@@ -1,0 +1,46 @@
+﻿<Page x:Class="vezba.DoctorPages.ViewAnamnesis"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:vezba.DoctorPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="ViewAnamnesis">
+
+    <ScrollViewer>
+        <Grid Background="White">
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="Padding" Value="3"></Setter>
+                    <Setter Property="FontFamily" Value="Verdana"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <Button Padding="5" Margin="5" Width="100" Height="30" Click="DeleteButtonClick" Style="{StaticResource ResourceKey=DoctorCancelButton}" FontWeight="Bold">Obriši</Button>
+                <Button Padding="5" Margin="5" Width="100" Height="30" Click="ReturnButtonClick" Style="{StaticResource ResourceKey=DoctorCancelButton}" FontWeight="Bold">Povratak</Button>
+            </StackPanel>
+            <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Vreme kreiranja:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">Pacijent:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">Doktor:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Top">Izveštaj:</TextBlock>
+
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="{ Binding Time, StringFormat=dd/MM/yyyy HH:mm, Mode=OneWay}"/>
+            <TextBlock Text="{Binding Patient}" Grid.Column="1" Grid.Row="2" Name="PatientNameSurname"/>
+            <TextBlock Text="{Binding Doctor}" Grid.Column="1" Grid.Row="3" Name="DoctorNameSurname"/>
+            <TextBlock Text="{Binding Comment}" Grid.Column="1" Grid.Row="4" VerticalAlignment="Top" TextWrapping="Wrap"/>
+        </Grid>
+    </ScrollViewer>
+</Page>

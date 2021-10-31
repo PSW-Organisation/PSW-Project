@@ -1,0 +1,513 @@
+[
+  {
+    "DeclinedMedicineID": 0,
+    "Medicine": {
+      "ingridient": [
+        {
+          "Name": "Celuloza, mikrokristalna"
+        },
+        {
+          "Name": "Hipromeloza (E464)"
+        },
+        {
+          "Name": "Titan-dioksid (E171)"
+        },
+        {
+          "Name": "Makrogol 400"
+        }
+      ],
+      "Name": "Xyzal",
+      "Manufacturer": "Aesica Pharmaceuticals S.r.l.",
+      "Packaging": "30 x 5 mg",
+      "MedicineID": 1,
+      "Status": 1,
+      "Condition": 0,
+      "IsDeleted": false,
+      "ReplacementMedicine": null,
+      "Ingridient": [
+        {
+          "Name": "Celuloza, mikrokristalna"
+        },
+        {
+          "Name": "Hipromeloza (E464)"
+        },
+        {
+          "Name": "Titan-dioksid (E171)"
+        },
+        {
+          "Name": "Makrogol 400"
+        }
+      ]
+    },
+    "Description": "Neka poruka",
+    "IsDeleted": true,
+    "MedicineName": "Xyzal",
+    "MedicineManufacturer": "Aesica Pharmaceuticals S.r.l."
+  },
+  {
+    "DeclinedMedicineID": 1,
+    "Medicine": {
+      "ingridient": [
+        {
+          "Name": "Acetilsalicilna kiselina"
+        },
+        {
+          "Name": "Skrob, kukuruzni"
+        },
+        {
+          "Name": "Trietil-citrat"
+        }
+      ],
+      "Name": "Aspirin",
+      "Manufacturer": "Bayer Bitterfeld GmbH ",
+      "Packaging": "30 x 100mg",
+      "MedicineID": 2,
+      "Status": 1,
+      "Condition": 0,
+      "IsDeleted": false,
+      "ReplacementMedicine": null,
+      "Ingridient": [
+        {
+          "Name": "Acetilsalicilna kiselina"
+        },
+        {
+          "Name": "Skrob, kukuruzni"
+        },
+        {
+          "Name": "Trietil-citrat"
+        }
+      ]
+    },
+    "Description": "Neka poruka",
+    "IsDeleted": true,
+    "MedicineName": "Aspirin",
+    "MedicineManufacturer": "Bayer Bitterfeld GmbH "
+  },
+  {
+    "DeclinedMedicineID": 2,
+    "Medicine": {
+      "ingridient": [
+        {
+          "Name": "Sastojak"
+        }
+      ],
+      "Name": "Lek1",
+      "Manufacturer": "Proizvodjac",
+      "Packaging": "Pakovanje",
+      "MedicineID": 2,
+      "Status": 1,
+      "Condition": 1,
+      "IsDeleted": false,
+      "ReplacementMedicine": {
+        "ingridient": [
+          {
+            "Name": "SilicijumDioksid"
+          },
+          {
+            "Name": "Kroskarmeloza-natrijum"
+          },
+          {
+            "Name": "Skrob, kukuruzni"
+          },
+          {
+            "Name": "Povidon (K25)"
+          },
+          {
+            "Name": "Eritrozin (E127)"
+          }
+        ],
+        "Name": "Ibuprofen",
+        "Manufacturer": "Union-Medic D.O.O. Novi Sad",
+        "Packaging": "30 x 400 mg",
+        "MedicineID": 0,
+        "Status": 0,
+        "Condition": 0,
+        "IsDeleted": false,
+        "ReplacementMedicine": {
+          "ingridient": [
+            {
+              "Name": "Trifolium pratense extractum siccum standardisatum"
+            }
+          ],
+          "Name": "Oestrofact",
+          "Manufacturer": "Union-Medic D.O.O. Novi Sad",
+          "Packaging": "50 x 70 mg",
+          "MedicineID": 3,
+          "Status": 0,
+          "Condition": 1,
+          "IsDeleted": false,
+          "ReplacementMedicine": null,
+          "Ingridient": [
+            {
+              "Name": "Trifolium pratense extractum siccum standardisatum"
+            }
+          ]
+        },
+        "Ingridient": [
+          {
+            "Name": "SilicijumDioksid"
+          },
+          {
+            "Name": "Kroskarmeloza-natrijum"
+          },
+          {
+            "Name": "Skrob, kukuruzni"
+          },
+          {
+            "Name": "Povidon (K25)"
+          },
+          {
+            "Name": "Eritrozin (E127)"
+          }
+        ]
+      },
+      "Ingridient": [
+        {
+          "Name": "Sastojak"
+        }
+      ]
+    },
+    "Description": "Ne dobro",
+    "IsDeleted": true,
+    "MedicineName": "Lek1",
+    "MedicineManufacturer": "Proizvodjac"
+  },
+  {
+    "DeclinedMedicineID": 3,
+    "Medicine": {
+      "ingridient": [
+        {
+          "Name": "asdasdasdasd"
+        }
+      ],
+      "Name": "asdasd",
+      "Manufacturer": "asdasda",
+      "Packaging": "asdasd",
+      "MedicineID": 3,
+      "Status": 1,
+      "Condition": 1,
+      "IsDeleted": false,
+      "ReplacementMedicine": {
+        "ingridient": [
+          {
+            "Name": "Celuloza, mikrokristalna"
+          },
+          {
+            "Name": "Hipromeloza (E464)"
+          },
+          {
+            "Name": "Titan-dioksid (E171)"
+          },
+          {
+            "Name": "Makrogol 400"
+          }
+        ],
+        "Name": "Xyzal",
+        "Manufacturer": "Aesica Pharmaceuticals S.r.l.",
+        "Packaging": "30 x 5 mg",
+        "MedicineID": 1,
+        "Status": 0,
+        "Condition": 0,
+        "IsDeleted": false,
+        "ReplacementMedicine": null,
+        "Ingridient": [
+          {
+            "Name": "Celuloza, mikrokristalna"
+          },
+          {
+            "Name": "Hipromeloza (E464)"
+          },
+          {
+            "Name": "Titan-dioksid (E171)"
+          },
+          {
+            "Name": "Makrogol 400"
+          }
+        ]
+      },
+      "Ingridient": [
+        {
+          "Name": "asdasdasdasd"
+        }
+      ]
+    },
+    "Description": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "IsDeleted": true,
+    "MedicineName": "asdasd",
+    "MedicineManufacturer": "asdasda"
+  },
+  {
+    "DeclinedMedicineID": 4,
+    "Medicine": {
+      "ingridient": [
+        {
+          "Name": "Sastojak"
+        }
+      ],
+      "Name": "Lek za odbiti",
+      "Manufacturer": "Neki proizvođač",
+      "Packaging": "Neko pakovanje",
+      "MedicineID": 4,
+      "Status": 1,
+      "Condition": 1,
+      "IsDeleted": false,
+      "ReplacementMedicine": {
+        "ingridient": [
+          {
+            "Name": "SilicijumDioksid"
+          },
+          {
+            "Name": "Kroskarmeloza-natrijum"
+          },
+          {
+            "Name": "Skrob, kukuruzni"
+          },
+          {
+            "Name": "Povidon (K25)"
+          },
+          {
+            "Name": "Eritrozin (E127)"
+          }
+        ],
+        "Name": "Ibuprofen",
+        "Manufacturer": "Union-Medic D.O.O. Novi Sad",
+        "Packaging": "30 x 400 mg",
+        "MedicineID": 0,
+        "Status": 0,
+        "Condition": 0,
+        "IsDeleted": false,
+        "ReplacementMedicine": {
+          "ingridient": [
+            {
+              "Name": "Trifolium pratense extractum siccum standardisatum"
+            }
+          ],
+          "Name": "Oestrofact",
+          "Manufacturer": "Union-Medic D.O.O. Novi Sad",
+          "Packaging": "50 x 70 mg",
+          "MedicineID": 3,
+          "Status": 0,
+          "Condition": 1,
+          "IsDeleted": false,
+          "ReplacementMedicine": null,
+          "Ingridient": [
+            {
+              "Name": "Trifolium pratense extractum siccum standardisatum"
+            }
+          ]
+        },
+        "Ingridient": [
+          {
+            "Name": "SilicijumDioksid"
+          },
+          {
+            "Name": "Kroskarmeloza-natrijum"
+          },
+          {
+            "Name": "Skrob, kukuruzni"
+          },
+          {
+            "Name": "Povidon (K25)"
+          },
+          {
+            "Name": "Eritrozin (E127)"
+          }
+        ]
+      },
+      "Ingridient": [
+        {
+          "Name": "Sastojak"
+        }
+      ]
+    },
+    "Description": "Ma bezveze",
+    "IsDeleted": true,
+    "MedicineName": "Lek za odbiti",
+    "MedicineManufacturer": "Neki proizvođač"
+  },
+  {
+    "DeclinedMedicineID": 5,
+    "Medicine": {
+      "ingridient": [],
+      "Name": "Lek promenjen",
+      "Manufacturer": "Normalan proizvodjac",
+      "Packaging": "Veliko pakovanje",
+      "MedicineID": 11,
+      "Status": 1,
+      "Condition": 0,
+      "IsDeleted": false,
+      "ReplacementMedicine": {
+        "ingridient": [
+          {
+            "Name": "Acetilsalicilna kiselina"
+          },
+          {
+            "Name": "Skrob, kukuruzni"
+          },
+          {
+            "Name": "Trietil-citrat"
+          }
+        ],
+        "Name": "Aspirin",
+        "Manufacturer": "Bayer Bitterfeld GmbH ",
+        "Packaging": "30 x 100mg",
+        "MedicineID": 2,
+        "Status": 0,
+        "Condition": 0,
+        "IsDeleted": false,
+        "ReplacementMedicine": null,
+        "Ingridient": [
+          {
+            "Name": "Acetilsalicilna kiselina"
+          },
+          {
+            "Name": "Skrob, kukuruzni"
+          },
+          {
+            "Name": "Trietil-citrat"
+          }
+        ]
+      },
+      "Ingridient": []
+    },
+    "Description": "Loš lek",
+    "IsDeleted": true,
+    "MedicineName": "Lek promenjen",
+    "MedicineManufacturer": "Normalan proizvodjac"
+  },
+  {
+    "DeclinedMedicineID": 6,
+    "Medicine": {
+      "ingridient": [
+        {
+          "Name": "Sastojak"
+        },
+        {
+          "Name": "Sastojak2"
+        }
+      ],
+      "Name": "Lek za odbiti1",
+      "Manufacturer": "Neki proizvođač1",
+      "Packaging": "Neko pakovanje1",
+      "MedicineID": 12,
+      "Status": 1,
+      "Condition": 2,
+      "IsDeleted": false,
+      "ReplacementMedicine": {
+        "ingridient": [
+          {
+            "Name": "Sastojak"
+          },
+          {
+            "Name": "Izmena"
+          }
+        ],
+        "Name": "Lek1",
+        "Manufacturer": "Proizvodjac",
+        "Packaging": "Pakovanje",
+        "MedicineID": 7,
+        "Status": 0,
+        "Condition": 1,
+        "IsDeleted": false,
+        "ReplacementMedicine": {
+          "ingridient": [
+            {
+              "Name": "Sastojak1"
+            }
+          ],
+          "Name": "Ibuprofen",
+          "Manufacturer": "UnionMedic NoviSad",
+          "Packaging": "30 x 30g",
+          "MedicineID": 3,
+          "Status": 0,
+          "Condition": 0,
+          "IsDeleted": false,
+          "ReplacementMedicine": null,
+          "Ingridient": [
+            {
+              "Name": "Sastojak1"
+            }
+          ]
+        },
+        "Ingridient": [
+          {
+            "Name": "Sastojak"
+          },
+          {
+            "Name": "Izmena"
+          }
+        ]
+      },
+      "Ingridient": [
+        {
+          "Name": "Sastojak"
+        },
+        {
+          "Name": "Sastojak2"
+        }
+      ]
+    },
+    "Description": "Neki komentar",
+    "IsDeleted": true,
+    "MedicineName": "Lek za odbiti1",
+    "MedicineManufacturer": "Neki proizvođač1"
+  },
+  {
+    "DeclinedMedicineID": 7,
+    "Medicine": {
+      "ingridient": [
+        {
+          "Name": "Loš sastojak"
+        }
+      ],
+      "Name": "Lek promenjen1",
+      "Manufacturer": "Normalan proizvodjac1",
+      "Packaging": "Veliko pakovanje1",
+      "MedicineID": 13,
+      "Status": 1,
+      "Condition": 0,
+      "IsDeleted": false,
+      "ReplacementMedicine": {
+        "ingridient": [
+          {
+            "Name": "Acetilsalicilna kiselina"
+          },
+          {
+            "Name": "Skrob, kukuruzni"
+          },
+          {
+            "Name": "Trietil-citrat"
+          }
+        ],
+        "Name": "Aspirin",
+        "Manufacturer": "Bayer Bitterfeld GmbH ",
+        "Packaging": "30 x 100mg",
+        "MedicineID": 2,
+        "Status": 0,
+        "Condition": 0,
+        "IsDeleted": false,
+        "ReplacementMedicine": null,
+        "Ingridient": [
+          {
+            "Name": "Acetilsalicilna kiselina"
+          },
+          {
+            "Name": "Skrob, kukuruzni"
+          },
+          {
+            "Name": "Trietil-citrat"
+          }
+        ]
+      },
+      "Ingridient": [
+        {
+          "Name": "Loš sastojak"
+        }
+      ]
+    },
+    "Description": "Neki komentar1",
+    "IsDeleted": true,
+    "MedicineName": "Lek promenjen1",
+    "MedicineManufacturer": "Normalan proizvodjac1"
+  }
+]

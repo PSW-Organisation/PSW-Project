@@ -1,0 +1,103 @@
+﻿<Page x:Class="vezba.DoctorPages.AppointmentGrid"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:vezba.DoctorPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="AppointmentGrid">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Label Grid.Column="0" Grid.Row="0" Content="Termini" Style="{DynamicResource SecTitle}" Foreground="{DynamicResource BackgroundColor}" Margin="60, 30, 0, 0"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" Margin="200, 0, 25, 0">
+                <Grid>
+                    <TextBox KeyDown="OnKeyDownHandler"  x:Name="SearchBox" Style="{DynamicResource SecStandardTextBox}" Margin="5,0"/>
+                    <TextBlock IsHitTestVisible="False" Text="Pretraži termine..." VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </Grid>
+                <Image Height="30" Margin="5,0">
+                    <Image.Source>
+                        <BitmapImage UriSource="/SecretaryGUI/SecretaryImages/search(2).png" />
+                    </Image.Source>
+                </Image>
+            </StackPanel>
+
+            <Button x:Name="FilterButton" Content="Filteri"
+                     Style="{DynamicResource SecStandardButton}" Margin="15,0,15,0" Click="FilterButton_Click"/>
+
+        </StackPanel>
+
+
+
+        <Grid Grid.Column="0" Grid.Row="1" Background="Gainsboro" Margin="30, 0, 30, 30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="70"/>
+            </Grid.RowDefinitions>
+
+
+            <DataGrid KeyDown="OnKeyDownDataGridHandler" Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="1" x:Name="appointmentsTable" ItemsSource="{Binding Appointments}" 
+                      Style="{DynamicResource SecTable}" Margin="20, 0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Datum" Binding="{Binding StartTime, StringFormat=dd.MM.yyyy}" Width="100"/>
+                    <DataGridTextColumn Header="Vreme" Binding="{Binding StartTime, StringFormat=HH:mm}" Width="100"/>
+                    <DataGridTextColumn Header="Trajanje (min)" Binding="{Binding DurationInMunutes}" Width="100" />
+                    <DataGridTextColumn Header="Prostorija" Binding="{Binding RoomName}" Width="100"/>
+                    <DataGridTextColumn Header="Pacijent" Binding="{Binding PatientName}" Width="*" />
+                    <DataGridTextColumn Header="Lekar" Binding="{Binding DoctorName}" Width="*"/>
+                </DataGrid.Columns>
+
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#e69087"/>
+                </DataGrid.Resources>
+            </DataGrid>
+
+            <Grid x:Name="NewSuccMessage" Grid.Column="0" Visibility="Collapsed" Grid.ColumnSpan="5" Grid.Row="1"  Background="{StaticResource BackgroundGridColor}" Opacity="0.9" Height="auto" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="70, 10">
+                <Label Content="Termin je uspešno zakazan." Style="{DynamicResource SecStandardLabelLeft}"/>
+            </Grid>
+            <Grid x:Name="EditSuccMessage" Grid.Column="0" Visibility="Collapsed" Grid.ColumnSpan="5" Grid.Row="1"  Background="{StaticResource BackgroundGridColor}" Opacity="0.9" Height="auto" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="70, 10">
+                <Label Content="Termin je uspešno izmenjen." Style="{DynamicResource SecStandardLabelLeft}"/>
+            </Grid>
+            <Grid x:Name="DelSuccMessage" Grid.Column="0" Visibility="Collapsed" Grid.ColumnSpan="5" Grid.Row="1"  Background="{StaticResource BackgroundGridColor}" Opacity="0.9" Height="auto" Width="auto" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="70, 10">
+                <Label Content="Termin je uspešno obrisan." Style="{DynamicResource SecStandardLabelLeft}"/>
+            </Grid>
+
+            <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,15,10"  VerticalAlignment="Bottom">
+                <Button  Grid.Row="2" Grid.Column="0" x:Name="NewAppointmentButton" Content="Novi termin"
+                     Style="{DynamicResource SecStandardButton}" Margin="20,0,15,0" BorderBrush="LightSeaGreen" Click="NewAppointmentButton_Click"/>
+                <Label Content="(prečica: N)" Padding="1" FontSize="8" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}"></Label>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="2" Margin="20,0,15,10"  VerticalAlignment="Bottom">
+                <Button x:Name="ViewAppointmentButton" Content="Prikaži"
+                     Style="{DynamicResource SecStandardButton}" Click="ViewAppointmentButton_Click"/>
+                <Label Content="(prečica: space)" Padding="1" FontSize="8" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}"></Label>
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+</Page>
