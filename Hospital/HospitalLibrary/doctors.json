@@ -1,0 +1,359 @@
+[
+  {
+    "Speciality": {
+      "Name": "Oftalmolog"
+    },
+    "WorkingSchedule": [
+      {
+        "BeginningDate": "2021-05-17T00:00:00",
+        "EndDate": "2021-05-23T00:00:00",
+        "Shift": 1,
+        "FormatedBeginnigDate": "17.05.2021.",
+        "FormatedEndDate": "23.05.2021.",
+        "FormatedShift": "14:00 - 21:00"
+      },
+      {
+        "BeginningDate": "2021-05-24T00:00:00",
+        "EndDate": "2021-05-30T00:00:00",
+        "Shift": 1,
+        "FormatedBeginnigDate": "24.05.2021.",
+        "FormatedEndDate": "30.05.2021.",
+        "FormatedShift": "14:00 - 21:00"
+      },
+      {
+        "BeginningDate": "2021-05-31T00:00:00",
+        "EndDate": "2021-06-06T00:00:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "31.05.2021.",
+        "FormatedEndDate": "06.06.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-06-07T00:00:00",
+        "EndDate": "2021-06-13T00:00:00",
+        "Shift": 1,
+        "FormatedBeginnigDate": "07.06.2021.",
+        "FormatedEndDate": "13.06.2021.",
+        "FormatedShift": "14:00 - 21:00"
+      },
+      {
+        "BeginningDate": "2021-06-13T14:01:18.9037993+02:00",
+        "EndDate": "2021-06-19T14:01:18.9037993+02:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "13.06.2021.",
+        "FormatedEndDate": "19.06.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-06-20T13:58:30.6460738+02:00",
+        "EndDate": "2021-06-26T13:58:30.6460738+02:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "20.06.2021.",
+        "FormatedEndDate": "26.06.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-06-27T13:58:30.6460738+02:00",
+        "EndDate": "2021-07-03T13:58:30.6460738+02:00",
+        "Shift": 1,
+        "FormatedBeginnigDate": "27.06.2021.",
+        "FormatedEndDate": "03.07.2021.",
+        "FormatedShift": "14:00 - 21:00"
+      }
+    ],
+    "AvailableDaysOff": 20,
+    "VacationDays": [
+      {
+        "StartDate": "2021-05-31T00:00:00",
+        "EndDate": "2021-06-01T00:00:00",
+        "FormatedStartDate": "31.05.2021.",
+        "FormatedEndDate": "01.06.2021."
+      }
+    ],
+    "NameAndSurname": "Pera Peric",
+    "SpecialityName": "Oftalmolog",
+    "SalaryInRsd": 90000,
+    "Username": "pera",
+    "Password": "perica",
+    "Name": "Pera",
+    "Surname": "Peric",
+    "Jmbg": "1541546542644",
+    "DateOfBirth": "2021-05-29T23:39:58.470643+02:00",
+    "Sex": 0,
+    "PhoneNumber": "0621846712",
+    "Adress": "neka ulica 45, Novi Sad",
+    "Email": "pera@gmail.com",
+    "IdCard": "007123352",
+    "Type": 2,
+    "IsDeleted": false
+  },
+  {
+    "Speciality": {
+      "Name": "Kardiolog"
+    },
+    "WorkingSchedule": [
+      {
+        "BeginningDate": "2021-05-24T00:00:00",
+        "EndDate": "2021-05-30T00:00:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "24.05.2021.",
+        "FormatedEndDate": "30.05.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-05-31T00:00:00",
+        "EndDate": "2021-06-06T00:00:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "31.05.2021.",
+        "FormatedEndDate": "06.06.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-06-13T13:01:08.0301357+02:00",
+        "EndDate": "2021-06-19T13:01:08.0301357+02:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "13.06.2021.",
+        "FormatedEndDate": "19.06.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-06-20T13:01:08.0301357+02:00",
+        "EndDate": "2021-06-26T13:01:08.0301357+02:00",
+        "Shift": 1,
+        "FormatedBeginnigDate": "20.06.2021.",
+        "FormatedEndDate": "26.06.2021.",
+        "FormatedShift": "14:00 - 21:00"
+      },
+      {
+        "BeginningDate": "2021-06-27T13:01:08.0301357+02:00",
+        "EndDate": "2021-07-03T13:01:08.0301357+02:00",
+        "Shift": 1,
+        "FormatedBeginnigDate": "27.06.2021.",
+        "FormatedEndDate": "03.07.2021.",
+        "FormatedShift": "14:00 - 21:00"
+      }
+    ],
+    "AvailableDaysOff": 20,
+    "VacationDays": [
+      {
+        "StartDate": "2021-05-31T00:00:00",
+        "EndDate": "2021-06-01T00:00:00",
+        "FormatedStartDate": "31.05.2021.",
+        "FormatedEndDate": "01.06.2021."
+      },
+      {
+        "StartDate": "2021-06-18T00:00:00",
+        "EndDate": "2021-06-24T00:00:00",
+        "FormatedStartDate": "18.06.2021.",
+        "FormatedEndDate": "24.06.2021."
+      }
+    ],
+    "NameAndSurname": "Dana Dimitrijevic",
+    "SpecialityName": "Kardiolog",
+    "SalaryInRsd": 120000,
+    "Username": "dana",
+    "Password": "danica",
+    "Name": "Dana",
+    "Surname": "Dimitrijevic",
+    "Jmbg": "0104998253658",
+    "DateOfBirth": "2021-05-29T23:39:58.470643+02:00",
+    "Sex": 1,
+    "PhoneNumber": "0621975732",
+    "Adress": "neka ulica 62, Novi Sad",
+    "Email": "dana@gmail.com",
+    "IdCard": "008996452",
+    "Type": 2,
+    "IsDeleted": false
+  },
+  {
+    "Speciality": {
+      "Name": "Kardiolog"
+    },
+    "WorkingSchedule": [
+      {
+        "BeginningDate": "2021-05-24T00:00:00",
+        "EndDate": "2021-05-30T00:00:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "24.05.2021.",
+        "FormatedEndDate": "30.05.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-05-31T00:00:00",
+        "EndDate": "2021-06-06T00:00:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "31.05.2021.",
+        "FormatedEndDate": "06.06.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-06-13T15:16:59.4786476+02:00",
+        "EndDate": "2021-06-19T15:16:59.4786476+02:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "13.06.2021.",
+        "FormatedEndDate": "19.06.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-06-20T15:16:59.4786476+02:00",
+        "EndDate": "2021-06-26T15:16:59.4786476+02:00",
+        "Shift": 1,
+        "FormatedBeginnigDate": "20.06.2021.",
+        "FormatedEndDate": "26.06.2021.",
+        "FormatedShift": "14:00 - 21:00"
+      }
+    ],
+    "AvailableDaysOff": 20,
+    "VacationDays": [],
+    "NameAndSurname": "Darko Torbica",
+    "SpecialityName": "Kardiolog",
+    "SalaryInRsd": 70000,
+    "Username": "darko",
+    "Password": "dare",
+    "Name": "Darko",
+    "Surname": "Torbica",
+    "Jmbg": "1708962324890",
+    "DateOfBirth": "2021-05-29T23:39:58.470643+02:00",
+    "Sex": 0,
+    "PhoneNumber": "0665813272",
+    "Adress": "neka ulica 38, Novi Sad",
+    "Email": "darko@gmail.com",
+    "IdCard": "007155721",
+    "Type": 2,
+    "IsDeleted": false
+  },
+  {
+    "Speciality": {
+      "Name": "Stomatolog"
+    },
+    "WorkingSchedule": [
+      {
+        "BeginningDate": "2021-05-24T00:00:00",
+        "EndDate": "2021-05-30T00:00:00",
+        "Shift": 1,
+        "FormatedBeginnigDate": "24.05.2021.",
+        "FormatedEndDate": "30.05.2021.",
+        "FormatedShift": "14:00 - 21:00"
+      },
+      {
+        "BeginningDate": "2021-05-31T00:00:00",
+        "EndDate": "2021-06-06T00:00:00",
+        "Shift": 1,
+        "FormatedBeginnigDate": "31.05.2021.",
+        "FormatedEndDate": "06.06.2021.",
+        "FormatedShift": "14:00 - 21:00"
+      },
+      {
+        "BeginningDate": "2021-06-07T00:00:00",
+        "EndDate": "2021-06-13T00:00:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "07.06.2021.",
+        "FormatedEndDate": "13.06.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-06-13T15:17:14.032646+02:00",
+        "EndDate": "2021-06-19T15:17:14.032646+02:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "13.06.2021.",
+        "FormatedEndDate": "19.06.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-06-20T15:17:14.032646+02:00",
+        "EndDate": "2021-06-26T15:17:14.032646+02:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "20.06.2021.",
+        "FormatedEndDate": "26.06.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      }
+    ],
+    "AvailableDaysOff": 20,
+    "VacationDays": [
+      {
+        "StartDate": "2021-06-02T00:00:00",
+        "EndDate": "2021-06-04T00:00:00",
+        "FormatedStartDate": "02.06.2021.",
+        "FormatedEndDate": "04.06.2021."
+      },
+      {
+        "StartDate": "2021-07-06T00:00:00",
+        "EndDate": "2021-07-08T00:00:00",
+        "FormatedStartDate": "06.07.2021.",
+        "FormatedEndDate": "08.07.2021."
+      }
+    ],
+    "NameAndSurname": "Milica Milicevic",
+    "SpecialityName": "Stomatolog",
+    "SalaryInRsd": 100000,
+    "Username": "milica",
+    "Password": "mica",
+    "Name": "Milica",
+    "Surname": "Milicevic",
+    "Jmbg": "2205972659017",
+    "DateOfBirth": "2021-05-29T23:39:58.470643+02:00",
+    "Sex": 1,
+    "PhoneNumber": "06364789110",
+    "Adress": "neka ulica 98, Novi Sad",
+    "Email": "milica@gmail.com",
+    "IdCard": "008100252",
+    "Type": 2,
+    "IsDeleted": false
+  },
+  {
+    "Speciality": {
+      "Name": "Opsti"
+    },
+    "WorkingSchedule": [
+      {
+        "BeginningDate": "2021-05-24T00:00:00",
+        "EndDate": "2021-05-30T00:00:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "24.05.2021.",
+        "FormatedEndDate": "30.05.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-05-31T00:00:00",
+        "EndDate": "2021-06-06T00:00:00",
+        "Shift": 0,
+        "FormatedBeginnigDate": "31.05.2021.",
+        "FormatedEndDate": "06.06.2021.",
+        "FormatedShift": "07:00 - 14:00"
+      },
+      {
+        "BeginningDate": "2021-06-13T15:17:23.3506829+02:00",
+        "EndDate": "2021-06-19T15:17:23.3506829+02:00",
+        "Shift": 1,
+        "FormatedBeginnigDate": "13.06.2021.",
+        "FormatedEndDate": "19.06.2021.",
+        "FormatedShift": "14:00 - 21:00"
+      }
+    ],
+    "AvailableDaysOff": 20,
+    "VacationDays": [
+      {
+        "StartDate": "2021-05-31T00:00:00",
+        "EndDate": "2021-05-31T00:00:00",
+        "FormatedStartDate": "31.05.2021.",
+        "FormatedEndDate": "31.05.2021."
+      }
+    ],
+    "NameAndSurname": "Jana Jankovic",
+    "SpecialityName": "Opsti",
+    "SalaryInRsd": 100000,
+    "Username": "jana",
+    "Password": "jaca",
+    "Name": "Jana",
+    "Surname": "Jankovic",
+    "Jmbg": "0611985621455",
+    "DateOfBirth": "2021-05-29T23:39:58.470643+02:00",
+    "Sex": 1,
+    "PhoneNumber": "06355589110",
+    "Adress": "neka ulica 12, Novi Sad",
+    "Email": "jana@gmail.com",
+    "IdCard": "007521352",
+    "Type": 2,
+    "IsDeleted": false
+  }
+]

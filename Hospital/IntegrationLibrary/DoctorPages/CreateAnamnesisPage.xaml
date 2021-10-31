@@ -1,0 +1,95 @@
+﻿<Page x:Class="vezba.DoctorPages.CreateAnamnesisPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:vezba"
+      xmlns:val="clr-namespace:vezba.DoctorValidation"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1200"
+      Title="CreateAnamnesisPage">
+
+    <ScrollViewer>
+        <Grid Background="White">
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="Height" Value="25"/>
+                    <Setter Property="Padding" Value="3"></Setter>
+                    <Setter Property="FontFamily" Value="Verdana"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel HorizontalAlignment="Right" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+                <Button Padding="5" Margin="5" Width="100" Height="30" Click="OkButtonClick" Style="{StaticResource ResourceKey=DoctorDefaultButton}" FontWeight="Bold">Potvrdi</Button>
+                <Button Padding="5" Margin="5" Width="100" Height="30" Click="CancelButtonClick" Style="{StaticResource ResourceKey=DoctorCancelButton}" FontWeight="Bold">Odustani</Button>
+            </StackPanel>
+            <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Hitna operacija:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">Pregled:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right">Vreme pregleda:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right">Trajanje u minutima:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right">Pacijent:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right">Doktor:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right">Prostorija:</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right" VerticalAlignment="Top">Izveštaj:</TextBlock>
+
+            <TextBlock x:Name="IsEmergencyTB" Grid.Column="1" Grid.Row="1"/>
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="{ Binding Appointment.ApointmentDescription, Mode=OneWay}"/>
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="{ Binding Appointment.StartTime, StringFormat=dd/MM/yyyy HH:mm, Mode=OneWay}"/>
+            <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Appointment.DurationInMunutes}"/>
+            <TextBlock Grid.Column="1" Grid.Row="5" Name="PatientNameSurname">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} {1}">
+                        <Binding Path="Appointment.Patient.Name" />
+                        <Binding Path="Appointment.Patient.Surname" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="6" Name="DoctorNameSurname">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} {1}">
+                        <Binding Path="Appointment.Doctor.Name" />
+                        <Binding Path="Appointment.Doctor.Surname" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding Appointment.Room.RoomNumber}"/>
+            <TextBox Grid.Column="1" Grid.Row="8" Name="TbComment" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Height="200" Margin="10, 10, 400, 10" VerticalAlignment="Top">
+                <TextBox.Text>
+                    <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <val:NonNullValidationRule ValidationStep="RawProposedValue"></val:NonNullValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+                <Validation.ErrorTemplate>
+                    <ControlTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding [0].ErrorContent}" Foreground="Red" Margin="5"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Validation.ErrorTemplate>
+            </TextBox>
+        </Grid>
+        </ScrollViewer>
+</Page>

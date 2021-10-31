@@ -1,0 +1,208 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:vezba.Themes">
+
+    <SolidColorBrush x:Key="BackgroundColor" Color="White"/>
+    <SolidColorBrush x:Key="BackgroundGridColor" Color="GhostWhite"/>
+    <SolidColorBrush x:Key="ButtonColor" Color="Lavender"/>
+    <SolidColorBrush x:Key="MenuColor" Color="Lavender"/>
+    <SolidColorBrush x:Key="MenuBarColor" Color="#FFF1F1FD"/>
+    <SolidColorBrush x:Key="ButtonBorderColor" Color="#ced0fd"/>
+    <SolidColorBrush x:Key="TextColor" Color="Black"/>
+
+    <Style x:Key="MyFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="-2" StrokeThickness="1" Stroke="Black" StrokeDashArray="1 2"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Label" x:Key="SecTitle">
+        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="SecReportTitle">
+        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="SecSubtitle">
+        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="SecReportSubtitle">
+        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="SecTitleTextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+    <Style TargetType="ComboBox" x:Key="SecStandardComboBox">
+        <Setter Property="Height" Value="27"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="IsEditable" Value="True"/>
+    </Style>
+    <Style TargetType="ComboBox" x:Key="SecShortComboBox">
+        <Setter Property="Height" Value="27"/>
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="IsEditable" Value="True"/>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="SecStandardTextBox">
+        <Setter Property="Height" Value="27"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="SecDescriptionTextBox">
+        <Setter Property="Height" Value="54"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Margin" Value="3"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+    <Style TargetType="DatePicker" x:Key="SecStandardDatePicker">
+        <Setter Property="Height" Value="27"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Margin" Value="3"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="SecStandardLabel">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="SecStandardLabelLeft">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="SecStandardReportLabel">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="SecStandardReportLabelLeft">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="SecStandardTextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="SecSmallSquereButton">
+        <Setter Property="Width" Value="27"/>
+        <Setter Property="Height" Value="27"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.5"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="DataGridCell" x:Key="SecTableCell">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <!--Setter Property="Background" Value="Gray"/-->
+    </Style>
+
+    <Style TargetType="DataGrid" x:Key="SecTable">
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="HeadersVisibility" Value="Column"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="CellStyle" Value="{DynamicResource SecTableCell}"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+    <Style TargetType="DataGridCell" x:Key="SecReportTableCell">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <!--Setter Property="Background" Value="Gray"/-->
+    </Style>
+
+    <Style TargetType="DataGrid" x:Key="SecReportTable">
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="HeadersVisibility" Value="Column"/>
+        <Setter Property="IsReadOnly" Value="True"/>
+        <Setter Property="AutoGenerateColumns" Value="False"/>
+        <Setter Property="CellStyle" Value="{DynamicResource SecReportTableCell}"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="Foreground" Value="Black"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="SecStandardButton">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="110"/>
+        <!--Setter Property="Background" Value="#ced0fd"/-->
+        <Setter Property="Background" Value="{DynamicResource ButtonColor}"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderColor}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.5"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="Button" x:Key="SecTab">
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+        <Setter Property="Background" Value="{DynamicResource MenuColor}"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.5"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Trigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <Style TargetType="Grid" x:Key="ColoredBackgroundGrid">
+        <Setter Property="Background" Value="{DynamicResource BackgroundGridColor}"/>
+    </Style>
+
+</ResourceDictionary>
