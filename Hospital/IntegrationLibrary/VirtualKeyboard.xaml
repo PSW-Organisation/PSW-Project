@@ -1,0 +1,471 @@
+﻿<Window x:Class="vezba.VirtualKeyboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:vezba"
+        mc:Ignorable="d"
+        Title="VirtualKeyboard" Height="250" Width="430" MouseDown="Window_MouseDown" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <Grid>
+        <Border CornerRadius="52" BorderThickness="10" BorderBrush="#FF7BC1A1">
+
+            <Border CornerRadius="35" BorderThickness="20">
+                <Border.BorderBrush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#FF7BC1A1" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="99*"/>
+                        <ColumnDefinition Width="271*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FF7BC1A1" Offset="1"/>
+                            <GradientStop Color="#FF8DC3AA" Offset="0.557"/>
+                            <GradientStop Color="#FF8FC7A9" Offset="0.493"/>
+                        </RadialGradientBrush>
+                    </Grid.Background>
+                    <Button x:Name="BtnQ" Content="Q" Margin="-23,21,80,127" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnQ_Click" Width="42" Height="42" HorizontalAlignment="Right">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnSpace" Content="Space" Margin="4,164,106,-16" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnSpace_Click" Height="42" VerticalAlignment="Top" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnComma" Content="," Margin="56,164,1,-16" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnComma_Click" Width="42" Height="42">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnDot" Content="." Margin="170,164,59,-16" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnDot_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnW" Content="W" Margin="19,21,38,127" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnW_Click" Width="42" Height="42">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnE" Content="E" Margin="61,21,267,127" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnE_Click" Width="42" Height="42" Grid.ColumnSpan="2">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnR" Content="R" Margin="4,21,225,127" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnR_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnT" Content="T" Margin="46,21,183,127" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnT_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnY" Content="Y" Margin="88,21,141,127" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnY_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnU" Content="U" Margin="130,21,99,127" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnU_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnI" Content="I" Margin="172,21,57,127" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnI_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnO" Content="O" Margin="214,21,15,127" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnO_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnP" Content="P" Margin="256,21,-27,127" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnP_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnA" Content="A" Margin="0,68,57,80" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnA_Click" Width="42" Height="42">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnS" Content="S" Margin="42,68,15,80" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnS_Click" Width="42" Height="42">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnD" Content="D" Margin="84,68,244,80" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnD_Click" Width="42" Height="42" Grid.ColumnSpan="2">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnF" Content="F" Margin="27,68,202,80" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnF_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnG" Content="G" Margin="69,68,160,80" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnG_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnH" Content="H" Margin="111,68,118,80" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnH_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnJ" Content="J" Margin="153,68,76,80" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnJ_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnK" Content="K" Margin="195,70,34,78" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnK_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnL" Content="L" Margin="237,70,-8,78" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnL_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnZ" Content="Z" Margin="42,117,15,31" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnZ_Click" Width="42" Height="42">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnX" Content="X" Margin="84,117,244,31" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnX_Click" Width="42" Height="42" Grid.ColumnSpan="2">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnC" Content="C" Margin="27,117,202,31" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnC_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnV" Content="V" Margin="69,117,160,31" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnV_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnB" Content="B" Margin="111,117,118,31" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnB_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnN" Content="N" Margin="153,117,76,31" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnN_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnM" Content="M" Margin="195,117,34,31" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnM_Click" Width="42" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnDel" Content="Del" Margin="237,117,-27,31" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnDel_Click" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnEnter" Content="Enter" Margin="217,164,-11,-16" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Click="BtnEnter_Click" Height="42" Grid.Column="1">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnNumbers" Content="123" Margin="-14,164,48,-16" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Height="42">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="BtnShift" Content="Shift" Margin="-19,117,57,31" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5" Height="42">
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                                <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <TextBox Background="AntiqueWhite" HorizontalAlignment="Left" Height="34" Margin="19,-23,0,0" TextWrapping="Wrap" Text="{Binding LetterInput, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="336" Grid.ColumnSpan="2" IsReadOnly="True" FontSize="20" Foreground="#FF2E421A">
+                        <TextBox.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="30"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </Grid>
+            </Border>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 0,
+    "Name": "Hanzaplast",
+    "Type": 1,
+    "IsDeleted": false
+  },
+  {
+    "Id": 1,
+    "Name": "Stetoskop",
+    "Type": 1,
+    "IsDeleted": false
+  },
+  {
+    "Id": 2,
+    "Name": "Krevet",
+    "Type": 0,
+    "IsDeleted": false
+  },
+  {
+    "Id": 3,
+    "Name": "Hirurška maska",
+    "Type": 1,
+    "IsDeleted": false
+  },
+  {
+    "Id": 4,
+    "Name": "Trokanalni EKG 30",
+    "Type": 1,
+    "IsDeleted": false
+  },
+  {
+    "Id": 8,
+    "Name": "Oprema",
+    "Type": 0,
+    "IsDeleted": true
+  },
+  {
+    "Id": 6,
+    "Name": "Krevet",
+    "Type": 0,
+    "IsDeleted": true
+  },
+  {
+    "Id": 7,
+    "Name": "aaa",
+    "Type": 0,
+    "IsDeleted": true
+  }
+]

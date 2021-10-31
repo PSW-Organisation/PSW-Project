@@ -1,0 +1,26 @@
+[
+  {
+    "Rating": 4,
+    "Comment": "ssssss",
+    "Id": 0,
+    "IsDeleted": false
+  },
+  {
+    "Rating": 4,
+    "Comment": "super",
+    "Id": 1,
+    "IsDeleted": false
+  },
+  {
+    "Rating": 1,
+    "Comment": "ocajno",
+    "Id": 2,
+    "IsDeleted": false
+  },
+  {
+    "Rating": 5,
+    "Comment": "Extra ful HD",
+    "Id": 3,
+    "IsDeleted": false
+  }
+]

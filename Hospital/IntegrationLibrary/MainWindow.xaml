@@ -1,0 +1,27 @@
+﻿<Window x:Class="vezba.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:vezba"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#66025887" Offset="0.638"/>
+                <GradientStop Color="#CC98B63A" Offset="0.875"/>
+                <GradientStop Color="#FFF7F7F7"/>
+                <GradientStop Color="#FFF7F7F7" Offset="0.191"/>
+                <GradientStop Color="#49F7F7F7" Offset="0.444"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Image Source="/Bolnica;component/PatientImages/zdravobolnica.jpeg" Margin="260,30,260,283" HorizontalAlignment="Center"/>
+        <Button Content="Prijavi se" HorizontalAlignment="Left" Margin="318,307,0,0" VerticalAlignment="Top" Width="158" Height="29" Click="Button_Click" Background="#FF98B63A" BorderBrush="#FF485F47"/>
+        <Label Content="Korisničko ime:" HorizontalAlignment="Left" Height="27" Margin="318,172,0,0" VerticalAlignment="Top" Width="104"/>
+        <Label Content="Lozinka:" HorizontalAlignment="Left" Height="27" Margin="318,232,0,0" VerticalAlignment="Top" Width="104"/>
+        <TextBox Name ="Username" Height="23" Margin="318,204,316,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <PasswordBox Name ="Password" HorizontalAlignment="Left" Height="23" Margin="318,264,0,0" VerticalAlignment="Top" Width="158"/>
+
+    </Grid>
+</Window>

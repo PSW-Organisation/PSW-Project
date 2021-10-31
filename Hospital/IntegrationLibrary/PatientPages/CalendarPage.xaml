@@ -1,0 +1,68 @@
+﻿<Page x:Class="vezba.PatientPages.CalendarPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:vezba.PatientPages" xmlns:model="clr-namespace:Model"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="430"
+      Title="CalendarPage">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Blue.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF7BC1A1"/>
+                <GradientStop Color="AntiqueWhite" Offset="0.483"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Image Source="/Bolnica;component/PatientImages/calendar (1).png" Width="45" Margin="26,10,360,543"/>
+        <Label Content="Događaji" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="30" Foreground="#FF2E421A" Margin="76,10,154,0" Height="57" Width="200"/>
+        <StackPanel Background="Transparent" Margin="0,72,0,56">
+            <Grid Height="40">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10 0">
+                    <Button Width="135" Uid="0" Content="Današnji" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2E421A" Click="TodayClick" />
+                    <Button Width="135" Uid="1" Content="Nedeljni" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2E421A" Click="WeekClick" />
+                    <Button Width="135" Uid="2" Content="Mesečni" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2E421A" Click="MonthClick" />
+                </StackPanel>
+                <Grid x:Name="GridCursor" Width="135" Height="5" Background="#FF2E421A" HorizontalAlignment="Left" Margin="10 0" VerticalAlignment="Bottom"/>
+            </Grid>
+            <Grid x:Name="GridTable" Height="418" Width="410">
+                <ListBox x:Name="appointmentsTodayTable" ItemsSource="{Binding Appointments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="418" Width="410" ScrollViewer.VerticalScrollBarVisibility="Hidden" Background="Transparent">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Height="50">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Width="380">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding StartTime, StringFormat='{}{0: dd.MM.yyyy HH:mm}', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" FontWeight="Bold" Foreground="#FF2E421A"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding Doctor, StringFormat='{}{0: }', Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  FontStyle="Italic" Foreground="Black"/>
+                                </Grid>
+                                <TextBlock Grid.Row="1" Text="{Binding ApointmentDescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="14" TextWrapping="Wrap" Width="380" Foreground="black"/>
+                                <Separator Grid.Row="2"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>
