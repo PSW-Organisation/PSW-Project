@@ -11,4 +11,9 @@ export class ConfigService {
   getPecurka(): Observable<any>{
     return this._http.get(`${this._url}/weatherforecast`, { responseType: 'text' });
   }
+
+/*  sendFeedback(feedback: {text: string, anonymous: boolean}, ): Observable<any>{
+    return this._http.post(`${this._url}/feedback`, { responseType: 'text' });
+  }
+*/
 }
