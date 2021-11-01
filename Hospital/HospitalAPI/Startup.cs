@@ -7,11 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 namespace HospitalAPI
 {
@@ -33,13 +30,20 @@ namespace HospitalAPI
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                     assembly => assembly.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName));
             });
+
+            services.AddMvc(setup => {
+                //...mvc setup...
+            }).AddFluentValidation().AddNewtonsoftJson();
+
+            services.AddTransient<IValidator<PatientFeedback>, PatientFeedbackValidator>();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
-            services.AddMvc();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

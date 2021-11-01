@@ -9,12 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationAPI", "Integrati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationLibrary", "IntegrationLibrary\IntegrationLibrary.csproj", "{0E0E4824-39EE-41E3-A541-D679DAD817D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalLibrary", "HospitalLibrary\HospitalLibrary.csproj", "{9B257411-35AF-44CA-8AEC-3F853F47633C}"
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationLibrary", "IntegrationLibrary\IntegrationLibrary.csproj", "{0E0E4824-39EE-41E3-A541-D679DAD817D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalLibrary", "HospitalLibrary\HospitalLibrary.csproj", "{9B257411-35AF-44CA-8AEC-3F853F47633C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyAPI", "PharmacyAPI\PharmacyAPI.csproj", "{0DEC1289-4EB9-4E21-81FA-33BB49B6DCA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyLibrary", "PharmacyLibrary\PharmacyLibrary.csproj", "{4057D79A-0D5A-4B62-AFBE-1A2C37EE94CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyLibrary", "PharmacyLibrary\PharmacyLibrary.csproj", "{4057D79A-0D5A-4B62-AFBE-1A2C37EE94CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
