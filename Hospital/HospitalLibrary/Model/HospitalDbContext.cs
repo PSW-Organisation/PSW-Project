@@ -8,6 +8,7 @@ namespace ehealthcare.Model
     public class HospitalDbContext : DbContext
     {
         public DbSet<VisitTime> VisitTimes { get; set; }
+        public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
 
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
@@ -21,6 +22,14 @@ namespace ehealthcare.Model
                 StartTime = new DateTime(2021, 4, 5),
                 EndTime = new DateTime(2021, 4, 25),
             });
+            modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
+            {
+                id = "f1",
+                patientId = "p1",
+                text = "alallalal",
+                anonymous = false,
+                publishAllowed = false
+            }); 
         }
     }
 }
