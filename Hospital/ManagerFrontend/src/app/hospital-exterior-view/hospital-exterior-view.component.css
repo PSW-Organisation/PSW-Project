@@ -1,0 +1,32 @@
+.viewOfMAP{
+    border: solid 2px silver;
+    width: 600px;
+    height: 400px;
+    background-color: rgb(153, 255, 102);
+}
+
+.viewLegend{
+    width: 600px;
+    height: 100px;
+    background-color: whitesmoke;
+}
+
+
+.building{
+    fill: rgb(153, 0, 153);
+    stroke: white;
+}
+
+.building:hover{
+    fill:rgb(87, 8, 140);
+}
+
+
+.road{
+    fill: rgb(179, 179, 204);
+    
+}
+
+.parking{
+    fill: blue;
+}
