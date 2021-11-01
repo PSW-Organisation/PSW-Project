@@ -1,0 +1,30 @@
+[
+  {
+    "Id": 0,
+    "TimeWritten": "2021-06-12T03:28:43.5605395+02:00",
+    "Rating": 4,
+    "Content": "Ne svidja mi se samo sto comboboxovi nisu u skladu sa ostatkom aplikacije po boji. Sve ostalo super.",
+    "IsDeleted": false
+  },
+  {
+    "Id": 0,
+    "TimeWritten": "2021-06-12T03:28:58.9206384+02:00",
+    "Rating": 5,
+    "Content": "Divno!",
+    "IsDeleted": false
+  },
+  {
+    "Id": 0,
+    "TimeWritten": "2021-06-12T03:47:42.7772042+02:00",
+    "Rating": 1,
+    "Content": "Cini se da sam u manjini, ali meni se ovo nista ne svidja!",
+    "IsDeleted": false
+  },
+  {
+    "Id": 3,
+    "TimeWritten": "2021-06-13T13:50:09.2041662+02:00",
+    "Rating": 4,
+    "Content": "Utisak nedelje",
+    "IsDeleted": false
+  }
+]

@@ -1,0 +1,58 @@
+﻿<Window x:Class="vezba.LogoutPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:vezba"
+        mc:Ignorable="d"
+        Title="LogoutPopup" Height="200" Width="300" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+
+    <Border CornerRadius="52" BorderThickness="10" BorderBrush="#FF7BC1A1">
+
+        <Border CornerRadius="35" BorderThickness="20">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#FF7BC1A1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid>
+                <Grid.Background>
+                    <RadialGradientBrush>
+                        <GradientStop Color="#FF7BC1A1" Offset="1"/>
+                        <GradientStop Color="#FF8DC3AA" Offset="0.557"/>
+                        <GradientStop Color="#FF8FC7A9" Offset="0.493"/>
+                    </RadialGradientBrush>
+                </Grid.Background>
+                <Button x:Name="btnNe" Content="Ne"  Click="btnNe_Click" Margin="121,101,23,10" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                            <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                        </RadialGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="btnDa" Content="Da" Click="btnDa_Click" Margin="20,101,124,10" Foreground="#FF2E421A" RenderTransformOrigin="0.5,0.5">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="30"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FF7E7A7A" Offset="1"/>
+                            <GradientStop Color="#FFBEBEBE" Offset="0.41"/>
+                        </RadialGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Label Content="Da li ste sigurni" HorizontalAlignment="Center" Margin="40,10,42,85" FontSize="20" Width="158" HorizontalContentAlignment="Center" Foreground="#FF2E421A"/>
+                <Label Content="da želite da se odjavite?" HorizontalAlignment="Center" Margin="10,45,10,55" FontSize="20" Width="220" HorizontalContentAlignment="Center" Foreground="#FF2E421A"/>
+            </Grid>
+        </Border>
+    </Border>
+</Window>
