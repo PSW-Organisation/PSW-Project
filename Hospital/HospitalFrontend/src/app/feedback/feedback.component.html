@@ -62,8 +62,7 @@
 
 
 <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Give us your feedback!</button>
-<div>{{text}}</div>
-<div>{{anonymous}}</div>
 <hr>
-
+<ng-lottie id="fbsent" (loopComplete)="loopComplete($event)" [options]="options" width="10%" height="10%"
+    style="align-items: center; display: none;"></ng-lottie>
 <pre>{{ closeResult }}</pre>

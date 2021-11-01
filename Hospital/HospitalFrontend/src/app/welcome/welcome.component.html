@@ -1,26 +1,239 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="#">LeanOn Hospital</a>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">About us</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ms-auto">
-            <li class=" nav-item">
-                <a class="nav-link" href="#">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Registration</a>
-            </li>
-        </ul>
-    </div>
+<!-- Navigation -->
+<div class="logo">
+  <i aria-hidden="true">
+    <span class="text-dark">
+        <img src="assets/favicon.png" alt="Logo" width="50" height="50">
+        LeanOn Hospital
+    </span>
+  </i>
+</div>
+<a class="menu-toggle rounded" href="#">
+  <i class="fa fa-bars"></i>
+</a>
+<nav id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li class="sidebar-brand">
+      <a class="smooth-scroll" href="#Header"></a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="smooth-scroll" href="#Banner">Home</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="smooth-scroll" href="#About">About</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="smooth-scroll" href="#Services">Services</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="smooth-scroll" href="#Testimonials">Feedbacks</a>
+    </li>
+    <li class="sidebar-nav-item">
+      <a class="smooth-scroll" href="#Contact">Contact</a>
+    </li>
+  </ul>
 </nav>
+<!-- Header Starts -->
+<section id="Banner" style="background-image: url(assets/doctor.jpg)" class="">
+  <div class="container content-wrap text-center text-dark">
+    <h1>Your health is in safe hands</h1>
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col">
+        <form id="loginform">
+          <div class="form-group">
+            <div class="form-floating" style="margin-bottom: 4%;">
+              <input id="username" class="form-control" autofocus type="text"/>
+              <label for="username">Username:</label>
+            </div>
+            <div class="form-floating">
+              <input id="password" class="form-control" type="password"/>
+              <label for="password">Password:</label>
+            </div>
+            <div class="d-flex justify-content-center" style="margin-top: 4%;">
+              <button type="submit" form="loginform" value="submit"
+                class="btn btn-primary btn-xl smooth-scroll">Login</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+    <button class="btn btn-xl smooth-scroll">Not registered yet?</button>
+  </div>
+  <div class="overlay"></div>
+</section>
+<!-- Header Ends -->
+<!-- About Us Starts -->
+<section id="About" class="content-section">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="block-heading">
+          <h2>About Us</h2>
+        </div>
+        <p class="lead">Our aim is to give every patient the prospect of a better quality of life. To do so, our
+          reinvestment model ensures we maintain a high standard of quality and are able to be innovative and forward
+          thinking with our infrastructure, clinical delivery and staff development.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- About Us ends -->
+<section id="Services" class="content-section text-center">
+  <div class="container">
+    <div class="block-heading">
+      <h2>What We Offer</h2>
+      <p>Enjoy easy to use hospital services on our Website</p>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <div class="service-box">
+          <div class="service-icon yellow">
+            <div class="front-content">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              <h3>Appointment scheduling</h3>
+            </div>
+          </div>
+          <div class="service-content">
+            <h3>Appointment scheduling</h3>
+            <p>As a patient, you choose whether the
+              appointment will be scheduled as soon as possible or according to the doctor's free time.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="service-box">
+          <div class="service-icon orange">
+            <div class="front-content">
+              <i class="fa fa-bell"></i>
+              <h3>Settable notifications</h3>
+            </div>
+          </div>
+          <div class="service-content">
+            <h3>Settable notifications</h3>
+            <p>As a patient, you can easy configure notifications about medicines and scheduled appointments.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="service-box ">
+          <div class="service-icon red">
+            <div class="front-content">
+              <i class="fa fa-sticky-note" aria-hidden="true"></i>
+              <h3>Observe doctor's reports</h3>
+            </div>
+          </div>
+          <div class="service-content">
+            <h3>Observe doctor's reports</h3>
+            <p>As a patient, you have access to all reports, doctors write after check up.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="service-box">
+          <div class="service-icon grey">
+            <div class="front-content">
+              <i class="fa fa-user-md"></i>
+              <h3>Experienced staff</h3>
+            </div>
+          </div>
+          <div class="service-content">
+            <h3>Experienced staff</h3>
+            <p>Collaboration
+              with experienced specialists, expert healthcare professionals, clinical partners and patient groups
+              ensures we
+              provide the best-possible experience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- TESTIMONIALS -->
+<section id="Testimonials" class="content-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="block-heading">
+          <h2>Feedbacks</h2>
 
-<div>
-    <app-feedback> </app-feedback>
-</div>
+        </div>
+        <div id="customers-testimonials" class="owl-carousel">
+          <div class="item">
+            <div class="shadow-effect">
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s</p>
+            </div>
+            <div class="testimonial-name">Sarah Jenks</div>
+          </div>
+          <div class="item">
+            <div class="shadow-effect">
+              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+                Latin literature from 45 BC, making it over 2000 years old</p>
+            </div>
+            <div class="testimonial-name">Tangelia Ekhoff</div>
+          </div>
+          <div class="item">
+            <div class="shadow-effect">
+              <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered
+                alteration in some form, by injected humour, or randomised words which don't look even slightly
+                believable. </p>
+            </div>
+            <div class="testimonial-name">John Doe</div>
+          </div>
+          <div class="item">
+            <div class="shadow-effect">
+              <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making
+                this the first true generator on the Internet. It uses a dictionary of over 200 Latin words</p>
+            </div>
+            <div class="testimonial-name">Amy Tan</div>
+          </div>
+          <div class="item">
+            <div class="shadow-effect">
+              <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text,
+                and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+            </div>
+            <div class="testimonial-name">Daniel Felsted</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END OF TESTIMONIALS -->
 
-<div class="jumbotron text-center text-bottom" style="margin-bottom:0; position: absolute;">
-    <p>Contact us</p>
-</div>
+<footer id="Contact" class="footer text-center">
+  <div>
+    <p>
+      <b>
+        Contact us on
+      </b>
+      <a href="https://mail.google.com/mail/u/0/#inbox">
+        leanonhospital@gmail.com
+      </a>
+    </p>
+  </div>
+  <div class="container">
+    <ul class="list-inline">
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="social-link rounded-circle text-white" href="javascript:void(0)">
+          <i class="fa fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
+    </ul>
+    <p class="text-muted small mb-0">Copyright © LeanON Hospital Website 2021</p>
+
+  </div>
+</footer>
