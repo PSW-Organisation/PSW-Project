@@ -42,10 +42,13 @@ namespace IntegrationAPI
 
             app.UseAuthorization();
 
+            app.UsePathBase("/api2");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
