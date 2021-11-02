@@ -1,59 +1,116 @@
-using Model;
+﻿using ehealthcare.Model;
+using ehealthcare.Repository;
+using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
-using vezba.Repository;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Service
+namespace ehealthcare.Service
 {
-   public class RoomService
+    public class RoomService
     {
-        private IRoomRepository RoomRepository { get; }
+        private RoomRepository roomRepository;
 
         public RoomService()
         {
-            RoomRepository = new RoomFileRepository();
+            roomRepository = new RoomXMLRepository();
+        }
+
+        public Room GetRoomById(String id)
+        {
+            return roomRepository.Get(id);
         }
 
         public List<Room> GetAllRooms()
         {
-            return RoomRepository.GetAll();
+            return roomRepository.GetAll();
         }
 
-        public Boolean SaveRoom(Room newRoom)
+        public void DeleteRoom(string id)
         {
-            return RoomRepository.Save(newRoom);
+            roomRepository.Delete(id);
         }
-
-        public Boolean UpdateRoom(Room updatedRoom)
+        public List<Room> GetAllNonRenovatedRooms(DateTime now)
         {
-            return RoomRepository.Update(updatedRoom);
-        }
-
-        public Boolean DeleteRoom(int roomId)
-        {
-            return RoomRepository.Delete(roomId);
-        }
-
-        public Room GetOneRoom(int roomId)
-        {
-            return RoomRepository.GetOne(roomId);
-        }
-
-        public List<Room> FindAllExistingRooms()
-        {
-            List<Room> rooms = GetAllRooms();
-            List<Room> returnedRooms = new List<Room>();
-
-            foreach (Room room in rooms)
+            List<Room> nonRenovatedRooms = roomRepository.GetAll();
+            foreach (Room room in nonRenovatedRooms)
             {
-                if (DateTime.Compare(room.StartDateTime, DateTime.Now) <= 0 && DateTime.Compare(room.EndDateTime, DateTime.Now) >= 0)
+                if (room.IsRenovated == false && now <= room.IsRenovatedUntill)
                 {
-                    returnedRooms.Add(room);
+                    room.IsRenovated = false;
                 }
             }
-           
-            return returnedRooms;
+            return nonRenovatedRooms;
         }
-        
-    }
+
+        public void MergeRooms(Room firstRoom, Room secondRoom)
+        {
+            List<Room> rooms = GetAllRooms();
+            DeleteRoom(firstRoom.Id);
+            DeleteRoom(secondRoom.Id);
+            Room mergedRooms = new Room() { Id = firstRoom.Id + secondRoom.Id, Floor = firstRoom.Floor, IsRenovated = firstRoom.IsRenovated,
+                                            IsRenovatedUntill = firstRoom.IsRenovatedUntill, NumOfTakenBeds = firstRoom.NumOfTakenBeds + secondRoom.NumOfTakenBeds,
+                                            Sector = firstRoom.Sector, RoomType = firstRoom.RoomType };
+            roomRepository.Save(mergedRooms);
+
+        }
+        public void SplitRoom(Room room)
+        {
+            List<Room> rooms = GetAllRooms();
+            DeleteRoom(room.Id);
+            Room firstNewRoom = new Room() {Id = room.Id + "R1", Floor=room.Floor, IsRenovated=room.IsRenovated, IsRenovatedUntill = room.IsRenovatedUntill, NumOfTakenBeds=room.NumOfTakenBeds/2, Sector = room.Sector, RoomType = room.RoomType };
+            Room secondNewRoom = new Room() { Id = room.Id + "R2", Floor = room.Floor, IsRenovated = room.IsRenovated, IsRenovatedUntill = room.IsRenovatedUntill, NumOfTakenBeds = room.NumOfTakenBeds/2, Sector = room.Sector, RoomType = room.RoomType };
+
+            roomRepository.Save(firstNewRoom);
+            roomRepository.Save(secondNewRoom);
+        }
+
+        public void CreateRoom(Room room)
+        {
+            roomRepository.Save(room);
+        }
+
+        public void CheckIfRoomIsRenovated(ObservableCollection<Room> rooms)
+        {
+            DateTime now = DateTime.Now;
+               foreach(Room room in rooms)
+            {
+                if(room.IsRenovated ==true && now >= room.IsRenovatedUntill)
+                {
+                    room.IsRenovated = false;
+                }
+            }
+        }
+
+       
+        public void SetRoom(Room room)
+        {
+            roomRepository.Update(room);
+        }
+
+          
+
+            public List<Room> GetRoomsForHospitalization()
+            {
+                RoomInventoryService roomInventoryService = new RoomInventoryService();
+                List<Room> allRooms = roomRepository.GetAll();
+                List<Room> freeRooms = new List<Room>();
+                if (allRooms != null)
+                {
+                    foreach (Room room in allRooms)
+                    {
+                        if (room.RoomType == RoomType.restingRoom && room.NumOfTakenBeds < roomInventoryService.GetNumOfBedsById(room.Id))
+                        {
+                            freeRooms.Add(room);
+                        }
+                    }
+                }
+                return freeRooms;
+            }
+        }
+    
 }
+
