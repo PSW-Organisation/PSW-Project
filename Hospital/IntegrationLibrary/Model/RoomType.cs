@@ -1,10 +1,9 @@
-namespace Model
+namespace ehealthcare.Model
 {
-    public enum RoomType
+	public enum RoomType
     {
-        examinationRoom,
-        operatingRoom,
-        recoveryRoom,
-        storageRoom
+        examination,
+        operation,
+        restingRoom
     }
 }
