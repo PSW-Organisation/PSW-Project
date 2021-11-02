@@ -1,5 +1,5 @@
 <ng-template #content let-modal>
-<!--  <form  #registrationForm="ngForm" (ngSubmit)="sendFeedback()">
+  <!--  <form  #registrationForm="ngForm" (ngSubmit)="sendFeedback()">
         <div>
             <label>Ostavite feedback:</label>
             <input type="text"  
@@ -13,9 +13,9 @@
           
     </form>
 -->
-<div class="modal-header">
+  <div class="modal-header">
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-     
+
     </button>
   </div>
   <div class="modal-body">
@@ -23,32 +23,33 @@
       <div class="form-group">
         <label for="feedback">Leave feedback here:</label>
         <div class="input-group">
-          <textarea rows="6" id="feedback" class="form-control" autofocus type="text" #t="ngModel" name="t"  [(ngModel)]="text"></textarea>
-          
+          <textarea rows="6" id="feedback" class="form-control" autofocus type="text" #t="ngModel" name="t"
+            [(ngModel)]="text"></textarea>
+
         </div>
         <label>Anonymus:</label>
-        <br/>
+        <br />
         <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic">
-            
-              <input type="radio" name="yes" value="true" [(ngModel)]="anonymous"/>
-              <label>Yes</label> 
-              
-              <input style="margin-left: 25%;" name="no" type="radio" value="false"  [(ngModel)]="anonymous"/>
-              <label>No</label> 
-           
-          </div>
+
+          <input type="radio" name="yes" [value]="true" [(ngModel)]="anonymous" />
+          <label>Yes</label>
+
+          <input style="margin-left: 25%;" name="no" type="radio" [value]="false" [(ngModel)]="anonymous" checked />
+          <label>No</label>
+
+        </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')" (click)="sendFeedback()">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')"
+      (click)="sendFeedback()">Send feedback</button>
   </div>
 </ng-template>
 
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)" >Give us your feedback!</button>
-<div>{{text}}</div>
-<div>{{anonymous}}</div>
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Give us your feedback!</button>
 <hr>
-
+<ng-lottie id="fbsent" (loopComplete)="loopComplete($event)" [options]="options" width="10%" height="10%"
+    style="align-items: center; display: none;"></ng-lottie>
 <pre>{{ closeResult }}</pre>
