@@ -1,0 +1,73 @@
+[{
+        "doorPosition": "right",
+        "width": 100,
+        "height": 100,
+        "x": 0,
+        "y": 0,
+        "roomId": "OP1"
+    },
+    {
+        "doorPosition": "left",
+        "width": 100,
+        "height": 100,
+        "x": 197,
+        "y": 0,
+        "roomId": "OP2"
+    },
+    {
+        "doorPosition": "right",
+        "width": 100,
+        "height": 100,
+        "x": 0,
+        "y": 100,
+        "roomId": "OP3"
+    },
+    {
+        "doorPosition": "left",
+        "width": 100,
+        "height": 100,
+        "x": 197,
+        "y": 100,
+        "roomId": "OP4"
+    },
+    {
+        "doorPosition": "right",
+        "width": 75,
+        "height": 145,
+        "x": 0,
+        "y": 340,
+        "roomId": "SP1"
+    },
+    {
+        "doorPosition": "left",
+        "width": 75,
+        "height": 145,
+        "x": 222,
+        "y": 343,
+        "roomId": "SP2"
+    },
+    {
+        "doorPosition": "top",
+        "width": 147,
+        "height": 80,
+        "x": 0,
+        "y": 517,
+        "roomId": "WC"
+    },
+    {
+        "doorPosition": "top",
+        "width": 147,
+        "height": 80,
+        "x": 150,
+        "y": 517,
+        "roomId": "WC"
+    },
+    {
+        "doorPosition": "none",
+        "width": 140,
+        "height": 100,
+        "x": 150,
+        "y": 220,
+        "roomId": "C"
+    }
+]

@@ -10,6 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ehealthcare.Model;
+using Microsoft.EntityFrameworkCore;
+using IntegrationLibrary.Model;
 
 namespace IntegrationAPI
 {
@@ -26,6 +29,20 @@ namespace IntegrationAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<IntegrationDbContext>(options =>
+            {
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
+                    assembly => assembly.MigrationsAssembly(typeof(IntegrationDbContext).Assembly.FullName));
+            });
+
+            /*services.AddMvc()
+                .AddNewtonsoftJson();*/
+
+            /*services.AddDbContext<IntegrationDbContext>(options =>
+            {
+                options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "DefaultConnection"));
+            });*/
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

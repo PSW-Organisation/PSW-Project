@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HospitalExteriorViewComponent } from './hospital-exterior-view/hospital-exterior-view.component';
+import { RoomsViewModule } from './rooms-view/rooms-view.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { HospitalExteriorViewComponent } from './hospital-exterior-view/hospital
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RoomsViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]
