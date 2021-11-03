@@ -19,37 +19,51 @@
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form [formGroup]="feedbackForm" (ngSubmit)="sendFeedback(modal)">
       <div class="form-group">
         <label for="feedback">Leave feedback here:</label>
         <div class="input-group">
-          <textarea rows="6" id="feedback" class="form-control" autofocus type="text" #t="ngModel" name="t"
-            [(ngModel)]="text"></textarea>
-
+          <textarea style="margin-left: 1%;" minlength="3" maxlength="30" rows="6" class="form-control" autofocus
+            type="text" formControlName="textControl"></textarea>
         </div>
+        <br />
         <label>Anonymus:</label>
         <br />
-        <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic">
+        <div class="btn-group btn-group-toggle" style="margin-left: 2%; margin-top: 1%;" ngbRadioGroup 
+          name="radioBasic">
 
-          <input type="radio" name="yes" [value]="true" [(ngModel)]="anonymous" />
-          <label>Yes</label>
+          <input type="radio" formControlName="anonymityControl" [value]="true"/>
+          <label style="margin-left: 2%;">Yes</label>
 
-          <input style="margin-left: 25%;" name="no" type="radio" [value]="false" [(ngModel)]="anonymous" checked />
-          <label>No</label>
+          <input style="margin-left: 30%;" formControlName="anonymityControl"  type="radio" [value]="false"/>
+          <label style="margin-left: 2%;"> No</label>
+        </div>
+        <br />
+        <br />
+        <label>Allow publishing:</label>
+        <br />
+        <div class="btn-group btn-group-toggle" style="margin-left: 2%; margin-top: 1%;" ngbRadioGroup
+          name="radioBasic">
+          <input type="radio" formControlName="publishControl" [value]="true" />
+          <label style="margin-left: 2%;" >Yes</label>
+
+          <input style="margin-left: 30%;" formControlName="publishControl" [value]="false" type="radio"/>
+          <label style="margin-left: 2%;" >No</label>
 
         </div>
       </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-dark" type="submit" >Save</button>
+      </div>
     </form>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')"
-      (click)="sendFeedback()">Send feedback</button>
-  </div>
+  
 </ng-template>
 
 
 <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Give us your feedback!</button>
+<div>{{text}}</div>
+<div>{{anonymous}}</div>
 <hr>
-<ng-lottie id="fbsent" (loopComplete)="loopComplete($event)" [options]="options" width="10%" height="10%"
-    style="align-items: center; display: none;"></ng-lottie>
+
 <pre>{{ closeResult }}</pre>

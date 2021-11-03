@@ -4,7 +4,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import player from 'lottie-web';
-import { EventManager } from '@angular/platform-browser';
+import { Feedback } from './feedback';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -13,9 +15,16 @@ import { EventManager } from '@angular/platform-browser';
   styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent implements OnInit {
-  text?: string;
-  anonymous = false;
+  text: string = '';
+  anonymous: boolean = false;
+  publishAllowed: boolean = false;
   closeResult = '';
+  feedbackForm = new FormGroup({
+    text: new FormControl('')
+  });
+
+  constructor(private servise: ConfigService, private modalService: NgbModal, private toastr: ToastrService) { }
+
   options: AnimationOptions = {
     path: 'https://assets7.lottiefiles.com/packages/lf20_s1nooojy.json',
     loop: true,
@@ -24,20 +33,50 @@ export class FeedbackComponent implements OnInit {
   };
   showAnimation = true;
 
-  constructor(private servise: ConfigService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    this.feedbackForm = new FormGroup({
+      textControl: new FormControl(
+        this.text, [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(100)
+      ]),
+      anonymityControl: new FormControl(false),
+      publishControl: new FormControl(false)
+    });
   }
 
 
-  sendFeedback() {
-    console.log(this.text + ' ' + this.anonymous);
+  sendFeedback(modal: any) {
+    let feedback: Feedback = {
+      id: 'f1',
+      patientId: 'p1',
+      text: this.feedbackForm.get("textControl")?.value,
+      anonymous: this.feedbackForm.get("anonymityControl")?.value,
+      publishAllowed: this.feedbackForm.get("publishControl")?.value,
+    }
+    this.servise.createFeedback(feedback).subscribe({
+      next: c => {
+        
+        if (c){
+          this.showSuccess('Successfully sent feedback!');
+          this.feedbackForm.reset();
+          this.feedbackForm.setValue({textControl: '', anonymityControl: false, publishControl: false})
+          modal.close();
+        }
+        else{
+          this.showError('An error occured.');
+        }
+      }
+    })
     let fbsent = document.getElementById('fbsent')
-    if(fbsent)
+    if (fbsent)
       fbsent.style.display = "block"
     player.play('feedbackGiven')
     this.text = '';
     this.anonymous = false;
+    this.publishAllowed = false;
     //this.servise.g
   }
 
@@ -52,8 +91,16 @@ export class FeedbackComponent implements OnInit {
   loopComplete(event: any) {
     player.pause('feedbackGiven')
     let fbsent = document.getElementById('fbsent')
-    if(fbsent)
+    if (fbsent)
       fbsent.style.display = "none"
+  }
+
+  showSuccess(message: string) {
+    this.toastr.success(message);
+  }
+
+  showError(message: string){
+    this.toastr.error(message);
   }
 
   private getDismissReason(reason: any): string {
