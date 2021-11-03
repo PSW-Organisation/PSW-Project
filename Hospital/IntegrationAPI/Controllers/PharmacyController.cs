@@ -36,7 +36,7 @@ namespace IntegrationAPI.Controllers
             }
         }
 
-        [HttpPost]      // POST /api/pharmacy Request body: {"pharmacyUrl":"someUrl", "pharmacyName":"someName", "pharmacyAddress":"someAddress", "pharmacyApiKey":"someApiKey"}
+        [HttpPost]      // POST /api/pharmacy Request body: {"pharmacyUrl":"someUrl", "pharmacyName":"someName", "pharmacyAddress":"someAddress", "pharmacyApiKey":"someApiKey", "hospitalApiKey":"someApiKey"}
         public IActionResult Add(PharmacyDto dto)
         {
             if (dto.PharmacyName.Length <= 0 || dto.PharmacyUrl.Length <= 0 || dto.PharmacyAddress.Length <= 0 || dto.PharmacyApiKey.Length <= 0)
@@ -47,6 +47,8 @@ namespace IntegrationAPI.Controllers
             long id = Program.Pharmacies.Count > 0 ? Program.Pharmacies.Max(Pharmacy => Pharmacy.PharmacyId) + 1 : 1;
             Pharmacy pharmacy = PharmacyAdapter.PharmacyDtoToPharmacy(dto);
             pharmacy.PharmacyId = id;
+            Guid apiKey = Guid.NewGuid();
+            pharmacy.HospitalApiKey = apiKey.ToString();
             Program.Pharmacies.Add(pharmacy);
             return Ok();
 
