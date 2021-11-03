@@ -13,12 +13,12 @@ namespace IntegrationLibrary.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<VisitTime>().HasData(new VisitTime()
+            /*modelBuilder.Entity<VisitTime>().HasData(new VisitTime()
             {
                 Id = "zoki",
                 StartTime = new DateTime(2010, 10, 10),
                 EndTime = new DateTime(2010, 10, 11)
-            });
+            });*/
         }
     }
 }
