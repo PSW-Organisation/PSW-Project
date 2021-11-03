@@ -7,17 +7,21 @@ namespace IntegrationLibrary.Model
 {
     public class IntegrationDbContext : DbContext
     {
+        public DbSet<Pharmacy> Pharmacies { get; set; }
+
         public IntegrationDbContext(DbContextOptions<IntegrationDbContext> options) : base(options) { }
 
         protected IntegrationDbContext() { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<VisitTime>().HasData(new VisitTime()
+            modelBuilder.Entity<Pharmacy>().HasData(new Pharmacy()
             {
-                Id = "zoki",
-                StartTime = new DateTime(2010, 10, 10),
-                EndTime = new DateTime(2010, 10, 11)
+                PharmacyId = 1,
+                PharmacyName = "Apoteka Jankovic",
+                PharmacyAddress = "Bul. Cara Lazara 58",
+                PharmacyUrl = "",
+                PharmacyApiKey = ""
             });
         }
     }
