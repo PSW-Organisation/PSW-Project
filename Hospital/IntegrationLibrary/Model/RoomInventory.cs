@@ -1,69 +1,96 @@
 using System;
-using Newtonsoft.Json;
 
-namespace Model
+namespace ehealthcare.Model
 {
-   public class RoomInventory
-   {
+    [Serializable]
+    public class RoomInventory : Entity
+    {
+        private int quantity;
+        private Inventory inventory;
+        private string roomId;
+        private int transferAmmount;
+        private DateTime staticTransferDate;
+        private string transferRoomId;
 
-        public RoomInventory(DateTime startTime, DateTime endTime, int quantity, int id, Equipment equipment, Room room, int numberUnavailable=0)
+        public RoomInventory() : base("undefinedNumberKey") { }
+
+        public RoomInventory(Inventory inventory, string roomId, int quantity) : base("undefinedNumberKey")
         {
-            this.StartTime = startTime;
-            this.EndTime = endTime;
-            this.equipment = equipment;
-            this.room = room;
-            this.Quantity = quantity;
-            this.IsDeleted = false;
-            this.Id = id;
-            NumberUnavailable = numberUnavailable;
+            this.inventory = inventory;
+            this.roomId = roomId;
+            this.quantity = quantity;
+            transferAmmount = 0;
         }
 
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public int Quantity { get; set; }
-        public int Id { get; set; }
-        public Boolean IsDeleted { get; set; }
 
-        public Equipment equipment;
-
-        public Room room;
-
-        public int NumberUnavailable { get; set; }
-
-        [JsonIgnore]
-        public String EquipmentName
+        public string TransferRoomId
         {
-            get
+            get { return transferRoomId; }
+            set
             {
-                if (equipment != null)
-                    return (equipment.Name);
-                else
-                    return "";
-            }
-        }
-        [JsonIgnore]
-        public String EquipmentId
-        {
-            get
-            {
-                if (equipment != null)
-                    return ("" + equipment.Id);
-                else
-                    return "";
-            }
-        }
-
-        [JsonIgnore]
-        public String TypeEquipmentSerbian
-        {
-            get
-            {
-                switch (equipment.Type)
+                if (value != transferRoomId)
                 {
-                    case EquipmentType.dinamical:
-                        return "Dinamièki";
-                    default:
-                        return "Statièki";
+                    transferRoomId = value;
+                }
+            }
+        }
+
+        public DateTime StaticTransferDate
+        {
+            get { return staticTransferDate; }
+            set
+            {
+                if (value != staticTransferDate)
+                {
+                    staticTransferDate = value;
+                }
+            }
+        }
+
+        public int Quantity
+        {
+            get { return quantity; }
+            set
+            {
+                if (value != quantity)
+                {
+                    quantity = value;
+                }
+            }
+        }
+
+        public int TransferAmmount
+        {
+            get { return transferAmmount; }
+            set
+            {
+                if (value != transferAmmount)
+                {
+                    transferAmmount = value;
+                }
+            }
+        }
+
+        public string RoomID
+        {
+            get { return roomId; }
+            set
+            {
+                if (value != roomId)
+                {
+                    roomId = value;
+                }
+            }
+        }
+
+        public Inventory Inventory
+        {
+            get { return inventory; }
+            set
+            {
+                if (value != inventory)
+                {
+                    inventory = value;
                 }
             }
         }

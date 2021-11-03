@@ -1,121 +1,93 @@
-using System;
-using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Model
+namespace ehealthcare.Model
 {
-   public class Medicine
-   {
-        public Medicine(String name, String manufacturer, String packaging, int medicineID, MedicineCondition condition)
+    [Serializable]
+    public class Medicine : Entity
+    {
+        private String name;
+        private MedicineStatus medicineStatus;
+        private List<MedicineIngredient> medicineIngredient;
+
+        public Medicine() : base("undefinedNumberKey") { }
+
+        public String Name
         {
-            this.MedicineID = medicineID;
-            this.Name = name;
-            this.Manufacturer = manufacturer;
-            this.Packaging = packaging;
-            this.Condition = condition;
-            this.Status = MedicineStatus.awaiting;
-            this.ReplacementMedicine = null;
-            this.ingridient = new System.Collections.Generic.List<Ingridient>();
-            this.IsDeleted = false;
+            get { return name; }
+            set { name = value; }
         }
-        public String Name { get; set; }
 
-        //******** Dodati deo - ako nesto ne radi
-        public String Manufacturer { get; set; }
-        public String Packaging { get; set; }
-        public int MedicineID { get; set; }
-        public MedicineStatus Status { get; set; }
-        public MedicineCondition Condition { get; set; }
-        public Boolean IsDeleted { get; set; }
+        public MedicineStatus MedicineStatus
+        {
+            get { return medicineStatus; }
+            set { medicineStatus = value; }
+        }
 
-        public Medicine ReplacementMedicine { get; set; }
-        //********
 
-        [JsonIgnore]
-        public String ConditionSerbian
+        public List<MedicineIngredient> MedicineIngredient
         {
             get
             {
-                switch (Condition)
-                {
-                    case MedicineCondition.capsule:
-                        return "kapsula";
-                    case MedicineCondition.pill:
-                        return "pilula";
-                    default:
-                        return "sirup";
-                }
-            }
-        }
-
-        [JsonIgnore]
-        public String StatusSerbian
-        {
-            get
-            {
-                switch (Status)
-                {
-                    case MedicineStatus.awaiting:
-                        return "Na �ekanju";
-                    case MedicineStatus.approved:
-                        return "Odobren";
-                    default:
-                        return "Odbijen";
-                }
-            }
-        }
-
-        public System.Collections.Generic.List<Ingridient> ingridient;
-
-        public System.Collections.Generic.List<Ingridient> Ingridient
-        {
-            get
-            {
-                if (ingridient == null)
-                    ingridient = new System.Collections.Generic.List<Ingridient>();
-                return ingridient;
+                if (medicineIngredient == null)
+                    medicineIngredient = new List<MedicineIngredient>();
+                return medicineIngredient;
             }
             set
             {
-                RemoveAllIngridient();
+                RemoveAllMedicineIngredient();
                 if (value != null)
                 {
-                    foreach (Ingridient oIngridient in value)
-                        AddIngridient(oIngridient);
+                    foreach (MedicineIngredient oMedicineIngredient in value)
+                        AddMedicineIngredient(oMedicineIngredient);
                 }
             }
         }
 
-        public void AddIngridient(Ingridient newIngridient)
+        public void AddMedicineIngredient(MedicineIngredient newMedicineIngredient)
         {
-            if (newIngridient == null)
+            if (newMedicineIngredient == null)
                 return;
-            if (this.ingridient == null)
-                ingridient = new System.Collections.Generic.List<Ingridient>();
-            if (!this.ingridient.Contains(newIngridient))
-                this.ingridient.Add(newIngridient);
+            if (this.medicineIngredient == null)
+                this.medicineIngredient = new List<MedicineIngredient>();
+            if (!this.medicineIngredient.Contains(newMedicineIngredient))
+                this.medicineIngredient.Add(newMedicineIngredient);
         }
 
-        public void RemoveIngridient(Ingridient oldIngridient)
+        public void RemoveMedicineIngredient(MedicineIngredient oldMedicineIngredient)
         {
-            if (oldIngridient == null)
+            if (oldMedicineIngredient == null)
                 return;
-            if (this.ingridient != null)
-                if (this.ingridient.Contains(oldIngridient))
-                    this.ingridient.Remove(oldIngridient);
+            if (this.medicineIngredient != null)
+                if (this.medicineIngredient.Contains(oldMedicineIngredient))
+                    this.medicineIngredient.Remove(oldMedicineIngredient);
         }
 
-        public void RemoveAllIngridient()
+        public void RemoveAllMedicineIngredient()
         {
-            if (ingridient != null)
-                ingridient.Clear();
+            if (medicineIngredient != null)
+                medicineIngredient.Clear();
         }
 
-        override
-        public String ToString()
+
+        [System.Xml.Serialization.XmlIgnore]
+        public String MedicineStatusString
         {
-            return Name;
+            get
+            {
+                if (Enum.GetName(typeof(MedicineStatus), medicineStatus) == "approved")
+                {
+                    return "Odobren";
+                }
+                else if (Enum.GetName(typeof(MedicineStatus), medicineStatus) == "disapproved")
+                {
+                    return "Neodobren";
+                }
+                else
+                {
+                    return "Čeka na odobravanje";
+                }
+            }
         }
-
     }
-
 }

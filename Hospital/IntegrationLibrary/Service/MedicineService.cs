@@ -1,75 +1,67 @@
+﻿using ehealthcare.Model;
+using ehealthcare.Repository;
+using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
-using Model;
-using Model;
-using vezba.Repository;
-using vezba.Service;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Service
+namespace ehealthcare.Service
 {
     public class MedicineService
     {
-
-        private IMedicineRepository MedicineRepository { get; }
-
-        public MedicineService(IMedicineRepository medicineRepository)
+        private MedicineRepository medicineRepository;
+        
+        public MedicineService()
         {
-            MedicineRepository = medicineRepository;
-        }
-        public List<Medicine> GetApproved()
-        {
-            return MedicineRepository.GetApproved();
+            medicineRepository = new MedicineXMLRepository();
         }
 
-        public List<Medicine> GetAwaiting()
+        public void SetMedicine(Medicine medicine)
         {
-            return MedicineRepository.GetAwaiting();
+            medicineRepository.Update(medicine);
         }
 
-        public List<Medicine> GetPossibleReplacements(Medicine medicine)
+        public void AddMedicine(Medicine medicine)
         {
-            List<Medicine> medicineForReplacement = GetApproved();
-            foreach (var replacement in medicineForReplacement)
+            medicineRepository.Save(medicine);
+        }
+
+        public void SetMedicineIngredients(Medicine medicine, List<MedicineIngredient> medicineIngredients)
+        {
+            medicine.MedicineIngredient = medicineIngredients;
+            medicineRepository.Update(medicine);
+        }
+
+        public List<Medicine> GetAllMedicines()
+        {
+            return medicineRepository.GetAll();
+        }
+
+        
+        public void AddMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient)
+        {
+            medicine.MedicineIngredient.Add(medicineIngredient);
+            medicineRepository.Update(medicine);
+        }
+
+        public void RemoveMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient)
+        {
+            foreach(MedicineIngredient mi in medicine.MedicineIngredient)
             {
-                if (replacement.MedicineID == medicine.MedicineID)
+                if (mi.Equals(medicineIngredient))
                 {
-                    medicineForReplacement.Remove(replacement);
+                    medicine.MedicineIngredient.Remove(mi);
                     break;
                 }
             }
-
-            return medicineForReplacement;
+            medicineRepository.Update(medicine);
         }
 
-        public Boolean UpdateMedicine(Medicine updatedMedicine)
+        public void DeleteMedicine(string id)
         {
-            return MedicineRepository.Update(updatedMedicine);
+            medicineRepository.Delete(id);
         }
-
-        public Boolean DeleteMedicine(int medicineID)
-        {
-            return MedicineRepository.Delete(medicineID);
-        }
-
-        public void ApproveMedicine(Medicine medicineToApprove)
-        {
-            medicineToApprove.Status = MedicineStatus.approved;
-            UpdateMedicine(medicineToApprove);
-        }
-
-        public Medicine getMedicineById(int medicineId)
-        {
-            return MedicineRepository.GetOne(medicineId);
-        }
-        public List<Medicine> GetAllMedicine()
-        {
-            return MedicineRepository.GetAll();
-        }
-
-        public Boolean SaveMedicine(Medicine newMedicine)
-        {
-            return MedicineRepository.Save(newMedicine);
-        }
-
     }
 }

@@ -1,22 +1,91 @@
 using System;
+using System.Xml.Serialization;
 
-namespace Model
+namespace ehealthcare.Model
 {
-    public class User
+    [XmlInclude(typeof(Patient))]
+    [XmlInclude(typeof(Doctor))]
+    public abstract class User : Entity
     {
-        public String Username { get; set; }
-        public String Password { get; set; }
-        public String Name { get; set; }
-        public String Surname { get; set; }
-        public String Jmbg { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public Sex Sex { get; set; }
-        public String PhoneNumber { get; set; }
-        public String Adress { get; set; }
-        public String Email { get; set; }
-        public String IdCard { get; set; }
-        public UserType Type { get; set; }
-        public Boolean IsDeleted { get; set; }
+        private String name;
+        private String surname;
+        private String parentName;
+        private String gender;
+        private DateTime dateOfBirth;
+        private String phone;
+        private String email;
+        private Address address;
 
+        public User() : base("undefinedKey") { }
+
+        public String Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public String Surname
+        {
+            get { return surname; }
+            set { surname = value; }
+        }
+
+        [System.Xml.Serialization.XmlIgnore]
+        public String FullName
+        {
+            get { return name + " " + surname; }
+        }
+
+        public String ParentName
+        {
+            get { return parentName; }
+            set { parentName = value; }
+        }
+
+        public String Gender
+        {
+            get { return gender; }
+            set { gender = value; }
+        }
+
+        public DateTime DateOfBirth
+        {
+            get { return dateOfBirth; }
+            set { dateOfBirth = value; }
+        }
+
+        public String Phone
+        {
+            get { return phone; }
+            set { phone = value; }
+        }
+
+        public String Email
+        {
+            get { return email; }
+            set { email = value; }
+        }
+
+        public Address Address
+        {
+            get { return address; }
+            set { address = value; }
+        }
+
+        [System.Xml.Serialization.XmlIgnore]
+        public String AddressString
+        {
+            get
+            {
+                if (address != null)
+                {
+                    return address.ToString();
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
     }
 }
