@@ -19,9 +19,9 @@ namespace IntegrationAPI
 
         public static List<Pharmacy> Pharmacies = new List<Pharmacy>()
         {
-            new Pharmacy(1 , "someUrl", "pharmacy1", "someAddress", "someApiKey", "dfdfa"),
-            new Pharmacy(2 , "someUrl", "pharmacy2", "someAddress", "someApiKey", "dasafsas"),
-            new Pharmacy(3 , "someUrl", "pharmacy3", "someAddress", "someApiKey", "adsada")
+            new Pharmacy(1 , "someUrl", "pharmacy1", "someAddress", "someApiKey"),
+            new Pharmacy(2 , "someUrl", "pharmacy2", "someAddress", "someApiKey"),
+            new Pharmacy(3 , "someUrl", "pharmacy3", "someAddress", "someApiKey")
         };
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
