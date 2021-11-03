@@ -301,6 +301,8 @@
   <span> Bolnica </span>
   <span style="width: 30px;"></span>
   <span> projekat</span>
+  <span style="width: 30px;"></span>
+  <span><a routerLink="/pharmacies" style="color: #eeeeee;">Pharmacies</a></span>
   <span style="width: 10px;"></span>
     <div class="spacer"></div>
     <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
@@ -321,9 +323,9 @@
   
   <div *ngIf="hospitalExteriorView">
     <app-hospital-exterior-view></app-hospital-exterior-view>
+    <router-outlet></router-outlet>
   </div>
   
-
 
   <!-- Footer -->
   <footer>
