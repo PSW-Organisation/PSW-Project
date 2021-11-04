@@ -1,151 +1,97 @@
-using Newtonsoft.Json;
 using System;
+using System.ComponentModel;
 
-namespace Model
+namespace ehealthcare.Model
 {
-    public class Room
+    [Serializable]
+    public class Room : Entity
     {
-        public RoomType RoomType { get; set; }
-        public int RoomNumber { get; set; }
-        public Floor RoomFloor { get; set; }
-        public Boolean IsDeleted { get; set; }
-        public DateTime StartDateTime { get; set; }
-        public DateTime EndDateTime { get; set; }
+        private String sector;
+        private int floor;
+        private RoomType roomType;
+        private bool isRenovated;
+        private DateTime isRenovatedUntil;
+        private int numOfTakenBeds;
 
-        public Room(DateTime startDateTime, int roomNumber, Floor roomFloor, RoomType roomType)
+        public Room() : base("undefinedKey") { }
+
+        public Room(String roomId, int roomFloor, String roomSector, RoomType roomType) : base(roomId)
         {
-            RoomType = roomType;
-            RoomNumber = roomNumber;
-            RoomFloor = roomFloor;
-            IsDeleted = false;
-            EndDateTime = new DateTime(2999, 12, 31);
-            StartDateTime = startDateTime;
-            renovation = new System.Collections.Generic.List<Renovation>();
+            sector = roomSector;
+            floor = roomFloor;
+            this.roomType = roomType;
         }
 
-        [JsonIgnore]
-        public String NumberAndType
+
+        public DateTime IsRenovatedUntill
         {
-            get
-            {
-                return RoomNumber + " " + TypeSerbian;
-            }
+            get { return isRenovatedUntil; }
+            set { isRenovatedUntil = value; }
         }
 
-        [JsonIgnore]
-        public String FloorSerbian
+        public String Sector
         {
-            get
+            get { return sector; }
+            set
             {
-                switch (RoomFloor)
+                if (value != sector)
                 {
-                    case Floor.first:
-                        return "Prvi";
-                    case Floor.second:
-                        return "Drugi";
-                    default:
-                        return "Treæi";
+                    sector = value;
                 }
             }
         }
 
-        [JsonIgnore]
-        public String TypeSerbian
+        public bool IsRenovated
         {
-            get
+            get { return isRenovated; }
+            set
             {
-                switch (RoomType)
+                if (value != isRenovated)
                 {
-                    case Model.RoomType.examinationRoom:
-                        return "Soba za preglede";
-                    case Model.RoomType.operatingRoom:
-                        return "Operaciona sala";
-                    case Model.RoomType.recoveryRoom:
-                        return "Soba za odmor";
-                    default:
-                        return "Magacin";
+                    isRenovated = value;
                 }
             }
         }
 
-        public string RoomFloorName
+        public int Floor
         {
-            get
+            get { return floor; }
+            set
             {
-                if (RoomFloor == Floor.first)
-                    return "Prvi";
-                else if (RoomFloor == Floor.second)
-                    return "Drugi";
-                else
-                    return "Treći";
-            }
-        }
-
-        public string RoomTypeName
-        {
-            get
-            {
-                if (RoomType == RoomType.examinationRoom)
-                    return "Ordinacija za preglede";
-                else if (RoomType == RoomType.operatingRoom)
-                    return "Operaciona sala";
-                else if (RoomType == RoomType.recoveryRoom)
-                    return "Soba za oporavak";
-                else
-                    return "Skladiste;";
-            }
-        }
-
-        public System.Collections.Generic.List<Renovation> renovation;
-      
-          public System.Collections.Generic.List<Renovation> Renovation
-          {
-             get
-             {
-                if (renovation == null)
-                   renovation = new System.Collections.Generic.List<Renovation>();
-                return renovation;
-             }
-             set
-             {
-                RemoveAllRenovation();
-                if (value != null)
+                if (value != floor)
                 {
-                   foreach (Renovation oRenovation in value)
-                      AddRenovation(oRenovation);
+                    floor = value;
                 }
-             }
-          }
-      
-          public void AddRenovation(Renovation newRenovation)
-          {
-             if (newRenovation == null)
-                return;
-             if (this.renovation == null)
-                this.renovation = new System.Collections.Generic.List<Renovation>();
-             if (!this.renovation.Contains(newRenovation))
-                this.renovation.Add(newRenovation);
-          }
-      
-          public void RemoveRenovation(Renovation oldRenovation)
-          {
-             if (oldRenovation == null)
-                return;
-             if (this.renovation != null)
-                if (this.renovation.Contains(oldRenovation))
-                   this.renovation.Remove(oldRenovation);
-          }
-     
-          public void RemoveAllRenovation()
-          {
-             if (renovation != null)
-                renovation.Clear();
-          }
-
-        public override string ToString()
-        {
-            return this.RoomNumber.ToString();
+            }
         }
 
+
+        public RoomType RoomType
+        {
+            get { return roomType; }
+            set
+            {
+                if (value != roomType)
+                {
+                    roomType = value;
+                }
+            }
+        }
+
+        public int NumOfTakenBeds
+        {
+            get { return numOfTakenBeds; }
+            set
+            {
+                numOfTakenBeds = value;
+            }
+        }
+
+        override
+            public string ToString()
+        {
+            return "ID Sobe: " + base.Id + " Sektor sobe: " + sector + " Sprat sobe: " + floor.ToString() + " Tip sobe: " +
+                   roomType.ToString() + " Da li se soba renovira: " + isRenovated.ToString();
+        }
     }
 }

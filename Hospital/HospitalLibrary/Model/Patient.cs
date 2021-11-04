@@ -1,114 +1,66 @@
 using System;
 using System.Collections.Generic;
 
-namespace Model
+namespace ehealthcare.Model
 {
+    [Serializable]
     public class Patient : User
     {
-        public Boolean IsBlocked { get; set; }
-        public Patient(Boolean isGuest, string name, string surname, string jmbg , DateTime date, Sex sex, string phoneNumber, string adress, string email, string idNum, string emContact, MedicalRecord med, string username, string password, Boolean block = false)
+        private MedicalRecord medicalRecord;
+        private List<MedicalPermit> medicalPermit;
+
+        public Patient()
         {
-
-            this.IsDeleted = false;
-            this.IsGuest = isGuest;
-            this.Name = name;
-            this.Surname = surname;
-            this.Jmbg = jmbg;
-            this.DateOfBirth = date;
-            this.Sex = sex;
-            this.PhoneNumber = phoneNumber;
-            this.Adress = adress;
-            this.Email = email;
-            this.IdCard = idNum;
-            this.EmergencyContact = emContact;
-            this.MedicalRecord = med;
-            this.Username = username;
-            this.Password = password;
-            this.appointment = null;
-            this.Type = UserType.patient;
-            this.IsBlocked = block;
         }
-        public Boolean IsGuest { get; set; }
-        public String EmergencyContact { get; set; }
 
-        public MedicalRecord MedicalRecord { get; set; }
+        public MedicalRecord MedicalRecord
+        {
+            get { return medicalRecord; }
+            set { medicalRecord = value; }
+        }
 
-        public string NameAndSurname
+        public List<MedicalPermit> MedicalPermit
         {
             get
             {
-                return Name + " " + Surname;
-            }
-        }
-
-        public List<Appointment> appointment;
-
-
-        public List<Appointment> Appointment
-        {
-            get
-            {
-                if (appointment == null)
-                    appointment = new List<Appointment>();
-                return appointment;
+                if (medicalPermit == null)
+                    medicalPermit = new List<MedicalPermit>();
+                return medicalPermit;
             }
             set
             {
-                RemoveAllAppointment();
+                RemoveAllMedicalPermit();
                 if (value != null)
                 {
-                    foreach (Appointment oAppointment in value)
-                        AddAppointment(oAppointment);
+                    foreach (MedicalPermit oMedicalPermit in value)
+                        AddMedicalPermit(oMedicalPermit);
                 }
             }
         }
 
-
-        public void AddAppointment(Appointment newAppointment)
+        public void AddMedicalPermit(MedicalPermit newMedicalPermit)
         {
-            if (newAppointment == null)
+            if (newMedicalPermit == null)
                 return;
-            if (this.appointment == null)
-                this.appointment = new System.Collections.Generic.List<Appointment>();
-            if (!this.appointment.Contains(newAppointment))
-            {
-                this.appointment.Add(newAppointment);
-                newAppointment.Patient = this;
-            }
+            if (this.medicalPermit == null)
+                this.medicalPermit = new List<MedicalPermit>();
+            if (!this.medicalPermit.Contains(newMedicalPermit))
+                this.medicalPermit.Add(newMedicalPermit);
         }
 
-
-        public void RemoveAppointment(Appointment oldAppointment)
+        public void RemoveMedicalPermit(MedicalPermit oldMedicalPermit)
         {
-            if (oldAppointment == null)
+            if (oldMedicalPermit == null)
                 return;
-            if (this.appointment != null)
-                if (this.appointment.Contains(oldAppointment))
-                {
-                    this.appointment.Remove(oldAppointment);
-                    oldAppointment.Patient = null;
-                }
+            if (this.medicalPermit != null)
+                if (this.medicalPermit.Contains(oldMedicalPermit))
+                    this.medicalPermit.Remove(oldMedicalPermit);
         }
 
-
-        public void RemoveAllAppointment()
+        public void RemoveAllMedicalPermit()
         {
-            if (appointment != null)
-            {
-                System.Collections.ArrayList tmpAppointment = new System.Collections.ArrayList();
-                foreach (Appointment oldAppointment in appointment)
-                    tmpAppointment.Add(oldAppointment);
-                appointment.Clear();
-                foreach (Appointment oldAppointment in tmpAppointment)
-                    oldAppointment.Patient = null;
-                tmpAppointment.Clear();
-            }
+            if (medicalPermit != null)
+                medicalPermit.Clear();
         }
-
-        public override string ToString()
-        {
-            return this.Name + " " + this.Surname;
-        }
-
     }
 }
