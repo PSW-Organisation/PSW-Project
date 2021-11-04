@@ -3,15 +3,17 @@ using System;
 using IntegrationLibrary.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace IntegrationLibrary.Migrations
 {
     [DbContext(typeof(IntegrationDbContext))]
-    partial class IntegrationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211104152816_dodatiPrigovori2")]
+    partial class dodatiPrigovori2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,9 +34,6 @@ namespace IntegrationLibrary.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<long>("PharmacyId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
@@ -47,8 +46,7 @@ namespace IntegrationLibrary.Migrations
                         {
                             ComplaintId = 1L,
                             Content = "Postovani, molimo Vas da isporuke o medicinskim sredstvima vrsite u navedenom roku! ",
-                            Date = new DateTime(2021, 11, 4, 21, 22, 6, 394, DateTimeKind.Local).AddTicks(3016),
-                            PharmacyId = 1L,
+                            Date = new DateTime(2021, 11, 4, 16, 28, 16, 16, DateTimeKind.Local).AddTicks(44),
                             Title = "Prigovor o dostavi"
                         });
                 });

@@ -9,6 +9,8 @@ namespace IntegrationLibrary.Model
     {
         public DbSet<Pharmacy> Pharmacies { get; set; }
 
+        public DbSet<Complaint> Complaints { get; set; }
+
         public IntegrationDbContext(DbContextOptions<IntegrationDbContext> options) : base(options) { }
 
         protected IntegrationDbContext() { }
@@ -23,6 +25,16 @@ namespace IntegrationLibrary.Model
                 PharmacyUrl = "",
                 PharmacyApiKey = ""
             });
+
+            modelBuilder.Entity<Complaint>().HasData(
+                new Complaint()
+                {
+                    ComplaintId = 1,
+                    Date = DateTime.Now,
+                    Title = "Prigovor o dostavi",
+                    Content = "Postovani, molimo Vas da isporuke o medicinskim sredstvima vrsite u navedenom roku! ",
+                    PharmacyId =1
+                });
         }
     }
 }
