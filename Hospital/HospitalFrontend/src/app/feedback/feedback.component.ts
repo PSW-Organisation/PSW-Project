@@ -50,22 +50,21 @@ export class FeedbackComponent implements OnInit {
 
   sendFeedback(modal: any) {
     let feedback: Feedback = {
-      id: 'f1',
-      patientId: 'p1',
+      id: 'f2',
+      patientId: 'p2',
       text: this.feedbackForm.get("textControl")?.value,
       anonymous: this.feedbackForm.get("anonymityControl")?.value,
       publishAllowed: this.feedbackForm.get("publishControl")?.value,
     }
     this.servise.createFeedback(feedback).subscribe({
       next: c => {
-        
-        if (c){
+        if (c) {
           this.showSuccess('Successfully sent feedback!');
           this.feedbackForm.reset();
-          this.feedbackForm.setValue({textControl: '', anonymityControl: false, publishControl: false})
+          this.feedbackForm.setValue({ textControl: '', anonymityControl: false, publishControl: false })
           modal.close();
         }
-        else{
+        else {
           this.showError('An error occured.');
         }
       }
@@ -99,7 +98,7 @@ export class FeedbackComponent implements OnInit {
     this.toastr.success(message);
   }
 
-  showError(message: string){
+  showError(message: string) {
     this.toastr.error(message);
   }
 

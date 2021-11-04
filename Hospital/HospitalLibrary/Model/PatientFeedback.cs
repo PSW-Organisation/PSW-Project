@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HospitalAPI.Models
+namespace ehealthcare.Model
 {
-    public class Feedback
+    public class PatientFeedback
     {
         public string id { get; set; }
         public string patientId { get; set; }

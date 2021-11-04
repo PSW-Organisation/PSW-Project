@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-outline-dark" type="submit" >Save</button>
+        <button class="btn btn-outline-dark" type="submit" [disabled]="!feedbackForm.valid">Save</button>
       </div>
     </form>
   </div>

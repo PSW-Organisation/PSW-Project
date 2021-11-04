@@ -5,33 +5,34 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HospitalAPI.Models;
+using ehealthcare.Model;
+
 
 namespace HospitalAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FeedbacksController : ControllerBase
+    public class PatientFeedbacksController : ControllerBase
     {
-        private readonly MyDbContext _context;
+        private readonly HospitalDbContext _context;
 
-        public FeedbacksController(MyDbContext context)
+        public PatientFeedbacksController(HospitalDbContext context)
         {
             _context = context;
         }
 
         // GET: api/Feedbacks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Feedback>>> GetFeedbacks()
+        public async Task<ActionResult<IEnumerable<PatientFeedback>>> GetFeedbacks()
         {
-            return await _context.Feedbacks.ToListAsync();
+            return await _context.PatientFeedbacks.ToListAsync();
         }
 
         // GET: api/Feedbacks/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Feedback>> GetFeedback(string id)
+        public async Task<ActionResult<PatientFeedback>> GetFeedback(string id)
         {
-            var feedback = await _context.Feedbacks.FindAsync(id);
+            var feedback = await _context.PatientFeedbacks.FindAsync(id);
 
             if (feedback == null)
             {
@@ -45,7 +46,7 @@ namespace HospitalAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFeedback(string id, Feedback feedback)
+        public async Task<IActionResult> PutFeedback(string id, PatientFeedback feedback)
         {
             if (id != feedback.id)
             {
@@ -77,25 +78,28 @@ namespace HospitalAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Feedback>> PostFeedback(Feedback feedback)
+        public async Task<ActionResult<PatientFeedback>> PostFeedback(PatientFeedback feedback)
         {
-            if (feedback.text.Equals(""))
+            if (!ModelState.IsValid)
                 return NoContent();
-            
+
+            _context.PatientFeedbacks.Add(feedback);
+            _context.SaveChanges();
+
             return Ok(feedback);
         }
 
         // DELETE: api/Feedbacks/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Feedback>> DeleteFeedback(string id)
+        public async Task<ActionResult<PatientFeedback>> DeleteFeedback(string id)
         {
-            var feedback = await _context.Feedbacks.FindAsync(id);
+            var feedback = await _context.PatientFeedbacks.FindAsync(id);
             if (feedback == null)
             {
                 return NotFound();
             }
 
-            _context.Feedbacks.Remove(feedback);
+            _context.PatientFeedbacks.Remove(feedback);
             await _context.SaveChangesAsync();
 
             return feedback;
@@ -103,7 +107,7 @@ namespace HospitalAPI.Controllers
 
         private bool FeedbackExists(string id)
         {
-            return _context.Feedbacks.Any(e => e.id == id);
+            return _context.PatientFeedbacks.Any(e => e.id == id);
         }
     }
 }

@@ -14,7 +14,7 @@ export class ConfigService {
   }
 
   createFeedback(feedback : Feedback): Observable<any>{
-    return this._http.post<number>(`${this._url}/api/Feedbacks`, feedback);
+    return this._http.post<number>(`${this._url}/api/PatientFeedbacks`, feedback);
   }
 
 }

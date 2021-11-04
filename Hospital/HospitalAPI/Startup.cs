@@ -7,13 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 namespace HospitalAPI
 {
@@ -36,13 +31,18 @@ namespace HospitalAPI
                     assembly => assembly.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName));
             });
 
-            services.AddMvc().AddNewtonsoftJson();
+            services.AddMvc(setup => {
+                //...mvc setup...
+            }).AddFluentValidation().AddNewtonsoftJson();
+
+            services.AddTransient<IValidator<PatientFeedback>, PatientFeedbackValidator>();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
+
             
         }
 
