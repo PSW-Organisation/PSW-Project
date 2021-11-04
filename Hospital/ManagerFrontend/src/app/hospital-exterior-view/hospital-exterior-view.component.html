@@ -1,34 +1,27 @@
 <div>
-
-    <svg class="viewOfMAP">
-      
-      <g *ngFor="let el of drawableElements">
-        <rect [attr.x]="el.x" [attr.y]="el.y" [attr.width]="el.width" [attr.height]="el.height" [attr.class]="dynamicSelectStyle(el)"
-        (click)="youClickedMe(el)"/>
-        <text dominant-baseline="middle" text-anchor="middle" [attr.x]="el.x+el.width/2" [attr.y]="el.y+el.height/2" font-family="Verdana" font-size="15" fill="white">{{el.name}}</text>
-      </g>
-  
-  
-  
-    </svg>
-  
-    <br/>
-    <br/>
-    
-      <svg class="viewLegend">
-        <g>
-          <circle cx="25" cy="25" r="5" fill="rgb(153, 0, 153)"/>
-          <text dominant-baseline="middle" x="55" y="26" font-family="Verdana" font-size="10" fill="Black"> - Building</text>
-        </g>
-        <g>
-          <circle cx="25" cy="45" r="5" fill="hsl(240, 20%, 75%)"/>
-          <text dominant-baseline="middle"  x="55" y="46" font-family="Verdana" font-size="10" fill="Black"> - Road</text>
-        </g>
-        <g>
-          <circle cx="25" cy="65" r="5" fill="blue"/>
-          <text dominant-baseline="middle" x="55" y="66" font-family="Verdana" font-size="10" fill="Black"> - Parking</text>
-        </g>
-      </svg>
-  
-  
-  </div>
+  <svg class="viewOfMAP">
+    <g *ngFor="let el of drawableElements">
+      <rect [attr.x]="el.x" [attr.y]="el.y" [attr.width]="el.width" [attr.height]="el.height"
+        [attr.class]="dynamicSelectStyle(el)" (click)="youClickedMe(el)" />
+      <text dominant-baseline="middle" text-anchor="middle" [attr.x]="el.x+el.width/2" [attr.y]="el.y+el.height/2"
+        font-family="Verdana" font-size="15" fill="white">{{el.name}}</text>
+    </g>
+  </svg>
+  <br />
+  <br />
+  <svg class="viewLegend">
+    <g>
+      <circle cx="25" cy="25" r="5" fill="rgb(153, 0, 153)" />
+      <text dominant-baseline="middle" x="55" y="26" font-family="Verdana" font-size="10" fill="Black"> -
+        Building</text>
+    </g>
+    <g>
+      <circle cx="25" cy="45" r="5" fill="hsl(240, 20%, 75%)" />
+      <text dominant-baseline="middle" x="55" y="46" font-family="Verdana" font-size="10" fill="Black"> - Road</text>
+    </g>
+    <g>
+      <circle cx="25" cy="65" r="5" fill="blue" />
+      <text dominant-baseline="middle" x="55" y="66" font-family="Verdana" font-size="10" fill="Black"> - Parking</text>
+    </g>
+  </svg>
+</div>
