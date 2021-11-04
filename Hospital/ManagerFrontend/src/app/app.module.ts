@@ -10,20 +10,27 @@ import { BuildingFloorsComponent } from './building-floors/building-floors.compo
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { HttpClientModule } from '@angular/common/http';
+import { PharmaciesService } from './pharmacies-view/pharmacies.service';
+
 @NgModule({
   declarations: [
     AppComponent,
     HospitalExteriorViewComponent,
-    PharmaciesViewComponent
+    PharmaciesViewComponent,
     BuildingFloorsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ PharmaciesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

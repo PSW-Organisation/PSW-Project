@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ehealthcare.Model;
+
 using Microsoft.EntityFrameworkCore;
 using IntegrationLibrary.Model;
 
@@ -18,6 +18,7 @@ namespace IntegrationAPI
 {
     public class Startup
     {
+        readonly string allowSpecificOrigins = "_allowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -35,6 +36,25 @@ namespace IntegrationAPI
                     assembly => assembly.MigrationsAssembly(typeof(IntegrationDbContext).Assembly.FullName));
             });
 
+            //services.AddCors(options =>
+            //    options.AddDefaultPolicy(
+            //        builder => builder.WithOrigins("https://localhost:16928")));
+            //options.AddPolicy(allowSpecificOrigins,
+
+            //builder =>
+
+            //{
+
+            //    builder.WithOrigins("https://localhost:4200")
+
+            //            .AllowAnyHeader()
+
+            //            .AllowAnyMethod();
+
+            //});
+
+
+
             /*services.AddMvc()
                 .AddNewtonsoftJson();*/
 
@@ -42,6 +62,16 @@ namespace IntegrationAPI
             {
                 options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "DefaultConnection"));
             });*/
+
+
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder
+                    .WithOrigins(new[] { "http://localhost:4200" })
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            }));
 
         }
 
@@ -52,19 +82,27 @@ namespace IntegrationAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseRouting();
+
+
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+            //app.UseCors(allowSpecificOrigins);
+            //app.UseCors(corsPolicyBuilder => corsPolicyBuilder.WithOrigins("http://localhost:16928").AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(options => options.AllowAnyOrigin());
+
+        
 
             app.UseAuthorization();
 
             app.UsePathBase("/api2");
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+           app.UseEndpoints(endpoints =>
+           {
+            endpoints.MapControllers();
+           });
 
         }
     }

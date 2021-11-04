@@ -2,11 +2,14 @@
     "api/*": {
         "target": "http://localhost:42789",
         "secure": false,
-        "logLevel": "debug"
+        "logLevel": "debug",
+        "changeOrigin": true
     },
     "api2/*": {
         "target": "http://localhost:16928",
         "secure": false,
-        "logLevel": "debug"
+        "logLevel": "debug",
+        "pathRewrite": {"^/api2" : ""},
+        "changeOrigin": true
     }
 }
