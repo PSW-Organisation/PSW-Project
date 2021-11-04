@@ -1,6 +1,7 @@
 ﻿using IntegrationAPI.Adapters;
 using IntegrationAPI.DTO;
 using IntegrationLibrary.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api2/[controller]")]
     [ApiController]
     public class PharmacyController : ControllerBase
     {
