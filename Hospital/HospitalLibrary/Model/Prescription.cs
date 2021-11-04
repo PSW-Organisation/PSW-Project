@@ -1,46 +1,24 @@
 using System;
-using Newtonsoft.Json;
 
-namespace Model
+
+namespace ehealthcare.Model
 {
-   public class Prescription
-   {
-       public DateTime StartDate { get; set; }
-        public int DurationInDays { get; set; }
-        public Period ReferencePeriod { get; set; }
-        public int Number { get; set; }
-        public int Id { get; set; }
-        public Boolean isActive { get; set; }
+    [Serializable]
+    public class Prescription
+    {
+        private bool active;
+        private Medicine medicine;
 
-        public Medicine Medicine { get; set; }
-
-        public Prescription(DateTime time, int d, Period rp, int n, int id, Boolean a, Medicine m)
+        public bool Active
         {
-            this.StartDate = time;
-            this.DurationInDays = d;
-            this.ReferencePeriod = rp;
-            this.Number = n;
-            this.Id = id;
-            this.isActive = a;
-            this.Medicine = m;
+            get { return active; }
+            set { active = value; }
         }
 
-        [JsonIgnore]
-        public String Consumption
+        public Medicine Medicine
         {
-            get
-            {
-                return Number + " " + ((ReferencePeriod == Period.daily) ? "dnevno" : "meseèno");
-            }
+            get { return medicine; }
+            set { medicine = value; }
         }
-
-        [JsonIgnore]
-        public String ReferencePeriodSerbian
-        {
-            get
-            {
-                return ((ReferencePeriod == Period.daily) ? "dnevno" : "meseèno");
-            }
-        }
-   }
+    }
 }
