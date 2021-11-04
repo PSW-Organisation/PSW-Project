@@ -14,6 +14,13 @@ import { ComplaintDetailComponent } from './complaint-detail/complaint-detail.co
 import { PharmaciesService } from './pharmacies-view/pharmacies.service';
 import { EditPharmacyService } from './edit-pharmacy/edit-pharmacy.service';
 
+import { FeedBackComponent } from './feedback/feedback.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FeedbackService } from './service/feedback.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +29,8 @@ import { EditPharmacyService } from './edit-pharmacy/edit-pharmacy.service';
     ComplaintsViewComponent,
     ComplaintDetailComponent,
     HospitalExteriorViewComponent,
-    PharmaciesViewComponent
+    PharmaciesViewComponent,
+    FeedBackComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +40,7 @@ import { EditPharmacyService } from './edit-pharmacy/edit-pharmacy.service';
   ],
   providers: [ 
     PharmaciesService,
+    FeedbackService,
     EditPharmacyService
   ],
   bootstrap: [AppComponent]

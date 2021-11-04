@@ -51,31 +51,14 @@ namespace HospitalAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFeedback(int id, PatientFeedback feedback)
+        public async Task<IActionResult> PutFeedback(int id, PatientFeedbackDto feedbackDto)
         {
-            if (id != feedback.Id)
-            {
+            if (!ModelState.IsValid)
                 return BadRequest();
-            }
 
-            _context.Entry(feedback).State = EntityState.Modified;
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FeedbackExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _patientFeedbackController.UpdatePatientFeedback(PatientFeedbackMapper.ToFeedback(feedbackDto));
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Feedbacks
@@ -86,7 +69,6 @@ namespace HospitalAPI.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest();
-
 
             _patientFeedbackController.AddPatientFeedback(PatientFeedbackMapper.ToFeedback(feedbackDto));
 
@@ -111,7 +93,7 @@ namespace HospitalAPI.Controllers
 
         private bool FeedbackExists(int id)
         {
-            return _context.PatientFeedbacks.Any(e => e.Id == id);
+            return _context.PatientFeedbacks.Any(e => e.Id.Equals(id));
         }
     }
 }

@@ -15,6 +15,7 @@ namespace HospitalAPI.Mapper
         {
             CreateMap<RoomGraphic, RoomGraphicDTO>();
             CreateMap<ExteriorGraphic, ExteriorGraphicDTO>();
+            CreateMap<PatientFeedback, PatientFeedbackDto>(); 
         }
     }
 }

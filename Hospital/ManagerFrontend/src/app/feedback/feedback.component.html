@@ -1,0 +1,32 @@
+<div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col justify-content-center d-flex"><h1 style="color: #02b3e4;">Feedbacks</h1></div>
+        <div class="col"></div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-secondary">
+                <th scope="col">Username</th>
+                <th scope="col">Date</th>
+                <th scope="col">Text</th>
+                <th scope="col"></th>
+            </thead>
+            <tbody class="table-hover">
+                <tr class="table-primary" *ngFor="let feedback of feedbacks">
+                    <td class="table-primary">{{ feedback.anonymous ? 'Anonymous' : feedback.patientUsername }}</td>
+                    <td class="table-primary">{{ feedback.submissionDate | date:'dd.MM.yyyy.'}}</td>
+                    <td class="table-primary">{{ feedback.text }}</td>
+                    <td class="table-primary justify-content-center display-inline text-center">
+                        <button *ngIf="feedback.publishAllowed && !feedback.isPublished" (click)="publishFeedback(feedback)" class="btn btn-md text-light text-center" style="background-color: #02b3e4;">
+                            Publish
+                        </button>
+                        <button *ngIf="feedback.publishAllowed && feedback.isPublished" (click)="publishFeedback(feedback)" class="btn btn-secondary btn-md text-light text-center">
+                            Hide
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
