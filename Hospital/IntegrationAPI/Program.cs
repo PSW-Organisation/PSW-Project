@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace IntegrationAPI
 {
     public class Program
@@ -24,6 +25,12 @@ namespace IntegrationAPI
             new Pharmacy(3 , "someUrl", "pharmacy3", "someAddress", "someApiKey")
         };
 
+        public static List<Complaint> Complaints = new List<Complaint>()
+        {
+            //podatak koji ce biti u bazi?
+            new Complaint(1 ,  DateTime.Now, "someTitle", "someContent", 1)
+          
+        }; 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
