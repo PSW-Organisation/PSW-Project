@@ -9,6 +9,7 @@ import { PharmaciesViewComponent } from './pharmacies-view/pharmacies-view.compo
 import { BuildingFloorsComponent } from './building-floors/building-floors.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http';
@@ -19,7 +20,8 @@ import { PharmaciesService } from './pharmacies-view/pharmacies.service';
     AppComponent,
     HospitalExteriorViewComponent,
     PharmaciesViewComponent,
-    BuildingFloorsComponent
+    BuildingFloorsComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
