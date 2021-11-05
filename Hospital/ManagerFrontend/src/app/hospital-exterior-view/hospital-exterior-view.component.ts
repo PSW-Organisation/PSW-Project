@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DrawableElement } from './drawableElement';
 
 @Component({
@@ -10,7 +11,7 @@ export class HospitalExteriorViewComponent implements OnInit {
 
   drawableElements: Array<DrawableElement>;
 
-  constructor() {
+  constructor(private router: Router) {
     this.drawableElements = [];
   }
 
@@ -27,7 +28,7 @@ export class HospitalExteriorViewComponent implements OnInit {
 
   youClickedMe(element: DrawableElement): void {
     if (element.type == 'building') {
-      alert('clicked ' + element.name);  
+      this.router.navigate(['/building/' + element.id + '/floor/0']);
     }
   }
 

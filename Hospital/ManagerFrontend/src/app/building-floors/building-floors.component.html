@@ -1,0 +1,12 @@
+<div>
+    <div>
+        <svg [attr.viewBox]="getViewBox()" preserveAspectRatio="xMidYMid meet">
+            <rect x="0" y="0" [attr.width]="drawableElement.width" [attr.height]="drawableElement.height"/>
+        </svg>
+    </div>
+    <div class="floorSelector">
+        <mat-button-toggle-group name="buildingFloor" aria-label="Building Floor" [value]="selectedFloor">
+            <mat-button-toggle *ngFor="let floor of building.floors" value="floor.level" (click)="changeFloor(floor)" [checked]="floorChecked(floor)">{{ floor.level }}</mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+</div>

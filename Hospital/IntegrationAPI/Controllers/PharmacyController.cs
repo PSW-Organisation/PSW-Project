@@ -1,6 +1,7 @@
 ﻿using IntegrationAPI.Adapters;
 using IntegrationAPI.DTO;
 using IntegrationLibrary.Model;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api2/[controller]")]
     [ApiController]
     public class PharmacyController : ControllerBase
     {
@@ -48,7 +49,7 @@ namespace IntegrationAPI.Controllers
         [HttpPost]      // POST /api/pharmacy Request body: {"pharmacyUrl":"someUrl", "pharmacyName":"someName", "pharmacyAddress":"someAddress", "pharmacyApiKey":"someApiKey"}
         public IActionResult Add(PharmacyDto dto)
         {
-            if (dto.PharmacyName.Length <= 0 || dto.PharmacyUrl.Length <= 0 || dto.PharmacyAddress.Length <= 0 || dto.PharmacyApiKey.Length <= 0)
+            if (dto.PharmacyName.Length <= 0 || dto.PharmacyUrl.Length <= 0 || dto.PharmacyAddress.Length <= 0)
             {
                 return BadRequest();
             }
@@ -57,10 +58,12 @@ namespace IntegrationAPI.Controllers
             long id = dbContext.Pharmacies.ToList().Count > 0 ? dbContext.Pharmacies.Max(Pharmacy => Pharmacy.PharmacyId) + 1 : 1;
             Pharmacy pharmacy = PharmacyAdapter.PharmacyDtoToPharmacy(dto);
             pharmacy.PharmacyId = id;
+            string apiKey = GenerateApiKey();
+            pharmacy.PharmacyApiKey = apiKey;
             //Program.Pharmacies.Add(pharmacy);
             dbContext.Pharmacies.Add(pharmacy);
             dbContext.SaveChanges();
-            return Ok();
+            return Ok(apiKey);
 
         }
 
@@ -80,6 +83,11 @@ namespace IntegrationAPI.Controllers
                 dbContext.SaveChanges();
                 return Ok();
             }
+        }
+
+        public string GenerateApiKey()
+        {
+            return System.Guid.NewGuid().ToString();
         }
     }
 }

@@ -55,6 +55,8 @@ namespace HospitalAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(options => options.AllowAnyOrigin());
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

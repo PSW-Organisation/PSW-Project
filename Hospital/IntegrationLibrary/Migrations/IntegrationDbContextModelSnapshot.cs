@@ -47,7 +47,7 @@ namespace IntegrationLibrary.Migrations
                         {
                             ComplaintId = 1L,
                             Content = "Postovani, molimo Vas da isporuke o medicinskim sredstvima vrsite u navedenom roku! ",
-                            Date = new DateTime(2021, 11, 4, 21, 22, 6, 394, DateTimeKind.Local).AddTicks(3016),
+                            Date = new DateTime(2021, 11, 5, 18, 42, 3, 155, DateTimeKind.Local).AddTicks(7421),
                             PharmacyId = 1L,
                             Title = "Prigovor o dostavi"
                         });
@@ -59,6 +59,9 @@ namespace IntegrationLibrary.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("HospitalApiKey")
+                        .HasColumnType("text");
 
                     b.Property<string>("PharmacyAddress")
                         .HasColumnType("text");
@@ -80,10 +83,41 @@ namespace IntegrationLibrary.Migrations
                         new
                         {
                             PharmacyId = 1L,
+                            HospitalApiKey = "",
                             PharmacyAddress = "Bul. Cara Lazara 58",
                             PharmacyApiKey = "",
                             PharmacyName = "Apoteka Jankovic",
                             PharmacyUrl = ""
+                        });
+                });
+
+            modelBuilder.Entity("IntegrationLibrary.Model.ResponseToComplaint", b =>
+                {
+                    b.Property<long>("ResponseToComplaintId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<long>("ComplaintId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("ResponseToComplaintId");
+
+                    b.ToTable("ResponseToComplaint");
+
+                    b.HasData(
+                        new
+                        {
+                            ResponseToComplaintId = 1L,
+                            ComplaintId = 0L,
+                            Content = "Prvi test Response to complaint",
+                            Date = new DateTime(2021, 11, 5, 18, 42, 3, 159, DateTimeKind.Local).AddTicks(1822)
                         });
                 });
 #pragma warning restore 612, 618

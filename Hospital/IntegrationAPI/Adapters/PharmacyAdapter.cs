@@ -16,6 +16,7 @@ namespace IntegrationAPI.Adapters
             pharmacy.PharmacyUrl = dto.PharmacyUrl;
             pharmacy.PharmacyAddress = dto.PharmacyAddress;
             pharmacy.PharmacyApiKey = dto.PharmacyApiKey;
+            pharmacy.HospitalApiKey = dto.HospitalApiKey;
             return pharmacy;
         }
 
@@ -26,6 +27,8 @@ namespace IntegrationAPI.Adapters
             dto.PharmacyUrl = pharmacy.PharmacyUrl;
             dto.PharmacyAddress = pharmacy.PharmacyAddress;
             dto.PharmacyApiKey = pharmacy.PharmacyApiKey;
+            dto.HospitalApiKey = pharmacy.HospitalApiKey;
+
             return dto;
         }
     }
