@@ -6,8 +6,11 @@ using System.Text;
 
 namespace HospitalLibrary.Repository.DbRepository
 {
-    public class PatientFeedbackDbRepository
+    public class PatientFeedbackDbRepository : GenericDbRepository<PatientFeedback>, IPatientFeedbackRepository
     {
-      
+
+        public PatientFeedbackDbRepository(HospitalDbContext dbContext) : base(dbContext)
+        {
+        }
     }
 }

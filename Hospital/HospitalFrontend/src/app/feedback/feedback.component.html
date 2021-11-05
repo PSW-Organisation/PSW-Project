@@ -1,21 +1,6 @@
 <ng-template #content let-modal>
-  <!--  <form  #registrationForm="ngForm" (ngSubmit)="sendFeedback()">
-        <div>
-            <label>Ostavite feedback:</label>
-            <input type="text"  
-              #t="ngModel" name="t" [(ngModel)]="content"/>
-        </div>
-          
-          <div>
-            <button type="submit" class="btn-primary">Send</button>                     
-           </div>
-
-          
-    </form>
--->
   <div class="modal-header">
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-
     </button>
   </div>
   <div class="modal-body">
@@ -29,13 +14,13 @@
         <br />
         <label>Anonymus:</label>
         <br />
-        <div class="btn-group btn-group-toggle" style="margin-left: 2%; margin-top: 1%;" ngbRadioGroup 
+        <div class="btn-group btn-group-toggle" style="margin-left: 2%; margin-top: 1%;" ngbRadioGroup
           name="radioBasic">
 
-          <input type="radio" formControlName="anonymityControl" [value]="true"/>
+          <input type="radio" formControlName="anonymityControl" [value]="true" />
           <label style="margin-left: 2%;">Yes</label>
 
-          <input style="margin-left: 30%;" formControlName="anonymityControl"  type="radio" [value]="false"/>
+          <input style="margin-left: 30%;" formControlName="anonymityControl" type="radio" [value]="false" />
           <label style="margin-left: 2%;"> No</label>
         </div>
         <br />
@@ -45,10 +30,10 @@
         <div class="btn-group btn-group-toggle" style="margin-left: 2%; margin-top: 1%;" ngbRadioGroup
           name="radioBasic">
           <input type="radio" formControlName="publishControl" [value]="true" />
-          <label style="margin-left: 2%;" >Yes</label>
+          <label style="margin-left: 2%;">Yes</label>
 
-          <input style="margin-left: 30%;" formControlName="publishControl" [value]="false" type="radio"/>
-          <label style="margin-left: 2%;" >No</label>
+          <input style="margin-left: 30%;" formControlName="publishControl" [value]="false" type="radio" />
+          <label style="margin-left: 2%;">No</label>
 
         </div>
       </div>
@@ -57,12 +42,9 @@
       </div>
     </form>
   </div>
-  
 </ng-template>
 
-
 <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Give us your feedback!</button>
-<hr>
-<ng-lottie id="fbsent" (loopComplete)="loopComplete($event)" [options]="options" width="10%" height="10%"
-    style="align-items: center; display: none;"></ng-lottie>
-<pre>{{ closeResult }}</pre>
+
+<!-- <ng-lottie id="fbsent" (loopComplete)="loopComplete($event)" [options]="options" width="10%" height="10%"
+    style="align-items: center; display: none;"></ng-lottie> -->

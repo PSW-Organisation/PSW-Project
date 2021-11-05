@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigService } from '../config/config.service';
+import { FeedbackService } from './feedback.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
 import player from 'lottie-web';
 import { Feedback } from './feedback';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { formatDate } from '@angular/common';
 
 
 @Component({
@@ -18,12 +18,13 @@ export class FeedbackComponent implements OnInit {
   text: string = '';
   anonymous: boolean = false;
   publishAllowed: boolean = false;
-  closeResult = '';
   feedbackForm = new FormGroup({
     text: new FormControl('')
   });
+  feedbacks: any;
 
-  constructor(private servise: ConfigService, private modalService: NgbModal, private toastr: ToastrService) { }
+  constructor(private service: FeedbackService, private modalService: NgbModal,
+    private toastr: ToastrService) { }
 
   options: AnimationOptions = {
     path: 'https://assets7.lottiefiles.com/packages/lf20_s1nooojy.json',
@@ -32,7 +33,6 @@ export class FeedbackComponent implements OnInit {
     name: 'feedbackGiven',
   };
   showAnimation = true;
-
 
   ngOnInit(): void {
     this.feedbackForm = new FormGroup({
@@ -47,18 +47,20 @@ export class FeedbackComponent implements OnInit {
     });
   }
 
-
   sendFeedback(modal: any) {
     let feedback: Feedback = {
-      id: 'f2',
-      patientId: 'p2',
+      patientUsername: 'imbiamba',
+      submissionDate: new Date(formatDate(Date.now(), 'dd.MM.yyyy.', 'en-US')),
       text: this.feedbackForm.get("textControl")?.value,
       anonymous: this.feedbackForm.get("anonymityControl")?.value,
       publishAllowed: this.feedbackForm.get("publishControl")?.value,
+      isPublished: false
     }
-    this.servise.createFeedback(feedback).subscribe({
+   
+    this.service.createFeedback(feedback).subscribe({
       next: c => {
-        if (c) {
+        console.log(c)
+        if (c.statusText === 'OK') {
           this.showSuccess('Successfully sent feedback!');
           this.feedbackForm.reset();
           this.feedbackForm.setValue({ textControl: '', anonymityControl: false, publishControl: false })
@@ -76,15 +78,10 @@ export class FeedbackComponent implements OnInit {
     this.text = '';
     this.anonymous = false;
     this.publishAllowed = false;
-    //this.servise.g
   }
 
   open(content: any) {
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' })
   }
 
   loopComplete(event: any) {
@@ -100,17 +97,5 @@ export class FeedbackComponent implements OnInit {
 
   showError(message: string) {
     this.toastr.error(message);
-  }
-
-  private getDismissReason(reason: any): string {
-    this.text = '';
-    this.anonymous = false;
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
   }
 }
