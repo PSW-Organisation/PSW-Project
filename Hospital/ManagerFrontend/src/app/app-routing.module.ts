@@ -5,10 +5,13 @@ import { PharmaciesViewComponent } from './pharmacies-view/pharmacies-view.compo
 
 import { BuildingFloorsComponent } from './building-floors/building-floors.component';
 import { HospitalExteriorViewComponent } from './hospital-exterior-view/hospital-exterior-view.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
-const routes: Routes = [{path: 'pharmacies', component: PharmaciesViewComponent},
-  { path: "building/:buidingId/floor/:id", component: BuildingFloorsComponent },
-  { path: "", component: HospitalExteriorViewComponent }
+const routes: Routes = [
+  { path: '', component: WelcomeComponent},
+  { path: 'pharmacies', component: PharmaciesViewComponent },
+  { path: 'building/:buidingId/floor/:id', component: BuildingFloorsComponent },
+  { path: 'hospitalExterior', component: HospitalExteriorViewComponent }
 ];
 
 @NgModule({
