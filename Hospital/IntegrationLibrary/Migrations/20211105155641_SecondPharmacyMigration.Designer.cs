@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IntegrationLibrary.Migrations
 {
     [DbContext(typeof(IntegrationDbContext))]
-    [Migration("20211104152816_dodatiPrigovori2")]
-    partial class dodatiPrigovori2
+    [Migration("20211105155641_SecondPharmacyMigration")]
+    partial class SecondPharmacyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,9 @@ namespace IntegrationLibrary.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<long>("PharmacyId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
@@ -46,7 +49,8 @@ namespace IntegrationLibrary.Migrations
                         {
                             ComplaintId = 1L,
                             Content = "Postovani, molimo Vas da isporuke o medicinskim sredstvima vrsite u navedenom roku! ",
-                            Date = new DateTime(2021, 11, 4, 16, 28, 16, 16, DateTimeKind.Local).AddTicks(44),
+                            Date = new DateTime(2021, 11, 5, 16, 56, 41, 566, DateTimeKind.Local).AddTicks(3576),
+                            PharmacyId = 1L,
                             Title = "Prigovor o dostavi"
                         });
                 });
@@ -57,6 +61,9 @@ namespace IntegrationLibrary.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("HospitalApiKey")
+                        .HasColumnType("text");
 
                     b.Property<string>("PharmacyAddress")
                         .HasColumnType("text");
@@ -78,6 +85,7 @@ namespace IntegrationLibrary.Migrations
                         new
                         {
                             PharmacyId = 1L,
+                            HospitalApiKey = "",
                             PharmacyAddress = "Bul. Cara Lazara 58",
                             PharmacyApiKey = "",
                             PharmacyName = "Apoteka Jankovic",

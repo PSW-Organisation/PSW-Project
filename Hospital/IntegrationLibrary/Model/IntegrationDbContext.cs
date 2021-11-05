@@ -10,6 +10,7 @@ namespace IntegrationLibrary.Model
         public DbSet<Pharmacy> Pharmacies { get; set; }
 
         public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<ResponseToComplaint> ResponseToComplaint { get; set; }
 
         public IntegrationDbContext(DbContextOptions<IntegrationDbContext> options) : base(options) { }
 
@@ -23,7 +24,8 @@ namespace IntegrationLibrary.Model
                 PharmacyName = "Apoteka Jankovic",
                 PharmacyAddress = "Bul. Cara Lazara 58",
                 PharmacyUrl = "",
-                PharmacyApiKey = ""
+                PharmacyApiKey = "",
+                HospitalApiKey = ""
             });
 
             modelBuilder.Entity<Complaint>().HasData(
@@ -35,6 +37,13 @@ namespace IntegrationLibrary.Model
                     Content = "Postovani, molimo Vas da isporuke o medicinskim sredstvima vrsite u navedenom roku! ",
                     PharmacyId =1
                 });
+            modelBuilder.Entity<ResponseToComplaint>().HasData(new ResponseToComplaint()
+            {
+                ResponseToComplaintId = 1,
+                Date = DateTime.Now,
+                Content = "Prvi test Response to complaint"
+
+            });
         }
     }
 }
