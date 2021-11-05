@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ehealthcare.Model;
-
+using HospitalLibrary.Controller;
+using HospitalAPI.DTO;
+using HospitalAPI.Mapper;
+using System.Net;
 
 namespace HospitalAPI.Controllers
 {
@@ -15,10 +18,12 @@ namespace HospitalAPI.Controllers
     public class PatientFeedbacksController : ControllerBase
     {
         private readonly HospitalDbContext _context;
+        private readonly PatientFeedbackController _patientFeedbackController;
 
         public PatientFeedbacksController(HospitalDbContext context)
         {
             _context = context;
+            _patientFeedbackController = new PatientFeedbackController(context);
         }
 
         // GET: api/Feedbacks
@@ -46,7 +51,7 @@ namespace HospitalAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFeedback(string id, PatientFeedback feedback)
+        public async Task<IActionResult> PutFeedback(int id, PatientFeedback feedback)
         {
             if (id != feedback.Id)
             {
@@ -54,7 +59,6 @@ namespace HospitalAPI.Controllers
             }
 
             _context.Entry(feedback).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -78,15 +82,15 @@ namespace HospitalAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public  ActionResult<PatientFeedback> PostFeedback(PatientFeedback feedback)
+        public  ActionResult PostFeedback(PatientFeedbackDto feedbackDto)
         {
             if (!ModelState.IsValid)
-                return NoContent();
+                return BadRequest();
 
-            _context.PatientFeedbacks.Add(feedback);
-            _context.SaveChanges();
 
-            return Ok(feedback);
+            _patientFeedbackController.AddPatientFeedback(PatientFeedbackMapper.ToFeedback(feedbackDto));
+
+            return Ok();
         }
 
         // DELETE: api/Feedbacks/5
@@ -105,7 +109,7 @@ namespace HospitalAPI.Controllers
             return feedback;
         }
 
-        private bool FeedbackExists(string id)
+        private bool FeedbackExists(int id)
         {
             return _context.PatientFeedbacks.Any(e => e.Id == id);
         }

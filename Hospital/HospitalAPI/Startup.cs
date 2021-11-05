@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FluentValidation.AspNetCore;
 using FluentValidation;
+using HospitalAPI.DTO;
 
 namespace HospitalAPI
 {
@@ -35,7 +36,7 @@ namespace HospitalAPI
                 //...mvc setup...
             }).AddFluentValidation().AddNewtonsoftJson();
 
-            services.AddTransient<IValidator<PatientFeedback>, PatientFeedbackValidator>();
+            services.AddTransient<IValidator<PatientFeedbackDto>, PatientFeedbackValidator>();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()

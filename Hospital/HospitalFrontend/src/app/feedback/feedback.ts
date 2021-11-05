@@ -1,5 +1,4 @@
 export interface Feedback {
-    id: string,
     patientUsername: string,
     submissionDate: Date
     text: string,
