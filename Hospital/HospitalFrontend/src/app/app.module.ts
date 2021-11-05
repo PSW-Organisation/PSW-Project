@@ -4,8 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PecurkaComponent } from './pecurka/pecurka.component';
-import { ConfigService } from './config/config.service';
+import { FeedbackService } from './feedback/feedback.service';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { RouterModule } from '@angular/router';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +13,8 @@ import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ToastrModule } from 'ngx-toastr';
+import { RandomUserService } from './random-user/random-user.service';
+import { DatePipe } from '@angular/common';
 
 export function playerFactory() {
   return player;
@@ -22,7 +23,6 @@ export function playerFactory() {
 @NgModule({
   declarations: [
     AppComponent,
-    PecurkaComponent,
     FeedbackComponent,
     WelcomeComponent
   ],
@@ -45,7 +45,7 @@ export function playerFactory() {
     NgbModule,
     LottieModule.forRoot({ player: playerFactory }),
   ],
-  providers: [ConfigService],
+  providers: [FeedbackService, RandomUserService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

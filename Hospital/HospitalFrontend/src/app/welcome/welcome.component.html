@@ -2,8 +2,8 @@
 <div class="logo">
   <i aria-hidden="true">
     <span class="text-dark">
-        <img src="assets/favicon.png" alt="Logo" width="50" height="50">
-        LeanOn Hospital
+      <img src="assets/favicon.png" alt="Logo" width="50" height="50">
+      LeanOn Hospital
     </span>
   </i>
 </div>
@@ -43,11 +43,11 @@
         <form id="loginform">
           <div class="form-group">
             <div class="form-floating" style="margin-bottom: 4%;">
-              <input id="username" class="form-control" autofocus type="text"/>
+              <input id="username" class="form-control" autofocus type="text" />
               <label for="username">Username:</label>
             </div>
             <div class="form-floating">
-              <input id="password" class="form-control" type="password"/>
+              <input id="password" class="form-control" type="password" />
               <label for="password">Password:</label>
             </div>
             <div class="d-flex justify-content-center" style="margin-top: 4%;">
@@ -158,44 +158,16 @@
       <div class="col-sm-12">
         <div class="block-heading">
           <h2>Feedbacks</h2>
-
         </div>
         <div id="customers-testimonials" class="owl-carousel">
-          <div class="item">
-            <div class="shadow-effect">
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s</p>
+          <div class="item" *ngFor="let feedback of feedbacks">
+            <div *ngIf="feedback.isPublished">
+              <div class="shadow-effect">
+                <p>{{feedback.text}}</p>
+                <h6>{{feedback.submissionDate | date:'dd.MM.yyyy.'}}</h6>
+              </div>
+              <div class="testimonial-name">{{feedback.anonymous ? 'Anonymous' : feedback.patientUsername}}</div>
             </div>
-            <div class="testimonial-name">Sarah Jenks</div>
-          </div>
-          <div class="item">
-            <div class="shadow-effect">
-              <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
-                Latin literature from 45 BC, making it over 2000 years old</p>
-            </div>
-            <div class="testimonial-name">Tangelia Ekhoff</div>
-          </div>
-          <div class="item">
-            <div class="shadow-effect">
-              <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                alteration in some form, by injected humour, or randomised words which don't look even slightly
-                believable. </p>
-            </div>
-            <div class="testimonial-name">John Doe</div>
-          </div>
-          <div class="item">
-            <div class="shadow-effect">
-              <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making
-                this the first true generator on the Internet. It uses a dictionary of over 200 Latin words</p>
-            </div>
-            <div class="testimonial-name">Amy Tan</div>
-          </div>
-          <div class="item">
-            <div class="shadow-effect">
-              <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text,
-                and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
-            </div>
-            <div class="testimonial-name">Daniel Felsted</div>
           </div>
         </div>
       </div>
