@@ -9,13 +9,15 @@ import { PharmaciesViewComponent } from './pharmacies-view/pharmacies-view.compo
 import { BuildingFloorsComponent } from './building-floors/building-floors.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HospitalExteriorViewComponent,
-    PharmaciesViewComponent
-    BuildingFloorsComponent
+    PharmaciesViewComponent,
+    BuildingFloorsComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
