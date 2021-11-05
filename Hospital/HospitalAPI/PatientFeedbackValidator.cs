@@ -11,11 +11,11 @@ namespace HospitalAPI
 	{
 		public PatientFeedbackValidator()
 		{
-			RuleFor(x => x.id).NotNull();
-			RuleFor(x => x.patientId).NotNull();
-			RuleFor(x => x.text).Length(4, 120);
-			RuleFor(x => x.anonymous).Must(x => x == true || x == false);
-			RuleFor(x => x.publishAllowed).Must(x => x == true || x == false);
+			RuleFor(x => x.Id).NotNull();
+			RuleFor(x => x.PatientUsername).MinimumLength(1);
+			RuleFor(x => x.Text).Length(4, 120);
+			RuleFor(x => x.Anonymous).Must(x => x == true || x == false);
+			RuleFor(x => x.PublishAllowed).Must(x => x == true || x == false);
 		}
 	}
 }

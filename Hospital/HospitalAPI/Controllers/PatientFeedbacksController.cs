@@ -48,7 +48,7 @@ namespace HospitalAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFeedback(string id, PatientFeedback feedback)
         {
-            if (id != feedback.id)
+            if (id != feedback.Id)
             {
                 return BadRequest();
             }
@@ -78,7 +78,7 @@ namespace HospitalAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<PatientFeedback>> PostFeedback(PatientFeedback feedback)
+        public  ActionResult<PatientFeedback> PostFeedback(PatientFeedback feedback)
         {
             if (!ModelState.IsValid)
                 return NoContent();
@@ -107,7 +107,7 @@ namespace HospitalAPI.Controllers
 
         private bool FeedbackExists(string id)
         {
-            return _context.PatientFeedbacks.Any(e => e.id == id);
+            return _context.PatientFeedbacks.Any(e => e.Id == id);
         }
     }
 }

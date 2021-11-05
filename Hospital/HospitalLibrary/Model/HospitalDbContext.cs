@@ -24,11 +24,13 @@ namespace ehealthcare.Model
             });
             modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
             {
-                id = "f1",
-                patientId = "p1",
-                text = "alallalal",
-                anonymous = false,
-                publishAllowed = false
+                Id = "f1",
+                PatientUsername= "p1",
+                SubmissionDate = new DateTime(2021, 11, 4),
+                Text = "alallalal",
+                Anonymous = false,
+                PublishAllowed = false,
+                IsPublished = false
             }); 
         }
     }
