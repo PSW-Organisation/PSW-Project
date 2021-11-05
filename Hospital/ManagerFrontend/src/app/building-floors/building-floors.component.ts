@@ -25,7 +25,7 @@ export class BuildingFloorsComponent implements OnInit {
     this.drawableElement = new DrawableElement(2, "ZGR2", 380, 120, 180, 110, "building");
     this.drawableElement = new DrawableElement(1, "ZGR1", 180, 30, 100, 200, "building");
     this.building = { floors: [{ level: -1 }, { level: 0 }, { level: 1 }, { level: 2 }] };
-    this.switchWidthAndHight();
+    // this.switchWidthAndHight();
     this.selectedFloor = this.route.snapshot.paramMap.get("id");
   }
 
