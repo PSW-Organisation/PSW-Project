@@ -6,14 +6,13 @@ import { Feedback } from './feedback';
 
 @Injectable()
 export class FeedbackService {
-  private _url = "http://localhost:42789";
   constructor(private _http: HttpClient) { }
 
   createFeedback(feedback : Feedback): Observable<any>{
-    return this._http.post<number>(`${this._url}/api/PatientFeedbacks`, feedback);
+    return this._http.post<any>('/api/PatientFeedbacks', feedback, {observe: 'response'});
   }
 
   getAllFeedbacks(): Observable<Feedback[]> {
-    return this._http.get<Feedback[]>(`${this._url}/api/PatientFeedbacks`)
+    return this._http.get<Feedback[]>('/api/PatientFeedbacks')
   }
 }

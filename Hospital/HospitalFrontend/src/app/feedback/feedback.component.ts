@@ -6,8 +6,6 @@ import player from 'lottie-web';
 import { Feedback } from './feedback';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { v4 as uuidv4 } from 'uuid';
-import { RandomUserService } from '../random-user/random-user.service';
 import { formatDate } from '@angular/common';
 
 
@@ -25,8 +23,8 @@ export class FeedbackComponent implements OnInit {
   });
   feedbacks: any;
 
-  constructor(private servise: FeedbackService, private modalService: NgbModal,
-    private toastr: ToastrService, private randomUserService: RandomUserService) { }
+  constructor(private service: FeedbackService, private modalService: NgbModal,
+    private toastr: ToastrService) { }
 
   options: AnimationOptions = {
     path: 'https://assets7.lottiefiles.com/packages/lf20_s1nooojy.json',
@@ -51,21 +49,18 @@ export class FeedbackComponent implements OnInit {
 
   sendFeedback(modal: any) {
     let feedback: Feedback = {
-      id: uuidv4(),
-      patientUsername: '',
+      patientUsername: 'imbiamba',
       submissionDate: new Date(formatDate(Date.now(), 'dd.MM.yyyy.', 'en-US')),
       text: this.feedbackForm.get("textControl")?.value,
       anonymous: this.feedbackForm.get("anonymityControl")?.value,
       publishAllowed: this.feedbackForm.get("publishControl")?.value,
       isPublished: false
     }
-    feedback.patientUsername = feedback.id;
-    /* this.randomUserService.getRandomUser().subscribe(user => {
-      feedback.patientUsername = user.results[0].login.username;
-    }); */
-    this.servise.createFeedback(feedback).subscribe({
+   
+    this.service.createFeedback(feedback).subscribe({
       next: c => {
-        if (c) {
+        console.log(c)
+        if (c.statusText === 'OK') {
           this.showSuccess('Successfully sent feedback!');
           this.feedbackForm.reset();
           this.feedbackForm.setValue({ textControl: '', anonymityControl: false, publishControl: false })

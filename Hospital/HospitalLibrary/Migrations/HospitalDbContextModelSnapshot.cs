@@ -19,34 +19,12 @@ namespace HospitalLibrary.Migrations
                 .HasAnnotation("ProductVersion", "3.1.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("VisitTime", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VisitTimes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            EndTime = new DateTime(2021, 4, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            StartTime = new DateTime(2021, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
-                });
-
             modelBuilder.Entity("ehealthcare.Model.PatientFeedback", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<bool>("Anonymous")
                         .HasColumnType("boolean");
@@ -73,7 +51,7 @@ namespace HospitalLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f1",
+                            Id = -1,
                             Anonymous = false,
                             IsPublished = false,
                             PatientUsername = "p1",
