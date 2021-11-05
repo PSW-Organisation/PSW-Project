@@ -1,5 +1,3 @@
-.floorSelector {
-    margin: 1%;
-    justify-content: center;
-    display: flex;
+.svg-content{
+    max-height: calc(100vh - 100px);
 }
