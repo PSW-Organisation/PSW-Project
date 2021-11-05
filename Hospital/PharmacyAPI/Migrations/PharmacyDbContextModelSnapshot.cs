@@ -19,6 +19,40 @@ namespace PharmacyAPI.Migrations
                 .HasAnnotation("ProductVersion", "3.1.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            modelBuilder.Entity("PharmacyAPI.Model.Complaint", b =>
+                {
+                    b.Property<long>("ComplaintId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<long>("HospitalId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("ComplaintId");
+
+                    b.ToTable("Complaints");
+
+                    b.HasData(
+                        new
+                        {
+                            ComplaintId = 1L,
+                            Content = "Razbijene epruvete",
+                            Date = new DateTime(2021, 11, 5, 17, 57, 13, 312, DateTimeKind.Local).AddTicks(868),
+                            HospitalId = 1L,
+                            Title = "Losa isporuka"
+                        });
+                });
+
             modelBuilder.Entity("PharmacyAPI.Model.Hospital", b =>
                 {
                     b.Property<long>("HospitalId")
@@ -60,6 +94,9 @@ namespace PharmacyAPI.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<long>("ComplaintId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Content")
                         .HasColumnType("text");
 
@@ -74,8 +111,9 @@ namespace PharmacyAPI.Migrations
                         new
                         {
                             ResponseToComplaintId = 1L,
+                            ComplaintId = 0L,
                             Content = "Imali smo problema sa nabavkom leka panadol, izvinjavamo se na zakasneloj porudzbini",
-                            Date = new DateTime(2021, 11, 4, 20, 12, 50, 155, DateTimeKind.Local).AddTicks(2491)
+                            Date = new DateTime(2021, 11, 5, 17, 57, 13, 309, DateTimeKind.Local).AddTicks(6989)
                         });
                 });
 

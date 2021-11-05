@@ -3,15 +3,17 @@ using System;
 using IntegrationLibrary.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace IntegrationLibrary.Migrations
 {
     [DbContext(typeof(IntegrationDbContext))]
-    partial class IntegrationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211105154855_ComplaintMigration")]
+    partial class ComplaintMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +49,7 @@ namespace IntegrationLibrary.Migrations
                         {
                             ComplaintId = 1L,
                             Content = "Postovani, molimo Vas da isporuke o medicinskim sredstvima vrsite u navedenom roku! ",
-                            Date = new DateTime(2021, 11, 5, 18, 42, 3, 155, DateTimeKind.Local).AddTicks(7421),
+                            Date = new DateTime(2021, 11, 5, 16, 48, 54, 783, DateTimeKind.Local).AddTicks(1101),
                             PharmacyId = 1L,
                             Title = "Prigovor o dostavi"
                         });
@@ -59,9 +61,6 @@ namespace IntegrationLibrary.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("HospitalApiKey")
-                        .HasColumnType("text");
 
                     b.Property<string>("PharmacyAddress")
                         .HasColumnType("text");
@@ -83,41 +82,10 @@ namespace IntegrationLibrary.Migrations
                         new
                         {
                             PharmacyId = 1L,
-                            HospitalApiKey = "",
                             PharmacyAddress = "Bul. Cara Lazara 58",
                             PharmacyApiKey = "",
                             PharmacyName = "Apoteka Jankovic",
                             PharmacyUrl = ""
-                        });
-                });
-
-            modelBuilder.Entity("IntegrationLibrary.Model.ResponseToComplaint", b =>
-                {
-                    b.Property<long>("ResponseToComplaintId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<long>("ComplaintId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Content")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("ResponseToComplaintId");
-
-                    b.ToTable("ResponseToComplaint");
-
-                    b.HasData(
-                        new
-                        {
-                            ResponseToComplaintId = 1L,
-                            ComplaintId = 0L,
-                            Content = "Prvi test Response to complaint",
-                            Date = new DateTime(2021, 11, 5, 18, 42, 3, 159, DateTimeKind.Local).AddTicks(1822)
                         });
                 });
 #pragma warning restore 612, 618

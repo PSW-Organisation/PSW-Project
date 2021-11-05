@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace PharmacyAPI.Model
+namespace IntegrationLibrary.Model
 {
    public  class ResponseToComplaint
     {
@@ -11,10 +11,10 @@ namespace PharmacyAPI.Model
         private String content;
         private long complaintId;
         public long ResponseToComplaintId { get => responseToComplaintId; set => responseToComplaintId = value; }
+        public long ComplaintId { get => complaintId; set => complaintId = value; }
 
         public DateTime Date { get => date; set => date = value; }
         public String Content { get => content; set => content = value; }
-        public long ComplaintId { get => complaintId; set => complaintId = value; }
 
         public ResponseToComplaint() { }
 
