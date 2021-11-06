@@ -18,11 +18,12 @@ import { RoomsViewModule } from './rooms-view/rooms-view.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http';
 import { PharmaciesService } from './pharmacies-view/pharmacies.service';
+
 import { ResponsiveSidebarComponent } from './responsive-sidebar/responsive-sidebar.component';
 import { RoomInfoComponent } from './room-info/room-info.component';
 import { EditPharmacyComponent } from './edit-pharmacy/edit-pharmacy.component';
 import { EditPharmacyService } from './edit-pharmacy/edit-pharmacy.service';
-
+import { ComplaintsViewComponent } from './complaints-view/complaints-view.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import { EditPharmacyService } from './edit-pharmacy/edit-pharmacy.service';
     WelcomeComponent,
     ResponsiveSidebarComponent,
     RoomInfoComponent,
-    EditPharmacyComponent
+    EditPharmacyComponent,
+    ComplaintsViewComponent
+
   ],
   imports: [
     BrowserModule,
