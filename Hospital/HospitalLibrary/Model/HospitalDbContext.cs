@@ -40,7 +40,6 @@ namespace ehealthcare.Model
                 Name = "S1",
                 Floor = 0,
                 Type = "Salter",
-                RoomId = "0",
                 RoomRef = null
             });
             
