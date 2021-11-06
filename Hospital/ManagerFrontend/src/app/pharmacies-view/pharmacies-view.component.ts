@@ -15,7 +15,6 @@ export class PharmaciesViewComponent implements OnInit {
   editing: boolean = false;
   newPharmacy: any = { pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: ""};
 
-
   constructor(private _pharmaciesService: PharmaciesService) { }
 
   ngOnInit(): void {
@@ -46,6 +45,7 @@ export class PharmaciesViewComponent implements OnInit {
         //alert("Pharmacy deleted successfully!");
       });
     }
+
   }
 
   refreshPharmacies(){
