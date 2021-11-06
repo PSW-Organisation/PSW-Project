@@ -54,24 +54,20 @@ namespace IntegrationAPI.Controllers
             {
                 return BadRequest();
             }
-            List<Pharmacy> result = new List<Pharmacy>();
-            //Program.Pharmacies.ForEach(pharmacy => result.Add(PharmacyAdapter.PharmacyToPharmacyDto(pharmacy)));
-            dbContext.Pharmacies.ToList().ForEach(pharmacy => result.Add(pharmacy));
-            foreach (Pharmacy pharmacy in result)
-            {
-                if(pharmacy.PharmacyApiKey == pharmaciesAccessApiKey)
+            Pharmacy pharmacy = dbContext.Pharmacies.FirstOrDefault(pharmacy => pharmacy.PharmacyApiKey == pharmaciesAccessApiKey);
+            if(pharmacy != null)
                 {
                     Complaint complaint = dbContext.Complaints.FirstOrDefault(complaint => complaint.PharmacyId == pharmacy.PharmacyId);
-                    if(complaint != null) { 
-                    long id = dbContext.ResponseToComplaint.ToList().Count > 0 ? dbContext.ResponseToComplaint.Max(ResponseToComplaint => ResponseToComplaint.ResponseToComplaintId) + 1 : 1;
-                    ResponseToComplaint response = ResponseToComplaintAdapter.ResponseDtoToResponse(dto);
-                    response.ResponseToComplaintId = id;
-                        response.ComplaintId = complaint.ComplaintId;
-                    dbContext.ResponseToComplaint.Add(response);
-                    dbContext.SaveChanges();
-                    return Ok();
-                    }
-                }
+                        if(complaint != null) { 
+                            long id = dbContext.ResponseToComplaint.ToList().Count > 0 ? dbContext.ResponseToComplaint.Max(ResponseToComplaint => ResponseToComplaint.ResponseToComplaintId) + 1 : 1;
+                             ResponseToComplaint response = ResponseToComplaintAdapter.ResponseDtoToResponse(dto);
+                            response.ResponseToComplaintId = id;
+                            response.ComplaintId = complaint.ComplaintId;
+                            dbContext.ResponseToComplaint.Add(response);
+                            dbContext.SaveChanges();
+                            return Ok();
+                         }
+                
             }
             return NotFound();
           

@@ -52,7 +52,36 @@ namespace PharmacyAPI.Controllers
             long id = dbContext.Hospitals.ToList().Count > 0 ? dbContext.Hospitals.Max(Hospital => Hospital.HospitalId) + 1 : 1;
             Hospital hospital = HospitalAdapter.HospitalDtoToHospital(dto);
             hospital.HospitalId = id;
+            string apiKey = GenerateApiKey();
+            hospital.HospitalApiKey = apiKey;
             dbContext.Hospitals.Add(hospital);
+            dbContext.SaveChanges();
+            return Ok(apiKey);
+        }
+
+        [HttpPut]
+        public IActionResult Put(UpdatePharmacyApiKey dto)
+        {
+            Hospital hospital = dbContext.Hospitals.SingleOrDefault(hospital => hospital.HospitalId == dto.HospitalId);
+            if (hospital == null)
+            {
+                return NotFound();
+            }
+            hospital.PharmacyApiKey = dto.PharmacyApiKey;
+            dbContext.Update(hospital);
+            dbContext.SaveChanges();
+            return Ok();
+        }
+        [HttpPut("{id?}")]
+        public IActionResult Put(HospitalDto dto, long id)
+        {
+            Hospital hospital = dbContext.Hospitals.SingleOrDefault(hospital => hospital.HospitalId == id);
+            if (hospital == null)
+            {
+                return NotFound();
+            }
+            hospital = HospitalAdapter.UpdateHospitalDtoToHospital(dto, hospital);
+            dbContext.Update(hospital);
             dbContext.SaveChanges();
             return Ok();
         }
@@ -72,6 +101,10 @@ namespace PharmacyAPI.Controllers
                 dbContext.SaveChanges();
                 return Ok();
             }
+        }
+        public string GenerateApiKey()
+        {
+            return System.Guid.NewGuid().ToString();
         }
     }
 }

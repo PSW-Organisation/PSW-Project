@@ -67,6 +67,32 @@ namespace IntegrationAPI.Controllers
 
         }
 
+        [HttpPut]
+        public IActionResult Put(UpdateHospitalApiKeyDTO dto)
+        {
+            Pharmacy pharmacy = dbContext.Pharmacies.SingleOrDefault(pharmacy => pharmacy.PharmacyId == dto.PharmacyID);
+            if(pharmacy == null)
+            {
+                return NotFound();
+            }
+            pharmacy.HospitalApiKey = dto.HospitalApiKey;
+            dbContext.Update(pharmacy);
+            dbContext.SaveChanges();
+            return Ok();
+        }
+        [HttpPut("{id?}")]
+        public IActionResult Put(PharmacyDto dto, long id)
+        {
+            Pharmacy pharmacy = dbContext.Pharmacies.SingleOrDefault(pharmacy => pharmacy.PharmacyId == id);
+            if(pharmacy == null)
+            {
+                return NotFound();
+            }
+            pharmacy = PharmacyAdapter.UpdatePharmacyDtoToPharmacy(dto, pharmacy);
+            dbContext.Update(pharmacy);
+            dbContext.SaveChanges();
+            return Ok();
+        }
         [HttpDelete("{id?}")]       // DELETE /api/pharmacy/1
         public IActionResult Delete(long id = 0)
         {
@@ -84,6 +110,7 @@ namespace IntegrationAPI.Controllers
                 return Ok();
             }
         }
+        
 
         public string GenerateApiKey()
         {

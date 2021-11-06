@@ -48,6 +48,7 @@ namespace PharmacyAPI
                 HospitalAddress = "Kralja Petra 32",
                 HospitalApiKey = "",
                 HospitalUrl = "",
+                PharmacyApiKey = "test"
             });
         }
     }

@@ -17,6 +17,7 @@ namespace PharmacyAPI.Adapter
             hospital.HospitalName = dto.HospitalName;
             hospital.HospitalUrl = dto.HospitalUrl;
             hospital.HospitalApiKey = dto.HospitalApiKey;
+            hospital.PharmacyApiKey = dto.PharmacyApiKey;
             return hospital;
         }
 
@@ -28,7 +29,18 @@ namespace PharmacyAPI.Adapter
             dto.HospitalName = hospital.HospitalName;
             dto.HospitalUrl = hospital.HospitalUrl;
             dto.HospitalApiKey = hospital.HospitalApiKey;
+            dto.PharmacyApiKey = hospital.PharmacyApiKey;
             return dto;
+        }
+
+        internal static Hospital UpdateHospitalDtoToHospital(HospitalDto dto, Hospital hospital)
+        {
+            hospital.HospitalAddress = dto.HospitalAddress;
+            hospital.HospitalName = dto.HospitalName;
+            hospital.HospitalUrl = dto.HospitalUrl;
+            hospital.HospitalApiKey = dto.HospitalApiKey;
+            hospital.PharmacyApiKey = dto.PharmacyApiKey;
+            return hospital;
         }
     }
 }
