@@ -11,5 +11,12 @@
         "logLevel": "debug",
         "pathRewrite": {"^/api2" : ""},
         "changeOrigin": true
+    },
+    "api3/*": {
+        "target": "http://localhost:29631",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {"^/api3" : ""},
+        "changeOrigin": true
     }
 }

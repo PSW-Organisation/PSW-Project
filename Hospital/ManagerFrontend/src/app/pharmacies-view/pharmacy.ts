@@ -1,5 +1,5 @@
 export interface IPharmacy{
-    pharmacyId: number;
+    pharmacyId: any;
     pharmacyUrl: string;
     pharmacyName: string;
     pharmacyAddress: string;

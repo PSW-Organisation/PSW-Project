@@ -3,5 +3,5 @@ export interface IComplaint{
     date: Date;
     title: string;
     content: string;
-    pharmacyId: number
+    pharmacyId: number;
 }

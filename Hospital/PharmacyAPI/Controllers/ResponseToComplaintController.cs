@@ -12,7 +12,7 @@ using System;
 namespace PharmacyAPI.Controllers
 {
 
-    [Route("api/responses")]
+    [Route("api3/responses")]
     [ApiController]
     public class ResponseToComplaintController : ControllerBase
     {

@@ -36,34 +36,8 @@ namespace IntegrationAPI
                     assembly => assembly.MigrationsAssembly(typeof(IntegrationDbContext).Assembly.FullName));
             });
 
-            //services.AddCors(options =>
-            //    options.AddDefaultPolicy(
-            //        builder => builder.WithOrigins("https://localhost:16928")));
-            //options.AddPolicy(allowSpecificOrigins,
-
-            //builder =>
-
-            //{
-
-            //    builder.WithOrigins("https://localhost:4200")
-
-            //            .AllowAnyHeader()
-
-            //            .AllowAnyMethod();
-
-            //});
-
-
-
-            /*services.AddMvc()
-                .AddNewtonsoftJson();*/
-
-            /*services.AddDbContext<IntegrationDbContext>(options =>
-            {
-                options.UseNpgsql(ConfigurationExtensions.GetConnectionString(Configuration, "DefaultConnection"));
-            });*/
-
-
+            //added for Cors error
+            //______________________________________________________________________
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
                 builder
@@ -72,7 +46,7 @@ namespace IntegrationAPI
                     .AllowAnyHeader()
                     .AllowCredentials();
             }));
-
+            //______________________________________________________________________
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,16 +58,17 @@ namespace IntegrationAPI
             }
             app.UseRouting();
 
-
+            //added for Cors error
+            //______________________________________________________________________
             app.UseCors("CorsPolicy");
+            //______________________________________________________________________
 
             app.UseHttpsRedirection();
 
-            //app.UseCors(allowSpecificOrigins);
-            //app.UseCors(corsPolicyBuilder => corsPolicyBuilder.WithOrigins("http://localhost:16928").AllowAnyMethod().AllowAnyHeader());
+            //added for Cors error
+            //______________________________________________________________________
             app.UseCors(options => options.AllowAnyOrigin());
-
-        
+            //______________________________________________________________________
 
             app.UseAuthorization();
 
