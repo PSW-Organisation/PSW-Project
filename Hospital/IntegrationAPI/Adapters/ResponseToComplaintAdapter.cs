@@ -17,6 +17,7 @@ namespace IntegrationAPI.Adapters
             response.ResponseToComplaintId = dto.ResponseId;
             response.Date = dto.Date;
             response.Content = dto.Content;
+            response.ComplaintId = dto.ComplaintId;
             return response;
 
         }
@@ -26,6 +27,7 @@ namespace IntegrationAPI.Adapters
             dto.ResponseId = response.ResponseToComplaintId;
             dto.Date = response.Date;
             dto.Content = response.Content;
+            dto.ComplaintId = response.ComplaintId;
             return dto;
 
         }

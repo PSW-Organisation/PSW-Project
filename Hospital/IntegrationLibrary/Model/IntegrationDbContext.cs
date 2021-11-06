@@ -41,8 +41,8 @@ namespace IntegrationLibrary.Model
             {
                 ResponseToComplaintId = 1,
                 Date = DateTime.Now,
-                Content = "Prvi test Response to complaint"
-
+                Content = "Prvi test Response to complaint",
+                ComplaintId = 1
             });
         }
     }

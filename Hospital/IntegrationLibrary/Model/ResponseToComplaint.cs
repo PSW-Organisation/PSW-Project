@@ -18,11 +18,12 @@ namespace IntegrationLibrary.Model
 
         public ResponseToComplaint() { }
 
-        public ResponseToComplaint(long responseId, DateTime date, string content)
+        public ResponseToComplaint(long responseId, DateTime date, string content, long complaintId)
         {
             this.responseToComplaintId = responseId;
             this.date = date;
             this.content = content;
+            this.complaintId = complaintId;
         }
     }
 }
