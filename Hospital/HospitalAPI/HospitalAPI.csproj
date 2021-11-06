@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="FluentResults" Version="3.0.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.20" />
@@ -23,10 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="HospitalLibrary">
-      <HintPath>..\HospitalLibrary\bin\Debug\netcoreapp3.1\HospitalLibrary.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\HospitalLibrary\HospitalLibrary.csproj" />
   </ItemGroup>
+
+
 
 
 </Project>

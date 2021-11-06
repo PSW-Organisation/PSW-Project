@@ -10,6 +10,7 @@ import { BuildingFloorsComponent } from './building-floors/building-floors.compo
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { RoomsViewModule } from './rooms-view/rooms-view.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http';
@@ -30,7 +31,8 @@ import { PharmaciesService } from './pharmacies-view/pharmacies.service';
     MatButtonToggleModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RoomsViewModule
   ],
   providers: [ PharmaciesService],
   bootstrap: [AppComponent]

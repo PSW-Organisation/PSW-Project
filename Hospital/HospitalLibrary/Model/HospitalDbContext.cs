@@ -9,6 +9,8 @@ namespace ehealthcare.Model
     {
         public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
 
+        public DbSet<RoomGraphic> RoomGraphics { get; set; }
+
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
         protected HospitalDbContext() { }
@@ -26,6 +28,22 @@ namespace ehealthcare.Model
                 PublishAllowed = false,
                 IsPublished = false
             }); 
+               
+            modelBuilder.Entity<RoomGraphic>().HasData(new RoomGraphic()
+            {
+                Id = "0",
+                DoorPosition = "right",
+                Width = 100,
+                Height = 100,
+                X = 0,
+                Y = 0,
+                Name = "S1",
+                Floor = 0,
+                Type = "Salter",
+                RoomId = "0",
+                RoomRef = null
+            });
+            
         }
     }
 }
