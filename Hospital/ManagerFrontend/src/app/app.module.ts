@@ -24,6 +24,7 @@ import { RoomInfoComponent } from './room-info/room-info.component';
 import { EditPharmacyComponent } from './edit-pharmacy/edit-pharmacy.component';
 import { EditPharmacyService } from './edit-pharmacy/edit-pharmacy.service';
 import { ComplaintsViewComponent } from './complaints-view/complaints-view.component';
+import { ComplaintDetailComponent } from './complaint-detail/complaint-detail.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +36,8 @@ import { ComplaintsViewComponent } from './complaints-view/complaints-view.compo
     ResponsiveSidebarComponent,
     RoomInfoComponent,
     EditPharmacyComponent,
-    ComplaintsViewComponent
-
+    ComplaintsViewComponent,
+    ComplaintDetailComponent
   ],
   imports: [
     BrowserModule,

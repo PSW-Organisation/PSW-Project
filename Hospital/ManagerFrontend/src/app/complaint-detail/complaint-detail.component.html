@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="card-header">
+        {{'Complaint ID:' + complaint?.complaintId}}
+    </div>
+    <div class="card-body"
+        *ngIf="complaint">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4">Date:</div>
+                    <div class="col-md-4">{{complaint.date}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Content:</div>
+                    <div class="col-md-4">{{complaint.content}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,7 +14,11 @@
             <tr *ngFor = 'let complaint of complaints'>    
                 <td></td>
                 <td>{{complaint.date}}</td>
-                <td>{{complaint.title}}</td>
+                <td>
+                    <a [routerLink] ="['/complaint' , complaint.complaintId]">
+                        {{complaint.title}}
+                    </a>
+                </td>
                 <td>{{complaint.content}}</td>
             </tr>
         </tbody>
