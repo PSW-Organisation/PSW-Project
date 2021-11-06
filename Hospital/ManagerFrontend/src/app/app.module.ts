@@ -15,12 +15,14 @@ import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { RoomsViewModule } from './rooms-view/rooms-view.module';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule } from '@angular/common/http';
 import { PharmaciesService } from './pharmacies-view/pharmacies.service';
 import { ResponsiveSidebarComponent } from './responsive-sidebar/responsive-sidebar.component';
 import { RoomInfoComponent } from './room-info/room-info.component';
+import { EditPharmacyComponent } from './edit-pharmacy/edit-pharmacy.component';
+import { EditPharmacyService } from './edit-pharmacy/edit-pharmacy.service';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { RoomInfoComponent } from './room-info/room-info.component';
     BuildingFloorsComponent,
     WelcomeComponent,
     ResponsiveSidebarComponent,
-    RoomInfoComponent
+    RoomInfoComponent,
+    EditPharmacyComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import { RoomInfoComponent } from './room-info/room-info.component';
     HttpClientModule,
     RoomsViewModule
   ],
-  providers: [ PharmaciesService],
+  providers: [ PharmaciesService, EditPharmacyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

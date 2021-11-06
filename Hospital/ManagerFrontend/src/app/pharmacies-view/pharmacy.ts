@@ -3,5 +3,5 @@ export interface IPharmacy{
     pharmacyUrl: string;
     pharmacyName: string;
     pharmacyAddress: string;
-    pharmacyApiKey: string;
+    hospitalApiKey: string;
 }

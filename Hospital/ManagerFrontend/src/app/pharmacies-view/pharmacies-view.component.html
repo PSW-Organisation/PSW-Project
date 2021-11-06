@@ -1,7 +1,48 @@
-<!-- Modal -->
+<!-- Naslov -->
+<div class="titleDiv"> 
+    <table> 
+        <tr> 
+            <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+            <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn Hospital</p></td>
+        </tr>
+    </table>
+</div>
+
+<div class="backgroundImage" > 
+<!-- Tabela -->
+    <div class="table-responsive table-striped">
+        <table class='table'>
+            <thead style="color:rgb(95, 173, 236); margin-bottom: 15px;">
+                <tr >
+                    <th>
+                        <button class="btn addButton"  data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i>Add</button>
+                    </th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Url</th>
+                    <th>Api key</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = 'let pharmacy of pharmacies'>    
+                    <td></td>
+                    <td>{{pharmacy.pharmacyName}}</td>
+                    <td>{{pharmacy.pharmacyAddress}}</td>
+                    <td>{{pharmacy.pharmacyUrl}}</td>
+                    <td>{{pharmacy.hospitalApiKey}}</td>
+                    <button class="btn" (click)="editPharmacy(pharmacy)" data-toggle="modal" data-target="#myModalEdit"><i class="fa fa-edit"></i> Edit</button>
+                    <button class="btn" (click)="deletePharmacy(pharmacy.pharmacyId)"><i class="fa fa-trash"></i> Delete</button>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+ <!-- Modal for registration-->
 <div id="myModal" class="modal fade" style="display: none;" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
-      <!-- Modal for registration-->
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Registrartion pharmacy</h4>
@@ -14,7 +55,7 @@
           <label>Url</label>
           <input type="text" class="form-control" placeholder="Enter pharmacy url" [(ngModel)]="newPharmacy.pharmacyUrl">
           <label>ApiKey</label>
-          <input type="text" class="form-control" placeholder="Enter pharmacy api key" [(ngModel)]="newPharmacy.pharmacyApiKey">
+          <input type="text" class="form-control" placeholder="Enter pharmacy api key" [(ngModel)]="newPharmacy.hospitalApiKey">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" (click)="addNewPharmacy()">Add</button>
@@ -24,27 +65,17 @@
     </div>
 </div>
 
-<div class="table-responsive table-striped">
-    <table class='table'>
-        <thead   style="color:rgb(95, 173, 236)">
-            <tr>
-                <th>
-                    <button class='btn btn-primary' data-toggle="modal" data-target="#myModal">Add</button>
-                </th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Url</th>
-                <th>Api key</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor = 'let pharmacy of pharmacies'>    
-                <td></td>
-                <td>{{pharmacy.pharmacyName}}</td>
-                <td>{{pharmacy.pharmacyAddress}}</td>
-                <td>{{pharmacy.pharmacyUrl}}</td>
-                <td>{{pharmacy.pharmacyApiKey}}</td>
-            </tr>
-        </tbody>
-    </table>
+<!-- Modal for edit-->
+<div id="myModalEdit" class="modal fade" style="display: none;" role="dialog" aria-hidden="true" *ngIf="editing">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit pharmacy</h4>
+        </div>
+        <div class="modal-body">
+         <app-edit-pharmacy [pharmacyEdit]='pharmacyForEdit' (refreshPharmacy)="refreshPharmacies()"></app-edit-pharmacy>
+         <button class="btn" data-dismiss="modal" aria-label="Close" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
 </div>

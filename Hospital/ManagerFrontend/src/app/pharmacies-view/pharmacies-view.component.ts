@@ -12,6 +12,8 @@ export class PharmaciesViewComponent implements OnInit {
   pharmacies: IPharmacy[] = [];
   errorMessage: string = ""; 
   newPharmacy: any = { pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", pharmacyApiKey: ""};
+  pharmacyForEdit: any = { pharmacyId:"", pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey:""};
+  editing: boolean = false;
 
   constructor(private _pharmaciesService: PharmaciesService) { }
 
@@ -20,8 +22,28 @@ export class PharmaciesViewComponent implements OnInit {
   }
 
   addNewPharmacy(){
-    this._pharmaciesService.addPharmacy(this.newPharmacy).subscribe(res => this.refreshPharmacies());
+    this._pharmaciesService.addPharmacy(this.newPharmacy).subscribe( res => {
+      this.refreshPharmacies();
+      alert("Pharmacy added successfully!");
+      alert("Api key for pharmacy is " + res);
+    } );
+    /*if (window.confirm('Are you sure, you want to add this pharmacy?')){
+      this._pharmaciesService.addPharmacy(this.newPharmacy).subscribe( data => {
+        this.refreshPharmacies();
+        alert("Pharmacy added successfully!");
+        alert("Api key for pharmacy is " + data);
+      });
+    }*/
     this.newPharmacy = {pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", pharmacyApiKey: ""};
+  }
+
+  deletePharmacy(id: number){
+    if (window.confirm('Are you sure, you want to delete this pharmacy?')){
+      this._pharmaciesService.deletePharmacy(id).subscribe( data => {
+        this.refreshPharmacies();
+        alert("Pharmacy deleted successfully!");
+      });
+    }
   }
 
   refreshPharmacies(){
@@ -30,6 +52,16 @@ export class PharmaciesViewComponent implements OnInit {
         this.pharmacies = pharmacies;
       },
       error => this.errorMessage = <any> error);
+  }
+
+  editPharmacy(edit : any) {
+    this.pharmacyForEdit = edit;
+    this.editing = true;
+  }
+
+  cancel(){
+    this.editing = false;
+    this.refreshPharmacies();
   }
 
 }
