@@ -10,6 +10,9 @@ using Microsoft.Extensions.Hosting;
 using FluentValidation.AspNetCore;
 using FluentValidation;
 using HospitalAPI.DTO;
+using AutoMapper;
+using HospitalLibrary.GraphicalEditor.Service;
+using HospitalLibrary.GraphicalEditor.Repository;
 
 namespace HospitalAPI
 {
@@ -43,8 +46,10 @@ namespace HospitalAPI
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
+            services.AddAutoMapper(typeof(Startup));
 
-            
+            services.AddScoped<IRoomGraphicService, RoomGraphicService>();
+            services.AddScoped<IRoomGraphicRepository, RoomGraphicRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

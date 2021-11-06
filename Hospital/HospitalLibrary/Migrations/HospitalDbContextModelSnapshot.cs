@@ -60,6 +60,54 @@ namespace HospitalLibrary.Migrations
                             Text = "alallalal"
                         });
                 });
+
+            modelBuilder.Entity("ehealthcare.Model.RoomGraphic", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DoorPosition")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Floor")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Width")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("X")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("Y")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoomGraphics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "0",
+                            DoorPosition = "right",
+                            Floor = 0,
+                            Height = 100.0,
+                            Name = "S1",
+                            Type = "Salter",
+                            Width = 100.0,
+                            X = 0.0,
+                            Y = 0.0
+                        });
+                });
 #pragma warning restore 612, 618
         }
     }
