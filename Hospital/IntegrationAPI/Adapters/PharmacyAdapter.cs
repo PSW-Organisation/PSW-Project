@@ -20,6 +20,15 @@ namespace IntegrationAPI.Adapters
             return pharmacy;
         }
 
+        public static Pharmacy UpdatePharmacyDtoToPharmacy(PharmacyDto dto, Pharmacy pharmacy)
+        {
+            pharmacy.PharmacyName = dto.PharmacyName;
+            pharmacy.PharmacyUrl = dto.PharmacyUrl;
+            pharmacy.PharmacyAddress = dto.PharmacyAddress;
+            pharmacy.PharmacyApiKey = dto.PharmacyApiKey;
+            pharmacy.HospitalApiKey = dto.HospitalApiKey;
+            return pharmacy;
+        }
         public static PharmacyDto PharmacyToPharmacyDto(Pharmacy pharmacy)
         {
             PharmacyDto dto = new PharmacyDto();
