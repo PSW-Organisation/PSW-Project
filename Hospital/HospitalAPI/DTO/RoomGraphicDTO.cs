@@ -18,8 +18,6 @@ namespace HospitalAPI.DTO
         public string DoorPosition { get; set; }
         public string Type { get; set; }
 
-        public string RoomId { get; set; }
-
         public Room RoomRef { get; set; }
     }
 }

@@ -14,8 +14,6 @@ namespace ehealthcare.Model
         public string Type { get; set; }
         public string Name { get; set; }
 
-        public string RoomId { get; set; }
-
         public Room RoomRef { get; set; }
 
 
