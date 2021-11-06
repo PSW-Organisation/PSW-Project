@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IComplaint } from '../complaints-view/complaint';
 
 import { ComplaintDetailService } from './complaint-detail.service';
+import { IResponseToComplaint } from './responseToComplaint';
 
 @Component({
   selector: 'app-complaint-detail',
@@ -12,6 +13,7 @@ import { ComplaintDetailService } from './complaint-detail.service';
 export class ComplaintDetailComponent implements OnInit {
 
   complaint: IComplaint | undefined;
+  responses: IResponseToComplaint[] = []
   errorMessage: string = ""
 
   constructor(private route: ActivatedRoute,
@@ -22,6 +24,7 @@ export class ComplaintDetailComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if(id) {
       this.getComplaint(id);
+      this.getResponses(id);
     }
   }
 
@@ -30,6 +33,15 @@ export class ComplaintDetailComponent implements OnInit {
       next: complaint => this.complaint = complaint,
       error: err => this.errorMessage = err
     });
+  }
+
+  getResponses(id: number): void {
+    this.complaintDetailService.getResponses().subscribe(
+      responses => {
+        this.responses = responses.filter(response => response.complaintId == id);
+      },
+      error => this.errorMessage = <any> error
+    )
   }
 
   onBack(): void {
