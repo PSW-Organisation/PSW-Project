@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PharmacyAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api3/[controller]")]
     public class PharmacyController : ControllerBase
     {
         private readonly PharmacyDbContext dbContext;

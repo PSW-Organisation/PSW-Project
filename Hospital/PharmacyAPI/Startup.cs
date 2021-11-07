@@ -31,6 +31,17 @@ namespace PharmacyAPI
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                     assembly => assembly.MigrationsAssembly(typeof(PharmacyDbContext).Assembly.FullName));
             });
+            //added for Cors error
+            //______________________________________________________________________
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder
+                    .WithOrigins(new[] { "http://localhost:4200" })
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            }));
+            //______________________________________________________________________
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,10 +56,22 @@ namespace PharmacyAPI
 
             app.UseAuthorization();
 
+            //added for Cors error 
+            //_______________________________________________________
+
+            app.UseCors("CorsPolicy");
+
+            app.UseHttpsRedirection();
+
+            app.UseCors(options => options.AllowAnyOrigin());
+            //________________________________________________________
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+
+
         }
     }
 }

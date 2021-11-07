@@ -11,9 +11,9 @@ import { IPharmacy } from './pharmacy';
 export class PharmaciesViewComponent implements OnInit {
   pharmacies: IPharmacy[] = [];
   errorMessage: string = ""; 
-  newPharmacy: any = { pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", pharmacyApiKey: ""};
   pharmacyForEdit: any = { pharmacyId:"", pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey:""};
   editing: boolean = false;
+  newPharmacy: any = { pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: ""};
 
   constructor(private _pharmaciesService: PharmaciesService) { }
 
@@ -34,16 +34,18 @@ export class PharmaciesViewComponent implements OnInit {
         alert("Api key for pharmacy is " + data);
       });
     }*/
-    this.newPharmacy = {pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", pharmacyApiKey: ""};
+   //pharmacyApiKey???
+    this.newPharmacy = {pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: ""};
   }
 
   deletePharmacy(id: number){
     if (window.confirm('Are you sure, you want to delete this pharmacy?')){
       this._pharmaciesService.deletePharmacy(id).subscribe( data => {
         this.refreshPharmacies();
-        alert("Pharmacy deleted successfully!");
+        //alert("Pharmacy deleted successfully!");
       });
     }
+
   }
 
   refreshPharmacies(){

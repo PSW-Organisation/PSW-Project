@@ -1,0 +1,52 @@
+
+<div class="titleDiv"> 
+    <table> 
+        <tr> 
+            <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+            <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn Hospital</p></td>
+        </tr>
+    </table>
+</div>
+
+
+<div class="backgroundImage"> 
+    <div class="card">
+    <div class="card-header" >
+        <h6 style="margin-top: 20px; margin-left: 50px; font-style: italic;"> Detailed view of complaint with responses:</h6>
+        <p style="margin-top: 20px; margin-left: 50px;">   {{'Complaint ID:  ' + complaint?.complaintId}}</p>
+      
+    </div>
+    <div class="card-body" style=" margin-left: 50px;"
+        *ngIf="complaint">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4" style="margin-bottom: 20px ;">Date:</div>
+                    <div class="col-md-4">{{complaint.date | date:'medium'}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">Content:</div>
+                    <div class="col-md-4">{{complaint.content}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<div class="table-responsive table-striped" style="margin-left: 60px;">
+    <table class='table'>
+        <thead >
+            <tr>
+                <th>Date</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = 'let response of responses'>    
+                <td>{{response.date}}</td>
+                <td>{{response.content}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+

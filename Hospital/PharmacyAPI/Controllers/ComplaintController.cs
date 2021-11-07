@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyAPI.Controllers
 {
-    [Route("api2/[controller]")]
+    [Route("api3/[controller]")]
     [ApiController]
     public class ComplaintController : ControllerBase
     {
@@ -51,11 +51,12 @@ namespace PharmacyAPI.Controllers
         //http://localhost:29631/api2/complaint/  + apiKey
         public IActionResult Add(ComplaintDTO dto, String hospitalApiKey)
         {
-            if ( dto.Date.Equals("") || dto.Title.Length <= 0 || dto.Content.Length <= 0)
+            if ( dto.Title.Length <= 0 || dto.Content.Length <= 0) //date sklonjen iz provere
             {
                 return BadRequest();
             }
             List<Hospital> result = new List<Hospital>();
+            dto.Date = DateTime.Now;
             dbContext.Hospitals.ToList().ForEach(hospital => result.Add(hospital));
             foreach(Hospital hospital in result)
             {

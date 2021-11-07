@@ -47,20 +47,45 @@ namespace IntegrationAPI.Controllers
         [HttpPost]      // POST /api/complaint Request body: {"complaintId":num,  "date":"date", "title":"someTitle", "content": "something", "pharmacyId":num}
         public IActionResult Add(ComplaintDTO dto)
         {
-            if ( dto.Date.Equals("") || dto.Title.Length <= 0 || dto.Content.Length <= 0)
+            if ( dto.Title.Length <= 0 || dto.Content.Length <= 0)
             {
                 return BadRequest();
             }
 
             
             long id = dbContext.Complaints.ToList().Count > 0 ? dbContext.Complaints.Max(Complaint => Complaint.ComplaintId) + 1 : 1;
+
+            DateTime date = DateTime.Now;
             Complaint complaint = ComplaintAdapter.ComplaintDtoToComplaint(dto);
             complaint.ComplaintId = id;
+            complaint.Date = date;
             dbContext.Complaints.Add(complaint);
             dbContext.SaveChanges();
             return Ok();
 
         }
+
+        [HttpPut]      // 
+        public IActionResult AddNew(ComplaintDTO dto)
+        {
+            if (dto.Title.Length <= 0 || dto.Content.Length <= 0)
+            {
+                return BadRequest();
+            }
+
+
+            long id = dbContext.Complaints.ToList().Count > 0 ? dbContext.Complaints.Max(Complaint => Complaint.ComplaintId) + 1 : 1;
+
+            DateTime date = DateTime.Now;
+            Complaint complaint = ComplaintAdapter.ComplaintDtoToComplaint(dto);
+            complaint.ComplaintId = id;
+            complaint.Date = date;
+            dbContext.Complaints.Add(complaint);
+            dbContext.SaveChanges();
+            return Ok();
+
+        }
+
 
         [HttpDelete("{id?}")]       // DELETE /api/complaint/1
         public IActionResult Delete(long id = 0)

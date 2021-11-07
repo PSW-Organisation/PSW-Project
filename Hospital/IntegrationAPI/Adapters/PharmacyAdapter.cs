@@ -12,6 +12,7 @@ namespace IntegrationAPI.Adapters
         public static Pharmacy PharmacyDtoToPharmacy(PharmacyDto dto)
         {
             Pharmacy pharmacy = new Pharmacy();
+            pharmacy.PharmacyId = dto.PharmacyId;
             pharmacy.PharmacyName = dto.PharmacyName;
             pharmacy.PharmacyUrl = dto.PharmacyUrl;
             pharmacy.PharmacyAddress = dto.PharmacyAddress;

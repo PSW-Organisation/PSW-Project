@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyAPI.Controllers
 {   [ApiController]
-    [Route("api/[controller]")]
+    [Route("api3/[controller]")]
     public class HospitalController : ControllerBase
 
     {
