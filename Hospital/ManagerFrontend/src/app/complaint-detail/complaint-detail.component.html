@@ -1,14 +1,28 @@
-<div class="card">
-    <div class="card-header">
-        {{'Complaint ID:' + complaint?.complaintId}}
+
+<div class="titleDiv"> 
+    <table> 
+        <tr> 
+            <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+            <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn Hospital</p></td>
+        </tr>
+    </table>
+</div>
+
+
+<div class="backgroundImage"> 
+    <div class="card">
+    <div class="card-header" >
+        <h6 style="margin-top: 20px; margin-left: 50px; font-style: italic;"> Detailed view of complaint with responses:</h6>
+        <p style="margin-top: 20px; margin-left: 50px;">   {{'Complaint ID:  ' + complaint?.complaintId}}</p>
+      
     </div>
-    <div class="card-body"
+    <div class="card-body" style=" margin-left: 50px;"
         *ngIf="complaint">
         <div class="row">
             <div class="col-md-8">
                 <div class="row">
-                    <div class="col-md-4">Date:</div>
-                    <div class="col-md-4">{{complaint.date}}</div>
+                    <div class="col-md-4" style="margin-bottom: 20px ;">Date:</div>
+                    <div class="col-md-4">{{complaint.date | date:'medium'}}</div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">Content:</div>
@@ -17,10 +31,10 @@
             </div>
         </div>
     </div>
-</div>
-<div class="table-responsive table-striped">
+    </div>
+<div class="table-responsive table-striped" style="margin-left: 60px;">
     <table class='table'>
-        <thead   style="color:rgb(95, 173, 236)">
+        <thead >
             <tr>
                 <th>Date</th>
                 <th>Content</th>
@@ -34,3 +48,5 @@
         </tbody>
     </table>
 </div>
+</div>
+
