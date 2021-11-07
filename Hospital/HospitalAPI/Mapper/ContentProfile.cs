@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HospitalLibrary.GraphicalEditor.Model;
 
 namespace HospitalAPI.Mapper
 {
@@ -13,6 +14,7 @@ namespace HospitalAPI.Mapper
         public ContentProfile()
         {
             CreateMap<RoomGraphic, RoomGraphicDTO>();
+            CreateMap<ExteriorGraphic, ExteriorGraphicDTO>();
         }
     }
 }

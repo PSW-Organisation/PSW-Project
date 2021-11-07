@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ehealthcare.Model;
@@ -9,9 +10,10 @@ using ehealthcare.Model;
 namespace HospitalLibrary.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    partial class HospitalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211107192440_ExteriorView")]
+    partial class ExteriorView
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,19 +198,7 @@ namespace HospitalLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rooms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "0",
-                            Floor = 1,
-                            IsRenovated = false,
-                            IsRenovatedUntill = new DateTime(2021, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NumOfTakenBeds = 2,
-                            RoomType = 1,
-                            Sector = "S!"
-                        });
+                    b.ToTable("Room");
                 });
 
             modelBuilder.Entity("ehealthcare.Model.RoomGraphic", b =>
@@ -257,7 +247,6 @@ namespace HospitalLibrary.Migrations
                             Floor = 0,
                             Height = 100.0,
                             Name = "S1",
-                            RoomId = "0",
                             Type = "Salter",
                             Width = 100.0,
                             X = 0.0,
