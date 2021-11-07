@@ -56,6 +56,9 @@ namespace HospitalAPI
             services.AddScoped<IRoomGraphicRepository, RoomGraphicRepository>();
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IRoomRepository, RoomDbRepository>();
+
+            services.AddScoped<IExteriorGraphicService, ExteriorGraphicService>();
+            services.AddScoped<IExteriorGraphicRepository, ExteriorGraphicRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
