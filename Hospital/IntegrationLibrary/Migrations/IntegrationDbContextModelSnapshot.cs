@@ -41,16 +41,6 @@ namespace IntegrationLibrary.Migrations
                     b.HasKey("ComplaintId");
 
                     b.ToTable("Complaints");
-
-                    b.HasData(
-                        new
-                        {
-                            ComplaintId = 1L,
-                            Content = "Postovani, molimo Vas da isporuke o medicinskim sredstvima vrsite u navedenom roku! ",
-                            Date = new DateTime(2021, 11, 5, 18, 42, 3, 155, DateTimeKind.Local).AddTicks(7421),
-                            PharmacyId = 1L,
-                            Title = "Prigovor o dostavi"
-                        });
                 });
 
             modelBuilder.Entity("IntegrationLibrary.Model.Pharmacy", b =>
@@ -78,17 +68,6 @@ namespace IntegrationLibrary.Migrations
                     b.HasKey("PharmacyId");
 
                     b.ToTable("Pharmacies");
-
-                    b.HasData(
-                        new
-                        {
-                            PharmacyId = 1L,
-                            HospitalApiKey = "",
-                            PharmacyAddress = "Bul. Cara Lazara 58",
-                            PharmacyApiKey = "",
-                            PharmacyName = "Apoteka Jankovic",
-                            PharmacyUrl = ""
-                        });
                 });
 
             modelBuilder.Entity("IntegrationLibrary.Model.ResponseToComplaint", b =>
@@ -110,15 +89,6 @@ namespace IntegrationLibrary.Migrations
                     b.HasKey("ResponseToComplaintId");
 
                     b.ToTable("ResponseToComplaint");
-
-                    b.HasData(
-                        new
-                        {
-                            ResponseToComplaintId = 1L,
-                            ComplaintId = 0L,
-                            Content = "Prvi test Response to complaint",
-                            Date = new DateTime(2021, 11, 5, 18, 42, 3, 159, DateTimeKind.Local).AddTicks(1822)
-                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -12,7 +12,7 @@
 <div class="backgroundImage"> 
     <div class="card">
     <div class="card-header" >
-        <h6 style="margin-top: 20px; margin-left: 50px; font-style: italic;"> Detailed view of complaint with responses:</h6>
+        <h6 style="margin-top: 20px; margin-left: 50px; font-style: italic;font-size: 16px;"> Detailed view of complaint with responses:</h6>
         <p style="margin-top: 20px; margin-left: 50px;">   {{'Complaint ID:  ' + complaint?.complaintId}}</p>
       
     </div>
@@ -42,7 +42,7 @@
         </thead>
         <tbody>
             <tr *ngFor = 'let response of responses'>    
-                <td>{{response.date}}</td>
+                <td>{{response.date | date:'medium'}}</td>
                 <td>{{response.content}}</td>
             </tr>
         </tbody>
