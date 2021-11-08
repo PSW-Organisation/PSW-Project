@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import {RoomsViewComponent} from './rooms-view.component';
+import { RouterModule, Routes } from '@angular/router';
+import { BuildingFloorsComponent } from './building-floors/building-floors.component';
 
+const routes: Routes = [
+  { path: 'building/:buidingId/floor/:floorId', component: BuildingFloorsComponent }
+];
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    RouterModule.forChild([
-      { path: 'rooms/:floorId',component:RoomsViewComponent},
-    ]),
+    RouterModule.forChild(routes),
   ],
   exports: [
     RouterModule

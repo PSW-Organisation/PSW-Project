@@ -1,5 +1,5 @@
-<div>
-  <svg class="viewOfMAP">
+<div class="container">
+  <svg class="viewOfMAP" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet">
     <g *ngFor="let el of drawableElements">
       <rect [attr.x]="el.x" [attr.y]="el.y" [attr.width]="el.width" [attr.height]="el.height"
         [attr.class]="dynamicSelectStyle(el)" (click)="youClickedMe(el)" />
@@ -9,7 +9,7 @@
   </svg>
   <br />
   <br />
-  <svg class="viewLegend">
+  <svg class="viewLegend" viewBox="0 0 600 100" preserveAspectRatio="xMidYMid meet">
     <g>
       <circle cx="25" cy="25" r="5" fill="rgb(153, 0, 153)" />
       <text dominant-baseline="middle" x="55" y="26" font-family="Verdana" font-size="10" fill="Black"> -

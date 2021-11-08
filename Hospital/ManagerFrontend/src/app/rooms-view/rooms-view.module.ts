@@ -1,23 +1,25 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { RoomsViewComponent } from './rooms-view.component';
-import { RoomViewComponent } from './room-view.component';
+import { SharedModule } from '../shared/shared.module';
 import { RoomsRoutingModule } from './rooms-routing.module';
 
+import { BuildingFloorsComponent } from './building-floors/building-floors.component';
+import { RoomsViewComponent } from './rooms-view/rooms-view.component';
+import { RoomInfoComponent } from './room-info/room-info.component';
+import { EditRoomComponent } from './edit-room/edit-room.component';
 
 @NgModule({
   declarations: [
+    BuildingFloorsComponent,
     RoomsViewComponent,
-    RoomViewComponent
+    RoomInfoComponent,
+    EditRoomComponent
   ],
   imports: [
-    CommonModule,
-    HttpClientModule,
+    SharedModule,
     RoomsRoutingModule
   ],
   exports:[
-    RoomViewComponent
+    SharedModule
   ]
 })
 export class RoomsViewModule { }

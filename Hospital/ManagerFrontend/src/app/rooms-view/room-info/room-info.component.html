@@ -1,7 +1,7 @@
-<mat-card class="example-card">
+<mat-card class="example-card" *ngIf="room">
     <mat-card-header>
         <div mat-card-avatar [style.backgroundColor]="roomColor(room.type)" class="header-image">{{room.name}}</div>
-        <mat-card-title>{{room.roomName}}</mat-card-title>
+        <mat-card-title>ROOM NAME</mat-card-title>
         <mat-card-subtitle>{{room.type}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
@@ -13,7 +13,7 @@
               </tr>
               <tr>
                 <th scope="row">Sector:</th>
-                <td>{{room.sector}}</td>
+                <td>SELECTOR</td>
               </tr>
             </tbody>
           </table>
