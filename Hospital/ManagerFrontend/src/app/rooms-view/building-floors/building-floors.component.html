@@ -1,0 +1,26 @@
+<app-responsive-sidebar>
+    <div app-sidebar-content class="container">
+        <app-rooms-view [floor]="selectedFloor" (redirect)="room=$event"></app-rooms-view>
+        <div class="m-2 d-flex justify-content-center">
+            <mat-button-toggle-group name="buildingFloor" aria-label="Building Floor" [value]="selectedFloor">
+                <mat-button-toggle *ngFor="let floor of floors" value="floor.floor" (click)="changeFloor(floor)"
+                    [checked]="floorChecked(floor)">{{ floor.floor }}
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </div>
+    <div app-sidebar>
+        <div class="container side">
+            <div class="row justify-content-start">
+                <app-room-info [room]="room"></app-room-info>
+                <div class="edit justify-content-end">
+                    <app-edit-room *ngIf="editing"></app-edit-room>
+                </div>
+                <div class="col-4">
+                    <button *ngIf="!editing" (click)="edit()">Edit</button>
+                    <button *ngIf="editing" (click)="change()">Change</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-responsive-sidebar>

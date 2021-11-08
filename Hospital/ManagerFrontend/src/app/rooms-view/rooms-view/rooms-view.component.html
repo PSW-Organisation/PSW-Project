@@ -1,12 +1,12 @@
-<div class="d-flex justify-content-center">
-    <svg [attr.viewBox]="getViewBox(320,640)" preserveAspectRatio="xMidYMid meet" class="viewOfMAP svg-content">
+<div class="d-flex justify-content-center" *ngIf="floor">
+    <svg [attr.viewBox]="getViewBox(320,640)" preserveAspectRatio="xMidYMid meet" class="svg-content">
     <rect class="border" [attr.x]="1.5" [attr.y]="1.5" [attr.width]="300-3" [attr.height]="600-3"
         [attr.fill]="'#E0E0E0'"></rect>
-    <rect class="border" *ngIf="floor === 0" [attr.x]="3"
+    <rect class="border" *ngIf="floor.floor === 0" [attr.x]="3"
         [attr.y]="255" [attr.width]="5" [attr.height]="40">
     </rect>    
-    <g *ngFor="let room of rooms">
-        <g class="shadow" transform="translate(-room.x, -room.y)" *ngIf="floor === room.floor">
+    <g *ngFor="let room of floor.rooms" (click)="toggleSidenav(room)">
+        <g class="shadow">
             <g>
                 <rect class="border" [attr.x]="room.x+1.5" [attr.y]="room.y+1.5" [attr.width]="room.width"
                     [attr.height]="room.height" [attr.fill]="roomColor(room.type)"></rect>

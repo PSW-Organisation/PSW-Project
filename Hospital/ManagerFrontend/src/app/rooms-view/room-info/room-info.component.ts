@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IRoom } from '../room';
 
 @Component({
   selector: 'app-room-info',
@@ -7,19 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoomInfoComponent implements OnInit {
 
+  @Input() room!: IRoom;
   fillColor!: string;
-  room: any = {
-    "id": 0,
-    "doorPosition": "right",
-    "width": 100,
-    "height": 100,
-    "x": 0,
-    "y": 0,
-    "name": "Š1",
-    "floor": 0,
-    "type": "Salter",
-    "roomName": "Šalter 1"
-};
 
   constructor() { }
 
@@ -39,7 +29,7 @@ export class RoomInfoComponent implements OnInit {
     else if (type=== 'WC'){
       this.fillColor = '#CCFFFF';
     }
-    else if (type === 'Č'){
+    else if (type === 'Cekaonica'){
       this.fillColor = '#E5FFCC';
     }
     return this.fillColor;
