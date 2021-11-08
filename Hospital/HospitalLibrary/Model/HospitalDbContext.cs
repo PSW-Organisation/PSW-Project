@@ -10,6 +10,7 @@ namespace ehealthcare.Model
         public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
 
         public DbSet<RoomGraphic> RoomGraphics { get; set; }
+        public DbSet<Room> Rooms { get; set; }
 
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
@@ -42,7 +43,19 @@ namespace ehealthcare.Model
                 Type = "Salter",
                 RoomRef = null
             });
-            
+
+            modelBuilder.Entity<Room>().HasData(new Room()
+            {
+                Id = "0",
+                Sector = "S!",
+                Floor = 1,
+                RoomType = RoomType.operation,
+                IsRenovated = false,
+                IsRenovatedUntill = new DateTime(2021, 6, 25),
+                NumOfTakenBeds = 2,
+
+            });
+
         }
     }
 }

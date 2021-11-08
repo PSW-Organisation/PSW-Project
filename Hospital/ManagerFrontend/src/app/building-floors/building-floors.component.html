@@ -1,20 +1,48 @@
 <app-responsive-sidebar #sidebar>
-    <div app-sidebar-content class="container">
-        <div class="d-flex justify-content-center">
-            <svg class="svg-content" [attr.viewBox]="getViewBox()" preserveAspectRatio="xMidYMid meet"
-                (click)="sidebar.open()">
-                <rect x="0" y="0" [attr.width]="drawableElement.width" [attr.height]="drawableElement.height" />
-            </svg>
-        </div>
-        <div class="m-2 d-flex justify-content-center">
-            <mat-button-toggle-group name="buildingFloor" aria-label="Building Floor" [value]="selectedFloor">
-                <mat-button-toggle *ngFor="let floor of building.floors" value="floor.level"
-                    (click)="changeFloor(floor)" [checked]="floorChecked(floor)">{{ floor.level }}
-                </mat-button-toggle>
-            </mat-button-toggle-group>
-        </div>
+  <div app-sidebar-content class="container">
+    <div class="d-flex justify-content-center">
+      <svg
+        class="svg-content"
+        [attr.viewBox]="getViewBox()"
+        preserveAspectRatio="xMidYMid meet"
+        (click)="sidebar.toogle()"
+      >
+        <rect
+          x="0"
+          y="0"
+          [attr.width]="drawableElement.width"
+          [attr.height]="drawableElement.height"
+        />
+      </svg>
     </div>
-    <div app-sidebar>
-        <app-room-info></app-room-info>
+    <div class="m-2 d-flex justify-content-center">
+      <mat-button-toggle-group
+        name="buildingFloor"
+        aria-label="Building Floor"
+        [value]="selectedFloor"
+      >
+        <mat-button-toggle
+          *ngFor="let floor of building.floors"
+          value="floor.level"
+          (click)="changeFloor(floor)"
+          [checked]="floorChecked(floor)"
+          >{{ floor.level }}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
+  </div>
+  <div app-sidebar>
+    <div class="container side">
+      <div class="row justify-content-start">
+        <div class="col-4">
+          <app-room-info></app-room-info>
+          <div class="edit justify-content-end">
+            <app-edit-room *ngIf="editing"></app-edit-room>
+          </div>
+          <button *ngIf="!editing" (click)="edit()">Edit</button>
+          <button *ngIf="editing" (click)="change()">Change</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </app-responsive-sidebar>

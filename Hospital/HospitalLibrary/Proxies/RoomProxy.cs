@@ -16,7 +16,7 @@ namespace ehealthcare.Proxies
 
 	public class RoomImpl : IRoom
 	{
-		RoomRepository roomRepository;
+		IRoomRepository roomRepository;
 		public Room GetRoom(string id)
 		{
 			if (roomRepository == null)

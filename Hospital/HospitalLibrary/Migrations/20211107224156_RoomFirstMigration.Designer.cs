@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ehealthcare.Model;
@@ -9,9 +10,10 @@ using ehealthcare.Model;
 namespace HospitalLibrary.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    partial class HospitalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211107224156_RoomFirstMigration")]
+    partial class RoomFirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,7 +120,7 @@ namespace HospitalLibrary.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("RoomRefId")
+                    b.Property<string>("RoomId")
                         .HasColumnType("text");
 
                     b.Property<string>("Type")
@@ -135,7 +137,7 @@ namespace HospitalLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomRefId");
+                    b.HasIndex("RoomId");
 
                     b.ToTable("RoomGraphics");
 
@@ -159,7 +161,7 @@ namespace HospitalLibrary.Migrations
                 {
                     b.HasOne("ehealthcare.Model.Room", "RoomRef")
                         .WithMany()
-                        .HasForeignKey("RoomRefId");
+                        .HasForeignKey("RoomId");
                 });
 #pragma warning restore 612, 618
         }

@@ -49,5 +49,19 @@ namespace HospitalLibrary.GraphicalEditor.Repository
         {
             throw new NotImplementedException();
         }
+
+        //public Room UpdateRoom(Room room)
+        //{
+        //    Room foundRoom = _dbContext.Rooms.SingleOrDefault(room => room.Id.Equals(room.Id));
+        //    if (foundRoom == null)
+        //    {
+        //        return null;
+        //    }
+        //    room.RoomType = roomDTO.RoomType;
+        //    _dbContext.Update(room);
+        //    _dbContext.SaveChanges();
+        //    return room;
+        //}
+        
     }
 }
