@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DrawableElement } from '../hospital-exterior-view/drawableElement';
-import { IBuilding } from './building';
-import { IFloor } from './floor';
+import { IBuilding } from '../rooms-view/building-floors/building';
+import { IFloor } from '../rooms-view/building-floors/floor';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -27,7 +27,7 @@ export class BuildingFloorsComponent implements OnInit {
 
   ngOnInit(): void {
     this.drawableElement = new DrawableElement(
-      2,
+      "2",
       'ZGR2',
       380,
       120,
@@ -36,7 +36,7 @@ export class BuildingFloorsComponent implements OnInit {
       'building'
     );
     this.drawableElement = new DrawableElement(
-      1,
+      "1",
       'ZGR1',
       180,
       30,
