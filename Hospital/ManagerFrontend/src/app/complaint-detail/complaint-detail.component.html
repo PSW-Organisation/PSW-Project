@@ -36,14 +36,17 @@
     <table class='table'>
         <thead >
             <tr>
+                <th>ID</th>
                 <th>Date</th>
                 <th>Content</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor = 'let response of responses'>    
+            <tr *ngFor = 'let response of responses'>
+                <td>{{response.responseId}}</td>    
                 <td>{{response.date | date:'medium'}}</td>
                 <td>{{response.content}}</td>
+                <button class="btn btn-secondary" (click)="deleteResponse(response.responseId)"><i class="fa fa-trash"></i> Delete</button>
             </tr>
         </tbody>
     </table>

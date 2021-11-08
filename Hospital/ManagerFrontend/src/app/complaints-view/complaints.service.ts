@@ -43,4 +43,8 @@ sendComplaintToPharmacy(newComplaint : any, key:string){
   return this._http.post('http://localhost:29631/api3/complaint/' + key, newComplaintForPharmacy);
 }
 
+deleteComplaint(id : number){
+  return this._http.delete('http://localhost:16928/api2/complaint/'+id);
+}
+
 }

@@ -75,6 +75,7 @@
                 <td><a [routerLink] ="['/complaint' , complaint.complaintId]">
                     {{complaint.title}} </a></td> 
                 <td>{{complaint.content}}</td>
+                <button class="btn btn-secondary" (click)="deleteComplaint(complaint.complaintId)"><i class="fa fa-trash"></i> Delete</button>
             </tr>
         </tbody>
     </table>

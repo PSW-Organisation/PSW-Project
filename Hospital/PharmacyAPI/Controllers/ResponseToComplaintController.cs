@@ -67,6 +67,20 @@ namespace PharmacyAPI.Controllers
 
         }
 
-
+        [HttpDelete("{id?}")]
+        public IActionResult Delete(long id = 0)
+        {
+            ResponseToComplaint response = dbContext.ResponsesToComplaint.SingleOrDefault(response => response.ResponseToComplaintId == id);
+            if (response == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                dbContext.ResponsesToComplaint.Remove(response);
+                dbContext.SaveChanges();
+                return Ok();
+            }
+        }
     }
 }

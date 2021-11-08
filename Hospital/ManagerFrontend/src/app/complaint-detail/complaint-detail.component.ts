@@ -15,16 +15,17 @@ export class ComplaintDetailComponent implements OnInit {
   complaint: IComplaint | undefined;
   responses: IResponseToComplaint[] = []
   errorMessage: string = ""
+  complaintId: number = 0
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private complaintDetailService: ComplaintDetailService) { }
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if(id) {
-      this.getComplaint(id);
-      this.getResponses(id);
+    this.complaintId = Number(this.route.snapshot.paramMap.get('id'));
+    if(this.complaintId) {
+      this.getComplaint(this.complaintId);
+      this.getResponses(this.complaintId);
     }
   }
 
@@ -47,5 +48,12 @@ export class ComplaintDetailComponent implements OnInit {
   onBack(): void {
     this.router.navigate(['/complaints']);
   }
-}
 
+  deleteResponse(id: number){
+    if (window.confirm('Are you sure you want to delete this response?')){
+      this.complaintDetailService.deleteResponse(id).subscribe( data => {
+        this.getResponses(this.complaintId);
+      });
+    }
+  }
+}
