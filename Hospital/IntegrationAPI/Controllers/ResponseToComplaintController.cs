@@ -74,6 +74,20 @@ namespace IntegrationAPI.Controllers
 
         }
 
-
+        [HttpDelete("{id?}")]
+        public IActionResult Delete(long id = 0)
+        {
+            ResponseToComplaint response = dbContext.ResponseToComplaint.SingleOrDefault(response => response.ResponseToComplaintId == id);
+            if (response == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                dbContext.ResponseToComplaint.Remove(response);
+                dbContext.SaveChanges();
+                return Ok();
+            }
+        }
     }
 }

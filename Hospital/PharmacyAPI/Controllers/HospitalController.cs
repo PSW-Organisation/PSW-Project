@@ -45,7 +45,7 @@ namespace PharmacyAPI.Controllers
         [HttpPost]
         public IActionResult Add(HospitalDto dto)
         {
-            if(dto.HospitalName.Length <= 0 || dto.HospitalUrl.Length <= 0 || dto.HospitalApiKey.Length <= 0 || dto.HospitalAddress.Length <= 0)
+            if(dto.HospitalName.Length <= 0 || dto.HospitalUrl.Length <= 0 || dto.HospitalAddress.Length <= 0)
             {
                 return BadRequest();
             }

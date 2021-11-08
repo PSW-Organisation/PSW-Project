@@ -34,4 +34,8 @@ export class ComplaintDetailService {
       tap(data => console.log("Data response :", data))
     )
   }
+
+  deleteResponse(id : number){
+    return this._http.delete('http://localhost:16928/api2/responses/'+id);
+  }
 }

@@ -1,5 +1,5 @@
 export interface IResponseToComplaint{
-    responseToComplaintId: number;
+    responseId: number;
     date: Date;
     content: string;
     complaintId: number

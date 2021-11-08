@@ -12,7 +12,7 @@
 <div class="backgroundImage"> 
     <div class="card">
     <div class="card-header" >
-        <h6 style="margin-top: 20px; margin-left: 50px; font-style: italic;"> Detailed view of complaint with responses:</h6>
+        <h6 style="margin-top: 20px; margin-left: 50px; font-style: italic;font-size: 16px;"> Detailed view of complaint with responses:</h6>
         <p style="margin-top: 20px; margin-left: 50px;">   {{'Complaint ID:  ' + complaint?.complaintId}}</p>
       
     </div>
@@ -36,14 +36,17 @@
     <table class='table'>
         <thead >
             <tr>
+                <th>ID</th>
                 <th>Date</th>
                 <th>Content</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor = 'let response of responses'>    
-                <td>{{response.date}}</td>
+            <tr *ngFor = 'let response of responses'>
+                <td>{{response.responseId}}</td>    
+                <td>{{response.date | date:'medium'}}</td>
                 <td>{{response.content}}</td>
+                <button class="btn btn-secondary" (click)="deleteResponse(response.responseId)"><i class="fa fa-trash"></i> Delete</button>
             </tr>
         </tbody>
     </table>
