@@ -1,5 +1,5 @@
 export class DrawableElement {
-    id: number;
+    idElement: string;
     name: string;
     x: number;
     y: number;
@@ -7,8 +7,8 @@ export class DrawableElement {
     height: number;
     type: string;
 
-    constructor(id: number, name: string, x: number, y: number, width: number, height: number, type: string ) {
-        this.id = id;
+    constructor(idElement: string, name: string, x: number, y: number, width: number, height: number, type: string ) {
+        this.idElement = idElement;
         this.name = name;
         this.x = x;
         this.y = y;
