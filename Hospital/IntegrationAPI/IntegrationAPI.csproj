@@ -25,14 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HospitalLibrary\HospitalLibrary.csproj" />
     <ProjectReference Include="..\IntegrationLibrary\IntegrationLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="IntegrationLibrary">
-      <HintPath>..\IntegrationLibrary\bin\Debug\netcoreapp3.1\IntegrationLibrary.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 
 
 </Project>

@@ -34,7 +34,7 @@ namespace HospitalLibrary.Controller
             return _patientFeedbackService.GetAllFeedbacks();
         }
 
-        public PatientFeedback GetPatientFeedback(int id)
+        public PatientFeedback GetPatientFeedback(string id)
         {
             return _patientFeedbackService.GetPatientFeedback(id);
         }

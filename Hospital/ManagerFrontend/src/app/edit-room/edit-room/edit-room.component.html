@@ -1,0 +1,8 @@
+<mat-form-field appearance="fill">
+  <mat-label>Room type</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let room of rooms" [value]="room.type">
+      {{ room.type }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

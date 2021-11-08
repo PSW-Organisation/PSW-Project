@@ -7,12 +7,13 @@ namespace HospitalLibrary.Repository
 {
     public interface IGenericRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
+        
+        IList<T> GetAll();
         IEnumerable<T> Search(Expression<Func<T, bool>> predicate);
-        T GetOneById(int id);
+        T Get(string id);
         void Insert(T entity);
-        void Update(T entity);
+        T Update(T entity);
         void Delete(T entity);
-        void Save();
+        void Save(T entity);
     }
 }

@@ -22,7 +22,7 @@ namespace HospitalLibrary.Repository.DbRepository
             try
             {
                 _dbContext.Set<T>().Remove(entity);
-                Save();
+                Save(entity);
             }
             catch (Exception ex)
             {
@@ -31,12 +31,12 @@ namespace HospitalLibrary.Repository.DbRepository
             }
         }
 
-        public IEnumerable<T> GetAll()
+        public IList<T> GetAll()
         {
-            return _dbContext.Set<T>();
+            return _dbContext.Set<T>().ToList();
         }
 
-        public T GetOneById(int id)
+        public T Get(string id)
         {
             return _dbContext.Set<T>().Find(id);
         }
@@ -44,10 +44,10 @@ namespace HospitalLibrary.Repository.DbRepository
         public void Insert(T entity)
         {
             _dbContext.Set<T>().Add(entity);
-            Save();
+            Save(entity);
         }
 
-        public void Save()
+        public void Save(T entity)
         {
             _dbContext.SaveChanges();
         }
@@ -57,10 +57,11 @@ namespace HospitalLibrary.Repository.DbRepository
             return _dbContext.Set<T>().Where(predicate);
         }
 
-        public void Update(T entity)
+        public T Update(T entity)
         {
             _dbContext.Set<T>().Update(entity);
-            Save();
+            Save(entity);
+            return entity;
         }
     }
 }

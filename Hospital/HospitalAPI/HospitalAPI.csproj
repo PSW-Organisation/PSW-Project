@@ -28,6 +28,21 @@
     <ProjectReference Include="..\HospitalLibrary\HospitalLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="HospitalLibrary">
+      <HintPath>..\HospitalLibrary\bin\Debug\netcoreapp3.1\HospitalLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+
+  
+
+
+ 
+
+
+
 
 
 

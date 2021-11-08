@@ -1,3 +1,10 @@
-.svg-content{
-    max-height: calc(100vh - 100px);
+.svg-content {
+  max-height: calc(100vh - 100px);
+}
+.side {
+  width: 300px;
+}
+
+.edit {
+  height: 150px;
 }

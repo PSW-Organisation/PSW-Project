@@ -1,4 +1,5 @@
 ﻿using ehealthcare.Model;
+using HospitalLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Repository
 {
-	public interface RoomRepository : GenericRepository<Room> 
+	public interface IRoomRepository : IGenericRepository<Room> 
 	{
 
 	}

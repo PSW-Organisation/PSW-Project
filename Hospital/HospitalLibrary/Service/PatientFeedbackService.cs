@@ -36,9 +36,9 @@ namespace HospitalLibrary.Service
             return _patientFeedbackRepository.GetAll();
         }
 
-        public PatientFeedback GetPatientFeedback(int id) 
+        public PatientFeedback GetPatientFeedback(string id) 
         {
-            return _patientFeedbackRepository.GetOneById(id);
+            return _patientFeedbackRepository.Get(id);
         }
     }
 }

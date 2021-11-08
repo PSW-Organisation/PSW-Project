@@ -20,5 +20,7 @@ namespace HospitalLibrary.GraphicalEditor.Service
         {
             return Result.Ok(_roomGraphicRepository.GetAll());
         }
+
+      
     }
 }
