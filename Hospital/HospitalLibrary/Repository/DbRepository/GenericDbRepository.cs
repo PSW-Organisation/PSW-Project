@@ -1,4 +1,5 @@
 ﻿using ehealthcare.Model;
+using HospitalLibrary.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace HospitalLibrary.Repository.DbRepository
 {
-    public class GenericDbRepository<T> : IGenericRepository<T> where T : class
+    public class GenericDbRepository<T> : IGenericRepository<T> where T : Entity
     {
         private readonly HospitalDbContext _dbContext;
 

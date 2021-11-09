@@ -13,6 +13,7 @@ namespace HospitalAPI.Mapper
         {
             PatientFeedbackDto mapped = new PatientFeedbackDto()
             {
+                Id = feedback.Id,
                 PatientUsername = feedback.PatientUsername,
                 SubmissionDate = feedback.SubmissionDate,
                 Text = feedback.Text,
@@ -28,6 +29,7 @@ namespace HospitalAPI.Mapper
         {
             PatientFeedback mapped = new PatientFeedback()
             {
+                Id = feedbackDto.Id,
                 PatientUsername = feedbackDto.PatientUsername,
                 SubmissionDate = feedbackDto.SubmissionDate,
                 Text = feedbackDto.Text,

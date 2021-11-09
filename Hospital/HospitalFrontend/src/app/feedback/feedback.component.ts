@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedbackService } from './feedback.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnimationOptions } from 'ngx-lottie';
 import player from 'lottie-web';
 import { Feedback } from './feedback';
@@ -16,8 +16,6 @@ import { formatDate } from '@angular/common';
 })
 export class FeedbackComponent implements OnInit {
   text: string = '';
-  anonymous: boolean = false;
-  publishAllowed: boolean = false;
   feedbackForm = new FormGroup({
     text: new FormControl('')
   });
@@ -50,13 +48,13 @@ export class FeedbackComponent implements OnInit {
   sendFeedback(modal: any) {
     let feedback: Feedback = {
       patientUsername: 'imbiamba',
-      submissionDate: new Date(formatDate(Date.now(), 'dd.MM.yyyy.', 'en-US')),
+      submissionDate: new Date((Date.now())),
       text: this.feedbackForm.get("textControl")?.value,
       anonymous: this.feedbackForm.get("anonymityControl")?.value,
       publishAllowed: this.feedbackForm.get("publishControl")?.value,
       isPublished: false
     }
-   
+
     this.service.createFeedback(feedback).subscribe({
       next: c => {
         console.log(c)
@@ -69,15 +67,13 @@ export class FeedbackComponent implements OnInit {
         else {
           this.showError('An error occured.');
         }
-      }
+      }, error: e => (console.log(e))
     })
     let fbsent = document.getElementById('fbsent')
     if (fbsent)
       fbsent.style.display = "block"
     player.play('feedbackGiven')
     this.text = '';
-    this.anonymous = false;
-    this.publishAllowed = false;
   }
 
   open(content: any) {

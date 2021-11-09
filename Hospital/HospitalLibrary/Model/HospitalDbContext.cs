@@ -24,7 +24,7 @@ namespace ehealthcare.Model
 
             modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
             {
-                Id = -1,
+                Id = "0",
                 PatientUsername = "p1",
                 SubmissionDate = new DateTime(2021, 11, 4),
                 Text = "alallalal",

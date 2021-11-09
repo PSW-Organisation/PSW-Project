@@ -18,8 +18,6 @@ export class WelcomeComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
-  
-
   getAllFeedbacks(): void{ 
     this.feedbackService.getAllFeedbacks().subscribe(feedbacks => this.feedbacks = feedbacks.filter(f => f.isPublished == true), 
       error => console.log(error));

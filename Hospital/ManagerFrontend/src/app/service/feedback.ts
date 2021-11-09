@@ -1,6 +1,7 @@
 export interface Feedback {
+    id: number,
     patientUsername: string,
-    submissionDate: Date,
+    submissionDate: Date
     text: string,
     anonymous: boolean,
     publishAllowed: boolean,

@@ -25,7 +25,7 @@
       <a class="smooth-scroll" href="#Services">Services</a>
     </li>
     <li class="sidebar-nav-item">
-      <a class="smooth-scroll" href="#Testimonials">Feedbacks</a>
+      <a class="smooth-scroll" href="#Feedbacks">Feedbacks</a>
     </li>
     <li class="sidebar-nav-item">
       <a class="smooth-scroll" href="#Contact">Contact</a>
@@ -47,11 +47,11 @@
           <div class="form-group">
             <div class="form-floating" style="margin-bottom: 4%;">
               <input id="username" class="form-control" autofocus type="text" />
-              <label for="username">Username:</label>
+              <label for="username">Username</label>
             </div>
             <div class="form-floating">
               <input id="password" class="form-control" type="password" />
-              <label for="password">Password:</label>
+              <label for="password">Password</label>
             </div>
             <div class="d-flex justify-content-center" style="margin-top: 4%;">
               <button type="submit" form="loginform" value="submit"
@@ -154,30 +154,26 @@
     </div>
   </div>
 </section>
-<!-- TESTIMONIALS -->
-<section id="Testimonials" class="content-section">
+<!-- FEEDBACKS -->
+<section id="Feedbacks" class="content-section text-center" *ngIf="feedbacks">
   <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="block-heading">
-          <h2>Feedbacks</h2>
-        </div>
-        <div id="customers-testimonials" class="owl-carousel">
-          <div class="item" *ngFor="let feedback of feedbacks">
-            <div *ngIf="feedback.isPublished">
-              <div class="shadow-effect">
-                <p>{{feedback.text}}</p>
-                <h6>{{feedback.submissionDate | date:'dd.MM.yyyy.'}}</h6>
-              </div>
-              <div class="testimonial-name">{{feedback.anonymous ? 'Anonymous' : feedback.patientUsername}}</div>
-            </div>
+    <div class="block-heading">
+      <h2>Feedbacks</h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4" *ngFor="let feedback of feedbacks | slice:0:3">
+        <div class="card d-flex mx-auto">
+          <div class="card-text">
+            <div class="card-title">{{feedback.anonymous ? 'Anonymous' : feedback.patientUsername}}</div>
+            <div style="margin-top: 1.2rem">{{feedback.text}}</div>
           </div>
+          <div class="footer">{{feedback.submissionDate | date:'dd.MM.yyyy.'}}</div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- END OF TESTIMONIALS -->
+<!-- FEEDBACKS -->
 
 <footer id="Contact" class="footer text-center">
   <div>
@@ -191,9 +187,9 @@
     <ul class="list-inline">
       <li class="list-inline-item">
         <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
-            <i class="fa fa-envelope" aria-hidden="true"></i>
+          <i class="fa fa-envelope" aria-hidden="true"></i>
         </a>
-    </li>
+      </li>
       <li class="list-inline-item">
         <a class="social-link rounded-circle text-white mr-3" href="javascript:void(0)">
           <i class="fa fa-facebook" aria-hidden="true"></i>
