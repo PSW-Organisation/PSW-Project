@@ -1,5 +1,4 @@
-﻿
-namespace ehealthcare.Model
+﻿namespace PharmacyAPI.Model
 {
     public enum MedicineStatus
     {

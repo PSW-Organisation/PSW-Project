@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PharmacyAPI.DTO;
+using PharmacyLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +13,44 @@ namespace PharmacyAPI.Controllers
     [Route("api3/[controller]")]
     public class PharmacyController : ControllerBase
     {
-        private readonly PharmacyDbContext dbContext;
+        private readonly IPharmacyService pharmacyService;
 
-        public PharmacyController(PharmacyDbContext context)
+        public PharmacyController(IPharmacyService pharmacyService)
         {
-            dbContext = context;
+            this.pharmacyService = pharmacyService;
         }
 
 
-        [HttpGet]       // GET /api/pharmacy
-        public IActionResult Get()
+        [HttpGet]       // GET /api3/pharmacy
+        public List<Pharmacy> GetAllPharmacies()
         {
-            List<Pharmacy> result = new List<Pharmacy>();
-            dbContext.Pharmacies.ToList().ForEach(pharmacy => result.Add(pharmacy));
-            return Ok(result);
+            return pharmacyService.Get();
         }
+
+        [HttpGet("{id?}")]
+        public Pharmacy Get(long id)
+        {
+            return pharmacyService.Get(id);
+        }
+
+        [HttpPost]
+        public Boolean Add(Pharmacy newPharmacy)
+        {
+            return pharmacyService.Add(newPharmacy);
+        }
+
+        [HttpDelete("{id?}")]
+        public Boolean Delete(long id)
+        {
+            return pharmacyService.Delete(id);
+        }
+
+        [HttpPut]
+        public Boolean Update(Pharmacy p)
+        {
+            return pharmacyService.Update(p);
+        }
+
+
     }
 }
