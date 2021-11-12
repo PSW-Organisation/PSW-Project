@@ -1,67 +1,48 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+﻿using PharmacyAPI.Model;
+using PharmacyLibrary.Repository.MedicineRepository;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace PharmacyLibrary.Service
 {
-    public class MedicineService
+    public class MedicineService : IMedicineService
     {
-        private MedicineRepository medicineRepository;
+        private readonly IMedicineRepository medicineRepository;
 
-        public MedicineService()
+        public MedicineService(IMedicineRepository medicineRepository)
         {
-            medicineRepository = new MedicineXMLRepository();
+            this.medicineRepository = medicineRepository;
         }
 
-        public void SetMedicine(Medicine medicine)
+        public bool Add(Medicine newMedicine)
         {
-            medicineRepository.Update(medicine);
+            return medicineRepository.Add(newMedicine);
         }
 
-        public void AddMedicine(Medicine medicine)
+        public bool Delete(int id)
         {
-            medicineRepository.Save(medicine);
+            return medicineRepository.Delete(id);
         }
 
-        public void SetMedicineIngredients(Medicine medicine, List<MedicineIngredient> medicineIngredients)
+        public List<Medicine> Get()
         {
-            medicine.MedicineIngredient = medicineIngredients;
-            medicineRepository.Update(medicine);
+            return medicineRepository.Get();
         }
 
-        public List<Medicine> GetAllMedicines()
+        public Medicine Get(int id)
         {
-            return medicineRepository.GetAll();
+            return medicineRepository.Get(id);
         }
 
-
-        public void AddMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient)
+        public bool Update(Medicine m)
         {
-            medicine.MedicineIngredient.Add(medicineIngredient);
-            medicineRepository.Update(medicine);
+            return medicineRepository.Update(m);
         }
 
-        public void RemoveMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient)
+        public bool CheckAvaliableQuantity(int idMedicine, int quantity)
         {
-            foreach (MedicineIngredient mi in medicine.MedicineIngredient)
-            {
-                if (mi.Equals(medicineIngredient))
-                {
-                    medicine.MedicineIngredient.Remove(mi);
-                    break;
-                }
-            }
-            medicineRepository.Update(medicine);
-        }
-
-        public void DeleteMedicine(string id)
-        {
-            medicineRepository.Delete(id);
+            return medicineRepository.CheckAvaliableQuantity(idMedicine, quantity);
         }
     }
 }

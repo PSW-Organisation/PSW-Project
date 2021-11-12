@@ -1,16 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ehealthcare.Model
+
+namespace PharmacyAPI.Model
 {
-    [Serializable]
-    public class Medicine : Entity
+    public class Medicine
     {
+        private int id;
         private String name;
         private MedicineStatus medicineStatus;
-        private List<MedicineIngredient> medicineIngredient;
+        private int quantity;
 
-        public Medicine() : base("undefinedNumberKey") { }
+        public Medicine() { }
+
+        public Medicine(int argId, String argName, MedicineStatus argMedicineStatus, int argQuantity)
+        {
+            id = argId;
+            name = argName;
+            medicineStatus = argMedicineStatus;
+            quantity = argQuantity;
+        }
+
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        public int Quantity
+        {
+            get { return quantity; }
+            set { quantity = value; }
+        }
 
         public String Name
         {
@@ -24,53 +45,6 @@ namespace ehealthcare.Model
             set { medicineStatus = value; }
         }
 
-
-        public List<MedicineIngredient> MedicineIngredient
-        {
-            get
-            {
-                if (medicineIngredient == null)
-                    medicineIngredient = new List<MedicineIngredient>();
-                return medicineIngredient;
-            }
-            set
-            {
-                RemoveAllMedicineIngredient();
-                if (value != null)
-                {
-                    foreach (MedicineIngredient oMedicineIngredient in value)
-                        AddMedicineIngredient(oMedicineIngredient);
-                }
-            }
-        }
-
-        public void AddMedicineIngredient(MedicineIngredient newMedicineIngredient)
-        {
-            if (newMedicineIngredient == null)
-                return;
-            if (this.medicineIngredient == null)
-                this.medicineIngredient = new List<MedicineIngredient>();
-            if (!this.medicineIngredient.Contains(newMedicineIngredient))
-                this.medicineIngredient.Add(newMedicineIngredient);
-        }
-
-        public void RemoveMedicineIngredient(MedicineIngredient oldMedicineIngredient)
-        {
-            if (oldMedicineIngredient == null)
-                return;
-            if (this.medicineIngredient != null)
-                if (this.medicineIngredient.Contains(oldMedicineIngredient))
-                    this.medicineIngredient.Remove(oldMedicineIngredient);
-        }
-
-        public void RemoveAllMedicineIngredient()
-        {
-            if (medicineIngredient != null)
-                medicineIngredient.Clear();
-        }
-
-
-        [System.Xml.Serialization.XmlIgnore]
         public String MedicineStatusString
         {
             get
