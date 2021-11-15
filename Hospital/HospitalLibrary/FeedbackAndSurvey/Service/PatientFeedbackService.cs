@@ -4,16 +4,18 @@ using HospitalLibrary.Repository.DbRepository;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HospitalLibrary.FeedbackAndSurvey.Model;
+using HospitalLibrary.FeedbackAndSurvey.Repository;
 
-namespace HospitalLibrary.Service
+namespace HospitalLibrary.FeedbackAndSurvey.Service
 {
-    public class PatientFeedbackService
+    public class PatientFeedbackService: IPatientFeedbackService
     {
-        private IPatientFeedbackRepository _patientFeedbackRepository;
+        private readonly IPatientFeedbackRepository _patientFeedbackRepository;
       
-        public PatientFeedbackService(HospitalDbContext dbContext)
+        public PatientFeedbackService(IPatientFeedbackRepository feedbackRepository)
         {
-            _patientFeedbackRepository = new PatientFeedbackDbRepository(dbContext);
+            _patientFeedbackRepository = feedbackRepository;
         }
 
         public void AddPatientFeedback(PatientFeedback patientFeedback) 

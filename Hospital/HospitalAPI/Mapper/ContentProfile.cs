@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.GraphicalEditor.Model;
 
 namespace HospitalAPI.Mapper
@@ -15,7 +16,9 @@ namespace HospitalAPI.Mapper
         {
             CreateMap<RoomGraphic, RoomGraphicDTO>();
             CreateMap<ExteriorGraphic, ExteriorGraphicDTO>();
-            CreateMap<PatientFeedback, PatientFeedbackDto>(); 
+            CreateMap<PatientFeedback, PatientFeedbackDTO>();
+            CreateMap<PatientFeedbackDTO, PatientFeedback>();
+
         }
     }
 }

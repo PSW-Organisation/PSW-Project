@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HospitalAPI
 {
-	public class PatientFeedbackValidator : AbstractValidator<PatientFeedbackDto>
+	public class PatientFeedbackValidator : AbstractValidator<PatientFeedbackDTO>
 	{
 		public PatientFeedbackValidator()
 		{

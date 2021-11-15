@@ -6,10 +6,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ehealthcare.Model;
-using HospitalLibrary.Controller;
 using HospitalAPI.DTO;
 using HospitalAPI.Mapper;
 using System.Net;
+using AutoMapper;
+using HospitalLibrary.FeedbackAndSurvey.Model;
+using HospitalLibrary.FeedbackAndSurvey.Repository;
+using HospitalLibrary.FeedbackAndSurvey.Service;
+using HospitalLibrary.Service;
 
 namespace HospitalAPI.Controllers
 {
@@ -18,19 +22,21 @@ namespace HospitalAPI.Controllers
     public class PatientFeedbacksController : ControllerBase
     {
         private readonly HospitalDbContext _context;
-        private readonly PatientFeedbackController _patientFeedbackController;
+        private readonly IPatientFeedbackService _patientFeedbackService;
+        private readonly IMapper _mapper;
 
-        public PatientFeedbacksController(HospitalDbContext context)
+
+        public PatientFeedbacksController(IPatientFeedbackService patientFeedbackService, IMapper mapper)
         {
-            _context = context;
-            _patientFeedbackController = new PatientFeedbackController(context);
+            _patientFeedbackService = patientFeedbackService;
+            _mapper = mapper;
         }
 
         // GET: api/Feedbacks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PatientFeedback>>> GetFeedbacks()
+        public ActionResult<IEnumerable<PatientFeedback>> GetFeedbacks()
         {
-            return await _context.PatientFeedbacks.ToListAsync();
+            return _patientFeedbackService.GetAllFeedbacks().ToList();
         }
 
         // GET: api/Feedbacks/5
@@ -51,12 +57,12 @@ namespace HospitalAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFeedback(int id, PatientFeedbackDto feedbackDto)
+        public IActionResult PutFeedback(int id, PatientFeedbackDTO feedbackDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            _patientFeedbackController.UpdatePatientFeedback(PatientFeedbackMapper.ToFeedback(feedbackDto));
+            _patientFeedbackService.UpdatePatientFeedback(_mapper.Map<PatientFeedback>(feedbackDto));
 
             return Ok();
         }
@@ -65,12 +71,12 @@ namespace HospitalAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public  ActionResult PostFeedback(PatientFeedbackDto feedbackDto)
+        public  ActionResult PostFeedback(PatientFeedbackDTO feedbackDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            _patientFeedbackController.AddPatientFeedback(PatientFeedbackMapper.ToFeedback(feedbackDto));
+            _patientFeedbackService.AddPatientFeedback(_mapper.Map<PatientFeedback>(feedbackDto));
 
             return Ok();
         }
