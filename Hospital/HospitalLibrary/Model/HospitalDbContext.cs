@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using HospitalLibrary.FeedbackAndSurvey.Model;
 
 namespace ehealthcare.Model
 {
@@ -24,7 +25,7 @@ namespace ehealthcare.Model
 
             modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
             {
-                Id = "0",
+                Id = -1,
                 PatientUsername = "p1",
                 SubmissionDate = new DateTime(2021, 11, 4),
                 Text = "alallalal",

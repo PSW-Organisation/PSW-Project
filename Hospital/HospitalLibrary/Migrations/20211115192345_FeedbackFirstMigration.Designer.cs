@@ -10,8 +10,8 @@ using ehealthcare.Model;
 namespace HospitalLibrary.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    [Migration("20211108194602_PatientFeedback")]
-    partial class PatientFeedback
+    [Migration("20211115192345_FeedbackFirstMigration")]
+    partial class FeedbackFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,48 @@ namespace HospitalLibrary.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.PatientFeedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<bool>("Anonymous")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsPublished")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("PatientUsername")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("PublishAllowed")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("SubmissionDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PatientFeedbacks");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            Anonymous = false,
+                            IsPublished = false,
+                            PatientUsername = "p1",
+                            PublishAllowed = false,
+                            SubmissionDate = new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Text = "alallalal"
+                        });
+                });
 
             modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.ExteriorGraphic", b =>
                 {
@@ -128,46 +170,6 @@ namespace HospitalLibrary.Migrations
                             Width = 50.0,
                             X = 380.0,
                             Y = 20.0
-                        });
-                });
-
-            modelBuilder.Entity("ehealthcare.Model.PatientFeedback", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Anonymous")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsPublished")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("PatientUsername")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("PublishAllowed")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("SubmissionDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PatientFeedbacks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "0",
-                            Anonymous = false,
-                            IsPublished = false,
-                            PatientUsername = "p1",
-                            PublishAllowed = false,
-                            SubmissionDate = new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Text = "alallalal"
                         });
                 });
 

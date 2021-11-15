@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalLibrary.Migrations
 {
-    public partial class PatientFeedback : Migration
+    public partial class FeedbackFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +12,8 @@ namespace HospitalLibrary.Migrations
                 name: "PatientFeedbacks",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PatientUsername = table.Column<string>(nullable: true),
                     SubmissionDate = table.Column<DateTime>(nullable: false),
                     Text = table.Column<string>(nullable: true),
@@ -27,7 +29,7 @@ namespace HospitalLibrary.Migrations
             migrationBuilder.InsertData(
                 table: "PatientFeedbacks",
                 columns: new[] { "Id", "Anonymous", "IsPublished", "PatientUsername", "PublishAllowed", "SubmissionDate", "Text" },
-                values: new object[] { "0", false, false, "p1", false, new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "alallalal" });
+                values: new object[] { -1, false, false, "p1", false, new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "alallalal" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

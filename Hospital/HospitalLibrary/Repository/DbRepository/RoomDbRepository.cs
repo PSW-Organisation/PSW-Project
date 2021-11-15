@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HospitalLibrary.Repository.DbRepository
 {
-    public class RoomDbRepository : GenericDbRepository<Room> , IRoomRepository
+    public class RoomDbRepository : GenericSTRINGIDRepository<Room> , IRoomRepository
     {
         public RoomDbRepository(HospitalDbContext dbContext) : base(dbContext)
         {

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace HospitalAPI.DTO
 {
-    public class PatientFeedbackDto
+    public class PatientFeedbackDTO
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string PatientUsername { get; set; }
         public DateTime SubmissionDate { get; set; }
         public string Text { get; set; }

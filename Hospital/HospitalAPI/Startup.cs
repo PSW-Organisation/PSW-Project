@@ -16,6 +16,10 @@ using HospitalLibrary.GraphicalEditor.Repository;
 using ehealthcare.Service;
 using HospitalLibrary.Service;
 using ehealthcare.Repository;
+using HospitalLibrary.FeedbackAndSurvey.Model;
+using HospitalLibrary.FeedbackAndSurvey.Repository;
+using HospitalLibrary.FeedbackAndSurvey.Service;
+using HospitalLibrary.Repository;
 using HospitalLibrary.Repository.DbRepository;
 
 namespace HospitalAPI
@@ -43,7 +47,7 @@ namespace HospitalAPI
                 //...mvc setup...
             }).AddFluentValidation().AddNewtonsoftJson();
 
-            services.AddTransient<IValidator<PatientFeedbackDto>, PatientFeedbackValidator>();
+            services.AddTransient<IValidator<PatientFeedbackDTO>, PatientFeedbackValidator>();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -59,6 +63,11 @@ namespace HospitalAPI
 
             services.AddScoped<IExteriorGraphicService, ExteriorGraphicService>();
             services.AddScoped<IExteriorGraphicRepository, ExteriorGraphicRepository>();
+
+            services.AddScoped<IPatientFeedbackService, PatientFeedbackService>();
+            services.AddScoped<GenericDbRepository<PatientFeedback>, PatientFeedbackDbRepository>();
+            services.AddScoped<IPatientFeedbackRepository, PatientFeedbackDbRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

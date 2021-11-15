@@ -1,19 +1,16 @@
 ﻿using ehealthcare.Model;
-using HospitalLibrary.Model;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace HospitalLibrary.Repository.DbRepository
 {
-    public class GenericDbRepository<T> : IGenericRepository<T> where T : EntityDb
+    public class GenericSTRINGIDRepository<T> : IGenericRepository<T> where T : Entity
     {
         private readonly HospitalDbContext _dbContext;
 
-        public GenericDbRepository(HospitalDbContext dbContext)
+        public GenericSTRINGIDRepository(HospitalDbContext dbContext)
         {
             _dbContext = dbContext;
         }

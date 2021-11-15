@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using ehealthcare.Model;
 
-namespace ehealthcare.Model
+namespace HospitalLibrary.FeedbackAndSurvey.Model
 {
-    public class PatientFeedback : Entity
+    public class PatientFeedback : EntityDb
     {
         public string PatientUsername { get; set; }
         public DateTime SubmissionDate { get; set; }
@@ -17,8 +18,10 @@ namespace ehealthcare.Model
         public bool PublishAllowed { get; set; }
         public bool IsPublished { get; set; }
 
-        public PatientFeedback(string id, string patientUsername, DateTime submissionDate, string text,
-                                bool anonymous, bool publishAllowed, bool isPublished): base(id)
+        public PatientFeedback(){}
+
+        public PatientFeedback(string patientUsername, DateTime submissionDate, string text,
+                                bool anonymous, bool publishAllowed, bool isPublished)
         {
             PatientUsername = patientUsername;
             SubmissionDate = submissionDate;
@@ -28,7 +31,5 @@ namespace ehealthcare.Model
             IsPublished = isPublished;
         }
 
-        public PatientFeedback() : base("undefinedKey") { }
-        
     }
 }
