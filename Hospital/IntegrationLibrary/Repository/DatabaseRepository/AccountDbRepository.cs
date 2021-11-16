@@ -1,6 +1,5 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using IntegrationLibrary.Model;
+﻿using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

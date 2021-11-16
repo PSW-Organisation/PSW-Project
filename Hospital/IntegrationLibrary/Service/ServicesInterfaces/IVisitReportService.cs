@@ -1,4 +1,4 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;

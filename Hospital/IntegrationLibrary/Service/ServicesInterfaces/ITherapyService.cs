@@ -1,8 +1,8 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using static ehealthcare.Service.TherapyService;
+using static IntegrationLibrary.Service.TherapyService;
 
 namespace IntegrationLibrary.Service.ServicesInterfaces
 {

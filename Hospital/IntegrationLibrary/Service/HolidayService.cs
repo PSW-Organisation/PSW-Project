@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using ehealthcare.Model;
-using ehealthcare.Repository;
 using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
     public class HolidayService : IHolidayService
     {

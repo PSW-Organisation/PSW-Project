@@ -1,13 +1,13 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
 using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class PersonalizedNotificationController
 	{

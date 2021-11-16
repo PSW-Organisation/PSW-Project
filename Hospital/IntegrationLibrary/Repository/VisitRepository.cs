@@ -1,8 +1,8 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 
-namespace ehealthcare.Repository
+namespace IntegrationLibrary.Repository
 {
     public interface VisitRepository : GenericRepository<Visit>
     {

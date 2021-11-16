@@ -1,4 +1,4 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Repository
+namespace IntegrationLibrary.Repository
 {
 	public interface DoctorRepository : GenericRepository<Doctor>
 	{

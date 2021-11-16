@@ -1,12 +1,14 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ehealthcare.Repository;
-using static ehealthcare.SecretaryApp.Constants;
+
 using IntegrationLibrary.Service.ServicesInterfaces;
 
-namespace ehealthcare.Service
+using IntegrationLibrary.Repository;
+using static IntegrationLibrary.SecretaryApp.Constants;
+
+namespace IntegrationLibrary.Service
 {
 	public class VisitTimeService : IVisitTimeService
     {

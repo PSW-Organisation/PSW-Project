@@ -1,9 +1,9 @@
-﻿using ehealthcare.Proxies;
-using ehealthcare.Service;
+﻿using IntegrationLibrary.Proxies;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     public class Reminder : Entity
     {

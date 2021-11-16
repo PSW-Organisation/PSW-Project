@@ -1,13 +1,13 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
 using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
     public class MedicineService : IMedicineService
     {
@@ -30,7 +30,11 @@ namespace ehealthcare.Service
 
         public void SetMedicineIngredients(Medicine medicine, List<MedicineIngredient> medicineIngredients)
         {
-            medicine.MedicineIngredient = medicineIngredients;
+            foreach (MedicineIngredient ingredient in medicineIngredients)
+            {
+                medicine.AddMedicineIngredient(ingredient.Name);
+            }
+            //medicine.MedicineIngredient = medicineIngredients;
             medicineRepository.Update(medicine);
         }
 
@@ -42,15 +46,15 @@ namespace ehealthcare.Service
         
         public void AddMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient)
         {
-            medicine.MedicineIngredient.Add(medicineIngredient);
+            medicine.MedicineIngredient.Add(medicineIngredient.Name);
             medicineRepository.Update(medicine);
         }
 
         public void RemoveMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient)
         {
-            foreach(MedicineIngredient mi in medicine.MedicineIngredient)
+            foreach(string mi in medicine.MedicineIngredient)
             {
-                if (mi.Equals(medicineIngredient))
+                if (mi.Equals(medicineIngredient.Name))
                 {
                     medicine.MedicineIngredient.Remove(mi);
                     break;

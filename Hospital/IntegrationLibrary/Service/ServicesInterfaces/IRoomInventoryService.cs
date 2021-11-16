@@ -1,5 +1,5 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+﻿using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;

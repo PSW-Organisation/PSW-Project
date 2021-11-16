@@ -1,14 +1,14 @@
-﻿using ehealthcare.Model;
-using ehealthcare.PatientApp.ApplicationData;
-using ehealthcare.Repository;
 using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.PatientApp.ApplicationData;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
 	public class ReminderService : IReminderService
 	{

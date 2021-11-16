@@ -1,6 +1,6 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 
-namespace ehealthcare.Repository
+namespace IntegrationLibrary.Repository
 {
 	public interface AccountDataRepository : GenericRepository<AccountData>
 	{

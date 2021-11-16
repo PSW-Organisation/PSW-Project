@@ -1,7 +1,7 @@
 using System;
-using ehealthcare.Model;
-using ehealthcare.Proxies;
-using static ehealthcare.SecretaryApp.Constants;
+using IntegrationLibrary.Proxies;
+using IntegrationLibrary.Model;
+using static IntegrationLibrary.SecretaryApp.Constants;
 
 [Serializable]
 public class Holiday : Entity

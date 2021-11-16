@@ -1,11 +1,12 @@
-﻿using System;
+using IntegrationLibrary.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ehealthcare.Model;
-using ehealthcare.Repository;
-using IntegrationLibrary.Model;
+using System.Threading.Tasks;
+
 namespace IntegrationLibrary.Repository.DatabaseRepository
+
 {
     public class WorkdayDbRepository : GenericDatabaseRepository<Workday>, WorkdayRepository
     {

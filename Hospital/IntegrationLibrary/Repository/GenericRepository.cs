@@ -1,4 +1,4 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Repository
+namespace IntegrationLibrary.Repository
 {
 	public interface GenericRepository<T> where T : class
 	{

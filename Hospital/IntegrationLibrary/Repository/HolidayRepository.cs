@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Repository
+namespace IntegrationLibrary.Repository
 {
     public interface HolidayRepository : GenericRepository<Holiday>
     {

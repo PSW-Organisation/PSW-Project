@@ -1,11 +1,12 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
+
 using IntegrationLibrary.Service.ServicesInterfaces;
+﻿using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
 	public class VisitService : IVisitService
 	{

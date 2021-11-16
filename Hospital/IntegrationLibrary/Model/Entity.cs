@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
 	
 	public class Entity
