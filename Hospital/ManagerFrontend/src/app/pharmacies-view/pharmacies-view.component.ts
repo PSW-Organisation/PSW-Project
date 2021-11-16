@@ -27,14 +27,6 @@ export class PharmaciesViewComponent implements OnInit {
       alert("Pharmacy added successfully!");
       alert("Api key for pharmacy is " + res);
     } );
-    /*if (window.confirm('Are you sure, you want to add this pharmacy?')){
-      this._pharmaciesService.addPharmacy(this.newPharmacy).subscribe( data => {
-        this.refreshPharmacies();
-        alert("Pharmacy added successfully!");
-        alert("Api key for pharmacy is " + data);
-      });
-    }*/
-   //pharmacyApiKey???
     this.newPharmacy = {pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: ""};
   }
 
@@ -42,7 +34,6 @@ export class PharmaciesViewComponent implements OnInit {
     if (window.confirm('Are you sure, you want to delete this pharmacy?')){
       this._pharmaciesService.deletePharmacy(id).subscribe( data => {
         this.refreshPharmacies();
-        //alert("Pharmacy deleted successfully!");
       });
     }
 

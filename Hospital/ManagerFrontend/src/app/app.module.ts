@@ -20,6 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { FeedbackService } from './service/feedback.service';
+import { OrderingMedicineComponent } from './ordering-medicine/ordering-medicine.component';
+import { SearchPharmaciesPipe } from './ordering-medicine/search-pharmacies.pipe';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { FeedbackService } from './service/feedback.service';
     ComplaintDetailComponent,
     HospitalExteriorViewComponent,
     PharmaciesViewComponent,
-    FeedBackComponent
+    FeedBackComponent,
+    OrderingMedicineComponent,
+    SearchPharmaciesPipe
   ],
   imports: [
     BrowserModule,

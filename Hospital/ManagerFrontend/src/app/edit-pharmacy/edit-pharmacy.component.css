@@ -1,5 +1,4 @@
 .btn {
-  background-color: DodgerBlue; /* Blue background */
   border: none; /* Remove borders */
   color: white; /* White text */
   padding: 6px 16px ; /* Some padding */
@@ -8,9 +7,4 @@
   margin-top: 5px;
   margin-bottom: 5px;
   margin-right: 5px;
-}
-  
-/* Darker background on mouse-over */
-.btn:hover {
-  background-color: RoyalBlue;
 }
