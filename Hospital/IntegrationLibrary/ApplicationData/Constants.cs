@@ -1,5 +1,5 @@
 ﻿
-namespace ehealthcare.SecretaryApp
+namespace IntegrationLibrary.SecretaryApp
 {
     public static class Constants
     {

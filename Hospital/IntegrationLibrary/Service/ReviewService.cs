@@ -1,6 +1,6 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+﻿using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
+using IntegrationLibrary.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
 	public class ReviewService
 	{

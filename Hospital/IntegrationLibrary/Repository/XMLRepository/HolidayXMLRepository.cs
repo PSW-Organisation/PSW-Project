@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Repository.XMLRepository
+namespace IntegrationLibrary.Repository.XMLRepository
 {
 	public class HolidayXMLRepository : GenericXMLRepository<Holiday>, HolidayRepository
 	{

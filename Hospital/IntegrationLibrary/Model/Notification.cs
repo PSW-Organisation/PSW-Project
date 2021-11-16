@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     [XmlInclude(typeof(PersonalizedNotification))]

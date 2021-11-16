@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
+using IntegrationLibrary.Repository.XMLRepository;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
     public class HolidayService
     {

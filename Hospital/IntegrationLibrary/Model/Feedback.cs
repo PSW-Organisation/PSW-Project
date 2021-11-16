@@ -1,11 +1,11 @@
-﻿using ehealthcare.Proxies;
+﻿using IntegrationLibrary.Proxies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public abstract class Feedback : Entity

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class Medicine : Entity
     {
         private String name;
         private MedicineStatus medicineStatus;
-        private List<MedicineIngredient> medicineIngredient;
-
+        private List<String> medicineIngredient;
+        private int medicineAmmount;
         public Medicine() : base("undefinedNumberKey") { }
 
         public String Name
@@ -25,12 +25,12 @@ namespace ehealthcare.Model
         }
 
 
-        public List<MedicineIngredient> MedicineIngredient
+        public List<String> MedicineIngredient
         {
             get
             {
                 if (medicineIngredient == null)
-                    medicineIngredient = new List<MedicineIngredient>();
+                    medicineIngredient = new List<String>();
                 return medicineIngredient;
             }
             set
@@ -38,29 +38,29 @@ namespace ehealthcare.Model
                 RemoveAllMedicineIngredient();
                 if (value != null)
                 {
-                    foreach (MedicineIngredient oMedicineIngredient in value)
+                    foreach (String oMedicineIngredient in value)
                         AddMedicineIngredient(oMedicineIngredient);
                 }
             }
         }
 
-        public void AddMedicineIngredient(MedicineIngredient newMedicineIngredient)
+        public void AddMedicineIngredient(String newMedicineIngredient)
         {
             if (newMedicineIngredient == null)
                 return;
-            if (this.medicineIngredient == null)
-                this.medicineIngredient = new List<MedicineIngredient>();
-            if (!this.medicineIngredient.Contains(newMedicineIngredient))
-                this.medicineIngredient.Add(newMedicineIngredient);
+            if (medicineIngredient == null)
+                medicineIngredient = new List<String>();
+            if (!medicineIngredient.Contains(newMedicineIngredient))
+                medicineIngredient.Add(newMedicineIngredient);
         }
 
-        public void RemoveMedicineIngredient(MedicineIngredient oldMedicineIngredient)
+        public void RemoveMedicineIngredient(String oldMedicineIngredient)
         {
             if (oldMedicineIngredient == null)
                 return;
-            if (this.medicineIngredient != null)
-                if (this.medicineIngredient.Contains(oldMedicineIngredient))
-                    this.medicineIngredient.Remove(oldMedicineIngredient);
+            if (medicineIngredient != null)
+                if (medicineIngredient.Contains(oldMedicineIngredient))
+                    medicineIngredient.Remove(oldMedicineIngredient);
         }
 
         public void RemoveAllMedicineIngredient()
@@ -89,5 +89,7 @@ namespace ehealthcare.Model
                 }
             }
         }
+
+        public int MedicineAmmount { get => medicineAmmount; set => medicineAmmount = value; }
     }
 }

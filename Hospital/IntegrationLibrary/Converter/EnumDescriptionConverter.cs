@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.SecretaryApp.Converter
+namespace IntegrationLibrary.SecretaryApp.Converter
 {
     public class EnumDescriptionConverter : EnumConverter
     {

@@ -1,9 +1,9 @@
-using ehealthcare.Proxies;
-using ehealthcare.Service;
+using IntegrationLibrary.Proxies;
+using IntegrationLibrary.Service;
 using System;
 using System.Drawing.Design;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class Account : Entity

@@ -1,7 +1,7 @@
-﻿using ehealthcare.SecretaryApp.Converter;
+﻿using IntegrationLibrary.SecretaryApp.Converter;
 using System.ComponentModel;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [TypeConverter(typeof(EnumDescriptionConverter))]
     public enum NotificationRole

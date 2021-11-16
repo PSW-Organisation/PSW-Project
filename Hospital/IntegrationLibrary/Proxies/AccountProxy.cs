@@ -1,8 +1,8 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+﻿using IntegrationLibrary.Repository;
+using IntegrationLibrary.Repository.XMLRepository;
+using IntegrationLibrary.Model;
 
-namespace ehealthcare.Proxies
+namespace IntegrationLibrary.Proxies
 {
 	interface IAccount
 	{

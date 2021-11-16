@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
+using IntegrationLibrary.Repository.XMLRepository;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
     public class AllergenService
     {

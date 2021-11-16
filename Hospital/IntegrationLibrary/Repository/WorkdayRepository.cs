@@ -1,9 +1,9 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ehealthcare.Repository
+namespace IntegrationLibrary.Repository
 {
     public interface WorkdayRepository : GenericRepository<Workday>
     {

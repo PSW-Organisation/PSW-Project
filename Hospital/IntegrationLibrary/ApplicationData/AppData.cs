@@ -1,11 +1,11 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.PatientApp.ApplicationData
+namespace IntegrationLibrary.PatientApp.ApplicationData
 {
 	public class AppData
 	{

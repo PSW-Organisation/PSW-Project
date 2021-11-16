@@ -1,11 +1,11 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Repository.XMLRepository
+namespace IntegrationLibrary.Repository.XMLRepository
 {
 	public class DoctorXMLRepository : GenericXMLRepository<Doctor>, DoctorRepository
 	{

@@ -1,7 +1,7 @@
-using ehealthcare.Service;
+using IntegrationLibrary.Service;
 using System;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     public class Therapy : Entity
     {

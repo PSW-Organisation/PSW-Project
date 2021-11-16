@@ -1,6 +1,6 @@
-﻿using ehealthcare.Service;
+﻿using IntegrationLibrary.Service;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     public class TherapyNotification : PersonalizedNotification
     {

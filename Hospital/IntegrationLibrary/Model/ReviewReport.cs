@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
 	[Serializable]
 	public class ReviewReport : Feedback

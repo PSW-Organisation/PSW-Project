@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
 	[Serializable]
 	public class Entity

@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class Room : Entity

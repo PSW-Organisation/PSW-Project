@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
 	internal class SerializedAttribute : Attribute
 	{
