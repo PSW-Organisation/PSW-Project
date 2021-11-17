@@ -15,7 +15,7 @@ namespace ehealthcare.Repository
 		public void Save(T entity);
 		public void SaveAll();
 		public T Update(T entity);
-		void Insert(T entity);
+	
 		public int GenerateId();
 		public void GenerateIdIfNeeded();
 		

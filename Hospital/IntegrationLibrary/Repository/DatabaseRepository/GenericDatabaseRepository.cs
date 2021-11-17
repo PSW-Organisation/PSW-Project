@@ -23,7 +23,7 @@ namespace IntegrationLibrary.Repository.DatabaseRepository
             try
             {
                 _dbContext.Set<T>().Remove(entity);
-                Save(entity);
+                SaveAll();
             }
             catch (Exception ex)
             {
@@ -75,14 +75,11 @@ namespace IntegrationLibrary.Repository.DatabaseRepository
             return _dbContext.Set<T>().ToList();
         }
 
-        public void Insert(T entity)
-        {
-            _dbContext.Set<T>().Add(entity);
-            Save(entity);
-        }
+     
 
         public void Save(T entity)
         {
+            _dbContext.Set<T>().Add(entity);
             _dbContext.SaveChanges();
         }
 
@@ -99,7 +96,7 @@ namespace IntegrationLibrary.Repository.DatabaseRepository
         public T Update(T entity)
         {
             _dbContext.Set<T>().Update(entity);
-            Save(entity);
+            SaveAll();
             return entity;
         }
     }

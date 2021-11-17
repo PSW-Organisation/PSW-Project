@@ -17,6 +17,8 @@ using ehealthcare.Repository;
 using IntegrationLibrary.Repository.DatabaseRepository;
 using IntegrationLibrary.Service.ServicesInterfaces;
 using ehealthcare.Service;
+using IntegrationLibrary.Service;
+using IntegrationLibrary.Repository;
 
 namespace IntegrationAPI
 {
@@ -63,6 +65,7 @@ namespace IntegrationAPI
             services.AddScoped<VisitRepository, VisitDbRepository>();
             services.AddScoped<VisitReportRepository, VisitReportDbRepository>();
             services.AddScoped<WorkdayRepository, WorkdayDbRepository>();
+            services.AddScoped<ComplaintRepository, ComplaintDbRepository>();
 
             //servisi
             services.AddScoped<IAccountService, AccountService>();
@@ -84,7 +87,8 @@ namespace IntegrationAPI
             services.AddScoped<IVisitService, VisitService>();
             services.AddScoped<IVisitReportService, VisitReportService>();
             services.AddScoped<IWorkdayService, WorkdayService>();
-
+            services.AddScoped<IComplaintService, ComplaintService>();
+            
 
             //added for Cors error
             //______________________________________________________________________

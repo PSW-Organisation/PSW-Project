@@ -1,6 +1,7 @@
 ﻿using IntegrationAPI.Adapters;
 using IntegrationAPI.DTO;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,27 +14,26 @@ namespace IntegrationAPI.Controllers
     [ApiController]
     public class ComplaintController : ControllerBase
     {
-        private readonly IntegrationDbContext dbContext;
+        private IComplaintService complaintService;
 
-        public ComplaintController(IntegrationDbContext context)
+        public ComplaintController(IComplaintService complaintService)
         {
-            dbContext = context;
+            this.complaintService = complaintService;
         }
 
         [HttpGet]       // GET /api/complaint
         public IActionResult Get()
         {
             List<ComplaintDTO> result = new List<ComplaintDTO>();
-            
-            dbContext.Complaints.ToList().ForEach(complaint => result.Add(ComplaintAdapter.ComplaintToComplaintDto(complaint)));
+            complaintService.GetAll().ForEach(complaint => result.Add(ComplaintAdapter.ComplaintToComplaintDto(complaint)));  
             return Ok(result);
         }
 
         [HttpGet("{id?}")]      // GET /api/complaint/1
-        public IActionResult Get(long id)
+        public IActionResult Get(int id)
         {
-            
-            Complaint complaint = dbContext.Complaints.FirstOrDefault(complaint => complaint.Id == id);
+
+            Complaint complaint = complaintService.Get(id);
             if (complaint == null)
             {
                 return NotFound();
@@ -52,57 +52,29 @@ namespace IntegrationAPI.Controllers
                 return BadRequest();
             }
 
-            
-            int id = dbContext.Complaints.ToList().Count > 0 ? dbContext.Complaints.Max(Complaint => Complaint.Id) + 1 : 1;
-
-            DateTime date = DateTime.Now;
-            Complaint complaint = ComplaintAdapter.ComplaintDtoToComplaint(dto);
-            complaint.Id = id;
-            complaint.Date = date;
-            dbContext.Complaints.Add(complaint);
-            dbContext.SaveChanges();
+            dto.Date = DateTime.Now;
+            complaintService.Save(ComplaintAdapter.ComplaintDtoToComplaint(dto));
+           
             return Ok();
 
         }
 
-        [HttpPut]      // 
-        public IActionResult AddNew(ComplaintDTO dto)
+       
+
+        [HttpDelete("{id?}")]       // DELETE /api2/complaint/1 
+        //zasto je id bio id=0?
+        public IActionResult Delete(int id)
         {
-            if (dto.Title.Length <= 0 || dto.Content.Length <= 0)
-            {
-                return BadRequest();
-            }
-
-
-            int id = dbContext.Complaints.ToList().Count > 0 ? dbContext.Complaints.Max(Complaint => Complaint.Id) + 1 : 1;
-
-            DateTime date = DateTime.Now;
-            Complaint complaint = ComplaintAdapter.ComplaintDtoToComplaint(dto);
-            complaint.Id = id;
-            complaint.Date = date;
-            dbContext.Complaints.Add(complaint);
-            dbContext.SaveChanges();
-            return Ok();
-
-        }
-
-
-        [HttpDelete("{id?}")]       // DELETE /api/complaint/1
-        public IActionResult Delete(long id = 0)
-        {
-            
-            Complaint complaint = dbContext.Complaints.SingleOrDefault(complaint => complaint.Id == id);
-            if (complaint == null)
+            Complaint complaint = complaintService.Get(id);
+            if(complaint == null)
             {
                 return NotFound();
             }
-            else
-            {
-               
-                dbContext.Complaints.Remove(complaint);
-                dbContext.SaveChanges();
-                return Ok();
+            else {
+               complaintService.Delete(complaint);
+               return Ok();
             }
+            
         }
     }
 }
