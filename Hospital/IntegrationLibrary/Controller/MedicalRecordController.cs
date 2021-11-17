@@ -1,6 +1,7 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,11 @@ namespace ehealthcare.Controller
 {
     public class MedicalRecordController
     {
-        private MedicalRecordService medicalRecordService;
+        private IMedicalRecordService medicalRecordService;
 
-        public MedicalRecordController()
+        public MedicalRecordController(IMedicalRecordService medicalRecordService)
         {
-            medicalRecordService = new MedicalRecordService();
+            this.medicalRecordService = medicalRecordService;
         }
 
         /**

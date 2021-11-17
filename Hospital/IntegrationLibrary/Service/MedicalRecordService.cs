@@ -1,6 +1,7 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Service
 {
-    public class MedicalRecordService
+    public class MedicalRecordService : IMedicalRecordService
     {
         private PatientRepository patientRepository;
 
-        public MedicalRecordService()
+        public MedicalRecordService(PatientRepository patientRepository)
         {
+            this.patientRepository = patientRepository;
         }
 
         /**

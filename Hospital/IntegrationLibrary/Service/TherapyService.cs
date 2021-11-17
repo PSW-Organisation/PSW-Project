@@ -1,16 +1,19 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 
 namespace ehealthcare.Service
 {
-	public class TherapyService
+	public class TherapyService : ITherapyService
 	{
 		private TherapyRepository therapyRepository;
 		private int xMinutes = 5;
 		private int xHours = 6;
+		private ITherapyNotificationService therapyNotificationService;
+
 		public class MedicineInfo
 		{
 			public DateTime Date { get; set; }
@@ -19,14 +22,20 @@ namespace ehealthcare.Service
 			public string Medicine { get; set; }
 		}
 
-		public TherapyService()
+		public TherapyService(TherapyRepository therapyRepository, ITherapyNotificationService therapyNotificationService)
 		{
+			this.therapyRepository = therapyRepository;
+			this.therapyNotificationService = therapyNotificationService;
 		}
 
-		/**
+        public TherapyService()
+        {
+        }
+
+        /**
         * <summary>Method returns all therapies for the given patient.</summary>
         */
-		public List<Therapy> GetAllTherapiesForPatient(Patient patient)
+        public List<Therapy> GetAllTherapiesForPatient(Patient patient)
 		{
 			List<Therapy> therapies = therapyRepository.GetAll();
 			List<Therapy> filteredTherapies = new List<Therapy>();
@@ -146,7 +155,6 @@ namespace ehealthcare.Service
 				{
 					List<Account> accounts = new List<Account>();
 					accounts.Add(AppData.getInstance().LoggedInAccount);
-					TherapyNotificationService therapyNotificationService = new TherapyNotificationService();
 					foreach (Therapy therapy in therapiesToTake)
 					{
 						TherapyNotification therapyNotification = new TherapyNotification()
@@ -326,7 +334,6 @@ namespace ehealthcare.Service
 
 		public void EraseTherapyNotifications()
 		{
-			TherapyNotificationService therapyNotificationService = new TherapyNotificationService();
 			List<TherapyNotification> therapyNotifications = therapyNotificationService.GetTherapyNotificationsForPatient(AppData.getInstance().LoggedInAccount.User.Id);
 			if(therapyNotifications.Count != 0) 
 			{

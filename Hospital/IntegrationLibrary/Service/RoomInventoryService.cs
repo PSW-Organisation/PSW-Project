@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Service
 {
-    public class RoomInventoryService
+    public class RoomInventoryService : IRoomInventoryService
     {
         private RoomInventoryRepository roomInventoryRepository;
         private IInventoryTransfer _inventoryTransfer;
         private InventoryTrasnferStatic staticTranfer = new InventoryTrasnferStatic();
-        public RoomInventoryService()
+        public RoomInventoryService(RoomInventoryRepository roomInventoryRepository, IInventoryTransfer _inventoryTransfer)
         {
+            this.roomInventoryRepository = roomInventoryRepository;
+            this._inventoryTransfer = _inventoryTransfer;
         }
 
         public void SetInventoryTransferStrategy(IInventoryTransfer inventoryTransfer)
@@ -195,7 +198,7 @@ namespace ehealthcare.Service
     class InventoryTrasnferNonStatic : IInventoryTransferNonStatic
     {
         private RoomInventoryRepository roomInventoryRepository;
-        private RoomInventoryService roomInventoryService = new RoomInventoryService();
+        private IRoomInventoryService roomInventoryService;
         public void DoInventoryTransfer(Room srcRoom, Room destRoom, int quantity, DateTime dueDate, RoomInventory trasnferedInventory)
         {
             List<RoomInventory> alteredRoomInventory = roomInventoryRepository.GetFacilityRoomInventory();

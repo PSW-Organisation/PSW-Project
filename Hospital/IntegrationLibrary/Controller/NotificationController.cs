@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ehealthcare.Controller
 {
 	public class NotificationController
 	{
-		private NotificationService notificationService;
+		private INotificationService notificationService;
 
-		public NotificationController()
-		{
-			notificationService = new NotificationService();
+		public NotificationController(INotificationService notificationService)
+        {
+            this.notificationService = notificationService;
 		}
 
         public List<Notification> GetAllNotifications()

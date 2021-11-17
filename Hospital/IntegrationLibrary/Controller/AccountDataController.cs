@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,11 @@ namespace ehealthcare.Controller
 	public class AccountDataController
 	{
 
-		private AccountDataService accountDataService;
+		private IAccountDataService accountDataService;
 
-		public AccountDataController()
+		public AccountDataController(IAccountDataService accountDataService)
 		{
-			accountDataService = new AccountDataService();
+			this.accountDataService = accountDataService;
 		}
 
 		public int GetNumberOfReadNotificationsForAccount(int username)

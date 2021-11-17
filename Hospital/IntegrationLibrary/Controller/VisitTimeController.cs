@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ehealthcare.Controller
 {
 	public class VisitTimeController
 	{
-		private VisitTimeService visitTimeService;
+		private IVisitTimeService visitTimeService;
 
-		public VisitTimeController()
+		public VisitTimeController(IVisitTimeService visitTimeService)
 		{
-			visitTimeService = new VisitTimeService();
+			this.visitTimeService = visitTimeService;
 		}
 
         public List<DateTime> getFirst21AvailableDates(Doctor doctor)

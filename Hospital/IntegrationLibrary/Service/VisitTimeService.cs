@@ -4,24 +4,27 @@ using System.Collections.Generic;
 using System.Linq;
 using ehealthcare.Repository;
 using static ehealthcare.SecretaryApp.Constants;
+using IntegrationLibrary.Service.ServicesInterfaces;
 
 namespace ehealthcare.Service
 {
-	public class VisitTimeService
-	{
+	public class VisitTimeService : IVisitTimeService
+    {
 
         private WorkdayRepository workdayRepository;
         private VisitRepository visitRepository;
-        public VisitTimeService()
+        private IWorkdayService workdayService;
+        public VisitTimeService(WorkdayRepository workdayRepository, VisitRepository visitRepository, IWorkdayService workdayService)
         {
-           
+            this.workdayRepository = workdayRepository;
+            this.visitRepository = visitRepository;
+            this.workdayRepository = workdayRepository;
         }
 
         public List<DateTime> getFirst21AvailableDates(Doctor doctor)
 		{
 			List<DateTime> availableDates = new List<DateTime>();
 
-			WorkdayService workdayService = new WorkdayService();
 			List<Workday> workdays = workdayService.GetWorkdaysForDoctor(doctor.Id);
 			foreach (Workday workday in workdays)
 			{

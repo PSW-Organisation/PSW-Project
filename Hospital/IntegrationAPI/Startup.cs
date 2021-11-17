@@ -15,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using IntegrationLibrary.Model;
 using ehealthcare.Repository;
 using IntegrationLibrary.Repository.DatabaseRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using ehealthcare.Service;
 
 namespace IntegrationAPI
 {
@@ -37,6 +39,8 @@ namespace IntegrationAPI
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                     assembly => assembly.MigrationsAssembly(typeof(IntegrationDbContext).Assembly.FullName));
             });
+
+            //repozitorijumi
             services.AddScoped<AccountRepository, AccountDbRepository>();
             services.AddScoped<AccountDataRepository, AccountDataDbRepository>();
             services.AddScoped<AllergenRepository, AllergenDbRepository>();
@@ -59,6 +63,27 @@ namespace IntegrationAPI
             services.AddScoped<VisitRepository, VisitDbRepository>();
             services.AddScoped<VisitReportRepository, VisitReportDbRepository>();
             services.AddScoped<WorkdayRepository, WorkdayDbRepository>();
+
+            //servisi
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IAccountDataService, AccountDataService>();
+            services.AddScoped<IAllergenService, AllergenService>();
+            services.AddScoped<IDoctorService, DoctorService>();
+            services.AddScoped<IHolidayService, HolidayService>();
+            services.AddScoped<IHospitalizationService, HospitalizationService>();
+            services.AddScoped<IMedicineService, MedicineService>();
+            services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<IPersonalizedNotificationService, PersonalizedNotificationService>();
+            services.AddScoped<IReminderService, ReminderService>();
+            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IRoomInventoryService, RoomInventoryService>();
+            services.AddScoped<ITherapyService, TherapyService>();
+            services.AddScoped<ITherapyNotificationService, TherapyNotificationService>();
+            services.AddScoped<IVisitService, VisitService>();
+            services.AddScoped<IVisitReportService, VisitReportService>();
+            services.AddScoped<IWorkdayService, WorkdayService>();
 
 
             //added for Cors error

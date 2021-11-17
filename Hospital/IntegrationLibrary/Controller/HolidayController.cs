@@ -1,4 +1,5 @@
 ﻿using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace ehealthcare.Controller
 {
 	public class HolidayController
 	{
-		private HolidayService holidayService;
+		private IHolidayService holidayService;
 
-		public HolidayController()
+		public HolidayController(IHolidayService holidayService)
 		{
-			holidayService = new HolidayService();
+            this.holidayService = holidayService;
 		}
 
         public List<Holiday> GetHolidays(int doctorId)

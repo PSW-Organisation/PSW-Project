@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ namespace ehealthcare.Controller
 {
 	public class FeedbackController
 	{
-		private FeedbackService feedbackService;
-		public FeedbackController()
+		private IFeedbackService feedbackService;
+		public FeedbackController(IFeedbackService feedbackService)
 		{
-			feedbackService = new FeedbackService();
+			this.feedbackService = feedbackService;
 		}
 
 		public void AddNewBugReport(BugReport bugReport)

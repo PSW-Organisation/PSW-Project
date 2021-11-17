@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,11 @@ namespace ehealthcare.Controller
 {
 	public class TherapyController
 	{
-		private TherapyService therapyService;
+		private ITherapyService therapyService;
 		
-		public TherapyController()
+		public TherapyController(ITherapyService therapyService)
 		{
-			therapyService = new TherapyService();
+			this.therapyService = therapyService;
 		}
 
 		/**

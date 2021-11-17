@@ -1,4 +1,5 @@
 ﻿using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace ehealthcare.Controller
 {
 	public class LoginController
 	{
-		private LoginService loginService;
+		private ILoginService loginService;
 
-		public LoginController()
+		public LoginController(ILoginService loginService)
 		{
-			loginService = new LoginService();
+            this.loginService = loginService;
 		}
 
         /**

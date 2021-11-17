@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ehealthcare.Controller
 {
 	public class RoomInventoryController
 	{
-		private RoomInventoryService roomInventoryService;
+		private IRoomInventoryService roomInventoryService;
 
-		public RoomInventoryController()
+		public RoomInventoryController(IRoomInventoryService roomInventoryService)
 		{
-            roomInventoryService = new RoomInventoryService();
+            this.roomInventoryService = roomInventoryService;
 		}
 
        

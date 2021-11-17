@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,13 +12,18 @@ namespace ehealthcare.Controller
 {
 	public class RoomController
 	{
-		private RoomService roomService;
-        private VisitService visitService = new VisitService();
+		private IRoomService roomService;
+        private IVisitService visitService;
         private IRenovateStrategy _renovateStrategy;
-        public RoomController()
+        public RoomController(IRoomService roomService, IVisitService visitService)
 		{
-			roomService = new RoomService();
+            this.roomService = roomService;
+            this.visitService = visitService;
 		}
+
+        public RoomController()
+        {
+        }
 
         public void SetStrategy(IRenovateStrategy renovateStrategy)
         {
@@ -62,7 +68,7 @@ namespace ehealthcare.Controller
             return roomService.GetRoomsForHospitalization();
         }
 
-        public void CheckIfRoomIsRenovated(ObservableCollection<Room> rooms)
+        public void CheckIfRoomIsRenovated(List<Room> rooms)
         {
             roomService.CheckIfRoomIsRenovated(rooms);
         }

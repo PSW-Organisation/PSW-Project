@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ehealthcare.Controller
 {
 	public class ReminderController
 	{
-		private ReminderService reminderService;
+		private IReminderService reminderService;
 
-		public ReminderController()
+		public ReminderController(IReminderService reminderService)
 		{
-			reminderService = new ReminderService();
+			this.reminderService = reminderService;
 		}
 
 		public void CreateNewReminder(Reminder reminder)

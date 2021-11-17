@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Service
 {
-	public class PersonalizedNotificationService
-	{
+	public class PersonalizedNotificationService : IPersonalizedNotificationService
+    {
 		private PersonalizedNotificationRepository personalizedNotificationRepository;
 
-		public PersonalizedNotificationService()
+		public PersonalizedNotificationService(PersonalizedNotificationRepository personalizedNotificationRepository)
 		{
+            this.personalizedNotificationRepository = personalizedNotificationRepository;
 		}
 
 		/**

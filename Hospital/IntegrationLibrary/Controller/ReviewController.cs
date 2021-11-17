@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ehealthcare.Controller
 {
 	public class ReviewController
 	{
-		private ReviewService reviewService;
+		private IReviewService reviewService;
 
-		public ReviewController()
+		public ReviewController(IReviewService reviewService)
 		{
-			reviewService = new ReviewService();
+			this.reviewService = reviewService;
 		}
 
 		public void AddNewDoctorReviewToStorage(DoctorReview doctorReview)

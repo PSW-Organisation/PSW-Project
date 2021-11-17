@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +9,20 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Service
 {
-	public class VisitReportService
+	public class VisitReportService : IVisitReportService
 	{
 		private VisitReportRepository visitReportRepository;
 
-		public VisitReportService()
+		public VisitReportService(VisitReportRepository visitReportRepository)
 		{
+			this.visitReportRepository = visitReportRepository;
 		}
 
-		public List<VisitReport> GetDoneVisitReportsForPatient(int id)
+        public VisitReportService()
+        {
+        }
+
+        public List<VisitReport> GetDoneVisitReportsForPatient(int id)
 		{
 			List<VisitReport> visitReports = visitReportRepository.GetAll();
 			List<VisitReport> filteredVisitReports = new List<VisitReport>();

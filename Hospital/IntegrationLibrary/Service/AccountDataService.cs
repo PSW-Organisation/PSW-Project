@@ -1,6 +1,7 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Service
 {
-	public class AccountDataService
+	public class AccountDataService : IAccountDataService
 	{
 		private AccountDataRepository accountDataRepository;
 		private int spamActionsLimit = 10;
 		private int cancelledVisitsLimit = 3;
-		public AccountDataService()
+		public AccountDataService(AccountDataRepository repository)
 		{
+			this.accountDataRepository = repository;
 		}
 
 		public int GetNumberOfReadNotificationsForAccount(int username)

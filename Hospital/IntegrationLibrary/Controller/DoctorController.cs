@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,18 @@ namespace ehealthcare.Controller
 {
 	public class DoctorController
 	{
-		private DoctorService doctorService;
+		private IDoctorService doctorService;
 
-		public DoctorController()
+		public DoctorController(IDoctorService doctorService)
 		{
-			doctorService = new DoctorService();
+            this.doctorService = doctorService;
 		}
 
-		public Doctor GetDoctorById(int id)
+        public DoctorController()
+        {
+        }
+
+        public Doctor GetDoctorById(int id)
 		{
 			return doctorService.GetDoctorById(id);
 		}

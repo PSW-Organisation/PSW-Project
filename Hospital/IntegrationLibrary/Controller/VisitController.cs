@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ehealthcare.Controller
 {
 	public class VisitController
 	{
-		private VisitService visitService;
+		private IVisitService visitService;
 
-		public VisitController()
+		public VisitController(IVisitService visitService)
 		{
-			visitService = new VisitService();
+			this.visitService = visitService;
 		}
 
 		public List<Visit> GetVisitsForPatient(int id)

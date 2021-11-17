@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ehealthcare.Controller
 {
 	public class WorkdayController
 	{
-        private WorkdayService workdayService;
+        private IWorkdayService workdayService;
 
-        public WorkdayController()
+        public WorkdayController(IWorkdayService workdayService)
         {
-            workdayService = new WorkdayService();
+            this.workdayService = workdayService;
         }
 
         public void NewWorkday(Workday workday)

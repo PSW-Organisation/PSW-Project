@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ehealthcare.Controller
 {
 	public class TherapyNotificationController
 	{
-		private TherapyNotificationService therapyNotificationService;
+		private ITherapyNotificationService therapyNotificationService;
 
-		public TherapyNotificationController()
+		public TherapyNotificationController(ITherapyNotificationService therapyNotificationService)
 		{
-			therapyNotificationService = new TherapyNotificationService();
+			this.therapyNotificationService = therapyNotificationService;
 		}
 
 		/**

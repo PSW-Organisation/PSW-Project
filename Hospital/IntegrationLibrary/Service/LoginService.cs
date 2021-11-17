@@ -1,18 +1,20 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace ehealthcare.Service
 {
-	public class LoginService
+	public class LoginService : ILoginService
     {
         private AccountRepository accountRepository;
 
-        public LoginService()
+        public LoginService(AccountRepository accountRepository)
         {
+            this.accountRepository = accountRepository;
         }
 
         /**
@@ -33,7 +35,7 @@ namespace ehealthcare.Service
             return false;
         }
 
-        private void SetLoggedInAccount(Account acc)
+        public void SetLoggedInAccount(Account acc)
         {
             AppData.getInstance().LoggedInAccount = acc;
         }

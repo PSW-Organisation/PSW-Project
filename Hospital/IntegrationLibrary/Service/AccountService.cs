@@ -1,6 +1,7 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,15 @@ using System.Windows;
 
 namespace ehealthcare.Service
 {
-	public class AccountService
-	{
+	public class AccountService : IAccountService
+    {
 		private AccountRepository accountRepository;
         private PatientRepository patientRepository;
 
-        public AccountService()
+        public AccountService(AccountRepository accountRepository, PatientRepository patientRepository)
 		{
-
+            this.accountRepository = accountRepository;
+            this.patientRepository = patientRepository;
         }
 
 		public Account GetAccountByUsername(int username)

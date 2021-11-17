@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,9 +10,16 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Service
 {
-    public class RoomService
+    public class RoomService : IRoomService
     {
         private RoomRepository roomRepository;
+        private IRoomInventoryService roomInventoryService;
+
+        public RoomService(RoomRepository roomRepository, IRoomInventoryService roomInventoryService)
+        {
+            this.roomRepository = roomRepository;
+            this.roomInventoryService = roomInventoryService;
+    }
 
         public RoomService()
         {
@@ -71,7 +79,7 @@ namespace ehealthcare.Service
             roomRepository.Save(room);
         }
 
-        public void CheckIfRoomIsRenovated(ObservableCollection<Room> rooms)
+        public void CheckIfRoomIsRenovated(List<Room> rooms)
         {
             DateTime now = DateTime.Now;
                foreach(Room room in rooms)
@@ -93,7 +101,6 @@ namespace ehealthcare.Service
 
             public List<Room> GetRoomsForHospitalization()
             {
-                RoomInventoryService roomInventoryService = new RoomInventoryService();
                 List<Room> allRooms = roomRepository.GetAll();
                 List<Room> freeRooms = new List<Room>();
                 if (allRooms != null)
@@ -108,7 +115,9 @@ namespace ehealthcare.Service
                 }
                 return freeRooms;
             }
-        }
+
+ 
+    }
     
 }
 

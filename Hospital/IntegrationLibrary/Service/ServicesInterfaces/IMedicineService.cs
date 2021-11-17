@@ -1,0 +1,18 @@
+﻿using ehealthcare.Model;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace IntegrationLibrary.Service.ServicesInterfaces
+{
+    public interface IMedicineService
+    {
+        public void SetMedicine(Medicine medicine);
+        public void AddMedicine(Medicine medicine);
+        public void SetMedicineIngredients(Medicine medicine, List<MedicineIngredient> medicineIngredients);
+        public List<Medicine> GetAllMedicines();
+        public void AddMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient);
+        public void RemoveMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient);
+        public void DeleteMedicine(Medicine id);
+    }
+}

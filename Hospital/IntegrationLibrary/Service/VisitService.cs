@@ -1,20 +1,23 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ehealthcare.Service
 {
-	public class VisitService
+	public class VisitService : IVisitService
 	{
 		private VisitRepository visitRepository;
 		private PatientRepository patientRepository;
 		private WorkdayRepository workdayRepository;
 
-		public VisitService()
+		public VisitService(VisitRepository visitRepository, PatientRepository patientRepository, WorkdayRepository workdayRepository)
 		{
-		
+			this.visitRepository = visitRepository;
+			this.patientRepository = patientRepository;
+			this.workdayRepository = workdayRepository;
 		}
 
 		public List<Visit> GetVisitsForPatient(int id)

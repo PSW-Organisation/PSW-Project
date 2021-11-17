@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,11 @@ namespace ehealthcare.Controller
 	public class AllergenController
 	{
 
-		private AllergenService allergenService;
+		private IAllergenService allergenService;
 
-		public AllergenController()
+		public AllergenController(IAllergenService allergenService)
 		{
-			allergenService = new AllergenService();
+			this.allergenService = allergenService;
 		}
 
 		public List<Allergen> GetAllAllergens()

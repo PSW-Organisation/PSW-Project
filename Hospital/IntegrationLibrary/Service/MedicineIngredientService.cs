@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Service
 {
-    public class MedicineIngredientService
+    public class MedicineIngredientService 
     {
         private MedicineIngredientRepository medIngRepository;
 

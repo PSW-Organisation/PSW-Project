@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,11 @@ namespace ehealthcare.Controller
 {
 	public class AccountController
 	{
-		private AccountService accountService;
+		private IAccountService accountService;
 
-		public AccountController()
+		public AccountController(IAccountService accountService)
 		{
-			accountService = new AccountService();
+			this.accountService = accountService;
 		}
 
 		public Account GetAccountByUsername(int username)

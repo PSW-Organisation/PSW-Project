@@ -1,6 +1,7 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,16 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Service
 {
-	public class ReminderService
+	public class ReminderService : IReminderService
 	{
 
 		private ReminderRepository reminderRepository;
 		private PersonalizedNotificationRepository personalizedNotificationRepository;
 
-		public ReminderService()
+		public ReminderService(ReminderRepository reminderRepository, PersonalizedNotificationRepository personalizedNotificationRepository)
 		{
-			
+			this.reminderRepository = reminderRepository;
+			this.personalizedNotificationRepository = personalizedNotificationRepository;
 		}
 
 		public void CreateNewReminder(Reminder reminder)
