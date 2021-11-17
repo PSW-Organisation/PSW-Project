@@ -17,12 +17,12 @@ namespace ehealthcare.Controller
 			visitReportService = new VisitReportService();
 		}
 
-		public List<VisitReport> GetDoneVisitReportsForPatient(String id)
+		public List<VisitReport> GetDoneVisitReportsForPatient(int id)
 		{
 			return visitReportService.GetDoneVisitReportsForPatient(id);
 		}
 
-		public VisitReport GetVisitReportWithId(string id)
+		public VisitReport GetVisitReportWithId(int id)
 		{
 			return visitReportService.GetVisitReportWithId(id);
 		}

@@ -4,11 +4,11 @@ using System.Text;
 [Serializable]
 public class VisitTime
 {
-    private string id;
+    private int id;
     private DateTime startTime;
     private DateTime endTime;
 
-    public string Id
+    public int Id
     {
         get { return id; }
         set { id = value; }

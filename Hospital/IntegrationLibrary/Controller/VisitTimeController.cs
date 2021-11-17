@@ -28,7 +28,7 @@ namespace ehealthcare.Controller
             return visitTimeService.GetNearestAvailableTimeSlot(doctor, startTime, duration);
         }
 
-        public VisitTime GetNearestAvailableDelay(String doctorId, String patientId, VisitTime takenTimeSlot, List<VisitTime> potentialDelays)
+        public VisitTime GetNearestAvailableDelay(int doctorId,int patientId, VisitTime takenTimeSlot, List<VisitTime> potentialDelays)
         {
             return visitTimeService.GetNearestAvailableDelay(doctorId, patientId, takenTimeSlot, potentialDelays);
         }
@@ -41,17 +41,17 @@ namespace ehealthcare.Controller
         }
 
 
-        public bool IsPatientAvailable(String patientId, VisitTime visitTime)
+        public bool IsPatientAvailable(int patientId, VisitTime visitTime)
         {
             return visitTimeService.IsPatientAvailable(patientId, visitTime);
         }
 
-        public List<VisitTime> GetAvailableTimeSlots(string doctorId, DateTime date)
+        public List<VisitTime> GetAvailableTimeSlots(int doctorId, DateTime date)
         {
             return visitTimeService.GetAvailableTimeSlots(doctorId, date);
         }
 
-        public List<VisitTime> GetAvailableTimeSlots(string doctorId)
+        public List<VisitTime> GetAvailableTimeSlots(int doctorId)
         {
             return visitTimeService.GetAvailableTimeSlots(doctorId);
         }

@@ -37,7 +37,7 @@ namespace ehealthcare.Controller
 		/**
         * <summary>Method finds and returns all therapies from giver patients VisitReport.</summary>
         */
-		public List<Therapy> GetTherapiesFromVisitReport(string id)
+		public List<Therapy> GetTherapiesFromVisitReport(int id)
 		{
 			return therapyService.GetTherapiesFromVisitReport(id);
 		}
@@ -45,7 +45,7 @@ namespace ehealthcare.Controller
 		/**
         * <summary>Method finds and returns Therapy class object by it's id.</summary>
         */
-		public Therapy GetTherapyById(string id)
+		public Therapy GetTherapyById(int id)
 		{
 			return therapyService.GetTherapyById(id);
 		}

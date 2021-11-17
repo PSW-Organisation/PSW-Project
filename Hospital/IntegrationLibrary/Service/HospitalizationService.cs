@@ -1,6 +1,5 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +14,6 @@ namespace ehealthcare.Service
 
         public HospitalizationService()
         {
-            hospitalizationRepository = new HospitalizationXMLRepository();
         }
 
         public List<Hospitalization> GetHospitalizations()

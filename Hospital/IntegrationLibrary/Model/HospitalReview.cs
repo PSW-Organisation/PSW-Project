@@ -14,7 +14,7 @@ namespace ehealthcare.Model
         private int rating;
         private string comment;
 
-        public HospitalReview() : base("undefinedNumberKey") 
+        public HospitalReview() : base(-1) 
         {
             lazyPatient = new PatientProxyImpl();
         }
@@ -37,7 +37,7 @@ namespace ehealthcare.Model
             }
         }
 
-        public String PatientId { get; set; }
+        public int PatientId { get; set; }
 
         public DateTime RatingDate
         {

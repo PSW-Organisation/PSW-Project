@@ -8,6 +8,6 @@ namespace ehealthcare.Repository
 {
     public interface HolidayRepository : GenericRepository<Holiday>
     {
-        public List<Holiday> GetHolidaysForDoctor(string doctorId);
+        public List<Holiday> GetHolidaysForDoctor(int doctorId);
     }
 }

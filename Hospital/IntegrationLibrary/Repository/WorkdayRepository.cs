@@ -13,15 +13,15 @@ namespace ehealthcare.Repository
 
         public void RemoveVisitTimes(Workday workday, List<VisitTime> visitTimes);
 
-        public void NewVisitTime(VisitTime visitTime, String doctorId);
+        public void NewVisitTime(VisitTime visitTime, int doctorId);
 
-        public Workday GetWorkday(String doctorId, DateTime date);
+        public Workday GetWorkday(int doctorId, DateTime date);
 
-        public List<Workday> GetWorkdaysForDoctor(String doctorId);
-        public List<Workday> GetWorkdaysAfter(DateTime date, String doctorId);
+        public List<Workday> GetWorkdaysForDoctor(int doctorId);
+        public List<Workday> GetWorkdaysAfter(DateTime date, int doctorId);
 
-        public List<Workday> GetWorkdays(int month, String doctorId);
-        public bool IsWorkday(String doctorId, DateTime date);
+        public List<Workday> GetWorkdays(int month, int doctorId);
+        public bool IsWorkday(int doctorId, DateTime date);
 
         public void DeleteVisitTime(Workday workday, VisitTime visitTime);
 

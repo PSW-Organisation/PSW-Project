@@ -10,7 +10,7 @@ namespace ehealthcare.Model
         private MedicineStatus medicineStatus;
         private List<MedicineIngredient> medicineIngredient;
 
-        public Medicine() : base("undefinedNumberKey") { }
+        public Medicine() : base(-1) { }
 
         public String Name
         {

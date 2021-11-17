@@ -1,6 +1,5 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +14,6 @@ namespace ehealthcare.Service
         
         public MedicineService()
         {
-            medicineRepository = new MedicineXMLRepository();
         }
 
         public void SetMedicine(Medicine medicine)
@@ -59,7 +57,7 @@ namespace ehealthcare.Service
             medicineRepository.Update(medicine);
         }
 
-        public void DeleteMedicine(string id)
+        public void DeleteMedicine(Medicine id)
         {
             medicineRepository.Delete(id);
         }

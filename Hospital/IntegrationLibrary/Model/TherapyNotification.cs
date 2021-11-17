@@ -14,7 +14,7 @@ namespace ehealthcare.Model
             set { therapy = value; }
         }
 
-        public string TherapyId
+        public int TherapyId
         {
             get { return therapy.Id; }
             set

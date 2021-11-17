@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 
 namespace ehealthcare.Service
 {
@@ -17,12 +16,7 @@ namespace ehealthcare.Service
 
         public HolidayService()
         {
-            holidayRepository = new HolidayXMLRepository();
-            doctorRepository = new DoctorXMLRepository();
-            workdayRepository = new WorkdayXMLRepository();
-            visitRepository = new VisitXMLRepository();
-            notificationRepository = new PersonalizedNotificationXMLRepository();
-            accountRepository = new AccountXMLRepository();
+           
         }
 
         internal bool CanUseHoliday(Holiday potentialHoliday)
@@ -30,7 +24,7 @@ namespace ehealthcare.Service
             return potentialHoliday.CanUseHoliday() && !IsOverlapping(potentialHoliday);
         }
 
-        public List<Holiday> GetHolidays(string doctorId)
+        public List<Holiday> GetHolidays(int doctorId)
         {
             return holidayRepository.GetHolidaysForDoctor(doctorId);
         }

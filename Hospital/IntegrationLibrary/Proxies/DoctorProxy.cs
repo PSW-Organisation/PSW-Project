@@ -1,6 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Repository.DatabaseRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +11,15 @@ namespace ehealthcare.Proxies
 {
 	interface IDoctor
 	{
-		public Doctor GetDoctor(string id);
+		public Doctor GetDoctor(int id);
 	}
 
 	public class DoctorImpl : IDoctor
 	{
 		DoctorRepository doctorRepository;
-		public Doctor GetDoctor(string id)
+		public Doctor GetDoctor(int id)
 		{
-			if (doctorRepository == null)
-				doctorRepository = new DoctorXMLRepository();
+			
 			return doctorRepository.Get(id);
 		}
 	}
@@ -28,7 +27,7 @@ namespace ehealthcare.Proxies
 	public class DoctorProxyImpl : IDoctor
 	{
 		private IDoctor doctor;
-		public Doctor GetDoctor(string id)
+		public Doctor GetDoctor(int id)
 		{
 			if (doctor == null)
 			{

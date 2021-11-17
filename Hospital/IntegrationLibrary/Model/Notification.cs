@@ -12,7 +12,7 @@ namespace ehealthcare.Model
         private DateTime date;
         private NotificationRole notificationRole;
 
-        public Notification() : base("undefinedNumberKey") { }
+        public Notification() : base(-1) { }
 
         public string Subject
         {

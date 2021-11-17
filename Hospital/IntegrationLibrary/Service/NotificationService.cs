@@ -1,7 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +15,6 @@ namespace ehealthcare.Service
 
         public NotificationService()
         {
-            notificationRepository = new NotificationXMLRepository();
         }
 
         public List<Notification> GetAllNotifications()

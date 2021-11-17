@@ -10,7 +10,7 @@ namespace ehealthcare.Repository
     public interface RoomInventoryRepository : GenericRepository<RoomInventory>
     {
         public List<RoomInventory> GetFacilityRoomInventory();
-        public List<RoomInventory> GetInventoryInRoom(string roomID);
+        public List<RoomInventory> GetInventoryInRoom(int roomID);
         public void SaveAllRoomInventory(List<RoomInventory> roomInventory);
 
         public void SaveAllRoomInventory();

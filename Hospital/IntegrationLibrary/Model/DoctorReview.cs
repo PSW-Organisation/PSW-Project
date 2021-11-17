@@ -13,7 +13,7 @@ namespace ehealthcare.Model
         private int rating;
         private string comment;
 
-        public DoctorReview() : base("undefinedKey") 
+        public DoctorReview() : base(-1) 
         {
             lazyVisit = new VisitProxyImpl();
         }

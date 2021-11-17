@@ -1,7 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +17,7 @@ namespace ehealthcare.Service
 
 		public ReminderService()
 		{
-			reminderRepository = new ReminderXMLRepository();
-			personalizedNotificationRepository = new PersonalizedNotificationXMLRepository();
+			
 		}
 
 		public void CreateNewReminder(Reminder reminder)
@@ -76,7 +74,7 @@ namespace ehealthcare.Service
 			}
 		}
 
-		public List<Reminder> GetAllRemindersForAccount(string username)
+		public List<Reminder> GetAllRemindersForAccount(int username)
 		{
 			List<Reminder> reminders = reminderRepository.GetAll();
 			List<Reminder> filteredReminders = new List<Reminder>();

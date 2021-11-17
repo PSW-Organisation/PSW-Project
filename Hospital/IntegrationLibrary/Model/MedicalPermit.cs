@@ -17,7 +17,7 @@ namespace ehealthcare.Model
             set { doctor = value; }
         }
 
-        public String DoctorId
+        public int DoctorId
         {
             get { return doctor.Id; }
             set

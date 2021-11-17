@@ -1,6 +1,5 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +14,9 @@ namespace ehealthcare.Service
 
 		public VisitReportService()
 		{
-			visitReportRepository = new VisitReportXMLRepository();
 		}
 
-		public List<VisitReport> GetDoneVisitReportsForPatient(String id)
+		public List<VisitReport> GetDoneVisitReportsForPatient(int id)
 		{
 			List<VisitReport> visitReports = visitReportRepository.GetAll();
 			List<VisitReport> filteredVisitReports = new List<VisitReport>();
@@ -36,7 +34,7 @@ namespace ehealthcare.Service
 			return filteredVisitReports;
 		}
 
-		public VisitReport GetVisitReportWithId(string id)
+		public VisitReport GetVisitReportWithId(int id)
 		{
 			return visitReportRepository.Get(id);
 		}
@@ -48,7 +46,7 @@ namespace ehealthcare.Service
 
 		public void UpdateVisitReport(VisitReport visitReport)
 		{
-			visitReportRepository.Delete(visitReport.Id);
+			visitReportRepository.Delete(visitReport);
 			visitReportRepository.Save(visitReport);
 		}
 	}

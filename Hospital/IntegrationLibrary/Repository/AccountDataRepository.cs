@@ -4,6 +4,6 @@ namespace ehealthcare.Repository
 {
 	public interface AccountDataRepository : GenericRepository<AccountData>
 	{
-		public void DeleteSpamBehaviorData(string username);
+		public void DeleteSpamBehaviorData(int username);
 	}
 }

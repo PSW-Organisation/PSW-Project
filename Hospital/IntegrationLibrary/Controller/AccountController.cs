@@ -17,7 +17,7 @@ namespace ehealthcare.Controller
 			accountService = new AccountService();
 		}
 
-		public Account GetAccountByUsername(String username)
+		public Account GetAccountByUsername(int username)
 		{
 			return accountService.GetAccountByUsername(username);
 		}
@@ -27,42 +27,42 @@ namespace ehealthcare.Controller
 			return accountService.GetAllAccounts();
 		}
 
-		public void BlockAccount(string username)
+		public void BlockAccount(int username)
 		{
 			accountService.BlockAccount(username);
 		}
 
-		public void UnblockAccount(string username)
+		public void UnblockAccount(int username)
 		{
 			accountService.UnblockAccount(username);
 		}
 
-		public bool IsAccountBlocked(string username, string password)
+		public bool IsAccountBlocked(int username, string password)
 		{
 			return accountService.IsAccountBlocked(username, password);
 		}
 
-		public void DeleteAccount(string username)
+		public void DeleteAccount(Account username)
 		{
 			accountService.DeleteAccount(username);
 		}
 
-		public void DeleteAccountByPatientId(string patientId)
+		public void DeleteAccountByPatientId(int patientId)
 		{
 			accountService.DeleteAccountByPatientId(patientId);
 		}
 
-		public string GetUsername(string patientId)
+		public int GetUsername(int patientId)
 		{
 			return accountService.GetUsername(patientId);
 		}
 
-        public void PromoteAccount(string id)
+        public void PromoteAccount(int id)
         {
             accountService.PromoteAccount(id);
         }
 
-		public void RegisterGuestAccount(String id)
+		public void RegisterGuestAccount(int id)
 		{
 			accountService.RegisterGuestAccount(id);
 		}

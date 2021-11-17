@@ -27,7 +27,7 @@ namespace ehealthcare.Controller
 			reminderService.GenerateNewNoteNotifications();
 		}
 
-		public List<Reminder> GetAllRemindersForAccount(string username)
+		public List<Reminder> GetAllRemindersForAccount(int username)
 		{
 			return reminderService.GetAllRemindersForAccount(username);
 		}

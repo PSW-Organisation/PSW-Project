@@ -20,7 +20,7 @@ namespace ehealthcare.Controller
         /**
         * <summary>Method returns all personalized notifications for the given account.</summary>
         */
-        public List<PersonalizedNotification> GetAllPersonalizedNotificationsForAccount(string username)
+        public List<PersonalizedNotification> GetAllPersonalizedNotificationsForAccount(int username)
         {
             return personalizedNotificationService.GetAllPersonalizedNotificationsForAccount(username);
         }

@@ -17,7 +17,7 @@ namespace ehealthcare.Controller
 			doctorService = new DoctorService();
 		}
 
-		public Doctor GetDoctorById(String id)
+		public Doctor GetDoctorById(int id)
 		{
 			return doctorService.GetDoctorById(id);
 		}

@@ -46,7 +46,7 @@ namespace ehealthcare.Model
             set { personalDoctor = value; }
         }
 
-        public String PersonalDoctorId
+        public int PersonalDoctorId
         {
             get
             {
@@ -55,7 +55,7 @@ namespace ehealthcare.Model
                     return personalDoctor.Id;
                 }
 
-                return null;
+                return -1;
             }
             set
             {

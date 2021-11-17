@@ -1,7 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +13,6 @@ namespace ehealthcare.Service
 
         public LoginService()
         {
-            accountRepository = new AccountXMLRepository();
         }
 
         /**

@@ -1,7 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +15,6 @@ namespace ehealthcare.Service
 
 		public TherapyNotificationService()
 		{
-			therapyNotificationRepository = new TherapyNotificationXMLRepository();
 		}
 
 		/**
@@ -27,7 +25,7 @@ namespace ehealthcare.Service
 			therapyNotificationRepository.Save(therapyNotification);
 		}
 
-		public List<TherapyNotification> GetTherapyNotificationsForPatient(string id)
+		public List<TherapyNotification> GetTherapyNotificationsForPatient(int id)
 		{
 			List<TherapyNotification> therapyNotifications = therapyNotificationRepository.GetAll();
 			List<TherapyNotification> filteredTherapyNotifications = new List<TherapyNotification>();
@@ -57,7 +55,7 @@ namespace ehealthcare.Service
 			return false;
 		}
 
-		public void RemoveTherapyNotificationFromStorage(string id)
+		public void RemoveTherapyNotificationFromStorage(TherapyNotification id)
 		{
 			therapyNotificationRepository.Delete(id);
 		}

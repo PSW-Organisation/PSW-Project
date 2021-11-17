@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 
 namespace ehealthcare.Service
 {
@@ -15,7 +14,6 @@ namespace ehealthcare.Service
 
         public AllergenService()
         {
-            allergenRepository = new AllergenXMLRepository();
         }
 
         public List<Allergen> GetAllAllergens()

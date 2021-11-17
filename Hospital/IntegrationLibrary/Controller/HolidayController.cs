@@ -16,7 +16,7 @@ namespace ehealthcare.Controller
 			holidayService = new HolidayService();
 		}
 
-        public List<Holiday> GetHolidays(string doctorId)
+        public List<Holiday> GetHolidays(int doctorId)
         {
             return holidayService.GetHolidays(doctorId);
         }

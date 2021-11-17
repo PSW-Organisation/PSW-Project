@@ -1,6 +1,5 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +14,12 @@ namespace ehealthcare.Service
 
 		public PersonalizedNotificationService()
 		{
-			personalizedNotificationRepository = new PersonalizedNotificationXMLRepository();
 		}
 
 		/**
         * <summary>Method returns all personalized notifications for the given account.</summary>
         */
-		public List<PersonalizedNotification> GetAllPersonalizedNotificationsForAccount(string username)
+		public List<PersonalizedNotification> GetAllPersonalizedNotificationsForAccount(int username)
 		{
 			List<PersonalizedNotification> personalizedNotifications = personalizedNotificationRepository.GetAll();
 			List<PersonalizedNotification> filteredPersonalizedNotifications = new List<PersonalizedNotification>();

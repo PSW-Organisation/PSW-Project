@@ -1,7 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +15,9 @@ namespace ehealthcare.Service
 
         public PatientService()
 		{
-			patientRepository = new PatientXMLRepository();
         }
 
-		public Patient GetPatientById(String id)
+		public Patient GetPatientById(int id)
 		{
 			return patientRepository.Get(id);
 		}
@@ -44,7 +42,7 @@ namespace ehealthcare.Service
             patientRepository.Update(patient);
         }
         
-        public void DeletePatient(string id)
+        public void DeletePatient(Patient id)
         {
             patientRepository.Delete(id);
         }

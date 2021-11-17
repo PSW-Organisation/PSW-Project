@@ -11,7 +11,7 @@ public class Holiday : Entity
     private IDoctor lazyDoctor;
     private Doctor doctor;
 
-    public Holiday() : base("undefinedNumberKey") 
+    public Holiday() : base(-1) 
     {
         lazyDoctor = new DoctorProxyImpl();
     }
@@ -57,7 +57,7 @@ public class Holiday : Entity
         }
     }
 
-    public String DoctorId { get; set; }
+    public int DoctorId { get; set; }
 
     public bool CanUseHoliday()
     {

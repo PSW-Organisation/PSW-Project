@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
 using IntegrationLibrary.Model;
+using ehealthcare.Repository;
+using IntegrationLibrary.Repository.DatabaseRepository;
 
 namespace IntegrationAPI
 {
@@ -35,6 +37,29 @@ namespace IntegrationAPI
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                     assembly => assembly.MigrationsAssembly(typeof(IntegrationDbContext).Assembly.FullName));
             });
+            services.AddScoped<AccountRepository, AccountDbRepository>();
+            services.AddScoped<AccountDataRepository, AccountDataDbRepository>();
+            services.AddScoped<AllergenRepository, AllergenDbRepository>();
+            services.AddScoped<BugReportRepository, BugReportDbRepository>();
+            services.AddScoped<DoctorRepository, DoctorDbRepository>();
+            services.AddScoped<HolidayRepository, HolidayDbRepository>();
+            services.AddScoped<DoctorReviewRepository, DoctorReviewDbRepository>();
+            services.AddScoped<HospitalizationRepository, HospitalizationDbRepository>();
+            services.AddScoped<HospitalReviewRepository, HospitalReviewDbRepository>();
+            services.AddScoped<MedicineRepository, MedicineDbRepository>();
+            services.AddScoped<NotificationRepository, NotificationDbRepository>();
+            services.AddScoped<PatientRepository, PatientDbRepository>();
+            services.AddScoped<PersonalizedNotificationRepository, PersonalizedNotificationDbRepository>();
+            services.AddScoped<ReminderRepository, ReminderDbRepository>();
+            services.AddScoped<ReviewReportRepository, ReviewReportDbRepository>();
+            services.AddScoped<RoomRepository, RoomDbRepository>();
+            services.AddScoped<RoomInventoryRepository, RoomInventoryDbRepository>();
+            services.AddScoped<TherapyRepository, TherapyDbRepository>();
+            services.AddScoped<TherapyNotificationRepository, TherapyNotificationDbRepository>();
+            services.AddScoped<VisitRepository, VisitDbRepository>();
+            services.AddScoped<VisitReportRepository, VisitReportDbRepository>();
+            services.AddScoped<WorkdayRepository, WorkdayDbRepository>();
+
 
             //added for Cors error
             //______________________________________________________________________

@@ -6,10 +6,10 @@ namespace ehealthcare.Repository
 {
 	public interface AccountRepository : GenericRepository<Account>
 	{
-		public void DeleteAccountByPatientId(string patientId);
-		public string GetUsername(string patientId);
-        public Account GetAccountByPatientId(string patientId);
-		public void PromoteAccount(string id);
+		public void DeleteAccountByPatientId(int patientId);
+		public int GetUsername(int patientId);
+        public Account GetAccountByPatientId(int patientId);
+		public void PromoteAccount(int id);
 
 	}
 }

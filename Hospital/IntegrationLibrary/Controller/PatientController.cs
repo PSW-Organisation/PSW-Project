@@ -17,7 +17,7 @@ namespace ehealthcare.Controller
             patientService = new PatientService();
 		}
 
-        public Patient GetPatientById(String id)
+        public Patient GetPatientById(int id)
         {
             return patientService.GetPatientById(id);
         }
@@ -37,7 +37,7 @@ namespace ehealthcare.Controller
             patientService.SetPatientsMedicalPermit(patient, medicalPermit);
         }
 
-        public void DeletePatient(string id)
+        public void DeletePatient(Patient id)
         {
             patientService.DeletePatient(id);
         }

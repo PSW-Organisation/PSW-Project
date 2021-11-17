@@ -1,6 +1,7 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository.DatabaseRepository;
 
 namespace ehealthcare.Proxies
 {
@@ -15,7 +16,10 @@ namespace ehealthcare.Proxies
 		public Account GetAccount(int id)
 		{
 			if (accountRepository == null)
-				accountRepository = new AccountXMLRepository();
+			{
+				IntegrationDbContext dbContext = new IntegrationDbContext();
+				accountRepository = new AccountDbRepository(dbContext);
+			}
 			return accountRepository.Get(id);
 		}
 	}

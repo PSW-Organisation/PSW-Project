@@ -25,7 +25,7 @@ namespace ehealthcare.Controller
 			therapyNotificationService.AddTherapyNotificationToStorage(therapyNotification);
 		}
 
-		public List<TherapyNotification> GetTherapyNotificationsForPatient(string id)
+		public List<TherapyNotification> GetTherapyNotificationsForPatient(int id)
 		{
 			
 			return therapyNotificationService.GetTherapyNotificationsForPatient(id);
@@ -36,7 +36,7 @@ namespace ehealthcare.Controller
 			return therapyNotificationService.TherapyNotificationExists(therapyNotification);
 		}
 
-		public void RemoveTherapyNotificationFromStorage(string id)
+		public void RemoveTherapyNotificationFromStorage(TherapyNotification id)
 		{
 			therapyNotificationService.RemoveTherapyNotificationFromStorage(id);
 		}

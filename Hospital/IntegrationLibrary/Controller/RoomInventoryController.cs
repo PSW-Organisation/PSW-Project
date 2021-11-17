@@ -23,7 +23,7 @@ namespace ehealthcare.Controller
         {
             return roomInventoryService.GetAllRoomInventory();
         }
-        public List<RoomInventory> GetInventoryInRoom(String roomID)
+        public List<RoomInventory> GetInventoryInRoom(int roomID)
         {
             return roomInventoryService.GetInventoryInRoom(roomID);
         }
@@ -46,7 +46,7 @@ namespace ehealthcare.Controller
             roomInventoryService.SetRoomInventory(roomInventory);
         }
 
-        public int GetNumOfBedsById(String id)
+        public int GetNumOfBedsById(int id)
         {
             return roomInventoryService.GetNumOfBedsById(id);
         }

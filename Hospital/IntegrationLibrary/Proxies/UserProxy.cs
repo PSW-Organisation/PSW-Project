@@ -1,6 +1,5 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,14 +22,12 @@ namespace ehealthcare.Proxies
 		{
 			if (type == LoginType.doctor)
 			{
-				if(doctorRepository == null)
-					doctorRepository = new DoctorXMLRepository();
+			
 				return doctorRepository.Get(id);
 			}
 			else if (type == LoginType.patient)
 			{
-				if(patientRepository == null)
-					patientRepository = new PatientXMLRepository();
+				
 				return patientRepository.Get(id);
 			}
 			else return null;

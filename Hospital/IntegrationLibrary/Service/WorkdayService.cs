@@ -1,6 +1,5 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,10 +17,7 @@ namespace ehealthcare.Service
 
 		public WorkdayService()
 		{
-			workdayRepository = new WorkdayXMLRepository();
-            visitRepository = new VisitXMLRepository();
-            accountRepository = new AccountXMLRepository();
-            notificationRepository = new PersonalizedNotificationXMLRepository();
+			
         }
 
         public void NewWorkday(Workday workday)
@@ -52,31 +48,31 @@ namespace ehealthcare.Service
             }
         }
 
-        public List<Workday> GetWorkdaysForDoctor(String doctorId)
+        public List<Workday> GetWorkdaysForDoctor(int doctorId)
         {
             return workdayRepository.GetWorkdaysForDoctor(doctorId);
         }
 
-        public bool IsWorkday(String doctorId, DateTime date)
+        public bool IsWorkday(int doctorId, DateTime date)
         {
             return workdayRepository.IsWorkday(doctorId, date);
         }
 
-        public Workday GetWorkday(DateTime date, String doctorId)
+        public Workday GetWorkday(DateTime date, int doctorId)
         {
             Workday doctorsWorkday = workdayRepository.GetWorkday(doctorId, date);
 
             return doctorsWorkday;
         }
 
-        public List<Workday> GetWorkdaysAfter(DateTime date, String doctorId)
+        public List<Workday> GetWorkdaysAfter(DateTime date, int doctorId)
         {
             List<Workday> workdays = workdayRepository.GetWorkdaysAfter(date, doctorId);
 
             return workdays;
         }
 
-        public List<Workday> GetWorkdays(int month, String doctorId)
+        public List<Workday> GetWorkdays(int month, int doctorId)
         {
             List<Workday> workdays = workdayRepository.GetWorkdays(month, doctorId);
 

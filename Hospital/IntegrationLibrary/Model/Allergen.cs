@@ -8,7 +8,7 @@ namespace ehealthcare.Model
         private String type;
         private Boolean isAlergic;
 
-        public Allergen() : base("undefinedKey") { }
+        public Allergen() : base(-1) { }
 
         public string Type
         {

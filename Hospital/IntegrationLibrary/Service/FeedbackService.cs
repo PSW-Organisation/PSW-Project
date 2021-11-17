@@ -1,6 +1,5 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +14,7 @@ namespace ehealthcare.Service
 		private ReviewReportRepository reviewReportRepository;
 		public FeedbackService()
 		{
-			bugReportRepository = new BugReportXMLRepository();
-			reviewReportRepository = new ReviewReportXMLRepository();
+			
 		}
 
 		public void AddNewBugReport(BugReport bugReport)

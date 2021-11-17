@@ -13,9 +13,9 @@ namespace ehealthcare.Model
         private DateTime isRenovatedUntil;
         private int numOfTakenBeds;
 
-        public Room() : base("undefinedKey") { }
+        public Room() : base(-1) { }
 
-        public Room(String roomId, int roomFloor, String roomSector, RoomType roomType) : base(roomId)
+        public Room(int roomId, int roomFloor, String roomSector, RoomType roomType) : base(roomId)
         {
             sector = roomSector;
             floor = roomFloor;

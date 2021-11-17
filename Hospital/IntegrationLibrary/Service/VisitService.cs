@@ -1,6 +1,5 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +14,10 @@ namespace ehealthcare.Service
 
 		public VisitService()
 		{
-			visitRepository = new VisitXMLRepository();
-			patientRepository = new PatientXMLRepository();
-			workdayRepository = new WorkdayXMLRepository();
+		
 		}
 
-		public List<Visit> GetVisitsForPatient(String id)
+		public List<Visit> GetVisitsForPatient(int id)
 		{
 			List<Visit> visits = visitRepository.GetAll();
 			List<Visit> filteredVisits = new List<Visit>();
@@ -46,11 +43,11 @@ namespace ehealthcare.Service
 
 		public void UpdateVisitInStorage(Visit newVisit)
 		{
-			visitRepository.Delete(newVisit.Id);
+			visitRepository.Delete(newVisit);
 			visitRepository.Save(newVisit);
 		}
 
-		public void MarkVisitsIfPatientDidntCome(string id)
+		public void MarkVisitsIfPatientDidntCome(int id)
 		{
 			List<Visit> patientsVisits = GetVisitsForPatient(id);
 			foreach (Visit visit in patientsVisits)
@@ -88,7 +85,7 @@ namespace ehealthcare.Service
 			}
 		}
 
-		public List<int> GetNumberOfVisitsPerMonthForPatient(string id)
+		public List<int> GetNumberOfVisitsPerMonthForPatient(int id)
 		{
 			List<Visit> patientsVisits = GetVisitsForPatient(id);
 			List<int> monthlyNumberOfVisits = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -109,13 +106,13 @@ namespace ehealthcare.Service
 			return true;
 		}
 
-		public Visit GetVisitById(string id)
+		public Visit GetVisitById(int id)
 		{
 			return visitRepository.Get(id);
 		}
 
 
-		public void DelayVisit(string id, VisitTime delayedVisitTime)
+		public void DelayVisit(int id, VisitTime delayedVisitTime)
 		{
 			List<Visit> allVisits = visitRepository.GetAll();
 			Visit visit = GetVisitById(id);
@@ -126,14 +123,14 @@ namespace ehealthcare.Service
 		}
 
 
-		public List<Visit> GetPatientsVisits(String id)
+		public List<Visit> GetPatientsVisits(int id)
 		{
 			List<Visit> patientsVisits = visitRepository.GetPatientsVisits(id);
 
 			return patientsVisits;
 		}
 
-		public Visit GetVisit(String doctorId, VisitTime visitTime)
+		public Visit GetVisit(int doctorId, VisitTime visitTime)
 		{
 			List<Visit> allVisits = visitRepository.GetAll();
 			foreach (Visit visit in allVisits)
@@ -184,7 +181,7 @@ namespace ehealthcare.Service
 			}
 		}
 
-		public List<Visit> GetCompletedPatientsVisits(String id)
+		public List<Visit> GetCompletedPatientsVisits(int id)
 		{
 			List<Visit> allVisits = visitRepository.GetAll();
 			List<Visit> patientsVisits = new List<Visit>();
@@ -201,7 +198,7 @@ namespace ehealthcare.Service
 			return patientsVisits;
 		}
 
-		public Visit GetMostRecentPatientVisitId(String id)
+		public Visit GetMostRecentPatientVisitId(int id)
 		{
 			List<Visit> patientsVisits = GetCompletedPatientsVisits(id);
 			Visit mostRecentVisit = patientsVisits.FirstOrDefault();

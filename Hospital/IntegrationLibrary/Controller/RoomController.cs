@@ -28,7 +28,7 @@ namespace ehealthcare.Controller
         {
             this._renovateStrategy.DoRenovation(selectedRoom, renovateDateTime, roomForMerge);
         }
-        public Room GetRoomById(String id)
+        public Room GetRoomById(int id)
         {
             return roomService.GetRoomById(id);
         }
@@ -38,7 +38,7 @@ namespace ehealthcare.Controller
             return roomService.GetAllRooms();
         }
 
-        public void DeleteRoom(string id)
+        public void DeleteRoom(Room id)
         {
             roomService.DeleteRoom(id);
         }
