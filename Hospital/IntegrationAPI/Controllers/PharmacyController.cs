@@ -1,6 +1,7 @@
 ﻿using IntegrationAPI.Adapters;
 using IntegrationAPI.DTO;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,32 +16,30 @@ namespace IntegrationAPI.Controllers
     [ApiController]
     public class PharmacyController : ControllerBase
     {
-        private readonly IntegrationDbContext dbContext;
+        private IPharmacyService pharmacyService;
 
-        public PharmacyController(IntegrationDbContext context)
+        public PharmacyController(IPharmacyService pharmacyService)
         {
-            dbContext = context;
+            this.pharmacyService = pharmacyService;
         }
 
         [HttpGet]       // GET /api/pharmacy
         public IActionResult Get()
         {
             List<PharmacyDto> result = new List<PharmacyDto>();
-            //Program.Pharmacies.ForEach(pharmacy => result.Add(PharmacyAdapter.PharmacyToPharmacyDto(pharmacy)));
-            dbContext.Pharmacies.ToList().ForEach(pharmacy => result.Add(PharmacyAdapter.PharmacyToPharmacyDto(pharmacy)));
+            pharmacyService.GetAll().ForEach(pharmacy => result.Add(PharmacyAdapter.PharmacyToPharmacyDto(pharmacy)));
             return Ok(result);
         }
 
         [HttpGet("{id?}")]      // GET /api/pharmacy/1
-        public IActionResult Get(long id)
+        public IActionResult Get(int id)
         {
-            //Pharmacy pharmacy = Program.Pharmacies.Find(pharmacy => pharmacy.PharmacyId == id);
-            Pharmacy pharmacy = dbContext.Pharmacies.FirstOrDefault(pharmacy => pharmacy.PharmacyId == id);
+            Pharmacy pharmacy = pharmacyService.Get(id);
             if (pharmacy == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 return Ok(PharmacyAdapter.PharmacyToPharmacyDto(pharmacy));
             }
@@ -53,68 +52,47 @@ namespace IntegrationAPI.Controllers
             {
                 return BadRequest();
             }
-
-            //long id = Program.Pharmacies.Count > 0 ? Program.Pharmacies.Max(Pharmacy => Pharmacy.PharmacyId) + 1 : 1;
-            long id = dbContext.Pharmacies.ToList().Count > 0 ? dbContext.Pharmacies.Max(Pharmacy => Pharmacy.PharmacyId) + 1 : 1;
-            Pharmacy pharmacy = PharmacyAdapter.PharmacyDtoToPharmacy(dto);
-            pharmacy.PharmacyId = id;
-            string apiKey = GenerateApiKey();
-            pharmacy.PharmacyApiKey = apiKey;
-            //Program.Pharmacies.Add(pharmacy);
-            dbContext.Pharmacies.Add(pharmacy);
-            dbContext.SaveChanges();
+            string apiKey = pharmacyService.Save(PharmacyAdapter.PharmacyDtoToPharmacy(dto));
             return Ok(apiKey);
-
         }
 
         [HttpPut]
         public IActionResult Put(UpdateHospitalApiKeyDTO dto)
         {
-            Pharmacy pharmacy = dbContext.Pharmacies.SingleOrDefault(pharmacy => pharmacy.PharmacyId == dto.PharmacyID);
-            if(pharmacy == null)
+            Pharmacy pharmacy = pharmacyService.Get(dto.PharmacyID);
+            if (pharmacy == null)
             {
                 return NotFound();
             }
-            pharmacy.HospitalApiKey = dto.HospitalApiKey;
-            dbContext.Update(pharmacy);
-            dbContext.SaveChanges();
+            pharmacyService.UpdateHospitalApiKey(pharmacy, dto.HospitalApiKey);
             return Ok();
         }
+
         [HttpPut("{id?}")]
-        public IActionResult Put(PharmacyDto dto, long id)
+        public IActionResult Put(PharmacyDto dto, int id)
         {
-            Pharmacy pharmacy = dbContext.Pharmacies.SingleOrDefault(pharmacy => pharmacy.PharmacyId == id);
-            if(pharmacy == null)
+            Pharmacy pharmacy = pharmacyService.Get(id);
+            if (pharmacy == null)
             {
                 return NotFound();
             }
-            pharmacy = PharmacyAdapter.UpdatePharmacyDtoToPharmacy(dto, pharmacy);
-            dbContext.Update(pharmacy);
-            dbContext.SaveChanges();
+            pharmacyService.Update(PharmacyAdapter.PharmacyDtoToPharmacy(dto));
             return Ok();
         }
+
         [HttpDelete("{id?}")]       // DELETE /api/pharmacy/1
-        public IActionResult Delete(long id = 0)
+        public IActionResult Delete(int id)
         {
-            //Pharmacy pharmacy = Program.Pharmacies.Find(pharmacy => pharmacy.PharmacyId == id);
-            Pharmacy pharmacy = dbContext.Pharmacies.SingleOrDefault(pharmacy => pharmacy.PharmacyId == id);
+            Pharmacy pharmacy = pharmacyService.Get(id);
             if (pharmacy == null)
             {
                 return NotFound();
             }
             else
             {
-                //Program.Pharmacies.Remove(pharmacy);
-                dbContext.Pharmacies.Remove(pharmacy);
-                dbContext.SaveChanges();
+                pharmacyService.Delete(pharmacy);
                 return Ok();
             }
-        }
-        
-
-        public string GenerateApiKey()
-        {
-            return System.Guid.NewGuid().ToString();
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using ehealthcare.Proxies;
-using ehealthcare.Service;
+﻿using IntegrationLibrary.Proxies;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     public class Hospitalization : Entity
     {
@@ -19,7 +19,7 @@ namespace ehealthcare.Model
         private Patient patient;
         private bool isActive;
 
-        public Hospitalization() : base("undefinedKey")
+        public Hospitalization() : base(-1)
         {
             lazyRoom = new RoomProxyImpl();
             lazyPatient = new PatientProxyImpl();
@@ -67,7 +67,7 @@ namespace ehealthcare.Model
             }
         }
 
-        public String RoomId { get; set; }
+        public int RoomId { get; set; }
 
         [System.Xml.Serialization.XmlIgnore]
         public Patient Patient
@@ -87,7 +87,7 @@ namespace ehealthcare.Model
             }
         }
 
-        public String PatientId { get; set; }
+        public int PatientId { get; set; }
 
         public bool IsActive
         {

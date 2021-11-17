@@ -1,20 +1,20 @@
 using System;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class RoomInventory : Entity
     {
         private int quantity;
         private Inventory inventory;
-        private string roomId;
+        private int roomId;
         private int transferAmmount;
         private DateTime staticTransferDate;
-        private string transferRoomId;
+        private int transferRoomId;
 
-        public RoomInventory() : base("undefinedNumberKey") { }
+        public RoomInventory() : base(-1) { }
 
-        public RoomInventory(Inventory inventory, string roomId, int quantity) : base("undefinedNumberKey")
+        public RoomInventory(Inventory inventory, int roomId, int quantity) : base(-1)
         {
             this.inventory = inventory;
             this.roomId = roomId;
@@ -23,7 +23,7 @@ namespace ehealthcare.Model
         }
 
 
-        public string TransferRoomId
+        public int TransferRoomId
         {
             get { return transferRoomId; }
             set
@@ -71,7 +71,7 @@ namespace ehealthcare.Model
             }
         }
 
-        public string RoomID
+        public int RoomID
         {
             get { return roomId; }
             set

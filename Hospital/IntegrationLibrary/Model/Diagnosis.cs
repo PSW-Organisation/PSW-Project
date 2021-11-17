@@ -1,14 +1,14 @@
 using System;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class Diagnosis
     {
-        private String id;
+        private int id;
         private String name;
 
-        public String Id
+        public int Id
         {
             get { return id; }
             set { id = value; }

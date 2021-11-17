@@ -1,20 +1,21 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class ReminderController
 	{
-		private ReminderService reminderService;
+		private IReminderService reminderService;
 
-		public ReminderController()
+		public ReminderController(IReminderService reminderService)
 		{
-			reminderService = new ReminderService();
+			this.reminderService = reminderService;
 		}
 
 		public void CreateNewReminder(Reminder reminder)
@@ -27,7 +28,7 @@ namespace ehealthcare.Controller
 			reminderService.GenerateNewNoteNotifications();
 		}
 
-		public List<Reminder> GetAllRemindersForAccount(string username)
+		public List<Reminder> GetAllRemindersForAccount(int username)
 		{
 			return reminderService.GetAllRemindersForAccount(username);
 		}

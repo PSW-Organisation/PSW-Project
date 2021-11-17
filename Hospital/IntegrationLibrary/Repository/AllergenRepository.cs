@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ehealthcare.Model;
+using IntegrationLibrary.Model;
 
-namespace ehealthcare.Repository
+namespace IntegrationLibrary.Repository
 {
     public interface AllergenRepository : GenericRepository<Allergen> {}
 }

@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 
-namespace ehealthcare.Repository
+namespace IntegrationLibrary.Repository
 {
     public class DataIO
     {

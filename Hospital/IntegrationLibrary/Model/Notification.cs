@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     [XmlInclude(typeof(PersonalizedNotification))]
@@ -12,7 +12,7 @@ namespace ehealthcare.Model
         private DateTime date;
         private NotificationRole notificationRole;
 
-        public Notification() : base("undefinedNumberKey") { }
+        public Notification() : base(-1) { }
 
         public string Subject
         {

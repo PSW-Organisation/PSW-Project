@@ -25,7 +25,7 @@ export class EditPharmacyComponent implements OnInit {
   }
 
   editPharmacy(){
-    var pharmacy =  { pharmacyId: this.pharmacyEdit.pharmacyId, pharmacyUrl: this.pharmacyUrl, pharmacyName:this.pharmacyName , pharmacyAddress: this.pharmacyAddress, hospitalApiKey: this.hospitalApiKey};
+    var pharmacy =  { pharmacyId: this.pharmacyEdit.pharmacyId, pharmacyUrl: this.pharmacyUrl, pharmacyName:this.pharmacyName , pharmacyAddress: this.pharmacyAddress, hospitalApiKey: this.hospitalApiKey, pharmacyApiKey: this.pharmacyEdit.pharmacyApiKey};
     this._editPharmacyService.editPharmacy(pharmacy).subscribe( res => {
       alert("Pharmacy updated successfully!");
       this.refreshPharmacy.emit();

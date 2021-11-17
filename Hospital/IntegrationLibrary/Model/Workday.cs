@@ -1,10 +1,10 @@
-using ehealthcare.Proxies;
-using ehealthcare.Service;
+using IntegrationLibrary.Proxies;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class Workday : Entity
@@ -15,7 +15,7 @@ namespace ehealthcare.Model
         private IDoctor lazyDoctor;
         private Doctor doctor;
 
-        public Workday() : base("undefinedNumberKey") 
+        public Workday() : base(-1) 
         {
             lazyDoctor = new DoctorProxyImpl();
         }
@@ -56,7 +56,7 @@ namespace ehealthcare.Model
             }
         }
 
-        public String DoctorId { get; set; }
+        public int DoctorId { get; set; }
 
         public bool IsInWorkTime(DateTime start, DateTime end) 
         {

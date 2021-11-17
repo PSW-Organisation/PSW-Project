@@ -1,24 +1,28 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-	public class VisitReportService
+	public class VisitReportService : IVisitReportService
 	{
 		private VisitReportRepository visitReportRepository;
 
-		public VisitReportService()
+		public VisitReportService(VisitReportRepository visitReportRepository)
 		{
-			visitReportRepository = new VisitReportXMLRepository();
+			this.visitReportRepository = visitReportRepository;
 		}
 
-		public List<VisitReport> GetDoneVisitReportsForPatient(String id)
+        public VisitReportService()
+        {
+        }
+
+        public List<VisitReport> GetDoneVisitReportsForPatient(int id)
 		{
 			List<VisitReport> visitReports = visitReportRepository.GetAll();
 			List<VisitReport> filteredVisitReports = new List<VisitReport>();
@@ -36,7 +40,7 @@ namespace ehealthcare.Service
 			return filteredVisitReports;
 		}
 
-		public VisitReport GetVisitReportWithId(string id)
+		public VisitReport GetVisitReportWithId(int id)
 		{
 			return visitReportRepository.Get(id);
 		}
@@ -48,7 +52,7 @@ namespace ehealthcare.Service
 
 		public void UpdateVisitReport(VisitReport visitReport)
 		{
-			visitReportRepository.Delete(visitReport.Id);
+			visitReportRepository.Delete(visitReport);
 			visitReportRepository.Save(visitReport);
 		}
 	}

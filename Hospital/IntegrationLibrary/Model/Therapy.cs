@@ -1,7 +1,7 @@
-using ehealthcare.Service;
+using IntegrationLibrary.Service;
 using System;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     public class Therapy : Entity
     {
@@ -16,7 +16,7 @@ namespace ehealthcare.Model
         private bool isActive;
         private VisitReport visitReport;
 
-        public Therapy() : base("undefinedNumberKey")
+        public Therapy() : base(-1)
         {
 
         }
@@ -78,13 +78,13 @@ namespace ehealthcare.Model
             set { patient = value; }
         }
 
-        public String PatientId
+        public int PatientId
         {
             get
             {
                 if (patient == null)
                 {
-                    return null;
+                    return -1;
                 }
 
                 return patient.Id;
@@ -109,7 +109,7 @@ namespace ehealthcare.Model
             set { visitReport = value; }
         }
 
-        public string VisitReportId
+        public int VisitReportId
         {
             get { return visitReport.Id; }
             set

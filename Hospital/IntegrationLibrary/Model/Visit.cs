@@ -1,8 +1,8 @@
-﻿using ehealthcare.Proxies;
-using ehealthcare.Service;
+﻿using IntegrationLibrary.Proxies;
+using IntegrationLibrary.Service;
 using System;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class Visit : Entity
@@ -23,7 +23,7 @@ namespace ehealthcare.Model
         private VisitReport visitReport;
         private bool isReviewed;
 
-        public Visit() : base("undefinedNumberKey") 
+        public Visit() : base(-1) 
         {
             lazyPatient = new PatientProxyImpl();
             lazyDoctor = new DoctorProxyImpl();
@@ -144,7 +144,7 @@ namespace ehealthcare.Model
             }
         }
 
-        public String DoctorId { get; set; }
+        public int DoctorId { get; set; }
 
         [System.Xml.Serialization.XmlIgnore]
         public String DoctorName
@@ -170,7 +170,7 @@ namespace ehealthcare.Model
             }
         }
 
-        public String PatientId { get; set; }
+        public int PatientId { get; set; }
 
         [System.Xml.Serialization.XmlIgnore]
         public String PatientName
@@ -196,7 +196,7 @@ namespace ehealthcare.Model
             }
         }
 
-        public String RoomId { get; set; }
+        public int RoomId { get; set; }
 
         [System.Xml.Serialization.XmlIgnore]
         public VisitReport VisitReport

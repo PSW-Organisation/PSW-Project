@@ -1,8 +1,8 @@
-﻿using ehealthcare.Proxies;
-using ehealthcare.Service;
+﻿using IntegrationLibrary.Proxies;
+using IntegrationLibrary.Service;
 using System;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class DoctorReview : Entity
@@ -13,7 +13,7 @@ namespace ehealthcare.Model
         private int rating;
         private string comment;
 
-        public DoctorReview() : base("undefinedKey") 
+        public DoctorReview() : base(-1) 
         {
             lazyVisit = new VisitProxyImpl();
         }

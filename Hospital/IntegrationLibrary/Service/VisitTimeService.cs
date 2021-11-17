@@ -1,29 +1,32 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ehealthcare.Repository;
-using static ehealthcare.SecretaryApp.Constants;
-using ehealthcare.Repository.XMLRepository;
 
-namespace ehealthcare.Service
+using IntegrationLibrary.Service.ServicesInterfaces;
+
+using IntegrationLibrary.Repository;
+using static IntegrationLibrary.SecretaryApp.Constants;
+
+namespace IntegrationLibrary.Service
 {
-	public class VisitTimeService
-	{
+	public class VisitTimeService : IVisitTimeService
+    {
 
         private WorkdayRepository workdayRepository;
         private VisitRepository visitRepository;
-        public VisitTimeService()
+        private IWorkdayService workdayService;
+        public VisitTimeService(WorkdayRepository workdayRepository, VisitRepository visitRepository, IWorkdayService workdayService)
         {
-            workdayRepository = new WorkdayXMLRepository();
-            visitRepository = new VisitXMLRepository();
+            this.workdayRepository = workdayRepository;
+            this.visitRepository = visitRepository;
+            this.workdayRepository = workdayRepository;
         }
 
         public List<DateTime> getFirst21AvailableDates(Doctor doctor)
 		{
 			List<DateTime> availableDates = new List<DateTime>();
 
-			WorkdayService workdayService = new WorkdayService();
 			List<Workday> workdays = workdayService.GetWorkdaysForDoctor(doctor.Id);
 			foreach (Workday workday in workdays)
 			{
@@ -139,7 +142,7 @@ namespace ehealthcare.Service
             return nearestTimeSlot;
         }
 
-        public VisitTime GetNearestAvailableDelay(String doctorId, String patientId, VisitTime takenTimeSlot, List<VisitTime> potentialDelays)
+        public VisitTime GetNearestAvailableDelay(int doctorId, int patientId, VisitTime takenTimeSlot, List<VisitTime> potentialDelays)
         {
             List<Workday> doctorsWorkdays = workdayRepository.GetWorkdaysAfter(takenTimeSlot.StartTime, doctorId);
             VisitTime availableDelay = new VisitTime();
@@ -155,7 +158,7 @@ namespace ehealthcare.Service
             return availableDelay;
         }
 
-        private VisitTime FindAvailableDelay(Workday workday, String patientId, VisitTime takenTimeSlot, List<VisitTime> potentialDelays)
+        private VisitTime FindAvailableDelay(Workday workday, int patientId, VisitTime takenTimeSlot, List<VisitTime> potentialDelays)
         {
             TimeSpan duration = takenTimeSlot.EndTime - takenTimeSlot.StartTime;
             DateTime start = workday.StartTime;
@@ -197,7 +200,7 @@ namespace ehealthcare.Service
             return visitTime.StartTime >= startTime && visitTime.StartTime <= finishTime;
         }
 
-        public bool IsPatientAvailable(String patientId, VisitTime visitTime)
+        public bool IsPatientAvailable(int patientId, VisitTime visitTime)
         {
             
             List<Visit> patientsVisits = visitRepository.GetPatientsVisits(patientId);
@@ -226,7 +229,7 @@ namespace ehealthcare.Service
             return false;
         }
 
-        public List<VisitTime> GetAvailableTimeSlots(string doctorId, DateTime date)
+        public List<VisitTime> GetAvailableTimeSlots(int doctorId, DateTime date)
         {
             List<VisitTime> availableTimeSlots = new List<VisitTime>();
             if(workdayRepository.IsWorkday(doctorId, date))
@@ -240,7 +243,7 @@ namespace ehealthcare.Service
             return availableTimeSlots;
         }
 
-        public List<VisitTime> GetAvailableTimeSlots(string doctorId)
+        public List<VisitTime> GetAvailableTimeSlots(int doctorId)
         {
             List<VisitTime> availableTimeSlots = new List<VisitTime>();
             foreach(Workday workday in workdayRepository.GetWorkdaysAfter(DateTime.Now, doctorId))

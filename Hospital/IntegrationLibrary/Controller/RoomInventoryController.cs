@@ -1,20 +1,21 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class RoomInventoryController
 	{
-		private RoomInventoryService roomInventoryService;
+		private IRoomInventoryService roomInventoryService;
 
-		public RoomInventoryController()
+		public RoomInventoryController(IRoomInventoryService roomInventoryService)
 		{
-            roomInventoryService = new RoomInventoryService();
+            this.roomInventoryService = roomInventoryService;
 		}
 
        
@@ -23,7 +24,7 @@ namespace ehealthcare.Controller
         {
             return roomInventoryService.GetAllRoomInventory();
         }
-        public List<RoomInventory> GetInventoryInRoom(String roomID)
+        public List<RoomInventory> GetInventoryInRoom(int roomID)
         {
             return roomInventoryService.GetInventoryInRoom(roomID);
         }
@@ -46,24 +47,22 @@ namespace ehealthcare.Controller
             roomInventoryService.SetRoomInventory(roomInventory);
         }
 
-        public int GetNumOfBedsById(String id)
+        public int GetNumOfBedsById(int id)
         {
             return roomInventoryService.GetNumOfBedsById(id);
         }
         public void DoTransferStatic(Room srcRoom, Room destRoom, int quantity, DateTime dueDate, RoomInventory trasnferedInventory)
         {
-            roomInventoryService.SetInventoryTransferStrategy(new InventoryTrasnferStatic());
-            roomInventoryService.DoTransfer(srcRoom, destRoom, quantity, dueDate, trasnferedInventory);
+            roomInventoryService.DoTransferStatic(srcRoom, destRoom, quantity, dueDate, trasnferedInventory);
         }
-        public void DoTransferNonStatic(Room srcRoom, Room destRoom, int quantity, DateTime dueDate, RoomInventory trasnferedInventory)
+        public void DoTransferNonStatic(Room srcRoom, Room destRoom, int quantity, RoomInventory trasnferedInventory)
         {
-            roomInventoryService.SetInventoryTransferStrategy(new InventoryTrasnferNonStatic());
-            roomInventoryService.DoTransfer(srcRoom, destRoom, quantity, dueDate, trasnferedInventory);
+            roomInventoryService.DoTransferNonStatic(srcRoom, destRoom, quantity, trasnferedInventory);
 
         }
         public void CheckIfInventoryNeedsTransfer(List<RoomInventory> checkedRoomInventory)
         {
-            roomInventoryService.CheckIfInventoryNeedsTransfer(checkedRoomInventory);
+            //roomInventoryService.CheckIfInventoryNeedsTransfer(checkedRoomInventory);
         }
 
     }

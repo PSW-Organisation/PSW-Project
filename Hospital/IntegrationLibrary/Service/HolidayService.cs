@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-    public class HolidayService
+    public class HolidayService : IHolidayService
     {
         private HolidayRepository holidayRepository;
         private DoctorRepository doctorRepository;
@@ -15,22 +15,22 @@ namespace ehealthcare.Service
         private PersonalizedNotificationRepository notificationRepository;
         private AccountRepository accountRepository;
 
-        public HolidayService()
+        public HolidayService(HolidayRepository holidayRepository, DoctorRepository doctorRepository, WorkdayRepository workdayRepository, VisitRepository visitRepository, PersonalizedNotificationRepository notificationRepository, AccountRepository accountRepository)
         {
-            holidayRepository = new HolidayXMLRepository();
-            doctorRepository = new DoctorXMLRepository();
-            workdayRepository = new WorkdayXMLRepository();
-            visitRepository = new VisitXMLRepository();
-            notificationRepository = new PersonalizedNotificationXMLRepository();
-            accountRepository = new AccountXMLRepository();
+            this.holidayRepository = holidayRepository;
+            this.doctorRepository = doctorRepository;
+            this.workdayRepository = workdayRepository;
+            this.visitRepository = visitRepository;
+            this.notificationRepository = notificationRepository;
+            this.accountRepository = accountRepository;
         }
 
-        internal bool CanUseHoliday(Holiday potentialHoliday)
+        public bool CanUseHoliday(Holiday potentialHoliday)
         {
             return potentialHoliday.CanUseHoliday() && !IsOverlapping(potentialHoliday);
         }
 
-        public List<Holiday> GetHolidays(string doctorId)
+        public List<Holiday> GetHolidays(int doctorId)
         {
             return holidayRepository.GetHolidaysForDoctor(doctorId);
         }
@@ -48,7 +48,7 @@ namespace ehealthcare.Service
 
         }
 
-        private void NotifyPatientOfCancellation(List<Visit> cancelledVisits)
+        public void NotifyPatientOfCancellation(List<Visit> cancelledVisits)
         {
             foreach (var visit in cancelledVisits)
             {
@@ -58,14 +58,14 @@ namespace ehealthcare.Service
             }
         }
 
-        private List<Visit> CancelVisitsInHolidayRange(Holiday newHoliday)
+        public List<Visit> CancelVisitsInHolidayRange(Holiday newHoliday)
         {
             List<VisitTime> visitForCanceling = workdayRepository.GetVisitTimesInHolidayRange(newHoliday);
             List<Visit> canceledVisits = visitRepository.CancelVisits(visitForCanceling, newHoliday.DoctorId);
             return canceledVisits;
         }
 
-        private bool IsOverlapping(Holiday newHoliday)
+        public bool IsOverlapping(Holiday newHoliday)
         {
             List<Holiday> doctorsHolidays = holidayRepository.GetHolidaysForDoctor(newHoliday.DoctorId);
             foreach (Holiday holiday in doctorsHolidays)

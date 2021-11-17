@@ -1,4 +1,4 @@
-﻿namespace ehealthcare.Model
+﻿namespace IntegrationLibrary.Model
 {
     public enum MedicineStatus
     {

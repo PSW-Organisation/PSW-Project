@@ -1,20 +1,21 @@
-﻿using ehealthcare.Model;
-using ehealthcare.PatientApp.ApplicationData;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.PatientApp.ApplicationData;
+using IntegrationLibrary.Repository;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-	public class LoginService
+	public class LoginService : ILoginService
     {
         private AccountRepository accountRepository;
 
-        public LoginService()
+        public LoginService(AccountRepository accountRepository)
         {
-            accountRepository = new AccountXMLRepository();
+            this.accountRepository = accountRepository;
         }
 
         /**
@@ -35,7 +36,7 @@ namespace ehealthcare.Service
             return false;
         }
 
-        private void SetLoggedInAccount(Account acc)
+        public void SetLoggedInAccount(Account acc)
         {
             AppData.getInstance().LoggedInAccount = acc;
         }

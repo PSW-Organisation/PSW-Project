@@ -1,20 +1,21 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class WorkdayController
 	{
-        private WorkdayService workdayService;
+        private IWorkdayService workdayService;
 
-        public WorkdayController()
+        public WorkdayController(IWorkdayService workdayService)
         {
-            workdayService = new WorkdayService();
+            this.workdayService = workdayService;
         }
 
         public void NewWorkday(Workday workday)
@@ -27,27 +28,27 @@ namespace ehealthcare.Controller
             workdayService.UpdateWorkHours(workday, startTime, endTime);
         }
 
-        public List<Workday> GetWorkdaysForDoctor(String doctorId)
+        public List<Workday> GetWorkdaysForDoctor(int doctorId)
         {
             return workdayService.GetWorkdaysForDoctor(doctorId);
         }
 
-        public bool IsWorkday(String doctorId, DateTime date)
+        public bool IsWorkday(int doctorId, DateTime date)
         {
             return workdayService.IsWorkday(doctorId, date);
         }
 
-        public Workday GetWorkday(DateTime date, String doctorId)
+        public Workday GetWorkday(DateTime date, int doctorId)
         {
             return workdayService.GetWorkday(date, doctorId);
         }
 
-        public List<Workday> GetWorkdaysAfter(DateTime date, String doctorId)
+        public List<Workday> GetWorkdaysAfter(DateTime date, int doctorId)
         {
             return workdayService.GetWorkdaysAfter(date, doctorId);
         }
 
-        public List<Workday> GetWorkdays(int month, String doctorId)
+        public List<Workday> GetWorkdays(int month, int doctorId)
         {
             return workdayService.GetWorkdays(month, doctorId);
         }

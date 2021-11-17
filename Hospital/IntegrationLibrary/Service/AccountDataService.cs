@@ -1,26 +1,25 @@
-﻿using ehealthcare.Model;
-using ehealthcare.PatientApp.ApplicationData;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-	public class AccountDataService
+	public class AccountDataService : IAccountDataService
 	{
 		private AccountDataRepository accountDataRepository;
 		private int spamActionsLimit = 10;
 		private int cancelledVisitsLimit = 3;
-		public AccountDataService()
+		public AccountDataService(AccountDataRepository repository)
 		{
-			accountDataRepository = new AccountDataXMLRepository();
+			this.accountDataRepository = repository;
 		}
 
-		public int GetNumberOfReadNotificationsForAccount(string username)
+		public int GetNumberOfReadNotificationsForAccount(int username)
 		{
 			AccountData accountData = accountDataRepository.Get(username);
 			if(accountData != null)
@@ -30,7 +29,7 @@ namespace ehealthcare.Service
 			return 0;
 		}
 
-		public void SetNumberOfReadNotificationsForAccount(string username, int numberOfReadNotifications)
+		public void SetNumberOfReadNotificationsForAccount(int username, int numberOfReadNotifications)
 		{
 			AccountData accountData = accountDataRepository.Get(username);
 			if(accountData != null)
@@ -45,7 +44,7 @@ namespace ehealthcare.Service
 			accountDataRepository.Save(new AccountData() { Account = account, NumberOfReadNotifications = 0, SpamActionDates = new List<DateTime>(), NumberOfSpamActions = 0, NumberOfCancelledVisits = 0, CancelledVisitsDates = new List<DateTime>() });
 		}
 
-		public void AddSpamActionForAccount(string username)
+		public void AddSpamActionForAccount(int username)
 		{
 			AccountData accountData = accountDataRepository.Get(username);
 			accountData.NumberOfSpamActions++;
@@ -53,7 +52,7 @@ namespace ehealthcare.Service
 			accountDataRepository.Update(accountData);
 		}
 
-		public bool IsAccountSpamming(string username)
+		public bool IsAccountSpamming(int username)
 		{
 			AccountData accountData = accountDataRepository.Get(username);
 			if(accountData.NumberOfSpamActions > spamActionsLimit)
@@ -63,7 +62,7 @@ namespace ehealthcare.Service
 			return false;
 		}
 
-		public bool IsAccountCancellingTooMuch(string username)
+		public bool IsAccountCancellingTooMuch(int username)
 		{
 			AccountData accountData = accountDataRepository.Get(username);
 			if (accountData.NumberOfCancelledVisits == cancelledVisitsLimit)
@@ -73,7 +72,7 @@ namespace ehealthcare.Service
 			return false;
 		}
 
-		public void AddCanceledVisitForAccount(string username)
+		public void AddCanceledVisitForAccount(int username)
 		{
 			AccountData accountData = accountDataRepository.Get(username);
 			accountData.NumberOfCancelledVisits++;
@@ -81,7 +80,7 @@ namespace ehealthcare.Service
 			accountDataRepository.Update(accountData);
 		}
 
-		public void RefreshCancelActionsForAccount(string username)
+		public void RefreshCancelActionsForAccount(int username)
 		{
 			AccountData accountData = accountDataRepository.Get(username);
 			DateTime timeNow = DateTime.Now;
@@ -96,7 +95,7 @@ namespace ehealthcare.Service
 			accountDataRepository.Update(accountData);
 		}
 
-		public void RefreshSpamActionsForAccount(string username)
+		public void RefreshSpamActionsForAccount(int username)
 		{
 			AccountData accountData = accountDataRepository.Get(username);
 			DateTime timeNow = DateTime.Now;
@@ -117,12 +116,12 @@ namespace ehealthcare.Service
 			}
 		}
 
-        public void DeleteAccountData(string username)
+        public void DeleteAccountData(AccountData username)
         {
 			accountDataRepository.Delete(username);
         }
 
-        public void DeleteSpamBehaviorData(string username)
+        public void DeleteSpamBehaviorData(int username)
         {
 			accountDataRepository.DeleteSpamBehaviorData(username);
         }

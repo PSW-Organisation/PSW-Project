@@ -1,26 +1,27 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class PersonalizedNotificationController
 	{
-		private PersonalizedNotificationService personalizedNotificationService;
+		private IPersonalizedNotificationService personalizedNotificationService;
 
-		public PersonalizedNotificationController()
+		public PersonalizedNotificationController(IPersonalizedNotificationService personalizedNotificationService)
 		{
-			personalizedNotificationService = new PersonalizedNotificationService();
+            this.personalizedNotificationService = personalizedNotificationService;
 		}
 
         /**
         * <summary>Method returns all personalized notifications for the given account.</summary>
         */
-        public List<PersonalizedNotification> GetAllPersonalizedNotificationsForAccount(string username)
+        public List<PersonalizedNotification> GetAllPersonalizedNotificationsForAccount(int username)
         {
             return personalizedNotificationService.GetAllPersonalizedNotificationsForAccount(username);
         }

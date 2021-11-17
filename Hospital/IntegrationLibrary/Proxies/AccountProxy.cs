@@ -1,21 +1,24 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository.DatabaseRepository;
+using IntegrationLibrary.Repository;
 
-namespace ehealthcare.Proxies
+namespace IntegrationLibrary.Proxies
 {
 	interface IAccount
 	{
-		public Account GetAccount(string id);
+		public Account GetAccount(int id);
 	}
 
 	public class AccountImpl : IAccount
 	{
 		AccountRepository accountRepository;
-		public Account GetAccount(string id)
+		public Account GetAccount(int id)
 		{
 			if (accountRepository == null)
-				accountRepository = new AccountXMLRepository();
+			{
+				IntegrationDbContext dbContext = new IntegrationDbContext();
+				accountRepository = new AccountDbRepository(dbContext);
+			}
 			return accountRepository.Get(id);
 		}
 	}
@@ -23,7 +26,7 @@ namespace ehealthcare.Proxies
 	public class AccountProxyImpl : IAccount
 	{
 		private IAccount account;
-		public Account GetAccount(string id)
+		public Account GetAccount(int id)
 		{
 			if (account == null)
 			{

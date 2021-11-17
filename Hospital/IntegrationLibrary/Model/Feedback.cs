@@ -1,11 +1,11 @@
-﻿using ehealthcare.Proxies;
+﻿using IntegrationLibrary.Proxies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public abstract class Feedback : Entity
@@ -13,7 +13,7 @@ namespace ehealthcare.Model
         private IAccount lazyAccount;
         private Account account;
 
-        public Feedback() : base("undefinedNumberKey")
+        public Feedback() : base(-1)
         {
             lazyAccount = new AccountProxyImpl();
         }
@@ -35,6 +35,6 @@ namespace ehealthcare.Model
                 AccountId = value.Id;
             }
         }
-        public string AccountId { get; set; }
+        public int AccountId { get; set; }
     }
 }

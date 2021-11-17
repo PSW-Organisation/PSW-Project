@@ -1,7 +1,7 @@
-using ehealthcare.Service;
+using IntegrationLibrary.Service;
 using System;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class Doctor : User
@@ -33,7 +33,7 @@ namespace ehealthcare.Model
             set { doctorRoom = value; }
         }
 
-        public String DoctorRoomId
+        public int DoctorRoomId
         {
             get { return doctorRoom.Id; }
             set

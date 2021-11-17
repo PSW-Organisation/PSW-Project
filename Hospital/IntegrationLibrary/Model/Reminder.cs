@@ -1,9 +1,9 @@
-﻿using ehealthcare.Proxies;
-using ehealthcare.Service;
+﻿using IntegrationLibrary.Proxies;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     public class Reminder : Entity
     {
@@ -16,7 +16,7 @@ namespace ehealthcare.Model
         private string title;
         private string description;
 
-        public Reminder() : base("undefinedNumberKey")
+        public Reminder() : base(-1)
         {
             lazyAccount = new AccountProxyImpl();
         }
@@ -39,7 +39,7 @@ namespace ehealthcare.Model
             }
         }
 
-        public string AccountUsername { get; set; }
+        public int AccountUsername { get; set; }
 
         public DateTime StartTime
         {

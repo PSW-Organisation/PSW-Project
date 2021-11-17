@@ -8,7 +8,7 @@ namespace IntegrationAPI.DTO
     public class ComplaintDTO
     {
 
-        public long ComplaintId { get; set; }
+        public int ComplaintId { get; set; }
         public DateTime Date { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }

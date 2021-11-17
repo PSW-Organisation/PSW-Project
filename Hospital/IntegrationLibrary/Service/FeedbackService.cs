@@ -1,22 +1,22 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-	public class FeedbackService
+	public class FeedbackService : IFeedbackService
 	{
 		private BugReportRepository bugReportRepository;
 		private ReviewReportRepository reviewReportRepository;
-		public FeedbackService()
+		public FeedbackService(BugReportRepository bugReportRepository, ReviewReportRepository reviewReportRepository)
 		{
-			bugReportRepository = new BugReportXMLRepository();
-			reviewReportRepository = new ReviewReportXMLRepository();
+			this.bugReportRepository = bugReportRepository;
+			this.reviewReportRepository = reviewReportRepository;
 		}
 
 		public void AddNewBugReport(BugReport bugReport)

@@ -12,7 +12,7 @@ namespace IntegrationAPI.Adapters
         public static Pharmacy PharmacyDtoToPharmacy(PharmacyDto dto)
         {
             Pharmacy pharmacy = new Pharmacy();
-            pharmacy.PharmacyId = dto.PharmacyId;
+            pharmacy.Id = dto.PharmacyId;
             pharmacy.PharmacyName = dto.PharmacyName;
             pharmacy.PharmacyUrl = dto.PharmacyUrl;
             pharmacy.PharmacyAddress = dto.PharmacyAddress;
@@ -33,7 +33,7 @@ namespace IntegrationAPI.Adapters
         public static PharmacyDto PharmacyToPharmacyDto(Pharmacy pharmacy)
         {
             PharmacyDto dto = new PharmacyDto();
-            dto.PharmacyId = pharmacy.PharmacyId;
+            dto.PharmacyId = pharmacy.Id;
             dto.PharmacyName = pharmacy.PharmacyName;
             dto.PharmacyUrl = pharmacy.PharmacyUrl;
             dto.PharmacyAddress = pharmacy.PharmacyAddress;

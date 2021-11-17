@@ -1,23 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
-	[Serializable]
+	
 	public class Entity
 	{
-		private string id;
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		private int id;
 
-		public Entity(string id)
+		public Entity(int id)
 		{
 			this.id = id;
 		}
 
-		public string Id 
+		public int Id 
 		{
 			get
 			{
