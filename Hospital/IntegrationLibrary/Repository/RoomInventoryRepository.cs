@@ -1,16 +1,16 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Repository
+namespace IntegrationLibrary.Repository
 {
     public interface RoomInventoryRepository : GenericRepository<RoomInventory>
     {
         public List<RoomInventory> GetFacilityRoomInventory();
-        public List<RoomInventory> GetInventoryInRoom(string roomID);
+        public List<RoomInventory> GetInventoryInRoom(int roomID);
         public void SaveAllRoomInventory(List<RoomInventory> roomInventory);
 
         public void SaveAllRoomInventory();

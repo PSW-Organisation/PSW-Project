@@ -1,23 +1,24 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class VisitController
 	{
-		private VisitService visitService;
+		private IVisitService visitService;
 
-		public VisitController()
+		public VisitController(IVisitService visitService)
 		{
-			visitService = new VisitService();
+			this.visitService = visitService;
 		}
 
-		public List<Visit> GetVisitsForPatient(String id)
+		public List<Visit> GetVisitsForPatient(int id)
 		{
 			return visitService.GetVisitsForPatient(id);
 		}
@@ -47,27 +48,27 @@ namespace ehealthcare.Controller
 			return visitService.IsVisitInNextThreeDays(visit); 
 		}
 
-		public Visit GetVisitById(string id)
+		public Visit GetVisitById(int id)
 		{
 			return visitService.GetVisitById(id);
 		}
 
-		public void DelayVisit(string id, VisitTime delayedVisitTime)
+		public void DelayVisit(int id, VisitTime delayedVisitTime)
 		{
 			visitService.DelayVisit(id, delayedVisitTime);
 		}
 
-		public List<Visit> GetPatientsVisits(String id)
+		public List<Visit> GetPatientsVisits(int id)
 		{
 			return visitService.GetPatientsVisits(id);
 		}
 
-		public void MarkVisitsIfPatientDidntCome(string id)
+		public void MarkVisitsIfPatientDidntCome(int id)
 		{
 			visitService.MarkVisitsIfPatientDidntCome(id);
 		}
 
-		public Visit GetVisit(String doctorId, VisitTime visitTime)
+		public Visit GetVisit(int doctorId, VisitTime visitTime)
 		{
 			return visitService.GetVisit(doctorId, visitTime);
 		}
@@ -92,17 +93,17 @@ namespace ehealthcare.Controller
 			visitService.CancelOperation(visit);
 		}
 
-		public List<Visit> GetCompletedPatientsVisits(String id)
+		public List<Visit> GetCompletedPatientsVisits(int id)
 		{
 			return visitService.GetCompletedPatientsVisits(id);
 		}
 
-		public List<int> GetNumberOfVisitsPerMonthForPatient(string id)
+		public List<int> GetNumberOfVisitsPerMonthForPatient(int id)
 		{
 			return visitService.GetNumberOfVisitsPerMonthForPatient(id);
 		}
 
-		public Visit GetMostRecentPatientVisitId(String id)
+		public Visit GetMostRecentPatientVisitId(int id)
 		{
 			return visitService.GetMostRecentPatientVisitId(id);
 		}

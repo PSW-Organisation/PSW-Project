@@ -1,8 +1,8 @@
-using ehealthcare.Service;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class MedicalRecord
@@ -46,7 +46,7 @@ namespace ehealthcare.Model
             set { personalDoctor = value; }
         }
 
-        public String PersonalDoctorId
+        public int PersonalDoctorId
         {
             get
             {
@@ -55,7 +55,7 @@ namespace ehealthcare.Model
                     return personalDoctor.Id;
                 }
 
-                return null;
+                return -1;
             }
             set
             {

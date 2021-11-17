@@ -1,20 +1,21 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class TherapyNotificationController
 	{
-		private TherapyNotificationService therapyNotificationService;
+		private ITherapyNotificationService therapyNotificationService;
 
-		public TherapyNotificationController()
+		public TherapyNotificationController(ITherapyNotificationService therapyNotificationService)
 		{
-			therapyNotificationService = new TherapyNotificationService();
+			this.therapyNotificationService = therapyNotificationService;
 		}
 
 		/**
@@ -25,7 +26,7 @@ namespace ehealthcare.Controller
 			therapyNotificationService.AddTherapyNotificationToStorage(therapyNotification);
 		}
 
-		public List<TherapyNotification> GetTherapyNotificationsForPatient(string id)
+		public List<TherapyNotification> GetTherapyNotificationsForPatient(int id)
 		{
 			
 			return therapyNotificationService.GetTherapyNotificationsForPatient(id);
@@ -36,7 +37,7 @@ namespace ehealthcare.Controller
 			return therapyNotificationService.TherapyNotificationExists(therapyNotification);
 		}
 
-		public void RemoveTherapyNotificationFromStorage(string id)
+		public void RemoveTherapyNotificationFromStorage(TherapyNotification id)
 		{
 			therapyNotificationService.RemoveTherapyNotificationFromStorage(id);
 		}

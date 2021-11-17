@@ -1,27 +1,27 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-	public class PersonalizedNotificationService
-	{
+	public class PersonalizedNotificationService : IPersonalizedNotificationService
+    {
 		private PersonalizedNotificationRepository personalizedNotificationRepository;
 
-		public PersonalizedNotificationService()
+		public PersonalizedNotificationService(PersonalizedNotificationRepository personalizedNotificationRepository)
 		{
-			personalizedNotificationRepository = new PersonalizedNotificationXMLRepository();
+            this.personalizedNotificationRepository = personalizedNotificationRepository;
 		}
 
 		/**
         * <summary>Method returns all personalized notifications for the given account.</summary>
         */
-		public List<PersonalizedNotification> GetAllPersonalizedNotificationsForAccount(string username)
+		public List<PersonalizedNotification> GetAllPersonalizedNotificationsForAccount(int username)
 		{
 			List<PersonalizedNotification> personalizedNotifications = personalizedNotificationRepository.GetAll();
 			List<PersonalizedNotification> filteredPersonalizedNotifications = new List<PersonalizedNotification>();

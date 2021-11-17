@@ -1,21 +1,22 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static ehealthcare.Service.TherapyService;
+using static IntegrationLibrary.Service.TherapyService;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class TherapyController
 	{
-		private TherapyService therapyService;
+		private ITherapyService therapyService;
 		
-		public TherapyController()
+		public TherapyController(ITherapyService therapyService)
 		{
-			therapyService = new TherapyService();
+			this.therapyService = therapyService;
 		}
 
 		/**
@@ -37,7 +38,7 @@ namespace ehealthcare.Controller
 		/**
         * <summary>Method finds and returns all therapies from giver patients VisitReport.</summary>
         */
-		public List<Therapy> GetTherapiesFromVisitReport(string id)
+		public List<Therapy> GetTherapiesFromVisitReport(int id)
 		{
 			return therapyService.GetTherapiesFromVisitReport(id);
 		}
@@ -45,7 +46,7 @@ namespace ehealthcare.Controller
 		/**
         * <summary>Method finds and returns Therapy class object by it's id.</summary>
         */
-		public Therapy GetTherapyById(string id)
+		public Therapy GetTherapyById(int id)
 		{
 			return therapyService.GetTherapyById(id);
 		}

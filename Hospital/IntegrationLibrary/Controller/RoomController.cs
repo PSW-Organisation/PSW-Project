@@ -1,5 +1,6 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,17 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class RoomController
 	{
-		private RoomService roomService;
-        private VisitService visitService = new VisitService();
+		private IRoomService roomService;
+        private IVisitService visitService;
         private IRenovateStrategy _renovateStrategy;
-        public RoomController()
+        public RoomController(IRoomService roomService, IVisitService visitService)
 		{
-			roomService = new RoomService();
+            this.roomService = roomService;
+            this.visitService = visitService;
 		}
+
+        public RoomController()
+        {
+        }
 
         public void SetStrategy(IRenovateStrategy renovateStrategy)
         {
@@ -28,7 +34,7 @@ namespace ehealthcare.Controller
         {
             this._renovateStrategy.DoRenovation(selectedRoom, renovateDateTime, roomForMerge);
         }
-        public Room GetRoomById(String id)
+        public Room GetRoomById(int id)
         {
             return roomService.GetRoomById(id);
         }
@@ -38,7 +44,7 @@ namespace ehealthcare.Controller
             return roomService.GetAllRooms();
         }
 
-        public void DeleteRoom(string id)
+        public void DeleteRoom(Room id)
         {
             roomService.DeleteRoom(id);
         }
@@ -62,7 +68,7 @@ namespace ehealthcare.Controller
             return roomService.GetRoomsForHospitalization();
         }
 
-        public void CheckIfRoomIsRenovated(ObservableCollection<Room> rooms)
+        public void CheckIfRoomIsRenovated(List<Room> rooms)
         {
             roomService.CheckIfRoomIsRenovated(rooms);
         }

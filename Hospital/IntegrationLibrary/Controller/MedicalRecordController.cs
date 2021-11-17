@@ -1,21 +1,23 @@
-﻿using ehealthcare.Model;
-using ehealthcare.PatientApp.ApplicationData;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.PatientApp.ApplicationData;
+
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
     public class MedicalRecordController
     {
-        private MedicalRecordService medicalRecordService;
+        private IMedicalRecordService medicalRecordService;
 
-        public MedicalRecordController()
+        public MedicalRecordController(IMedicalRecordService medicalRecordService)
         {
-            medicalRecordService = new MedicalRecordService();
+            this.medicalRecordService = medicalRecordService;
         }
 
         /**

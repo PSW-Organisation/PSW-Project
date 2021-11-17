@@ -1,25 +1,28 @@
-﻿using ehealthcare.Model;
-using ehealthcare.PatientApp.ApplicationData;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-	public class PatientService
-	{
+	public class PatientService : IPatientService
+    {
 		private PatientRepository patientRepository;
 
-        public PatientService()
+        public PatientService(PatientRepository patientRepository)
 		{
-			patientRepository = new PatientXMLRepository();
+            this.patientRepository = patientRepository;
         }
 
-		public Patient GetPatientById(String id)
+        public PatientService()
+        {
+        }
+
+        public Patient GetPatientById(int id)
 		{
 			return patientRepository.Get(id);
 		}
@@ -44,7 +47,7 @@ namespace ehealthcare.Service
             patientRepository.Update(patient);
         }
         
-        public void DeletePatient(string id)
+        public void DeletePatient(Patient id)
         {
             patientRepository.Delete(id);
         }

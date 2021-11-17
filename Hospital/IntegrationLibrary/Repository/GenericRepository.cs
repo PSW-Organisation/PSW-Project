@@ -1,20 +1,27 @@
-﻿using ehealthcare.Model;
+﻿using IntegrationLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Repository
+namespace IntegrationLibrary.Repository
 {
-	public interface GenericRepository<T> where T : Entity
+	public interface GenericRepository<T> where T : class
 	{
 		public List<T> GetAll();
-		public T Get(string id);
-		public void SaveAll();
+		public T Get(int id);
 		public void Save(T entity);
-		public void Update(T entity);
-		public void Delete(string id);
-		public string GenerateId();
+		public void SaveAll();
+		public T Update(T entity);
+	
+		public int GenerateId();
+		public void GenerateIdIfNeeded();
+		
+		IEnumerable<T> Search(Expression<Func<T, bool>> predicate);
+
+		public void Delete(T entity);
+		
 	}
 }

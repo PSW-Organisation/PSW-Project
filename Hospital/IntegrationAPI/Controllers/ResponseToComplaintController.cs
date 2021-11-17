@@ -8,6 +8,7 @@ using System;
 using IntegrationLibrary.Model;
 using IntegrationAPI.DTO;
 using IntegrationAPI.Adapters;
+using IntegrationLibrary.Service.ServicesInterfaces;
 
 namespace IntegrationAPI.Controllers
 {
@@ -17,26 +18,30 @@ namespace IntegrationAPI.Controllers
     public class ResponseToComplaintController : ControllerBase
     {
 
-        private readonly IntegrationDbContext dbContext;
+        private IResponseToComplaintService responseService;
+        private IPharmacyService pharmacyService;
+        private IComplaintService complaintService;
 
-        public ResponseToComplaintController(IntegrationDbContext context)
+        public ResponseToComplaintController(IResponseToComplaintService responseService, IPharmacyService pharmacyService, IComplaintService complaintService)
         {
-            dbContext = context;
+            this.responseService = responseService;
+            this.pharmacyService = pharmacyService;
+            this.complaintService = complaintService;
         }
 
         [HttpGet]       // GET /api/response
         public IActionResult Get()
         {
             List<ResponseToComplaintDTO> result = new List<ResponseToComplaintDTO>();
-            dbContext.ResponseToComplaint.ToList().ForEach(responseToComplaint => result.Add(ResponseToComplaintAdapter.ResponseToResponseDto(responseToComplaint)));
+            responseService.GetAll().ForEach(responseToComplaint => result.Add(ResponseToComplaintAdapter.ResponseToResponseDto(responseToComplaint)));
             return Ok(result);
         }
 
         [HttpGet("{id?}")]      // GET /api/pharmacy/1
-        public IActionResult Get(long id)
+        public IActionResult Get(int id)
         {
 
-            ResponseToComplaint response = dbContext.ResponseToComplaint.FirstOrDefault(response => response.ResponseToComplaintId == id);
+            ResponseToComplaint response = responseService.Get(id);
             if (response == null)
             {
                 return NotFound();
@@ -54,38 +59,53 @@ namespace IntegrationAPI.Controllers
             {
                 return BadRequest();
             }
-            Pharmacy pharmacy = dbContext.Pharmacies.FirstOrDefault(pharmacy => pharmacy.PharmacyApiKey == pharmaciesAccessApiKey);
-            if(pharmacy != null)
-                {
-                    Complaint complaint = dbContext.Complaints.FirstOrDefault(complaint => complaint.PharmacyId == pharmacy.PharmacyId);
-                        if(complaint != null) { 
-                            long id = dbContext.ResponseToComplaint.ToList().Count > 0 ? dbContext.ResponseToComplaint.Max(ResponseToComplaint => ResponseToComplaint.ResponseToComplaintId) + 1 : 1;
-                             ResponseToComplaint response = ResponseToComplaintAdapter.ResponseDtoToResponse(dto);
-                            response.ResponseToComplaintId = id;
-                            response.ComplaintId = complaint.ComplaintId;
-                            dbContext.ResponseToComplaint.Add(response);
-                            dbContext.SaveChanges();
-                            return Ok();
-                         }
-                
+            List<Pharmacy> allPharmacies = pharmacyService.GetAll();
+            Pharmacy pharmacy = new Pharmacy();
+            //Pharmacy pharmacy = dbContext.Pharmacies.FirstOrDefault(pharmacy => pharmacy.PharmacyApiKey == pharmaciesAccessApiKey);
+            foreach(Pharmacy p in allPharmacies)
+            {
+                if (p.PharmacyApiKey == pharmaciesAccessApiKey)
+                    pharmacy = p;
             }
+
+            if(pharmacy != null)
+             {
+                List<Complaint> allComplaints = complaintService.GetAll();
+                Complaint complaint = new Complaint();
+                    foreach ( Complaint c in allComplaints)
+                    {
+                        if (c.PharmacyId == pharmacy.Id)
+                            complaint = c;
+                    }
+                       // Complaint complaint = dbContext.Complaints.FirstOrDefault(complaint => complaint.PharmacyId == pharmacy.Id);
+
+                    if(complaint != null) { 
+                           
+             
+                      responseService.Save(ResponseToComplaintAdapter.ResponseDtoToResponse(dto));
+             
+                      return Ok();
+                    }
+                
+             }
             return NotFound();
           
 
         }
 
         [HttpDelete("{id?}")]
-        public IActionResult Delete(long id = 0)
+        //bila nula, ne znam zasto NIKOLA???
+        public IActionResult Delete(int id = 0)
         {
-            ResponseToComplaint response = dbContext.ResponseToComplaint.SingleOrDefault(response => response.ResponseToComplaintId == id);
+            ResponseToComplaint response = responseService.Get(id); 
+
             if (response == null)
             {
                 return NotFound();
             }
             else
             {
-                dbContext.ResponseToComplaint.Remove(response);
-                dbContext.SaveChanges();
+                responseService.Delete(response);
                 return Ok();
             }
         }

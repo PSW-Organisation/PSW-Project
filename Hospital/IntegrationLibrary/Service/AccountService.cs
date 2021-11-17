@@ -1,7 +1,6 @@
-﻿using ehealthcare.Model;
-using ehealthcare.PatientApp.ApplicationData;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-	public class AccountService
-	{
+	public class AccountService : IAccountService
+    {
 		private AccountRepository accountRepository;
         private PatientRepository patientRepository;
 
-        public AccountService()
+        public AccountService(AccountRepository accountRepository, PatientRepository patientRepository)
 		{
-			accountRepository = new AccountXMLRepository();
-            patientRepository = new PatientXMLRepository();
-
+            this.accountRepository = accountRepository;
+            this.patientRepository = patientRepository;
         }
 
-		public Account GetAccountByUsername(String username)
+		public Account GetAccountByUsername(int username)
 		{
 			return accountRepository.Get(username);
 		}
@@ -33,21 +31,21 @@ namespace ehealthcare.Service
             return accountRepository.GetAll();
         }
 
-		public void BlockAccount(string username)
+		public void BlockAccount(int username)
 		{
 			Account accountToBlock = accountRepository.Get(username);
 			accountToBlock.IsBlocked = true;
 			accountRepository.Update(accountToBlock);
 		}
 
-        public void UnblockAccount(string username)
+        public void UnblockAccount(int username)
         {
             Account account = accountRepository.Get(username);
             account.IsBlocked = false;
             accountRepository.Update(account);
         }
 
-        public bool IsAccountBlocked(string username, string password)
+        public bool IsAccountBlocked(int username, string password)
         {
             List<Account> accounts = accountRepository.GetAll();
             foreach (Account acc in accounts)
@@ -60,22 +58,22 @@ namespace ehealthcare.Service
             return false;
         }
 
-        public void DeleteAccount(string username)
+        public void DeleteAccount(Account account)
         {
-            accountRepository.Delete(username);
+            accountRepository.Delete(account);
         }
 
-        public void DeleteAccountByPatientId(string patientId)
+        public void DeleteAccountByPatientId(int patientId)
         {
 			accountRepository.DeleteAccountByPatientId(patientId);
         }
 
-        public string GetUsername(string patientId)
+        public int GetUsername(int patientId)
         {
             return accountRepository.GetUsername(patientId);
         }
 
-        public void RegisterGuestAccount(String id)
+        public void RegisterGuestAccount(int id)
         {
             Patient user = new Patient() { Id = id };
             Account account = new Account() { Id = id, Password = "bolnica", LoginType = LoginType.guestPatient, User = user, IsBlocked = false };
@@ -90,7 +88,7 @@ namespace ehealthcare.Service
 
         }
         
-        public void PromoteAccount(string id)
+        public void PromoteAccount(int id)
         {
             accountRepository.PromoteAccount(id);
         }

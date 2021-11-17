@@ -1,8 +1,8 @@
-using ehealthcare.Service;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {   
     [Serializable]
     public class VisitReport : Entity
@@ -14,7 +14,7 @@ namespace ehealthcare.Model
         private List<Prescription> prescription;
         private string patientNote;
 
-        public VisitReport() : base("undefinedKey") { }
+        public VisitReport() : base(-1) { }
 
         public DateTime ReportDate
         {
@@ -29,7 +29,7 @@ namespace ehealthcare.Model
             set { patient = value; }
         }
 
-        public string PatientId
+        public int PatientId
         {
             get { return patient.Id; }
             set

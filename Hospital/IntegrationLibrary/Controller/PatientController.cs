@@ -1,23 +1,24 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class PatientController
 	{
-		private PatientService patientService;
+		private IPatientService patientService;
 
-		public PatientController()
+		public PatientController(IPatientService patientService)
 		{
-            patientService = new PatientService();
+            this.patientService = patientService;
 		}
 
-        public Patient GetPatientById(String id)
+        public Patient GetPatientById(int id)
         {
             return patientService.GetPatientById(id);
         }
@@ -37,7 +38,7 @@ namespace ehealthcare.Controller
             patientService.SetPatientsMedicalPermit(patient, medicalPermit);
         }
 
-        public void DeletePatient(string id)
+        public void DeletePatient(Patient id)
         {
             patientService.DeletePatient(id);
         }

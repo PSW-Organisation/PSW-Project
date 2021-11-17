@@ -1,17 +1,19 @@
-﻿using ehealthcare.Model;
-using ehealthcare.PatientApp.ApplicationData;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.PatientApp.ApplicationData;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-	public class TherapyService
+	public class TherapyService : ITherapyService
 	{
 		private TherapyRepository therapyRepository;
 		private int xMinutes = 5;
 		private int xHours = 6;
+		private ITherapyNotificationService therapyNotificationService;
+
 		public class MedicineInfo
 		{
 			public DateTime Date { get; set; }
@@ -20,15 +22,20 @@ namespace ehealthcare.Service
 			public string Medicine { get; set; }
 		}
 
-		public TherapyService()
+		public TherapyService(TherapyRepository therapyRepository, ITherapyNotificationService therapyNotificationService)
 		{
-			therapyRepository = new TherapyXMLRepository();
+			this.therapyRepository = therapyRepository;
+			this.therapyNotificationService = therapyNotificationService;
 		}
 
-		/**
+        public TherapyService()
+        {
+        }
+
+        /**
         * <summary>Method returns all therapies for the given patient.</summary>
         */
-		public List<Therapy> GetAllTherapiesForPatient(Patient patient)
+        public List<Therapy> GetAllTherapiesForPatient(Patient patient)
 		{
 			List<Therapy> therapies = therapyRepository.GetAll();
 			List<Therapy> filteredTherapies = new List<Therapy>();
@@ -56,7 +63,7 @@ namespace ehealthcare.Service
 		/**
         * <summary>Method finds and returns all therapies from giver patients VisitReport.</summary>
         */
-		public List<Therapy> GetTherapiesFromVisitReport(string id)
+		public List<Therapy> GetTherapiesFromVisitReport(int id)
 		{
 			List<Therapy> therapies = therapyRepository.GetAll();
 			List<Therapy> filteredTherapies = new List<Therapy>();
@@ -76,7 +83,7 @@ namespace ehealthcare.Service
 		/**
         * <summary>Method finds and returns Therapy class object by it's id.</summary>
         */
-		public Therapy GetTherapyById(string id)
+		public Therapy GetTherapyById(int id)
 		{
 			return therapyRepository.Get(id);
 		}
@@ -148,7 +155,6 @@ namespace ehealthcare.Service
 				{
 					List<Account> accounts = new List<Account>();
 					accounts.Add(AppData.getInstance().LoggedInAccount);
-					TherapyNotificationService therapyNotificationService = new TherapyNotificationService();
 					foreach (Therapy therapy in therapiesToTake)
 					{
 						TherapyNotification therapyNotification = new TherapyNotification()
@@ -328,7 +334,6 @@ namespace ehealthcare.Service
 
 		public void EraseTherapyNotifications()
 		{
-			TherapyNotificationService therapyNotificationService = new TherapyNotificationService();
 			List<TherapyNotification> therapyNotifications = therapyNotificationService.GetTherapyNotificationsForPatient(AppData.getInstance().LoggedInAccount.User.Id);
 			if(therapyNotifications.Count != 0) 
 			{
@@ -336,7 +341,7 @@ namespace ehealthcare.Service
 				{
 					if(therapyNotification.Date.AddHours(xHours) <= DateTime.Now)
 					{
-						therapyNotificationService.RemoveTherapyNotificationFromStorage(therapyNotification.Id);
+						therapyNotificationService.RemoveTherapyNotificationFromStorage(therapyNotification);
 					}
 				}
 			}

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
-    [Serializable]
+    
     public class Address
     {
         private String homeAddress;

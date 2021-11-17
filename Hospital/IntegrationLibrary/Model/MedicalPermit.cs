@@ -1,8 +1,8 @@
-﻿using ehealthcare.Service;
+﻿using IntegrationLibrary.Service;
 using System;
 
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class MedicalPermit
@@ -17,7 +17,7 @@ namespace ehealthcare.Model
             set { doctor = value; }
         }
 
-        public String DoctorId
+        public int DoctorId
         {
             get { return doctor.Id; }
             set

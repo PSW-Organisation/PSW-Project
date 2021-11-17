@@ -1,20 +1,21 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class NotificationController
 	{
-		private NotificationService notificationService;
+		private INotificationService notificationService;
 
-		public NotificationController()
-		{
-			notificationService = new NotificationService();
+		public NotificationController(INotificationService notificationService)
+        {
+            this.notificationService = notificationService;
 		}
 
         public List<Notification> GetAllNotifications()

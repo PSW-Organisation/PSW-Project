@@ -1,22 +1,21 @@
-﻿using ehealthcare.Model;
-using ehealthcare.PatientApp.ApplicationData;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-	public class TherapyNotificationService
+	public class TherapyNotificationService : ITherapyNotificationService
 	{
 		private TherapyNotificationRepository therapyNotificationRepository;
 
-		public TherapyNotificationService()
+		public TherapyNotificationService(TherapyNotificationRepository therapyNotificationRepository)
 		{
-			therapyNotificationRepository = new TherapyNotificationXMLRepository();
+			this.therapyNotificationRepository = therapyNotificationRepository;
 		}
 
 		/**
@@ -27,7 +26,7 @@ namespace ehealthcare.Service
 			therapyNotificationRepository.Save(therapyNotification);
 		}
 
-		public List<TherapyNotification> GetTherapyNotificationsForPatient(string id)
+		public List<TherapyNotification> GetTherapyNotificationsForPatient(int id)
 		{
 			List<TherapyNotification> therapyNotifications = therapyNotificationRepository.GetAll();
 			List<TherapyNotification> filteredTherapyNotifications = new List<TherapyNotification>();
@@ -57,7 +56,7 @@ namespace ehealthcare.Service
 			return false;
 		}
 
-		public void RemoveTherapyNotificationFromStorage(string id)
+		public void RemoveTherapyNotificationFromStorage(TherapyNotification id)
 		{
 			therapyNotificationRepository.Delete(id);
 		}

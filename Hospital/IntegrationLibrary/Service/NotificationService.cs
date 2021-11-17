@@ -1,22 +1,21 @@
-﻿using ehealthcare.Model;
-using ehealthcare.PatientApp.ApplicationData;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-    public class NotificationService
+    public class NotificationService : INotificationService
     {
         private NotificationRepository notificationRepository;
 
-        public NotificationService()
+        public NotificationService(NotificationRepository notificationRepository)
         {
-            notificationRepository = new NotificationXMLRepository();
+            this.notificationRepository = notificationRepository;
         }
 
         public List<Notification> GetAllNotifications()
@@ -75,7 +74,7 @@ namespace ehealthcare.Service
             return notifications;
         }
 
-        private List<Notification> GetNotificationsForWorkers(NotificationRole role, List<Notification> allNotifications)
+        public List<Notification> GetNotificationsForWorkers(NotificationRole role, List<Notification> allNotifications)
         {
             List<Notification> notificationsForWorkers = new List<Notification>();
             foreach(Notification notification in allNotifications)
@@ -88,7 +87,7 @@ namespace ehealthcare.Service
             return notificationsForWorkers;
         }
 
-        private int GetIndex(Notification notification)
+        public int GetIndex(Notification notification)
         {
             int index = -1;
             List<Notification> allNotificaitons = notificationRepository.GetAll();

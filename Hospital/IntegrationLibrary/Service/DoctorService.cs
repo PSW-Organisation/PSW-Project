@@ -1,24 +1,30 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-	public class DoctorService
-	{
+	public class DoctorService : IDoctorService
+    {
 		private DoctorRepository doctorRepository;
+        private IWorkdayService workdayService;
 
-		public DoctorService()
+        public DoctorService(DoctorRepository doctorRepository, IWorkdayService workdayService)
 		{
-			doctorRepository = new DoctorXMLRepository();
+            this.doctorRepository = doctorRepository;
+            this.workdayService = workdayService;
         }
 
-		public Doctor GetDoctorById(String id)
+        public DoctorService()
+        {
+        }
+
+        public Doctor GetDoctorById(int id)
 		{
 			return doctorRepository.Get(id);
 		}
@@ -29,7 +35,6 @@ namespace ehealthcare.Service
         }
         public List<Doctor> FindAvailableDoctors(Specialization specialization)
         {
-            WorkdayService workdayService = new WorkdayService();
             List<Doctor> availableDoctors = new List<Doctor>();
             List<Doctor> specializedDoctors = GetDoctors(specialization);
             foreach (Doctor doctor in specializedDoctors)
@@ -59,7 +64,6 @@ namespace ehealthcare.Service
 
         public List<Doctor> FindAvailableDoctors(DateTime date)
         {
-            WorkdayService workdayService = new WorkdayService();
             List<Doctor> allDoctors = doctorRepository.GetAll();
             List<Doctor> availableDoctors = new List<Doctor>();
             foreach (Doctor doctor in allDoctors)

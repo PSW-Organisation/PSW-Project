@@ -1,6 +1,6 @@
-﻿using ehealthcare.Service;
+﻿using IntegrationLibrary.Service;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     public class TherapyNotification : PersonalizedNotification
     {
@@ -14,7 +14,7 @@ namespace ehealthcare.Model
             set { therapy = value; }
         }
 
-        public string TherapyId
+        public int TherapyId
         {
             get { return therapy.Id; }
             set

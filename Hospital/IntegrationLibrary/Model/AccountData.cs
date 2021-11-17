@@ -1,9 +1,9 @@
-﻿using ehealthcare.Proxies;
-using ehealthcare.Service;
+﻿using IntegrationLibrary.Proxies;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 
-namespace ehealthcare.Model
+namespace IntegrationLibrary.Model
 {
     [Serializable]
     public class AccountData : Entity
@@ -16,7 +16,7 @@ namespace ehealthcare.Model
         private int numberOfCancelledVisits;
         private List<DateTime> cancelledVisitsDates;
 
-        public AccountData() : base("undefinedKey") 
+        public AccountData() : base(-1) 
         { 
             lazyAccount = new AccountProxyImpl();
         }

@@ -1,20 +1,21 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Controller
+namespace IntegrationLibrary.Controller
 {
 	public class VisitTimeController
 	{
-		private VisitTimeService visitTimeService;
+		private IVisitTimeService visitTimeService;
 
-		public VisitTimeController()
+		public VisitTimeController(IVisitTimeService visitTimeService)
 		{
-			visitTimeService = new VisitTimeService();
+			this.visitTimeService = visitTimeService;
 		}
 
         public List<DateTime> getFirst21AvailableDates(Doctor doctor)
@@ -28,7 +29,7 @@ namespace ehealthcare.Controller
             return visitTimeService.GetNearestAvailableTimeSlot(doctor, startTime, duration);
         }
 
-        public VisitTime GetNearestAvailableDelay(String doctorId, String patientId, VisitTime takenTimeSlot, List<VisitTime> potentialDelays)
+        public VisitTime GetNearestAvailableDelay(int doctorId,int patientId, VisitTime takenTimeSlot, List<VisitTime> potentialDelays)
         {
             return visitTimeService.GetNearestAvailableDelay(doctorId, patientId, takenTimeSlot, potentialDelays);
         }
@@ -41,17 +42,17 @@ namespace ehealthcare.Controller
         }
 
 
-        public bool IsPatientAvailable(String patientId, VisitTime visitTime)
+        public bool IsPatientAvailable(int patientId, VisitTime visitTime)
         {
             return visitTimeService.IsPatientAvailable(patientId, visitTime);
         }
 
-        public List<VisitTime> GetAvailableTimeSlots(string doctorId, DateTime date)
+        public List<VisitTime> GetAvailableTimeSlots(int doctorId, DateTime date)
         {
             return visitTimeService.GetAvailableTimeSlots(doctorId, date);
         }
 
-        public List<VisitTime> GetAvailableTimeSlots(string doctorId)
+        public List<VisitTime> GetAvailableTimeSlots(int doctorId)
         {
             return visitTimeService.GetAvailableTimeSlots(doctorId);
         }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Repository
+namespace IntegrationLibrary.Repository
 {
     public interface HolidayRepository : GenericRepository<Holiday>
     {
-        public List<Holiday> GetHolidaysForDoctor(string doctorId);
+        public List<Holiday> GetHolidaysForDoctor(int doctorId);
     }
 }

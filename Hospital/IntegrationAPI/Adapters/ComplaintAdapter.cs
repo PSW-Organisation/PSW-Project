@@ -13,7 +13,7 @@ namespace IntegrationAPI.Adapters
         public static Complaint ComplaintDtoToComplaint(ComplaintDTO dto)
         {
             Complaint complaint = new Complaint();
-            complaint.ComplaintId = dto.ComplaintId;
+            complaint.Id = dto.ComplaintId;
             complaint.Date = dto.Date;
             complaint.Title = dto.Title;
             complaint.Content = dto.Content;
@@ -24,7 +24,7 @@ namespace IntegrationAPI.Adapters
         public static ComplaintDTO ComplaintToComplaintDto(Complaint complaint)
         {
             ComplaintDTO dto = new ComplaintDTO();
-            dto.ComplaintId = complaint.ComplaintId;
+            dto.ComplaintId = complaint.Id;
       
             dto.Date = complaint.Date;
             dto.Title = complaint.Title;

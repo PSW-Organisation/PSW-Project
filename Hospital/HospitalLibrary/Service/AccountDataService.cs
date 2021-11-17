@@ -1,7 +1,7 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using ehealthcare.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,6 @@ namespace ehealthcare.Service
 		private int cancelledVisitsLimit = 3;
 		public AccountDataService()
 		{
-			accountDataRepository = new AccountDataXMLRepository();
 		}
 
 		public int GetNumberOfReadNotificationsForAccount(string username)

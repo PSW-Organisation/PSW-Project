@@ -1,6 +1,6 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +8,17 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-	public class ReviewService
+	public class ReviewService : IReviewService
 	{
-
 		private DoctorReviewRepository doctorReviewRepository;
 		private HospitalReviewRepository hospitalReviewRepository;
 
-		public ReviewService()
+		public ReviewService(DoctorReviewRepository doctorReviewRepository, HospitalReviewRepository hospitalReviewRepository)
 		{
-			doctorReviewRepository = new DoctorReviewXMLRepository();
-			hospitalReviewRepository = new HospitalReviewXMLRepository();
+			this.doctorReviewRepository = doctorReviewRepository;
+			this.hospitalReviewRepository = hospitalReviewRepository;
 		}
 
 		public void AddNewDoctorReviewToStorage(DoctorReview doctorReview)

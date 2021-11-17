@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 
-namespace ehealthcare.Service
+namespace IntegrationLibrary.Service
 {
-    public class AllergenService
+    public class AllergenService : IAllergenService
     {
         private AllergenRepository allergenRepository;
 
-        public AllergenService()
+        public AllergenService(AllergenRepository allergenRepository)
         {
-            allergenRepository = new AllergenXMLRepository();
+            this.allergenRepository = allergenRepository;
         }
 
         public List<Allergen> GetAllAllergens()

@@ -1,26 +1,24 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Proxies
+namespace IntegrationLibrary.Proxies
 {
 	interface IVisit
 	{
-		public Visit GetVisit(string id);
+		public Visit GetVisit(int id);
 	}
 
 	public class VisitImpl : IVisit
 	{
 		VisitRepository visitRepository;
-		public Visit GetVisit(string id)
+		public Visit GetVisit(int id)
 		{
-			if (visitRepository == null)
-				visitRepository = new VisitXMLRepository();
+			
 			return visitRepository.Get(id);
 		}
 	}
@@ -28,7 +26,7 @@ namespace ehealthcare.Proxies
 	public class VisitProxyImpl : IVisit
 	{
 		private IVisit visit;
-		public Visit GetVisit(string id)
+		public Visit GetVisit(int id)
 		{
 			if (visit == null)
 			{

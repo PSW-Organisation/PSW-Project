@@ -1,26 +1,24 @@
-﻿using ehealthcare.Model;
-using ehealthcare.Repository;
-using ehealthcare.Repository.XMLRepository;
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Proxies
+namespace IntegrationLibrary.Proxies
 {
 	interface IRoom
 	{
-		public Room GetRoom(string id);
+		public Room GetRoom(int id);
 	}
 
 	public class RoomImpl : IRoom
 	{
 		RoomRepository roomRepository;
-		public Room GetRoom(string id)
+		public Room GetRoom(int id)
 		{
-			if (roomRepository == null)
-				roomRepository = new RoomXMLRepository();
+			
 			return roomRepository.Get(id);
 		}
 	}
@@ -28,7 +26,7 @@ namespace ehealthcare.Proxies
 	public class RoomProxyImpl : IRoom
 	{
 		private IRoom room;
-		public Room GetRoom(string id)
+		public Room GetRoom(int id)
 		{
 			if (room == null)
 			{
