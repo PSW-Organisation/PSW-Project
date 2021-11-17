@@ -1,14 +1,16 @@
 using ehealthcare.Service;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ehealthcare.Model
 {
     [Serializable]
+    [Table("Doctors")]
     public class Doctor : User
     {
         private Specialization specialization;
         private int usedOffdays;
-        private Room doctorRoom;
+       
 
         public Doctor()
         {
@@ -26,21 +28,7 @@ namespace ehealthcare.Model
             set { usedOffdays = value; }
         }
 
-        [System.Xml.Serialization.XmlIgnore]
-        public Room DoctorRoom
-        {
-            get { return doctorRoom; }
-            set { doctorRoom = value; }
-        }
-
-        public int DoctorRoomId
-        {
-            get { return doctorRoom.Id; }
-            set
-            {
-                RoomService roomService = new RoomService();
-                doctorRoom = roomService.GetRoomById(value);
-            }
-        }
+       
+       
     }
 }

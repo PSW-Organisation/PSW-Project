@@ -1,14 +1,16 @@
-﻿using System;
+﻿using HospitalLibrary.Model;
+using System;
 using System.Collections.Generic;
 
 namespace ehealthcare.Model
 {
     [Serializable]
-    public class Country
+    public class Country : EntityDb
     {
         private String name;
         private String code;
         private List<City> cities;
+        
 
         public Country()
         {
@@ -35,5 +37,7 @@ namespace ehealthcare.Model
 
             set { cities = value; }
         }
+
+       
     }
 }

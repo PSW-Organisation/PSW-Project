@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ehealthcare.Model
 {
     [Serializable]
+    [Table("Patients")]
     public class Patient : User
     {
         private MedicalRecord medicalRecord;
@@ -13,13 +15,16 @@ namespace ehealthcare.Model
         {
         }
 
-        public MedicalRecord MedicalRecord
+
+        public virtual MedicalRecord Medical
         {
             get { return medicalRecord; }
             set { medicalRecord = value; }
         }
 
-        public List<MedicalPermit> MedicalPermit
+        public int MedicalRecordId { get; set; }
+
+        public virtual ICollection<MedicalPermit> MedicalPermit
         {
             get
             {

@@ -7,7 +7,7 @@ namespace ehealthcare.Model
 {
     public class Reminder : Entity
     {
-        private IAccount lazyAccount;
+       // private IAccount lazyAccount;
         private Account account;
         private DateTime startTime;
         private List<DayOfWeek> days;
@@ -18,27 +18,10 @@ namespace ehealthcare.Model
 
         public Reminder() : base("undefinedNumberKey")
         {
-            lazyAccount = new AccountProxyImpl();
+           
         }
 
-        [System.Xml.Serialization.XmlIgnore]
-        public Account Account
-        {
-            get
-            {
-                if (account == null)
-                {
-                    account = lazyAccount.GetAccount(AccountUsername);
-                }
-                return account;
-            }
-            set
-            {
-                account = value;
-                AccountUsername = value.Id;
-            }
-        }
-
+       
         public string AccountUsername { get; set; }
 
         public DateTime StartTime

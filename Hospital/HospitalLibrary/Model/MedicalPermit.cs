@@ -1,11 +1,12 @@
 ﻿using ehealthcare.Service;
+using HospitalLibrary.Model;
 using System;
 
 
 namespace ehealthcare.Model
 {
     [Serializable]
-    public class MedicalPermit
+    public class MedicalPermit : EntityDb
     {
         private Doctor doctor;
         private DateTime expirationDate;

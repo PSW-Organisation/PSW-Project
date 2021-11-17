@@ -10,20 +10,21 @@ namespace ehealthcare.Service
 {
 	public class LoginService
     {
-        private AccountRepository accountRepository;
+       // private AccountRepository accountRepository;
 
         public LoginService()
         {
-            accountRepository = new AccountXMLRepository();
+           // accountRepository = new AccountXMLRepository();
         }
 
         /**
          * <summary>Method checks login credentials and sets global account for the given credentials. <br/>
          * Returns true if the username and password belond to a registered user in database, and false if otherwise.</summary>
          */
+        /*
         public bool AttemptLogin(string usernameAttempt, string passwordAttempt)
 		{
-            List<Account> accounts = accountRepository.GetAll();
+            //List<Account> accounts = accountRepository.GetAll();
             foreach (Account acc in accounts)
             {
                 if (usernameAttempt.Equals(acc.Id) && passwordAttempt.Equals(acc.Password) && acc.IsBlocked == false)
@@ -33,7 +34,9 @@ namespace ehealthcare.Service
                 }
             }
             return false;
-        }
+
+            
+        }*/
 
         private void SetLoggedInAccount(Account acc)
         {

@@ -25,7 +25,7 @@ namespace ehealthcare.Service
 
         public void ChangeDoctorRoom(Room roomForTransfer, Room oldRoom)
         {
-            doctorRepository.ChangeDoctorRoom(roomForTransfer, oldRoom);
+            //doctorRepository.ChangeDoctorRoom(roomForTransfer, oldRoom);
         }
         public List<Doctor> FindAvailableDoctors(Specialization specialization)
         {

@@ -13,7 +13,7 @@ namespace ehealthcare.Service
         private WorkdayRepository workdayRepository;
         private VisitRepository visitRepository;
         private PersonalizedNotificationRepository notificationRepository;
-        private AccountRepository accountRepository;
+       // private AccountRepository accountRepository;
 
         public HolidayService()
         {
@@ -22,7 +22,7 @@ namespace ehealthcare.Service
             workdayRepository = new WorkdayXMLRepository();
             visitRepository = new VisitXMLRepository();
             notificationRepository = new PersonalizedNotificationXMLRepository();
-            accountRepository = new AccountXMLRepository();
+          //  accountRepository = new AccountXMLRepository();
         }
 
         internal bool CanUseHoliday(Holiday potentialHoliday)
@@ -53,7 +53,7 @@ namespace ehealthcare.Service
             foreach (var visit in cancelledVisits)
             {
                 List<Account> accounts = new List<Account>();
-                accounts.Add(accountRepository.GetAccountByPatientId(visit.PatientId));
+                //accounts.Add(accountRepository.GetAccountByPatientId(visit.PatientId));
                 notificationRepository.NotifyPatientOfCancellation(accounts, visit.VisitTime.StartTime);
             }
         }

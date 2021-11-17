@@ -11,7 +11,7 @@ namespace ehealthcare.Repository.XMLRepository
 	{
 		public DoctorXMLRepository() : base("doctors.xml") { }
 
-        public void ChangeDoctorRoom(Room roomForTransfer, Room oldRoom)
+       /* public void ChangeDoctorRoom(Room roomForTransfer, Room oldRoom)
         {
             foreach (Doctor doctor in base.GetAll())
             {
@@ -24,7 +24,7 @@ namespace ehealthcare.Repository.XMLRepository
                 }
             }
             SaveAll();
-        }
+        }*/
 
         public Doctor GetDoctorByName(string fullName)
         {

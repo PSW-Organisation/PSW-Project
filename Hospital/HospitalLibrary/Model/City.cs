@@ -1,9 +1,10 @@
-﻿using System;
+﻿using HospitalLibrary.Model;
+using System;
 
 namespace ehealthcare.Model
 {
     [Serializable]
-    public class City
+    public class City : EntityDb
     {
         private String name;
         private String postalCode;
@@ -33,5 +34,7 @@ namespace ehealthcare.Model
 
             set { country = value; }
         }
+
+        public int CountryId { get; set; }
     }
 }

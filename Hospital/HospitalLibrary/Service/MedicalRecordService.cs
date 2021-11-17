@@ -24,15 +24,15 @@ namespace ehealthcare.Service
         */
         public void SetPatientsDoctor(string patientId ,Doctor doctor)
         {
-            ((Patient)AppData.getInstance().LoggedInAccount.User).MedicalRecord.PersonalDoctor = doctor;
+            ((Patient)AppData.getInstance().LoggedInAccount.User).Medical.PersonalDoctor = doctor;
             Patient patient = patientRepository.Get(patientId);
-            patient.MedicalRecord.PersonalDoctor = doctor;
+            patient.Medical.PersonalDoctor = doctor;
             patientRepository.Save(patient);
         }
-
+        /*
         public bool CheckIfAlergic(Patient patient, Medicine medicine)
         {
-            foreach (Allergen allergen in patient.MedicalRecord.Allergens)
+            foreach (Allergen allergen in patient.Medical.Allergens)
             {
                 if (allergen.IsAlergic == true && allergen.Id == medicine.Name)
                 {
@@ -40,6 +40,6 @@ namespace ehealthcare.Service
                 }
             }
             return false;
-        }
+        }*/
     }
 }

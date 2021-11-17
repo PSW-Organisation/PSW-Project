@@ -1,27 +1,38 @@
-﻿using HospitalLibrary.FeedbackAndSurvey.Model;
-using HospitalLibrary.GraphicalEditor.Model;
+﻿using HospitalLibrary.GraphicalEditor.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.RoomsAndEquipment.Model;
+using HospitalLibrary.Model;
+using System.Linq;
 
 namespace ehealthcare.Model
 {
     public class HospitalDbContext : DbContext
     {
         public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
-
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Allergen> Allergens { get; set; }
+        public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<MedicalPermit> MedicalPermits { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
         public DbSet<RoomGraphic> RoomGraphics { get; set; }
         public DbSet<Room> Rooms { get; set; }
 
         public DbSet<FloorGraphic> FloorGraphics { get; set; }
 
+        public DbSet<PatientAllergen> PatientAllergens { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<ExteriorGraphic> ExteriorGraphic { get; set; }
         public DbSet<TermOfRelocationEquipment> TermOfRelocationEquipments { get; set; }
 
         public DbSet<RoomEquipment> RoomEquipments { get; set; }
+
 
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
@@ -32,15 +43,14 @@ namespace ehealthcare.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
+            modelBuilder.Entity<Allergen>(a =>
             {
-                Id = -1,
-                PatientUsername = "p1",
-                SubmissionDate = new DateTime(2021, 11, 4),
-                Text = "alallalal",
-                Anonymous = false,
-                PublishAllowed = false,
-                IsPublished = false
+                a.HasData(new Allergen()
+                {
+                    Id = "1",
+                    Type = "macija dlaka",
+
+                });
             });
 
             modelBuilder.Entity<RoomEquipment>().HasData(
@@ -71,6 +81,17 @@ namespace ehealthcare.Model
 
 
                 );
+            modelBuilder.Entity<PatientFeedback>().HasData(
+                new
+                {
+                    Id = -1,
+                    PatientUsername = "p1",
+                    SubmissionDate = new DateTime(2021, 11, 4),
+                    Text = "alallalal",
+                    Anonymous = false,
+                    PublishAllowed = false,
+                    IsPublished = false
+                });
 
 
             modelBuilder.Entity<Room>().HasData(
@@ -515,7 +536,8 @@ namespace ehealthcare.Model
 
             );
 
-            modelBuilder.Entity<ExteriorGraphic>().HasData(new ExteriorGraphic()
+            modelBuilder.Entity<ExteriorGraphic>().HasData(
+            new ExteriorGraphic()
             {
                 Id = 1,
                 X = 180,
@@ -591,7 +613,136 @@ namespace ehealthcare.Model
                 Name = "P",
                 Type = "parking",
                 IdElement = -1
+            }
+            );
+
+
+
+            modelBuilder.Entity<MedicalRecord>(m =>
+            {
+                m.HasData(
+                  new MedicalRecord
+                  {
+                      PersonalId = "1209001129123",
+                      BloodType = 1,
+                      Height = 186,
+                      Weight = 90,
+                      Profession = "Professor",
+                      DoctorId = "1",
+                      PatientId = "imbiamba"
+                  });
+
             });
+
+
+            modelBuilder.Entity<PatientAllergen>(a =>
+            {
+                a.HasData(new PatientAllergen()
+                {
+                    Id = 1,
+                    MedicalRecordId = 1,
+                    AllergenId = 1
+
+                });
+            });
+
+
+            modelBuilder.Entity<Patient>(p =>
+            {
+                p.HasOne<MedicalRecord>(m => m.Medical);
+                p.HasData(
+                    new Patient
+                    {
+                        Id = "imbiamba",
+                        Name = "Marko",
+                        Surname = "Ilic",
+                        ParentName = "Milan",
+                        Username = "imbiamba",
+                        Password = "pecurkaa",
+                        LoginType = LoginType.patient,
+                        Gender = "male",
+                        DateOfBirth = new DateTime(2001, 11, 9),
+                        Phone = "019919199191",
+                        Email = "markoilic@gmail.com",
+                        AddressId = 1,
+                        IsBlocked = false,
+                        IsActivated = false,
+                        MedicalRecordId = 1
+                    });
+            });
+
+
+
+
+            modelBuilder.Entity<Doctor>(d =>
+            {
+
+                d.HasData(
+                    new Doctor
+                    {
+                        Id = "nelex",
+                        Name = "Nemanja",
+                        Surname = "Radojcic",
+                        ParentName = "Zoran",
+                        Username = "nelex",
+                        Password = "najjacapecurka",
+                        LoginType = LoginType.doctor,
+                        Gender = "male",
+                        DateOfBirth = new DateTime(1999, 7, 14),
+                        Phone = "019919199191",
+                        Email = "nemanjar@gmail.com",
+                        AddressId = 1,
+                        IsBlocked = false,
+                        IsActivated = false,
+                        UsedOffDays = 12,
+                        Specialization = 0,
+                    });
+            });
+
+
+
+
+            modelBuilder.Entity<City>().HasData(new City()
+            {
+                Id = 1,
+                Name = "Novi Sad",
+                PostalCode = "21000",
+                CountryId = 1
+
+            });
+
+
+            modelBuilder.Entity<Country>(c =>
+            {
+                c.HasData(
+                    new Country
+                    {
+                        Id = 1,
+                        Name = "Srbija",
+                        Code = "21000"
+                    });
+
+                c.HasMany(city => city.Cities);
+            });
+
+            modelBuilder.Entity<Address>().HasData(new Address()
+            {
+                Id = 1,
+                HomeAddress = "Sime Milutinovica, 2",
+                CityId = 1
+            });
+
+            modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
+            {
+                Id = 1,
+                PatientUsername = "imbiamba",
+                SubmissionDate = new DateTime(2021, 11, 4),
+                Text = "alallalal",
+                Anonymous = false,
+                PublishAllowed = false,
+                IsPublished = false
+            });
+
 
         }
     }

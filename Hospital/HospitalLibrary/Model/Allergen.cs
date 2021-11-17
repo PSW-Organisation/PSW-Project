@@ -1,4 +1,8 @@
+using HospitalLibrary.Model;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ehealthcare.Model
 {
@@ -6,7 +10,6 @@ namespace ehealthcare.Model
     public class Allergen : Entity
     {
         private String type;
-        private Boolean isAlergic;
 
         public Allergen() : base("undefinedKey") { }
 
@@ -17,11 +20,13 @@ namespace ehealthcare.Model
             set { type = value; }
         }
 
-        public bool IsAlergic
+       /* public bool IsAlergic
         {
             get { return isAlergic; }
 
             set { isAlergic = value; }
         }
+
+        */
     }
 }
