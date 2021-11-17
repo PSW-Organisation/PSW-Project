@@ -5,16 +5,14 @@ namespace ehealthcare.Model
 {
     public class RoomGraphic : Entity
     {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Width { get; set; }
-        public double Height { get; set; }
-        public int Floor { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
         public string DoorPosition { get; set; }
-        public string Type { get; set; }
-        public string Name { get; set; }
 
-        public Room RoomRef { get; set; }
+        public string RoomId { get; set; }
+        public Room Room { get; set; }
 
 
         public RoomGraphic():base("undefinedKey")

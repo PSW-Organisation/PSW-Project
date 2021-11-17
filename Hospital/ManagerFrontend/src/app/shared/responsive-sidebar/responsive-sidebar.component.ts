@@ -1,37 +1,31 @@
-import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
+import { Component, Input, ViewChild } from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 import { SidenavService } from './sidenav.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-responsive-sidebar',
   templateUrl: './responsive-sidebar.component.html',
   styleUrls: ['./responsive-sidebar.component.css']
 })
-export class ResponsiveSidebarComponent implements OnInit {
+export class ResponsiveSidebarComponent {
 
   @ViewChild('sidenav') public sidenav!: MatSidenav;
-  mobileQuery: MediaQueryList;
-  private _mobileQueryListener: () => void;
+  isHandset$: Observable<boolean> = this._breakpointObserver.observe(Breakpoints.Handset)
+  .pipe(
+    map(result => result.matches),
+    shareReplay()
+  );
+  @Input() sidenavTitle: string = "";
   isShowing: boolean = false;
 
-  constructor(changeDetectorRef: ChangeDetectorRef,
-              media: MediaMatcher,
-              private sidenavService: SidenavService) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addEventListener('change', this._mobileQueryListener);
-  }
+  constructor(private _breakpointObserver: BreakpointObserver,
+              private _sidenavService: SidenavService) { }
 
-  ngOnInit(): void {
-  }
-  
   ngAfterViewInit(): void {
-    this.sidenavService.setSidenav(this.sidenav);
-  }
-
-  ngOnDestroy(): void {
-    this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
+    this._sidenavService.setSidenav(this.sidenav);
   }
 
   open(): void {

@@ -4,6 +4,9 @@ namespace ehealthcare.Model
     {
         examination,
         operation,
-        restingRoom
+        restingRoom,
+        restroom,
+        counter,
+        waitingRoom
     }
 }

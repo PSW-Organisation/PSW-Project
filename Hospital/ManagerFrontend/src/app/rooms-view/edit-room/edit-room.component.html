@@ -1,8 +1,29 @@
-<mat-form-field appearance="fill">
-  <mat-label>Room type</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let room of rooms" [value]="room.type">
-      {{ room.type }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<div class="col-4">
+  <mat-form-field appearance="fill">
+    <mat-label>Room type :</mat-label>
+    <mat-select [(ngModel)]="selectedType" (selectionChange)="select()">
+      <mat-option *ngFor="let type of types" [value]="type.RoomType">
+        {{ type.text }}
+        <div></div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Name :</mat-label>
+    <input
+      matInput
+      placeholder="Enter room name"
+      [(ngModel)]="newName"
+      (change)="select()"
+    />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Sector :</mat-label>
+    <input
+      matInput
+      placeholder="Enter room sector"
+      [(ngModel)]="newSector"
+      (change)="select()"
+    />
+  </mat-form-field>
+</div>

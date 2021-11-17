@@ -10,6 +10,8 @@ namespace HospitalAPI.DTO
     {
         public string Id { get; set; }
         public String Sector { get; set; }
+
+        public String Name { get; set; }
         public int Floor { get; set; }
         public RoomType RoomType { get; set; }
         public bool IsRenovated { get; set; }

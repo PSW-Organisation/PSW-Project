@@ -1,20 +1,22 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-  <mat-sidenav-container
-    class="example-sidenav-container"
-    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
-  >
-    <mat-sidenav
-      #sidenav
-      [mode]="mobileQuery.matches ? 'over' : 'side'"
-      [fixedInViewport]="mobileQuery.matches"
-      position="end"
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [(opened)]="isShowing"
-      fixedTopGap="56"
-    >
+      position="end">
+      <mat-toolbar>
+        <button
+          type="button"
+          aria-label="Close sidenav"
+          mat-icon-button
+          (click)="sidenav.close()">
+          <mat-icon aria-label="Side nav close icon">arrow_forward</mat-icon>
+        </button>
+        {{sidenavTitle}}
+      </mat-toolbar>
       <ng-content select="[app-sidebar]"></ng-content>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <ng-content select="[app-sidebar-content]"></ng-content>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ng-content select="[app-sidebar-content]"></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
