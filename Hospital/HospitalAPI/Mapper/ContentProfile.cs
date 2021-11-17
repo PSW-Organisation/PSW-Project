@@ -15,10 +15,11 @@ namespace HospitalAPI.Mapper
         public ContentProfile()
         {
             CreateMap<RoomGraphic, RoomGraphicDTO>();
+            CreateMap<Room, RoomDTO>();
             CreateMap<ExteriorGraphic, ExteriorGraphicDTO>();
             CreateMap<PatientFeedback, PatientFeedbackDTO>();
             CreateMap<PatientFeedbackDTO, PatientFeedback>();
-
+            CreateMap<FloorGraphic, FloorGraphicDTO>();
         }
     }
 }

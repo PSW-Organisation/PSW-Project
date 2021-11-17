@@ -1,12 +1,19 @@
-export interface IRoom{
-    id: number;
-    name: string;
-    type: string;
-    x: number;
-    y: number;
-    width : number;
-    height : number;
-    doorPosition: string;
-    floor: number;
+export interface IRoom {
+  id: number;
+  name: string;
+  sector: string;
+  floor: number;
+  roomType: RoomType;
+  isRenovated: boolean;
+  isRenovatedUntil: string;
+  numOfTakenBeds: number;
 }
 
+export enum RoomType {
+  examination,
+  operation,
+  restingRoom,
+  restroom,
+  counter,
+  waitingRoom,
+}

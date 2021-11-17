@@ -1,188 +1,188 @@
 [
-    {
+  {
+    "floor": 0,
+    "rooms": [
+      {
+        "id": 0,
+        "doorPosition": "right",
+        "width": 100,
+        "height": 100,
+        "x": 0,
+        "y": 0,
+        "name": "Š1",
         "floor": 0,
-        "rooms": [
-            {
-                "id": 0,
-                "doorPosition": "right",
-                "width": 100,
-                "height": 100,
-                "x": 0,
-                "y": 0,
-                "name": "Š1",
-                "floor": 0,
-                "type": "Salter"
-            },
-            {
-                "id": 1,
-                "doorPosition": "right",
-                "width": 100,
-                "height": 100,
-                "x": 0,
-                "y": 100,
-                "name": "Š2",
-                "floor": 0,
-                "type": "Salter"
-            },
-            {
-                "id": 2,
-                "doorPosition": "right",
-                "width": 75,
-                "height": 145,
-                "x": 0,
-                "y": 340,
-                "name": "SP1",
-                "floor": 0,
-                "type": "SalaZaPregled"
-            },
-            {
-                "id": 3,
-                "doorPosition": "left",
-                "width": 75,
-                "height": 145,
-                "x": 222,
-                "y": 340,
-                "name": "SP2",
-                "floor": 0,
-                "type": "SalaZaPregled"
-            },
-            {
-                "id": 4,
-                "doorPosition": "top",
-                "width": 147,
-                "height": 80,
-                "x": 0,
-                "y": 517,
-                "name": "WC",
-                "floor": 0,
-                "type": "WC"
-            },
-            {
-                "id": 5,
-                "doorPosition": "top",
-                "width": 147,
-                "height": 80,
-                "x": 150,
-                "y": 517,
-                "name": "WC",
-                "floor": 0,
-                "type": "WC"
-            },
-            {
-                "id": 6,
-                "doorPosition": "none",
-                "width": 140,
-                "height": 160,
-                "x": 150,
-                "y": 20,
-                "name": "Č",
-                "floor": 0,
-                "type": "Cekaonica"
-            }
-        ]
-    },
-    {
+        "type": 4
+      },
+      {
+        "id": 1,
+        "doorPosition": "right",
+        "width": 100,
+        "height": 100,
+        "x": 0,
+        "y": 100,
+        "name": "Š2",
+        "floor": 0,
+        "type": 4
+      },
+      {
+        "id": 2,
+        "doorPosition": "right",
+        "width": 75,
+        "height": 145,
+        "x": 0,
+        "y": 340,
+        "name": "SP1",
+        "floor": 0,
+        "type": 0
+      },
+      {
+        "id": 3,
+        "doorPosition": "left",
+        "width": 75,
+        "height": 145,
+        "x": 222,
+        "y": 340,
+        "name": "SP2",
+        "floor": 0,
+        "type": 0
+      },
+      {
+        "id": 4,
+        "doorPosition": "top",
+        "width": 147,
+        "height": 80,
+        "x": 0,
+        "y": 517,
+        "name": "WC",
+        "floor": 0,
+        "type": 3
+      },
+      {
+        "id": 5,
+        "doorPosition": "top",
+        "width": 147,
+        "height": 80,
+        "x": 150,
+        "y": 517,
+        "name": "WC",
+        "floor": 0,
+        "type": 3
+      },
+      {
+        "id": 6,
+        "doorPosition": "none",
+        "width": 140,
+        "height": 160,
+        "x": 150,
+        "y": 20,
+        "name": "Č",
+        "floor": 0,
+        "type": 5
+      }
+    ]
+  },
+  {
+    "floor": 1,
+    "rooms": [
+      {
+        "id": 7,
+        "doorPosition": "right",
+        "width": 100,
+        "height": 100,
+        "x": 0,
+        "y": 0,
+        "name": "OP1",
         "floor": 1,
-        "rooms": [
-            {
-                "id": 7,
-                "doorPosition": "right",
-                "width": 100,
-                "height": 100,
-                "x": 0,
-                "y": 0,
-                "name": "OP1",
-                "floor": 1,
-                "type": "OperacionaSala"
-            },
-            {
-                "id": 8,
-                "doorPosition": "left",
-                "width": 100,
-                "height": 100,
-                "x": 197,
-                "y": 0,
-                "name": "OP2",
-                "floor": 1,
-                "type": "OperacionaSala"
-            },
-            {
-                "id": 9,
-                "doorPosition": "right",
-                "width": 100,
-                "height": 100,
-                "x": 0,
-                "y": 100,
-                "name": "OP3",
-                "floor": 1,
-                "type": "OperacionaSala"
-            },
-            {
-                "id": 10,
-                "doorPosition": "left",
-                "width": 100,
-                "height": 100,
-                "x": 197,
-                "y": 100,
-                "name": "OP4",
-                "floor": 1,
-                "type": "OperacionaSala"
-            },
-            {
-                "id": 11,
-                "doorPosition": "right",
-                "width": 75,
-                "height": 145,
-                "x": 0,
-                "y": 340,
-                "name": "SP3",
-                "floor": 1,
-                "type": "SalaZaPregled"
-            },
-            {
-                "id": 12,
-                "doorPosition": "left",
-                "width": 75,
-                "height": 145,
-                "x": 222,
-                "y": 340,
-                "name": "SP4",
-                "floor": 1,
-                "type": "SalaZaPregled"
-            },
-            {
-                "id": 13,
-                "doorPosition": "top",
-                "width": 147,
-                "height": 80,
-                "x": 0,
-                "y": 517,
-                "name": "WC",
-                "floor": 1,
-                "type": "WC"
-            },
-            {
-                "id": 14,
-                "doorPosition": "top",
-                "width": 147,
-                "height": 80,
-                "x": 150,
-                "y": 517,
-                "name": "WC",
-                "floor": 1,
-                "type": "WC"
-            },
-            {
-                "id": 15,
-                "doorPosition": "none",
-                "width": 140,
-                "height": 100,
-                "x": 10,
-                "y": 220,
-                "name": "Č",
-                "floor": 1,
-                "type": "Cekaonica"
-            }
-        ]
-    }
+        "type": 1
+      },
+      {
+        "id": 8,
+        "doorPosition": "left",
+        "width": 100,
+        "height": 100,
+        "x": 197,
+        "y": 0,
+        "name": "OP2",
+        "floor": 1,
+        "type": 1
+      },
+      {
+        "id": 9,
+        "doorPosition": "right",
+        "width": 100,
+        "height": 100,
+        "x": 0,
+        "y": 100,
+        "name": "OP3",
+        "floor": 1,
+        "type": 1
+      },
+      {
+        "id": 10,
+        "doorPosition": "left",
+        "width": 100,
+        "height": 100,
+        "x": 197,
+        "y": 100,
+        "name": "OP4",
+        "floor": 1,
+        "type": 1
+      },
+      {
+        "id": 11,
+        "doorPosition": "right",
+        "width": 75,
+        "height": 145,
+        "x": 0,
+        "y": 340,
+        "name": "SP3",
+        "floor": 1,
+        "type": 0
+      },
+      {
+        "id": 12,
+        "doorPosition": "left",
+        "width": 75,
+        "height": 145,
+        "x": 222,
+        "y": 340,
+        "name": "SP4",
+        "floor": 1,
+        "type": 0
+      },
+      {
+        "id": 13,
+        "doorPosition": "top",
+        "width": 147,
+        "height": 80,
+        "x": 0,
+        "y": 517,
+        "name": "WC",
+        "floor": 1,
+        "type": 3
+      },
+      {
+        "id": 14,
+        "doorPosition": "top",
+        "width": 147,
+        "height": 80,
+        "x": 150,
+        "y": 517,
+        "name": "WC",
+        "floor": 1,
+        "type": 3
+      },
+      {
+        "id": 15,
+        "doorPosition": "none",
+        "width": 140,
+        "height": 100,
+        "x": 10,
+        "y": 220,
+        "name": "Č",
+        "floor": 1,
+        "type": 5
+      }
+    ]
+  }
 ]

@@ -1,6 +1,7 @@
-import { IRoom } from "../room";
+import { IRoomGraphic } from "../roomGraphic";
 
 export interface IFloor {
     floor: number;
-    rooms: Array<IRoom>;
+    roomGraphics: Array<IRoomGraphic>;
+    buildingId: string;
 }

@@ -1,24 +1,32 @@
-<mat-card class="example-card" *ngIf="room">
-    <mat-card-header>
-        <div mat-card-avatar [style.backgroundColor]="roomColor(room.type)" class="header-image">{{room.name}}</div>
-        <mat-card-title>ROOM NAME</mat-card-title>
-        <mat-card-subtitle>{{room.type}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <table class="table">
-            <tbody>
-              <tr>
-                <th scope="row">Floor:</th>
-                <td>{{room.floor}}</td>
-              </tr>
-              <tr>
-                <th scope="row">Sector:</th>
-                <td>SELECTOR</td>
-              </tr>
-            </tbody>
-          </table>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button>Edit</button>
-    </mat-card-actions>
+<mat-card class="example-card" *ngIf="roomGraphic">
+  <mat-card-header>
+    <div
+      mat-card-avatar
+      [style.backgroundColor]="roomColor(roomGraphic.room.roomType)"
+      class="header-image"
+    >
+      {{ getAcronym(roomGraphic.room.name) }}
+    </div>
+    <mat-card-title>{{ roomGraphic.room.name }}</mat-card-title>
+    <mat-card-subtitle>{{
+      getRoomTypeText(roomGraphic.room.roomType)
+    }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th scope="row">Floor:</th>
+          <td>{{ roomGraphic.room.floor }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Sector:</th>
+          <td>{{ roomGraphic.room.sector }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>Edit</button>
+  </mat-card-actions>
 </mat-card>

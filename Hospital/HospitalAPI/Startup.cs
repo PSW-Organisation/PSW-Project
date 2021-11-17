@@ -9,18 +9,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FluentValidation.AspNetCore;
 using FluentValidation;
-using HospitalAPI.DTO;
 using AutoMapper;
 using HospitalLibrary.GraphicalEditor.Service;
 using HospitalLibrary.GraphicalEditor.Repository;
 using ehealthcare.Service;
 using HospitalLibrary.Service;
 using ehealthcare.Repository;
-using HospitalLibrary.FeedbackAndSurvey.Model;
-using HospitalLibrary.FeedbackAndSurvey.Repository;
-using HospitalLibrary.FeedbackAndSurvey.Service;
 using HospitalLibrary.Repository;
 using HospitalLibrary.Repository.DbRepository;
+using HospitalLibrary.FeedbackAndSurvey.Service;
+using HospitalLibrary.FeedbackAndSurvey.Model;
+using HospitalLibrary.FeedbackAndSurvey.Repository;
+using HospitalAPI.DTO;
 
 namespace HospitalAPI
 {
@@ -48,16 +48,20 @@ namespace HospitalAPI
             }).AddFluentValidation().AddNewtonsoftJson();
 
             services.AddTransient<IValidator<PatientFeedbackDTO>, PatientFeedbackValidator>();
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
+                builder
+                    .WithOrigins(new[] { "http://localhost:4200" })
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
             }));
             services.AddAutoMapper(typeof(Startup));
 
             services.AddScoped<IRoomGraphicService, RoomGraphicService>();
             services.AddScoped<IRoomGraphicRepository, RoomGraphicRepository>();
+            services.AddScoped<IFloorGraphicService, FloorGraphicService>();
+            services.AddScoped<IFloorGraphicRepository, FloorGraphicRepository>();
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IRoomRepository, RoomDbRepository>();
 
@@ -78,13 +82,15 @@ namespace HospitalAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(options => options.AllowAnyOrigin());
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseCors("MyPolicy");
+            app.UseCors("CorsPolicy");
+
+
+            app.UseHttpsRedirection();
+
+            app.UseCors(options => options.AllowAnyOrigin());
 
             app.UseAuthorization();
 

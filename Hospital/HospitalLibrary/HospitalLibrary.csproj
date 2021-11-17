@@ -25,6 +25,7 @@
     <Folder Include="Schedule\Model\" />
     <Folder Include="Schedule\Service\" />
     <Folder Include="Schedule\Repository\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

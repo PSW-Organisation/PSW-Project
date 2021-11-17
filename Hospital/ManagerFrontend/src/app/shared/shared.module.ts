@@ -23,7 +23,7 @@ import { SidenavService } from './responsive-sidebar/sidenav.service';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    ResponsiveSidebarComponent
+    ResponsiveSidebarComponent,
   ],
   providers: [SidenavService]
 })
