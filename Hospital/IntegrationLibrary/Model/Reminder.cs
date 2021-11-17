@@ -16,7 +16,7 @@ namespace ehealthcare.Model
         private string title;
         private string description;
 
-        public Reminder() : base("undefinedNumberKey")
+        public Reminder() : base(-1)
         {
             lazyAccount = new AccountProxyImpl();
         }
@@ -39,7 +39,7 @@ namespace ehealthcare.Model
             }
         }
 
-        public string AccountUsername { get; set; }
+        public int AccountUsername { get; set; }
 
         public DateTime StartTime
         {

@@ -16,7 +16,7 @@ namespace ehealthcare.Model
         private int numberOfCancelledVisits;
         private List<DateTime> cancelledVisitsDates;
 
-        public AccountData() : base("undefinedKey") 
+        public AccountData() : base(-1) 
         { 
             lazyAccount = new AccountProxyImpl();
         }

@@ -33,7 +33,7 @@ namespace IntegrationAPI.Controllers
         public IActionResult Get(long id)
         {
             
-            Complaint complaint = dbContext.Complaints.FirstOrDefault(complaint => complaint.ComplaintId == id);
+            Complaint complaint = dbContext.Complaints.FirstOrDefault(complaint => complaint.Id == id);
             if (complaint == null)
             {
                 return NotFound();
@@ -53,11 +53,11 @@ namespace IntegrationAPI.Controllers
             }
 
             
-            long id = dbContext.Complaints.ToList().Count > 0 ? dbContext.Complaints.Max(Complaint => Complaint.ComplaintId) + 1 : 1;
+            int id = dbContext.Complaints.ToList().Count > 0 ? dbContext.Complaints.Max(Complaint => Complaint.Id) + 1 : 1;
 
             DateTime date = DateTime.Now;
             Complaint complaint = ComplaintAdapter.ComplaintDtoToComplaint(dto);
-            complaint.ComplaintId = id;
+            complaint.Id = id;
             complaint.Date = date;
             dbContext.Complaints.Add(complaint);
             dbContext.SaveChanges();
@@ -74,11 +74,11 @@ namespace IntegrationAPI.Controllers
             }
 
 
-            long id = dbContext.Complaints.ToList().Count > 0 ? dbContext.Complaints.Max(Complaint => Complaint.ComplaintId) + 1 : 1;
+            int id = dbContext.Complaints.ToList().Count > 0 ? dbContext.Complaints.Max(Complaint => Complaint.Id) + 1 : 1;
 
             DateTime date = DateTime.Now;
             Complaint complaint = ComplaintAdapter.ComplaintDtoToComplaint(dto);
-            complaint.ComplaintId = id;
+            complaint.Id = id;
             complaint.Date = date;
             dbContext.Complaints.Add(complaint);
             dbContext.SaveChanges();
@@ -91,7 +91,7 @@ namespace IntegrationAPI.Controllers
         public IActionResult Delete(long id = 0)
         {
             
-            Complaint complaint = dbContext.Complaints.SingleOrDefault(complaint => complaint.ComplaintId == id);
+            Complaint complaint = dbContext.Complaints.SingleOrDefault(complaint => complaint.Id == id);
             if (complaint == null)
             {
                 return NotFound();

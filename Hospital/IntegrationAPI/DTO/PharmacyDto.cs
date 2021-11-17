@@ -7,7 +7,7 @@ namespace IntegrationAPI.DTO
 {
     public class PharmacyDto
     {
-        public long PharmacyId { get; set; }
+        public int PharmacyId { get; set; }
         public string PharmacyUrl { get; set; }
         public string PharmacyName { get; set; }
         public string PharmacyAddress { get; set; }

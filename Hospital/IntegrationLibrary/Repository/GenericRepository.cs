@@ -10,11 +10,11 @@ namespace ehealthcare.Repository
 	public interface GenericRepository<T> where T : Entity
 	{
 		public List<T> GetAll();
-		public T Get(string id);
+		public T Get(int id);
 		public void SaveAll();
 		public void Save(T entity);
 		public void Update(T entity);
-		public void Delete(string id);
-		public string GenerateId();
+		public void Delete(int id);
+		public int GenerateId();
 	}
 }

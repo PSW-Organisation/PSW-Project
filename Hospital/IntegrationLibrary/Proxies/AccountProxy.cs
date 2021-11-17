@@ -6,13 +6,13 @@ namespace ehealthcare.Proxies
 {
 	interface IAccount
 	{
-		public Account GetAccount(string id);
+		public Account GetAccount(int id);
 	}
 
 	public class AccountImpl : IAccount
 	{
 		AccountRepository accountRepository;
-		public Account GetAccount(string id)
+		public Account GetAccount(int id)
 		{
 			if (accountRepository == null)
 				accountRepository = new AccountXMLRepository();
@@ -23,7 +23,7 @@ namespace ehealthcare.Proxies
 	public class AccountProxyImpl : IAccount
 	{
 		private IAccount account;
-		public Account GetAccount(string id)
+		public Account GetAccount(int id)
 		{
 			if (account == null)
 			{

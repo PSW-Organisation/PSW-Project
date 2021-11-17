@@ -10,14 +10,14 @@ namespace ehealthcare.Model
 	[Serializable]
 	public class Entity
 	{
-		private string id;
+		private int id;
 
-		public Entity(string id)
+		public Entity(int id)
 		{
 			this.id = id;
 		}
 
-		public string Id 
+		public int Id 
 		{
 			get
 			{

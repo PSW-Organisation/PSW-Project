@@ -16,7 +16,7 @@ namespace ehealthcare.Model
         private String email;
         private Address address;
 
-        public User() : base("undefinedKey") { }
+        public User() : base(-1) { }
 
         public String Name
         {

@@ -12,14 +12,14 @@ namespace ehealthcare.Proxies
 {
 	interface IUser
 	{
-		public User GetUser(string id, LoginType type);
+		public User GetUser(int id, LoginType type);
 	}
 
 	public class UserImpl : IUser
 	{
 		DoctorRepository doctorRepository;
 		PatientRepository patientRepository;
-		public User GetUser(string id, LoginType type)
+		public User GetUser(int id, LoginType type)
 		{
 			if (type == LoginType.doctor)
 			{
@@ -40,7 +40,7 @@ namespace ehealthcare.Proxies
 	public class UserProxyImpl : IUser
 	{
 		private IUser user;
-		public User GetUser(string id, LoginType type)
+		public User GetUser(int id, LoginType type)
 		{
 			if (user == null)
 			{

@@ -10,12 +10,12 @@ namespace ehealthcare.Model
     {
         private IUser lazyUser;
         private User user;
-        private string userId;
+        private int userId;
         private String password;
         private LoginType loginType;
         private bool isBlocked;
 
-        public Account() : base("undefinedKey") 
+        public Account() : base(-1) 
         {
             lazyUser = new UserProxyImpl();
         }
@@ -38,7 +38,7 @@ namespace ehealthcare.Model
             }
         }
 
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         public String Password
         {

@@ -36,7 +36,7 @@ namespace IntegrationAPI.Controllers
         public IActionResult Get(long id)
         {
 
-            ResponseToComplaint response = dbContext.ResponseToComplaint.FirstOrDefault(response => response.ResponseToComplaintId == id);
+            ResponseToComplaint response = dbContext.ResponseToComplaint.FirstOrDefault(response => response.Id == id);
             if (response == null)
             {
                 return NotFound();
@@ -57,12 +57,12 @@ namespace IntegrationAPI.Controllers
             Pharmacy pharmacy = dbContext.Pharmacies.FirstOrDefault(pharmacy => pharmacy.PharmacyApiKey == pharmaciesAccessApiKey);
             if(pharmacy != null)
                 {
-                    Complaint complaint = dbContext.Complaints.FirstOrDefault(complaint => complaint.PharmacyId == pharmacy.PharmacyId);
+                    Complaint complaint = dbContext.Complaints.FirstOrDefault(complaint => complaint.PharmacyId == pharmacy.Id);
                         if(complaint != null) { 
-                            long id = dbContext.ResponseToComplaint.ToList().Count > 0 ? dbContext.ResponseToComplaint.Max(ResponseToComplaint => ResponseToComplaint.ResponseToComplaintId) + 1 : 1;
-                             ResponseToComplaint response = ResponseToComplaintAdapter.ResponseDtoToResponse(dto);
-                            response.ResponseToComplaintId = id;
-                            response.ComplaintId = complaint.ComplaintId;
+                            int id = dbContext.ResponseToComplaint.ToList().Count > 0 ? dbContext.ResponseToComplaint.Max(ResponseToComplaint => ResponseToComplaint.Id) + 1 : 1;
+                            ResponseToComplaint response = ResponseToComplaintAdapter.ResponseDtoToResponse(dto);
+                            response.Id = id;
+                            response.ComplaintId = complaint.Id;
                             dbContext.ResponseToComplaint.Add(response);
                             dbContext.SaveChanges();
                             return Ok();
@@ -77,7 +77,7 @@ namespace IntegrationAPI.Controllers
         [HttpDelete("{id?}")]
         public IActionResult Delete(long id = 0)
         {
-            ResponseToComplaint response = dbContext.ResponseToComplaint.SingleOrDefault(response => response.ResponseToComplaintId == id);
+            ResponseToComplaint response = dbContext.ResponseToComplaint.SingleOrDefault(response => response.Id == id);
             if (response == null)
             {
                 return NotFound();

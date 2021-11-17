@@ -35,7 +35,7 @@ namespace IntegrationAPI.Controllers
         public IActionResult Get(long id)
         {
             //Pharmacy pharmacy = Program.Pharmacies.Find(pharmacy => pharmacy.PharmacyId == id);
-            Pharmacy pharmacy = dbContext.Pharmacies.FirstOrDefault(pharmacy => pharmacy.PharmacyId == id);
+            Pharmacy pharmacy = dbContext.Pharmacies.FirstOrDefault(pharmacy => pharmacy.Id == id);
             if (pharmacy == null)
             {
                 return NotFound();
@@ -55,9 +55,9 @@ namespace IntegrationAPI.Controllers
             }
 
             //long id = Program.Pharmacies.Count > 0 ? Program.Pharmacies.Max(Pharmacy => Pharmacy.PharmacyId) + 1 : 1;
-            long id = dbContext.Pharmacies.ToList().Count > 0 ? dbContext.Pharmacies.Max(Pharmacy => Pharmacy.PharmacyId) + 1 : 1;
+            int id = dbContext.Pharmacies.ToList().Count > 0 ? dbContext.Pharmacies.Max(Pharmacy => Pharmacy.Id) + 1 : 1;
             Pharmacy pharmacy = PharmacyAdapter.PharmacyDtoToPharmacy(dto);
-            pharmacy.PharmacyId = id;
+            pharmacy.Id = id;
             string apiKey = GenerateApiKey();
             pharmacy.PharmacyApiKey = apiKey;
             //Program.Pharmacies.Add(pharmacy);
@@ -70,7 +70,7 @@ namespace IntegrationAPI.Controllers
         [HttpPut]
         public IActionResult Put(UpdateHospitalApiKeyDTO dto)
         {
-            Pharmacy pharmacy = dbContext.Pharmacies.SingleOrDefault(pharmacy => pharmacy.PharmacyId == dto.PharmacyID);
+            Pharmacy pharmacy = dbContext.Pharmacies.SingleOrDefault(pharmacy => pharmacy.Id == dto.PharmacyID);
             if(pharmacy == null)
             {
                 return NotFound();
@@ -83,7 +83,7 @@ namespace IntegrationAPI.Controllers
         [HttpPut("{id?}")]
         public IActionResult Put(PharmacyDto dto, long id)
         {
-            Pharmacy pharmacy = dbContext.Pharmacies.SingleOrDefault(pharmacy => pharmacy.PharmacyId == id);
+            Pharmacy pharmacy = dbContext.Pharmacies.SingleOrDefault(pharmacy => pharmacy.Id == id);
             if(pharmacy == null)
             {
                 return NotFound();
@@ -97,7 +97,7 @@ namespace IntegrationAPI.Controllers
         public IActionResult Delete(long id = 0)
         {
             //Pharmacy pharmacy = Program.Pharmacies.Find(pharmacy => pharmacy.PharmacyId == id);
-            Pharmacy pharmacy = dbContext.Pharmacies.SingleOrDefault(pharmacy => pharmacy.PharmacyId == id);
+            Pharmacy pharmacy = dbContext.Pharmacies.SingleOrDefault(pharmacy => pharmacy.Id == id);
             if (pharmacy == null)
             {
                 return NotFound();

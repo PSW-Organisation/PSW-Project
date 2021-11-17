@@ -1,26 +1,24 @@
-﻿using System;
+﻿using ehealthcare.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace IntegrationLibrary.Model
 {
-   public  class ResponseToComplaint
+   public  class ResponseToComplaint : Entity
     {
-        private long responseToComplaintId;
         private DateTime date;
         private String content;
         private long complaintId;
-        public long ResponseToComplaintId { get => responseToComplaintId; set => responseToComplaintId = value; }
         public long ComplaintId { get => complaintId; set => complaintId = value; }
 
         public DateTime Date { get => date; set => date = value; }
         public String Content { get => content; set => content = value; }
 
-        public ResponseToComplaint() { }
+        public ResponseToComplaint() : base(-1) { }
 
-        public ResponseToComplaint(long responseId, DateTime date, string content, long complaintId)
+        public ResponseToComplaint(DateTime date, string content, long complaintId) : base(-1)
         {
-            this.responseToComplaintId = responseId;
             this.date = date;
             this.content = content;
             this.complaintId = complaintId;

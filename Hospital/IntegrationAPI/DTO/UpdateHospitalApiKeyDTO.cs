@@ -7,7 +7,7 @@ namespace IntegrationAPI.DTO
 {
     public class UpdateHospitalApiKeyDTO
     {
-        public long PharmacyID { get; set; }
+        public int PharmacyID { get; set; }
         public string HospitalApiKey { get; set; }
     }
 }
