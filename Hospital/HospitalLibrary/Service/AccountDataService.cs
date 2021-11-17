@@ -41,7 +41,7 @@ namespace ehealthcare.Service
 
 		public void AddNewAccountData(Account account)
 		{
-			accountDataRepository.Save(new AccountData() { Account = account, NumberOfReadNotifications = 0, SpamActionDates = new List<DateTime>(), NumberOfSpamActions = 0, NumberOfCancelledVisits = 0, CancelledVisitsDates = new List<DateTime>() });
+			//accountDataRepository.Save(new AccountData() { Account = account, NumberOfReadNotifications = 0, SpamActionDates = new List<DateTime>(), NumberOfSpamActions = 0, NumberOfCancelledVisits = 0, CancelledVisitsDates = new List<DateTime>() });
 		}
 
 		public void AddSpamActionForAccount(string username)

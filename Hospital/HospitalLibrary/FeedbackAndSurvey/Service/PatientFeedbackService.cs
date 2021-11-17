@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Text;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.FeedbackAndSurvey.Repository;
+using HospitalLibrary.Model;
 
 namespace HospitalLibrary.FeedbackAndSurvey.Service
 {
     public class PatientFeedbackService: IPatientFeedbackService
     {
         private readonly IPatientFeedbackRepository _patientFeedbackRepository;
-      
+
         public PatientFeedbackService(IPatientFeedbackRepository feedbackRepository)
         {
             _patientFeedbackRepository = feedbackRepository;

@@ -7,6 +7,12 @@ namespace ehealthcare.Model
     {
         public List<Employee> TeamMembers { get; set; }
         public string ManagedDepartment { get; set; }
+
+        public Manager(string id) : base(id)
+        {
+
+        }
+
     }
 
     public interface IFullTimeEmployee

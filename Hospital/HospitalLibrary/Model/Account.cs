@@ -1,67 +1,29 @@
 using ehealthcare.Proxies;
 using ehealthcare.Service;
+using HospitalLibrary.Model;
 using System;
 using System.Drawing.Design;
 
 namespace ehealthcare.Model
 {
     [Serializable]
-    public class Account : Entity
+    public class Account : EntityDb
     {
-        private IUser lazyUser;
-        private User user;
-        private string userId;
-        private String password;
-        private LoginType loginType;
-        private bool isBlocked;
+        public User User { get; set; }
+       
+        public LoginType LoginType { get; set; }
 
-        public Account() : base("undefinedKey") 
+        public string Username { get; set; }
+
+        public string Password { get; set; }
+
+        public bool IsBlocked { get; set; }
+       
+        public bool IsActivated { get; set; }
+
+        public Account() 
         {
-            lazyUser = new UserProxyImpl();
-        }
-
-        [System.Xml.Serialization.XmlIgnore]
-        public User User
-        {
-            get
-            {
-                if (user == null)
-                {
-                    user = lazyUser.GetUser(UserId, LoginType);
-                }
-                return user;
-            }
-            set
-            {
-                user = value;
-                UserId = value.Id;
-            }
-        }
-
-        public string UserId { get; set; }
-
-        public String Password
-        {
-            get { return password; }
-            set { password = value; }
-        }
-
-        public LoginType LoginType
-        {
-            get { return loginType; }
-            set { loginType = value; }
-        }
-
-        [System.Xml.Serialization.XmlIgnore]
-        public String LoginTypeString
-        {
-            get { return loginType == LoginType.guestPatient ? "Guest nalog" : "Punopravni nalog"; }
-        }
-
-        public bool IsBlocked
-        {
-            get { return isBlocked; }
-            set { isBlocked = value; }
+           
         }
     }
 }

@@ -58,6 +58,16 @@ namespace HospitalLibrary.Migrations
                             PublishAllowed = false,
                             SubmissionDate = new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Text = "alallalal"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            Anonymous = false,
+                            IsPublished = false,
+                            PatientUsername = "imbiamba",
+                            PublishAllowed = false,
+                            SubmissionDate = new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Text = "alallalal"
                         });
                 });
 
@@ -205,113 +215,7 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
-
-            modelBuilder.Entity("HospitalLibrary.RoomsAndEquipment.Model.TermOfRelocationEquipment", b =>{
-                  b.Property<DateTime>("EndTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool>("FinishedRelocation")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("IdDestinationRoom")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("IdSourceRoom")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("NameOfEquipment")
-                        .HasColumnType("text");
-
-                    b.Property<int>("QuantityOfEquipment")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("durationInMinutes")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TermOfRelocationEquipments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EndTime = new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 8,
-                            IdSourceRoom = 7,
-                            NameOfEquipment = "bed",
-                            QuantityOfEquipment = 2,
-                            StartTime = new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 10
-                        },
-                        new
-                        {
-                            Id = 2,
-                            EndTime = new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 9,
-                            IdSourceRoom = 7,
-                            NameOfEquipment = "needle",
-                            QuantityOfEquipment = 14,
-                            StartTime = new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 40
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EndTime = new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 9,
-                            IdSourceRoom = 8,
-                            NameOfEquipment = "infusion",
-                            QuantityOfEquipment = 8,
-                            StartTime = new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 15
-                        },
-                        new
-                        {
-                            Id = 4,
-                            EndTime = new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 11,
-                            IdSourceRoom = 9,
-                            NameOfEquipment = "table",
-                            QuantityOfEquipment = 1,
-                            StartTime = new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 25
-                        },
-                        new
-                        {
-                            Id = 5,
-                            EndTime = new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 7,
-                            IdSourceRoom = 10,
-                            NameOfEquipment = "xrayMachine",
-                            QuantityOfEquipment = 1,
-                            StartTime = new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 30
-                        },
-                        new
-                        {
-                            Id = 6,
-                            EndTime = new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 11,
-                            IdSourceRoom = 10,
-                            NameOfEquipment = "chair",
-                            QuantityOfEquipment = 5,
-                            StartTime = new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 20
-                        });
-            });
-
-            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.RoomEquipment", b =>
-
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Allergen", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -321,44 +225,105 @@ namespace HospitalLibrary.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
-                    b.ToTable("RoomEquipments");
+                    b.ToTable("Allergens");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Name = "Bed",
-                            Quantity = 2,
-                            RoomId = 1,
-                            Type = "Static"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Needle",
-                            Quantity = 200,
-                            RoomId = 2,
-                            Type = "Dynamic"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Needle",
-                            Quantity = 300,
-                            RoomId = 3,
-                            Type = "Dynamic"
+                            Name = "macija dlaka"
                         });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.MedicalRecord", b =>
+                {
+                    b.Property<string>("PatientId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("BloodType")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PersonalId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Profession")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Weight")
+                        .HasColumnType("integer");
+
+                    b.HasKey("PatientId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("MedicalRecords");
+
+                    b.HasData(
+                        new
+                        {
+                            PatientId = "imbiamba",
+                            BloodType = 4,
+                            DoctorId = "nelex",
+                            Height = 186,
+                            PersonalId = "1209001129123",
+                            Profession = "Professor",
+                            Weight = 90
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.Model.PatientAllergen", b =>
+                {
+                    b.Property<string>("PatientId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("AllergenId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("PatientId", "AllergenId");
+
+                    b.HasIndex("AllergenId");
+
+                    b.ToTable("PatientAllergens");
+
+                    b.HasData(
+                        new
+                        {
+                            PatientId = "imbiamba",
+                            AllergenId = 1
+                        });
+                });
+
+            modelBuilder.Entity("ehealthcare.Model.MedicalPermit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("MedicalPermits");
                 });
 
             modelBuilder.Entity("ehealthcare.Model.Room", b =>
@@ -569,6 +534,143 @@ namespace HospitalLibrary.Migrations
                             NumOfTakenBeds = 0,
                             RoomType = 5,
                             Sector = "WS"
+                        });
+                });
+
+            modelBuilder.Entity("ehealthcare.Model.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsActivated")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsBlocked")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("LoginType")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ParentName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("Token")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+                });
+
+            modelBuilder.Entity("ehealthcare.Model.Doctor", b =>
+                {
+                    b.HasBaseType("ehealthcare.Model.User");
+
+                    b.Property<int>("Specialization")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UsedOffDays")
+                        .HasColumnType("integer");
+
+                    b.ToTable("Doctors");
+
+                    b.HasDiscriminator().HasValue("Doctor");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "nelex",
+                            Address = "Sime Milutinovica, 2",
+                            City = "Novi Sad",
+                            Country = "Serbia",
+                            DateOfBirth = new DateTime(1999, 7, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "nemanjar@gmail.com",
+                            Gender = "male",
+                            IsActivated = false,
+                            IsBlocked = false,
+                            LoginType = 2,
+                            Name = "Nemanja",
+                            ParentName = "Zoran",
+                            Password = "najjacapecurka",
+                            Phone = "019919199191",
+                            Surname = "Radojcic",
+                            Token = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Username = "nelex",
+                            Specialization = 3,
+                            UsedOffDays = 12
+                        });
+                });
+
+            modelBuilder.Entity("ehealthcare.Model.Patient", b =>
+                {
+                    b.HasBaseType("ehealthcare.Model.User");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("Patients");
+
+                    b.HasDiscriminator().HasValue("Patient");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "imbiamba",
+                            Address = "Sime Milosevica, 5",
+                            DateOfBirth = new DateTime(2001, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "markoilic@gmail.com",
+                            Gender = "male",
+                            IsActivated = false,
+                            IsBlocked = false,
+                            LoginType = 0,
+                            Name = "Marko",
+                            ParentName = "Milan",
+                            Password = "pecurkaa",
+                            Phone = "019919199191",
+                            Surname = "Ilic",
+                            Token = new Guid("601ccaa8-3a07-4a7c-89b9-9953e6eac8a7"),
+                            Username = "imbiamba"
                         });
                 });
 
@@ -797,6 +899,52 @@ namespace HospitalLibrary.Migrations
                                     Y = 220
                                 });
                         });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.MedicalRecord", b =>
+                {
+                    b.HasOne("ehealthcare.Model.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
+                    b.HasOne("ehealthcare.Model.Patient", "Patient")
+                        .WithOne("Medical")
+                        .HasForeignKey("HospitalLibrary.MedicalRecords.Model.MedicalRecord", "PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HospitalLibrary.Model.PatientAllergen", b =>
+                {
+                    b.HasOne("HospitalLibrary.MedicalRecords.Model.Allergen", "Allergen")
+                        .WithMany("PatientAllergens")
+                        .HasForeignKey("AllergenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ehealthcare.Model.Patient", "Patient")
+                        .WithMany("PatientAllergens")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ehealthcare.Model.MedicalPermit", b =>
+                {
+                    b.HasOne("ehealthcare.Model.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
+                    b.HasOne("ehealthcare.Model.Patient", null)
+                        .WithMany("MedicalPermits")
+                        .HasForeignKey("PatientId");
+                });
+
+            modelBuilder.Entity("ehealthcare.Model.Patient", b =>
+                {
+                    b.HasOne("ehealthcare.Model.Doctor", null)
+                        .WithMany("Patients")
+                        .HasForeignKey("DoctorId");
                 });
 #pragma warning restore 612, 618
         }

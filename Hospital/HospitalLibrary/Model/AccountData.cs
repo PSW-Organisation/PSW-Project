@@ -9,7 +9,7 @@ namespace ehealthcare.Model
     public class AccountData : Entity
     {
         private int numberOfReadNotifications;
-        private IAccount lazyAccount;
+        //private IAccount lazyAccount;
         private Account account;
         private int numberOfSpamActions;
         private List<DateTime> spamActionDates;
@@ -18,7 +18,7 @@ namespace ehealthcare.Model
 
         public AccountData() : base("undefinedKey") 
         { 
-            lazyAccount = new AccountProxyImpl();
+            //lazyAccount = new AccountProxyImpl();
         }
 
         public int NumberOfReadNotifications
@@ -27,24 +27,8 @@ namespace ehealthcare.Model
             set { numberOfReadNotifications = value; }
         }
 
-        [System.Xml.Serialization.XmlIgnore]
-        public Account Account
-        {
-            get 
-            {
-                if (account == null)
-                {
-                    account = lazyAccount.GetAccount(base.Id);
-                }
-                return account;
-            }
-            set 
-            {
-                account = value;
-                base.Id = value.Id;
-            }
-        }
-
+        
+       
         public int NumberOfSpamActions
         {
             get { return numberOfSpamActions; }

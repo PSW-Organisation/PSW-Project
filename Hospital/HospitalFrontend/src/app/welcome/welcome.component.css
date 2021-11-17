@@ -10,6 +10,14 @@ body {
     max-width: 950px
 }
 
+.register-left img{
+    margin-top: 0%;
+    margin-left: 10%;
+    width: 25%;
+    -webkit-animation: mover 2s infinite  alternate;
+    animation: mover 2s infinite  alternate;
+}
+
 .card {
     border-radius: 1rem;
     box-shadow: 0px -10px 0px #07bcab

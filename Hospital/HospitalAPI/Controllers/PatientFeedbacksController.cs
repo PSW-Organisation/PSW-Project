@@ -13,6 +13,9 @@ using AutoMapper;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.FeedbackAndSurvey.Repository;
 using HospitalLibrary.FeedbackAndSurvey.Service;
+using HospitalLibrary.Service;
+using HospitalLibrary.MedicalRecords.Service;
+using HospitalLibrary.MedicalRecords.Repository;
 
 namespace HospitalAPI.Controllers
 {
@@ -35,7 +38,7 @@ namespace HospitalAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<PatientFeedback>> GetFeedbacks()
         {
-            return _patientFeedbackService.GetAllFeedbacks().ToList();
+            return _patientFeedbackService.GetAllFeedbacks().ToList();  
         }
 
         // GET: api/Feedbacks/5

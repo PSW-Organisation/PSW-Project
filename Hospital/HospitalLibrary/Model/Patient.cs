@@ -1,66 +1,30 @@
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ehealthcare.Model
 {
     [Serializable]
+    [Table("Patients")]
     public class Patient : User
     {
-        private MedicalRecord medicalRecord;
-        private List<MedicalPermit> medicalPermit;
+        public virtual MedicalRecord Medical { get; set; }
 
-        public Patient()
-        {
-        }
+        public virtual ICollection<MedicalPermit> MedicalPermits { get; set; }
 
-        public MedicalRecord MedicalRecord
-        {
-            get { return medicalRecord; }
-            set { medicalRecord = value; }
-        }
+        public virtual ICollection<PatientAllergen> PatientAllergens { get; set; }
 
-        public List<MedicalPermit> MedicalPermit
-        {
-            get
-            {
-                if (medicalPermit == null)
-                    medicalPermit = new List<MedicalPermit>();
-                return medicalPermit;
-            }
-            set
-            {
-                RemoveAllMedicalPermit();
-                if (value != null)
-                {
-                    foreach (MedicalPermit oMedicalPermit in value)
-                        AddMedicalPermit(oMedicalPermit);
-                }
-            }
-        }
+        [JsonConstructor]
+        public Patient(string id) : base(id) { }
 
-        public void AddMedicalPermit(MedicalPermit newMedicalPermit)
+        
+        public Patient(string id, MedicalRecord medical, int medicalRecordId) : base(id)
         {
-            if (newMedicalPermit == null)
-                return;
-            if (this.medicalPermit == null)
-                this.medicalPermit = new List<MedicalPermit>();
-            if (!this.medicalPermit.Contains(newMedicalPermit))
-                this.medicalPermit.Add(newMedicalPermit);
-        }
-
-        public void RemoveMedicalPermit(MedicalPermit oldMedicalPermit)
-        {
-            if (oldMedicalPermit == null)
-                return;
-            if (this.medicalPermit != null)
-                if (this.medicalPermit.Contains(oldMedicalPermit))
-                    this.medicalPermit.Remove(oldMedicalPermit);
-        }
-
-        public void RemoveAllMedicalPermit()
-        {
-            if (medicalPermit != null)
-                medicalPermit.Clear();
+            Medical = medical;
         }
     }
 }
