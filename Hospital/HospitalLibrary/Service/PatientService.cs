@@ -36,11 +36,11 @@ namespace ehealthcare.Service
 
         public void SetPatientsMedicalPermit(Patient patient, MedicalPermit medicalPermit)
         {
-            if (patient.MedicalPermit.Equals(null))
+            if (patient.MedicalPermits.Equals(null))
             {
-                patient.MedicalPermit = new List<MedicalPermit>();
+                patient.MedicalPermits = new List<MedicalPermit>();
             }
-            patient.MedicalPermit.Add(medicalPermit);
+            patient.MedicalPermits.Add(medicalPermit);
             patientRepository.Update(patient);
         }
         

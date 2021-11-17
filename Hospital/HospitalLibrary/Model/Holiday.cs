@@ -11,6 +11,7 @@ public class Holiday : Entity
     private IDoctor lazyDoctor;
     private Doctor doctor;
 
+
     public Holiday() : base("undefinedNumberKey") 
     {
         lazyDoctor = new DoctorProxyImpl();

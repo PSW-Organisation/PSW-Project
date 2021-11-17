@@ -1,0 +1,371 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container register" style="max-width: 100%;">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="assets/logo.png" alt="" />
+            <span style="margin-left: 10px;" class="text-dark">
+                <i> LeanOn Hospital</i>
+            </span>
+        </div>
+        <div class="col-md-9 register-right">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Registration form</h3>
+                    <form [formGroup]="registrationForm" (ngSubmit)="register()">
+                        <div class="row register-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="nameControl" id="name" class="form-control"
+                                            type="text" />
+                                        <label for="name">First name*</label>
+                                    </div>
+                                    <div *ngIf="name?.invalid && name?.touched" class="my-error">
+                                        <div *ngIf="name?.errors?.['required']">
+                                            First name is required.
+                                        </div>
+                                        <div *ngIf="name?.errors?.['maxlength']">
+                                            First name can be 30 characters long at most.
+                                        </div>
+                                        <div *ngIf="name?.errors?.['pattern']">
+                                            First name must only contain letters and begin with an uppercase letter.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="parentNameControl" id="parentName" class="form-control"
+                                            type="text" />
+                                        <label for="parentName">Parent name*</label>
+                                    </div>
+                                    <div *ngIf="parentName?.invalid && parentName?.touched"
+                                        class="my-error">
+                                        <div *ngIf="parentName?.errors?.['required']">
+                                            Parent name is required.
+                                        </div>
+                                        <div *ngIf="parentName?.errors?.['maxlength']">
+                                            Parent name can be 30 characters long at most.
+                                        </div>
+                                        <div *ngIf="parentName?.errors?.['pattern']">
+                                            Parent name must only contain letters and begin with an uppercase letter.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="surnameControl" id="lastname" class="form-control"
+                                            type="text" />
+                                        <label for="lastname">Last name*</label>
+                                    </div>
+                                    <div *ngIf="surname?.invalid && surname?.touched"
+                                        class="my-error">
+                                        <div *ngIf="surname?.errors?.['required']">
+                                            Last name is required.
+                                        </div>
+                                        <div *ngIf="surname?.errors?.['maxlength']">
+                                            Last name can be 30 characters long at most.
+                                        </div>
+                                        <div *ngIf="surname?.errors?.['pattern']">
+                                            Last name must only contain letters and begin with an uppercase letter.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="personalIdControl" id="personalId" class="form-control"
+                                            type="text" />
+                                        <label for="personalId">Personal ID*</label>
+                                    </div>
+                                    <div *ngIf="personalId?.invalid && personalId?.touched"
+                                        class="my-error">
+                                        <div *ngIf="personalId?.errors?.['required']">
+                                            Personal ID is required.
+                                        </div>
+                                        <div *ngIf="personalId?.errors?.['pattern']">
+                                            Personal ID must be exactly 13 digits.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="dateOfBirthControl" id="dateofbirth"
+                                            class="form-control" type="date" />
+                                        <label for="dateofbirth">Date of birth*</label>
+                                    </div>
+                                    <!-- <div *ngIf="parentName?.invalid && (parentName?.dirty || parentName?.touched)"
+                                        class="my-error">
+
+                                        <div *ngIf="parentName?.errors?.['required']">
+                                            Parent name is required.
+                                        </div>
+                                        <div *ngIf="parentName?.errors?.['minlength']">
+                                            Parent name must be at least 2 characters long.
+                                        </div>
+                                        <div *ngIf="parentName?.errors?.['pattern']">
+                                            Parent name must only contain letters.
+                                        </div> -->
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="phoneControl" id="phone" class="form-control"
+                                            type="text" />
+                                        <label for="phone">Contact phone*</label>
+                                    </div>
+                                    <div *ngIf="phone?.invalid && phone?.touched" class="my-error">
+                                        <div *ngIf="phone?.errors?.['required']">
+                                            Contact phone is required.
+                                        </div>
+                                        <div *ngIf="phone?.errors?.['pattern']">
+                                            Contact phone must be between 9 and 10 digits
+                                            without special characters and whitespaces.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <select (change)="updateCities()" class="form-select ng-dirty ng-valid" style="height: unset;"
+                                            formControlName="countryControl" id="country">
+                                            <option selected [value]="countries[0]">Serbia</option>
+                                            <option [value]="countries[1]">Bosnia and Herzegovina</option>
+                                            <option [value]="countries[2]">Montenegro</option>
+                                        </select>
+                                        <label for="country">Country*</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <select data-size="12" style="height: unset;" formControlName="cityControl" id="city"
+                                            class="form-select ng-dirty ng-valid">
+                                            <option *ngFor="let c of cities" [value]="c">{{c}}</option>
+                                        </select>
+                                        <label for="city">City*</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="addressControl" id="address" class="form-control"
+                                            type="text" />
+                                        <label for="address">Address*</label>
+                                    </div>
+                                    <div *ngIf="address?.invalid && address?.touched"
+                                        class="my-error">
+                                        <div *ngIf="address?.errors?.['required']">
+                                            Address is required.
+                                        </div>
+                                        <div *ngIf="address?.errors?.['minlength']">
+                                            Address must be at least 4 characters long.
+                                        </div>
+                                        <div *ngIf="address?.errors?.['maxlength']">
+                                            Address can be 50 characters long at most.
+                                        </div>
+                                        <div *ngIf="address?.errors?.['pattern']">
+                                            Address can contain letters, numbers, commas, slashes and hyphens.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="professionControl" id="profession" class="form-control"
+                                            type="text" />
+                                        <label for="profession">Profession*</label>
+                                    </div>
+                                    <div *ngIf="profession?.invalid && profession?.touched"
+                                        class="my-error">
+                                        <div *ngIf="profession?.errors?.['required']">
+                                            Profession is required.
+                                        </div>
+                                        <div *ngIf="profession?.errors?.['minlength']">
+                                            Profession must be at least 3 characters long.
+                                        </div>
+                                        <div *ngIf="profession?.errors?.['maxlength']">
+                                            Profession can be 100 characters long at most.
+                                        </div>
+                                        <div *ngIf="profession?.errors?.['pattern']">
+                                            Profession can contain letters, commas, slashes and hyphens. 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="usernameControl" id="username" class="form-control"
+                                            type="text"/>
+                                        <label for="username">Username*</label>
+                                    </div>
+                                    <div *ngIf="username?.invalid && username?.touched"
+                                        class="my-error">
+                                        <div *ngIf="username?.errors?.['required']">
+                                            Username is required.
+                                        </div>
+                                        <div *ngIf="username?.errors?.['pattern']">
+                                            Username must be between 4 and 20 characters.
+                                            No dots and underscores at the beginning or end
+                                            or in the middle if they are consecutive.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="emailControl" id="email" class="form-control"
+                                            type="text" required />
+                                        <label for="email">Email*</label>
+                                    </div>
+                                    <div *ngIf="email?.invalid && email?.touched"
+                                        class="my-error">
+                                        <div *ngIf="email?.errors?.['required']">
+                                            Email is required.
+                                        </div>
+                                        <div *ngIf="email?.errors?.['maxlength']">
+                                            Email can be 254 characters long at most.
+                                        </div>
+                                        <div *ngIf="email?.errors?.['email']">
+                                            Email must contain at least one digit or letter before and after the @ sign
+                                            and cannot end with special characters.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="passwordControl" id="password" class="form-control"
+                                            type="password" />
+                                        <label for="password">Password*</label>
+                                    </div>
+                                    <div *ngIf="password?.invalid && password?.touched"
+                                        class="my-error">
+                                        <div *ngIf="password?.errors?.['required']">
+                                            Password is required.
+                                        </div>
+                                        <div *ngIf="password?.errors?.['pattern']">
+                                            Password must contain a minimum of eight characters, 
+                                            at least one uppercase letter, one lowercase letter, 
+                                            one number and one special character.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="confirmPasswordControl" id="confirmPassword"
+                                            class="form-control" type="password" />
+                                        <label for="confirmPassword">Confirm password*</label>
+                                    </div>
+                                    <div *ngIf="confirmPassword?.invalid && confirmPassword?.touched"
+                                        class="my-error">
+                                        <div *ngIf="confirmPassword?.errors?.['pattern']">
+                                            Confirmation password must match password.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <select style="height: unset;" formControlName="bloodTypeControl" id="bloodtype"
+                                            class="form-select ng-dirty ng-valid">
+                                            <option *ngFor="let b of bloodTypes" [value]="b">{{b}}</option>
+                                        </select>
+                                        <label for="bloodtype">Blood type*</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 align-self-center">
+                                    <div class="form-group" *ngIf="allergens">
+                                        <angular2-multiselect id="allergens" [data]="allergens"
+                                            [(ngModel)]="patient.allergens" [settings]="settings"
+                                            formControlName="allergensControl">
+                                        </angular2-multiselect>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="heightControl" id="height" 
+                                        class="form-control ng-dirty" type="number" />
+                                        <label for="height">Height* [cm]</label>
+                                    </div>
+                                    <div *ngIf="height?.invalid && height?.touched"
+                                        class="my-error">
+                                        <div *ngIf="height?.errors?.['required']">
+                                            Height is required.
+                                        </div>
+                                        <div *ngIf="height?.errors?.['min']">
+                                            Height must be equal or higher than 50cm.
+                                        </div>
+                                        <div *ngIf="height?.errors?.['max']">
+                                            Height must be equal or lower than 280cm.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="weightControl" id="weight" 
+                                        class="form-control ng-dirty" type="number"/>
+                                        <label for="weight">Weight* [kg]</label>
+                                    </div>
+                                    <div *ngIf="weight?.invalid && weight?.touched"
+                                        class="my-error">
+                                        <div *ngIf="weight?.errors?.['required']">
+                                            Weight is required.
+                                        </div>
+                                        <div *ngIf="weight?.errors?.['min']">
+                                            Weight must be equal or higher than 30kg.
+                                        </div>
+                                        <div *ngIf="weight?.errors?.['max']">
+                                            Weight must be equal or lower than 650kg.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Gender*</label>
+                                    <div class="form-group" ngbRadioGroup>
+                                        <div class="form-check form-check-inline">
+                                            <input formControlName="genderControl" class="form-check-input" type="radio"
+                                                id="maleId" value="male" checked>
+                                            <label class="form-check-label" for="maleId">Male</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input formControlName="genderControl" class="form-check-input" type="radio"
+                                                id="femaleId" value="female">
+                                            <label class="form-check-label" for="femaleId">Female</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <select style="height: unset;" formControlName="doctorControl" id="doctor"
+                                            class="form-select ng-dirty ng-valid">
+                                            <option *ngFor="let d of doctors; let i = index" [value]="d"
+                                                [selected]="i === 0">{{d.fullName}}</option>
+                                        </select>
+                                        <label for="doctor">Personal doctor*</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <input type="submit" class="btnRegister" [disabled]="registrationForm.invalid">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

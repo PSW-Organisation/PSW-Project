@@ -29,7 +29,7 @@ namespace ehealthcare.Service
 
 		public void GenerateNewNoteNotifications()
 		{
-			List<Reminder> reminders = GetAllRemindersForAccount(AppData.getInstance().LoggedInAccount.Id);
+			/*List<Reminder> reminders = GetAllRemindersForAccount(AppData.getInstance().LoggedInAccount.Id);
 			DateTime timeNow = DateTime.Now;
 			foreach (Reminder reminder in reminders)
 			{
@@ -74,6 +74,7 @@ namespace ehealthcare.Service
 					}
 				}
 			}
+			*/
 		}
 
 		public List<Reminder> GetAllRemindersForAccount(string username)

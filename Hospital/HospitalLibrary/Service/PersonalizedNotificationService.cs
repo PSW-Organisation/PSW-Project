@@ -30,10 +30,10 @@ namespace ehealthcare.Service
 			{
 				foreach(Account account in personalizedNotification.Accounts)
 				{
-					if(account.Id == username)
+					/*if(account.Id.Equals username)
 					{
 						filteredPersonalizedNotifications.Add(personalizedNotification);
-					}
+					}*/
 				}
 			}
 
@@ -43,10 +43,10 @@ namespace ehealthcare.Service
         public List<PersonalizedNotification> GetAllPersonalizedNotifications()
         {
             List<PersonalizedNotification> allNotifications = personalizedNotificationRepository.GetAll();
-            if (allNotifications == null)
+            /*if (allNotifications == null)
             {
                 allNotifications = new List<PersonalizedNotification>();
-            }
+            }*/
 
             return allNotifications;
         }

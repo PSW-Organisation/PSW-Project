@@ -13,12 +13,12 @@ namespace ehealthcare.Service
 {
 	public class AccountService
 	{
-		private AccountRepository accountRepository;
+		/*private AccountDbRepository accountRepository;
         private PatientRepository patientRepository;
 
         public AccountService()
 		{
-			accountRepository = new AccountXMLRepository();
+			accountRepository = new AccountDbRepository();
             patientRepository = new PatientXMLRepository();
 
         }
@@ -28,10 +28,7 @@ namespace ehealthcare.Service
 			return accountRepository.Get(username);
 		}
 
-        public List<Account> GetAllAccounts()
-        {
-            return accountRepository.GetAll();
-        }
+       
 
 		public void BlockAccount(string username)
 		{
@@ -94,5 +91,8 @@ namespace ehealthcare.Service
         {
             accountRepository.PromoteAccount(id);
         }
+        */
     }
+
+        
 }

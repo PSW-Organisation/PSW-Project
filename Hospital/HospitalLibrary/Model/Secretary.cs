@@ -6,6 +6,11 @@ namespace ehealthcare.Model
     {
         public string DeskPhoneNumber { get; set; }
 
+        public Secretary(string id) : base(id)
+        {
+                
+        }
+
         public override void SetWorkHours(DateTime startTime, DateTime endTime)
         {
             int shift = (endTime - startTime).Hours;

@@ -10,7 +10,7 @@ namespace ehealthcare.Repository
 {
 	public interface DoctorRepository : GenericRepository<Doctor>
 	{
-        public void ChangeDoctorRoom(Room roomForTransfer, Room oldRoom);
+        //public void ChangeDoctorRoom(Room roomForTransfer, Room oldRoom);
         public Doctor GetDoctorByName(string fullName);
         public List<Doctor> GetDoctors(Specialization specialization);
         public void UseOffDays(Doctor doctor, int days);

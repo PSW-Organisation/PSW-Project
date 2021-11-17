@@ -13,14 +13,14 @@ namespace ehealthcare.Service
 	{
 		private WorkdayRepository workdayRepository;
         private VisitRepository visitRepository;
-        private AccountRepository accountRepository;
+        //private AccountRepository accountRepository;
         private PersonalizedNotificationRepository notificationRepository;
 
 		public WorkdayService()
 		{
 			workdayRepository = new WorkdayXMLRepository();
             visitRepository = new VisitXMLRepository();
-            accountRepository = new AccountXMLRepository();
+           // accountRepository = new AccountDbRepository();
             notificationRepository = new PersonalizedNotificationXMLRepository();
         }
 
@@ -47,7 +47,7 @@ namespace ehealthcare.Service
             foreach (var visit in cancelledVisits)
             {
                 List<Account> accounts = new List<Account>();
-                accounts.Add(accountRepository.GetAccountByPatientId(visit.PatientId));
+                //accounts.Add(accountRepository.GetAccountByPatientId(visit.PatientId));
                 notificationRepository.NotifyPatientOfCancellation(accounts, visit.VisitTime.StartTime);
             }
         }
