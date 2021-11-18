@@ -25,6 +25,7 @@ namespace IntegrationLibrary.Service
 
         public void AddMedicine(Medicine medicine)
         {
+            medicine.Id = medicineRepository.GenerateId();
             medicineRepository.Save(medicine);
         }
 
@@ -38,7 +39,7 @@ namespace IntegrationLibrary.Service
             medicineRepository.Update(medicine);
         }
 
-        public List<Medicine> GetAllMedicines()
+        public List<Medicine> GetAllMedicine()
         {
             return medicineRepository.GetAll();
         }
@@ -63,9 +64,14 @@ namespace IntegrationLibrary.Service
             medicineRepository.Update(medicine);
         }
 
-        public void DeleteMedicine(Medicine id)
+        public void DeleteMedicine(Medicine medicine)
         {
-            medicineRepository.Delete(id);
+            medicineRepository.Delete(medicine);
+        }
+
+        public Medicine GetMedicine(int id)
+        {
+            return medicineRepository.Get(id);
         }
     }
 }

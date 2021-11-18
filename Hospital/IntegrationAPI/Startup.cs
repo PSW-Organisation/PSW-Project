@@ -64,6 +64,7 @@ namespace IntegrationAPI
             services.AddScoped<VisitReportRepository, VisitReportDbRepository>();
             services.AddScoped<WorkdayRepository, WorkdayDbRepository>();
             services.AddScoped<ComplaintRepository, ComplaintDbRepository>();
+            services.AddScoped<MedicineTransactionRepository, MedicineTransactionDbRepository>();
 
             //servisi
             services.AddScoped<IAccountService, AccountService>();
@@ -86,6 +87,7 @@ namespace IntegrationAPI
             services.AddScoped<IVisitReportService, VisitReportService>();
             services.AddScoped<IWorkdayService, WorkdayService>();
             services.AddScoped<IComplaintService, ComplaintService>();
+            services.AddScoped<IMedicineTransactionService, MedicineTransactionService>();
             
 
             //added for Cors error

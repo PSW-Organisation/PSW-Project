@@ -10,9 +10,11 @@ namespace IntegrationLibrary.Service.ServicesInterfaces
         public void SetMedicine(Medicine medicine);
         public void AddMedicine(Medicine medicine);
         public void SetMedicineIngredients(Medicine medicine, List<MedicineIngredient> medicineIngredients);
-        public List<Medicine> GetAllMedicines();
+        public List<Medicine> GetAllMedicine();
         public void AddMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient);
         public void RemoveMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient);
         public void DeleteMedicine(Medicine id);
+
+        public Medicine GetMedicine(int id);
     }
 }

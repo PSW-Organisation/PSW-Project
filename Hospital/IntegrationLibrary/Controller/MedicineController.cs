@@ -35,7 +35,7 @@ namespace IntegrationLibrary.Controller
 
         public List<Medicine> GetAllMedicines()
         {
-            return medicineService.GetAllMedicines();
+            return medicineService.GetAllMedicine();
         }
 
         public void AddMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient)
