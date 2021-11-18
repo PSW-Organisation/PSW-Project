@@ -10,8 +10,8 @@ using ehealthcare.Model;
 namespace HospitalLibrary.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    [Migration("20211115192345_FeedbackFirstMigration")]
-    partial class FeedbackFirstMigration
+    [Migration("20211118014859_ExteriorGraphics")]
+    partial class ExteriorGraphics
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,14 +65,16 @@ namespace HospitalLibrary.Migrations
 
             modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.ExteriorGraphic", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<double>("Height")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("IdElement")
-                        .HasColumnType("text");
+                    b.Property<int>("IdElement")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -96,9 +98,9 @@ namespace HospitalLibrary.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0",
+                            Id = 1,
                             Height = 200.0,
-                            IdElement = "0",
+                            IdElement = 0,
                             Name = "ZGR1",
                             Type = "building",
                             Width = 100.0,
@@ -107,9 +109,9 @@ namespace HospitalLibrary.Migrations
                         },
                         new
                         {
-                            Id = "1",
+                            Id = 2,
                             Height = 110.0,
-                            IdElement = "1",
+                            IdElement = 1,
                             Name = "ZGR2",
                             Type = "building",
                             Width = 180.0,
@@ -118,9 +120,9 @@ namespace HospitalLibrary.Migrations
                         },
                         new
                         {
-                            Id = "2",
+                            Id = 7,
                             Height = 50.0,
-                            IdElement = "-1",
+                            IdElement = -1,
                             Name = "",
                             Type = "road",
                             Width = 600.0,
@@ -129,9 +131,9 @@ namespace HospitalLibrary.Migrations
                         },
                         new
                         {
-                            Id = "3",
+                            Id = 3,
                             Height = 110.0,
-                            IdElement = "-1",
+                            IdElement = -1,
                             Name = "",
                             Type = "road",
                             Width = 50.0,
@@ -140,9 +142,9 @@ namespace HospitalLibrary.Migrations
                         },
                         new
                         {
-                            Id = "4",
+                            Id = 4,
                             Height = 400.0,
-                            IdElement = "-1",
+                            IdElement = -1,
                             Name = "",
                             Type = "road",
                             Width = 50.0,
@@ -151,9 +153,9 @@ namespace HospitalLibrary.Migrations
                         },
                         new
                         {
-                            Id = "5",
+                            Id = 5,
                             Height = 80.0,
-                            IdElement = "-1",
+                            IdElement = -1,
                             Name = "P",
                             Type = "parking",
                             Width = 50.0,
@@ -162,115 +164,15 @@ namespace HospitalLibrary.Migrations
                         },
                         new
                         {
-                            Id = "6",
+                            Id = 6,
                             Height = 80.0,
-                            IdElement = "-1",
+                            IdElement = -1,
                             Name = "P",
                             Type = "parking",
                             Width = 50.0,
                             X = 380.0,
                             Y = 20.0
                         });
-                });
-
-            modelBuilder.Entity("ehealthcare.Model.Room", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Floor")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsRenovated")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("IsRenovatedUntill")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("NumOfTakenBeds")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("RoomType")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Sector")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Rooms");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "0",
-                            Floor = 1,
-                            IsRenovated = false,
-                            IsRenovatedUntill = new DateTime(2021, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NumOfTakenBeds = 2,
-                            RoomType = 1,
-                            Sector = "S!"
-                        });
-                });
-
-            modelBuilder.Entity("ehealthcare.Model.RoomGraphic", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("DoorPosition")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Floor")
-                        .HasColumnType("integer");
-
-                    b.Property<double>("Height")
-                        .HasColumnType("double precision");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("RoomRefId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
-
-                    b.Property<double>("Width")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("X")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("Y")
-                        .HasColumnType("double precision");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoomRefId");
-
-                    b.ToTable("RoomGraphics");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "0",
-                            DoorPosition = "right",
-                            Floor = 0,
-                            Height = 100.0,
-                            Name = "S1",
-                            Type = "Salter",
-                            Width = 100.0,
-                            X = 0.0,
-                            Y = 0.0
-                        });
-                });
-
-            modelBuilder.Entity("ehealthcare.Model.RoomGraphic", b =>
-                {
-                    b.HasOne("ehealthcare.Model.Room", "RoomRef")
-                        .WithMany()
-                        .HasForeignKey("RoomRefId");
                 });
 #pragma warning restore 612, 618
         }

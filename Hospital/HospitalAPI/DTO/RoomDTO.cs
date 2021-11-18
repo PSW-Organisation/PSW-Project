@@ -8,7 +8,7 @@ namespace HospitalAPI.DTO
 {
     public class RoomDTO
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public String Sector { get; set; }
 
         public String Name { get; set; }

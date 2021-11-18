@@ -9,14 +9,17 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Service
 {
-    public class RoomInventoryService
+    public class RoomInventoryService : IRoomInventoryService
     {
-        private RoomInventoryRepository roomInventoryRepository;
+        private IRoomInventoryRepository _roomInventoryRepository;
         private IInventoryTransfer _inventoryTransfer;
-        private InventoryTrasnferStatic staticTranfer = new InventoryTrasnferStatic();
-        public RoomInventoryService()
+        private IInventoryTrasnferStatic _staticTranfer;
+
+        public RoomInventoryService(IRoomInventoryRepository roomInventoryRepository, IInventoryTransfer inventoryTransfer, IInventoryTrasnferStatic staticTranfer)
         {
-            roomInventoryRepository = new RoomInventoryXMLRepository();
+            _roomInventoryRepository = roomInventoryRepository;
+            _inventoryTransfer = inventoryTransfer;
+            _staticTranfer = staticTranfer;
         }
 
         public void SetInventoryTransferStrategy(IInventoryTransfer inventoryTransfer)
@@ -28,7 +31,7 @@ namespace ehealthcare.Service
             List<RoomInventory> filteredInventoryByName = new List<RoomInventory>();
             if (roomId != null)
             {
-                foreach (RoomInventory ri in roomInventoryRepository.GetInventoryInRoom(roomId))
+                foreach (RoomInventory ri in _roomInventoryRepository.GetInventoryInRoom(roomId))
                 {
                     if (ri.Inventory.Name.Equals(name))
                         filteredInventoryByName.Add(ri);
@@ -36,7 +39,7 @@ namespace ehealthcare.Service
             }
             else
             {
-                foreach (RoomInventory ri in roomInventoryRepository.GetFacilityRoomInventory())
+                foreach (RoomInventory ri in _roomInventoryRepository.GetFacilityRoomInventory())
                 {
                     if (ri.Inventory.Name.Equals(name))
                         filteredInventoryByName.Add(ri);
@@ -48,39 +51,39 @@ namespace ehealthcare.Service
 
         public List<RoomInventory> GetAllRoomInventory()
         {
-            return roomInventoryRepository.GetFacilityRoomInventory();
+            return _roomInventoryRepository.GetFacilityRoomInventory();
         }
 
         public List<RoomInventory> GetInventoryInRoom(String roomID)
         {
-            return roomInventoryRepository.GetInventoryInRoom(roomID);
+            return _roomInventoryRepository.GetInventoryInRoom(roomID);
         }
 
         public void DeleteRoomInventoryByNameInRoom(RoomInventory roomInventory)
         {
-            roomInventoryRepository.DeleteRoomInventoryByNameInRoom(roomInventory);
+            _roomInventoryRepository.DeleteRoomInventoryByNameInRoom(roomInventory);
         }
 
         public void DoTransfer(Room srcRoom, Room destRoom, int quantity, DateTime dueDate, RoomInventory trasnferedInventory)
         {
-            this._inventoryTransfer.DoInventoryTransfer( srcRoom,  destRoom,  quantity,  dueDate,  trasnferedInventory);
+            this._inventoryTransfer.DoInventoryTransfer(srcRoom, destRoom, quantity, dueDate, trasnferedInventory);
         }
-        
+
         public void CheckIfInventoryNeedsTransfer(List<RoomInventory> checkedRoomInventory)
         {
-            this.staticTranfer.CheckIfInventoryNeedsTransfer(checkedRoomInventory);
+            this._staticTranfer.CheckIfInventoryNeedsTransfer(checkedRoomInventory);
         }
         public void CreateRoomInventory(RoomInventory roominventory)
         {
-            roomInventoryRepository.NewRoomInventory(roominventory);
+            _roomInventoryRepository.NewRoomInventory(roominventory);
         }
         public void RemoveAllRoomInventoryInRoom(Room room)
         {
-            roomInventoryRepository.DeleteRoomInventoryInRoom(room);
+            _roomInventoryRepository.DeleteRoomInventoryInRoom(room);
         }
         public void SetRoomInventory(RoomInventory roomInventory)
         {
-            roomInventoryRepository.SetRoomInventory(roomInventory);
+            _roomInventoryRepository.SetRoomInventory(roomInventory);
         }
 
         public List<RoomInventory> FilterRoomInventoryByStatus(string searchInvStatusParam, string selectedRoomId)
@@ -88,7 +91,7 @@ namespace ehealthcare.Service
             List<RoomInventory> filteredInventoryByStatus = new List<RoomInventory>();
             if (selectedRoomId != null)
             {
-                foreach (RoomInventory ri in roomInventoryRepository.GetInventoryInRoom(searchInvStatusParam))
+                foreach (RoomInventory ri in _roomInventoryRepository.GetInventoryInRoom(searchInvStatusParam))
                 {
                     if (ri.Inventory.StatusString.Equals(searchInvStatusParam))
                         filteredInventoryByStatus.Add(ri);
@@ -96,7 +99,7 @@ namespace ehealthcare.Service
             }
             else
             {
-                foreach (RoomInventory ri in roomInventoryRepository.GetFacilityRoomInventory())
+                foreach (RoomInventory ri in _roomInventoryRepository.GetFacilityRoomInventory())
                 {
                     if (ri.Inventory.StatusString.Equals(searchInvStatusParam))
                         filteredInventoryByStatus.Add(ri);
@@ -105,12 +108,12 @@ namespace ehealthcare.Service
 
             return filteredInventoryByStatus;
         }
-        public int GetNumOfBedsById(String id)
+        public int GetNumOfBedsById(int id)
         {
-            List<RoomInventory> inventories = roomInventoryRepository.GetInventories();
+            List<RoomInventory> inventories = _roomInventoryRepository.GetInventories();
             foreach (RoomInventory roomInventory in inventories)
             {
-                if (roomInventory.RoomID == id && roomInventory.Inventory.Name.Equals("Kreveti"))
+                if (roomInventory.RoomId == id && roomInventory.Inventory.Name.Equals("Kreveti"))
                 {
                     return roomInventory.Quantity;
                 }
@@ -118,7 +121,6 @@ namespace ehealthcare.Service
             return 0;
         }
     }
-
 
     public interface IInventoryTransfer
     {
@@ -141,7 +143,13 @@ namespace ehealthcare.Service
 
     class InventoryTrasnferStatic : IInventoryTransferStatic
     {
-        private RoomInventoryRepository roomInventoryRepository = new RoomInventoryXMLRepository();
+        private IRoomInventoryRepository _roomInventoryRepository;
+
+        public InventoryTrasnferStatic(IRoomInventoryRepository roomInventoryRepository)
+        {
+            _roomInventoryRepository = roomInventoryRepository;
+        }
+
         public void CheckIfInventoryNeedsTransfer(List<RoomInventory> checkedRoomInventory)
         {
             for (int i = checkedRoomInventory.Count - 1; i >= 0; i--)
@@ -153,18 +161,18 @@ namespace ehealthcare.Service
                     if (checkedRoomInventory[i].Quantity > 0)
                     {
                         RoomInventory rm = new RoomInventory();
-                        rm.RoomID = checkedRoomInventory[i].TransferRoomId;
+                        rm.RoomId = checkedRoomInventory[i].TransferRoomId;
                         rm.Quantity = checkedRoomInventory[i].TransferAmmount;
                         rm.Inventory = checkedRoomInventory[i].Inventory;
                         checkedRoomInventory[i].TransferAmmount = 0;
-                        roomInventoryRepository.SaveAllRoomInventory(checkedRoomInventory);
+                        _roomInventoryRepository.SaveAllRoomInventory(checkedRoomInventory);
                     }
                     else if (checkedRoomInventory[i].Quantity == 0)
                     {
-                        checkedRoomInventory[i].RoomID = checkedRoomInventory[i].TransferRoomId;
+                        checkedRoomInventory[i].RoomId = checkedRoomInventory[i].TransferRoomId;
                         checkedRoomInventory[i].Quantity = checkedRoomInventory[i].TransferAmmount;
                         checkedRoomInventory[i].TransferAmmount = 0;
-                        roomInventoryRepository.SaveAllRoomInventory(checkedRoomInventory);
+                        _roomInventoryRepository.SaveAllRoomInventory(checkedRoomInventory);
 
                     }
                 }
@@ -173,18 +181,18 @@ namespace ehealthcare.Service
 
         public void DoInventoryTransfer(Room srcRoom, Room destRoom, int quantity, DateTime dueDate, RoomInventory trasnferedInventory)
         {
-            List<RoomInventory> alteredRoomInventory = roomInventoryRepository.GetFacilityRoomInventory();
+            List<RoomInventory> alteredRoomInventory = _roomInventoryRepository.GetFacilityRoomInventory();
 
             if (trasnferedInventory.Quantity >= quantity)
             {
                 for (int i = alteredRoomInventory.Count - 1; i >= 0; i--)
                 {
-                    if (trasnferedInventory.RoomID == alteredRoomInventory[i].RoomID && trasnferedInventory.Inventory.Name.Equals(alteredRoomInventory[i].Inventory.Name))
+                    if (trasnferedInventory.RoomId == alteredRoomInventory[i].RoomId && trasnferedInventory.Inventory.Name.Equals(alteredRoomInventory[i].Inventory.Name))
                     {
                         alteredRoomInventory[i].TransferRoomId = destRoom.Id;
                         alteredRoomInventory[i].TransferAmmount = quantity;
                         alteredRoomInventory[i].StaticTransferDate = dueDate;
-                        roomInventoryRepository.SaveAllRoomInventory(alteredRoomInventory);
+                        _roomInventoryRepository.SaveAllRoomInventory(alteredRoomInventory);
 
                     }
                 }
@@ -196,19 +204,26 @@ namespace ehealthcare.Service
 
     class InventoryTrasnferNonStatic : IInventoryTransferNonStatic
     {
-        private RoomInventoryRepository roomInventoryRepository = new RoomInventoryXMLRepository();
-        private RoomInventoryService roomInventoryService = new RoomInventoryService();
+        private IRoomInventoryRepository _roomInventoryRepository;
+        private IRoomInventoryService _roomInventoryService;
+
+        public InventoryTrasnferNonStatic(IRoomInventoryRepository roomInventoryRepository, IRoomInventoryService roomInventoryService)
+        {
+            _roomInventoryRepository = roomInventoryRepository;
+            _roomInventoryService = roomInventoryService;
+        }
+
         public void DoInventoryTransfer(Room srcRoom, Room destRoom, int quantity, DateTime dueDate, RoomInventory trasnferedInventory)
         {
-            List<RoomInventory> alteredRoomInventory = roomInventoryRepository.GetFacilityRoomInventory();
+            List<RoomInventory> alteredRoomInventory = _roomInventoryRepository.GetFacilityRoomInventory();
             if (trasnferedInventory.Quantity == quantity)
             {
                 for (int i = alteredRoomInventory.Count - 1; i >= 0; i--)
                 {
-                    if (trasnferedInventory.RoomID == alteredRoomInventory[i].RoomID && trasnferedInventory.Inventory.Name.Equals(alteredRoomInventory[i].Inventory.Name))
+                    if (trasnferedInventory.RoomId == alteredRoomInventory[i].RoomId && trasnferedInventory.Inventory.Name.Equals(alteredRoomInventory[i].Inventory.Name))
                     {
-                        alteredRoomInventory[i].RoomID = destRoom.Id;
-                        roomInventoryRepository.SaveAllRoomInventory(alteredRoomInventory);
+                        alteredRoomInventory[i].RoomId = destRoom.Id;
+                        _roomInventoryRepository.SaveAllRoomInventory(alteredRoomInventory);
 
                     }
                 }
@@ -217,13 +232,13 @@ namespace ehealthcare.Service
             {
                 for (int i = alteredRoomInventory.Count - 1; i >= 0; i--)
                 {
-                    if (trasnferedInventory.RoomID == alteredRoomInventory[i].RoomID && trasnferedInventory.Inventory.Name.Equals(alteredRoomInventory[i].Inventory.Name))
+                    if (trasnferedInventory.RoomId == alteredRoomInventory[i].RoomId && trasnferedInventory.Inventory.Name.Equals(alteredRoomInventory[i].Inventory.Name))
                     {
                         alteredRoomInventory[i].Quantity = trasnferedInventory.Quantity - quantity;
                         Inventory newInventory = new Inventory() { Name = alteredRoomInventory[i].Inventory.Name, Status = alteredRoomInventory[i].Inventory.Status, IsStatic = alteredRoomInventory[i].Inventory.IsStatic };
-                        RoomInventory roomInventory = new RoomInventory() { RoomID = destRoom.Id, Quantity = quantity, Inventory = newInventory };
-                        roomInventoryRepository.SaveAllRoomInventory(alteredRoomInventory);
-                        roomInventoryService.CreateRoomInventory(roomInventory);
+                        RoomInventory roomInventory = new RoomInventory() { RoomId = destRoom.Id, Quantity = quantity, Inventory = newInventory };
+                        _roomInventoryRepository.SaveAllRoomInventory(alteredRoomInventory);
+                        _roomInventoryService.CreateRoomInventory(roomInventory);
                     }
                 }
             }

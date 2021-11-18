@@ -10,6 +10,6 @@ namespace HospitalLibrary.FeedbackAndSurvey.Service
         public void UpdatePatientFeedback(PatientFeedback patientFeedback);
         public void DeletePatientFeedback(PatientFeedback patientFeedback);
         public IEnumerable<PatientFeedback> GetAllFeedbacks();
-        public PatientFeedback GetPatientFeedback(string id);
+        public PatientFeedback GetPatientFeedback(int id);
     }
 }

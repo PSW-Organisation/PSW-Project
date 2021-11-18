@@ -24,7 +24,7 @@ export class BuildingFloorsComponent implements OnInit {
   errorMessage!: string;
   roomGraphic!: IRoomGraphic;
   editing: boolean = false;
-  postId!: string;
+  postId!: number;
 
   constructor(
     private _router: Router,
@@ -48,7 +48,7 @@ export class BuildingFloorsComponent implements OnInit {
       .subscribe((data) => {
         this.postId = data.id;
         this.floors[this.selectedFloorNumber].roomGraphics.filter(
-          (r) => String(r.id) === this.postId
+          (r) => r.id === this.postId
         )[0].room = data;
 
         console.log(data);

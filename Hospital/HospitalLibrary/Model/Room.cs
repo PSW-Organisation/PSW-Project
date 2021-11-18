@@ -1,10 +1,11 @@
 using System;
 using System.ComponentModel;
+using HospitalLibrary.Model;
 
 namespace ehealthcare.Model
 {
     [Serializable]
-    public class Room : Entity
+    public class Room : EntityDb
     {
         public string Name { get; set; }
         public string Sector { get; set; }
@@ -14,7 +15,9 @@ namespace ehealthcare.Model
         public DateTime IsRenovatedUntill { get; set; }
         public int NumOfTakenBeds { get; set; }
 
-        public Room() : base("undefinedKey") { }
+        public Room()
+        {
+        }
 
         override public string ToString()
         {

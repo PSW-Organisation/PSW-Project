@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace HospitalLibrary.Repository.DbRepository
 {
-    public class GenericSTRINGIDRepository<T> : IGenericRepository<T> where T : Entity
+    public class GenericSTRINGIDRepository<T> : IGenericSTRINGIDRepository<T> where T : Entity
     {
         private readonly HospitalDbContext _dbContext;
 
@@ -22,10 +22,10 @@ namespace HospitalLibrary.Repository.DbRepository
                 _dbContext.Set<T>().Remove(entity);
                 Save(entity);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
         }
 

@@ -33,7 +33,7 @@ namespace ehealthcare.Model
             set { doctorRoom = value; }
         }
 
-        public String DoctorRoomId
+        public int DoctorRoomId
         {
             get { return doctorRoom.Id; }
             set
