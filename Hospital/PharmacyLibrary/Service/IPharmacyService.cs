@@ -7,7 +7,7 @@ namespace PharmacyLibrary.Service
 {
     public interface IPharmacyService
     {
-       public List<Pharmacy> Get();
+        public List<Pharmacy> Get();
 
         public Pharmacy Get(long id);
 

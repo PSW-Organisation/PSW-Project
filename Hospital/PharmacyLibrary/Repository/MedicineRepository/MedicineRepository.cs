@@ -9,7 +9,6 @@ namespace PharmacyLibrary.Repository.MedicineRepository
 {
     public class MedicineRepository : IMedicineRepository
     {
-
         private readonly PharmacyDbContext pharmacyDbContext;
 
         public MedicineRepository(PharmacyDbContext pharmacyDbContext)
@@ -32,7 +31,6 @@ namespace PharmacyLibrary.Repository.MedicineRepository
             {
                 newMedicine.Quantity = 0;
             }
-
 
             pharmacyDbContext.Medicines.Add(newMedicine);
             pharmacyDbContext.SaveChanges();
@@ -109,6 +107,24 @@ namespace PharmacyLibrary.Repository.MedicineRepository
             return true;
         }
 
+        public Boolean CheckIfExists(string medicineName, int medicineQuantity)
+        {
+            Medicine medicine = pharmacyDbContext.Medicines.FirstOrDefault(medicine => medicine.Name == medicineName);
+            if (medicine == null || medicine.Quantity < medicineQuantity)
+            {
+                return false;
+            }
 
+            return true;
+        }
+
+        public int reduceQuantityOfMedicine(string medicineName, int medicineQuantity)
+        {
+            Medicine medicine = pharmacyDbContext.Medicines.FirstOrDefault(medicine => medicine.Name == medicineName);
+            medicine.Quantity = medicine.Quantity - medicineQuantity;
+            pharmacyDbContext.Update(medicine);
+            pharmacyDbContext.SaveChanges();
+            return medicine.Quantity;
+        }
     }
 }

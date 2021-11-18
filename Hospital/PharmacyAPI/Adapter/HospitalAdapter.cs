@@ -33,7 +33,7 @@ namespace PharmacyAPI.Adapter
             return dto;
         }
 
-        internal static Hospital UpdateHospitalDtoToHospital(HospitalDto dto, Hospital hospital)
+        public static Hospital UpdateHospitalDtoToHospital(HospitalDto dto, Hospital hospital)
         {
             hospital.HospitalAddress = dto.HospitalAddress;
             hospital.HospitalName = dto.HospitalName;

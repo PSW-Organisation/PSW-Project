@@ -66,6 +66,7 @@
                 <th>Date</th>
                 <th>Title</th>
                 <th>Content</th>
+                <th> </th>
             </tr>
         </thead>
         <tbody>
@@ -75,7 +76,7 @@
                 <td><a [routerLink] ="['/complaint' , complaint.complaintId]">
                     {{complaint.title}} </a></td> 
                 <td>{{complaint.content}}</td>
-                <button class="btn btn-secondary" (click)="deleteComplaint(complaint.complaintId)"><i class="fa fa-trash"></i> Delete</button>
+                <button class="btn btn-secondary" style= "background-color: gray;" (click)="deleteComplaint(complaint.complaintId)"><i class="fa fa-trash"></i> Delete</button>
             </tr>
         </tbody>
     </table>

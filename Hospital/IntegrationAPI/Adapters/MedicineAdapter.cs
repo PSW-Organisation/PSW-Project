@@ -16,7 +16,7 @@ namespace IntegrationAPI.Adapters
             medicine.Name = dto.Name;
             medicine.MedicineStatus = MedicineStatus.approved;
             medicine.MedicineIngredient = new List<String>();
-            medicine.MedicineAmmount = dto.MedicineAmmount;
+            medicine.MedicineAmmount = dto.MedicineAmount;
             return medicine;
         }
 
@@ -25,7 +25,7 @@ namespace IntegrationAPI.Adapters
             MedicineDTO dto = new MedicineDTO();
             dto.Id = medicine.Id;
             dto.Name = medicine.Name;
-            dto.MedicineAmmount = medicine.MedicineAmmount;
+            dto.MedicineAmount = medicine.MedicineAmmount;
             return dto;
         }
 
@@ -34,7 +34,7 @@ namespace IntegrationAPI.Adapters
             MedicineTransaction transaction = new MedicineTransaction();
             transaction.Id = 0;
             transaction.MedicineId = dto.Id;
-            transaction.MedicineAmmount = dto.MedicineAmmount;
+            transaction.MedicineAmmount = dto.MedicineAmount;
             transaction.TransactionTime = DateTime.Now;
             return transaction;
         }

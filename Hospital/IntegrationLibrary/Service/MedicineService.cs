@@ -6,16 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RestSharp;
 
 namespace IntegrationLibrary.Service
 {
     public class MedicineService : IMedicineService
     {
         private MedicineRepository medicineRepository;
+        private IPharmacyService pharmacyService;
         
-        public MedicineService(MedicineRepository medicineRepository)
+        public MedicineService(MedicineRepository medicineRepository, IPharmacyService pharmacyService)
         {
             this.medicineRepository = medicineRepository;
+            this.pharmacyService = pharmacyService;
         }
 
         public void SetMedicine(Medicine medicine)
@@ -72,6 +75,34 @@ namespace IntegrationLibrary.Service
         public Medicine GetMedicine(int id)
         {
             return medicineRepository.Get(id);
+        }
+
+        public List<Pharmacy> searchMedicine(string medicineName, int medicineAmount)
+        {
+            List<Pharmacy> pharmacies = new List<Pharmacy>();
+          
+            foreach(Pharmacy pharmacy in pharmacyService.GetAll())
+            {
+                var client = new RestSharp.RestClient(pharmacy.PharmacyUrl);
+                var request = new RestRequest("/api3/medicine/" + pharmacy.HospitalApiKey);
+                var values = new Dictionary<string, object>
+                {
+                    {"medicineName", medicineName}, {"medicineAmount", medicineAmount}
+                };
+                request.AddJsonBody(values);
+                IRestResponse response = client.Post(request);
+                if (response.Content.Equals("true"))
+                {
+                    pharmacies.Add(pharmacy);
+                }
+            }
+
+            return pharmacies;
+        }
+
+        public Medicine GetMedicineByName(string name)
+        {
+            return this.medicineRepository.GetMedicineByName(name);
         }
     }
 }
