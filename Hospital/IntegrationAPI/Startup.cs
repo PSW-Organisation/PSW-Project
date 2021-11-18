@@ -66,6 +66,7 @@ namespace IntegrationAPI
             services.AddScoped<ComplaintRepository, ComplaintDbRepository>();
             services.AddScoped<MedicineTransactionRepository, MedicineTransactionDbRepository>();
             services.AddScoped<PharmacyRepository, PharmacyDbRepository>();
+            services.AddScoped<ResponseToComplaintRepository, ResponseToComplaintDbRepository>();
 
             //servisi
             services.AddScoped<IAccountService, AccountService>();
@@ -90,6 +91,7 @@ namespace IntegrationAPI
             services.AddScoped<IComplaintService, ComplaintService>();
             services.AddScoped<IMedicineTransactionService, MedicineTransactionService>();
             services.AddScoped<IPharmacyService, PharmacyService>();
+            services.AddScoped<IResponseToComplaintService, ResponseToComplaintService>();
 
             //added for Cors error
             //______________________________________________________________________
