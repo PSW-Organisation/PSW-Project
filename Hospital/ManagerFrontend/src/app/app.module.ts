@@ -10,22 +10,23 @@ import { PharmaciesViewComponent } from './pharmacies-view/pharmacies-view.compo
 import { EditPharmacyComponent } from './edit-pharmacy/edit-pharmacy.component';
 import { ComplaintsViewComponent } from './complaints-view/complaints-view.component';
 import { ComplaintDetailComponent } from './complaint-detail/complaint-detail.component';
+import { SurveyComponent } from './survey/survey.component';
 import { PharmaciesService } from './pharmacies-view/pharmacies.service';
 import { EditPharmacyService } from './edit-pharmacy/edit-pharmacy.service';
 
 import { FeedBackComponent } from './feedback/feedback.component';
-import { FeedbackService } from './service/feedback.service';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FeedbackService } from './feedback/feedback.service';
 import { OrderingMedicineComponent } from './ordering-medicine/ordering-medicine.component';
 import { SearchPharmaciesPipe } from './ordering-medicine/search-pharmacies.pipe';
 import { RoomManagmentModule } from './room-managment/room-managment.module';
 import { MedicineConsumptionComponent } from './medicine-consumption/medicine-consumption.component';
 
-
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BenefitsViewComponent } from './benefits-view/benefits-view.component';
+import { SurveyService } from './survey/survey.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { BenefitsViewComponent } from './benefits-view/benefits-view.component';
     SearchPharmaciesPipe,
     MedicineConsumptionComponent,
     BenefitsViewComponent,
+    SurveyComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { BenefitsViewComponent } from './benefits-view/benefits-view.component';
   providers: [
     PharmaciesService,
     FeedbackService,
-    EditPharmacyService
+    EditPharmacyService,
+    SurveyService
   ],
   bootstrap: [AppComponent],
 })

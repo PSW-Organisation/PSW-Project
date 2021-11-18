@@ -53,11 +53,11 @@ namespace HospitalLibrary.Migrations
                         {
                             Id = -1,
                             Anonymous = false,
-                            IsPublished = false,
-                            PatientUsername = "p1",
-                            PublishAllowed = false,
+                            IsPublished = true,
+                            PatientUsername = "imbiamba",
+                            PublishAllowed = true,
                             SubmissionDate = new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Text = "alallalal"
+                            Text = "Sehr gut!"
                         },
                         new
                         {
@@ -68,6 +68,66 @@ namespace HospitalLibrary.Migrations
                             PublishAllowed = false,
                             SubmissionDate = new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Text = "alallalal"
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.Question", b =>
+                {
+                    b.Property<int>("SurveyId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("integer");
+
+                    b.HasKey("SurveyId", "Id");
+
+                    b.ToTable("Questions");
+
+                    b.HasData(
+                        new
+                        {
+                            SurveyId = -1,
+                            Id = -1,
+                            Category = 1,
+                            Value = 1
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.Survey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("SubmissionDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("VisitId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Surveys");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            PatientId = "imbiamba",
+                            SubmissionDate = new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VisitId = 1
                         });
                 });
 
@@ -212,12 +272,6 @@ namespace HospitalLibrary.Migrations
                             Id = 2,
                             BuildingId = 0,
                             Floor = 1L
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BuildingId = 1,
-                            Floor = 0L
                         });
                 });
 
@@ -267,14 +321,6 @@ namespace HospitalLibrary.Migrations
                             Name = "Needle",
                             Quantity = 300,
                             RoomId = 3,
-                            Type = "Dynamic"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Picks",
-                            Quantity = 300,
-                            RoomId = 16,
                             Type = "Dynamic"
                         });
                 });
@@ -708,17 +754,6 @@ namespace HospitalLibrary.Migrations
                             NumOfTakenBeds = 0,
                             RoomType = 5,
                             Sector = "WS"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Floor = 0,
-                            IsRenovated = false,
-                            IsRenovatedUntill = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Waiting room 3",
-                            NumOfTakenBeds = 0,
-                            RoomType = 5,
-                            Sector = "WS"
                         });
                 });
 
@@ -854,9 +889,25 @@ namespace HospitalLibrary.Migrations
                             Password = "pecurkaa",
                             Phone = "019919199191",
                             Surname = "Ilic",
-                            Token = new Guid("b48819f3-473a-4015-aefb-aa31ad80e018"),
+                            Token = new Guid("17893c3e-07de-4e65-aad1-47964225946f"),
                             Username = "imbiamba"
                         });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.Question", b =>
+                {
+                    b.HasOne("HospitalLibrary.FeedbackAndSurvey.Model.Survey", "Survey")
+                        .WithMany("Questions")
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.Survey", b =>
+                {
+                    b.HasOne("ehealthcare.Model.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId");
                 });
 
             modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.FloorGraphic", b =>
@@ -1082,17 +1133,6 @@ namespace HospitalLibrary.Migrations
                                     Width = 140,
                                     X = 10,
                                     Y = 220
-                                },
-                                new
-                                {
-                                    Id = 17,
-                                    DoorPosition = "right",
-                                    FloorGraphicId = 3,
-                                    Height = 100,
-                                    RoomId = 17,
-                                    Width = 100,
-                                    X = 0,
-                                    Y = 0
                                 });
                         });
                 });

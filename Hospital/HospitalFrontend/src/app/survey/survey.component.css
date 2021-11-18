@@ -1,0 +1,106 @@
+html, body {
+    min-height: 100%;
+    }
+    body, input {
+        padding: 5% 10%;
+        line-height: 1.4;
+        background: #888;
+        outline: none;
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 14px;
+        color: #666;
+        line-height: 22px;
+    }
+    .star {
+        font-size: 1.5rem;
+        color: #ebe5e5;
+      }
+      .filled {
+        color: rgb(236, 156, 8);
+      }
+      .bad {
+        color: rgb(236, 156, 8);
+      }
+      .filled.bad {
+        color: rgb(236, 156, 8);
+      }
+    
+    .main-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    }
+    form {
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 2px 5px #ccc; 
+    background: #fff;
+    }
+    input {
+    width: calc(100% - 10px);
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    }
+    textarea {
+    width: calc(100% - 6px);
+    outline: none;
+    }
+    th, td {
+    width: 15%;
+    padding: 15px 0;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    vertical-align: unset;
+    line-height: 18px;
+    font-weight: 400;
+    word-break: break-all;
+    }
+    .additional-question th, .additional-question td {
+    width: 38%;
+    }
+    .course-rate th, .course-rate td {
+    width: 19%;
+    }
+    .first-col, .additional-question  .first-col, .course-rate .first-col {
+    width: 24%;
+    text-align: left;
+    }
+    .btn-block {
+    margin-top: 20px;
+    text-align: center;
+    }
+    @media (min-width: 568px) {
+    th, td {
+    word-break: keep-all;
+    }
+    }
+    input[type="radio"] {
+        position: fixed;
+        top: 0;
+        right: 100%;
+    }
+    input[type="radio"]:checked ~ input + label {
+        background: none;
+        color: #aaa;
+    }
+    
+    input + label {
+        background: #fff;
+        color: orange;
+        margin: 0 0 1em 0;
+    }
+    
+    input + label:first-of-type {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+    
+    input:checked + label {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+    
+    

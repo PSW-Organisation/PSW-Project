@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { Feedback } from "../service/feedback";
-import { FeedbackService } from "../service/feedback.service";
+import { Feedback } from "./feedback";
+import { FeedbackService } from "./feedback.service";
 
 @Component({
     selector: 'feedback',

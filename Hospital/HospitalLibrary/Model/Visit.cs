@@ -31,6 +31,11 @@ namespace ehealthcare.Model
             lazyVisitReport = new VisitReportProxyImpl();
         }
 
+        public Visit(int serialNum) : base("undefinedNumberKey")
+        {
+            SerialNumber = serialNum;
+        }
+
         public int SerialNumber
         {
             get { return serialNumber; }

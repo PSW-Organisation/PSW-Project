@@ -7,13 +7,11 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ComplaintsViewComponent } from './complaints-view/complaints-view.component';
 import { ComplaintDetailComponent } from './complaint-detail/complaint-detail.component';
 import { OrderingMedicineComponent } from './ordering-medicine/ordering-medicine.component';
-<<<<<<< HEAD
 import { MedicineConsumptionComponent } from './medicine-consumption/medicine-consumption.component';
 import { HospitalExteriorViewComponent } from './room-managment/hospital-exterior-view/hospital-exterior-view.component';
+import { SurveyComponent } from './survey/survey.component';
 
-=======
 import { BenefitsViewComponent } from './benefits-view/benefits-view.component';
->>>>>>> 6fb5296 (feat: medicine benefit)
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'pharmacies', component: PharmaciesViewComponent },
@@ -23,7 +21,8 @@ const routes: Routes = [
   { path: 'hospitalExterior', component: HospitalExteriorViewComponent },
   { path: 'orderingMedicine', component: OrderingMedicineComponent },
   { path: 'medicineConsumption', component: MedicineConsumptionComponent},
-  {path:'benefits', component: BenefitsViewComponent}
+  {path:'benefits', component: BenefitsViewComponent},
+  { path: 'survey', component: SurveyComponent },
 ];
 
 @NgModule({

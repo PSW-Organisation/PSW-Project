@@ -22,6 +22,7 @@ namespace HospitalLibrary.MedicalRecords.Repository
         {
             var doctors = _dbContext.Set<Doctor>().Where(d => d.Specialization.Equals(Specialization.none)).ToList();
             if (doctors.Count == 0) return 0;
+            if (doctors.Exists(d => d.Patients == null)) return 0;
             return doctors.Select(d => d.Patients.Count).Min();
         }
 

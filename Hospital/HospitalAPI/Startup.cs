@@ -69,6 +69,7 @@ namespace HospitalAPI
             services.AddTransient<IValidator<PatientFeedbackDTO>, PatientFeedbackValidator>();
             services.AddTransient<IValidator<PatientDto>, PatientValidator>();
 
+            services.AddTransient<IValidator<SurveyQuestionDto>, SurveyValidator>();
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
                 builder
@@ -102,11 +103,6 @@ namespace HospitalAPI
             services.AddScoped<GenericSTRINGIDRepository<Patient>, PatientDbRepository>();
             services.AddScoped<IPatientRepository, PatientDbRepository>();
 
-            services.AddScoped<IPatientFeedbackService, PatientFeedbackService>();
-            services.AddScoped<GenericDbRepository<PatientFeedback>, PatientFeedbackDbRepository>();
-            services.AddScoped<IPatientFeedbackRepository, PatientFeedbackDbRepository>();
-            services.AddScoped<IRoomEquipmentService, RoomEquipmentService>();
-            services.AddScoped<IRoomEquipmentRepository, RoomEquipmentRepository>();
             services.AddScoped<GenericSTRINGIDRepository<Doctor>, DoctorDbRepository>();
             services.AddScoped<IDoctorRepository, DoctorDbRepository>();
             services.AddScoped<IDoctorService, DoctorService>();
@@ -123,6 +119,12 @@ namespace HospitalAPI
             services.AddScoped<IPatientFeedbackRepository, PatientFeedbackDbRepository>();
             
             services.AddHostedService<ScheduleBackgroundService>();
+            services.AddScoped<ISurveyService, SurveyService>();
+            services.AddScoped<GenericDbRepository<Survey>, SurveyDbRepository>();
+            services.AddScoped<ISurveyRepository, SurveyDbRepository>();
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

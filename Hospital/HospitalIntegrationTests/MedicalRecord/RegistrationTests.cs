@@ -38,9 +38,9 @@ namespace HospitalIntegrationTests.MedicalRecord
             var response = await _client.SendAsync(postRequest);
 
             response.EnsureSuccessStatusCode();
-            Assert.Equal("micko", context.Patients.Where(p => p.Username == "micko").FirstOrDefault().Username);
-            Assert.Equal("micko", context.MedicalRecords.Where(m => m.PatientId == "micko").FirstOrDefault().PatientId);
-            Assert.Equal(1, context.PatientAllergens.Where(pa => pa.PatientId == "micko" && pa.AllergenId == 1).FirstOrDefault().AllergenId);
+            Assert.Equal("micko", context.Patients.FirstOrDefault(p => p.Username == "micko").Username);
+            Assert.Equal("micko", context.MedicalRecords.FirstOrDefault(m => m.PatientId == "micko").PatientId);
+            Assert.Equal(1, context.PatientAllergens.FirstOrDefault(pa => pa.PatientId == "micko" && pa.AllergenId == 1).AllergenId);
         }
 
         [Fact]
