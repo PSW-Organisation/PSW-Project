@@ -30,9 +30,10 @@ namespace IntegrationAPI.Controllers
         }
 
         [HttpGet("{id?}")]      // GET /api/medicine/1
-        public IActionResult Get(string id)
+        public IActionResult Get(int id)
         {
-            Medicine medicine = dbContext.Medicine.FirstOrDefault(medicine => medicine.Id.Equals(id));
+           
+            Medicine medicine = dbContext.Medicine.FirstOrDefault(medicine => medicine.Id == id);
             if (medicine == null)
             {
                 return NotFound();
@@ -46,12 +47,12 @@ namespace IntegrationAPI.Controllers
         [HttpPost]      // POST /api/medicine Request body:
         public IActionResult Add(MedicineDTO dto)
         {
-            if (dto.Id.Length <= 0 || dto.Name.Length <= 0 || dto.MedicineAmmount <= 0)
+            if (dto.Id <= 0 || dto.Name.Length <= 0 || dto.MedicineAmmount <= 0)
             {
                 return BadRequest();
             }
             Medicine newMedicine = MedicineAdapter.MedicineDtoToMedicine(dto);
-            Medicine existingMedicine = dbContext.Medicine.SingleOrDefault(medicine => medicine.Id.Equals(dto.Id));
+            Medicine existingMedicine = dbContext.Medicine.SingleOrDefault(medicine => medicine.Id == dto.Id);
             if (existingMedicine == null)
             {
                 dbContext.Medicine.Add(newMedicine);
@@ -63,8 +64,8 @@ namespace IntegrationAPI.Controllers
                 dbContext.Medicine.Update(existingMedicine);
             }
             MedicineTransaction transaction = MedicineAdapter.MedicineDtoToMedicineTransaction(dto);
-            long id = dbContext.MedicineTransactions.ToList().Count > 0 ? dbContext.MedicineTransactions.Max(transaction => Convert.ToInt64(transaction.Id)) + 1 : 1;
-            transaction.Id = "" + id;
+            int id = dbContext.MedicineTransactions.ToList().Count > 0 ? dbContext.MedicineTransactions.Max(transaction => transaction.Id) + 1 : 1;
+            transaction.Id = id;
             dbContext.MedicineTransactions.Add(transaction);
             dbContext.SaveChanges();
             return Ok();
@@ -74,7 +75,7 @@ namespace IntegrationAPI.Controllers
         [HttpPut]
         public IActionResult Put(MedicineDTO dto)
         {
-            Medicine medicine = dbContext.Medicine.SingleOrDefault(medicine => medicine.Id.Equals(dto.Id));
+            Medicine medicine = dbContext.Medicine.SingleOrDefault(medicine => medicine.Id == dto.Id);
             if (medicine == null)
             {
                 return NotFound();
@@ -87,9 +88,9 @@ namespace IntegrationAPI.Controllers
         }
 
         [HttpDelete("{id?}")]       // DELETE /api/medicine/1
-        public IActionResult Delete(string id = "")
+        public IActionResult Delete(int id)
         {
-            Medicine medicine = dbContext.Medicine.SingleOrDefault(medicine => medicine.Id.Equals(id));
+            Medicine medicine = dbContext.Medicine.SingleOrDefault(medicine => medicine.Id == id);
             if (medicine == null)
             {
                 return NotFound();

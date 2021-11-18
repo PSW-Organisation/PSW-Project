@@ -32,7 +32,7 @@ namespace IntegrationAPI.Adapters
         public static MedicineTransaction MedicineDtoToMedicineTransaction(MedicineDTO dto)
         {
             MedicineTransaction transaction = new MedicineTransaction();
-            transaction.Id = "";
+            transaction.Id = 0;
             transaction.MedicineId = dto.Id;
             transaction.MedicineAmmount = dto.MedicineAmmount;
             transaction.TransactionTime = DateTime.Now;

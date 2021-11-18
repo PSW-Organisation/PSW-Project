@@ -13,10 +13,8 @@ using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
 using IntegrationLibrary.Model;
-using ehealthcare.Repository;
 using IntegrationLibrary.Repository.DatabaseRepository;
 using IntegrationLibrary.Service.ServicesInterfaces;
-using ehealthcare.Service;
 using IntegrationLibrary.Service;
 using IntegrationLibrary.Repository;
 

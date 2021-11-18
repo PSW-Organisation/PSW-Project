@@ -9,9 +9,9 @@ namespace IntegrationLibrary.Model
         private String name;
         private MedicineStatus medicineStatus;
 
-        public Medicine() : base(-1) { }
         private List<String> medicineIngredient;
         private int medicineAmmount;
+        public Medicine() : base(-1) { }
 
         public String Name
         {
