@@ -53,18 +53,16 @@ namespace ehealthcare.Controller
         }
         public void DoTransferStatic(Room srcRoom, Room destRoom, int quantity, DateTime dueDate, RoomInventory trasnferedInventory)
         {
-            roomInventoryService.SetInventoryTransferStrategy(new InventoryTrasnferStatic());
-            roomInventoryService.DoTransfer(srcRoom, destRoom, quantity, dueDate, trasnferedInventory);
+            roomInventoryService.DoTransferStatic(srcRoom, destRoom, quantity, dueDate, trasnferedInventory);
         }
-        public void DoTransferNonStatic(Room srcRoom, Room destRoom, int quantity, DateTime dueDate, RoomInventory trasnferedInventory)
+        public void DoTransferNonStatic(Room srcRoom, Room destRoom, int quantity, RoomInventory trasnferedInventory)
         {
-            roomInventoryService.SetInventoryTransferStrategy(new InventoryTrasnferNonStatic());
-            roomInventoryService.DoTransfer(srcRoom, destRoom, quantity, dueDate, trasnferedInventory);
+            roomInventoryService.DoTransferNonStatic(srcRoom, destRoom, quantity, trasnferedInventory);
 
         }
         public void CheckIfInventoryNeedsTransfer(List<RoomInventory> checkedRoomInventory)
         {
-            roomInventoryService.CheckIfInventoryNeedsTransfer(checkedRoomInventory);
+            //roomInventoryService.CheckIfInventoryNeedsTransfer(checkedRoomInventory);
         }
 
     }

@@ -2,7 +2,7 @@
 
 namespace ehealthcare.Model
 {
-    [Serializable]
+    
     public class Address
     {
         private String homeAddress;

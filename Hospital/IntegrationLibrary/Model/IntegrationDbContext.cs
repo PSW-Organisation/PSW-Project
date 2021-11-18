@@ -15,9 +15,9 @@ namespace IntegrationLibrary.Model
 
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<ResponseToComplaint> ResponseToComplaint { get; set; }
-        public DbSet<Account> Accounts { get; set; }
-        public DbSet<AccountData> AccountData { get; set; }
-        public DbSet<Allergen> Allergends { get; set; }
+        //public DbSet<Account> Accounts { get; set; }
+        //public DbSet<AccountData> AccountData { get; set; }
+        //public DbSet<Allergen> Allergens { get; set; }
         public IntegrationDbContext() { }
     }
 }
