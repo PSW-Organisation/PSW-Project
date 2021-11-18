@@ -17,6 +17,7 @@ import { RandomUserService } from './random-user/random-user.service';
 import { DatePipe, Location } from '@angular/common';
 import { RegistrationComponent } from './registration/registration.component';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { SurveyComponent } from './survey/survey.component';
 
 export function playerFactory() {
   return player;
@@ -27,7 +28,8 @@ export function playerFactory() {
     AppComponent,
     FeedbackComponent,
     WelcomeComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    SurveyComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ export function playerFactory() {
       { path: 'feedback', component: FeedbackComponent },
       { path: 'registration', component: RegistrationComponent },
       { path: 'verification', component: WelcomeComponent },
-      { path: '**', redirectTo: '' }
+      { path: 'survey', component: SurveyComponent},
+      { path: '**', redirectTo: '' },
     ]),
     NgbModule,
     LottieModule.forRoot({ player: playerFactory }),

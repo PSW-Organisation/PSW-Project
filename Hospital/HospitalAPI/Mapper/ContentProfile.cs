@@ -42,8 +42,7 @@ namespace HospitalAPI.Mapper
                     DoctorId = x.DoctorId,
                     Allergens = x.Allergens
                 }));*/
-               
-            
+            CreateMap<SurveyQuestionDto, Survey>();
         }
     }
 }

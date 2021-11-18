@@ -10,8 +10,8 @@ using ehealthcare.Model;
 namespace HospitalLibrary.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    [Migration("20211123172035_RegistrationMigration")]
-    partial class RegistrationMigration
+    [Migration("20211125191858_Survey")]
+    partial class Survey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,11 +55,11 @@ namespace HospitalLibrary.Migrations
                         {
                             Id = -1,
                             Anonymous = false,
-                            IsPublished = false,
-                            PatientUsername = "p1",
-                            PublishAllowed = false,
+                            IsPublished = true,
+                            PatientUsername = "imbiamba",
+                            PublishAllowed = true,
                             SubmissionDate = new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Text = "alallalal"
+                            Text = "Sehr gut!"
                         },
                         new
                         {
@@ -70,6 +70,66 @@ namespace HospitalLibrary.Migrations
                             PublishAllowed = false,
                             SubmissionDate = new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Text = "alallalal"
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.Question", b =>
+                {
+                    b.Property<int>("SurveyId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Category")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("integer");
+
+                    b.HasKey("SurveyId", "Id");
+
+                    b.ToTable("Questions");
+
+                    b.HasData(
+                        new
+                        {
+                            SurveyId = -1,
+                            Id = -1,
+                            Category = 1,
+                            Value = 1
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.Survey", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("SubmissionDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("VisitId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Surveys");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = -1,
+                            PatientId = "imbiamba",
+                            SubmissionDate = new DateTime(2021, 11, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            VisitId = 1
                         });
                 });
 
@@ -217,6 +277,56 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.RoomEquipment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoomEquipments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Bed",
+                            Quantity = 2,
+                            RoomId = 1,
+                            Type = "Static"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Needle",
+                            Quantity = 200,
+                            RoomId = 2,
+                            Type = "Dynamic"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Needle",
+                            Quantity = 300,
+                            RoomId = 3,
+                            Type = "Dynamic"
+                        });
+                });
+
             modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.Allergen", b =>
                 {
                     b.Property<int>("Id")
@@ -300,6 +410,116 @@ namespace HospitalLibrary.Migrations
                         {
                             PatientId = "imbiamba",
                             AllergenId = 1
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.RoomsAndEquipment.Model.TermOfRelocationEquipment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("FinishedRelocation")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("IdDestinationRoom")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdSourceRoom")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("NameOfEquipment")
+                        .HasColumnType("text");
+
+                    b.Property<int>("QuantityOfEquipment")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("durationInMinutes")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TermOfRelocationEquipments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EndTime = new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 8,
+                            IdSourceRoom = 7,
+                            NameOfEquipment = "bed",
+                            QuantityOfEquipment = 2,
+                            StartTime = new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified),
+                            durationInMinutes = 10
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EndTime = new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 9,
+                            IdSourceRoom = 7,
+                            NameOfEquipment = "needle",
+                            QuantityOfEquipment = 14,
+                            StartTime = new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified),
+                            durationInMinutes = 40
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EndTime = new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 9,
+                            IdSourceRoom = 8,
+                            NameOfEquipment = "infusion",
+                            QuantityOfEquipment = 8,
+                            StartTime = new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified),
+                            durationInMinutes = 15
+                        },
+                        new
+                        {
+                            Id = 4,
+                            EndTime = new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 11,
+                            IdSourceRoom = 9,
+                            NameOfEquipment = "table",
+                            QuantityOfEquipment = 1,
+                            StartTime = new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                            durationInMinutes = 25
+                        },
+                        new
+                        {
+                            Id = 5,
+                            EndTime = new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 7,
+                            IdSourceRoom = 10,
+                            NameOfEquipment = "xrayMachine",
+                            QuantityOfEquipment = 1,
+                            StartTime = new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified),
+                            durationInMinutes = 30
+                        },
+                        new
+                        {
+                            Id = 6,
+                            EndTime = new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 11,
+                            IdSourceRoom = 10,
+                            NameOfEquipment = "chair",
+                            QuantityOfEquipment = 5,
+                            StartTime = new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified),
+                            durationInMinutes = 20
                         });
                 });
 
@@ -671,9 +891,25 @@ namespace HospitalLibrary.Migrations
                             Password = "pecurkaa",
                             Phone = "019919199191",
                             Surname = "Ilic",
-                            Token = new Guid("601ccaa8-3a07-4a7c-89b9-9953e6eac8a7"),
+                            Token = new Guid("17893c3e-07de-4e65-aad1-47964225946f"),
                             Username = "imbiamba"
                         });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.Question", b =>
+                {
+                    b.HasOne("HospitalLibrary.FeedbackAndSurvey.Model.Survey", "Survey")
+                        .WithMany("Questions")
+                        .HasForeignKey("SurveyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.Survey", b =>
+                {
+                    b.HasOne("ehealthcare.Model.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId");
                 });
 
             modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.FloorGraphic", b =>

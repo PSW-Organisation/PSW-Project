@@ -45,6 +45,8 @@ namespace HospitalIntegrationTests
                                 Password = "Coa1999!",
                                 Name = "Aleksandar"
                             });
+                            SeedData(appContext);
+
                             appContext.SaveChanges();
                         }
                         catch (Exception ex)
@@ -52,6 +54,95 @@ namespace HospitalIntegrationTests
                             throw;
                         }
                     }
+                }
+            });
+        }
+
+        private static void SeedData(HospitalDbContext context)
+        {
+            context.Doctors.Add(new Doctor("nemanja")
+            {
+                Specialization = Specialization.none,
+                UsedOffDays = 2,
+                Patients = new List<Patient>(){
+                    new Patient("luka") {
+                        LoginType = 0,
+                        Password = "Coa1999!",
+                        Name = "Aleksandar"
+                    },
+                    new Patient("lukaaa") {
+                        LoginType = 0,
+                        Password = "Coa1999!",
+                        Name = "Aleksandar"
+                    }
+                }
+            });
+            context.Doctors.Add(new Doctor("maja")
+            {
+                Specialization = Specialization.none,
+                UsedOffDays = 2,
+                Patients = new List<Patient>(){
+                    new Patient("milica") {
+                        LoginType = 0,
+                        Password = "Coa1999!",
+                        Name = "Aleksandar"
+                    },
+                    new Patient("zora") {
+                        LoginType = 0,
+                        Password = "Coa1999!",
+                        Name = "Aleksandar"
+                    },
+                    new Patient("milan") {
+                        LoginType = 0,
+                        Password = "Coa1999!",
+                        Name = "Aleksandar"
+                    },
+
+                }
+            });
+            context.Doctors.Add(new Doctor("mirko")
+            {
+                Specialization = Specialization.none,
+                UsedOffDays = 2,
+                Patients = new List<Patient>(){
+                    new Patient("milicaaa") {
+                        LoginType = 0,
+                        Password = "Coa1999!",
+                        Name = "Aleksandar"
+                    },
+                    new Patient("zoraaa") {
+                        LoginType = 0,
+                        Password = "Coa1999!",
+                        Name = "Aleksandar"
+                    },
+                    new Patient("milanaa") {
+                        LoginType = 0,
+                        Password = "Coa1999!",
+                        Name = "Aleksandar"
+                    },
+                    new Patient("milana") {
+                        LoginType = 0,
+                        Password = "Coa1999!",
+                        Name = "Aleksandar"
+                    },
+                    new Patient("milanaaaa") {
+                        LoginType = 0,
+                        Password = "Coa1999!",
+                        Name = "Aleksandar"
+                    },
+                }
+            });
+            context.Doctors.Add(new Doctor("mihajlo")
+            {
+                Specialization = Specialization.cardiologist,
+                UsedOffDays = 2,
+                Patients = new List<Patient>(){
+                    new Patient("jovana") {
+                        LoginType = 0,
+                        Password = "Coa1999!",
+                        Name = "Aleksandar"
+                    },
+
                 }
             });
         }

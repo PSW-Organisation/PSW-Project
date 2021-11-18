@@ -30,7 +30,8 @@ namespace ehealthcare.Model
         public DbSet<TermOfRelocationEquipment> TermOfRelocationEquipments { get; set; }
 
         public DbSet<RoomEquipment> RoomEquipments { get; set; }
-
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<Question> Questions { get; set; }
 
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
@@ -90,12 +91,12 @@ namespace ehealthcare.Model
                 new
                 {
                     Id = -1,
-                    PatientUsername = "p1",
+                    PatientUsername = "imbiamba",
                     SubmissionDate = new DateTime(2021, 11, 4),
-                    Text = "alallalal",
+                    Text = "Sehr gut!",
                     Anonymous = false,
-                    PublishAllowed = false,
-                    IsPublished = false
+                    PublishAllowed = true,
+                    IsPublished = true
                 });
 
 
@@ -673,7 +674,6 @@ namespace ehealthcare.Model
 
             });
 
-
             modelBuilder.Entity<PatientAllergen>(a =>
             {
                 a.HasData(new PatientAllergen()
@@ -712,11 +712,7 @@ namespace ehealthcare.Model
                         IsActivated = false,
                         Token = Guid.NewGuid()
                     });
-               
             });
-
-
-
 
             modelBuilder.Entity<Doctor>(d =>
             {
@@ -743,13 +739,7 @@ namespace ehealthcare.Model
                         UsedOffDays = 12,
                         Specialization = Specialization.none
                     });
-            });
-
-
-
-
-           
-           
+            }); 
 
             modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
             {
@@ -762,6 +752,31 @@ namespace ehealthcare.Model
                 IsPublished = false
             });
 
+            modelBuilder.Entity<Survey>(s =>
+                {
+                    s.HasData(
+                        new Survey()
+                        {
+                            Id = -1,
+                            PatientId = "imbiamba",
+                            SubmissionDate = new DateTime(2021, 11, 18),
+                            VisitId = 1
+                        });
+                });
+
+            modelBuilder.Entity<Question>(q =>
+            {
+                q.HasData(
+                    new Question()
+                    {
+                        SurveyId = -1,
+                        Id = -1,
+                        Value = 1,
+                        Category = QuestionCategory.hospital
+                    });
+
+                q.HasKey(q => new { q.SurveyId, q.Id });
+            });
 
         }
     }
