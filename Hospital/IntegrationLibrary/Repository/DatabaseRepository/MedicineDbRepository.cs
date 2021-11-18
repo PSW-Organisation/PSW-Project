@@ -8,5 +8,15 @@ namespace IntegrationLibrary.Repository.DatabaseRepository
     public class MedicineDbRepository : GenericDatabaseRepository<Medicine>, MedicineRepository
     {
         public MedicineDbRepository(IntegrationDbContext dbContext): base(dbContext) { }
+
+        public Medicine GetMedicineByName(string name)
+        {
+            foreach (Medicine medicine in this.GetAll())
+            {
+                if (medicine.Name.Equals(name))
+                    return medicine;
+            }
+            return null;
+        }
     }
 }

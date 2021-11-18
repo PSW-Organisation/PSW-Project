@@ -9,6 +9,6 @@ namespace IntegrationAPI.DTO
     {
         public int Id {get;set;}
         public string Name { get; set; }
-        public int MedicineAmmount { get; set; }
+        public int MedicineAmount { get; set; }
     }
 }

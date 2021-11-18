@@ -10,10 +10,11 @@
         </table>
     </div>
 
+    <!-- Pretraga leka -->
     <table class = "search">
         <tr>
             <td><input type="text" style="width: 300px;margin-bottom: 5px;" class="form-control" placeholder="Enter medicine name" [(ngModel)]="medicineName"> </td>
-            <td><input type="number" class="form-control" style="width: 100px;margin-bottom: 5px;" placeholder="Enter medicine amount" [(ngModel)]="medicineAmount"> </td>
+            <td><input type="number" class="form-control" style="width: 200px;margin-bottom: 5px;" [(ngModel)]="medicineAmount"> </td>
             <td><button class="btn  btn-secondary" style="width: 100px;margin-left: 2px;" (click)="searchMedicine()">Search</button></td>
         </tr>
     </table>
@@ -22,10 +23,9 @@
         <div class="table-responsive table-striped" *ngIf = 'pharmacies.length != 0'>
             <table class = "search">
                 <td><input type="text" style="width: 300px;margin-bottom: 5px;" class="form-control" placeholder="Enter pharmacy city or street" [(ngModel)]="searchParameter"></td>
-                <td><button class="btn  btn-secondary" style="margin-left: 100px;" (click)="searchMedicine()">Search</button></td>
             </table>
-            <table class='table'>
-                <thead style="margin-bottom: 15px;">
+            <table class="table">
+                <thead style="color:rgb(62, 66, 70); opacity: 2.2; background-color: whitesmoke;">
                     <tr>
                         <th>Name</th>
                         <th>Address</th>
@@ -38,10 +38,15 @@
                         <td>{{pharmacy.pharmacyName}}</td>
                         <td>{{pharmacy.pharmacyAddress}}</td>
                         <td>{{pharmacy.pharmacyUrl}}</td>
-                        <button class="btn btn-secondary" (click)="order()">Order</button>
+                        <td><button class="btn btn-secondary" (click)="order(pharmacy)">Order</button></td>  
                     </tr>
                 </tbody>
             </table>
         </div>
+
+     <!-- Poruka ako nema leka -->
+     <div *ngIf = 'notFound'>
+         <p style="margin-left: 80px; margin-top: 30px; font-size: medium; font-weight: bold;">{{notFoundMessage}}</p>
+     </div>
 </div>
     

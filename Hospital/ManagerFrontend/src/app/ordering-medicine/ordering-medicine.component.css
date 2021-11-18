@@ -19,7 +19,7 @@
     margin-top: 30px;
     margin-left: 80px;
     margin-right: 60px ;
-    width: auto;
+    max-width: 70%;
     opacity:2;
     color: black; font-size: 18px;   
   }

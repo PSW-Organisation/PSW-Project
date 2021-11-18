@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PharmacyLibrary.Repository.HospitalRepository;
 using PharmacyLibrary.Repository.MedicineRepository;
 using PharmacyLibrary.Repository.PharmacyRepository;
 using PharmacyLibrary.Service;
@@ -34,10 +35,13 @@ namespace PharmacyAPI
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                     assembly => assembly.MigrationsAssembly(typeof(PharmacyDbContext).Assembly.FullName));
             });
+        
             services.AddTransient<IPharmacyRepository, PharmacyRepository>();
             services.AddTransient<IMedicineRepository, MedicineRepository>();
+            services.AddScoped<IHospitalRepository, HospitalRepository>();
             services.AddScoped<IPharmacyService, PharmacyService>();
             services.AddScoped<IMedicineService, MedicineService>();
+            services.AddScoped<IHospitalService, HospitalService>();
             //added for Cors error
             //______________________________________________________________________
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>

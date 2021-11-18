@@ -2,6 +2,7 @@
 using PharmacyAPI.Adapter;
 using PharmacyAPI.DTO;
 using PharmacyAPI.Model;
+using PharmacyLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,27 +12,26 @@ namespace PharmacyAPI.Controllers
 {   [ApiController]
     [Route("api3/[controller]")]
     public class HospitalController : ControllerBase
-
     {
-        private readonly PharmacyDbContext dbContext;
+        private readonly IHospitalService hospitalService;
 
-        public HospitalController(PharmacyDbContext context)
+        public HospitalController(IHospitalService hospitalService)
         {
-            dbContext = context;
+            this.hospitalService = hospitalService;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
             List<HospitalDto> result = new List<HospitalDto>();
-            dbContext.Hospitals.ToList().ForEach(hospital => result.Add(HospitalAdapter.HospitalToHospitalDto(hospital)));
+            hospitalService.Get().ToList().ForEach(hospital => result.Add(HospitalAdapter.HospitalToHospitalDto(hospital)));
             return Ok(result);
         }
 
         [HttpGet("{id?}")]
         public IActionResult Get(long id)
         {
-            Hospital hospital = dbContext.Hospitals.FirstOrDefault(hospital => hospital.HospitalId == id);
+            Hospital hospital = hospitalService.Get(id);
             if(hospital == null)
             {
                 return NotFound();
@@ -49,17 +49,11 @@ namespace PharmacyAPI.Controllers
             {
                 return BadRequest();
             }
-            long id = dbContext.Hospitals.ToList().Count > 0 ? dbContext.Hospitals.Max(Hospital => Hospital.HospitalId) + 1 : 1;
-            Hospital hospital = HospitalAdapter.HospitalDtoToHospital(dto);
-            hospital.HospitalId = id;
-            string apiKey = GenerateApiKey();
-            hospital.HospitalApiKey = apiKey;
-            dbContext.Hospitals.Add(hospital);
-            dbContext.SaveChanges();
-            return Ok(apiKey);
+            
+            return Ok(hospitalService.Add(HospitalAdapter.HospitalDtoToHospital(dto)));
         }
 
-        [HttpPut]
+        /*[HttpPut]
         public IActionResult Put(UpdatePharmacyApiKey dto)
         {
             Hospital hospital = dbContext.Hospitals.SingleOrDefault(hospital => hospital.HospitalId == dto.HospitalId);
@@ -71,25 +65,23 @@ namespace PharmacyAPI.Controllers
             dbContext.Update(hospital);
             dbContext.SaveChanges();
             return Ok();
-        }
+        }*/
         [HttpPut("{id?}")]
         public IActionResult Put(HospitalDto dto, long id)
         {
-            Hospital hospital = dbContext.Hospitals.SingleOrDefault(hospital => hospital.HospitalId == id);
+            Hospital hospital = hospitalService.Get(id);
             if (hospital == null)
             {
                 return NotFound();
             }
-            hospital = HospitalAdapter.UpdateHospitalDtoToHospital(dto, hospital);
-            dbContext.Update(hospital);
-            dbContext.SaveChanges();
+            hospitalService.Update(HospitalAdapter.UpdateHospitalDtoToHospital(dto, hospital));
             return Ok();
         }
 
         [HttpDelete("{id?}")]
-        public IActionResult Delete(long id = 0)
+        public IActionResult Delete(long id)
         {
-            Hospital hospital = dbContext.Hospitals.SingleOrDefault(hospital => hospital.HospitalId == id);
+            Hospital hospital = hospitalService.Get(id);
             if(hospital == null)
             {
                 return NotFound();
@@ -97,14 +89,9 @@ namespace PharmacyAPI.Controllers
             }
             else
             {
-                dbContext.Hospitals.Remove(hospital);
-                dbContext.SaveChanges();
+                hospitalService.Delete(id);
                 return Ok();
             }
-        }
-        public string GenerateApiKey()
-        {
-            return System.Guid.NewGuid().ToString();
         }
     }
 }
