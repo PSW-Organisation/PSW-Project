@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace HospitalLibrary.GraphicalEditor.Repository
 {
-    public class FloorGraphicRepository : GenericSTRINGIDRepository<FloorGraphic>, IFloorGraphicRepository
+    public class FloorGraphicRepository : GenericDbRepository<FloorGraphic>, IFloorGraphicRepository
     {
         HospitalDbContext _dbContext;
         public FloorGraphicRepository(HospitalDbContext dbContext) : base(dbContext) 

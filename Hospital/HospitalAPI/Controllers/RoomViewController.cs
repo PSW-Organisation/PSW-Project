@@ -48,7 +48,7 @@ namespace HospitalAPI.Controllers
 
         [HttpPut]
         public IActionResult Put(RoomDTO dto)
-        { 
+        {
             Room room = _dbcontext.Rooms.SingleOrDefault(room => room.Id.Equals(dto.Id));
             room.RoomType = dto.RoomType;
             room.Name = dto.Name;

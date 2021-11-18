@@ -38,7 +38,7 @@ namespace HospitalLibrary.FeedbackAndSurvey.Service
             return _patientFeedbackRepository.GetAll();
         }
 
-        public PatientFeedback GetPatientFeedback(string id) 
+        public PatientFeedback GetPatientFeedback(int id) 
         {
             return _patientFeedbackRepository.Get(id);
         }

@@ -42,7 +42,7 @@ namespace ehealthcare.Model
             modelBuilder.Entity<Room>().HasData(
                 new
                 {
-                    Id = "0",
+                    Id = 16,
                     Name = "Counter 1",
                     Floor = 0,
                     IsRenovated = false,
@@ -53,7 +53,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "1",
+                    Id = 1,
                     Name = "Counter 2",
                     Floor = 0,
                     IsRenovated = false,
@@ -64,7 +64,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "2",
+                    Id = 2,
                     Name = "Examination room 1",
                     Floor = 0,
                     IsRenovated = false,
@@ -75,7 +75,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "3",
+                    Id = 3,
                     Name = "Examination room 2",
                     Floor = 0,
                     IsRenovated = false,
@@ -86,7 +86,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "4",
+                    Id = 4,
                     Name = "Restroom 1",
                     Floor = 0,
                     IsRenovated = false,
@@ -97,7 +97,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "5",
+                    Id = 5,
                     Name = "Restroom 2",
                     Floor = 0,
                     IsRenovated = false,
@@ -108,7 +108,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "6",
+                    Id = 6,
                     Name = "Waiting room 1",
                     Floor = 0,
                     IsRenovated = false,
@@ -118,7 +118,7 @@ namespace ehealthcare.Model
                     Sector = "WS"
                 }, new
                 {
-                    Id = "7",
+                    Id = 7,
                     Name = "Operation room 1",
                     Floor = 1,
                     IsRenovated = false,
@@ -129,7 +129,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "8",
+                    Id = 8,
                     Name = "Operation room 2",
                     Floor = 1,
                     IsRenovated = false,
@@ -140,7 +140,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "9",
+                    Id = 9,
                     Name = "Operation room 3",
                     Floor = 1,
                     IsRenovated = false,
@@ -151,7 +151,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "10",
+                    Id = 10,
                     Name = "Operation room 4",
                     Floor = 1,
                     IsRenovated = false,
@@ -162,7 +162,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "11",
+                    Id = 11,
                     Name = "Examination room 3",
                     Floor = 1,
                     IsRenovated = false,
@@ -173,7 +173,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "12",
+                    Id = 12,
                     Name = "Examination room 4",
                     Floor = 1,
                     IsRenovated = false,
@@ -184,7 +184,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "13",
+                    Id = 13,
                     Name = "Restroom 3",
                     Floor = 1,
                     IsRenovated = false,
@@ -195,7 +195,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "14",
+                    Id = 14,
                     Name = "Restroom 4",
                     Floor = 1,
                     IsRenovated = false,
@@ -206,7 +206,7 @@ namespace ehealthcare.Model
                 },
                 new
                 {
-                    Id = "15",
+                    Id = 15,
                     Name = "Waiting room 2",
                     Floor = 1,
                     IsRenovated = false,
@@ -222,81 +222,81 @@ namespace ehealthcare.Model
             {
                 fg.HasData(new FloorGraphic
                 {
-                    Id = "0",
+                    Id = 1,
                     Floor = 0,
-                    BuildingId = "0"
+                    BuildingId = 0
 
                 });
                 fg.OwnsMany(e => e.RoomGraphics).HasData(new
                 {
-                    Id = "0",
+                    Id = 16,
                     DoorPosition = "right",
                     Width = 100,
                     Height = 100,
                     X = 0,
                     Y = 0,
-                    FloorGraphicId = "0",
-                    RoomId = "0"
+                    FloorGraphicId = 1,
+                    RoomId = 16
                 }, new
                 {
-                    Id = "1",
+                    Id = 1,
                     DoorPosition = "right",
                     Width = 100,
                     Height = 100,
                     X = 0,
                     Y = 100,
-                    FloorGraphicId = "0",
-                    RoomId = "1"
+                    FloorGraphicId = 1,
+                    RoomId = 1
                 }, new
                 {
-                    Id = "2",
+                    Id = 2,
                     DoorPosition = "right",
                     Width = 75,
                     Height = 145,
                     X = 0,
                     Y = 340,
-                    FloorGraphicId = "0",
-                    RoomId = "2"
+                    FloorGraphicId = 1,
+                    RoomId = 2
                 }, new
                 {
-                    Id = "3",
+                    Id = 3,
                     DoorPosition = "left",
                     Width = 75,
                     Height = 145,
                     X = 222,
                     Y = 340,
-                    FloorGraphicId = "0",
-                    RoomId = "3"
+                    FloorGraphicId = 1,
+                    RoomId = 3
                 }, new
                 {
-                    Id = "4",
+                    Id = 4,
                     DoorPosition = "top",
                     Width = 147,
                     Height = 80,
                     X = 0,
                     Y = 517,
-                    FloorGraphicId = "0",
-                    RoomId = "4"
+                    FloorGraphicId = 1,
+                    RoomId = 4
                 }, new
                 {
-                    Id = "5",
+                    Id = 5,
                     DoorPosition = "top",
                     Width = 147,
                     Height = 80,
                     X = 150,
                     Y = 517,
-                    FloorGraphicId = "0",
-                    RoomId = "5"
+                    FloorGraphicId = 1,
+                    RoomId = 5
                 }, new
                 {
-                    Id = "6",
+                    Id = 6,
                     DoorPosition = "none",
                     Width = 140,
                     Height = 160,
                     X = 150,
                     Y = 20,
-                    FloorGraphicId = "0",
-                    RoomId = "6"
+                    FloorGraphicId = 1,
+                    RoomId = 6
                 });
             });
 
@@ -304,101 +304,101 @@ namespace ehealthcare.Model
             {
                 fg.HasData(new FloorGraphic
                 {
-                    Id = "1",
+                    Id = 2,
                     Floor = 1,
-                    BuildingId = "0"
+                    BuildingId = 0
 
                 });
                 fg.OwnsMany(e => e.RoomGraphics).HasData(new
                 {
-                    Id = "7",
+                    Id = 7,
                     DoorPosition = "right",
                     Width = 100,
                     Height = 100,
                     X = 0,
                     Y = 0,
-                    FloorGraphicId = "1",
-                    RoomId = "7"
+                    FloorGraphicId = 2,
+                    RoomId = 7
                 }, new
                 {
-                    Id = "8",
+                    Id = 8,
                     DoorPosition = "left",
                     Width = 100,
                     Height = 100,
                     X = 197,
                     Y = 0,
-                    FloorGraphicId = "1",
-                    RoomId = "8"
+                    FloorGraphicId = 2,
+                    RoomId = 8
                 }, new
                 {
-                    Id = "9",
+                    Id = 9,
                     DoorPosition = "right",
                     Width = 100,
                     Height = 100,
                     X = 0,
                     Y = 100,
-                    FloorGraphicId = "1",
-                    RoomId = "9"
+                    FloorGraphicId = 2,
+                    RoomId = 9
                 }, new
                 {
-                    Id = "10",
+                    Id = 10,
                     DoorPosition = "left",
                     Width = 100,
                     Height = 100,
                     X = 197,
                     Y = 100,
-                    FloorGraphicId = "1",
-                    RoomId = "10"
+                    FloorGraphicId = 2,
+                    RoomId = 10
                 }, new
                 {
-                    Id = "11",
+                    Id = 11,
                     DoorPosition = "right",
                     Width = 75,
                     Height = 145,
                     X = 0,
                     Y = 340,
-                    FloorGraphicId = "1",
-                    RoomId = "11"
+                    FloorGraphicId = 2,
+                    RoomId = 11
                 }, new
                 {
-                    Id = "12",
+                    Id = 12,
                     DoorPosition = "left",
                     Width = 75,
                     Height = 145,
                     X = 222,
                     Y = 340,
-                    FloorGraphicId = "1",
-                    RoomId = "12"
+                    FloorGraphicId = 2,
+                    RoomId = 12
                 }, new
                 {
-                    Id = "13",
+                    Id = 13,
                     DoorPosition = "top",
                     Width = 147,
                     Height = 80,
                     X = 0,
                     Y = 517,
-                    FloorGraphicId = "1",
-                    RoomId = "13"
+                    FloorGraphicId = 2,
+                    RoomId = 13
                 }, new
                 {
-                    Id = "14",
+                    Id = 14,
                     DoorPosition = "top",
                     Width = 147,
                     Height = 80,
                     X = 150,
                     Y = 517,
-                    FloorGraphicId = "1",
-                    RoomId = "14"
+                    FloorGraphicId = 2,
+                    RoomId = 14
                 }, new
                 {
-                    Id = "15",
+                    Id = 15,
                     DoorPosition = "none",
                     Width = 140,
                     Height = 100,
                     X = 10,
                     Y = 220,
-                    FloorGraphicId = "1",
-                    RoomId = "15"
+                    FloorGraphicId = 2,
+                    RoomId = 15
                 });
             });
 
@@ -406,80 +406,80 @@ namespace ehealthcare.Model
 
             modelBuilder.Entity<ExteriorGraphic>().HasData(new ExteriorGraphic()
             {
-                Id = "0",
+                Id = 1,
                 X = 180,
                 Y = 30,
                 Width = 100,
                 Height = 200,
                 Name = "ZGR1",
                 Type = "building",
-                IdElement = "0"
+                IdElement = 0
             },
             new ExteriorGraphic()
             {
-                Id = "1",
+                Id = 2,
                 X = 380,
                 Y = 120,
                 Width = 180,
                 Height = 110,
                 Name = "ZGR2",
                 Type = "building",
-                IdElement = "1"
+                IdElement = 1
             },
             new ExteriorGraphic()
             {
-                Id = "2",
+                Id = 7,
                 X = 0,
                 Y = 250,
                 Width = 600,
                 Height = 50,
                 Name = "",
                 Type = "road",
-                IdElement = "-1"
+                IdElement = -1
             },
             new ExteriorGraphic()
             {
-                Id = "3",
+                Id = 3,
                 X = 0,
                 Y = 290,
                 Width = 50,
                 Height = 110,
                 Name = "",
                 Type = "road",
-                IdElement = "-1"
+                IdElement = -1
             },
             new ExteriorGraphic()
             {
-                Id = "4",
+                Id = 4,
                 X = 305,
                 Y = 0,
                 Width = 50,
                 Height = 400,
                 Name = "",
                 Type = "road",
-                IdElement = "-1"
+                IdElement = -1
             },
             new ExteriorGraphic()
             {
-                Id = "5",
+                Id = 5,
                 X = 245,
                 Y = 310,
                 Width = 50,
                 Height = 80,
                 Name = "P",
                 Type = "parking",
-                IdElement = "-1"
+                IdElement = -1
             },
             new ExteriorGraphic()
             {
-                Id = "6",
+                Id = 6,
                 X = 380,
                 Y = 20,
                 Width = 50,
                 Height = 80,
                 Name = "P",
                 Type = "parking",
-                IdElement = "-1"
+                IdElement = -1
             });
 
         }

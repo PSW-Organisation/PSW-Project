@@ -8,7 +8,7 @@ namespace HospitalAPI.DTO
 {
     public class RoomGraphicDTO
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
         public int Width { get; set; }
@@ -17,7 +17,7 @@ namespace HospitalAPI.DTO
         public int Floor { get; set; }
         public string DoorPosition { get; set; }
         public RoomType Type { get; set; }
-        public string RoomId { get; set; }
+        public int RoomId { get; set; }
         public Room Room { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace HospitalLibrary.GraphicalEditor.Service
             _exteriorGraphicRepository = exteriorGraphicRepository;
         }
 
-        public Result<List<ExteriorGraphic>> GetExteriorGraphics()
+        public Result<IList<ExteriorGraphic>> GetExteriorGraphics()
         {
             return Result.Ok(_exteriorGraphicRepository.GetAll());
         }

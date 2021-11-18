@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalLibrary.Migrations
 {
-    public partial class FeedbackFirstMigration : Migration
+    public partial class PatientFeedbackFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

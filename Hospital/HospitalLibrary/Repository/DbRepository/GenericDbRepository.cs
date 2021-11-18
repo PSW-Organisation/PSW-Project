@@ -25,10 +25,10 @@ namespace HospitalLibrary.Repository.DbRepository
                 _dbContext.Set<T>().Remove(entity);
                 Save(entity);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
             }
         }
 
@@ -37,7 +37,7 @@ namespace HospitalLibrary.Repository.DbRepository
             return _dbContext.Set<T>().ToList();
         }
 
-        public T Get(string id)
+        public T Get(int id)
         {
             return _dbContext.Set<T>().Find(id);
         }

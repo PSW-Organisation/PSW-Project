@@ -192,11 +192,11 @@ namespace ehealthcare.Model
             set
             {
                 room = value;
-                RoomId = value.Id;
+                //RoomId = value.Id;
             }
         }
 
-        public String RoomId { get; set; }
+        public int RoomId { get; set; }
 
         [System.Xml.Serialization.XmlIgnore]
         public VisitReport VisitReport

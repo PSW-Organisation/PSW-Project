@@ -16,7 +16,7 @@ namespace HospitalLibrary.GraphicalEditor.Service
             _roomGraphicRepository = roomGraphicRepository;
         }
 
-        public Result<List<RoomGraphic>> GetRoomGraphics()
+        public Result<IList<RoomGraphic>> GetRoomGraphics()
         {
             return Result.Ok(_roomGraphicRepository.GetAll());
         }

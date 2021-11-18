@@ -9,6 +9,6 @@ namespace HospitalLibrary.GraphicalEditor.Service
 {
     public interface IExteriorGraphicService
     {
-        Result<List<ExteriorGraphic>> GetExteriorGraphics();
+        Result<IList<ExteriorGraphic>> GetExteriorGraphics();
     }
 }

@@ -21,7 +21,7 @@ namespace ehealthcare.Service
             _roomRepository = roomRepository;
         }
 
-        public Room GetRoomById(String id)
+        public Room GetRoomById(int id)
         {
             return _roomRepository.Get(id);
         }
@@ -31,7 +31,7 @@ namespace ehealthcare.Service
             return _roomRepository.GetAll().ToList();
         }
 
-        public void DeleteRoom(string id)
+        public void DeleteRoom(int id)
         {
             Room room = _roomRepository.Get(id);
             if (room != null)
@@ -67,8 +67,8 @@ namespace ehealthcare.Service
         {
             List<Room> rooms = GetAllRooms();
             DeleteRoom(room.Id);
-            Room firstNewRoom = new Room() {Id = room.Id + "R1", Floor=room.Floor, IsRenovated=room.IsRenovated, IsRenovatedUntill = room.IsRenovatedUntill, NumOfTakenBeds=room.NumOfTakenBeds/2, Sector = room.Sector, RoomType = room.RoomType };
-            Room secondNewRoom = new Room() { Id = room.Id + "R2", Floor = room.Floor, IsRenovated = room.IsRenovated, IsRenovatedUntill = room.IsRenovatedUntill, NumOfTakenBeds = room.NumOfTakenBeds/2, Sector = room.Sector, RoomType = room.RoomType };
+            Room firstNewRoom = new Room() {Id = room.Id + 1, Floor=room.Floor, IsRenovated=room.IsRenovated, IsRenovatedUntill = room.IsRenovatedUntill, NumOfTakenBeds=room.NumOfTakenBeds/2, Sector = room.Sector, RoomType = room.RoomType };
+            Room secondNewRoom = new Room() { Id = room.Id + 2, Floor = room.Floor, IsRenovated = room.IsRenovated, IsRenovatedUntill = room.IsRenovatedUntill, NumOfTakenBeds = room.NumOfTakenBeds/2, Sector = room.Sector, RoomType = room.RoomType };
 
             _roomRepository.Save(firstNewRoom);
             _roomRepository.Save(secondNewRoom);
@@ -99,9 +99,8 @@ namespace ehealthcare.Service
 
           
 
-            public List<Room> GetRoomsForHospitalization()
+            public List<Room> GetRoomsForHospitalization(IRoomInventoryService roomInventoryService)
             {
-                RoomInventoryService roomInventoryService = new RoomInventoryService();
                 List<Room> allRooms = _roomRepository.GetAll().ToList();
                 List<Room> freeRooms = new List<Room>();
                 if (allRooms != null)

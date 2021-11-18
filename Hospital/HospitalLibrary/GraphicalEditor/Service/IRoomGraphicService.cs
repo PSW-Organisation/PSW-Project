@@ -8,6 +8,6 @@ namespace HospitalLibrary.GraphicalEditor.Service
 {
     public interface IRoomGraphicService 
     {
-        Result<List<RoomGraphic>> GetRoomGraphics();
+        Result<IList<RoomGraphic>> GetRoomGraphics();
     }
 }

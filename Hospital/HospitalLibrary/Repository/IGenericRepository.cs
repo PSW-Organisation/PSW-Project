@@ -10,7 +10,7 @@ namespace HospitalLibrary.Repository
         
         IList<T> GetAll();
         IEnumerable<T> Search(Expression<Func<T, bool>> predicate);
-        T Get(string id);
+        T Get(int id);
         void Insert(T entity);
         T Update(T entity);
         void Delete(T entity);
