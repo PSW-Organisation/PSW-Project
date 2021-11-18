@@ -13,9 +13,6 @@ namespace ehealthcare.Model
     public class HospitalDbContext : DbContext
     {
         public DbSet<PatientFeedback> PatientFeedbacks { get; set; }
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<Country> Countries { get; set; }
-        public DbSet<City> Cities { get; set; }
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Allergen> Allergens { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
@@ -649,7 +646,6 @@ namespace ehealthcare.Model
 
             modelBuilder.Entity<Patient>(p =>
             {
-                p.HasOne<MedicalRecord>(m => m.Medical);
                 p.HasData(
                     new Patient
                     {
@@ -691,7 +687,9 @@ namespace ehealthcare.Model
                         DateOfBirth = new DateTime(1999, 7, 14),
                         Phone = "019919199191",
                         Email = "nemanjar@gmail.com",
-                        AddressId = 1,
+                        HomeAddress = "Sime Milutinovica, 2",
+                        City = "Novi Sad",
+                        Country = "Serbia",
                         IsBlocked = false,
                         IsActivated = false,
                         UsedOffDays = 12,
@@ -702,35 +700,8 @@ namespace ehealthcare.Model
 
 
 
-            modelBuilder.Entity<City>().HasData(new City()
-            {
-                Id = 1,
-                Name = "Novi Sad",
-                PostalCode = "21000",
-                CountryId = 1
-
-            });
-
-
-            modelBuilder.Entity<Country>(c =>
-            {
-                c.HasData(
-                    new Country
-                    {
-                        Id = 1,
-                        Name = "Srbija",
-                        Code = "21000"
-                    });
-
-                c.HasMany(city => city.Cities);
-            });
-
-            modelBuilder.Entity<Address>().HasData(new Address()
-            {
-                Id = 1,
-                HomeAddress = "Sime Milutinovica, 2",
-                CityId = 1
-            });
+           
+           
 
             modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
             {

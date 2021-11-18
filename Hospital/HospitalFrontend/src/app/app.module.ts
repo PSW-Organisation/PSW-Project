@@ -15,6 +15,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ToastrModule } from 'ngx-toastr';
 import { RandomUserService } from './random-user/random-user.service';
 import { DatePipe } from '@angular/common';
+import { RegistrationComponent } from './registration/registration.component';
 
 export function playerFactory() {
   return player;
@@ -24,7 +25,8 @@ export function playerFactory() {
   declarations: [
     AppComponent,
     FeedbackComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,8 @@ export function playerFactory() {
     }),
     RouterModule.forRoot([
       { path: '', component: WelcomeComponent},
-      { path: 'feedback', component: FeedbackComponent}
+      { path: 'feedback', component: FeedbackComponent},
+      { path: 'registration', component: RegistrationComponent}
     ]), 
     NgbModule,
     LottieModule.forRoot({ player: playerFactory }),

@@ -41,7 +41,7 @@ namespace HospitalAPI
             services.AddDbContext<HospitalDbContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
-                    assembly => assembly.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName));
+                    assembly => assembly.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName)).UseLazyLoadingProxies();
             });
 
             services.AddMvc(setup => {

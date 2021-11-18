@@ -8,30 +8,17 @@ namespace ehealthcare.Model
     [Serializable]
     public class MedicalPermit : EntityDb
     {
-        private Doctor doctor;
-        private DateTime expirationDate;
+       
+        public virtual Doctor Doctor { get; set; }
+       
+        public String DoctorId { get; set; }
 
-        [System.Xml.Serialization.XmlIgnore]
-        public Doctor Doctor
+        public DateTime ExpirationDate { get; set; }
+
+        public MedicalPermit()
         {
-            get { return doctor; }
-            set { doctor = value; }
+
         }
 
-        public String DoctorId
-        {
-            get { return doctor.Id; }
-            set
-            {
-                DoctorService doctorService = new DoctorService();
-                doctor = doctorService.GetDoctorById(value);
-            }
-        }
-
-        public DateTime ExpirationDate
-        {
-            get { return expirationDate; }
-            set { expirationDate = value; }
-        }
     }
 }

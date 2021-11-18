@@ -24,9 +24,9 @@ namespace ehealthcare.Service
         */
         public void SetPatientsDoctor(string patientId ,Doctor doctor)
         {
-            ((Patient)AppData.getInstance().LoggedInAccount.User).Medical.PersonalDoctor = doctor;
+            ((Patient)AppData.getInstance().LoggedInAccount.User).Medical.Doctor = doctor;
             Patient patient = patientRepository.Get(patientId);
-            patient.Medical.PersonalDoctor = doctor;
+            patient.Medical.Doctor = doctor;
             patientRepository.Save(patient);
         }
         /*

@@ -11,46 +11,31 @@ namespace ehealthcare.Model
     [Serializable]
     public class MedicalRecord
     {
-        private Doctor personalDoctor;
-
-        
+        [Key]
+        public string PatientId { get; set; }
         public virtual Patient Patient { get; set; }
-       
         public string PersonalId { get; set; }
         public int BloodType { get; set; }
         public int Height { get; set; }
         public int Weight { get; set; }
         public string Profession { get; set; }
+        public virtual Doctor Doctor { get; set; }
         public string DoctorId { get; set; }
 
-        
-        [Key]
-        public string PatientId { get; set; }
+        public MedicalRecord() { }
 
-
-        [System.Xml.Serialization.XmlIgnore]
-        public virtual Doctor PersonalDoctor
+        public MedicalRecord(string patientId, Patient patient, string personalId, int bloodType,
+                             int height, int weight, string profession, Doctor doctor, string doctorId)
         {
-            get { return personalDoctor; }
-            set { personalDoctor = value; }
-        }
-
-        public String PersonalDoctorId
-        {
-            get
-            {
-                if (personalDoctor != null)
-                {
-                    return personalDoctor.Id;
-                }
-
-                return null;
-            }
-            set
-            {
-                DoctorService doctorService = new DoctorService();
-                personalDoctor = doctorService.GetDoctorById(value);
-            }
+            PatientId = patientId;
+            Patient = patient;
+            PersonalId = personalId;
+            BloodType = bloodType;
+            Height = height;
+            Weight = weight;
+            Profession = profession;
+            Doctor = doctor;
+            DoctorId = doctorId;
         }
     }
 }
