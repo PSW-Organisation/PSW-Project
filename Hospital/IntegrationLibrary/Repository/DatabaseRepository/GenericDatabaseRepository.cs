@@ -31,7 +31,6 @@ namespace IntegrationLibrary.Repository.DatabaseRepository
             }
         }
 
-       
         public int GenerateId()
         {
             int maxId = 0;
@@ -74,8 +73,6 @@ namespace IntegrationLibrary.Repository.DatabaseRepository
             return _dbContext.Set<T>().ToList();
         }
 
-     
-
         public void Save(T entity)
         {
             _dbContext.Set<T>().Add(entity);
@@ -94,7 +91,8 @@ namespace IntegrationLibrary.Repository.DatabaseRepository
 
         public T Update(T entity)
         {
-            _dbContext.Set<T>().Update(entity);
+            T oldEntitiy = this.Get(entity.Id);
+            _dbContext.Entry(oldEntitiy).CurrentValues.SetValues(entity);
             SaveAll();
             return entity;
         }

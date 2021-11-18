@@ -32,7 +32,6 @@ namespace IntegrationAPI.Controllers
         [HttpGet("{id?}")]      // GET /api/complaint/1
         public IActionResult Get(int id)
         {
-
             Complaint complaint = complaintService.Get(id);
             if (complaint == null)
             {
@@ -56,10 +55,7 @@ namespace IntegrationAPI.Controllers
             complaintService.Save(ComplaintAdapter.ComplaintDtoToComplaint(dto));
            
             return Ok();
-
         }
-
-       
 
         [HttpDelete("{id?}")]       // DELETE /api2/complaint/1 
         //zasto je id bio id=0?
@@ -74,7 +70,6 @@ namespace IntegrationAPI.Controllers
                complaintService.Delete(complaint);
                return Ok();
             }
-            
         }
     }
 }
