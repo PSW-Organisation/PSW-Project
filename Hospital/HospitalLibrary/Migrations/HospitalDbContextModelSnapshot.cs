@@ -399,34 +399,6 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ehealthcare.Model.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("HomeAddress")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CityId");
-
-                    b.ToTable("Addresses");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CityId = 1,
-                            HomeAddress = "Sime Milutinovica, 2"
-                        });
-                });
-
             modelBuilder.Entity("ehealthcare.Model.Allergen", b =>
                 {
                     b.Property<string>("Id")
@@ -444,64 +416,6 @@ namespace HospitalLibrary.Migrations
                         {
                             Id = "1",
                             Type = "macija dlaka"
-                        });
-                });
-
-            modelBuilder.Entity("ehealthcare.Model.City", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
-
-                    b.ToTable("Cities");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CountryId = 1,
-                            Name = "Novi Sad",
-                            PostalCode = "21000"
-                        });
-                });
-
-            modelBuilder.Entity("ehealthcare.Model.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Code")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "21000",
-                            Name = "Srbija"
                         });
                 });
 
@@ -544,9 +458,6 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("integer");
 
-                    b.Property<string>("PersonalDoctorId")
-                        .HasColumnType("text");
-
                     b.Property<string>("PersonalId")
                         .HasColumnType("text");
 
@@ -558,7 +469,7 @@ namespace HospitalLibrary.Migrations
 
                     b.HasKey("PatientId");
 
-                    b.HasIndex("PersonalDoctorId");
+                    b.HasIndex("DoctorId");
 
                     b.ToTable("MedicalRecords");
 
@@ -566,8 +477,8 @@ namespace HospitalLibrary.Migrations
                         new
                         {
                             PatientId = "imbiamba",
-                            BloodType = 1,
-                            DoctorId = "1",
+                            BloodType = 4,
+                            DoctorId = "nelex",
                             Height = 186,
                             PersonalId = "1209001129123",
                             Profession = "Professor",
@@ -792,6 +703,12 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("City")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp without time zone");
 
@@ -803,6 +720,9 @@ namespace HospitalLibrary.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Gender")
+                        .HasColumnType("text");
+
+                    b.Property<string>("HomeAddress")
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActivated")
@@ -834,8 +754,6 @@ namespace HospitalLibrary.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
-
                     b.ToTable("Users");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("User");
@@ -859,10 +777,13 @@ namespace HospitalLibrary.Migrations
                         new
                         {
                             Id = "nelex",
-                            AddressId = 1,
+                            AddressId = 0,
+                            City = "Novi Sad",
+                            Country = "Serbia",
                             DateOfBirth = new DateTime(1999, 7, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nemanjar@gmail.com",
                             Gender = "male",
+                            HomeAddress = "Sime Milutinovica, 2",
                             IsActivated = false,
                             IsBlocked = false,
                             LoginType = 2,
@@ -1136,24 +1057,6 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ehealthcare.Model.Address", b =>
-                {
-                    b.HasOne("ehealthcare.Model.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ehealthcare.Model.City", b =>
-                {
-                    b.HasOne("ehealthcare.Model.Country", "Country")
-                        .WithMany("Cities")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ehealthcare.Model.MedicalPermit", b =>
                 {
                     b.HasOne("ehealthcare.Model.Doctor", "Doctor")
@@ -1167,22 +1070,13 @@ namespace HospitalLibrary.Migrations
 
             modelBuilder.Entity("ehealthcare.Model.MedicalRecord", b =>
                 {
+                    b.HasOne("ehealthcare.Model.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
                     b.HasOne("ehealthcare.Model.Patient", "Patient")
                         .WithOne("Medical")
                         .HasForeignKey("ehealthcare.Model.MedicalRecord", "PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ehealthcare.Model.Doctor", "PersonalDoctor")
-                        .WithMany()
-                        .HasForeignKey("PersonalDoctorId");
-                });
-
-            modelBuilder.Entity("ehealthcare.Model.User", b =>
-                {
-                    b.HasOne("ehealthcare.Model.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ehealthcare.Service
+namespace HospitalLibrary.Service
 {
 	public class DoctorService
 	{
@@ -27,12 +27,13 @@ namespace ehealthcare.Service
         {
             //doctorRepository.ChangeDoctorRoom(roomForTransfer, oldRoom);
         }
+        /*
         public List<Doctor> FindAvailableDoctors(Specialization specialization)
         {
-            WorkdayService workdayService = new WorkdayService();
-            List<Doctor> availableDoctors = new List<Doctor>();
+            //WorkdayService workdayService = new WorkdayService();
+            /*List<Doctor> availableDoctors = new List<Doctor>();
             List<Doctor> specializedDoctors = GetDoctors(specialization);
-            foreach (Doctor doctor in specializedDoctors)
+           /* foreach (Doctor doctor in specializedDoctors)
             {
                 if (workdayService.IsWorkday(doctor.Id, DateTime.Today))
                 {
@@ -40,7 +41,7 @@ namespace ehealthcare.Service
                 }
             }
             return availableDoctors;
-        }
+        }*/
 
         public List<Doctor> GetDoctors(Specialization specialization)
         {
@@ -52,25 +53,17 @@ namespace ehealthcare.Service
 	        return doctorRepository.GetAll();
 	    }
 
+        public static int FindPersonalDoctor(Doctor[] list)
+        {
+
+            throw new NotImplementedException();
+        }
+
         public Doctor GetDoctorByName(string fullName)
         {
             return doctorRepository.GetDoctorByName(fullName);
         }
 
-        public List<Doctor> FindAvailableDoctors(DateTime date)
-        {
-            WorkdayService workdayService = new WorkdayService();
-            List<Doctor> allDoctors = doctorRepository.GetAll();
-            List<Doctor> availableDoctors = new List<Doctor>();
-            foreach (Doctor doctor in allDoctors)
-            {
-                if(workdayService.IsWorkday(doctor.Id, date))
-                {
-                    availableDoctors.Add(doctor);
-                }
-            }
-
-            return availableDoctors;
-        }
+       
 	}
 }

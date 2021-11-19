@@ -19,64 +19,44 @@
                         <div class="row register-form">
                             <div class="col-md-6">
                                 <div class="form-floating" style="margin-bottom: 4%;">
-                                    <input formControlName="nameControl" id="name" class="form-control" type="text" />
+                                    <input formControlName="nameControl" id="name" class="form-control" type="text"
+                                        pattern="^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,}$" />
                                     <label for="name">Name*</label>
                                 </div>
-                                <div class="form-floating" style="margin-bottom: 4%;">
-                                    <input formControlName="parentNameControl" id="parentName" class="form-control"
-                                        type="text" />
-                                    <label for="parentName">Parent name*</label>
-                                </div>
+
                                 <div class="form-floating" style="margin-bottom: 4%;">
                                     <input formControlName="surnameControl" id="lastname" class="form-control"
-                                        type="text" />
+                                        type="text" pattern="^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,}$" />
                                     <label for="lastname">Last name*</label>
                                 </div>
-                                <div class="form-floating" style="margin-bottom: 4%;">
-                                    <input formControlName="personalIdControl" id="personalid" class="form-control"
-                                        type="text" />
-                                    <label for="parentname">Personal id*</label>
-                                </div>
+
                                 <div class="form-floating" style="margin-bottom: 4%;">
                                     <input formControlName="dateOfBirthControl" id="dateofbirth" class="form-control"
                                         type="date" />
                                     <label for="dateofbirth">Date of birth*</label>
                                 </div>
 
-                                
+
                                 <div class="form-floating" style="margin-bottom: 4%;">
                                     <select (change)="updateCities()" class="form-select" style="height: unset;"
-                                    formControlName="countryControl" id="country" class="form-control">
-                                    <option selected [value]="countries[0]">Serbia</option>
-                                    <option [value]="countries[1]">Bosnia and Herzegovina</option>
-                                    <option [value]="countries[2]">Montenegro</option>
-                                </select>
-                                <label for="country">Country*</label>
-                            </div>
-                            <div class="form-floating" style="margin-bottom: 4%;">
-                                <select style="height: unset;" formControlName="cityControl" id="city"
-                                class="form-control">
-                                <option *ngFor="let c of cities" [value]="c">{{c}}</option>
-                            </select>
-                            <label for="city">City*</label>
-                        </div>
-                        <div class="form-floating" style="margin-bottom: 4%;">
-                            <input formControlName="addressControl" id="address" class="form-control"
-                                type="text" />
-                            <label for="address">Address*</label>
-                        </div>
-                        <div class="form-floating" style="margin-bottom: 4%;">
-                            <input formControlName="phoneControl" id="phone" class="form-control" type="text" />
-                            <label for="phone">Contact phone*</label>
-                        </div>
-                        <div class="form-floating" style="margin-bottom: 4%;">
-                                    <input formControlName="emailControl" id="email" class="form-control" type="text" />
-                                    <label for="email">Email*</label>
+                                        formControlName="countryControl" id="country" class="form-control">
+                                        <option selected [value]="countries[0]">Serbia</option>
+                                        <option [value]="countries[1]">Bosnia and Herzegovina</option>
+                                        <option [value]="countries[2]">Montenegro</option>
+                                    </select>
+                                    <label for="country">Country*</label>
                                 </div>
+                                
+                                <div class="form-floating" style="margin-bottom: 4%;">
+                                    <input formControlName="addressControl" id="address" class="form-control"
+                                        type="text" />
+                                    <label for="address">Address*</label>
+                                </div>
+                                
                                 <div class="form-floating" style="margin-bottom: 4%;">
 
                                     <input formControlName="usernameControl" id="username" class="form-control"
-                                        type="text" />
+                                        type="text" pattern="^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{2,19}$" />
                                     <label for="username">Username*</label>
                                 </div>
                                 <div class="form-floating" style="margin-bottom: 4%;">
@@ -85,32 +65,53 @@
                                     <label for="password">Password*</label>
                                 </div>
                                 <div class="form-floating" style="margin-bottom: 4%;">
-                                    <input formControlName="confirmPasswordControl" id="confirmPassword"
-                                        class="form-control" type="password" />
-                                    <label for="confirmPassword">Confirm password*</label>
-                                </div>
-                                <div class="form-group">
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-
-                                <div class="form-floating" style="margin-bottom: 4%;">
                                     <input formControlName="heightControl" id="height" class="form-control"
-                                        type="number" min="0" max="280"/>
+                                        type="number" min="0" max="280" />
                                     <label for="height">Height* [cm]</label>
                                 </div>
-
                                 <div class="form-floating" style="margin-bottom: 4%;">
-                                    <input formControlName="weightControl" id="weight" class="form-control"
-                                        type="number" min="0" max="650" />
-                                    <label for="weight">Weight* [kg]</label>
-                                </div>
-                                <div class="form-floating" style="margin-bottom: 4%;">
-                                    <select style="height: unset;" formControlName="bloodTypeControl" id="bloodtype" class="form-control">
+                                    <select style="height: unset;" formControlName="bloodTypeControl" id="bloodtype"
+                                        class="form-control">
                                         <option *ngFor="let b of bloodTypes" [value]="b">{{b}}</option>
                                     </select>
                                     <label for="bloodtype">Blood type*</label>
+                                </div>
+                                <label>Gender*</label>
+                                <div class="form-group">
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                            id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">Female</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                            id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                    </div>
+                                </div> <!-- /.form-group -->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating" style="margin-bottom: 4%;">
+                                    <input formControlName="parentNameControl" id="parentName" class="form-control"
+                                        type="text" pattern="^[^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{1,}$" />
+                                    <label for="parentName">Parent name*</label>
+                                </div>
+                                <div class="form-floating" style="margin-bottom: 4%;">
+                                    <input formControlName="personalIdControl" id="personalid" class="form-control"
+                                        type="text" />
+                                    <label for="parentname">Personal id*</label>
+                                </div>
+                                <div class="form-floating" style="margin-bottom: 4%;">
+                                    <input formControlName="phoneControl" id="phone" class="form-control" type="text" />
+                                    <label for="phone">Contact phone*</label>
+                                </div>
+                                <div class="form-floating" style="margin-bottom: 4%;">
+                                    <select style="height: unset;" formControlName="cityControl" id="city"
+                                        class="form-control">
+                                        <option *ngFor="let c of cities" [value]="c">{{c}}</option>
+                                    </select>
+                                    <label for="city">City*</label>
                                 </div>
                                 <div class="form-floating" style="margin-bottom: 4%;">
                                     <input formControlName="professionControl" id="profession" class="form-control"
@@ -118,33 +119,39 @@
                                     <label for="profession">Profession*</label>
                                 </div>
                                 <div class="form-floating" style="margin-bottom: 4%;">
+                                    <input formControlName="emailControl" id="email" class="form-control" type="text"
+                                        required />
+                                    <label for="email">Email*</label>
+                                </div>
+                                <div class="form-floating" style="margin-bottom: 4%;">
+                                    <input formControlName="confirmPasswordControl" id="confirmPassword"
+                                    class="form-control" type="password" />
+                                    <label for="confirmPassword">Confirm password*</label>
+                                </div>
+                                
+                                <div class="form-floating" style="margin-bottom: 4%;">
+                                    <input formControlName="weightControl" id="weight" class="form-control"
+                                        type="number" min="0" max="650" />
+                                    <label for="weight">Weight* [kg]</label>
+                                </div>
+                                
+                                
+                                <div class="form-floating" style="margin-bottom: 4%;">
                                     <input formControlName="doctorControl" id="doctor" class="form-control"
                                         type="text" />
                                     <label for="doctor">Personal doctor*</label>
                                 </div>
+                                
+                            </div>
+                            <div class="col text-center">
+                                <input type="submit"  class="btnRegister">
 
-                                <div class="form-group">
-                                    <label>Gender*</label>
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="radio-inline">
-                                                <input formControlName="genderControl" type="radio" id="femaleRadio"
-                                                    value="Female">Female
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <label class="radio-inline">
-                                                <input formControlName="genderControl" type="radio" id="maleRadio"
-                                                    value="Male">Male
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div> <!-- /.form-group -->
-                                <input type="submit" class="btnRegister" value="Register" />
                             </div>
                         </div>
                     </form>
                 </div>
+                <p>Form Status: {{registrationForm.status }}</p>
+
             </div>
         </div>
     </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { RegistrationService } from './registration.service';
@@ -42,13 +42,34 @@ export class RegistrationComponent implements OnInit {
   registrationForm = new FormGroup({
     usernameControl: new FormControl(this.user.username),
     passwordControl: new FormControl(this.user.password),
-    nameControl: new FormControl(this.user.name),
-    parentNameControl: new FormControl(this.user.parentName),
-    surnameControl: new FormControl(this.user.surname),
+    nameControl: new FormControl(this.user.name, [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z]+$'),
+      Validators.minLength(2),
+      Validators.maxLength(30)
+    ]),
+    parentNameControl: new FormControl(this.user.parentName, 
+      [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z]+$'),
+        Validators.minLength(2),
+        Validators.maxLength(30)
+      ]),
+    surnameControl: new FormControl(this.user.surname, [
+      Validators.required,
+      Validators.pattern('^[a-zA-Z]+$'),
+      Validators.minLength(2),
+      Validators.maxLength(30)
+    ]),
     dateOfBirthControl: new FormControl(this.user.dateOfBirth),
     genderControl: new FormControl(this.user.gender),
     phoneControl: new FormControl(this.user.phone),
-    emailControl: new FormControl(this.user.email),
+    emailControl: new FormControl(this.user.email, [
+      Validators.required,
+      Validators.minLength(4),
+      Validators.email,
+      Validators.maxLength(40)
+    ]),
     addressControl: new FormControl(this.user.address),
     cityControl: new FormControl(this.user.city),
     countryControl: new FormControl(this.countries[0]),
@@ -59,6 +80,7 @@ export class RegistrationComponent implements OnInit {
     heightControl: new FormControl(this.user.height),
     weightControl: new FormControl(this.user.weight),
     confirmPasswordControl: new FormControl(this.confirmPassword),
+    
   });
 
   constructor(private service: RegistrationService, private modalService: NgbModal,
@@ -83,7 +105,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   register(): void {
-
+    
   }
 
 

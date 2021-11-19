@@ -621,13 +621,13 @@ namespace ehealthcare.Model
                   new MedicalRecord
                   {
                       PersonalId = "1209001129123",
-                      BloodType = 1,
+                      BloodType = BloodType.AB_positive,
                       Height = 186,
                       Weight = 90,
                       Profession = "Professor",
-                      DoctorId = "1",
+                      DoctorId = "nelex",
                       PatientId = "imbiamba"
-                  });
+                  }); ;
 
             });
 

@@ -1,4 +1,5 @@
 using ehealthcare.Service;
+using HospitalLibrary;
 using HospitalLibrary.Model;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace ehealthcare.Model
         public string PatientId { get; set; }
         public virtual Patient Patient { get; set; }
         public string PersonalId { get; set; }
-        public int BloodType { get; set; }
+        public BloodType BloodType { get; set; }
         public int Height { get; set; }
         public int Weight { get; set; }
         public string Profession { get; set; }
@@ -24,7 +25,7 @@ namespace ehealthcare.Model
 
         public MedicalRecord() { }
 
-        public MedicalRecord(string patientId, Patient patient, string personalId, int bloodType,
+        public MedicalRecord(string patientId, Patient patient, string personalId, BloodType bloodType,
                              int height, int weight, string profession, Doctor doctor, string doctorId)
         {
             PatientId = patientId;
@@ -39,3 +40,4 @@ namespace ehealthcare.Model
         }
     }
 }
+
