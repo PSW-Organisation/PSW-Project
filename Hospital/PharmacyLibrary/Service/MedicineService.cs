@@ -44,5 +44,10 @@ namespace PharmacyLibrary.Service
         {
             return medicineRepository.CheckAvaliableQuantity(idMedicine, quantity);
         }
+
+        public List<Medicine> Search(string name, string useFor)
+        {
+            return medicineRepository.Search(name, useFor);
+        }
     }
 }

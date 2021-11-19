@@ -19,6 +19,6 @@ namespace PharmacyLibrary.Repository.MedicineRepository
 
         Boolean CheckAvaliableQuantity(int idMedicine, int quantity);
 
-
+        List<Medicine> Search(string name, string useFor);
     }
 }

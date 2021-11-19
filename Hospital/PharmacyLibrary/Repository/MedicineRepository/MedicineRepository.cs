@@ -109,6 +109,20 @@ namespace PharmacyLibrary.Repository.MedicineRepository
             return true;
         }
 
+        public List<Medicine> Search(string name, string useFor)
+        {
+            List<Medicine> medications = new List<Medicine>();
+            List<Medicine> nameFilter = pharmacyDbContext.Medicines.Where(medicine => medicine.Name.ToUpper().Contains(name.ToUpper())).ToList();
 
+            foreach(Medicine medicine in nameFilter)
+            {
+                foreach(string medicineUseFor in medicine.UseFor)
+                {
+                    if (medicineUseFor.ToUpper().Contains(useFor.ToUpper())) medications.Add(medicine);
+                }
+            }
+
+            return medications;
+        }
     }
 }
