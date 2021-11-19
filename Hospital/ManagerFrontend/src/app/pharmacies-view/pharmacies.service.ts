@@ -39,4 +39,11 @@ thisUrl: string = "http://localhost:16928/api2/pharmacy";
     return this._http.delete(this.thisUrl+'/'+idPharmacy);
   }
 
+  postFile(fileToUpload: File, pharmacyURL: string) {
+    const endpoint = pharmacyURL + '/report';
+    const formData: FormData = new FormData();
+    formData.append('fileKey', fileToUpload, fileToUpload.name);
+    return this._http
+      .post(endpoint, formData);
+}
 }

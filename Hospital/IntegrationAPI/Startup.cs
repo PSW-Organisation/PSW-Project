@@ -17,6 +17,8 @@ using IntegrationLibrary.Repository.DatabaseRepository;
 using IntegrationLibrary.Service.ServicesInterfaces;
 using IntegrationLibrary.Service;
 using IntegrationLibrary.Repository;
+using DinkToPdf.Contracts;
+using DinkToPdf;
 
 namespace IntegrationAPI
 {
@@ -33,6 +35,8 @@ namespace IntegrationAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
             services.AddControllers();
             services.AddDbContext<IntegrationDbContext>(options =>
             {
