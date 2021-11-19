@@ -10,6 +10,9 @@ namespace PharmacyAPI.Model
         private String name;
         private MedicineStatus medicineStatus;
         private int quantity;
+        public List<string> UseFor { get; set; }
+        public List<string> SideEffects { get; set; }
+        public List<string> Ingredients { get; set; }
 
         public Medicine() { }
 

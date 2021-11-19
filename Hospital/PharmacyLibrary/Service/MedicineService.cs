@@ -55,5 +55,10 @@ namespace PharmacyLibrary.Service
         {
            return medicineRepository.reduceQuantityOfMedicine(medicineName, medicineAmount);
         }
+        
+        public List<Medicine> Search(string name, string useFor)
+        {
+            return medicineRepository.Search(name, useFor);
+        }
     }
 }
