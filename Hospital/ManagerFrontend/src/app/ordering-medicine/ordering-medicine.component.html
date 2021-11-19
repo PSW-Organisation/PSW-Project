@@ -1,9 +1,9 @@
-<div class="backgroundImage" > 
+<div class="backgroundImage" >
 
     <!-- Naslov -->
-    <div class="titleDiv"> 
-        <table> 
-            <tr> 
+    <div class="titleDiv">
+        <table>
+            <tr>
                 <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
                 <td><p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn Hospital</p></td>
             </tr>
@@ -34,19 +34,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let pharmacy of pharmacies | searchPharmacies:searchParameter'>  
+                    <tr *ngFor='let pharmacy of pharmacies | searchPharmacies:searchParameter'>
                         <td>{{pharmacy.pharmacyName}}</td>
                         <td>{{pharmacy.pharmacyAddress}}</td>
                         <td>{{pharmacy.pharmacyUrl}}</td>
-                        <td><button class="btn btn-secondary" (click)="order(pharmacy)">Order</button></td>  
+                        <td><button class="btn btn-secondary" (click)="order(pharmacy)">Order</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-     <!-- Poruka ako nema leka -->
-     <div *ngIf = 'notFound'>
-         <p style="margin-left: 80px; margin-top: 30px; font-size: medium; font-weight: bold;">{{notFoundMessage}}</p>
-     </div>
+        <div *ngIf = 'notFound'>
+            <p style="margin-left: 80px; margin-top: 30px; font-size: medium; font-weight: bold;">{{notFoundMessage}}</p>
+        </div>
+
+        <button class="btn  btn-secondary addButton" style="margin-left:80px ;" data-toggle="modal" data-target="#medicineReport"><i class="fa fa-edit"></i> Report</button>
+
+        <!-- Modal for medicine report-->
+        <div id="medicineReport" class="modal fade" style="display: none;" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">Medicine Consumption Report</h4>
+                </div>
+                <div class="modal-body">
+                <label>Start date</label>
+                <input type="date" class="form-control" placeholder="Start date" [(ngModel)]="timeRange.startDate">
+                <label>Address</label>
+                <input type="date" class="form-control" placeholder="End date" [(ngModel)]="timeRange.endDate">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="getMedicineReport()">Ok</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
 </div>
-    

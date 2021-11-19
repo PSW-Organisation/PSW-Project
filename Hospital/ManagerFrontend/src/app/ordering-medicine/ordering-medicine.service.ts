@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { IPharmacy } from '../pharmacies-view/pharmacy';
 
 @Injectable({
@@ -23,4 +24,17 @@ export class OrderingMedicineService {
   orderMedicinePharmacy(pharmacyUrl: string, hospitalApiKey: string, name: string, amount: number){
     return this._http.put(pharmacyUrl +'/api3/medicine/' + hospitalApiKey , {"medicineName": name, "medicineAmount": amount});
   }
+
+  public getMedicineReport(timeRange: any): any {
+    var mediaType = 'application/pdf';
+    this._http.get('http://localhost:16928/api2/pdfcreator/' + timeRange.startDate + '/' + timeRange.endDate, { responseType: 'blob' }).subscribe(
+        (response) => {
+            var blob = new Blob([response], { type: mediaType });
+            const url= window.URL.createObjectURL(blob);
+            window.open(url);
+        },
+        e => { throwError(e); }
+    );
+  }
+
 }
