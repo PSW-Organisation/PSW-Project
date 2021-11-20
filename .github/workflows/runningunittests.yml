@@ -1,0 +1,20 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+env:
+ PROJECT-PATH : 'Hospital/IntegrationAPIUnitTests/IntegrationAPIUnitTests.csproj'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build
+      run: dotnet build ${{ env.PROJECT-PATH }} --configuration Release
+    - name: Test
+      run: dotnet test ${{ env.PROJECT-PATH }} --configuration Release --no-build 
