@@ -16,9 +16,9 @@ namespace ehealthcare.Model
 
         public ICollection<Patient> Patients { get; set; }
 
-        public Doctor() { }
+        public Doctor(string id) : base(id) { }
 
-        public Doctor(Specialization specialization, int usedOffDays)
+        public Doctor(string id, Specialization specialization, int usedOffDays) : base(id)
         {
             Specialization = specialization;
             UsedOffDays = usedOffDays;

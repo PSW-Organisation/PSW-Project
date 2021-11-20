@@ -13,6 +13,7 @@ namespace HospitalLibrary.Repository.DbRepository
     {
         private readonly HospitalDbContext _dbContext;
 
+
         public GenericDbRepository(HospitalDbContext dbContext)
         {
             _dbContext = dbContext;

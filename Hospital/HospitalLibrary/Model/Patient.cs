@@ -14,9 +14,9 @@ namespace ehealthcare.Model
 
         public virtual ICollection<MedicalPermit> MedicalPermit { get; set; }
 
-        public Patient() { }
+        public Patient(string id) : base(id) { }
       
-        public Patient(MedicalRecord medical, int medicalRecordId)
+        public Patient(string id, MedicalRecord medical, int medicalRecordId) : base(id)
         {
             Medical = medical;
             MedicalRecordId = medicalRecordId;

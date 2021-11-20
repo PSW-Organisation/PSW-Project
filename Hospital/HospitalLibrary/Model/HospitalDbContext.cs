@@ -647,7 +647,7 @@ namespace ehealthcare.Model
             modelBuilder.Entity<Patient>(p =>
             {
                 p.HasData(
-                    new Patient
+                    new Patient("imbiamba")
                     {
                         Id = "imbiamba",
                         Name = "Marko",
@@ -674,7 +674,7 @@ namespace ehealthcare.Model
             {
 
                 d.HasData(
-                    new Doctor
+                    new Doctor("nelex")
                     {
                         Id = "nelex",
                         Name = "Nemanja",

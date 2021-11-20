@@ -13,7 +13,9 @@ namespace HospitalLibrary.Service
 	{
 		private DoctorRepository doctorRepository;
 
-		public DoctorService()
+       
+
+        public DoctorService()
 		{
 			doctorRepository = new DoctorXMLRepository();
         }

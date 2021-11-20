@@ -31,5 +31,10 @@ namespace ehealthcare.Model
 
             return false;
         }
+
+        public Employee(string id) : base(id)
+        {
+
+        }
     }
 }

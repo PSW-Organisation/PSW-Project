@@ -22,6 +22,8 @@ using HospitalLibrary.FeedbackAndSurvey.Repository;
 using HospitalAPI.DTO;
 using HospitalLibrary.RoomsAndEquipment.Service;
 using HospitalLibrary.RoomsAndEquipment.Repository;
+using HospitalLibrary.MedicalRecord.Repository;
+using HospitalLibrary.MedicalRecords.Repository;
 
 namespace HospitalAPI
 {
@@ -77,6 +79,9 @@ namespace HospitalAPI
             services.AddScoped<IPatientFeedbackRepository, PatientFeedbackDbRepository>();
             services.AddScoped<IRoomEquipmentService, RoomEquipmentService>();
             services.AddScoped<IRoomEquipmentRepository, RoomEquipmentRepository>();
+            services.AddScoped<GenericSTRINGIDRepository<Doctor>, DoctorDbRepository>();
+            services.AddScoped<IDoctorRepository, DoctorDbRepository>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

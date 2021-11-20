@@ -47,7 +47,7 @@ namespace ehealthcare.Model
 
         public int AddressId { get; set; }
 
-        public User() : base("undefinedKey") { }
+        public User(string id) : base(id) { }
 
     }
 }
