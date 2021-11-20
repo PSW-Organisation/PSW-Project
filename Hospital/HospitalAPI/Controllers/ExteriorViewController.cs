@@ -30,6 +30,7 @@ namespace HospitalAPI.Controllers
         {
             var result = _exteriorGraphicService.GetExteriorGraphics();
             return Ok(result.Value.Select(r => _mapper.Map<ExteriorGraphicDTO>(r)).ToList());
+            //return Ok(new ExteriorGraphicDTO() { Name="a"});
         }
 
     }
