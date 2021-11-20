@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using HospitalLibrary.FeedbackAndSurvey.Model;
+using HospitalLibrary.RoomsAndEquipment.Model;
 
 namespace ehealthcare.Model
 {
@@ -17,6 +18,7 @@ namespace ehealthcare.Model
         public DbSet<FloorGraphic> FloorGraphics { get; set; }
 
         public DbSet<ExteriorGraphic> ExteriorGraphic { get; set; }
+        public DbSet<TermOfRelocationEquipment> TermOfRelocationEquipments { get; set; }
 
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
@@ -403,6 +405,83 @@ namespace ehealthcare.Model
             });
 
 
+            modelBuilder.Entity<TermOfRelocationEquipment>().HasData(
+                new TermOfRelocationEquipment()
+                {
+                    Id = 1,
+                    IdSourceRoom = 7,
+                    IdDestinationRoom = 8,
+                    NameOfEquipment = "bed",
+                    QuantityOfEquipment = 2,
+                    StartTime = new DateTime(2021, 11, 22, 1, 0, 0),
+                    EndTime = new DateTime(2021, 11, 22, 1, 10, 0),
+                    durationInMinutes = 10,
+                    FinishedRelocation = false
+                },
+                new TermOfRelocationEquipment()
+                {
+                    Id = 2,
+                    IdSourceRoom = 7,
+                    IdDestinationRoom = 9,
+                    NameOfEquipment = "needle",
+                    QuantityOfEquipment = 14,
+                    StartTime = new DateTime(2021, 11, 22, 3, 30, 0),
+                    EndTime = new DateTime(2021, 11, 22, 4, 10, 0),
+                    durationInMinutes = 40,
+                    FinishedRelocation = false
+                },
+                new TermOfRelocationEquipment()
+                {
+                    Id = 3,
+                    IdSourceRoom = 8,
+                    IdDestinationRoom = 9,
+                    NameOfEquipment = "infusion",
+                    QuantityOfEquipment = 8,
+                    StartTime = new DateTime(2021, 11, 23, 7, 30, 0),
+                    EndTime = new DateTime(2021, 11, 23, 7, 45, 0),
+                    durationInMinutes = 15,
+                    FinishedRelocation = false
+                },
+                new TermOfRelocationEquipment()
+                {
+                    Id = 4,
+                    IdSourceRoom = 9,
+                    IdDestinationRoom = 11,
+                    NameOfEquipment = "table",
+                    QuantityOfEquipment = 1,
+                    StartTime = new DateTime(2021, 11, 23, 9, 0, 0),
+                    EndTime = new DateTime(2021, 11, 23, 9, 25, 0),
+                    durationInMinutes = 25,
+                    FinishedRelocation = false
+                },
+                new TermOfRelocationEquipment()
+                {
+                    Id = 5,
+                    IdSourceRoom = 10,
+                    IdDestinationRoom = 7,
+                    NameOfEquipment = "xrayMachine",
+                    QuantityOfEquipment = 1,
+                    StartTime = new DateTime(2021, 11, 23, 10, 45, 0),
+                    EndTime = new DateTime(2021, 11, 23, 11, 15, 0),
+                    durationInMinutes = 30,
+                    FinishedRelocation = false
+                },
+                new TermOfRelocationEquipment()
+                {
+                    Id = 6,
+                    IdSourceRoom = 10,
+                    IdDestinationRoom = 11,
+                    NameOfEquipment = "chair",
+                    QuantityOfEquipment = 5,
+                    StartTime = new DateTime(2021, 11, 23, 14, 30, 0),
+                    EndTime = new DateTime(2021, 11, 23, 14, 50, 0),
+                    durationInMinutes = 20,
+                    FinishedRelocation = false
+                }
+
+
+
+            );
 
             modelBuilder.Entity<ExteriorGraphic>().HasData(new ExteriorGraphic()
             {

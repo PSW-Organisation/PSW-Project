@@ -20,6 +20,8 @@ using HospitalLibrary.FeedbackAndSurvey.Service;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.FeedbackAndSurvey.Repository;
 using HospitalAPI.DTO;
+using HospitalLibrary.RoomsAndEquipment.Service;
+using HospitalLibrary.RoomsAndEquipment.Repository;
 
 namespace HospitalAPI
 {
@@ -66,6 +68,9 @@ namespace HospitalAPI
 
             services.AddScoped<IExteriorGraphicService, ExteriorGraphicService>();
             services.AddScoped<IExteriorGraphicRepository, ExteriorGraphicRepository>();
+
+            services.AddScoped<IRelocationEquipmentService, RelocationEquipmentService>();
+            services.AddScoped<IRelocationEquipmentRepository, RelocationEquipmentRepository>();
 
             services.AddScoped<IPatientFeedbackService, PatientFeedbackService>();
             services.AddScoped<GenericDbRepository<PatientFeedback>, PatientFeedbackDbRepository>();
