@@ -1,7 +1,13 @@
+using ehealthcare.Model;
+using HospitalLibrary.MedicalRecords.Repository;
+using HospitalLibrary.MedicalRecords.Service;
+using HospitalUnitTests;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Xunit;
+using System.Net.Mail;
 
 namespace HospitalTests
 {
@@ -14,7 +20,27 @@ namespace HospitalTests
            Assert.Equal(Validate(email), valid);
         }
 
-     
+        [Fact]
+        public void Is_verification_email_not_sent()
+        {
+            HospitalDbContext context = MockDbContext.InitMockContext();
+            var repository = new UserDbRepository(context);
+            var service = new UserService(repository);
+
+            Assert.ThrowsAny<Exception>(() => service.SendEmail("lalalal"));
+        }
+
+        [Fact]
+        public void Is_verification_email_sent()
+        {
+            HospitalDbContext context = MockDbContext.InitMockContext();
+            var repository = new UserDbRepository(context);
+            var service = new UserService(repository);
+
+            service.SendEmail("bilebem774@kyrescu.com");
+        }
+
+
         public static IEnumerable<object[]> Data =>
                                             new List<object[]>
                                             {

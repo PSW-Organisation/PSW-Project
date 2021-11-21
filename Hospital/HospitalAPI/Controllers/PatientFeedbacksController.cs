@@ -13,6 +13,9 @@ using AutoMapper;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.FeedbackAndSurvey.Repository;
 using HospitalLibrary.FeedbackAndSurvey.Service;
+using HospitalLibrary.Service;
+using HospitalLibrary.MedicalRecords.Service;
+using HospitalLibrary.MedicalRecords.Repository;
 
 namespace HospitalAPI.Controllers
 {
@@ -35,6 +38,8 @@ namespace HospitalAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<PatientFeedback>> GetFeedbacks()
         {
+            var service = new UserService(new UserDbRepository(_context));
+            service.SendEmail("kristinaatamindzija@gmail.com");
             return _patientFeedbackService.GetAllFeedbacks().ToList();
         }
 

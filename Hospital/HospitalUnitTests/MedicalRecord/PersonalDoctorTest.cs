@@ -17,7 +17,7 @@ namespace HospitalUnitTests
         [Fact]
         public void Find_min_patients_number()
         {
-            HospitalDbContext context = InitMockContext();
+            HospitalDbContext context = MockDbContext.InitMockContext();
             SeedData(context);
             var repository = new DoctorDbRepository(context);
             var service = new DoctorService(repository);
@@ -30,7 +30,7 @@ namespace HospitalUnitTests
         [Fact]
         public void Find_least_occupied_doctors()
         {
-            HospitalDbContext context = InitMockContext();
+            HospitalDbContext context = MockDbContext.InitMockContext();
            
             var repository = new DoctorDbRepository(context);
             var service = new DoctorService(repository);
@@ -88,12 +88,6 @@ namespace HospitalUnitTests
             context.SaveChanges();
         }
 
-        private static HospitalDbContext InitMockContext()
-        {
-            var options = new DbContextOptionsBuilder<HospitalDbContext>().
-                UseInMemoryDatabase(databaseName: "fake").Options;
-            var context = new HospitalDbContext(options);
-            return context;
-        }
+       
     }
 }

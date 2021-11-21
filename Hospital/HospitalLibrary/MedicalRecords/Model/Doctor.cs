@@ -14,7 +14,7 @@ namespace ehealthcare.Model
         
         public int UsedOffDays { get; set; }
 
-        public ICollection<Patient> Patients { get; set; }
+        public virtual ICollection<Patient> Patients { get; set; }
 
         public Doctor(string id) : base(id) { }
 

@@ -12,17 +12,12 @@ namespace HospitalLibrary.MedicalRecords.Service
     {
         private readonly IDoctorRepository _doctorRepository;
 
-      
-
-        private readonly HospitalDbContext _context;
-
         public DoctorService(IDoctorRepository doctorRepository)
         {
             _doctorRepository = doctorRepository;
            
         }
 
-        
         public int FindLeastNumberOfPatient()
         {
             return _doctorRepository.FindLeastNumberOfPatient();
