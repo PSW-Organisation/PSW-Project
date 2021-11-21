@@ -14,7 +14,6 @@ export class PharmaciesViewComponent implements OnInit {
   pharmacyForEdit: any = { pharmacyId:"", pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey:""};
   editing: boolean = false;
   newPharmacy: any = { pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: ""};
-  fileToUpload: File | null = null;
 
   constructor(private _pharmaciesService: PharmaciesService) { }
 
@@ -58,15 +57,4 @@ export class PharmaciesViewComponent implements OnInit {
     this.refreshPharmacies();
   }
 
-  handleFileInput(event: Event) {
-    this.fileToUpload = (<HTMLInputElement>event.target).files?.item(0) as File;
-}
-
-uploadFileToActivity() {
-  this._pharmaciesService.postFile(this.fileToUpload as File, this.pharmacyForEdit.pharmacyUrl).subscribe(data => {
-    // do something, if upload success
-    }, error => {
-      console.log(error);
-    });
-}
 }
