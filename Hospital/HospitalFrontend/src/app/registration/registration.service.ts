@@ -12,9 +12,12 @@ export class RegistrationService {
   getCitiesForCountry(country: string): Observable<any>{
     return this._http.post<any>('https://countriesnow.space/api/v0.1/countries/cities', {"country" : country});
   }
-/*
-  getAllFeedbacks(): Observable<Feedback[]> {
-    return this._http.get<Feedback[]>('/api/PatientFeedbacks')
+
+  getAllergens(): Observable<any>{
+    return this._http.get<any>('api/Registration')
   }
-*/
+
+  getDoctors(): Observable<any>{
+    return this._http.get<any>('api/Registration/Doctors')
+  }
 }

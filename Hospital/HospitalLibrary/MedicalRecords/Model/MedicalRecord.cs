@@ -1,5 +1,7 @@
+using ehealthcare.Model;
 using ehealthcare.Service;
 using HospitalLibrary;
+using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.Model;
 using System;
 using System.Collections.Generic;
@@ -7,9 +9,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
-namespace ehealthcare.Model
+namespace HospitalLibrary.MedicalRecords.Model
 {
-    [Serializable]
     public class MedicalRecord
     {
         [Key]
@@ -22,6 +23,7 @@ namespace ehealthcare.Model
         public string Profession { get; set; }
         public virtual Doctor Doctor { get; set; }
         public string DoctorId { get; set; }
+        public virtual ICollection<Allergen> Allergens { get; set; }
 
         public MedicalRecord() { }
 

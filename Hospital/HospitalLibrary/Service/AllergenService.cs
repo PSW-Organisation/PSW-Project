@@ -6,21 +6,19 @@ using System.Threading.Tasks;
 using ehealthcare.Model;
 using ehealthcare.Repository;
 using ehealthcare.Repository.XMLRepository;
+using HospitalLibrary;
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Repository;
 
 namespace ehealthcare.Service
 {
     public class AllergenService
     {
-        private AllergenRepository allergenRepository;
+        private readonly IAllergenRepository _allergenRepository;
 
-        public AllergenService()
+        public AllergenService(IAllergenRepository allergenRepository)
         {
-            allergenRepository = new AllergenXMLRepository();
-        }
-
-        public List<Allergen> GetAllAllergens()
-        {
-            return allergenRepository.GetAll();
+            _allergenRepository = allergenRepository;
         }
     }
 }

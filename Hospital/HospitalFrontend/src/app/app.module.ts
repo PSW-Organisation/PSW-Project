@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RandomUserService } from './random-user/random-user.service';
 import { DatePipe } from '@angular/common';
 import { RegistrationComponent } from './registration/registration.component';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 export function playerFactory() {
   return player;
@@ -47,6 +48,7 @@ export function playerFactory() {
     ]), 
     NgbModule,
     LottieModule.forRoot({ player: playerFactory }),
+    AngularMultiSelectModule
   ],
   providers: [FeedbackService, RandomUserService, DatePipe],
   bootstrap: [AppComponent]

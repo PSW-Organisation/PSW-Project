@@ -1,3 +1,5 @@
+import { Allergen } from "./allergen";
+
 export interface User{
     username: string,
     password: string,
@@ -17,4 +19,5 @@ export interface User{
     doctor: string,
     height: number,
     weight: number,
+    allergens: Allergen[]
 }

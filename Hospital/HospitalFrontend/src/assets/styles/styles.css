@@ -42,12 +42,11 @@ h1,h2,h3,h4,h5,h6 {
 	color: #fff;
 }
 span {
-	color: #fff;
+	color: #6f7275;
 	vertical-align: middle;
-	margin-left: 9px;
-	font-size: 24px;
+	margin-left: 2px;
+	font-size: 15px;
 	font-family: 'Source Sans Pro', sans-serif;
-	text-transform: capitalize;
 }
 #sidebar-wrapper {
   position: fixed;

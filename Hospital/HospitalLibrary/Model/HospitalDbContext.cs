@@ -1,4 +1,5 @@
-﻿using HospitalLibrary.GraphicalEditor.Model;
+using HospitalLibrary.GraphicalEditor.Model;
+using HospitalLibrary.MedicalRecords.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -44,9 +45,8 @@ namespace ehealthcare.Model
             {
                 a.HasData(new Allergen()
                 {
-                    Id = "1",
-                    Type = "macija dlaka",
-
+                    Id = 1,
+                    Name = "macija dlaka",
                 });
             });
 

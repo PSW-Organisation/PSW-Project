@@ -24,6 +24,10 @@ using HospitalLibrary.RoomsAndEquipment.Service;
 using HospitalLibrary.RoomsAndEquipment.Repository;
 using HospitalLibrary.MedicalRecord.Repository;
 using HospitalLibrary.MedicalRecords.Repository;
+using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.MedicalRecords.Service;
+using AllergenService = HospitalLibrary.MedicalRecords.Service.AllergenService;
+using HospitalLibrary;
 
 namespace HospitalAPI
 {
@@ -82,6 +86,11 @@ namespace HospitalAPI
             services.AddScoped<IRoomEquipmentRepository, RoomEquipmentRepository>();
             services.AddScoped<GenericSTRINGIDRepository<Doctor>, DoctorDbRepository>();
             services.AddScoped<IDoctorRepository, DoctorDbRepository>();
+            services.AddScoped<IDoctorService, DoctorService>();
+
+            services.AddScoped<IAllergenService, AllergenService>();
+            services.AddScoped<GenericDbRepository<Allergen>, AllergenDbRepository>();
+            services.AddScoped<IAllergenRepository, AllergenDbRepository>();
            
         }
 
