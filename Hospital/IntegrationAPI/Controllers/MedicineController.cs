@@ -16,12 +16,12 @@ namespace IntegrationAPI.Controllers
     public class MedicineController : ControllerBase
     {
         private IMedicineService medicineService;
-        private IMedicineTransactionService transactionService;
+       
 
-        public MedicineController(IMedicineService medicineService, IMedicineTransactionService transactionService)
+        public MedicineController(IMedicineService medicineService)
         {
             this.medicineService = medicineService;
-            this.transactionService = transactionService;
+          
         }
 
         [HttpGet]       // GET /api/medicine
@@ -55,34 +55,7 @@ namespace IntegrationAPI.Controllers
                 return BadRequest();
             }
 
-            Medicine existingMedicine = new Medicine();
-            if (dto.Id == -1) { 
-                //id ce biti -1 kada se salje zahtev za narucivanje i treba uvecati kolicinu a imamo informaciju samo o nazivu leka, nemamo id
-                existingMedicine = medicineService.GetMedicineByName(dto.Name);
-            } else
-            {
-               existingMedicine = medicineService.GetMedicine(dto.Id);
-            }
-
-            if (existingMedicine == null)
-            {
-                Medicine newMedicine = MedicineAdapter.MedicineDtoToMedicine(dto);
-                medicineService.AddMedicine(newMedicine);
-                MedicineTransaction transaction = MedicineAdapter.MedicineDtoToMedicineTransaction(dto); 
-                transaction.MedicineId = newMedicine.Id;//da bi MedicineTransaction imao id novog leka
-                transactionService.Save(transaction);
-            }
-            else
-            {
-                //existingMedicine.Name = dto.Name;
-                //existingMedicine.MedicineAmmount = existingMedicine.MedicineAmmount + dto.MedicineAmmount;
-                //dbContext.Medicine.Update(existingMedicine);
-                existingMedicine.MedicineAmmount = existingMedicine.MedicineAmmount + dto.MedicineAmount;
-                medicineService.SetMedicine(existingMedicine);
-                MedicineTransaction transaction = MedicineAdapter.MedicineDtoToMedicineTransaction(dto); 
-                transaction.MedicineId = existingMedicine.Id;//da bi MedicineTransaction imao id pronadjenog leka
-                transactionService.Save(transaction);
-            }
+            medicineService.AddMedicine(MedicineAdapter.MedicineDtoToMedicine(dto));
             return Ok();
 
         }

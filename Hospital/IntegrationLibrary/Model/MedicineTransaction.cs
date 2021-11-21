@@ -14,5 +14,12 @@ namespace IntegrationLibrary.Model
         public int MedicineId { get => medicineId; set => medicineId = value; }
         public int MedicineAmmount { get => medicineAmmount; set => medicineAmmount = value; }
         public DateTime TransactionTime { get => transactionTime; set => transactionTime = value; }
+   
+        public MedicineTransaction(int idTransaction,int idMedicine, int medicineAmount, DateTime time): base(idTransaction)
+        {
+            this.medicineId = idMedicine;
+            this.medicineAmmount = medicineAmount;
+            this.transactionTime = time;
+        }
     }
 }

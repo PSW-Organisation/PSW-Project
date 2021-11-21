@@ -47,13 +47,21 @@ namespace PharmacyLibrary.Service
 
         public bool CheckIfExists(string medicineName, int medicineQuantity)
         {
+            Medicine medicine = medicineRepository.FindByName(medicineName);
+            if (medicine == null || medicine.Quantity < medicineQuantity)
+            {
+                return false;
+            }
 
-            return medicineRepository.CheckIfExists(medicineName, medicineQuantity);
+            return true;
         }
 
         public int reduceQuantityOfMedicine(string medicineName, int medicineAmount)
         {
-           return medicineRepository.reduceQuantityOfMedicine(medicineName, medicineAmount);
+            Medicine medicine = medicineRepository.FindByName(medicineName);
+            medicine.Quantity = medicine.Quantity - medicineAmount;
+            medicineRepository.Update(medicine);
+            return medicine.Quantity;
         }
 
         public List<Medicine> Search(string name, string useFor)

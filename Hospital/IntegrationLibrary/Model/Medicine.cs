@@ -92,5 +92,15 @@ namespace IntegrationLibrary.Model
         }
 
         public int MedicineAmmount { get => medicineAmmount; set => medicineAmmount = value; }
+     public Medicine(int argId, String argName, MedicineStatus argMedicineStatus, int argQuantity): base(argId)
+    {
+       
+        name = argName;
+        medicineStatus = argMedicineStatus;
+        medicineAmmount = argQuantity;
     }
+    
+    }
+
+   
 }

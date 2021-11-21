@@ -107,24 +107,9 @@ namespace PharmacyLibrary.Repository.MedicineRepository
             return true;
         }
 
-        public Boolean CheckIfExists(string medicineName, int medicineQuantity)
+        public Medicine FindByName(string medicineName)
         {
-            Medicine medicine = pharmacyDbContext.Medicines.FirstOrDefault(medicine => medicine.Name == medicineName);
-            if (medicine == null || medicine.Quantity < medicineQuantity)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public int reduceQuantityOfMedicine(string medicineName, int medicineQuantity)
-        {
-            Medicine medicine = pharmacyDbContext.Medicines.FirstOrDefault(medicine => medicine.Name == medicineName);
-            medicine.Quantity = medicine.Quantity - medicineQuantity;
-            pharmacyDbContext.Update(medicine);
-            pharmacyDbContext.SaveChanges();
-            return medicine.Quantity;
+            return pharmacyDbContext.Medicines.FirstOrDefault(medicine => medicine.Name == medicineName);
         }
 
         public List<Medicine> Search(string name, string useFor)

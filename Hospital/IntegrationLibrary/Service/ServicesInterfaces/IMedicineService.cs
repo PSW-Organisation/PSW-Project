@@ -8,7 +8,7 @@ namespace IntegrationLibrary.Service.ServicesInterfaces
     public interface IMedicineService
     {
         public void SetMedicine(Medicine medicine);
-        public void AddMedicine(Medicine medicine);
+        public Medicine AddMedicine(Medicine medicine);
         public void SetMedicineIngredients(Medicine medicine, List<MedicineIngredient> medicineIngredients);
         public List<Medicine> GetAllMedicine();
         public void AddMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient);
@@ -17,5 +17,7 @@ namespace IntegrationLibrary.Service.ServicesInterfaces
         public Medicine GetMedicine(int id);
         public List<Pharmacy> searchMedicine(string medicineName, int medicineAmount);
         public Medicine GetMedicineByName(string name);
+
+       
     }
 }
