@@ -34,7 +34,7 @@ export class HospitalExteriorViewComponent implements OnInit {
 
   youClickedMe(element: DrawableElement): void {
     if (element.type == 'building') {
-      this.router.navigate(['/building/' + element.idElement + '/floor/0']);
+      this.router.navigate(['roomManagment/building/' + element.idElement + '/floor/0']);
     }
   }
 

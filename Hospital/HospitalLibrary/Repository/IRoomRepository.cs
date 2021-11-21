@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Repository
 {
-	public interface IRoomRepository : IGenericRepository<Room> 
-	{
-
-	}
+    public interface IRoomRepository : IGenericRepository<Room>
+    {
+        IEnumerable<Room> GetAllByName(string name);
+    }
 
 }

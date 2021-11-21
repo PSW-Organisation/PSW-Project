@@ -1,20 +1,11 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav class="sidenav" fixedInViewport
+  <mat-sidenav #sidenav class="sidenav"
+      [fixedInViewport] = "isHandset$ | async"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [(opened)]="isShowing"
-      position="end">
-      <mat-toolbar>
-        <button
-          type="button"
-          aria-label="Close sidenav"
-          mat-icon-button
-          (click)="sidenav.close()">
-          <mat-icon aria-label="Side nav close icon">arrow_forward</mat-icon>
-        </button>
-        {{sidenavTitle}}
-      </mat-toolbar>
-      <ng-content select="[app-sidebar]"></ng-content>
+      [(opened)]="opened"
+      [position]="position">
+    <ng-content select="[app-sidebar]"></ng-content>
   </mat-sidenav>
   <mat-sidenav-content>
     <ng-content select="[app-sidebar-content]"></ng-content>

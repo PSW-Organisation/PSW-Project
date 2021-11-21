@@ -1,19 +1,20 @@
-<app-responsive-sidebar sidenavTitle="Rooms Info">
+<app-responsive-sidebar #roomInfo position="end">
   <div app-sidebar-content class="container">
     <button
       type="button"
       aria-label="Back to overview"
       mat-icon-button
-      [routerLink]="['/hospitalExterior']"
+      [routerLink]="['/roomManagment/hospitalExterior']"
     >
       <mat-icon aria-label="Back to overview icon">arrow_backward</mat-icon>
       Back to overview
     </button>
     <app-rooms-view
+      [sidenav]="roomInfo"
       [floor]="selectedFloor"
       (selectedRoomGraphic)="roomGraphic = $event"
     ></app-rooms-view>
-    <div class="m-2 d-flex justify-content-center">
+    <div class="d-flex justify-content-center">
       <mat-button-toggle-group
         name="buildingFloor"
         aria-label="Building Floor"
@@ -30,6 +31,16 @@
     </div>
   </div>
   <div app-sidebar>
+    <mat-toolbar style="background-color: white;">
+      <button
+        type="button"
+        aria-label="Close sidenav"
+        mat-icon-button
+        (click)="roomInfo.close()">
+        <mat-icon aria-label="Side nav close icon">arrow_forward</mat-icon>
+      </button>
+      Rooms Info
+    </mat-toolbar>
     <div class="container side">
       <div class="row justify-content-start">
         <app-room-info [roomGraphic]="roomGraphic"></app-room-info>

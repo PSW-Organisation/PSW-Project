@@ -2,7 +2,6 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { SidenavService } from './sidenav.service';
 import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
@@ -18,26 +17,21 @@ export class ResponsiveSidebarComponent {
     map(result => result.matches),
     shareReplay()
   );
-  @Input() sidenavTitle: string = "";
-  isShowing: boolean = false;
+  @Input() position: 'start' | 'end' = 'start';
+  @Input() opened: boolean = false;
 
-  constructor(private _breakpointObserver: BreakpointObserver,
-              private _sidenavService: SidenavService) { }
-
-  ngAfterViewInit(): void {
-    this._sidenavService.setSidenav(this.sidenav);
-  }
+  constructor(private _breakpointObserver: BreakpointObserver) { }
 
   open(): void {
-    this.isShowing = true;
+    this.sidenav.open();
   }
 
   close(): void {
-    this.isShowing = false;
+    this.sidenav.close();
   }
 
   toogle(): void {
-    this.isShowing = !this.isShowing;
+    this.sidenav.toggle();
   }
 
 }

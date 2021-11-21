@@ -57,7 +57,7 @@ export class BuildingFloorsComponent implements OnInit {
   }
 
   private getFloors() {
-    this._roomService.getRooms().subscribe(
+    this._roomService.getFloors().subscribe(
       (floors) => {
         this.floors = floors.filter((floor: IFloor) => {
           return (
@@ -81,7 +81,7 @@ export class BuildingFloorsComponent implements OnInit {
   changeFloor(floor: IFloor): void {
     this.selectedFloor = floor;
     this._router.navigate([
-      '/building/' +
+      'roomManagment/building/' +
         this._route.snapshot.paramMap.get('buidingId') +
         '/floor/' +
         floor.floor,

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SidenavService } from 'src/app/shared/responsive-sidebar/sidenav.service';
+import { ResponsiveSidebarComponent } from 'src/app/shared/responsive-sidebar/responsive-sidebar.component';
 import { IFloor } from '../building-floors/floor';
-import { IRoom, RoomType } from '../room';
+import { RoomType } from '../room';
 import { IRoomGraphic } from '../roomGraphic';
 import { RoomService } from '../rooms.service';
 
@@ -12,12 +12,12 @@ import { RoomService } from '../rooms.service';
 })
 export class RoomsViewComponent implements OnInit {
   @Input() floor!: IFloor;
+  @Input() sidenav!: ResponsiveSidebarComponent;
   @Output() selectedRoomGraphic: EventEmitter<IRoomGraphic> =
     new EventEmitter();
   fillColor!: string;
 
   constructor(
-    private _sidenav: SidenavService,
     private _roomService: RoomService
   ) {}
 
@@ -33,7 +33,7 @@ export class RoomsViewComponent implements OnInit {
 
   selectRoom(room: IRoomGraphic) {
     this.selectedRoomGraphic.emit(room);
-    this._sidenav.open();
+    this.sidenav.open();
   }
   getAcronym(text: string): string {
     return this._roomService.getAcronym(text);
