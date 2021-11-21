@@ -47,7 +47,6 @@ namespace PharmacyLibrary.Service
 
         public bool CheckIfExists(string medicineName, int medicineQuantity)
         {
-
             return medicineRepository.CheckIfExists(medicineName, medicineQuantity);
         }
 
