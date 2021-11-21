@@ -34,7 +34,6 @@
                     <td>{{pharmacy.hospitalApiKey}}</td>
                     <button class="btn" (click)="editPharmacy(pharmacy)" data-toggle="modal" data-target="#myModalEdit"><i class="fa fa-edit"></i> Edit</button>
                     <button class="btn" (click)="deletePharmacy(pharmacy.pharmacyId)"><i class="fa fa-trash"></i> Delete</button>
-                    <button class="btn" (click)="editPharmacy(pharmacy)" data-toggle="modal" data-target="#sendReport"> Report </button>
                 </tr>
             </tbody>
         </table>
@@ -80,27 +79,4 @@
         </div>
       </div>
     </div>
-</div>
-
-<!-- Modal for sending report-->
-<div id="sendReport" class="modal fade" style="display: none;" role="dialog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Send PDF Report</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label for="file">Choose File</label>
-          <input type="file"
-                 id="file"
-                 (change)="handleFileInput($event)">
-        </div>          
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" (click)="uploadFileToActivity()">Add</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
 </div>

@@ -17,11 +17,12 @@ import { FeedBackComponent } from './feedback/feedback.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeedbackService } from './service/feedback.service';
 import { OrderingMedicineComponent } from './ordering-medicine/ordering-medicine.component';
 import { SearchPharmaciesPipe } from './ordering-medicine/search-pharmacies.pipe';
 import { RoomManagmentModule } from './room-managment/room-managment.module';
+import { MedicineConsumptionComponent } from './medicine-consumption/medicine-consumption.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { RoomManagmentModule } from './room-managment/room-managment.module';
     FeedBackComponent,
     OrderingMedicineComponent,
     SearchPharmaciesPipe,
+    MedicineConsumptionComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,7 @@ import { RoomManagmentModule } from './room-managment/room-managment.module';
     AppRoutingModule,
     RoomManagmentModule
   ],
-  providers: [ 
+  providers: [
     PharmaciesService,
     FeedbackService,
     EditPharmacyService

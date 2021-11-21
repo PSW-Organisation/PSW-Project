@@ -15,17 +15,11 @@ export class OrderingMedicineComponent implements OnInit {
   searchParameter: string = "";
   notFoundMessage: string = "";
   notFound: boolean = false;
-  timeRange: any = {startDate: Date, endDate: Date};
 
   constructor(private _orderingMedicineService: OrderingMedicineService) { }
 
   ngOnInit(): void {
 
-  }
-
-  getMedicineReport(){
-    this._orderingMedicineService.getMedicineReport(this.timeRange);
-    this.timeRange= {startDate: null, endDate: null}
   }
 
   //metoda kojom se narucuje lek prosledjenoj apoteci, sa prosledjenim imenom i kolicinom

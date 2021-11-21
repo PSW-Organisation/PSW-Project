@@ -7,6 +7,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ComplaintsViewComponent } from './complaints-view/complaints-view.component';
 import { ComplaintDetailComponent } from './complaint-detail/complaint-detail.component';
 import { OrderingMedicineComponent } from './ordering-medicine/ordering-medicine.component';
+import { MedicineConsumptionComponent } from './medicine-consumption/medicine-consumption.component';
+import { HospitalExteriorViewComponent } from './room-managment/hospital-exterior-view/hospital-exterior-view.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -14,7 +16,9 @@ const routes: Routes = [
   { path: 'complaints', component: ComplaintsViewComponent },
   { path: 'complaint/:id', component: ComplaintDetailComponent },
   { path: 'feedback', component: FeedBackComponent },
-  { path: 'orderingMedicine', component: OrderingMedicineComponent }
+  { path: 'hospitalExterior', component: HospitalExteriorViewComponent },
+  { path: 'orderingMedicine', component: OrderingMedicineComponent },
+  { path: 'medicineConsumption', component: MedicineConsumptionComponent}
 ];
 
 @NgModule({

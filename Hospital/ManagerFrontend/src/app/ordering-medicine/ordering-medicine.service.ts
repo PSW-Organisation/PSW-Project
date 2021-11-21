@@ -25,16 +25,4 @@ export class OrderingMedicineService {
     return this._http.put(pharmacyUrl +'/api3/medicine/' + hospitalApiKey , {"medicineName": name, "medicineAmount": amount});
   }
 
-  public getMedicineReport(timeRange: any): any {
-    var mediaType = 'application/pdf';
-    this._http.get('http://localhost:16928/api2/pdfcreator/' + timeRange.startDate + '/' + timeRange.endDate, { responseType: 'blob' }).subscribe(
-        (response) => {
-            var blob = new Blob([response], { type: mediaType });
-            const url= window.URL.createObjectURL(blob);
-            window.open(url);
-        },
-        e => { throwError(e); }
-    );
-  }
-
 }
