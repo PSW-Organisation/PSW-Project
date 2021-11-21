@@ -1,13 +1,22 @@
-﻿using ehealthcare.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Collections.ObjectModel;
+using ehealthcare.Model;
 
-namespace HospitalLibrary.Service
+namespace ehealthcare.Service
 {
     public interface IRoomService
     {
-
-        public Room SetRoom(Room room);
+        void CheckIfRoomIsRenovated(ObservableCollection<Room> rooms);
+        void CreateRoom(Room room);
+        void DeleteRoom(int id);
+        List<Room> GetAllNonRenovatedRooms(DateTime now);
+        IList<Room> GetAllRooms();
+        Room GetRoomById(int id);
+        List<Room> GetRoomsForHospitalization(IRoomInventoryService roomInventoryService);
+        void MergeRooms(Room firstRoom, Room secondRoom);
+        Room SetRoom(Room room);
+        void SplitRoom(Room room);
+        IEnumerable<Room> GetAllByName(string name);
     }
 }

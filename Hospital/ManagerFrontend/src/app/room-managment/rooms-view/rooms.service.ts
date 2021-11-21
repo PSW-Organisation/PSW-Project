@@ -1,22 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { IFloor } from './building-floors/floor';
-import { RoomType } from './room';
+import { IRoom, RoomType } from './room';
+import { IRoomGraphic } from './roomGraphic';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoomService {
-  private _roomsUrl = 'http://localhost:42789/api/rooms/floors';
+  private _floorsUrl = 'http://localhost:42789/api/rooms/floors';
+  private _roomsUrl = 'http://localhost:42789/api/rooms/rooms';
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
-  getRooms(): Observable<IFloor[]> {
-    return this._http.get<IFloor[]>(this._roomsUrl).pipe(
+  getFloors(): Observable<IFloor[]> {
+    return this._http.get<IFloor[]>(this._floorsUrl).pipe(
       tap((data) => console.log('All: ', JSON.stringify(data))),
       catchError(this.handleError)
+    );
+  }
+  
+  getRoomsByName(name: string): Observable<IRoom[]> {
+    // if (!name.trim()) {
+    //   return of([]);
+    // }
+    return this._http.get<IRoom[]>(`${this._roomsUrl}?name=${name}`)
+      .pipe(
+        tap((data) => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
     );
   }
 

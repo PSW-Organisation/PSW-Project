@@ -1,7 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
 using ehealthcare.Repository.XMLRepository;
-using HospitalLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Service
 {
-    public class RoomService: IRoomService
+    public class RoomService : IRoomService
     {
         private IRoomRepository _roomRepository;
 
@@ -26,7 +25,7 @@ namespace ehealthcare.Service
             return _roomRepository.Get(id);
         }
 
-        public List<Room> GetAllRooms()
+        public IList<Room> GetAllRooms()
         {
             return _roomRepository.GetAll().ToList();
         }
@@ -54,21 +53,28 @@ namespace ehealthcare.Service
 
         public void MergeRooms(Room firstRoom, Room secondRoom)
         {
-            List<Room> rooms = GetAllRooms();
+            IList<Room> rooms = GetAllRooms();
             DeleteRoom(firstRoom.Id);
             DeleteRoom(secondRoom.Id);
-            Room mergedRooms = new Room() { Id = firstRoom.Id + secondRoom.Id, Floor = firstRoom.Floor, IsRenovated = firstRoom.IsRenovated,
-                                            IsRenovatedUntill = firstRoom.IsRenovatedUntill, NumOfTakenBeds = firstRoom.NumOfTakenBeds + secondRoom.NumOfTakenBeds,
-                                            Sector = firstRoom.Sector, RoomType = firstRoom.RoomType };
+            Room mergedRooms = new Room()
+            {
+                Id = firstRoom.Id + secondRoom.Id,
+                Floor = firstRoom.Floor,
+                IsRenovated = firstRoom.IsRenovated,
+                IsRenovatedUntill = firstRoom.IsRenovatedUntill,
+                NumOfTakenBeds = firstRoom.NumOfTakenBeds + secondRoom.NumOfTakenBeds,
+                Sector = firstRoom.Sector,
+                RoomType = firstRoom.RoomType
+            };
             _roomRepository.Save(mergedRooms);
 
         }
         public void SplitRoom(Room room)
         {
-            List<Room> rooms = GetAllRooms();
+            IList<Room> rooms = GetAllRooms();
             DeleteRoom(room.Id);
-            Room firstNewRoom = new Room() {Id = room.Id + 1, Floor=room.Floor, IsRenovated=room.IsRenovated, IsRenovatedUntill = room.IsRenovatedUntill, NumOfTakenBeds=room.NumOfTakenBeds/2, Sector = room.Sector, RoomType = room.RoomType };
-            Room secondNewRoom = new Room() { Id = room.Id + 2, Floor = room.Floor, IsRenovated = room.IsRenovated, IsRenovatedUntill = room.IsRenovatedUntill, NumOfTakenBeds = room.NumOfTakenBeds/2, Sector = room.Sector, RoomType = room.RoomType };
+            Room firstNewRoom = new Room() { Id = room.Id + 1, Floor = room.Floor, IsRenovated = room.IsRenovated, IsRenovatedUntill = room.IsRenovatedUntill, NumOfTakenBeds = room.NumOfTakenBeds / 2, Sector = room.Sector, RoomType = room.RoomType };
+            Room secondNewRoom = new Room() { Id = room.Id + 2, Floor = room.Floor, IsRenovated = room.IsRenovated, IsRenovatedUntill = room.IsRenovatedUntill, NumOfTakenBeds = room.NumOfTakenBeds / 2, Sector = room.Sector, RoomType = room.RoomType };
 
             _roomRepository.Save(firstNewRoom);
             _roomRepository.Save(secondNewRoom);
@@ -82,40 +88,45 @@ namespace ehealthcare.Service
         public void CheckIfRoomIsRenovated(ObservableCollection<Room> rooms)
         {
             DateTime now = DateTime.Now;
-               foreach(Room room in rooms)
+            foreach (Room room in rooms)
             {
-                if(room.IsRenovated ==true && now >= room.IsRenovatedUntill)
+                if (room.IsRenovated == true && now >= room.IsRenovatedUntill)
                 {
                     room.IsRenovated = false;
                 }
             }
         }
 
-       
+
         public Room SetRoom(Room room)
         {
-           return _roomRepository.Update(room);
+            return _roomRepository.Update(room);
         }
 
-          
 
-            public List<Room> GetRoomsForHospitalization(IRoomInventoryService roomInventoryService)
+
+        public List<Room> GetRoomsForHospitalization(IRoomInventoryService roomInventoryService)
+        {
+            List<Room> allRooms = _roomRepository.GetAll().ToList();
+            List<Room> freeRooms = new List<Room>();
+            if (allRooms != null)
             {
-                List<Room> allRooms = _roomRepository.GetAll().ToList();
-                List<Room> freeRooms = new List<Room>();
-                if (allRooms != null)
+                foreach (Room room in allRooms)
                 {
-                    foreach (Room room in allRooms)
+                    if (room.RoomType == RoomType.restingRoom && room.NumOfTakenBeds < roomInventoryService.GetNumOfBedsById(room.Id))
                     {
-                        if (room.RoomType == RoomType.restingRoom && room.NumOfTakenBeds < roomInventoryService.GetNumOfBedsById(room.Id))
-                        {
-                            freeRooms.Add(room);
-                        }
+                        freeRooms.Add(room);
                     }
                 }
-                return freeRooms;
             }
+            return freeRooms;
         }
-    
+
+        public IEnumerable<Room> GetAllByName(string name)
+        {
+            return _roomRepository.GetAllByName(name);
+        }
+    }
+
 }
 

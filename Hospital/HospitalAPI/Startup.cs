@@ -13,7 +13,6 @@ using AutoMapper;
 using HospitalLibrary.GraphicalEditor.Service;
 using HospitalLibrary.GraphicalEditor.Repository;
 using ehealthcare.Service;
-using HospitalLibrary.Service;
 using ehealthcare.Repository;
 using HospitalLibrary.Repository;
 using HospitalLibrary.Repository.DbRepository;

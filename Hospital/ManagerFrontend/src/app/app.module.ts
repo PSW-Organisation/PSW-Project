@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { RoomsViewModule } from './rooms-view/rooms-view.module';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { HospitalExteriorViewComponent } from './hospital-exterior-view/hospital-exterior-view.component';
+import { HospitalExteriorViewComponent } from './room-managment/hospital-exterior-view/hospital-exterior-view.component';
 import { PharmaciesViewComponent } from './pharmacies-view/pharmacies-view.component';
 import { EditPharmacyComponent } from './edit-pharmacy/edit-pharmacy.component';
 import { ComplaintsViewComponent } from './complaints-view/complaints-view.component';
@@ -22,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeedbackService } from './service/feedback.service';
 import { OrderingMedicineComponent } from './ordering-medicine/ordering-medicine.component';
 import { SearchPharmaciesPipe } from './ordering-medicine/search-pharmacies.pipe';
+import { RoomManagmentModule } from './room-managment/room-managment.module';
 
 @NgModule({
   declarations: [
@@ -34,13 +34,13 @@ import { SearchPharmaciesPipe } from './ordering-medicine/search-pharmacies.pipe
     PharmaciesViewComponent,
     FeedBackComponent,
     OrderingMedicineComponent,
-    SearchPharmaciesPipe
+    SearchPharmaciesPipe,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    RoomsViewModule
+    RoomManagmentModule
   ],
   providers: [ 
     PharmaciesService,
