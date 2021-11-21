@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeedbackService } from './service/feedback.service';
 import { OrderingMedicineComponent } from './ordering-medicine/ordering-medicine.component';
 import { SearchPharmaciesPipe } from './ordering-medicine/search-pharmacies.pipe';
+import { MedicineConsumptionComponent } from './medicine-consumption/medicine-consumption.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SearchPharmaciesPipe } from './ordering-medicine/search-pharmacies.pipe
     PharmaciesViewComponent,
     FeedBackComponent,
     OrderingMedicineComponent,
-    SearchPharmaciesPipe
+    SearchPharmaciesPipe,
+    MedicineConsumptionComponent
   ],
   imports: [
     BrowserModule,
