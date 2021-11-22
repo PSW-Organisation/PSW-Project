@@ -5,8 +5,7 @@
     <div class="m-auto w-75 p-3">
         <mat-form-field class="w-100">
             <span matPrefix></span>
-            <input type="search" matInput name="search" [(ngModel)]="searchText" autocomplete="off"
-                placeholder="Start searching for rooms or buildings by name">
+            <input type="search" matInput name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Start searching for rooms or buildings by name">
             <button matSuffix mat-button (click)="search()">
                 <mat-icon>search</mat-icon>
             </button>

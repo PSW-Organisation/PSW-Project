@@ -1,61 +1,34 @@
 <app-responsive-sidebar #roomInfo position="end">
-  <div app-sidebar-content class="container">
-    <button
-      type="button"
-      aria-label="Back to overview"
-      mat-icon-button
-      [routerLink]="['/roomManagment/hospitalExterior']"
-    >
+    <div app-sidebar-content class="container">
+        <button type="button" aria-label="Back to overview" mat-icon-button [routerLink]="['/roomManagment/hospitalExterior']">
       <mat-icon aria-label="Back to overview icon">arrow_backward</mat-icon>
       Back to overview
     </button>
-    <app-rooms-view
-      [sidenav]="roomInfo"
-      [floor]="selectedFloor"
-      (selectedRoomGraphic)="roomGraphic = $event"
-    ></app-rooms-view>
-    <div class="d-flex justify-content-center">
-      <mat-button-toggle-group
-        name="buildingFloor"
-        aria-label="Building Floor"
-        [value]="selectedFloor"
-      >
-        <mat-button-toggle
-          *ngFor="let floor of floors"
-          value="floor.floor"
-          (click)="changeFloor(floor)"
-          [checked]="floorChecked(floor)"
-          >{{ floor.floor }}
-        </mat-button-toggle>
-      </mat-button-toggle-group>
+        <app-rooms-view [sidenav]="roomInfo" [floor]="selectedFloor" (selectedRoomGraphic)="roomGraphic = $event"></app-rooms-view>
+        <div class="d-flex justify-content-center">
+            <mat-button-toggle-group name="buildingFloor" aria-label="Building Floor" [value]="selectedFloor">
+                <mat-button-toggle *ngFor="let floor of floors" value="floor.floor" (click)="changeFloor(floor)" [checked]="floorChecked(floor)">{{ floor.floor }}
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
     </div>
-  </div>
-  <div app-sidebar>
-    <mat-toolbar style="background-color: white;">
-      <button
-        type="button"
-        aria-label="Close sidenav"
-        mat-icon-button
-        (click)="roomInfo.close()">
+    <div app-sidebar>
+        <mat-toolbar style="background-color: white;">
+            <button type="button" aria-label="Close sidenav" mat-icon-button (click)="roomInfo.close()">
         <mat-icon aria-label="Side nav close icon">arrow_forward</mat-icon>
-      </button>
-      Rooms Info
-    </mat-toolbar>
-    <div class="container side">
-      <div class="row justify-content-start">
-        <app-room-info [roomGraphic]="roomGraphic"></app-room-info>
-        <div class="edit">
-          <app-edit-room
-            [roomInfo]="roomGraphic.room"
-            (selectionChange)="updatedRoom = $event"
-            *ngIf="editing"
-          ></app-edit-room>
+      </button> Rooms Info
+        </mat-toolbar>
+        <div class="container side">
+            <div class="row justify-content-start">
+                <app-room-info [roomGraphic]="roomGraphic"></app-room-info>
+                <div class="edit">
+                    <app-edit-room [roomInfo]="roomGraphic.room" (selectionChange)="updatedRoom = $event" *ngIf="editing"></app-edit-room>
+                </div>
+                <div class="col-4">
+                    <button *ngIf="!editing" (click)="edit()">Edit</button>
+                    <button *ngIf="editing" (click)="change()">Change</button>
+                </div>
+            </div>
         </div>
-        <div class="col-4">
-          <button *ngIf="!editing" (click)="edit()">Edit</button>
-          <button *ngIf="editing" (click)="change()">Change</button>
-        </div>
-      </div>
     </div>
-  </div>
 </app-responsive-sidebar>

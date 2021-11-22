@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class HospitalExteriorService {
 
-  private _exteriorGraphicUrl = 'http://localhost:65192/api/exterior';
+  private _exteriorGraphicUrl = 'http://localhost:42789/api/exterior';
 
   constructor(private _http: HttpClient) { }
 

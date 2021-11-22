@@ -12,6 +12,7 @@ import { IRoomGraphic } from './roomGraphic';
 export class RoomService {
   private _floorsUrl = 'http://localhost:42789/api/rooms/floors';
   private _roomsUrl = 'http://localhost:42789/api/rooms/rooms';
+  private _baseRoomsUrl = 'http://localhost:42789/api/baseRooms';
 
   constructor(private _http: HttpClient) { }
 
@@ -30,6 +31,13 @@ export class RoomService {
       .pipe(
         tap((data) => console.log('All: ', JSON.stringify(data))),
         catchError(this.handleError)
+    );
+  }
+
+  getRooms(): Observable<IRoom[]> {
+    return this._http.get<IRoom[]>(this._baseRoomsUrl).pipe(
+      tap((data) => console.log('All: ', JSON.stringify(data))),
+      catchError(this.handleError)
     );
   }
 

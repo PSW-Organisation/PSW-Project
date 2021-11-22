@@ -75,7 +75,8 @@ namespace HospitalAPI
             services.AddScoped<IPatientFeedbackService, PatientFeedbackService>();
             services.AddScoped<GenericDbRepository<PatientFeedback>, PatientFeedbackDbRepository>();
             services.AddScoped<IPatientFeedbackRepository, PatientFeedbackDbRepository>();
-
+            services.AddScoped<IRoomEquipmentService, RoomEquipmentService>();
+            services.AddScoped<IRoomEquipmentRepository, RoomEquipmentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

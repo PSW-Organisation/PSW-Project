@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ehealthcare.Model;
@@ -9,9 +10,10 @@ using ehealthcare.Model;
 namespace HospitalLibrary.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    partial class HospitalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211121220912_RoomEquipment")]
+    partial class RoomEquipment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -205,113 +207,7 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
-
-            modelBuilder.Entity("HospitalLibrary.RoomsAndEquipment.Model.TermOfRelocationEquipment", b =>{
-                  b.Property<DateTime>("EndTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool>("FinishedRelocation")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("IdDestinationRoom")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("IdSourceRoom")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("NameOfEquipment")
-                        .HasColumnType("text");
-
-                    b.Property<int>("QuantityOfEquipment")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("durationInMinutes")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TermOfRelocationEquipments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EndTime = new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 8,
-                            IdSourceRoom = 7,
-                            NameOfEquipment = "bed",
-                            QuantityOfEquipment = 2,
-                            StartTime = new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 10
-                        },
-                        new
-                        {
-                            Id = 2,
-                            EndTime = new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 9,
-                            IdSourceRoom = 7,
-                            NameOfEquipment = "needle",
-                            QuantityOfEquipment = 14,
-                            StartTime = new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 40
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EndTime = new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 9,
-                            IdSourceRoom = 8,
-                            NameOfEquipment = "infusion",
-                            QuantityOfEquipment = 8,
-                            StartTime = new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 15
-                        },
-                        new
-                        {
-                            Id = 4,
-                            EndTime = new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 11,
-                            IdSourceRoom = 9,
-                            NameOfEquipment = "table",
-                            QuantityOfEquipment = 1,
-                            StartTime = new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 25
-                        },
-                        new
-                        {
-                            Id = 5,
-                            EndTime = new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 7,
-                            IdSourceRoom = 10,
-                            NameOfEquipment = "xrayMachine",
-                            QuantityOfEquipment = 1,
-                            StartTime = new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 30
-                        },
-                        new
-                        {
-                            Id = 6,
-                            EndTime = new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 11,
-                            IdSourceRoom = 10,
-                            NameOfEquipment = "chair",
-                            QuantityOfEquipment = 5,
-                            StartTime = new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 20
-                        });
-            });
-
             modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.RoomEquipment", b =>
-
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

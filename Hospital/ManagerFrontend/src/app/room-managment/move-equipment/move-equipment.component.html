@@ -1,0 +1,76 @@
+<mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>equipment</ng-template>
+            <mat-form-field appearance="fill">
+                <mat-label>Select equipment :</mat-label>
+                <mat-select [(ngModel)]="selectedEquipment" formControlName="firstCtrl">
+                    <mat-option *ngFor="let equipmentDTO of equipmentsDTO" [value]="equipmentDTO">
+                        Equipment: {{ equipmentDTO.name }} - Quantity {{ equipmentDTO.quantity }}
+                        <div></div>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div (click)="activateSecond()">
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>room</ng-template>
+            <mat-form-field appearance="fill" *ngIf="equipmentsDTO">
+                <mat-label>Select source room :</mat-label>
+                <mat-select [(ngModel)]="selectedRoomWithEquipment" formControlName="secondCtrl">
+                    <mat-option *ngFor="let equipment of equipments" [value]="equipment">
+                        Room: {{ equipment.roomId }} - Equipment: {{ equipment.name }} - Quantity {{ equipment.quantity }}
+                        <div></div>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button (click)="activateThird()" mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+            <ng-template matStepLabel>Fill out amount</ng-template>
+            <mat-form-field appearance="fill">
+                <mat-label>Amount</mat-label>
+                <input matInput [(ngModel)]="equipmentAmount" placeholder="Last name, Third name" formControlName="thirdCtrl" max="100" required />
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button (click)="activateForth()" mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="forthFormGroup">
+        <form [formGroup]="forthFormGroup">
+            <ng-template matStepLabel>room</ng-template>
+            <mat-form-field appearance="fill">
+                <mat-label>Select destination room :</mat-label>
+                <mat-select [(ngModel)]="selectedDestinationRoom" formControlName="forthCtrl">
+                    <mat-option *ngFor="let room of roomsWithoutSource" [value]="room">
+                        Room: {{ room.id }} - Name: {{ room.name }} - Sector: {{ room.sector }}
+                        <div></div>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-stepper>
