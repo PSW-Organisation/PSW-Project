@@ -20,9 +20,9 @@ namespace HospitalLibrary.MedicalRecords.Repository
 
         public int FindLeastNumberOfPatient()
         {
-            return _dbContext.Set<Doctor>().
-                   Where(d => d.Specialization.Equals(Specialization.none))
-                  .Select(d => d.Patients.Count).Min();
+            var doctors = _dbContext.Set<Doctor>().Where(d => d.Specialization.Equals(Specialization.none)).ToList();
+            if (doctors.Count == 0) return 0;
+            return doctors.Select(d => d.Patients.Count).Min();
         }
 
         public List<Doctor> GetLeastOccupiedDoctors(int minPatients)

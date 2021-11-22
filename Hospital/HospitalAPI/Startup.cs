@@ -28,6 +28,8 @@ using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Service;
 using AllergenService = HospitalLibrary.MedicalRecords.Service.AllergenService;
 using HospitalLibrary;
+using PatientService = HospitalLibrary.MedicalRecords.Service.PatientService;
+using Newtonsoft.Json;
 
 namespace HospitalAPI
 {
@@ -37,13 +39,14 @@ namespace HospitalAPI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }        
+        }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
             services.AddDbContext<HospitalDbContext>(options =>
             {
@@ -51,9 +54,13 @@ namespace HospitalAPI
                     assembly => assembly.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName)).UseLazyLoadingProxies();
             });
 
-            services.AddMvc(setup => {
+            services.AddMvc(setup =>
+            {
                 //...mvc setup...
-            }).AddFluentValidation().AddNewtonsoftJson();
+            }).AddFluentValidation().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             services.AddTransient<IValidator<PatientFeedbackDTO>, PatientFeedbackValidator>();
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
@@ -68,8 +75,10 @@ namespace HospitalAPI
 
             services.AddScoped<IRoomGraphicService, RoomGraphicService>();
             services.AddScoped<IRoomGraphicRepository, RoomGraphicRepository>();
+
             services.AddScoped<IFloorGraphicService, FloorGraphicService>();
             services.AddScoped<IFloorGraphicRepository, FloorGraphicRepository>();
+
             services.AddScoped<IRoomService, RoomService>();
             services.AddScoped<IRoomRepository, RoomDbRepository>();
 
@@ -78,6 +87,13 @@ namespace HospitalAPI
 
             services.AddScoped<IRelocationEquipmentService, RelocationEquipmentService>();
             services.AddScoped<IRelocationEquipmentRepository, RelocationEquipmentRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<GenericSTRINGIDRepository<User>, UserDbRepository>();
+            services.AddScoped<IUserRepository, UserDbRepository>();
+
+            services.AddScoped<IPatientService, PatientService>();
+            services.AddScoped<GenericSTRINGIDRepository<Patient>, PatientDbRepository>();
+            services.AddScoped<IPatientRepository, PatientDbRepository>();
 
             services.AddScoped<IPatientFeedbackService, PatientFeedbackService>();
             services.AddScoped<GenericDbRepository<PatientFeedback>, PatientFeedbackDbRepository>();
@@ -91,7 +107,7 @@ namespace HospitalAPI
             services.AddScoped<IAllergenService, AllergenService>();
             services.AddScoped<GenericDbRepository<Allergen>, AllergenDbRepository>();
             services.AddScoped<IAllergenRepository, AllergenDbRepository>();
-           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

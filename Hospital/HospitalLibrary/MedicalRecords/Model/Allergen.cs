@@ -1,4 +1,6 @@
+using ehealthcare.Model;
 using HospitalLibrary.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,9 +12,10 @@ namespace HospitalLibrary.MedicalRecords.Model
     {
         public string Name { get; set; }
 
-        [NotMapped]
-        public virtual MedicalRecord MedicalRecord { get; set; }
+        
+        public virtual ICollection<PatientAllergen> PatientAllergens { get; set; }
 
+        [JsonConstructor]
         public Allergen() { }
 
         public Allergen(string name)

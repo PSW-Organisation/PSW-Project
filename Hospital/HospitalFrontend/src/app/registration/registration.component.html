@@ -147,7 +147,7 @@
                                 </div>
                                 <div class="col-md-6 align-self-center">
                                     <div class="form-group" *ngIf="allergens">
-                                        <angular2-multiselect id="allergens" [data]="allergens" [(ngModel)]="user.allergens"
+                                        <angular2-multiselect id="allergens" [data]="allergens" [(ngModel)]="patient.allergens"
                                             [settings]="settings" (onSelect)="onItemSelect($event)"
                                             (onDeSelect)="onItemDeselect($event)" (onSelectAll)="onSelectAll($event)"
                                             (onDeSelectAll)="onDeselectAll($event)" formControlName="allergensControl">
@@ -176,14 +176,14 @@
                                     <label>Gender*</label>
                                     <div class="form-group">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                id="inlineRadio1" value="option1">
-                                            <label class="form-check-label" for="inlineRadio1">Female</label>
+                                            <input formControlName="genderControl"  class="form-check-input" type="radio" name="maleRadio"
+                                                id="maleId" value="male" >
+                                            <label class="form-check-label" for="maleId">Male</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" style="color: #6f7275;" type="radio" name="inlineRadioOptions"
-                                                id="inlineRadio1" value="option1">
-                                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                                            <input formControlName="genderControl" class="form-check-input" type="radio" name="femaleRadio"
+                                                id="femaleId" value="female">
+                                            <label class="form-check-label" for="femaleId">Female</label>
                                         </div>
                                     </div>
                                 </div>

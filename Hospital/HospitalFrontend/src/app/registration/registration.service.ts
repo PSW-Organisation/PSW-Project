@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Patient} from './patient';
 
 @Injectable({
   providedIn: 'root'
@@ -20,4 +21,8 @@ export class RegistrationService {
   getDoctors(): Observable<any>{
     return this._http.get<any>('api/Registration/Doctors')
   }
+
+  register(patient: Patient): Observable<any>{
+    return this._http.post<any>('/api/Registration', patient, {observe: 'response'});
+  } 
 }

@@ -15,6 +15,7 @@ namespace HospitalLibrary.MedicalRecords.Model
     {
         [Key]
         public string PatientId { get; set; }
+
         public virtual Patient Patient { get; set; }
         public string PersonalId { get; set; }
         public BloodType BloodType { get; set; }
@@ -23,8 +24,7 @@ namespace HospitalLibrary.MedicalRecords.Model
         public string Profession { get; set; }
         public virtual Doctor Doctor { get; set; }
         public string DoctorId { get; set; }
-        public virtual ICollection<Allergen> Allergens { get; set; }
-
+       
         public MedicalRecord() { }
 
         public MedicalRecord(string patientId, Patient patient, string personalId, BloodType bloodType,

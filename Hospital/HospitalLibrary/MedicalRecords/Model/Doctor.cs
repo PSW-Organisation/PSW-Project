@@ -1,4 +1,5 @@
 using ehealthcare.Service;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace ehealthcare.Model
 
         public virtual ICollection<Patient> Patients { get; set; }
 
+        [JsonConstructor]
         public Doctor(string id) : base(id) { }
 
         public Doctor(string id, Specialization specialization, int usedOffDays) : base(id)

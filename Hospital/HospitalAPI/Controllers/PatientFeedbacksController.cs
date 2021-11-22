@@ -38,9 +38,7 @@ namespace HospitalAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<PatientFeedback>> GetFeedbacks()
         {
-            var service = new UserService(new UserDbRepository(_context));
-            service.SendEmail("kristinaatamindzija@gmail.com");
-            return _patientFeedbackService.GetAllFeedbacks().ToList();
+            return _patientFeedbackService.GetAllFeedbacks().ToList();  
         }
 
         // GET: api/Feedbacks/5

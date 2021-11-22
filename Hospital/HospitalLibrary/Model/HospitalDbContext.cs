@@ -627,7 +627,8 @@ namespace ehealthcare.Model
                       Profession = "Professor",
                       DoctorId = "nelex",
                       PatientId = "imbiamba"
-                  }); ;
+                  });
+               // m.HasKey(m => new { m.Id, m.PatientId });
 
             });
 
@@ -636,14 +637,19 @@ namespace ehealthcare.Model
             {
                 a.HasData(new PatientAllergen()
                 {
-                    Id = 1,
-                    MedicalRecordId = 1,
+                    PatientId = "imbiamba",
                     AllergenId = 1
 
                 });
+                a.HasKey(pa => new { pa.PatientId, pa.AllergenId });
+                a.HasOne<Patient>(p => p.Patient).WithMany(p => p.PatientAllergens)
+                .HasForeignKey(pa => pa.PatientId);
+                a.HasOne<Allergen>(a => a.Allergen).WithMany(p => p.PatientAllergens)
+                .HasForeignKey(pa => pa.AllergenId);
+
             });
 
-
+            
             modelBuilder.Entity<Patient>(p =>
             {
                 p.HasData(
@@ -660,11 +666,12 @@ namespace ehealthcare.Model
                         DateOfBirth = new DateTime(2001, 11, 9),
                         Phone = "019919199191",
                         Email = "markoilic@gmail.com",
-                        AddressId = 1,
+                        Address = "Sime Milosevica, 5",
                         IsBlocked = false,
                         IsActivated = false,
-                        MedicalRecordId = 1
+                       
                     });
+               
             });
 
 
@@ -687,13 +694,13 @@ namespace ehealthcare.Model
                         DateOfBirth = new DateTime(1999, 7, 14),
                         Phone = "019919199191",
                         Email = "nemanjar@gmail.com",
-                        HomeAddress = "Sime Milutinovica, 2",
+                        Address = "Sime Milutinovica, 2",
                         City = "Novi Sad",
                         Country = "Serbia",
                         IsBlocked = false,
                         IsActivated = false,
                         UsedOffDays = 12,
-                        Specialization = 0,
+                        Specialization = Specialization.none
                     });
             });
 
