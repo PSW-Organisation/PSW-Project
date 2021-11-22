@@ -12,7 +12,6 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PharmaciesService {
-
 data!: Observable<IPharmacy[]>;
 thisUrl: string = "http://localhost:16928/api2/pharmacy";
 
@@ -33,6 +32,10 @@ thisUrl: string = "http://localhost:16928/api2/pharmacy";
     .pipe(
     tap(data => alert("hej pbde sam")
     )) ;
+  }
+
+  searchMedicine(search : any, hospitalApiKey: string) : Observable<boolean>{
+    return this._http.post<boolean>('http://localhost:29631/api3/medicine/' + hospitalApiKey, search);
   }
 
   deletePharmacy(idPharmacy : number){
