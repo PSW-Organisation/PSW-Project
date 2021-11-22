@@ -16,7 +16,9 @@ namespace PharmacyAPI
 
         public PharmacyDbContext(DbContextOptions<PharmacyDbContext> options) : base(options) { }
 
-        protected PharmacyDbContext() { }
-
+        public PharmacyDbContext()
+        {
+        }
+        
     }
 }
