@@ -7,10 +7,11 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace IntegrationAPIIntegrationTests
+namespace IntegrationAPIUnitTests
 {
-    public class UnitTest1
+    public class OrderingMedicineTest
     {
+
         //integracioni za hospital
         [Fact]
         public void search_medicine_found()

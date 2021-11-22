@@ -24,6 +24,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalUnitTests", "Hospit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalIntegrationTests", "HospitalIntegrationTests\HospitalIntegrationTests.csproj", "{F6749AE4-E3AC-4E5F-9C9B-7D6AABD05122}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyAPIUnitTests", "PharmacyAPIUnitTests\PharmacyAPIUnitTests.csproj", "{92928ABB-E7B7-495A-AAA6-BB7AC188D091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyAPIIntegrationTests", "PharmacyAPIIntegrationTests\PharmacyAPIIntegrationTests.csproj", "{42CF393B-BCC4-4CA5-82EC-B5123EEE150A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
