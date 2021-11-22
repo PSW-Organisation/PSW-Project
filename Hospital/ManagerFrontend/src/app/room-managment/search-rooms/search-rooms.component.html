@@ -20,14 +20,20 @@
                     <th>Sector</th>
                     <th>Type</th>
                     <th>Floor</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody *ngIf="rooms.length !== 0">
-                <tr *ngFor="let room of rooms">
+                <tr *ngFor="let room of rooms" class="align-middle">
                     <td>{{room.name}}</td>
                     <td>{{room.sector}}</td>
                     <td>{{room.roomType}}</td>
                     <td>{{room.floor}}</td>
+                    <td>
+                        <button type="button" aria-label="Find on map" mat-icon-button (click)="findOnMap(room)">
+                            <mat-icon aria-label="Find on map icon"> location_on</mat-icon>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
