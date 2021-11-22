@@ -14,15 +14,12 @@ import { PharmaciesService } from './pharmacies-view/pharmacies.service';
 import { EditPharmacyService } from './edit-pharmacy/edit-pharmacy.service';
 
 import { FeedBackComponent } from './feedback/feedback.component';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeedbackService } from './service/feedback.service';
 import { OrderingMedicineComponent } from './ordering-medicine/ordering-medicine.component';
 import { SearchPharmaciesPipe } from './ordering-medicine/search-pharmacies.pipe';
 import { RoomManagmentModule } from './room-managment/room-managment.module';
 import { MedicineConsumptionComponent } from './medicine-consumption/medicine-consumption.component';
+
 
 @NgModule({
   declarations: [
@@ -49,6 +46,6 @@ import { MedicineConsumptionComponent } from './medicine-consumption/medicine-co
     FeedbackService,
     EditPharmacyService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -10,6 +10,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatStepperModule } from '@angular/material/stepper';
 @NgModule({
   imports: [
     MatButtonToggleModule,
@@ -23,6 +24,7 @@ import { MatInputModule } from '@angular/material/input';
     MatToolbarModule,
     MatIconModule,
     MatInputModule,
+    MatStepperModule,
   ],
   exports: [
     MatButtonToggleModule,
@@ -36,6 +38,7 @@ import { MatInputModule } from '@angular/material/input';
     MatToolbarModule,
     MatIconModule,
     MatInputModule,
+    MatStepperModule,
   ],
 })
 export class MaterialModule {}

@@ -1,4 +1,5 @@
-﻿using HospitalLibrary.GraphicalEditor.Model;
+﻿using HospitalLibrary.FeedbackAndSurvey.Model;
+using HospitalLibrary.GraphicalEditor.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace ehealthcare.Model
         public DbSet<ExteriorGraphic> ExteriorGraphic { get; set; }
         public DbSet<TermOfRelocationEquipment> TermOfRelocationEquipments { get; set; }
 
+        public DbSet<RoomEquipment> RoomEquipments { get; set; }
+
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
         protected HospitalDbContext()
@@ -39,6 +42,35 @@ namespace ehealthcare.Model
                 PublishAllowed = false,
                 IsPublished = false
             });
+
+            modelBuilder.Entity<RoomEquipment>().HasData(
+                new
+                {
+                    Id = 1,
+                    Name = "Bed",
+                    Quantity = 2,
+                    Type = "Static",
+                    RoomId = 1
+                },
+                new
+                {
+                    Id = 2,
+                    Name = "Needle",
+                    Quantity = 200,
+                    Type = "Dynamic",
+                    RoomId = 2
+                },
+                new
+                {
+                    Id = 3,
+                    Name = "Needle",
+                    Quantity = 300,
+                    Type = "Dynamic",
+                    RoomId = 3
+                }
+
+
+                );
 
 
             modelBuilder.Entity<Room>().HasData(

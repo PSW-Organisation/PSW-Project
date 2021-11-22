@@ -23,15 +23,15 @@ export class ResponsiveSidebarComponent {
   constructor(private _breakpointObserver: BreakpointObserver) { }
 
   open(): void {
-    this.sidenav.open();
+    this.opened = true;
   }
 
   close(): void {
-    this.sidenav.close();
+    this.opened = false;
   }
 
   toogle(): void {
-    this.sidenav.toggle();
+    this.opened = !this.opened;
   }
 
 }

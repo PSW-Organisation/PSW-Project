@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { RoomsRoutingModule } from './rooms-routing.module';
 
 import { BuildingFloorsComponent } from './building-floors/building-floors.component';
 import { RoomsViewComponent } from './rooms-view/rooms-view.component';
@@ -19,4 +20,4 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ]
 })
-export class RoomsViewModule { }
+export class RoomsViewModule {}

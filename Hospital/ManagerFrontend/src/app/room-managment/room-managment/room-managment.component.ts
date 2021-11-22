@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ResponsiveSidebarComponent } from 'src/app/shared/responsive-sidebar/responsive-sidebar.component';
 
 @Component({
   selector: 'app-room-managment',
