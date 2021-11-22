@@ -10,6 +10,12 @@
     stroke-width: 3;
 }
 
+.selected-room-border {
+    fill: rgba(145, 92, 182, 1);
+    stroke-width: 4px;
+    filter: drop-shadow(0px 0px 10px rgba(145, 92, 182, 1));
+}
+
 .svg-content {
     max-height: calc(100vh - 180px);
 }
@@ -20,6 +26,10 @@
     -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
     transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.room-text {
+    user-select: none;
 }
 
 

@@ -11,7 +11,8 @@ const routes: Routes = [
       children: [
         { path: 'searchRooms', component: SearchRoomsComponent },
         { path: 'hospitalExterior', component: HospitalExteriorViewComponent },
-        { path: 'building/:buidingId/floor/:floorId', component: BuildingFloorsComponent }
+        { path: 'building/:buidingId/floor/:floorId', component: BuildingFloorsComponent },
+        { path: 'building/:buidingId/floor/:floorId/room/:roomId', component: BuildingFloorsComponent }
       ]
   }
 ];

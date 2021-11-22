@@ -24,7 +24,7 @@
       *ngFor="let roomGraphic of floor.roomGraphics"
       (click)="selectRoom(roomGraphic)"
     >
-      <g class="shadow" *ngIf="roomGraphic.room">
+      <g class="shadow" *ngIf="roomGraphic && roomGraphic.room && selectedRoom">
         <g>
           <rect
             class="border"
@@ -33,8 +33,10 @@
             [attr.width]="roomGraphic.width"
             [attr.height]="roomGraphic.height"
             [attr.fill]="roomColor(roomGraphic.room.roomType)"
+            [ngClass]="{'selected-room-border': roomGraphic.room.id === selectedRoom.room.id}"
           ></rect>
           <text
+            class="room-text"
             dominant-baseline="middle"
             text-anchor="middle"
             [attr.x]="roomGraphic.x + roomGraphic.width / 2"
