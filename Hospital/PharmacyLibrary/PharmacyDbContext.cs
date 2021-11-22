@@ -16,9 +16,14 @@ namespace PharmacyAPI
 
         public PharmacyDbContext(DbContextOptions<PharmacyDbContext> options) : base(options) { }
 
-        public PharmacyDbContext()
+        public PharmacyDbContext() 
         {
         }
-        
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            String connectionString = "Server=localhost;Port=5432;Database=PharmacyDb;User ID=postgres;Password=postgres;";
+            optionsBuilder.UseNpgsql(connectionString);
+        }
     }
 }
