@@ -8,6 +8,18 @@
     </table>
 </div>
 
+ <!-- Pretraga leka -->
+ <table class = "search" style="margin-left: 80px; margin-top: 30px;">
+  <tr>
+      <td><input type="text" style="width: 300px;margin-bottom: 5px;" class="form-control" placeholder="Enter medicine name" [(ngModel)]="medicineName"> </td>
+      <td><input type="number" class="form-control" style="width: 200px;margin-bottom: 5px;" [(ngModel)]="medicineAmount"> </td>
+  </tr>
+  </table>
+
+ 
+  <p style="margin-left: 80px; margin-top: 30px; font-size: medium; font-weight: bold;">{{notFoundMessage}}</p>
+
+
 <div class="backgroundImage" > 
 <!-- Tabela -->
     <div class="table-responsive table-striped">
@@ -35,7 +47,8 @@
                     <button class="btn" (click)="editPharmacy(pharmacy)" data-toggle="modal" data-target="#myModalEdit"><i class="fa fa-edit"></i> Edit</button>
                     <button class="btn" (click)="deletePharmacy(pharmacy.pharmacyId)"><i class="fa fa-trash"></i> Delete</button>
                     <button class="btn" (click)="editPharmacy(pharmacy)" data-toggle="modal" data-target="#sendReport"> Report </button>
-                </tr>
+                    <button class="btn" (click)="searchMedicine(pharmacy.hospitalApiKey)">Search</button>
+                  </tr>
             </tbody>
         </table>
     </div>

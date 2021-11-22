@@ -15,6 +15,10 @@ export class PharmaciesViewComponent implements OnInit {
   editing: boolean = false;
   newPharmacy: any = { pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: ""};
   fileToUpload: File | null = null;
+  medicineName: string = "";
+  medicineAmount: number = 0;
+  notFoundMessage: string = "";
+  notFound: boolean = false;
 
   constructor(private _pharmaciesService: PharmaciesService) { }
 
@@ -57,6 +61,21 @@ export class PharmaciesViewComponent implements OnInit {
     this.editing = false;
     this.refreshPharmacies();
   }
+
+  //metoda koja vraca sve apoteke koje sadrze lek sa prosledjenim imenom i kolicinom
+  searchMedicine(hospitalApiKey: string) {
+    if (this.medicineName === "" && this.medicineAmount === null){ //da se refresuje nakon sto je izvrseno narucivanje
+      this.notFound = false;
+    } else {
+      this._pharmaciesService.searchMedicine({"medicineName": this.medicineName.toLocaleLowerCase(), "medicineAmount": this.medicineAmount}, hospitalApiKey).subscribe(
+      response => { this.notFound = response;  
+        if (this.notFound === false) { //ako nema leka
+          this.notFoundMessage = "We don't have that medicine!";
+        } else {
+          this.notFoundMessage = "We have that medicine!";
+        }
+      })
+    };}
 
   handleFileInput(event: Event) {
     this.fileToUpload = (<HTMLInputElement>event.target).files?.item(0) as File;
