@@ -48,7 +48,7 @@ namespace PharmacyAPI.Controllers
         }
 
         [HttpPost("{hospitalApiKey?}")]      // POST /api/complaint Request body: {"complaintId":num,  "date":"date", "title":"someTitle", "content": "something", "pharmacyId":num}
-        //http://localhost:29631/api2/complaint/  + apiKey
+        //http://localhost:29631/api3/complaint/  + apiKey
         public IActionResult Add(ComplaintDTO dto, String hospitalApiKey)
         {
             if ( dto.Title.Length <= 0 || dto.Content.Length <= 0) //date sklonjen iz provere
@@ -80,7 +80,6 @@ namespace PharmacyAPI.Controllers
         [HttpDelete("{id?}")]       // DELETE /api/complaint/1
         public IActionResult Delete(long id = 0)
         {
-            
             Complaint complaint = dbContext.Complaints.SingleOrDefault(complaint => complaint.ComplaintId == id);
             if (complaint == null)
             {
