@@ -5,11 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RegistrationService } from './welcome/reistration.service';
+import { FormsModule } from '@angular/forms';
+import { ComplaintsViewComponent } from './complaints-view/complaints-view.component';
+import { HospitalViewComponent } from './hospital-view/hospital-view.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    ComplaintsViewComponent,
+    HospitalViewComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -17,7 +26,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ RegistrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

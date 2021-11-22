@@ -1,0 +1,118 @@
+ <!-- zaglavlje -->
+ <div class="logo" > 
+    <table> 
+        <tr> 
+            <td><img src="../../favicon.ico" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+            <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; font-weight: bold;  color:rgb(23, 23, 102); " >Flos</p></td>
+            <td style="margin-left:1200px;">
+            <li class="nav-item" style="margin-left: 1150px; "> 
+           <a class="nav-link" routerLink="">Home</a>
+       </li> </td>
+        </tr>
+        
+       </table>      
+</div>
+
+<div class="backgroundImage">
+
+
+     <div class="table-responsive table-striped">
+         <table class='table'>
+             <thead   style="color:rgb(17, 67, 109); opacity: 2.2; background-color: whitesmoke;">
+                 <tr>
+                     <th> </th>
+                     <th>Date</th>
+                     <th>Title</th>
+                     <th>Content</th>
+                     <th> </th>
+                     <th></th>
+                     <th></th>
+                 </tr>
+             </thead>
+             <tbody>
+                
+                 <tr *ngFor = 'let complaint of complaints'>    
+                     <td></td>
+                     <td style="opacity: 2.2; color: black; font-size: 16px;">{{complaint.date | date:'short'}}</td>
+                     <td>{{complaint.title}}</td> 
+                     <td>{{complaint.content}}</td>
+                     <td>  <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newResponse">send response</button></td>
+                     <button class="btn btn-secondary" style= "background-color: gray;" ><i class="fa fa-trash"></i> Delete</button>
+                 </tr>  
+ <!--
+                 <tr>    
+                    <td></td>
+                    <td > <label>11/10/2021</label></td>
+                    <td>
+                        Prigovor o dostavi </td> 
+                    <td>Postovani, molimo Vas da lekove koje nam isporucujete adekvatno pakujete</td>
+                    <td>  <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newResponse">send response</button></td>
+                   <td><button class="btn btn-secondary" style= "background-color: gray;" ><i class="fa fa-trash"></i> Delete complaint</button></td> 
+                </tr>
+
+                <tr>    
+                    <td></td>
+                    <td > <label>11/13/2021</label></td>
+                    <td>
+                        Los kvalitet </td> 
+                    <td>Postovani, zelimo da Vam skrenemo paznju da igle koje ste nam poslali porudzbinom N2346 nisu sterilne, jer je zastitna folija probusena.</td>
+                    <td>  <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newResponse">send response</button></td>
+                   <td><button class="btn btn-secondary" style= "background-color: gray;" ><i class="fa fa-trash"></i> Delete complaint</button></td> 
+                </tr>
+                <tr>    
+                    <td></td>
+                    <td > <label>11/20/2021</label></td>
+                    <td>
+                       Pogresna kolicina isporucena</td> 
+                    <td>Postovani, zamolili bismo vas da na fakture N8976 korigujete kolicinu porucenih rukavica, porudzbenica je obuhvatala 20, a ne 40 pakovanja, samim tim je i cena neadekvatna. Hvala na razumevanju!  </td>
+                    <td>  <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newResponse" >send response</button></td>
+                   <td><button class="btn btn-secondary" style= "background-color: gray;" ><i class="fa fa-trash"></i> Delete complaint</button></td> 
+                </tr>-->
+             </tbody>
+         </table>
+     </div>
+      <!-- div za background da bi se videla slika-->
+    <div style="height: 400px; width:20px ;"> </div>
+     </div>
+
+
+     <!-- Modal za novi odgovor-->
+<div id="newResponse" class="modal fade " style="display: none; " role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 450px;">
+      <!-- Modal for complaint-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Write response</h4>
+        </div>
+        <div class="modal-body">
+          
+            <div> 
+                <td>
+                     </td>
+              <table class="tableModal"> 
+                  <tr style="height: 10px;"> </tr>
+                
+                  <tr style="height: 10px;"> </tr>
+                  <tr> 
+                      <td class="tdInForm"> <label style="font-size: medium;">Content: </label> </td> </tr>
+                      <tr><td > <textarea type="text" class="form-control" style= "width: 380px; height: 100px"  placeholder="Write your response"  ></textarea></td> </tr>
+                  
+                    <tr style="height: 10px;"> </tr>
+                 <tr> 
+                   
+                   
+                  </tr>
+                  <tr style="height: 10px;"> </tr>
+                  
+              </table>
+              
+            </div>       
+              
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" style="margin-right:30px; " data-dismiss="modal"  >Send</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+</div>
