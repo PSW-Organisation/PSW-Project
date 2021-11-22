@@ -1,4 +1,4 @@
-name: Run Tests
+name: Run Unit Tests
 
 on:
   push:
@@ -9,7 +9,7 @@ env:
  PROJECT-PATH : 'Hospital/IntegrationAPIUnitTests/IntegrationAPIUnitTests.csproj'
 
 jobs:
-  build:
+  buildUnitTests: 
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
