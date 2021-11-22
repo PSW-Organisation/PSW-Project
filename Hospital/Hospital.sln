@@ -15,9 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyAPI", "PharmacyAPI\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyLibrary", "PharmacyLibrary\PharmacyLibrary.csproj", "{6CCA2F53-05DD-43DD-948A-AEA97E714475}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationAPIUnitTests", "IntegrationAPIUnitTests\IntegrationAPIUnitTests.csproj", "{F9CED1EC-F9DE-4C3B-AAC0-DA8F522A0041}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationAPIUnitTests", "IntegrationAPIUnitTests\IntegrationAPIUnitTests.csproj", "{F9CED1EC-F9DE-4C3B-AAC0-DA8F522A0041}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationAPIIntegrationTests", "IntegrationAPIIntegrationTests\IntegrationAPIIntegrationTests.csproj", "{B2AE0A5D-4834-4D1F-A96C-E6E743638DB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationAPIIntegrationTests", "IntegrationAPIIntegrationTests\IntegrationAPIIntegrationTests.csproj", "{B2AE0A5D-4834-4D1F-A96C-E6E743638DB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyAPIUnitTests", "PharmacyAPIUnitTests\PharmacyAPIUnitTests.csproj", "{92928ABB-E7B7-495A-AAA6-BB7AC188D091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyAPIIntegrationTests", "PharmacyAPIIntegrationTests\PharmacyAPIIntegrationTests.csproj", "{42CF393B-BCC4-4CA5-82EC-B5123EEE150A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{B2AE0A5D-4834-4D1F-A96C-E6E743638DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2AE0A5D-4834-4D1F-A96C-E6E743638DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2AE0A5D-4834-4D1F-A96C-E6E743638DB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92928ABB-E7B7-495A-AAA6-BB7AC188D091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92928ABB-E7B7-495A-AAA6-BB7AC188D091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92928ABB-E7B7-495A-AAA6-BB7AC188D091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92928ABB-E7B7-495A-AAA6-BB7AC188D091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42CF393B-BCC4-4CA5-82EC-B5123EEE150A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42CF393B-BCC4-4CA5-82EC-B5123EEE150A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42CF393B-BCC4-4CA5-82EC-B5123EEE150A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42CF393B-BCC4-4CA5-82EC-B5123EEE150A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
