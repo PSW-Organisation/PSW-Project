@@ -10,6 +10,7 @@ namespace PharmacyAPIIntegrationTests
 {
     public class MedicineTest
     {
+       
         [Fact]
         public void check_if_medicine_existsTrue()
         {
@@ -17,7 +18,7 @@ namespace PharmacyAPIIntegrationTests
 
             MedicineService medicineService = new MedicineService(stubMedicineRepository);
 
-            Boolean exists = medicineService.CheckIfExists("panklav", 1);
+            Boolean exists = medicineService.CheckIfExists("verapamil", 1);
 
             Assert.True(exists);
         }
@@ -29,7 +30,7 @@ namespace PharmacyAPIIntegrationTests
 
             MedicineService medicineService = new MedicineService(stubMedicineRepository);
 
-            Boolean exists = medicineService.CheckIfExists("panklav", 11);
+            Boolean exists = medicineService.CheckIfExists("analgin", 11);
 
             Assert.True(!exists);
         }
