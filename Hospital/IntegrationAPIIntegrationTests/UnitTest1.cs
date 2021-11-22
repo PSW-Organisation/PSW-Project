@@ -1,7 +1,8 @@
+using IntegrationLibrary.Model;
+using IntegrationLibrary.Repository;
+using IntegrationLibrary.Service;
+using IntegrationLibrary.Service.ServicesInterfaces;
 using Moq;
-using PharmacyAPI.Model;
-using PharmacyLibrary.Repository.MedicineRepository;
-using PharmacyLibrary.Service;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -10,47 +11,39 @@ namespace IntegrationAPIIntegrationTests
 {
     public class UnitTest1
     {
-
+        //integracioni za hospital
         [Fact]
-        public void check_if_medicine_existsTrue()
+        public void search_medicine_found()
         {
-            var stubMedicineRepository = new Mock<IMedicineRepository>();
+            var stubRepositoryPharmacy = new Mock<PharmacyRepository>();
+            var stubRepositoryMedicine = new Mock<MedicineRepository>();
+            var pharmacies = new List<Pharmacy>();
 
-            stubMedicineRepository.Setup(m => m.FindByName("panklav")).Returns(new Medicine(0, "panklav", 0, 10));
+            pharmacies.Add(new Pharmacy("http://localhost:29631", "Flos", "Bulevar Oslobodjenja, Novi Sad", "bc56df25-0d34-4801-b76a-931e61b4c752", "108817cf-dc25-40f4-a18f-244c1315840a"));
+            stubRepositoryPharmacy.Setup(p => p.GetAll()).Returns(pharmacies);
+            IPharmacyService pharmacyService = new PharmacyService(stubRepositoryPharmacy.Object);
+            MedicineService medicineService = new MedicineService(stubRepositoryMedicine.Object, pharmacyService);
 
-            MedicineService medicineService = new MedicineService(stubMedicineRepository.Object);
+            List<Pharmacy> retVal = medicineService.searchMedicine("panklav", 1);
 
-            Boolean exists = medicineService.CheckIfExists("panklav", 1);
-
-            Assert.True(exists);
+            Assert.True(retVal.Count.ToString().Equals("1"));
         }
 
         [Fact]
-        public void check_if_medicine_existsFalse()
+        public void search_medicine_not_found()
         {
-            var stubMedicineRepository = new Mock<IMedicineRepository>();
+            var stubRepositoryPharmacy = new Mock<PharmacyRepository>();
+            var stubRepositoryMedicine = new Mock<MedicineRepository>();
+            var pharmacies = new List<Pharmacy>();
 
-            stubMedicineRepository.Setup(m => m.FindByName("panklav")).Returns(new Medicine(0, "panklav", 0, 10));
+            pharmacies.Add(new Pharmacy("http://localhost:29631", "Flos", "Bulevar Oslobodjenja, Novi Sad", "bc56df25-0d34-4801-b76a-931e61b4c752", "108817cf-dc25-40f4-a18f-244c1315840a"));
+            stubRepositoryPharmacy.Setup(p => p.GetAll()).Returns(pharmacies);
+            IPharmacyService pharmacyService = new PharmacyService(stubRepositoryPharmacy.Object);
+            MedicineService medicineService = new MedicineService(stubRepositoryMedicine.Object, pharmacyService);
 
-            MedicineService medicineService = new MedicineService(stubMedicineRepository.Object);
+            List<Pharmacy> retVal = medicineService.searchMedicine("panklav", 1);
 
-            Boolean exists = medicineService.CheckIfExists("panklav", 1);
-
-            Assert.True(!exists);
-        }
-
-        [Fact]
-        public void check_if_quantity_is_reduced()
-        {
-            var stubMedicineRepository = new Mock<IMedicineRepository>();
-
-            stubMedicineRepository.Setup(m => m.FindByName("analgin")).Returns(new Medicine(0, "analgin", 0, 10));
-
-            MedicineService medicineService = new MedicineService(stubMedicineRepository.Object);
-
-            int quantity = medicineService.reduceQuantityOfMedicine("analgin", 1);
-
-            Assert.True(quantity.ToString().Equals("9"));
+            Assert.True(retVal.Count.ToString().Equals("0"));
         }
     }
 }
