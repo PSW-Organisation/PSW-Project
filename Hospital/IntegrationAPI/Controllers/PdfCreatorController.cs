@@ -6,6 +6,7 @@ using IntegrationLibrary.Model;
 using IntegrationLibrary.Service.ServicesInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -29,10 +30,10 @@ namespace IntegrationAPI.Controllers
             this.medicineService = medicineService;
         }
 
-        [HttpGet("{startTime}/{endTime}")]
-        public IActionResult CreatePDF(DateTime startTime, DateTime endTime)
+        [HttpPost]
+        public IActionResult Upload(TimeRangeDTO dto)
         {
-            var consumption = getMedicineConsumption(startTime, endTime);
+            var consumption = getMedicineConsumption(dto.StartTime, dto.EndTime);
 
             var globalSettings = new GlobalSettings
             {
@@ -47,7 +48,7 @@ namespace IntegrationAPI.Controllers
             var objectSettings = new ObjectSettings
             {
                 PagesCount = true,
-                HtmlContent = TemplateGenerator.GetHTMLString(startTime, endTime, consumption),
+                HtmlContent = TemplateGenerator.GetHTMLString(dto.StartTime, dto.EndTime, consumption),
                 WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "style.css") },
                 HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
                 FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
@@ -56,12 +57,25 @@ namespace IntegrationAPI.Controllers
             var pdf = new HtmlToPdfDocument
             {
                 GlobalSettings = globalSettings,
-                Objects = { objectSettings}
+                Objects = { objectSettings }
             };
 
             var file = _converter.Convert(pdf);
+            var fileName = dto.StartTime.ToString("dd-M-yyyy") + "_" + dto.EndTime.ToString("dd-M-yyyy") + ".pdf";
 
-            return File(file, "application/pdf", "MedicineReport.pdf");
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "tester", "password")))
+            {
+                client.Connect();
+
+                using(Stream stream = new MemoryStream(file))
+                {
+                    client.UploadFile(stream, @"\pharmacy\" + fileName, x => { Console.WriteLine(x); });
+                }
+
+                    client.Disconnect();
+            }
+
+            return Ok(fileName);
         }
 
         public List<MedicineConsumption> getMedicineConsumption(DateTime startTime, DateTime endTime)
