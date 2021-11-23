@@ -2,8 +2,10 @@
 using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PharmacyAPI.Model;
 using PharmacyAPI.Utility;
 using PharmacyLibrary.Service;
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,9 +27,22 @@ namespace PharmacyAPI.Controllers
             this.medicineService = medicineService;
         }
 
-        [HttpGet("{id?}")]
-        public IActionResult CreatePDF(int id)
+        [HttpGet("{name?}")]
+        public IActionResult Upload(string name)
         {
+            Medicine medicine = null;
+            foreach(var med in medicineService.Get())
+            {
+                if(med.Name.Equals(name))
+                {
+                    medicine = med;
+                }
+            }
+            if(medicine == null)
+            {
+                return BadRequest();
+            }
+
             var globalSettings = new GlobalSettings
             {
                 ColorMode = ColorMode.Color,
@@ -41,7 +56,7 @@ namespace PharmacyAPI.Controllers
             var objectSettings = new ObjectSettings
             {
                 PagesCount = true,
-                HtmlContent = TemplateGenerator.GetHTMLString(medicineService.Get(id)),
+                HtmlContent = TemplateGenerator.GetHTMLString(medicine),
                 WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "style.css") },
                 HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
                 FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
@@ -54,8 +69,28 @@ namespace PharmacyAPI.Controllers
             };
 
             var file = _converter.Convert(pdf);
+            var fileName = name + ".pdf";
 
-            return File(file, "application/pdf", "MedicineReport.pdf");
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "tester", "password")))
+            {
+                client.Connect();
+
+                using (Stream stream = new MemoryStream(file))
+                {
+                    client.UploadFile(stream, @"\hospital\" + fileName, x => { Console.WriteLine(x); });
+                }
+
+                //string serverFile = @"\public\Medicine_Report.pdf";
+                //string localFile = @"D:\PDFCreator\Medicine_Report2.pdf";
+                //using (Stream stream = System.IO.File.OpenWrite(localFile))
+                //{
+                //    client.DownloadFile(serverFile, stream, x => Console.WriteLine(x));
+                //}
+
+                client.Disconnect();
+            }
+
+            return Ok(fileName);
         }
 
     }

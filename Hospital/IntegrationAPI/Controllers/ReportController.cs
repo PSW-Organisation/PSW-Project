@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,36 +14,24 @@ namespace IntegrationAPI.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
-        [HttpPost, DisableRequestSizeLimit]
-        public IActionResult Upload()
+        [HttpGet("{fileName?}")]
+        public IActionResult Download(string fileName)
         {
-            try
+            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "tester", "password")))
             {
-                var file = Request.Form.Files[0];
+                client.Connect();
+
                 var folderName = Path.Combine("Resources", "Reports");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                var localFile = Path.Combine(pathToSave, fileName);
 
-                if (file.Length > 0)
+                string serverFile = @"\hospital\" + fileName;
+                using (Stream stream = System.IO.File.OpenWrite(localFile))
                 {
-                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                    var fullPath = Path.Combine(pathToSave, fileName);
-                    var dbPath = Path.Combine(folderName, fileName);
-
-                    using (var stream = new FileStream(fullPath, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-
-                    return Ok(new { dbPath });
+                    client.DownloadFile(serverFile, stream, x => Console.WriteLine(x));
                 }
-                else
-                {
-                    return BadRequest();
-                }
-            }
-            catch (Exception ex)
-            {
 
+                client.Disconnect();
             }
             return Ok();
         }

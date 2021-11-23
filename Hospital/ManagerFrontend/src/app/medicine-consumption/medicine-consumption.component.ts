@@ -12,7 +12,8 @@ export class MedicineConsumptionComponent implements OnInit {
   pharmacyUrl: string = "";
   pharmacies: IPharmacy[]= [];
   errorMessage: string = ""
-  timeRange: any = {startDate: Date, endDate: Date};
+  timeRange: any = {startTime: Date, endTime: Date};
+  medicineName: string = ""
 
   constructor(private _consumptionService: MedicineConsumptionService) { }
 
@@ -29,21 +30,11 @@ export class MedicineConsumptionComponent implements OnInit {
     );
   }
 
-  handleFileInput(event: Event) {
-    this.fileToUpload = (<HTMLInputElement>event.target).files?.item(0) as File;
+  getMedicineDetails(){
+    this._consumptionService.getMedicineDetails(this.pharmacyUrl, this.medicineName);
   }
 
-  uploadFileToActivity() {
-    this._consumptionService.postFile(this.fileToUpload as File, this.pharmacyUrl).subscribe(data => {
-      // do something, if upload success
-      }, error => {
-        console.log(error);
-      });
+  sendConsumptionReport(){
+    this._consumptionService.sendConsumptionReport(this.pharmacyUrl, this.timeRange);
   }
-
-  getMedicineReport(){
-    this._consumptionService.getMedicineReport(this.timeRange);
-    this.timeRange= {startDate: null, endDate: null}
-  }
-
 }

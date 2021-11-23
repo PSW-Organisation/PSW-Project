@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
 import { IPharmacy } from '../pharmacies-view/pharmacy';
 
 @Injectable({
@@ -21,24 +21,29 @@ export class MedicineConsumptionService {
     )
   }
 
-  postFile(fileToUpload: File, pharmacyURL: string) {
-    const endpoint = pharmacyURL + '/report';
-    const formData: FormData = new FormData();
-    formData.append('fileKey', fileToUpload, fileToUpload.name);
-    return this._http
-      .post(endpoint, formData);
-  }
-
-  public getMedicineReport(timeRange: any): any {
+  /*requestMedicineReport(pharmacyUrl: string, medicineName: string) {
     var mediaType = 'application/pdf';
-    this._http.get('http://localhost:16928/api2/pdfcreator/' + timeRange.startDate + '/' + timeRange.endDate, { responseType: 'blob' }).subscribe(
+    this._http.get(pharmacyUrl + '/pdfcreator/' + medicineName, { responseType: 'blob' }).subscribe(
         (response) => {
+            this._http.get('http://localhost:16928/api2/report/' + medicineName )
             var blob = new Blob([response], { type: mediaType });
             const url= window.URL.createObjectURL(blob);
             window.open(url);
         },
         e => { throwError(e); }
     );
+  }*/
+
+  getMedicineDetails(pharmacyUrl: string, medicineName: string){
+    this._http.get(pharmacyUrl + '/pdfcreator/' + medicineName, { responseType: 'text' }).pipe(
+      mergeMap(response => this._http.get('http://localhost:16928/api2/report/' + response ))
+    ).subscribe();
+  }
+  
+  sendConsumptionReport(pharmacyUrl: string, timeRange: any){
+    this._http.post('http://localhost:16928/api2/pdfcreator', timeRange, { responseType: 'text' }).pipe(
+      mergeMap(response => this._http.get(pharmacyUrl + '/report/' + response ))
+    ).subscribe();
   }
 
 }
