@@ -41,12 +41,20 @@ namespace HospitalAPI.Controllers
             return Ok(result.Select(r => _mapper.Map<RoomEquipmentQuantityDTO>(r)).ToList());
         }
 
-        [HttpGet("{equipmentName}")]
+        [HttpGet]
+        [Route("equipment/{equipmentName}")]
         public ActionResult<List<RoomEquipmentDTO>> GetEquipmentInRooms(string equipmentName)
         {
             var result = _roomEquipmentService.GetEquipmentInRooms(equipmentName);
             return Ok(result.Select(r => _mapper.Map<RoomEquipmentDTO>(r)).ToList());
         }
-        
+
+        [HttpGet("{roomId}")]
+        public ActionResult<List<RoomEquipmentDTO>> GetAllEquipmentInRoom(int roomId)
+        {
+            var result = _roomEquipmentService.GetAllEquipmentInRoom(roomId);
+            return Ok(result.Select(r => _mapper.Map<RoomEquipmentDTO>(r)).ToList());
+        }
+
     }
 }

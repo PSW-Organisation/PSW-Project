@@ -31,5 +31,11 @@ namespace HospitalLibrary.GraphicalEditor.Service
         {
             return _roomEquipmentRepository.GetAllRoomEquipmentQuantity();
         }
+
+        public List<RoomEquipment> GetAllEquipmentInRoom(int roomId)
+        {
+            return _roomEquipmentRepository.GetAllEquipmentInRoom(roomId);
+
+        }
     }
 }

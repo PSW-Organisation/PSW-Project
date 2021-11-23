@@ -11,5 +11,6 @@ namespace HospitalLibrary.GraphicalEditor.Service
         public List<RoomEquipmentQuantityDTO> GetRoomEquipmentQuantity();
         public List<RoomEquipment> GetEquipmentInRooms(string equipmentName);
         public Result<IList<RoomEquipment>> GetAllEquipmentInRooms();
+        public List<RoomEquipment> GetAllEquipmentInRoom(int roomId);
     }
 }

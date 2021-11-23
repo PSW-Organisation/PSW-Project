@@ -7,6 +7,7 @@ import { RoomsViewComponent } from './rooms-view/rooms-view.component';
 import { RoomInfoComponent } from './room-info/room-info.component';
 import { EditRoomComponent } from './edit-room/edit-room.component';
 import { RouterModule } from '@angular/router';
+import { RoomEquipmentComponent } from './room-equipment/room-equipment.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { RouterModule } from '@angular/router';
     RoomsViewComponent,
     RoomInfoComponent,
     EditRoomComponent,
+    RoomEquipmentComponent,
   ],
   imports: [
     SharedModule,

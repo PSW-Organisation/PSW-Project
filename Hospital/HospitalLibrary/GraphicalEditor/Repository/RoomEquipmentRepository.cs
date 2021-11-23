@@ -8,13 +8,12 @@ namespace HospitalLibrary.GraphicalEditor.Repository
 {
     public class RoomEquipmentRepository : GenericDbRepository<RoomEquipment>, IRoomEquipmentRepository
     {
-
         HospitalDbContext _dbContext;
+        
         public RoomEquipmentRepository(HospitalDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
-
 
         public List<RoomEquipmentQuantityDTO> GetAllRoomEquipmentQuantity()
         {
@@ -33,6 +32,10 @@ namespace HospitalLibrary.GraphicalEditor.Repository
             return _dbContext.RoomEquipments.Where(c => c.Name.ToLower().Equals(equipmentName.ToLower()))
         .Select(c => c).ToList();
         }
-
+        
+        public List<RoomEquipment> GetAllEquipmentInRoom(int roomId)
+        {
+            return _dbContext.RoomEquipments.Where(e => e.RoomId == roomId).ToList();
+        }
     }
 }

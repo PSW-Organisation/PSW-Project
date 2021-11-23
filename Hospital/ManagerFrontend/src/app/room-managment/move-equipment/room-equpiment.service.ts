@@ -20,7 +20,7 @@ export class RoomEqupimentService {
   }
 
   getRoomEquipment(name: string): Observable<IEquipment[]> {
-    return this._http.get<IEquipment[]>(this._equipmentUrl+`/${name}`).pipe(
+    return this._http.get<IEquipment[]>(this._equipmentUrl+`/equipment/${name}`).pipe(
       tap((data) => console.log('All equipment: ', JSON.stringify(data))),
       catchError(this.handleError)
     );
@@ -29,6 +29,13 @@ export class RoomEqupimentService {
   getAllRoomEquipment(): Observable<IEquipment[]> {
     return this._http.get<IEquipment[]>(this._equipmentUrl).pipe(
       tap((data) => console.log('All equipment: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+  
+  getAllRoomEquipmentInRoom(roomId: number): Observable<IEquipment[]> {
+    return this._http.get<IEquipment[]>(this._equipmentUrl+`/${roomId}`).pipe(
+      tap((data) => console.log('All Room equipment: ', JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
