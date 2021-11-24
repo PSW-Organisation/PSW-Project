@@ -107,6 +107,7 @@ namespace IntegrationAPI
             services.AddScoped<IMedicineTransactionService, MedicineTransactionService>();
             services.AddScoped<IPharmacyService, PharmacyService>();
             services.AddScoped<IResponseToComplaintService, ResponseToComplaintService>();
+            services.AddScoped<IMedicineConsumptionService, MedicineConsumptionService>();
 
             //added for Cors error
             //______________________________________________________________________
