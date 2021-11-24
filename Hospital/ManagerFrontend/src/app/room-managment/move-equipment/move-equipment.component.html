@@ -61,13 +61,94 @@
             </mat-form-field>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
+                <button (click)="activateFive()" mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="fiveFormGroup">
+        <form [formGroup]="fiveFormGroup">
+            <ng-template matStepLabel>dates</ng-template>
+
+            <mat-label>Select starting date</mat-label>
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="pickerStart" [min]="minDate" formControlName="startTimeCtrl" (dateInput)="addEvent('inputStart', $event)" (dateChange)="addEvent('changeStart', $event)"/>
+                    <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerStart></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="col-1">
+                    <input matInput [(ngModel)]="startHours" type="number" formControlName="startHoursCtrl" min="0" max="23"/><mat-label>hours</mat-label>
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill" class="col-1">
+                    <input matInput [(ngModel)]="startMinutes" type="number" formControlName="startMinutesCtrl" min="0" max="59"/><mat-label>minutes</mat-label>
+                </mat-form-field>
+            </div>
+            
+            <div style="height: 80px;"></div>
+            <mat-label>Select ending date</mat-label>
+            <div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="pickerEnd" [min]="minDate" formControlName="endTimeCtrl" (dateInput)="addEvent('inputEnd', $event)" (dateChange)="addEvent('changeEnd', $event)"/>
+                    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerEnd></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="col-1">
+                    <input matInput [(ngModel)]="endHours" type="number" formControlName="endHoursCtrl" min="0" max="23"/><mat-label>hours</mat-label>
+                </mat-form-field>
+    
+                <mat-form-field appearance="fill" class="col-1">
+                    <input matInput [(ngModel)]="endMinutes" type="number" formControlName="endMinutesCtrl" min="0" max="59"/><mat-label>minutes</mat-label>
+                </mat-form-field>
+            </div>
+            <div style="height: 80px;"></div>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button (click)="activateSix()" mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+        
+    </mat-step>
+    <mat-step [stepControl]="sixFormGroup">
+        <form [formGroup]="sixFormGroup">
+            <ng-template matStepLabel>duration</ng-template>
+            <mat-form-field appearance="fill">
+                <mat-label>enter duration</mat-label>
+                <input matInput type="number" min="0" [(ngModel)]="duration" formControlName="sixCtrl"/><mat-label>m</mat-label>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button (click)="activateSeven()" mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="sevenFormGroup">
+        <form [formGroup]="sevenFormGroup">
+            <ng-template matStepLabel>possible terms of relocation</ng-template>
+            <mat-label>Chose one of possible terms of relocation</mat-label>
+            <mat-selection-list [multiple]="false">
+                <mat-list-option *ngFor="let freeTerm of freeTerms" [value]="selectedFreeTerm">
+                    <div>
+                       From {{ freeTerm.startTime | date: 'dd.MM.yyyy HH:mm' }}
+                       To {{ freeTerm.endTime | date: 'dd.MM.yyyy HH:mm' }}
+                    </div>
+                </mat-list-option>
+            </mat-selection-list>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>
             </div>
         </form>
     </mat-step>
+
     <mat-step>
         <ng-template matStepLabel>Done</ng-template>
         <p>You are now done.</p>
+        
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button (click)="stepper.reset()">Reset</button>

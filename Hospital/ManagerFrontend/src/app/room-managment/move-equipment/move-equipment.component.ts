@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { IRoom } from '../rooms-view/room';
 import { RoomService } from '../rooms-view/rooms.service';
-import { IEquipment, IEquipmentQuantity } from './room-equipment';
+import { IEquipment, IEquipmentQuantity, IFreeTerms, IParamsOfRelocationEquipment, ParamsOfRelocationEquipment } from './room-equipment';
 
 import { RoomEqupimentService } from './room-equpiment.service';
 
@@ -13,11 +14,14 @@ import { RoomEqupimentService } from './room-equpiment.service';
   styleUrls: ['./move-equipment.component.css'],
 })
 export class MoveEquipmentComponent implements OnInit {
-  isLinear = true;
+  isLinear = true; 
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;
   forthFormGroup!: FormGroup;
+  fiveFormGroup!: FormGroup;
+  sixFormGroup!: FormGroup;
+  sevenFormGroup!: FormGroup;
   selectedEquipment!: IEquipmentQuantity;
   equipments!: IEquipment[];
   equipmentsDTO!: IEquipmentQuantity[];
@@ -25,10 +29,47 @@ export class MoveEquipmentComponent implements OnInit {
   roomsWithoutSource!: IRoom[];
   selectedDestinationRoom!: IRoom;
   equipmentAmount!: number;
+  paramsOfRelocationEquipment!: IParamsOfRelocationEquipment;
+  freeTerms!: IFreeTerms[];
+  minDate!: Date;
+  selectedFreeTerm!: IFreeTerms;
+
+  startYear!: number;
+  startMonth!: number;
+  startDay!: number;
+  startHours!: number;
+  startMinutes!: number;
+
+  endYear!: number;
+  endMonth!: number;
+  endDay!: number;
+  endHours!: number;
+  endMinutes!: number;
+  
+  duration!: number;
+
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    if (event.value != null) {
+      if (type === 'inputStart' || type === 'changeStart') {
+        this.startYear = event.value.getFullYear();
+        this.startMonth = event.value.getMonth();
+        this.startDay = event.value.getDate();
+      }
+      else if (type === 'inputEnd' || type === 'changeEnd') {
+        this.endYear = event.value.getFullYear();
+        this.endMonth = event.value.getMonth();
+        this.endDay = event.value.getDate();
+      }
+
+    }
+  }
+
 
   constructor(private _formBuilder: FormBuilder,
     private _roomEquipmentService: RoomEqupimentService,
-    private _roomService: RoomService) { }
+    private _roomService: RoomService) {
+    this.paramsOfRelocationEquipment = new ParamsOfRelocationEquipment(-1, -1, '', -1, new Date(), new Date(), 0);
+  }
 
   activateSecond() {
     this._roomEquipmentService.getRoomEquipment(this.selectedEquipment.name).subscribe(roomEquipment => this.equipments = roomEquipment);
@@ -49,6 +90,25 @@ export class MoveEquipmentComponent implements OnInit {
 
   }
 
+  activateFive() {
+    
+  }
+
+  activateSix() {
+
+  }
+
+  activateSeven() {
+    this.paramsOfRelocationEquipment.NameOfEquipment = this.selectedEquipment.name;
+    this.paramsOfRelocationEquipment.IdSourceRoom = this.selectedRoomWithEquipment.roomId;
+    this.paramsOfRelocationEquipment.IdDestinationRoom = this.selectedDestinationRoom.id;
+    this.paramsOfRelocationEquipment.QuantityOfEquipment = this.equipmentAmount;
+    this.paramsOfRelocationEquipment.StartTime = new Date(Date.UTC(this.startYear, this.startMonth, this.startDay, this.startHours, this.startMinutes));
+    this.paramsOfRelocationEquipment.endTime = new Date(Date.UTC(this.endYear, this.endMonth, this.endDay, this.endHours, this.endMinutes));
+    this.paramsOfRelocationEquipment.durationInMinutes = this.duration;
+    this._roomEquipmentService.getAllPosibleRelocationTerms(this.paramsOfRelocationEquipment).subscribe(free => {this.freeTerms = free});
+  }
+
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
@@ -62,7 +122,23 @@ export class MoveEquipmentComponent implements OnInit {
     this.forthFormGroup = this._formBuilder.group({
       forthCtrl: ['', Validators.required],
     });
+    this.fiveFormGroup = this._formBuilder.group({
+      fiveCtrl: ['', Validators.required],
+      startTimeCtrl: ['', Validators.required],
+      startHoursCtrl: ['', Validators.required],
+      startMinutesCtrl: ['', Validators.required],
+      endTimeCtrl: ['', Validators.required],
+      endHoursCtrl: ['', Validators.required],
+      endMinutesCtrl: ['', Validators.required],
+    });
+    this.sixFormGroup = this._formBuilder.group({
+      sixCtrl: ['', Validators.required],
+    });
+    this.sevenFormGroup = this._formBuilder.group({
+      sevenCtrl: ['', Validators.required],
+    });
 
+    this.minDate = new Date(Date.now());
 
     this._roomEquipmentService.getRoomEquipmentQuantity().subscribe(roomEquipment => this.equipmentsDTO = roomEquipment);
 
