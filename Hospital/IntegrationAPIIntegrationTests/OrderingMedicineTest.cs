@@ -12,7 +12,7 @@ namespace IntegrationAPIIntegrationTests
     public class OrderingMedicineTest
     {
         //integracioni za hospital
-        [Fact]
+        /*[Fact]
         public void search_medicine_found()
         {
             var stubRepositoryPharmacy = new Mock<PharmacyRepository>();
@@ -44,6 +44,6 @@ namespace IntegrationAPIIntegrationTests
             List<Pharmacy> retVal = medicineService.searchMedicine("concor", 1);
 
             Assert.True(retVal.Count.ToString().Equals("0"));
-        }
+        }*/
     }
 }
