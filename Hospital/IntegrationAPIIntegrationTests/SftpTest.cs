@@ -4,6 +4,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using Xunit;
 
@@ -15,7 +16,7 @@ namespace IntegrationAPIIntegrationTests
         public void Upload_file()
         {
             var fileName = "test.txt";
-            var localDir = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace("bin\\Debug", "Data"));
+            var localDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName.Replace("bin", "Data");
             var localFile = Path.Combine(localDir, fileName);
             string serverFile = @"\test\" + fileName;
 
@@ -32,7 +33,7 @@ namespace IntegrationAPIIntegrationTests
         public void Dowload_file()
         {
             var fileName = "test.txt";
-            var localDir = Path.GetDirectoryName(Directory.GetCurrentDirectory().Replace("bin\\Debug", "Data"));
+            var localDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName.Replace("bin", "Data");
             var localFile = Path.Combine(localDir, fileName);
 
             string serverFile = @"\test\" + fileName;
