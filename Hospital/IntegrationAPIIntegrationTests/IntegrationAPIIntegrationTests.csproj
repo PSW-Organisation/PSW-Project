@@ -26,7 +26,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IntegrationAPI\IntegrationAPI.csproj" />
     <ProjectReference Include="..\IntegrationLibrary\IntegrationLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

@@ -13,7 +13,6 @@ using AutoMapper;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.FeedbackAndSurvey.Repository;
 using HospitalLibrary.FeedbackAndSurvey.Service;
-using HospitalLibrary.Service;
 using HospitalLibrary.MedicalRecords.Service;
 using HospitalLibrary.MedicalRecords.Repository;
 
