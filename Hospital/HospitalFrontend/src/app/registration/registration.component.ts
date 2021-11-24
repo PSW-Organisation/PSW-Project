@@ -6,9 +6,9 @@ import { RegistrationService } from './registration.service';
 import { Patient } from './patient';
 import { Allergen } from './allergen';
 import { Doctor } from './doctor';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { MedicalRecord } from './medical-record';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import * as XRegExp from 'xregexp';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +17,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class RegistrationComponent implements OnInit {
 
-  countries: string[] = ['serbia', 'bosnia and herzegovina', 'montenegro']
+  countries: string[] = ['Serbia', 'Bosnia and Herzegovina', 'Montenegro']
   bloodTypes: string[] = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
   cities: string[] = []
   allergens: Allergen[] = []
@@ -25,7 +25,7 @@ export class RegistrationComponent implements OnInit {
 
   settings = {
     singleSelection: false,
-    text: "Select allergens*",
+    text: "Select allergens",
     selectAllText: 'Select all',
     unSelectAllText: 'Unselect all',
     enableSearchFilter: true,
@@ -41,7 +41,7 @@ export class RegistrationComponent implements OnInit {
     parentName: '',
     surname: '',
     dateOfBirth: new Date(Date.now()),
-    gender: '',
+    gender: 'male',
     phone: '',
     email: '',
     address: '',
@@ -57,39 +57,38 @@ export class RegistrationComponent implements OnInit {
       bloodType: 'A+',
       profession: '',
       doctorId: '',
-      height: 0,
-      weight: 0,
+      height: 170,
+      weight: 60,
       patient: null,
       doctor: null
     }
   }
 
-  confirmPassword: string = ''
+  repeatPassword: string = ''
 
-  registrationForm = new FormGroup({
+  registrationForm: FormGroup = new FormGroup({
     usernameControl: new FormControl(this.patient.username, [
-      Validators.required
+      Validators.required,
+      Validators.pattern('^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$')
     ]),
     passwordControl: new FormControl(this.patient.password, [
-      Validators.required
+      Validators.required,
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,40}$')
     ]),
     nameControl: new FormControl(this.patient.name, [
       Validators.required,
-      Validators.pattern('^[a-zA-Z]+$'),
-      Validators.minLength(2),
+      Validators.pattern(XRegExp('^\\p{Lu}[\\p{Ll}]+$', 'u')),
       Validators.maxLength(30)
     ]),
     parentNameControl: new FormControl(this.patient.parentName,
       [
         Validators.required,
-        Validators.pattern('^[a-zA-Z]+$'),
-        Validators.minLength(2),
+        Validators.pattern(XRegExp('^\\p{Lu}[\\p{Ll}]+$', 'u')),
         Validators.maxLength(30)
       ]),
     surnameControl: new FormControl(this.patient.surname, [
       Validators.required,
-      Validators.pattern('^[a-zA-Z]+$'),
-      Validators.minLength(2),
+      Validators.pattern(XRegExp('^\\p{Lu}[\\p{Ll}]+$', 'u')),
       Validators.maxLength(30)
     ]),
     dateOfBirthControl: new FormControl(this.patient.dateOfBirth, [
@@ -99,16 +98,19 @@ export class RegistrationComponent implements OnInit {
       Validators.required
     ]),
     phoneControl: new FormControl(this.patient.phone, [
-      Validators.required
+      Validators.required,
+      Validators.pattern('^(\\+\\d{3})?\\d{8,10}$')
     ]),
     emailControl: new FormControl(this.patient.email, [
       Validators.required,
-      Validators.minLength(4),
       Validators.email,
-      Validators.maxLength(40)
+      Validators.maxLength(254)
     ]),
     addressControl: new FormControl(this.patient.address, [
-      Validators.required
+      Validators.required,
+      Validators.minLength(4),
+      Validators.maxLength(50),
+      Validators.pattern(XRegExp('^[\\p{L}\\s,0-9\\/-]+$', 'u'))
     ]),
     cityControl: new FormControl(this.patient.city, [
       Validators.required
@@ -117,31 +119,53 @@ export class RegistrationComponent implements OnInit {
       Validators.required
     ]),
     personalIdControl: new FormControl(this.patient.medical.personalId, [
-      Validators.required
+      Validators.required,
+      Validators.pattern('\\d{13}')
     ]),
     bloodTypeControl: new FormControl(this.patient.medical.bloodType, [
       Validators.required
     ]),
     professionControl: new FormControl(this.patient.medical.profession, [
-      Validators.required
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(100),
+      Validators.pattern(XRegExp('^[\\p{L}\\s,\\/-]+$', 'u'))
     ]),
     doctorControl: new FormControl(this.patient.medical.doctorId[0], [
       Validators.required
     ]),
     heightControl: new FormControl(this.patient.medical.height, [
-      Validators.required
+      Validators.required,
+      Validators.min(50),
+      Validators.max(280)
     ]),
     weightControl: new FormControl(this.patient.medical.weight, [
-      Validators.required
+      Validators.required,
+      Validators.min(30),
+      Validators.max(650)
     ]),
-    confirmPasswordControl: new FormControl(this.confirmPassword, [
-      Validators.required
+    confirmPasswordControl: new FormControl(this.repeatPassword, [
+      Validators.required,
+      Validators.pattern(this.repeatPassword),
     ]),
     allergensControl: new FormControl(this.patient.allergens, [
-      Validators.required
     ])
-
   });
+
+  get name() { return this.registrationForm.get('nameControl') }
+  get parentName() { return this.registrationForm.get('parentNameControl') }
+  get surname() { return this.registrationForm.get('surnameControl') }
+  get personalId() { return this.registrationForm.get('personalIdControl') }
+  get dateOfBirth() { return this.registrationForm.get('dateOfBirthControl') }
+  get phone() { return this.registrationForm.get('phoneControl') }
+  get address() { return this.registrationForm.get('addressControl') }
+  get profession() { return this.registrationForm.get('professionControl') }
+  get username() { return this.registrationForm.get('usernameControl') }
+  get email() { return this.registrationForm.get('emailControl') }
+  get password() { return this.registrationForm.get('passwordControl') }
+  get confirmPassword() { return this.registrationForm.get('confirmPasswordControl') }
+  get height() { return this.registrationForm.get('heightControl') }
+  get weight() { return this.registrationForm.get('weightControl') }
 
   constructor(private registrationService: RegistrationService, private modalService: NgbModal,
     private toastr: ToastrService, private router: Router) { }
@@ -164,6 +188,20 @@ export class RegistrationComponent implements OnInit {
         this.registrationForm.get('doctorControl')?.setValue(d[0])
       }, error: e => (console.log(e))
     })
+
+    this.onPasswordChanges();
+  }
+
+  onPasswordChanges(): void {
+    this.registrationForm.get('passwordControl')?.valueChanges.subscribe(val => {
+      if (XRegExp.test(val, XRegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,40}$'))) {
+        this.registrationForm.get('confirmPasswordControl')?.setValidators([Validators.required, Validators.pattern(val)]);
+        this.registrationForm.get('confirmPasswordControl')?.updateValueAndValidity();
+      }
+      else {
+        this.registrationForm.get('confirmPasswordControl')?.setErrors({ 'incorrect': true })
+      }
+    });
   }
 
   updateCities(): void {
@@ -176,6 +214,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   register(): void {
+    if(this.registrationForm.invalid){
+      this.showError('Form is invalid!');
+      return;
+    }
     let bloodType = this.registrationForm.get('bloodTypeControl')?.value;
 
     if (bloodType === 'A+') bloodType = 'A_positive'
@@ -216,7 +258,6 @@ export class RegistrationComponent implements OnInit {
       address: this.registrationForm.get('addressControl')?.value,
       city: this.registrationForm.get('cityControl')?.value,
       country: this.registrationForm.get('countryControl')?.value,
-   
       isActivated: false,
       isBlocked: false,
       medical: medicalRecord,
@@ -229,7 +270,6 @@ export class RegistrationComponent implements OnInit {
         if (c.statusText === 'OK') {
           this.toastr.success('Verification email has been sent. Click on the link to verify your account.');
           this.registrationForm.reset();
-          //this.registrationForm.setValue({ textControl: '', anonymityControl: false, publishControl: false })
           setTimeout(() => { this.router.navigate(['/']); }, 5000);
         }
         else {
@@ -237,21 +277,6 @@ export class RegistrationComponent implements OnInit {
         }
       }, error: e => (console.log(e))
     })
-  }
-
-  onItemSelect(item: any) {
-    console.log(item);
-    console.log(this.patient.allergens);
-  }
-  onItemDeselect(item: any) {
-    console.log(item);
-    console.log(this.patient.allergens);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
-  onDeselectAll(items: any) {
-    console.log(items);
   }
 
   showSuccess(message: string) {

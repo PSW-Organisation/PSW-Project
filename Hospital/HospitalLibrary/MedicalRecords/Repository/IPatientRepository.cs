@@ -10,5 +10,6 @@ namespace HospitalLibrary.MedicalRecords.Repository
     public interface IPatientRepository : IGenericSTRINGIDRepository<Patient>
     {
         public void MapPatientAllergens(Patient patient, List<Allergen> allergens);
+        public int Activate(Guid guid);
     }
 }

@@ -669,7 +669,7 @@ namespace ehealthcare.Model
                         Address = "Sime Milosevica, 5",
                         IsBlocked = false,
                         IsActivated = false,
-                       
+                        Token = Guid.NewGuid()
                     });
                
             });

@@ -16,23 +16,20 @@ namespace HospitalLibrary.MedicalRecords.Service
         public PatientService(IPatientRepository patientRepository)
         {
             _patientRepository = patientRepository;
-
         }
 
         public void Register(Patient patient, List<Allergen> allergens)
         {
-
-            
             _patientRepository.Insert(patient);
             _patientRepository.MapPatientAllergens(patient, allergens);
         }
 
-        public void SendEmail(string recipientEmail)
+        public void SendEmail(string recipientEmail, Guid token)
         {
             MailMessage mm = new MailMessage();
             mm.To.Add(new MailAddress(recipientEmail, "Request for Verification"));
             mm.From = new MailAddress("leanonhospital@gmail.com");
-            mm.Body = $"<a href=\"http://localhost:4200/verification?token={Guid.NewGuid()}\">Click here to verify</a>";
+            mm.Body = $"<a href=\"http://localhost:4200/verification?token={token}\">Click here to verify</a>";
             mm.IsBodyHtml = true;
             mm.Subject = "Verification";
             SmtpClient smcl = new SmtpClient();
@@ -49,7 +46,11 @@ namespace HospitalLibrary.MedicalRecords.Service
             {
                 Console.WriteLine("Error: {0}", e.StatusCode);
             }
+        }
 
+        public int Activate(Guid guid)
+        {
+            return _patientRepository.Activate(guid);
         }
     }
 }

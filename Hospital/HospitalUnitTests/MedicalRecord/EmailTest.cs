@@ -5,9 +5,7 @@ using HospitalUnitTests;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Xunit;
-using System.Net.Mail;
 
 namespace HospitalTests
 {
@@ -27,7 +25,7 @@ namespace HospitalTests
             var repository = new PatientDbRepository(context);
             var service = new PatientService(repository);
 
-            Assert.ThrowsAny<Exception>(() => service.SendEmail("lalalal"));
+            Assert.ThrowsAny<Exception>(() => service.SendEmail("lalalal", Guid.NewGuid()));
         }
 
         [Fact]
@@ -37,7 +35,7 @@ namespace HospitalTests
             var repository = new PatientDbRepository(context);
             var service = new PatientService(repository);
 
-            service.SendEmail("bilebem774@kyrescu.com");
+            service.SendEmail("todepe@thecarinformation.com", Guid.NewGuid());
         }
 
 

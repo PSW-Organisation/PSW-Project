@@ -30,6 +30,7 @@ using AllergenService = HospitalLibrary.MedicalRecords.Service.AllergenService;
 using HospitalLibrary;
 using PatientService = HospitalLibrary.MedicalRecords.Service.PatientService;
 using Newtonsoft.Json;
+using HospitalAPI.Validators;
 
 namespace HospitalAPI
 {
@@ -63,6 +64,8 @@ namespace HospitalAPI
             });
 
             services.AddTransient<IValidator<PatientFeedbackDTO>, PatientFeedbackValidator>();
+            services.AddTransient<IValidator<PatientDto>, PatientValidator>();
+
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
                 builder

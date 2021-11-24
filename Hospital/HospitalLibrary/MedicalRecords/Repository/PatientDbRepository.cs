@@ -31,5 +31,15 @@ namespace HospitalLibrary.MedicalRecords.Repository
 
             _dbContext.SaveChanges();
         }
+
+        public int Activate(Guid guid)
+        {
+            Patient patient = _dbContext.Patients.SingleOrDefault(p => p.Token.Equals(guid));
+            if (patient is null) return 404;
+            if (patient.IsActivated) return 400;
+            patient.IsActivated = true;
+            _dbContext.SaveChanges();
+            return 200;
+        }
     }
 }

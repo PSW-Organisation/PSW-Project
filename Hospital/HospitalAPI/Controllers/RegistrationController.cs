@@ -19,21 +19,18 @@ namespace HospitalAPI.Controllers
         private readonly IAllergenService _allergenService;
         private readonly IDoctorService _doctorService;
         private readonly IPatientService _patientService;
-        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
 
         public RegistrationController(IAllergenService allergenService, IDoctorService doctorService,
-                           IPatientService patientService, IUserService userService, IMapper mapper)
+                           IPatientService patientService, IMapper mapper)
         {
             _allergenService = allergenService;
             _doctorService = doctorService;
             _patientService = patientService;
-            _userService = userService;
             _mapper = mapper;
         }
 
-        // GET: api/Allergens
         [HttpGet]
         public ActionResult<IEnumerable<Allergen>> GetAllergens()
         {
@@ -49,15 +46,27 @@ namespace HospitalAPI.Controllers
         [HttpPost]
         public ActionResult Register(PatientDto patientDto)
         {
-            /*if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest();
-            */
 
-
+            patientDto.Token = Guid.NewGuid();
             _patientService.Register(_mapper.Map<Patient>(patientDto), patientDto.Allergens.ToList());
+            _patientService.SendEmail(patientDto.Email, patientDto.Token);
 
             return Ok();
         }
 
+        [HttpPut("{token}")]
+        public ActionResult Activate(string token)
+        {
+            if (!Guid.TryParse(token, out Guid guid)) return BadRequest();
+            int statusCode = _patientService.Activate(guid);
+            return statusCode switch
+            {
+                200 => Ok(),
+                400 => BadRequest(),
+                _ => NotFound(),
+            };
+        }
     }
 }

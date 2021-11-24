@@ -3,6 +3,6 @@
 @import '~ngx-toastr/toastr';
 
 .toast-custom{
-    top: 10vh;
-    right: 3vw;
+    top: 2vh;
+    right: 1vw;
 }

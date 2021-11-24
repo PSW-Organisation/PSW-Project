@@ -85,6 +85,18 @@ body {
     cursor: pointer;
 }
 
+.btnRegister:disabled {
+    margin-top: 2%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #61f1e5;
+    color: #fff;
+    font-weight: 600;
+    width: 20%;
+    cursor: auto;
+}
+
 .register .nav-tabs {
     margin-top: 3%;
     border: none;
@@ -125,4 +137,24 @@ body {
 .form-check-input:checked {
     background-color: #6f7275;
     border-color: #02ccba;
+}
+
+.my-error {
+    position: relative;
+    margin-bottom: 1rem;
+    margin-top: -0.9rem;
+    padding: 0rem;
+    background-color: transparent;
+    border: transparent;
+    color: red;
+    margin-left: 0.8rem;
+    font-size: 0.83rem;
+}
+
+.ng-touched.ng-invalid:not(form) {
+    border: 3px solid red;
+}
+
+.ng-touched.ng-valid:not(form) {
+    border: 3px solid rgb(11 210 180);
 }
