@@ -25,9 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalUnitTests", "Hospit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalIntegrationTests", "HospitalIntegrationTests\HospitalIntegrationTests.csproj", "{F6749AE4-E3AC-4E5F-9C9B-7D6AABD05122}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyAPIUnitTests", "PharmacyAPIUnitTests\PharmacyAPIUnitTests.csproj", "{92928ABB-E7B7-495A-AAA6-BB7AC188D091}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyAPIUnitTests", "PharmacyAPIUnitTests\PharmacyAPIUnitTests.csproj", "{92928ABB-E7B7-495A-AAA6-BB7AC188D091}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyAPIIntegrationTests", "PharmacyAPIIntegrationTests\PharmacyAPIIntegrationTests.csproj", "{42CF393B-BCC4-4CA5-82EC-B5123EEE150A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyAPIIntegrationTests", "PharmacyAPIIntegrationTests\PharmacyAPIIntegrationTests.csproj", "{42CF393B-BCC4-4CA5-82EC-B5123EEE150A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

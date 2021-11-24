@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PharmacyAPI.Service;
+using PharmacyAPI.Utility;
 using Renci.SshNet;
 using System;
 using System.Collections.Generic;
@@ -17,23 +19,14 @@ namespace PharmacyAPI.Controllers
         [HttpGet("{fileName?}")]
         public IActionResult Download(string fileName)
         {
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "tester", "password")))
-            {
-                client.Connect();
-
-                var folderName = Path.Combine("Resources", "Reports");
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                var localFile = Path.Combine(pathToSave, fileName);
-
-                string serverFile = @"\pharmacy\" + fileName;
-                using (Stream stream = System.IO.File.OpenWrite(localFile))
-                {
-                    client.DownloadFile(serverFile, stream, x => Console.WriteLine(x));
-                }
-
-                client.Disconnect();
-            }
-            return Ok();
+            SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
+            var folderName = Path.Combine("Resources", "Reports");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+            var localFile = Path.Combine(pathToSave, fileName);
+            string serverFile = @"\pharmacy\" + fileName;
+            if (sftpService.DownloadFile(serverFile, localFile))
+                return Ok();
+            return BadRequest();
         }
     }
 }

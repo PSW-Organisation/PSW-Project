@@ -81,11 +81,4 @@ export class PharmaciesViewComponent implements OnInit {
     this.fileToUpload = (<HTMLInputElement>event.target).files?.item(0) as File;
 }
 
-uploadFileToActivity() {
-  this._pharmaciesService.postFile(this.fileToUpload as File, this.pharmacyForEdit.pharmacyUrl).subscribe(data => {
-    // do something, if upload success
-    }, error => {
-      console.log(error);
-    });
-}
 }

@@ -3,6 +3,7 @@ using DinkToPdf.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PharmacyAPI.Model;
+using PharmacyAPI.Service;
 using PharmacyAPI.Utility;
 using PharmacyLibrary.Service;
 using Renci.SshNet;
@@ -70,27 +71,11 @@ namespace PharmacyAPI.Controllers
 
             var file = _converter.Convert(pdf);
             var fileName = name + ".pdf";
-
-            using (SftpClient client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "tester", "password")))
-            {
-                client.Connect();
-
-                using (Stream stream = new MemoryStream(file))
-                {
-                    client.UploadFile(stream, @"\hospital\" + fileName, x => { Console.WriteLine(x); });
-                }
-
-                //string serverFile = @"\public\Medicine_Report.pdf";
-                //string localFile = @"D:\PDFCreator\Medicine_Report2.pdf";
-                //using (Stream stream = System.IO.File.OpenWrite(localFile))
-                //{
-                //    client.DownloadFile(serverFile, stream, x => Console.WriteLine(x));
-                //}
-
-                client.Disconnect();
-            }
-
-            return Ok(fileName);
+            var serverFile = @"\hospital\" + fileName;
+            SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
+            if (sftpService.UploadFile(file, serverFile))
+                return Ok(fileName);
+            return BadRequest();
         }
 
     }
