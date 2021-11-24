@@ -123,7 +123,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
                 TimeSpan durationOfFreeTimeInteval = freeTimeInteval.EndTime - freeTimeInteval.StartTime;
                 double totalMinutes = durationOfFreeTimeInteval.TotalMinutes;
                 double numberOfPossibleTermins = totalMinutes / paramsOfRelocationEquipment.durationInMinutes;
-                if(numberOfPossibleTermins > 1)
+                if(numberOfPossibleTermins >= 1)
                 {
                     int n = (int)numberOfPossibleTermins;
                     DateTime time = freeTimeInteval.StartTime;
@@ -136,6 +136,25 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             }
 
             return freePossibleTermsOfRelocation;
+        }
+
+        public TermOfRelocationEquipment CreateTermsOfRelocation(ParamsOfRelocationEquipment paramsOfRelocationEquipment)
+        {
+            TermOfRelocationEquipment newTermOfRelocationEquipment = new TermOfRelocationEquipment(paramsOfRelocationEquipment);
+            List<TimeInterval> termForRelocation = GetFreePossibleTermsOfRelocation(paramsOfRelocationEquipment);
+            if(termForRelocation.Count == 1)
+            {
+                newTermOfRelocationEquipment.StartTime = termForRelocation[0].StartTime;
+                newTermOfRelocationEquipment.EndTime = termForRelocation[0].EndTime;
+                newTermOfRelocationEquipment.Id = _relocationEquipmentRepository.GetNewID();
+
+                _relocationEquipmentRepository.Insert(newTermOfRelocationEquipment);
+                return newTermOfRelocationEquipment;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 

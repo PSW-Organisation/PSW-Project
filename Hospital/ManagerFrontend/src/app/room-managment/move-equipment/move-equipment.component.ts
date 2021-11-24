@@ -33,6 +33,7 @@ export class MoveEquipmentComponent implements OnInit {
   freeTerms!: IFreeTerms[];
   minDate!: Date;
   selectedFreeTerm!: IFreeTerms;
+  termOfRelocationEquipment!: IParamsOfRelocationEquipment;
 
   startYear!: number;
   startMonth!: number;
@@ -95,7 +96,6 @@ export class MoveEquipmentComponent implements OnInit {
   }
 
   activateSix() {
-
   }
 
   activateSeven() {
@@ -107,6 +107,13 @@ export class MoveEquipmentComponent implements OnInit {
     this.paramsOfRelocationEquipment.endTime = new Date(Date.UTC(this.endYear, this.endMonth, this.endDay, this.endHours, this.endMinutes));
     this.paramsOfRelocationEquipment.durationInMinutes = this.duration;
     this._roomEquipmentService.getAllPosibleRelocationTerms(this.paramsOfRelocationEquipment).subscribe(free => {this.freeTerms = free});
+  }
+
+  
+  activateLast() {
+    this.paramsOfRelocationEquipment.StartTime = this.selectedFreeTerm.startTime;
+    this.paramsOfRelocationEquipment.endTime = this.selectedFreeTerm.endTime;
+    this._roomEquipmentService.createTermOfRelocation(this.paramsOfRelocationEquipment).subscribe(create => { this.termOfRelocationEquipment = create; });
   }
 
   ngOnInit() {
@@ -123,11 +130,8 @@ export class MoveEquipmentComponent implements OnInit {
       forthCtrl: ['', Validators.required],
     });
     this.fiveFormGroup = this._formBuilder.group({
-      fiveCtrl: ['', Validators.required],
-      startTimeCtrl: ['', Validators.required],
       startHoursCtrl: ['', Validators.required],
       startMinutesCtrl: ['', Validators.required],
-      endTimeCtrl: ['', Validators.required],
       endHoursCtrl: ['', Validators.required],
       endMinutesCtrl: ['', Validators.required],
     });
@@ -137,6 +141,7 @@ export class MoveEquipmentComponent implements OnInit {
     this.sevenFormGroup = this._formBuilder.group({
       sevenCtrl: ['', Validators.required],
     });
+    
 
     this.minDate = new Date(Date.now());
 

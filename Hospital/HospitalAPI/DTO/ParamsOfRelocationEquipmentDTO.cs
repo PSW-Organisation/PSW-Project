@@ -31,6 +31,17 @@ namespace HospitalAPI.DTO
 
             return paramsOfRelocationEquipment;
         }
+
+        public ParamsOfRelocationEquipmentDTO(TermOfRelocationEquipment termOfRelocationEquipment)
+        {
+            IdSourceRoom = termOfRelocationEquipment.IdSourceRoom;
+            IdDestinationRoom = termOfRelocationEquipment.IdDestinationRoom;
+            NameOfEquipment = termOfRelocationEquipment.NameOfEquipment;
+            QuantityOfEquipment = termOfRelocationEquipment.QuantityOfEquipment;
+            StartTime = termOfRelocationEquipment.StartTime;
+            endTime = termOfRelocationEquipment.EndTime;
+            durationInMinutes = termOfRelocationEquipment.durationInMinutes;
+        }
         
     }
 

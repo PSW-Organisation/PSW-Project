@@ -17,6 +17,11 @@ namespace HospitalLibrary.RoomsAndEquipment.Repository
             _dbContext = dbContext;
         }
 
+        public int GetNewID()
+        {
+            return GetAll().Count() + 1;
+        }
+
         public List<TermOfRelocationEquipment> GetTermsOfRelocationByRoomId(int id)
         {
             return _dbContext.TermOfRelocationEquipments.Where(t => t.IdDestinationRoom == id || t.IdSourceRoom == id ).ToList();

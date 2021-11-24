@@ -29,12 +29,24 @@ namespace HospitalAPI.Controllers
         [HttpPost]
         public IActionResult GetTermsOfRelocation([FromBody] ParamsOfRelocationEquipmentDTO paramsOfRelocationEquipmentDTO)
         {
-            
             ParamsOfRelocationEquipment paramsOfRelocationEquipment = paramsOfRelocationEquipmentDTO.GenerateModel();
 
             List<TimeInterval> listOfPossibleTermsOfRelocation =_relocationEquipmentService.GetFreePossibleTermsOfRelocation(paramsOfRelocationEquipment);
-            return Ok(listOfPossibleTermsOfRelocation);
-            
+            return Ok(listOfPossibleTermsOfRelocation);   
+        }
+
+        [HttpPut]
+        public IActionResult CreateTermOfRelocation([FromBody] ParamsOfRelocationEquipmentDTO paramsOfRelocationEquipmentDTO)
+        {
+            ParamsOfRelocationEquipment paramsOfRelocationEquipment = paramsOfRelocationEquipmentDTO.GenerateModel();
+
+            TermOfRelocationEquipment termOfRelocationEquipment = _relocationEquipmentService.CreateTermsOfRelocation(paramsOfRelocationEquipment);
+            if (termOfRelocationEquipment == null)
+            {
+                return BadRequest("unsuccessfully");
+            }
+            ParamsOfRelocationEquipmentDTO termOfRelocationEquipmentDTO = new ParamsOfRelocationEquipmentDTO(termOfRelocationEquipment);
+            return Ok(termOfRelocationEquipmentDTO);
         }
 
     }

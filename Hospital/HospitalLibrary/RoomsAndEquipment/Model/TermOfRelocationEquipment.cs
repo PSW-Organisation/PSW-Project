@@ -18,5 +18,17 @@ namespace HospitalLibrary.RoomsAndEquipment.Model
 
         public TermOfRelocationEquipment() {}
 
+        public TermOfRelocationEquipment(ParamsOfRelocationEquipment paramsOfRelocationEquipment)
+        {
+            IdSourceRoom = paramsOfRelocationEquipment.IdSourceRoom;
+            IdDestinationRoom = paramsOfRelocationEquipment.IdDestinationRoom;
+            NameOfEquipment = paramsOfRelocationEquipment.NameOfEquipment;
+            QuantityOfEquipment = paramsOfRelocationEquipment.QuantityOfEquipment;
+            StartTime = paramsOfRelocationEquipment.StartTime;
+            EndTime = paramsOfRelocationEquipment.endTime;
+            durationInMinutes = paramsOfRelocationEquipment.durationInMinutes;
+            FinishedRelocation = false;
+        }
+
     }
 }

@@ -73,7 +73,7 @@
             <div>
                 <mat-form-field appearance="fill">
                     <mat-label>Choose a date</mat-label>
-                    <input matInput [matDatepicker]="pickerStart" [min]="minDate" formControlName="startTimeCtrl" (dateInput)="addEvent('inputStart', $event)" (dateChange)="addEvent('changeStart', $event)"/>
+                    <input matInput [matDatepicker]="pickerStart" [min]="minDate" (dateInput)="addEvent('inputStart', $event)" (dateChange)="addEvent('changeStart', $event)"/>
                     <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
                     <mat-datepicker #pickerStart></mat-datepicker>
                 </mat-form-field>
@@ -92,7 +92,7 @@
             <div>
                 <mat-form-field appearance="fill">
                     <mat-label>Choose a date</mat-label>
-                    <input matInput [matDatepicker]="pickerEnd" [min]="minDate" formControlName="endTimeCtrl" (dateInput)="addEvent('inputEnd', $event)" (dateChange)="addEvent('changeEnd', $event)"/>
+                    <input matInput [matDatepicker]="pickerEnd" [min]="minDate" (dateInput)="addEvent('inputEnd', $event)" (dateChange)="addEvent('changeEnd', $event)"/>
                     <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
                     <mat-datepicker #pickerEnd></mat-datepicker>
                 </mat-form-field>
@@ -129,26 +129,31 @@
     <mat-step [stepControl]="sevenFormGroup">
         <form [formGroup]="sevenFormGroup">
             <ng-template matStepLabel>possible terms of relocation</ng-template>
-            <mat-label>Chose one of possible terms of relocation</mat-label>
-            <mat-selection-list [multiple]="false">
-                <mat-list-option *ngFor="let freeTerm of freeTerms" [value]="selectedFreeTerm">
-                    <div>
-                       From {{ freeTerm.startTime | date: 'dd.MM.yyyy HH:mm' }}
-                       To {{ freeTerm.endTime | date: 'dd.MM.yyyy HH:mm' }}
-                    </div>
-                </mat-list-option>
-            </mat-selection-list>
+            <mat-form-field appearance="fill" class="col-5">
+                <mat-label>Chose one of possible terms of relocation</mat-label>
+                <mat-select [(ngModel)]="selectedFreeTerm" formControlName="sevenCtrl">
+                    <mat-option *ngFor="let freeTerm of freeTerms" [value]="freeTerm">
+                        <div>
+                            From {{ freeTerm.startTime | date: 'dd.MM.yyyy HH:mm' : 'UTC' }}
+                            To {{ freeTerm.endTime | date: 'dd.MM.yyyy HH:mm' : 'UTC' }}
+                         </div>
+                        <div></div>
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button (click)="activateLast()" mat-button matStepperNext>Next</button>
             </div>
         </form>
     </mat-step>
 
     <mat-step>
         <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
-        
+        <div>
+            <p>successfully scheduled appointment for relocation equipment</p>
+        </div>
+
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button (click)="stepper.reset()">Reset</button>

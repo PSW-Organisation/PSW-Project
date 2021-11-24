@@ -9,5 +9,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Repository
     public interface IRelocationEquipmentRepository : IGenericRepository<TermOfRelocationEquipment>
     {
         List<TermOfRelocationEquipment> GetTermsOfRelocationByRoomId(int id);
+
+        int GetNewID();
     }
 }

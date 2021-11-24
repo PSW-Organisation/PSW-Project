@@ -40,6 +40,11 @@ export class RoomEqupimentService {
       pipe(tap((data) => console.log('All: ', JSON.stringify(data))), catchError(this.handleError));
   }
 
+  createTermOfRelocation(paramsOfRelocationEquipment: IParamsOfRelocationEquipment): Observable<IParamsOfRelocationEquipment>{
+    return this._http.put<IParamsOfRelocationEquipment>(this._termsOfRelocationUrl, paramsOfRelocationEquipment).
+      pipe(tap((data) => console.log('All: ', JSON.stringify(data))), catchError(this.handleError));
+  }
+
   private handleError(err: HttpErrorResponse) {
     console.log(err.message);
     return throwError(err.message);
