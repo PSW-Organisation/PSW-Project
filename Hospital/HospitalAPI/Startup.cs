@@ -43,7 +43,7 @@ namespace HospitalAPI
             services.AddDbContext<HospitalDbContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
-                    assembly => assembly.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName));
+                assembly => assembly.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName));
             });
 
             services.AddMvc(setup => {
@@ -73,16 +73,14 @@ namespace HospitalAPI
 
             services.AddScoped<IRelocationEquipmentService, RelocationEquipmentService>();
             services.AddScoped<IRelocationEquipmentRepository, RelocationEquipmentRepository>();
+            services.AddScoped<IRoomEquipmentService, RoomEquipmentService>();
+            services.AddScoped<IRoomEquipmentRepository, RoomEquipmentRepository>();
            
             services.AddScoped<IPatientFeedbackService, PatientFeedbackService>();
             services.AddScoped<GenericDbRepository<PatientFeedback>, PatientFeedbackDbRepository>();
             services.AddScoped<IPatientFeedbackRepository, PatientFeedbackDbRepository>();
-            services.AddScoped<IRoomEquipmentService, RoomEquipmentService>();
-            services.AddScoped<IRoomEquipmentRepository, RoomEquipmentRepository>();
-            services.AddSingleton<IRoomEquipmentRelocator, RoomEquipmentRelocator>();
+            
             services.AddHostedService<ScheduleBackgroundService>();
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,5 +9,7 @@ namespace HospitalLibrary.GraphicalEditor.Repository
         public List<RoomEquipmentQuantityDTO> GetAllRoomEquipmentQuantity();
         public RoomEquipment GetEquipmentInRoomByName(int idRoom, string nameOfEquipment);
         public List<RoomEquipment> GetEquipmentInRooms(string equipmentName);
+        int GetNewID();
+
     }
 }

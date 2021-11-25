@@ -1,6 +1,7 @@
 ﻿using HospitalLibrary.Repository;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HospitalLibrary.RoomsAndEquipment.Repository
 {

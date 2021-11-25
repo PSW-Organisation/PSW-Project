@@ -39,5 +39,11 @@ namespace HospitalLibrary.GraphicalEditor.Repository
         {
             return _dbContext.RoomEquipments.SingleOrDefault(c => c.Name.Equals(nameOfEquipment) && c.RoomId == idRoom);
         }
+
+        public int GetNewID()
+        {
+            return GetAll().Count() + 1;
+        }
+
     }
 }
