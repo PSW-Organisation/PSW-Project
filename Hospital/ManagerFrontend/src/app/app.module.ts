@@ -21,6 +21,12 @@ import { RoomManagmentModule } from './room-managment/room-managment.module';
 import { MedicineConsumptionComponent } from './medicine-consumption/medicine-consumption.component';
 
 
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BenefitsViewComponent } from './benefits-view/benefits-view.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +39,8 @@ import { MedicineConsumptionComponent } from './medicine-consumption/medicine-co
     FeedBackComponent,
     OrderingMedicineComponent,
     SearchPharmaciesPipe,
-    MedicineConsumptionComponent
+    MedicineConsumptionComponent,
+    BenefitsViewComponent,
   ],
   imports: [
     BrowserModule,

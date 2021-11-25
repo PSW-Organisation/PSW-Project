@@ -1,6 +1,7 @@
 ﻿using IntegrationAPI.Adapters;
 using IntegrationAPI.DTO;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Service;
 using IntegrationLibrary.Service.ServicesInterfaces;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +18,7 @@ namespace IntegrationAPI.Controllers
     public class PharmacyController : ControllerBase
     {
         private IPharmacyService pharmacyService;
+        private RabbitMQService rabbitMQService;
 
         public PharmacyController(IPharmacyService pharmacyService)
         {
@@ -53,6 +55,8 @@ namespace IntegrationAPI.Controllers
                 return BadRequest();
             }
             string apiKey = pharmacyService.Save(PharmacyAdapter.PharmacyDtoToPharmacy(dto));
+
+
             return Ok(apiKey);
         }
 

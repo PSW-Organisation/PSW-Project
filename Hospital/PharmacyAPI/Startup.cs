@@ -12,6 +12,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PharmacyLibrary.Repository.HospitalRepository;
+using PharmacyLibrary.Repository.MedicineBenefitRepository;
 using PharmacyLibrary.Repository.MedicineRepository;
 using PharmacyLibrary.Repository.PharmacyRepository;
 using PharmacyLibrary.Service;
@@ -52,10 +53,12 @@ namespace PharmacyAPI
         
             services.AddTransient<IPharmacyRepository, PharmacyRepository>();
             services.AddTransient<IMedicineRepository, MedicineRepository>();
+            services.AddScoped<IMedicineBenefitRepository, MedicineBenefitRepository>();
             services.AddScoped<IHospitalRepository, HospitalRepository>();
             services.AddScoped<IPharmacyService, PharmacyService>();
             services.AddScoped<IMedicineService, MedicineService>();
             services.AddScoped<IHospitalService, HospitalService>();
+            services.AddScoped<IMedicineBenefitService, MedicineBenefitService>();
             //added for Cors error
             //______________________________________________________________________
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>

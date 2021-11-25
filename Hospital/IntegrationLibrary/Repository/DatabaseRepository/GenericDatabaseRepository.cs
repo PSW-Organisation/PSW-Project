@@ -56,7 +56,7 @@ namespace IntegrationLibrary.Repository.DatabaseRepository
         {
             foreach (T entity in _dbContext.Set<T>().ToList())
             {
-                if (entity.Id == -1)
+                if (entity.Id == -1) //"undefinedKey"
                 {
                     entity.Id = GenerateId();
                 }
