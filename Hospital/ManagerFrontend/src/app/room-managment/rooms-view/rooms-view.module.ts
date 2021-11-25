@@ -18,8 +18,7 @@ import { RoomEquipmentComponent } from './room-equipment/room-equipment.componen
     RoomEquipmentComponent,
   ],
   imports: [
-    SharedModule,
-    RouterModule
+    SharedModule
   ]
 })
 export class RoomsViewModule {}

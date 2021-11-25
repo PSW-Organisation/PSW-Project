@@ -1,6 +1,8 @@
 <mat-toolbar>
   <ng-content select="[app-navbar-button]"></ng-content>
-  <img src="../../assets/favicon.png" class="ms-2" width="48" height="48">
-  <span> LeanOn Hospital </span>
-  <span class="spacer"></span>
+  <span class="cursor-pointer" [routerLink]="['']">
+    <img src="../../assets/favicon.png" class="ms-2" width="48" height="48">
+    <span class="fst-italic"> LeanOn Hospital </span>
+  </span>
+    <span class="spacer"></span>
 </mat-toolbar>
