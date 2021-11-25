@@ -11,5 +11,6 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
         Result<IList<TermOfRelocationEquipment>> GetTermsOfRelocationEquipment();
         List<TimeInterval> GetFreePossibleTermsOfRelocation(ParamsOfRelocationEquipment paramsOfRelocationEquipment);
         List<TermOfRelocationEquipment> GetTermsOfRelocationByRoomId(int id);
+        TermOfRelocationEquipment CreateTermsOfRelocation(ParamsOfRelocationEquipment paramsOfRelocationEquipment);
     }
 }
