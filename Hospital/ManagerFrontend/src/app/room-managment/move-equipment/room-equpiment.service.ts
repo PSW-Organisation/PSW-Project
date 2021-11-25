@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { IEquipment, IEquipmentQuantity } from './room-equipment';
+import { IEquipment, IEquipmentQuantity, IFreeTerms } from './room-equipment';
+import { IParamsOfRelocationEquipment } from './room-equipment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoomEqupimentService {
   private _equipmentUrl = 'http://localhost:42789/api/roomEquipments';
+  private _termsOfRelocationUrl = 'http://localhost:42789/api/termsofrelocation';
 
   constructor(private _http: HttpClient) {}
 
@@ -38,6 +40,16 @@ export class RoomEqupimentService {
       tap((data) => console.log('All Room equipment: ', JSON.stringify(data))),
       catchError(this.handleError)
     );
+  }
+
+  getAllPosibleRelocationTerms(paramsOfRelocationEquipment: IParamsOfRelocationEquipment): Observable<IFreeTerms[]> {
+    return this._http.post<IFreeTerms[]>(this._termsOfRelocationUrl, paramsOfRelocationEquipment).
+      pipe(tap((data) => console.log('All: ', JSON.stringify(data))), catchError(this.handleError));
+  }
+
+  createTermOfRelocation(paramsOfRelocationEquipment: IParamsOfRelocationEquipment): Observable<IParamsOfRelocationEquipment>{
+    return this._http.put<IParamsOfRelocationEquipment>(this._termsOfRelocationUrl, paramsOfRelocationEquipment).
+      pipe(tap((data) => console.log('All: ', JSON.stringify(data))), catchError(this.handleError));
   }
 
   private handleError(err: HttpErrorResponse) {

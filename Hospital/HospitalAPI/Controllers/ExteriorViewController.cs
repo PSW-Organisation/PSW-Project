@@ -9,6 +9,8 @@ using HospitalAPI.DTO;
 using HospitalLibrary.GraphicalEditor.Service;
 using FluentResults;
 using ehealthcare.Model;
+using Microsoft.Extensions.DependencyInjection;
+using HospitalLibrary.RoomsAndEquipment.Service;
 
 namespace HospitalAPI.Controllers
 {

@@ -1,6 +1,7 @@
 ﻿using ehealthcare.Model;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.Repository.DbRepository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,10 +20,10 @@ namespace HospitalLibrary.GraphicalEditor.Repository
         {
             return _dbContext.RoomEquipments
                 .GroupBy(o => o.Name)
-                .Select(g => new RoomEquipmentQuantityDTO 
-                { 
+                .Select(g => new RoomEquipmentQuantityDTO
+                {
                     Name = g.Key,
-                    Quantity = g.Sum(i => i.Quantity) 
+                    Quantity = g.Sum(i => i.Quantity)
                 }).ToList();
 
         }
@@ -37,5 +38,16 @@ namespace HospitalLibrary.GraphicalEditor.Repository
         {
             return _dbContext.RoomEquipments.Where(e => e.RoomId == roomId).ToList();
         }
+
+        public RoomEquipment GetEquipmentInRoomByName(int idRoom, string nameOfEquipment)
+        {
+            return _dbContext.RoomEquipments.SingleOrDefault(c => c.Name.Equals(nameOfEquipment) && c.RoomId == idRoom);
+        }
+
+        public int GetNewID()
+        {
+            return GetAll().Count() + 1;
+        }
+
     }
 }

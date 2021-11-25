@@ -31,6 +31,7 @@ using HospitalLibrary;
 using PatientService = HospitalLibrary.MedicalRecords.Service.PatientService;
 using Newtonsoft.Json;
 using HospitalAPI.Validators;
+using System;
 
 namespace HospitalAPI
 {
@@ -42,6 +43,7 @@ namespace HospitalAPI
             Configuration = configuration;
         }
 
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -52,7 +54,8 @@ namespace HospitalAPI
             services.AddDbContext<HospitalDbContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
-                    assembly => assembly.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName)).UseLazyLoadingProxies();
+                assembly => assembly.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName)).UseLazyLoadingProxies();
+                //assembly => assembly.MigrationsAssembly(typeof(HospitalDbContext).Assembly.FullName));
             });
 
             services.AddMvc(setup =>
@@ -90,6 +93,7 @@ namespace HospitalAPI
 
             services.AddScoped<IRelocationEquipmentService, RelocationEquipmentService>();
             services.AddScoped<IRelocationEquipmentRepository, RelocationEquipmentRepository>();
+            
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<GenericSTRINGIDRepository<User>, UserDbRepository>();
             services.AddScoped<IUserRepository, UserDbRepository>();
@@ -111,6 +115,14 @@ namespace HospitalAPI
             services.AddScoped<GenericDbRepository<Allergen>, AllergenDbRepository>();
             services.AddScoped<IAllergenRepository, AllergenDbRepository>();
 
+            services.AddScoped<IRoomEquipmentService, RoomEquipmentService>();
+            services.AddScoped<IRoomEquipmentRepository, RoomEquipmentRepository>();
+           
+            services.AddScoped<IPatientFeedbackService, PatientFeedbackService>();
+            services.AddScoped<GenericDbRepository<PatientFeedback>, PatientFeedbackDbRepository>();
+            services.AddScoped<IPatientFeedbackRepository, PatientFeedbackDbRepository>();
+            
+            services.AddHostedService<ScheduleBackgroundService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

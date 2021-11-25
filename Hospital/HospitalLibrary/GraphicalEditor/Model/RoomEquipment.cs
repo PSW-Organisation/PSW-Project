@@ -15,5 +15,13 @@ namespace HospitalLibrary.GraphicalEditor.Model
         public RoomEquipment()
         {
         }
+
+        public RoomEquipment(RoomEquipment roomEquipment)
+        {
+            Quantity = roomEquipment.Quantity;
+            Name = roomEquipment.Name;
+            Type = roomEquipment.Type;
+            RoomId = roomEquipment.RoomId;
+        }
     }
 }
