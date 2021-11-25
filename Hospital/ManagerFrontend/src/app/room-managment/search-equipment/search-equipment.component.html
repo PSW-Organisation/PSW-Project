@@ -5,7 +5,10 @@
 </div>
 <div class="container">
     <div class="m-auto w-75 p-3">
-        <input class="form-control" type="text" name="search" [ngModel]="searchText" (ngModelChange)="search($event)" autocomplete="off" placeholder="Equipment name">
+        <mat-form-field class="w-100">
+            <span matPrefix></span>
+            <input type="search" matInput name="search" [ngModel]="searchText" (ngModelChange)="search($event)" autocomplete="off" placeholder="Equipment name">
+        </mat-form-field>
     </div>
     <table class="table table-striped zui-table-highlight">
         <thead>

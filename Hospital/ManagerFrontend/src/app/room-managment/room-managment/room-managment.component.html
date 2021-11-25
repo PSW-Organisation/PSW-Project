@@ -1,8 +1,8 @@
 <app-navbar>
     <div app-navbar-button>
         <button type="button" aria-label="Toogle sidenav" mat-icon-button (click)="sidenav.toogle()">
-      <mat-icon aria-label="Side nav toogle icon">menu</mat-icon>
-    </button>
+            <mat-icon aria-label="Side nav toogle icon">menu</mat-icon>
+        </button>
     </div>
 </app-navbar>
 <app-responsive-sidebar #sidenav position="start">
@@ -10,7 +10,23 @@
         <router-outlet></router-outlet>
     </div>
     <div app-sidebar>
-        <div class="container side">
-        </div>
+        <mat-nav-list>
+            <mat-list-item [routerLink]="['/roomManagment/searchRooms']" [routerLinkActive]="['active']">
+                <span matLine>Search Rooms</span>
+                <mat-icon>search</mat-icon>
+            </mat-list-item>
+            <mat-list-item [routerLink]="['/roomManagment/searchEquipment']">
+                <span matLine>Search Equipment</span>
+                <mat-icon>search</mat-icon>
+            </mat-list-item>
+            <mat-list-item [routerLink]="['/roomManagment/hospitalExterior']">
+                <span matLine>Hospital Map</span>
+                <mat-icon>map</mat-icon>
+            </mat-list-item>
+            <mat-list-item [routerLink]="['/roomManagment/moveEquipment']">
+                <span matLine>Move Equipment</span>
+                <mat-icon>compare_arrows</mat-icon>
+            </mat-list-item>
+        </mat-nav-list>
     </div>
 </app-responsive-sidebar>
