@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using HospitalLibrary.GraphicalEditor.Model;
+using HospitalLibrary.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;

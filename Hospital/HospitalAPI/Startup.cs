@@ -22,6 +22,7 @@ using HospitalLibrary.FeedbackAndSurvey.Repository;
 using HospitalAPI.DTO;
 using HospitalLibrary.RoomsAndEquipment.Service;
 using HospitalLibrary.RoomsAndEquipment.Repository;
+using System;
 
 namespace HospitalAPI
 {
@@ -31,6 +32,7 @@ namespace HospitalAPI
         {
             Configuration = configuration;
         }
+
 
         public IConfiguration Configuration { get; }
 
@@ -71,12 +73,16 @@ namespace HospitalAPI
 
             services.AddScoped<IRelocationEquipmentService, RelocationEquipmentService>();
             services.AddScoped<IRelocationEquipmentRepository, RelocationEquipmentRepository>();
-
+           
             services.AddScoped<IPatientFeedbackService, PatientFeedbackService>();
             services.AddScoped<GenericDbRepository<PatientFeedback>, PatientFeedbackDbRepository>();
             services.AddScoped<IPatientFeedbackRepository, PatientFeedbackDbRepository>();
             services.AddScoped<IRoomEquipmentService, RoomEquipmentService>();
             services.AddScoped<IRoomEquipmentRepository, RoomEquipmentRepository>();
+            services.AddSingleton<IRoomEquipmentRelocator, RoomEquipmentRelocator>();
+            services.AddHostedService<ScheduleBackgroundService>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
