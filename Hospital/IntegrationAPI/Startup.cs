@@ -82,7 +82,7 @@ namespace IntegrationAPI
             services.AddScoped<MedicineTransactionRepository, MedicineTransactionDbRepository>();
             services.AddScoped<PharmacyRepository, PharmacyDbRepository>();
             services.AddScoped<ResponseToComplaintRepository, ResponseToComplaintDbRepository>();
-
+            services.AddScoped<MedicineBenefitRepository, MedicineBenefitDbRepository>();
             //servisi
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IAccountDataService, AccountDataService>();
@@ -109,6 +109,9 @@ namespace IntegrationAPI
             services.AddScoped<IResponseToComplaintService, ResponseToComplaintService>();
             services.AddScoped<IMedicineConsumptionService, MedicineConsumptionService>();
 
+
+            services.AddScoped<IMedicineBenefitService, MedicineBenefitService>();
+            services.AddHostedService<RabbitMQService>();
             //added for Cors error
             //______________________________________________________________________
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PharmacyAPI.Model;
+using PharmacyLibrary.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,13 +13,12 @@ namespace PharmacyAPI
         public DbSet<Hospital> Hospitals { get; set; }
         public DbSet<ResponseToComplaint> ResponsesToComplaint { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<MedicineBenefit> MedicineBenefits { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
-
         public PharmacyDbContext(DbContextOptions<PharmacyDbContext> options) : base(options) { }
 
-        public PharmacyDbContext() 
-        {
-        }
+
+        public PharmacyDbContext() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
