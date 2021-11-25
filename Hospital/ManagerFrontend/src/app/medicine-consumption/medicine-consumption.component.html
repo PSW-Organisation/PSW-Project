@@ -1,7 +1,21 @@
-<div class="container-fluid">
-    <div class="row">
+
+<!-- Naslov -->
+<div class="titleDiv">
+    <table>
+        <tr>
+            <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+            <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn Hospital</p></td>
+        </tr>
+    </table>
+</div>
+<div class="backgroundImage"><div class="container-fluid">
+ 
+
+
+
+    <div class="row" style="margin-left: 50px;">
         <div class="col-4">
-            <h2 style="text-align: center; margin-top: 20px;">Generate PDF Report</h2>
+            <h2 style="text-align: center; margin-top: 20px;">Generate PDF Report for medicine consumption</h2>
             <div class="form-group mb-3">
                 <label for="startDate">Start date</label>
                 <input id="startDate" type="date" class="form-control" placeholder="Start date" [(ngModel)]="timeRange.startTime">
@@ -17,22 +31,25 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-2 mx-auto">
-                <button type="button" class="btn btn-primary" (click)="sendConsumptionReport()">Generate</button>
+                <button type="button" class="btn btn-danger" (click)="sendConsumptionReport()">Generate</button>
             </div>
-            <h2 style="text-align: center; margin-top: 20px;">Generate PDF Report</h2>
-            <div class="form-group mb-3">
-                <label for="pharmacy">Choose Pharmacy</label>
-                <select id="pharmacy" class="form-control" [(ngModel)]="pharmacyUrl">
-                    <option  *ngFor="let pharmacy of pharmacies" [value]="pharmacy.pharmacyUrl">{{pharmacy.pharmacyName}}</option>
-                </select>
-            </div>
-            <div class="form-group mb-3">
-                <label for="medicine">Enter medicine name</label>
-                <input id="medicine" class="form-control" type="text" placeholder="Medicine name" [(ngModel)]="medicineName">
-            </div>
-            <div class="d-grid gap-2 col-2 mx-auto">
-                <button type="button" class="btn btn-primary" (click)="getMedicineDetails()">Generate</button>
+            <div> 
+                <h2 style="text-align: center; margin-top: 20px;">Generate PDF Report for medicine specification</h2>
+                <div class="form-group mb-3">
+                    <label for="pharmacy">Choose Pharmacy</label>
+                    <select id="pharmacy" class="form-control" [(ngModel)]="pharmacyUrl">
+                        <option  *ngFor="let pharmacy of pharmacies" [value]="pharmacy.pharmacyUrl">{{pharmacy.pharmacyName}}</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="medicine">Enter medicine name</label>
+                    <input id="medicine" class="form-control" type="text" placeholder="Medicine name" [(ngModel)]="medicineName">
+                </div>
+                <div class="d-grid gap-2 col-2 mx-auto">
+                    <button type="button" class="btn btn-danger" (click)="getMedicineDetails()">Generate</button>
+                </div>
             </div>
         </div>
     </div>
+</div>
 </div>

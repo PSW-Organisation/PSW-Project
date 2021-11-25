@@ -1,0 +1,29 @@
+.backgroundImage{
+    background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("../../assets/doctor.jpg");
+
+    min-height: 100%;
+    min-width:1024px;
+    width: 100%;
+    height: auto;
+    
+ 
+
+      
+    /* Set up positioning */
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+   
+  }
+}
+
+.titleDiv {
+    height: 70px;
+    background-color: whitesmoke;
+  }
