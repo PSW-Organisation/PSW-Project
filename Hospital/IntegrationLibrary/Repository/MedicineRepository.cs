@@ -10,5 +10,6 @@ namespace IntegrationLibrary.Repository
     public interface MedicineRepository : GenericRepository<Medicine>
     {
         public Medicine GetMedicineByName(string name);
+  
     }
 }

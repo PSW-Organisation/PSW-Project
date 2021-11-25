@@ -19,6 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationAPIUnitTests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationAPIIntegrationTests", "IntegrationAPIIntegrationTests\IntegrationAPIIntegrationTests.csproj", "{B2AE0A5D-4834-4D1F-A96C-E6E743638DB1}"
 EndProject
+
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalUnitTests", "HospitalUnitTests\HospitalUnitTests.csproj", "{096E6F8A-C872-4275-B97F-EDA0E5B27576}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalIntegrationTests", "HospitalIntegrationTests\HospitalIntegrationTests.csproj", "{F6749AE4-E3AC-4E5F-9C9B-7D6AABD05122}"
@@ -65,6 +66,10 @@ Global
 		{B2AE0A5D-4834-4D1F-A96C-E6E743638DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2AE0A5D-4834-4D1F-A96C-E6E743638DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2AE0A5D-4834-4D1F-A96C-E6E743638DB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{087FFB7E-BB9A-419D-97F7-31757A03CAB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{087FFB7E-BB9A-419D-97F7-31757A03CAB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{087FFB7E-BB9A-419D-97F7-31757A03CAB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{087FFB7E-BB9A-419D-97F7-31757A03CAB1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{096E6F8A-C872-4275-B97F-EDA0E5B27576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{096E6F8A-C872-4275-B97F-EDA0E5B27576}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{096E6F8A-C872-4275-B97F-EDA0E5B27576}.Release|Any CPU.ActiveCfg = Release|Any CPU

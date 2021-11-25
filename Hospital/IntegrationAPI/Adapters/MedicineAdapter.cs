@@ -38,5 +38,7 @@ namespace IntegrationAPI.Adapters
             transaction.TransactionTime = DateTime.Now;
             return transaction;
         }
+
+      
     }
 }

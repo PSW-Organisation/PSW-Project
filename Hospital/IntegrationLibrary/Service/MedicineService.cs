@@ -1,6 +1,7 @@
 using IntegrationLibrary.Service.ServicesInterfaces;
 using IntegrationLibrary.Model;
 using IntegrationLibrary.Repository;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,22 +15,50 @@ namespace IntegrationLibrary.Service
     {
         private MedicineRepository medicineRepository;
         private IPharmacyService pharmacyService;
+        private IMedicineTransactionService transactionService;
         
-        public MedicineService(MedicineRepository medicineRepository, IPharmacyService pharmacyService)
+        public MedicineService(MedicineRepository medicineRepository, IPharmacyService pharmacyService, IMedicineTransactionService transactionService)
         {
             this.medicineRepository = medicineRepository;
             this.pharmacyService = pharmacyService;
+            this.transactionService = transactionService;
         }
 
         public void SetMedicine(Medicine medicine)
         {
             medicineRepository.Update(medicine);
         }
+      
+        public Medicine AddMedicine(Medicine medicine)
+        {
+            Medicine existingMedicine = GetMedicineByName(medicine.Name);
+            if (existingMedicine == null)
+            {
+               return  addIfMedicineNotExist(medicine);
+               
+            }
+            else
+            {
+               return IfMedicineExist(medicine, existingMedicine);
+            }
+        }
 
-        public void AddMedicine(Medicine medicine)
+        private Medicine IfMedicineExist(Medicine medicine, Medicine existing)
+        {
+            existing.MedicineAmmount = existing.MedicineAmmount + medicine.MedicineAmmount;
+            this.SetMedicine(existing);
+            MedicineTransaction transaction = new MedicineTransaction(0, existing.Id, medicine.MedicineAmmount, DateTime.Now);
+            transactionService.Save(transaction);
+            return null; 
+        }
+
+        private Medicine addIfMedicineNotExist(Medicine medicine)
         {
             medicine.Id = medicineRepository.GenerateId();
             medicineRepository.Save(medicine);
+            MedicineTransaction transaction = new MedicineTransaction(0, medicine.Id, medicine.MedicineAmmount, DateTime.Now);
+            transactionService.Save(transaction);
+            return medicine;
         }
 
         public void SetMedicineIngredients(Medicine medicine, List<MedicineIngredient> medicineIngredients)
@@ -104,5 +133,7 @@ namespace IntegrationLibrary.Service
         {
             return this.medicineRepository.GetMedicineByName(name);
         }
+
+       
     }
 }
