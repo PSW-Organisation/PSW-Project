@@ -44,7 +44,6 @@ namespace IntegrationAPIIntegrationTests
             IPharmacyService pharmacyService = new PharmacyService(stubRepositoryPharmacy.Object);
             IMedicineTransactionService medicineTransactionService = new MedicineTransactionService(stubRepositoryTransaction.Object);
             MedicineService medicineService = new MedicineService(stubRepositoryMedicine.Object, pharmacyService, medicineTransactionService);
-
             List<Pharmacy> retVal = medicineService.searchMedicine("concor", 1);
 
             Assert.True(retVal.Count.ToString().Equals("0"));
