@@ -1,0 +1,38 @@
+<div class="titleDiv">
+  <table>
+    <tr>
+      <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+      <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn Hospital</p></td>
+    </tr>
+  </table>
+</div>
+
+<div class="backgroundImage">
+  <div class="table-responsive table-striped">
+    <table class='table'>
+        <thead style="color:rgb(95, 173, 236); margin-bottom: 15px;">
+            <tr >
+              <th></th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Due Date</th>
+                <th>Medicine Id</th>
+                <th>Published</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = 'let benefit of benefits'>
+                <td></td>
+                <td hidden>{{benefit.Id}}</td>
+                <td>{{benefit.medicineBenefitTitle}}</td>
+                <td>{{benefit.medicineBenefitContent}}</td>
+                <td>{{benefit.medicineBenefitDueDate}}</td>
+                <td>{{benefit.medicineId}}</td>
+                <td>             <button type="button" class="btn btn-default" data-dismiss="modal" (click)="unpublishBenefit(benefit)">Add</button>
+                </td>
+              </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>

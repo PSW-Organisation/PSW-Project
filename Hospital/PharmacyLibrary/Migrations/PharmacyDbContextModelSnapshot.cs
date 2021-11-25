@@ -145,6 +145,30 @@ namespace PharmacyLibrary.Migrations
 
                     b.ToTable("Pharmacies");
                 });
+
+            modelBuilder.Entity("PharmacyLibrary.Model.MedicineBenefit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("MedicineBenefitContent")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("MedicineBenefitDueDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("MedicineBenefitTitle")
+                        .HasColumnType("text");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicineBenefits");
+                });
 #pragma warning restore 612, 618
         }
     }
