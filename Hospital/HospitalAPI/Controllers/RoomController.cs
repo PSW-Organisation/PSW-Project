@@ -27,5 +27,12 @@ namespace HospitalAPI.Controllers
             var result = _roomService.GetAllRooms();
             return result.Select(r => _mapper.Map<RoomDTO>(r)).ToList();
         }
+
+        [HttpGet("{id}")]
+        public RoomDTO GetRoom(int id)
+        {
+            var result = _roomService.GetRoomById(id);
+            return  _mapper.Map<RoomDTO>(result);
+        }
     }
 }

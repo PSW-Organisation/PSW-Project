@@ -38,6 +38,9 @@ export class SearchRoomsComponent implements OnInit {
   }
 
   findOnMap(room: IRoom): void {
-    this._router.navigateByUrl(`roomManagment/building/0/floor/${room.floor}/room/${room.id}`);
+    this._roomService.getBuildingForRoom(room.id).subscribe(building => {
+      this._router.navigateByUrl(`roomManagment/building/${building}/floor/${room.floor}/room/${room.id}`);
+    })
+    
   }
 }

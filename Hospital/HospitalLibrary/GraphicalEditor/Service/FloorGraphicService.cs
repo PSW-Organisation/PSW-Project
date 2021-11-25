@@ -2,6 +2,7 @@
 using FluentResults;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.GraphicalEditor.Repository;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace HospitalLibrary.GraphicalEditor.Service
 {
@@ -19,5 +20,9 @@ namespace HospitalLibrary.GraphicalEditor.Service
             return Result.Ok(_floorGraphicRepository.GetAllWithRooms());
         }
 
+        public Result<int> GetBuildingForRoom(int roomId)
+        {
+            return Result.Ok(_floorGraphicRepository.GetBuildingForRoom(roomId));
+        }
     }
 }
