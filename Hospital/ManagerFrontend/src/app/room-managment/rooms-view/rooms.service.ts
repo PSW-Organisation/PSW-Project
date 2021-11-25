@@ -13,11 +13,20 @@ export class RoomService {
   private _floorsUrl = 'http://localhost:42789/api/rooms/floors';
   private _roomsUrl = 'http://localhost:42789/api/rooms/rooms';
   private _baseRoomsUrl = 'http://localhost:42789/api/baseRooms';
+  private _floorsGraphicsUrl = 'http://localhost:42789/api/floorGraphics';
+
 
   constructor(private _http: HttpClient) { }
 
   getFloors(): Observable<IFloor[]> {
     return this._http.get<IFloor[]>(this._floorsUrl).pipe(
+      tap((data) => console.log('All: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  getBuildingForRoom(roomId:number): Observable<number> {
+    return this._http.get<number>(this._floorsGraphicsUrl+`/${roomId}`).pipe(
       tap((data) => console.log('All: ', JSON.stringify(data))),
       catchError(this.handleError)
     );
@@ -28,6 +37,17 @@ export class RoomService {
     //   return of([]);
     // }
     return this._http.get<IRoom[]>(`${this._roomsUrl}?name=${name}`)
+      .pipe(
+        tap((data) => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
+    );
+  }
+
+  getRoomById(roomId: number): Observable<IRoom> {
+    // if (!name.trim()) {
+    //   return of([]);
+    // }
+    return this._http.get<IRoom>(this._baseRoomsUrl+`/${roomId}`)
       .pipe(
         tap((data) => console.log('All: ', JSON.stringify(data))),
         catchError(this.handleError)

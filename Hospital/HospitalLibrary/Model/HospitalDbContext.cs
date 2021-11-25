@@ -74,6 +74,14 @@ namespace ehealthcare.Model
                     Quantity = 300,
                     Type = "Dynamic",
                     RoomId = 3
+                },
+                new
+                {
+                    Id = 4,
+                    Name = "Picks",
+                    Quantity = 300,
+                    Type = "Dynamic",
+                    RoomId = 16
                 }
 
 
@@ -266,9 +274,20 @@ namespace ehealthcare.Model
                     NumOfTakenBeds = 0,
                     RoomType = RoomType.waitingRoom,
                     Sector = "WS"
+                },
+                new
+                {
+                    Id = 17,
+                    Name = "Waiting room 3",
+                    Floor = 0,
+                    IsRenovated = false,
+                    IsRenovatedUntill = new DateTime(),
+                    NumOfTakenBeds = 0,
+                    RoomType = RoomType.waitingRoom,
+                    Sector = "WS"
                 }
-
             );
+            
 
             modelBuilder.Entity<FloorGraphic>(fg =>
             {
@@ -451,6 +470,28 @@ namespace ehealthcare.Model
                     Y = 220,
                     FloorGraphicId = 2,
                     RoomId = 15
+                });
+            });
+
+            modelBuilder.Entity<FloorGraphic>(fg =>
+            {
+                fg.HasData(new FloorGraphic
+                {
+                    Id = 3,
+                    Floor = 0,
+                    BuildingId = 1
+
+                });
+                fg.OwnsMany(e => e.RoomGraphics).HasData(new
+                {
+                    Id = 17,
+                    DoorPosition = "right",
+                    Width = 100,
+                    Height = 100,
+                    X = 0,
+                    Y = 0,
+                    FloorGraphicId = 3,
+                    RoomId = 17
                 });
             });
 
