@@ -43,7 +43,15 @@ namespace HospitalIntegrationTests
                             {
                                 LoginType = 0,
                                 Password = "Coa1999!",
-                                Name = "Aleksandar"
+                                Name = "Aleksandar",
+                                IsActivated = true,
+                                Token = new Guid("98dd3304-2326-4e8e-9f6d-868f30f9a9cc"),
+                                Medical = new HospitalLibrary.MedicalRecords.Model.MedicalRecord()
+                                {
+                                    PatientId = "coalukas",
+                                    DoctorId = "nelex",
+                                    Doctor = null
+                                }
                             });
                             SeedData(appContext);
 

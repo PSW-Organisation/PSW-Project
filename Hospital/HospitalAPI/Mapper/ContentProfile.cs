@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
+using HospitalLibrary.Model;
 
 namespace HospitalAPI.Mapper
 {
@@ -28,20 +29,6 @@ namespace HospitalAPI.Mapper
             CreateMap<RoomEquipment, RoomEquipmentDTO>();
 
             CreateMap<PatientDto, Patient>().ConstructUsing(x => new Patient(x.Username)).ReverseMap();
-                /*.ForMember(dest => dest.Medical,
-                opt => opt.Ignore()).ForMember(dest => dest.MedicalPermits, opt => opt.Ignore()
-                */
-                /*.MapFrom(x => new MedicalRecord()
-                {
-                    PersonalId = x.PersonalId,
-                    BloodType = x.BloodType,
-                    Height = x.Height,
-                    Weight = x.Weight,
-                    Profession = x.Profession,
-                    Doctor = null,
-                    DoctorId = x.DoctorId,
-                    Allergens = x.Allergens
-                }));*/
             CreateMap<SurveyQuestionDto, Survey>();
         }
     }

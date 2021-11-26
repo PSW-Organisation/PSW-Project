@@ -52,6 +52,11 @@ namespace HospitalLibrary.MedicalRecords.Service
         {
             return _patientRepository.Activate(guid);
         }
+
+        public Patient GetProfileData(string username)
+        {
+            return _patientRepository.Get(username);
+        }
     }
 }
 

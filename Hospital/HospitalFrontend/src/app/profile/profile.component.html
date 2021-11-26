@@ -1,0 +1,209 @@
+<div class="container register" style="max-width: 100%;">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="assets/logo.png" alt="" />
+            <span style="margin-left: 10px;" class="text-dark">
+                <i> LeanOn Hospital</i>
+            </span>
+        </div>
+        <div class="col-md-9 register-right">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Profile</h3>
+                    <form [formGroup]="profile">
+                        <div class="row register-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="nameControl" id="name" class="form-control"
+                                            type="text" />
+                                        <label for="name">First name*</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="parentNameControl" id="parentName" class="form-control"
+                                            type="text" />
+                                        <label for="parentName">Parent name*</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="surnameControl" id="lastname" class="form-control"
+                                            type="text" />
+                                        <label for="lastname">Last name*</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="personalIdControl" id="personalId" class="form-control"
+                                            type="text" />
+                                        <label for="personalId">Personal ID*</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 align-self-center" style="margin-top: -0.5rem;">
+                                    <label for="dateofbirth" class="my-label">Date of
+                                        birth*</label>
+                                    <div class="input-group mb-4">
+                                        <input class="form-control form-control=lg" [readonly]="true"
+                                            placeholder="Date of birth*" name="dp" formControlName="dateOfBirthControl"
+                                            id="dateofbirth" ngbDatepicker #d="ngbDatepicker"
+                                            [value]="patient.dateOfBirth | date:'dd.MM.yyyy.'">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" disabled (click)="d.toggle()"
+                                                type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="phoneControl" id="phone" class="form-control"
+                                            type="text" />
+                                        <label for="phone">Contact phone*</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <select class="form-select ng-dirty ng-valid" style="height: unset;"
+                                            formControlName="countryControl" id="country">
+                                            <option selected [value]="patient.country">{{patient.country}}</option>
+                                        </select>
+                                        <label for="country">Country*</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <select data-size="12" style="height: unset;" formControlName="cityControl"
+                                            id="city" class="form-select ng-dirty ng-valid">
+                                            <option [value]="patient.city">{{patient.city}}</option>
+                                        </select>
+                                        <label for="city">City*</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="addressControl" id="address" class="form-control"
+                                            type="text" />
+                                        <label for="address">Address*</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="professionControl" id="profession" class="form-control"
+                                            type="text" />
+                                        <label for="profession">Profession*</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="usernameControl" id="username" class="form-control"
+                                            type="text" />
+                                        <label for="username">Username*</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="emailControl" id="email" class="form-control"
+                                            type="text" required />
+                                        <label for="email">Email*</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="passwordControl" id="password" class="form-control"
+                                            type="password" />
+                                        <label for="password">Password*</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="confirmPasswordControl" id="confirmPassword"
+                                            class="form-control" type="password" />
+                                        <label for="confirmPassword">Confirm password*</label>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <select style="height: unset;" formControlName="bloodTypeControl" id="bloodtype"
+                                            class="form-select ng-dirty ng-valid">
+                                            <option selected [value]="patient.medical.bloodType">
+                                                {{patient.medical.bloodType}}</option>
+                                        </select>
+                                        <label for="bloodtype">Blood type*</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 align-self-center">
+                                    <div class="form-group" *ngIf="patient.allergens">
+                                        <angular2-multiselect id="allergens" [data]="patient.allergens"
+                                            [(ngModel)]="patient.allergens" [settings]="settings"
+                                            formControlName="allergensControl">
+                                        </angular2-multiselect>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="heightControl" id="height" class="form-control ng-dirty"
+                                            type="number" />
+                                        <label for="height">Height* [cm]</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <input formControlName="weightControl" id="weight" class="form-control ng-dirty"
+                                            type="number" />
+                                        <label for="weight">Weight* [kg]</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="my-label">Gender*</label>
+                                    <div class="form-group" ngbRadioGroup>
+                                        <div class="form-check form-check-inline">
+                                            <input formControlName="genderControl" class="form-check-input" type="radio"
+                                                id="maleId" value="male" checked>
+                                            <label class="form-check-label" for="maleId">Male</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input formControlName="genderControl" class="form-check-input" type="radio"
+                                                id="femaleId" value="female">
+                                            <label class="form-check-label" for="femaleId">Female</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <select style="height: unset;" formControlName="doctorControl" id="doctor"
+                                            class="form-select ng-dirty ng-valid">
+                                            <option selected [value]="patient.medical.doctorId">
+                                                {{patient.medical.doctorId}}</option>
+                                        </select>
+                                        <label for="doctor">Personal doctor*</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

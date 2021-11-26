@@ -16,6 +16,7 @@ namespace HospitalAPI.Validators
             RuleFor(x => x.Name).Matches("^\\p{Lu}[\\p{Ll}]+$").MaximumLength(30);
             RuleFor(x => x.ParentName).Matches("^\\p{Lu}[\\p{Ll}]+$").MaximumLength(30);
             RuleFor(x => x.Surname).Matches("^\\p{Lu}[\\p{Ll}]+$").MaximumLength(30);
+            RuleFor(x => x.DateOfBirth).LessThanOrEqualTo(DateTime.Now - new TimeSpan(18 * 365, 0, 0, 0));
             RuleFor(x => x.Gender).Must(x => x == "male" || x == "female");
             RuleFor(x => x.Phone).Matches("^(\\+\\d{3})?\\d{8,10}$");
             RuleFor(x => x.Email).EmailAddress();
