@@ -42,8 +42,7 @@
                                             type="text" />
                                         <label for="parentName">Parent name*</label>
                                     </div>
-                                    <div *ngIf="parentName?.invalid && parentName?.touched"
-                                        class="my-error">
+                                    <div *ngIf="parentName?.invalid && parentName?.touched" class="my-error">
                                         <div *ngIf="parentName?.errors?.['required']">
                                             Parent name is required.
                                         </div>
@@ -63,8 +62,7 @@
                                             type="text" />
                                         <label for="lastname">Last name*</label>
                                     </div>
-                                    <div *ngIf="surname?.invalid && surname?.touched"
-                                        class="my-error">
+                                    <div *ngIf="surname?.invalid && surname?.touched" class="my-error">
                                         <div *ngIf="surname?.errors?.['required']">
                                             Last name is required.
                                         </div>
@@ -82,8 +80,7 @@
                                             type="text" />
                                         <label for="personalId">Personal ID*</label>
                                     </div>
-                                    <div *ngIf="personalId?.invalid && personalId?.touched"
-                                        class="my-error">
+                                    <div *ngIf="personalId?.invalid && personalId?.touched" class="my-error">
                                         <div *ngIf="personalId?.errors?.['required']">
                                             Personal ID is required.
                                         </div>
@@ -94,24 +91,30 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating" style="margin-bottom: 4%;">
-                                        <input formControlName="dateOfBirthControl" id="dateofbirth"
-                                            class="form-control" type="date" />
-                                        <label for="dateofbirth">Date of birth*</label>
+                                <div class="col-md-6 align-self-center" style="margin-top: -0.5rem;">
+                                    <label for="dateOfBirth" class="my-label">Date of
+                                        birth*</label>
+                                    <div class="input-group mb-4">
+                                        <input class="form-control form-control=lg" placeholder="dd.MM.yyyy." name="dp"
+                                            formControlName="dateOfBirthControl" (dateSelect)="onDateSelect($event)"
+                                            id="dateOfBirth" ngbDatepicker #d="ngbDatepicker"
+                                            [minDate]="{year: minDate.year(), month: minDate.month(), day: minDate.day()}"
+                                            [maxDate]="{year: maxDate.year(), month: maxDate.month(), day: maxDate.day()}"
+                                            [startDate]="{year: startDate.year(), month: startDate.month()}"
+                                            [markDisabled]="isDisabled">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" (click)="d.toggle()"
+                                                type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <!-- <div *ngIf="parentName?.invalid && (parentName?.dirty || parentName?.touched)"
-                                        class="my-error">
-
-                                        <div *ngIf="parentName?.errors?.['required']">
-                                            Parent name is required.
+                                    <div *ngIf="dateOfBirth?.invalid && dateOfBirth?.touched" class="my-error"
+                                        style="margin-top: -1.4rem;">
+                                        <div *ngIf="dateOfBirth?.errors?.['required']">
+                                            Date of birth is required.
                                         </div>
-                                        <div *ngIf="parentName?.errors?.['minlength']">
-                                            Parent name must be at least 2 characters long.
-                                        </div>
-                                        <div *ngIf="parentName?.errors?.['pattern']">
-                                            Parent name must only contain letters.
-                                        </div> -->
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating" style="margin-bottom: 4%;">
@@ -133,8 +136,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-floating" style="margin-bottom: 4%;">
-                                        <select (change)="updateCities()" class="form-select ng-dirty ng-valid" style="height: unset;"
-                                            formControlName="countryControl" id="country">
+                                        <select (change)="updateCities()" class="form-select ng-dirty ng-valid"
+                                            style="height: unset;" formControlName="countryControl" id="country">
                                             <option selected [value]="countries[0]">Serbia</option>
                                             <option [value]="countries[1]">Bosnia and Herzegovina</option>
                                             <option [value]="countries[2]">Montenegro</option>
@@ -144,8 +147,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating" style="margin-bottom: 4%;">
-                                        <select data-size="12" style="height: unset;" formControlName="cityControl" id="city"
-                                            class="form-select ng-dirty ng-valid">
+                                        <select data-size="12" style="height: unset;" formControlName="cityControl"
+                                            id="city" class="form-select ng-dirty ng-valid">
                                             <option *ngFor="let c of cities" [value]="c">{{c}}</option>
                                         </select>
                                         <label for="city">City*</label>
@@ -159,8 +162,7 @@
                                             type="text" />
                                         <label for="address">Address*</label>
                                     </div>
-                                    <div *ngIf="address?.invalid && address?.touched"
-                                        class="my-error">
+                                    <div *ngIf="address?.invalid && address?.touched" class="my-error">
                                         <div *ngIf="address?.errors?.['required']">
                                             Address is required.
                                         </div>
@@ -181,8 +183,7 @@
                                             type="text" />
                                         <label for="profession">Profession*</label>
                                     </div>
-                                    <div *ngIf="profession?.invalid && profession?.touched"
-                                        class="my-error">
+                                    <div *ngIf="profession?.invalid && profession?.touched" class="my-error">
                                         <div *ngIf="profession?.errors?.['required']">
                                             Profession is required.
                                         </div>
@@ -193,7 +194,7 @@
                                             Profession can be 100 characters long at most.
                                         </div>
                                         <div *ngIf="profession?.errors?.['pattern']">
-                                            Profession can contain letters, commas, slashes and hyphens. 
+                                            Profession can contain letters, commas, slashes and hyphens.
                                         </div>
                                     </div>
                                 </div>
@@ -202,11 +203,10 @@
                                 <div class="col-md-6">
                                     <div class="form-floating" style="margin-bottom: 4%;">
                                         <input formControlName="usernameControl" id="username" class="form-control"
-                                            type="text"/>
+                                            type="text" />
                                         <label for="username">Username*</label>
                                     </div>
-                                    <div *ngIf="username?.invalid && username?.touched"
-                                        class="my-error">
+                                    <div *ngIf="username?.invalid && username?.touched" class="my-error">
                                         <div *ngIf="username?.errors?.['required']">
                                             Username is required.
                                         </div>
@@ -223,8 +223,7 @@
                                             type="text" required />
                                         <label for="email">Email*</label>
                                     </div>
-                                    <div *ngIf="email?.invalid && email?.touched"
-                                        class="my-error">
+                                    <div *ngIf="email?.invalid && email?.touched" class="my-error">
                                         <div *ngIf="email?.errors?.['required']">
                                             Email is required.
                                         </div>
@@ -232,7 +231,8 @@
                                             Email can be 254 characters long at most.
                                         </div>
                                         <div *ngIf="email?.errors?.['email']">
-                                            Email must contain at least one digit or letter before and after the @ sign
+                                            Email must contain at least one digit or letter before and after the @
+                                            sign
                                             and cannot end with special characters.
                                         </div>
                                     </div>
@@ -245,14 +245,13 @@
                                             type="password" />
                                         <label for="password">Password*</label>
                                     </div>
-                                    <div *ngIf="password?.invalid && password?.touched"
-                                        class="my-error">
+                                    <div *ngIf="password?.invalid && password?.touched" class="my-error">
                                         <div *ngIf="password?.errors?.['required']">
                                             Password is required.
                                         </div>
                                         <div *ngIf="password?.errors?.['pattern']">
-                                            Password must contain a minimum of eight characters, 
-                                            at least one uppercase letter, one lowercase letter, 
+                                            Password must contain a minimum of eight characters,
+                                            at least one uppercase letter, one lowercase letter,
                                             one number and one special character.
                                         </div>
                                     </div>
@@ -263,8 +262,7 @@
                                             class="form-control" type="password" />
                                         <label for="confirmPassword">Confirm password*</label>
                                     </div>
-                                    <div *ngIf="confirmPassword?.invalid && confirmPassword?.touched"
-                                        class="my-error">
+                                    <div *ngIf="confirmPassword?.invalid && confirmPassword?.touched" class="my-error">
                                         <div *ngIf="confirmPassword?.errors?.['pattern']">
                                             Confirmation password must match password.
                                         </div>
@@ -293,12 +291,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-floating" style="margin-bottom: 4%;">
-                                        <input formControlName="heightControl" id="height" 
-                                        class="form-control ng-dirty" type="number" />
+                                        <input formControlName="heightControl" id="height" class="form-control ng-dirty"
+                                            type="number" />
                                         <label for="height">Height* [cm]</label>
                                     </div>
-                                    <div *ngIf="height?.invalid && height?.touched"
-                                        class="my-error">
+                                    <div *ngIf="height?.invalid && height?.touched" class="my-error">
                                         <div *ngIf="height?.errors?.['required']">
                                             Height is required.
                                         </div>
@@ -312,12 +309,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating" style="margin-bottom: 4%;">
-                                        <input formControlName="weightControl" id="weight" 
-                                        class="form-control ng-dirty" type="number"/>
+                                        <input formControlName="weightControl" id="weight" class="form-control ng-dirty"
+                                            type="number" />
                                         <label for="weight">Weight* [kg]</label>
                                     </div>
-                                    <div *ngIf="weight?.invalid && weight?.touched"
-                                        class="my-error">
+                                    <div *ngIf="weight?.invalid && weight?.touched" class="my-error">
                                         <div *ngIf="weight?.errors?.['required']">
                                             Weight is required.
                                         </div>
@@ -332,7 +328,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>Gender*</label>
+                                    <label class="my-label">Gender*</label>
                                     <div class="form-group" ngbRadioGroup>
                                         <div class="form-check form-check-inline">
                                             <input formControlName="genderControl" class="form-check-input" type="radio"

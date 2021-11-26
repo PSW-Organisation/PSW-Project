@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { RegistrationService } from './registration.service';
 import { Patient } from './patient';
@@ -9,6 +9,7 @@ import { Doctor } from './doctor';
 import { Router } from '@angular/router';
 import { MedicalRecord } from './medical-record';
 import * as XRegExp from 'xregexp';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-registration',
@@ -22,6 +23,9 @@ export class RegistrationComponent implements OnInit {
   cities: string[] = []
   allergens: Allergen[] = []
   doctors: Doctor[] = []
+  minDate: moment.Moment = moment()
+  maxDate: moment.Moment = moment()
+  startDate: moment.Moment = moment()
 
   settings = {
     singleSelection: false,
@@ -30,7 +34,10 @@ export class RegistrationComponent implements OnInit {
     unSelectAllText: 'Unselect all',
     enableSearchFilter: true,
     labelKey: 'name',
-    primaryKey: 'id'
+    primaryKey: 'id',
+    tagToBody: false,
+    lazyLoading: true,
+    maxHeight: 150,
   };
 
   patient: Patient = {
@@ -40,7 +47,7 @@ export class RegistrationComponent implements OnInit {
     name: '',
     parentName: '',
     surname: '',
-    dateOfBirth: new Date(Date.now()),
+    dateOfBirth: '',
     gender: 'male',
     phone: '',
     email: '',
@@ -171,6 +178,7 @@ export class RegistrationComponent implements OnInit {
     private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
+    this.configDatePicker()
     this.registrationService.getCitiesForCountry(this.patient.country).subscribe({
       next: c => {
         this.cities = c.data
@@ -191,6 +199,15 @@ export class RegistrationComponent implements OnInit {
 
     this.onPasswordChanges();
   }
+
+  configDatePicker(): void {
+    this.maxDate = moment(Date.now()).subtract(18, 'years');
+    this.minDate = moment({ year: 1900, month: 1, day: 1 })
+    this.startDate = moment(Date.now()).subtract(21, 'years');
+  }
+
+  isDisabled = (date: NgbDate) =>
+    moment({ year: date.year, month: date.month, day: date.day }).isAfter(moment().subtract(18, 'years'));
 
   onPasswordChanges(): void {
     this.registrationForm.get('passwordControl')?.valueChanges.subscribe(val => {
@@ -213,8 +230,12 @@ export class RegistrationComponent implements OnInit {
     })
   }
 
+  onDateSelect(event: any): void {
+    this.registrationForm.get('dateOfBirthControl')?.setValue(`${event.day}-${event.month}-${event.year}`)
+  }
+
   register(): void {
-    if(this.registrationForm.invalid){
+    if (this.registrationForm.invalid) {
       this.showError('Form is invalid!');
       return;
     }
@@ -243,6 +264,9 @@ export class RegistrationComponent implements OnInit {
       doctor: null
     }
 
+    let date: string = this.registrationForm.get('dateOfBirthControl')?.value
+    let dateParts = date.split('-');
+
     let patient: Patient = {
       loginType: 'patient',
       allergens: this.registrationForm.get('allergensControl')?.value,
@@ -251,7 +275,7 @@ export class RegistrationComponent implements OnInit {
       name: this.registrationForm.get('nameControl')?.value,
       parentName: this.registrationForm.get('parentNameControl')?.value,
       surname: this.registrationForm.get('surnameControl')?.value,
-      dateOfBirth: this.registrationForm.get('dateOfBirthControl')?.value,
+      dateOfBirth: `${dateParts[1]}-${dateParts[0]}-${dateParts[2]}`,
       gender: this.registrationForm.get('genderControl')?.value,
       phone: this.registrationForm.get('phoneControl')?.value,
       email: this.registrationForm.get('emailControl')?.value,
@@ -264,18 +288,16 @@ export class RegistrationComponent implements OnInit {
       medicalPermits: []
     }
 
+
     this.registrationService.register(patient).subscribe({
       next: c => {
         console.log(c)
         if (c.statusText === 'OK') {
-          this.toastr.success('Verification email has been sent. Click on the link to verify your account.');
+          this.toastr.success('Verification email has been sent! Redirecting to home page');
           this.registrationForm.reset();
           setTimeout(() => { this.router.navigate(['/']); }, 5000);
         }
-        else {
-          this.showError('An error occured.');
-        }
-      }, error: e => (console.log(e))
+      }, error: e => this.showError('An error occured.')
     })
   }
 

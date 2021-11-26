@@ -139,28 +139,8 @@ body {
     border-color: #02ccba;
 }
 
-.my-error {
-    position: relative;
-    margin-bottom: 1rem;
-    margin-top: -0.9rem;
-    padding: 0rem;
-    background-color: transparent;
-    border: transparent;
-    color: red;
-    margin-left: 0.8rem;
-    font-size: 0.83rem;
-}
-
-.ng-touched.ng-invalid:not(form) {
-    border: 3px solid red;
-}
-
-.ng-touched.ng-valid:not(form) {
-    border: 3px solid rgb(11 210 180);
-}
-
 .my-label {
     font-size: 14px;
-    margin-bottom: 0.1rem;
+    margin-bottom: 0.02rem;
     margin-left: 0.7rem;
 }

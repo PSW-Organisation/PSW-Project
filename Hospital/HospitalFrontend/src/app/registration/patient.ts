@@ -9,7 +9,7 @@ export interface Patient{
     name: string,
     parentName: string,
     surname: string,
-    dateOfBirth: Date,
+    dateOfBirth: string | null,
     gender: string,
     phone: string,
     email: string,

@@ -13,6 +13,7 @@ using HospitalLibrary.Model;
 using ehealthcare.Model;
 using Microsoft.Extensions.DependencyInjection;
 using System.Data;
+using System.Net;
 
 namespace HospitalIntegrationTests.MedicalRecord
 {
@@ -69,6 +70,26 @@ namespace HospitalIntegrationTests.MedicalRecord
             Assert.Throws<HttpRequestException>(() => response.EnsureSuccessStatusCode());
         }
 
+        [Theory]
+        [MemberData(nameof(Data))]
+        public async Task Update_PUT_Action_AccountActivation(string token, HttpStatusCode expectedStatus)
+        {
+            var putRequest = new HttpRequestMessage(HttpMethod.Put, $"api/Registration/{token}");
+
+            var response = await _client.SendAsync(putRequest);
+
+            Assert.Equal(expectedStatus, response.StatusCode);
+        }
+
+        public static IEnumerable<object[]> Data =>
+                                           new List<object[]>
+                                           {
+                                                new object[] { "55455454-32434324-asdfs!-sdadad", HttpStatusCode.BadRequest },
+                                                new object[] { "12fd2a13-39e7-4672-bc7f-a1d6f6d79030", HttpStatusCode.NotFound },
+                                                new object[] { "98dd3304-2326-4e8e-9f6d-868f30f9a9cc", HttpStatusCode.BadRequest },
+                                                new object[] { "601ccaa8-3a07-4a7c-89b9-9953e6eac8a7", HttpStatusCode.OK },
+                                           };
+
         private static PatientDto GetData()
         {
             return new PatientDto()
@@ -110,7 +131,8 @@ namespace HospitalIntegrationTests.MedicalRecord
                     Profession = "Software Engineer",
                     DoctorId = "nelex"
                 },
-                IsActivated = false,
+                Token = new Guid("3e8549d0-db22-4d38-bd30-84b6c3e3e344"),
+                IsActivated = true,
                 IsBlocked = false,
                 MedicalPermits = new List<MedicalPermit>()
             };

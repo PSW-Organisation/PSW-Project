@@ -710,7 +710,7 @@ namespace ehealthcare.Model
                         Address = "Sime Milosevica, 5",
                         IsBlocked = false,
                         IsActivated = false,
-                        Token = Guid.NewGuid()
+                        Token = new Guid("601ccaa8-3a07-4a7c-89b9-9953e6eac8a7")
                     });
             });
 
