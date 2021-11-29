@@ -23,6 +23,9 @@ import { registerLocaleData } from '@angular/common';
 import localeSr from '@angular/common/locales/sr-Latn';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { CustomAdapter, CustomDateParserFormatter } from './shared/services/date-formatter.service';
+import { AppointmentsComponent } from './appointments/appointments.component';
+import { StepperComponent } from './stepper/stepper.component';
+import { RecommendedAppointmentSchedulingComponent } from './recommended-appointment-scheduling/recommended-appointment-scheduling.component';
 
 export function playerFactory() {
   return player;
@@ -35,7 +38,10 @@ export function playerFactory() {
     WelcomeComponent,
     RegistrationComponent,
     SurveyComponent,
-    ProfileComponent
+    ProfileComponent,
+    AppointmentsComponent,
+    StepperComponent,
+    RecommendedAppointmentSchedulingComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +62,9 @@ export function playerFactory() {
       { path: 'verification', component: WelcomeComponent },
       { path: 'survey', component: SurveyComponent},
       { path: 'profile', component: ProfileComponent },
+      { path: 'appointments', component: AppointmentsComponent },
+      { path: 'basic-scheduling', component: StepperComponent },
+      { path: 'recommended-appointment-scheduling', component: RecommendedAppointmentSchedulingComponent },
       { path: '**', redirectTo: '' }
     ]),
     NgbModule,

@@ -1,6 +1,7 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.Repository;
 using ehealthcare.Repository.XMLRepository;
+using HospitalLibrary.Schedule.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,14 @@ namespace ehealthcare.Service
 	public class WorkdayService
 	{
 		private WorkdayRepository workdayRepository;
-        private VisitRepository visitRepository;
+        private IVisitRepository visitRepository;
         //private AccountRepository accountRepository;
         private PersonalizedNotificationRepository notificationRepository;
 
 		public WorkdayService()
 		{
 			workdayRepository = new WorkdayXMLRepository();
-            visitRepository = new VisitXMLRepository();
+            //visitRepository = new VisitXMLRepository();
            // accountRepository = new AccountDbRepository();
             notificationRepository = new PersonalizedNotificationXMLRepository();
         }
@@ -48,7 +49,7 @@ namespace ehealthcare.Service
             {
                 List<Account> accounts = new List<Account>();
                 //accounts.Add(accountRepository.GetAccountByPatientId(visit.PatientId));
-                notificationRepository.NotifyPatientOfCancellation(accounts, visit.VisitTime.StartTime);
+                notificationRepository.NotifyPatientOfCancellation(accounts, visit.StartTime);
             }
         }
 

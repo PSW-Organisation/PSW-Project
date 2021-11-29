@@ -5,7 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from './profile.service';
 import { formatDate } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-
+import { Visit } from './visit';
+import { HttpParameterCodec } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +14,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+  active: string = 'appointments';
 
   settings = {
     singleSelection: false,
@@ -99,12 +102,17 @@ export class ProfileComponent implements OnInit {
     ])
   });
 
-  constructor(private route: ActivatedRoute, private profileService: ProfileService, 
+  visits: Visit[] = [];
+
+  username: string = '';
+
+  constructor(private route: ActivatedRoute, private profileService: ProfileService,
     private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      if (params['username'])
+      if (params['username']) {
+        this.username = params['username'];
         this.profileService.getProfileData(params['username']).subscribe({
           next: response => {
             this.patient = response
@@ -112,12 +120,18 @@ export class ProfileComponent implements OnInit {
               .flatMap((a: { allergen: any; }) => a.allergen);
             this.updateControls();
             this.profile.disable();
-          }, error: e => { 
+          }, error: e => {
             this.router.navigate(['/'])
             this.showError('An error has occured.')
           }
         })
+      }
     });
+  }
+
+  navigateToAppointments(): void {
+    this.router.navigate(['/appointments?username=' + this.username])
+    console.log(this.router.url);
   }
 
   updateControls(): void {

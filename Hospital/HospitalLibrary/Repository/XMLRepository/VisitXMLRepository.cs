@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ehealthcare.Repository.XMLRepository
 {
-	public class VisitXMLRepository : GenericXMLRepository<Visit>, VisitRepository
+	public class VisitXMLRepository 
 	{
-		public VisitXMLRepository() : base("visits.xml") { }
+        /*public VisitXMLRepository() : base("visits.xml") { }
 
         public List<Visit> CancelVisits(List<VisitTime> visitTimes, string doctorId)
         {
@@ -18,7 +18,7 @@ namespace ehealthcare.Repository.XMLRepository
             {
                 foreach (Visit visit in base.GetAll())
                 {
-                    if (visit.DoctorId.Equals(doctorId) && visit.VisitTime.StartTime.Equals(visitTime.StartTime) && visit.VisitTime.EndTime.Equals(visitTime.EndTime))
+                    if (visit.DoctorId.Equals(doctorId) && visit.StartTime.Equals(visitTime.StartTime) && visit.EndTime.Equals(visitTime.EndTime))
                     {
                         visit.VisitStatus = VisitStatus.canceled;
                         canceledVisits.Add(visit);
@@ -46,6 +46,7 @@ namespace ehealthcare.Repository.XMLRepository
             return patientsVisits;
         }
 
-
+        */
     }
+
 }

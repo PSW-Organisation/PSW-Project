@@ -15,25 +15,7 @@ namespace ehealthcare.Model
 
         public DoctorReview() : base("undefinedKey") 
         {
-            lazyVisit = new VisitProxyImpl();
-        }
-
-        [System.Xml.Serialization.XmlIgnore]
-        public Visit Visit
-        {
-            get 
-            { 
-                if(visit == null)
-                {
-                    visit = lazyVisit.GetVisit(base.Id);
-                }
-                return visit;
-            }
-            set 
-            { 
-                visit = value;
-                base.Id = value.Id;
-            }
+            //lazyVisit = new VisitProxyImpl();
         }
 
         public DateTime RatingDate

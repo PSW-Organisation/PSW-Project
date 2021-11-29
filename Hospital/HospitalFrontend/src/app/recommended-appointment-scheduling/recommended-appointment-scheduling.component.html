@@ -1,0 +1,121 @@
+<div class="logo">
+    <i aria-hidden="true">
+      <span class="text-dark">
+        <img  src="assets/logo.png" alt="Logo" width="50" height="50">
+        LeanOn Hospital
+      </span>
+    </i>
+  </div>
+<body class="backgroundImage" style="background-attachment: fixed; padding-top: 3%;">
+    <div class="main-block">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-12">
+                <div class="block">
+                    <form [formGroup]="visitForm" (ngSubmit)="generateFreeVisits()">
+                        <div class="row" style="padding-top: 3%;">
+                            <div class="col"></div>
+                            <div class="col">
+                                <ngb-datepicker formControlName="dateControl" style="background-color: white;" #dp
+                                    (dateSelect)="onDateSelection($event)" [displayMonths]="4" [dayTemplate]="t"
+                                    [markDisabled]="isDisabled"
+                                    [minDate]="{year: minDate.year(), month: minDate.month(), day: minDate.day()+2}"
+                                    [startDate]="{year: minDate.year(), month: minDate.month()+1, day: minDate.day()+2}"
+                                    outsideDays="hidden">
+                                </ngb-datepicker>
+        
+                                <ng-template #t let-date let-focused="focused">
+                                    <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                                        [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                                        (mouseleave)="hoveredDate = null">
+                                        {{ date.day }}
+                                    </span>
+                                </ng-template>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row" style="padding-top: 3%;">
+                            <div class="col"></div>
+                            <div class="col">
+                                <div class="form-floating">
+                                    <select [(ngModel)]="selectedD" style="height: unset;" id="select"
+                                        class="form-select ng-dirty ng-valid">
+                                        <option *ngFor="let d of doctors" [value]="d.id" [selected]="doctors[1]">
+                                            {{d.fullName}} ({{d.specialization === 0 ? "Cardiology" : d.specialization === 1 ?
+                                            "Dermatology" :
+                                            d.specialization === 2 ? "Internal medicine" : "General particioner"}})</option>
+                                    </select>
+                                    <label for="specialization">Select preferred doctor</label>
+                                </div>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row" style="padding-top: 3%;">
+                            <div class="col"></div>
+                            <div class="col">
+                                <label class="my-label">Select priority of scheduling:</label>
+                                <div class="form-group" ngbRadioGroup name="radioBasic">
+                                    <div class="form-check form-check-inline">
+                                        <input type="radio" class="form-check-input" id="dateId" formControlName="radioControl"
+                                            [value]="true" checked />
+                                        <label class="form-check-label" for="dateId">Date</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" formControlName="radioControl" id="docId" type="radio"
+                                            [value]="false" />
+                                        <label class="form-check-label" for="docId"> Doctor</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row" style="padding-top: 3%;">
+                            <div class="col"></div>
+                            <div class="col text-center">
+                                <button class="btn-primary btn" type="submit">Generate appointments</button>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                    </form>
+                    <div *ngIf="isGenerated">
+                        <div class="row" style="padding-top: 3%;">
+                            <div class="col"></div>
+                            <div class="col-12">
+                                <p>Select preferred appointment:</p>
+                                <div class="table-responsive" style="overflow-y: auto; height: 50vh;">
+                                    <table id="myTable" class='table table-hover text-center'>
+                                        <thead
+                                            style="color:rgb(95, 173, 236); position: sticky; top: 0; background-color: #d7d8da;">
+                                            <tr>
+                                                <th scope="col">Start time</th>
+                                                <th scope="col">End time</th>
+                                                <th scope="col">Doctor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-hover">
+                                            <tr style="cursor: pointer;" *ngFor="let visit of generatedFreeVisits" (click)="selectedRow(visit);"
+                                                [ngStyle]="{'background-color': visit.isCanceled === true ? 'rgb(95, 173, 236)' : '#d7d8da'}">
+                                                <td>{{visit.startTime | date: 'dd.MM.yyyy. HH:mm'}}</td>
+                                                <td>{{visit.endTime | date: 'dd.MM.yyyy. HH:mm'}}</td>
+                                                <td>{{visit.doctor.name}} {{visit.doctor.surname}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row" style="padding-top: 3%;">
+                            <div class="col"></div>
+                            <div class="col text-center">
+                                <button class="btn btn-primary" (click)="createVisit()">Submit</button>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</body>

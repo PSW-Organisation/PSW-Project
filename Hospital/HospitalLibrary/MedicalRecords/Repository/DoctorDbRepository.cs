@@ -31,5 +31,15 @@ namespace HospitalLibrary.MedicalRecords.Repository
             return _dbContext.Set<Doctor>().Where(d => d.Specialization.Equals(Specialization.none))
                   .Where(d => d.Patients.Count >= minPatients && d.Patients.Count <= minPatients + 2).ToList();
         }
+
+        public List<Doctor> GetAllDoctors()
+        {
+            return _dbContext.Set<Doctor>().ToList();
+        }
+
+        public Doctor GetDoctorById(string doctorId)
+        {
+            return _dbContext.Find<Doctor>(doctorId);
+        }
     }
 }

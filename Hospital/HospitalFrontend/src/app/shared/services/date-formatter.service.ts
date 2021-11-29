@@ -9,7 +9,7 @@ export class CustomAdapter extends NgbDateAdapter<string> {
   readonly DELIMITER = '-';
 
   fromModel(value: string | null): NgbDateStruct | null {
-    if (moment(value, 'DD-MM-YYYY', true).isValid()) {
+    if (moment(value, 'DD-MM-YYYY', false).isValid()) {
       let date = value?.split(this.DELIMITER);
       if (date)
         return {

@@ -41,5 +41,21 @@ namespace HospitalLibrary.MedicalRecords.Repository
             _dbContext.SaveChanges();
             return 200;
         }
+
+        public List<Patient> GetAllPatients()
+        {
+            return _dbContext.Set<Patient>().ToList();
+        }
+
+        public List<Patient> GetMaliciousPatients()
+        {
+            var canceledVisits = _dbContext.Visits.Where(visit => visit.IsCanceled &&
+                   visit.EndTime >= DateTime.Now - new TimeSpan(30, 0, 0, 0) && visit.EndTime <= DateTime.Now + new TimeSpan(30, 0, 0, 0)).
+                   OrderByDescending(visit => visit.EndTime).ToList().GroupBy(visit => visit.PatientId).
+                   Select(group => new { group.Key, Count = group.Count() }).Where(patient => patient.Count >= 3);
+            List<Patient> maliciousPatients = new List<Patient>();
+            foreach (string key in canceledVisits.Select(v => v.Key).ToList()) maliciousPatients.Add(Get(key));
+            return maliciousPatients;
+        }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using ehealthcare.Model;
+using ehealthcare.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ehealthcare.Repository;
 using static ehealthcare.SecretaryApp.Constants;
 using ehealthcare.Repository.XMLRepository;
 
@@ -12,11 +12,11 @@ namespace ehealthcare.Service
 	{
 
         private WorkdayRepository workdayRepository;
-        private VisitRepository visitRepository;
+        //private VisitRepository visitRepository;
         public VisitTimeService()
         {
-            workdayRepository = new WorkdayXMLRepository();
-            visitRepository = new VisitXMLRepository();
+            //workdayRepository = new WorkdayXMLRepository();
+            //visitRepository = new VisitXMLRepository();
         }
 
         public List<DateTime> getFirst21AvailableDates(Doctor doctor)
@@ -141,7 +141,7 @@ namespace ehealthcare.Service
 
         public VisitTime GetNearestAvailableDelay(String doctorId, String patientId, VisitTime takenTimeSlot, List<VisitTime> potentialDelays)
         {
-            List<Workday> doctorsWorkdays = workdayRepository.GetWorkdaysAfter(takenTimeSlot.StartTime, doctorId);
+            /*List<Workday> doctorsWorkdays = workdayRepository.GetWorkdaysAfter(takenTimeSlot.StartTime, doctorId);
             VisitTime availableDelay = new VisitTime();
             foreach(Workday workday in doctorsWorkdays)
             {
@@ -153,9 +153,11 @@ namespace ehealthcare.Service
             }
 
             return availableDelay;
+            */
+            return null;
         }
 
-        private VisitTime FindAvailableDelay(Workday workday, String patientId, VisitTime takenTimeSlot, List<VisitTime> potentialDelays)
+       /* private VisitTime FindAvailableDelay(Workday workday, String patientId, VisitTime takenTimeSlot, List<VisitTime> potentialDelays)
         {
             TimeSpan duration = takenTimeSlot.EndTime - takenTimeSlot.StartTime;
             DateTime start = workday.StartTime;
@@ -197,6 +199,7 @@ namespace ehealthcare.Service
             return visitTime.StartTime >= startTime && visitTime.StartTime <= finishTime;
         }
 
+        /*
         public bool IsPatientAvailable(String patientId, VisitTime visitTime)
         {
             
@@ -213,7 +216,7 @@ namespace ehealthcare.Service
             }
             return true;
         }
-
+        */
         private bool IsOverlappingWithPotentialDelays(List<VisitTime> potentialDelays, VisitTime timeSlot)
         {
             foreach(VisitTime delayedVisitTime in potentialDelays)

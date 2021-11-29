@@ -1,4 +1,20 @@
 <div class="container register" style="max-width: 100%;">
+    <button class="menu-toggle rounded">
+        <i class="fa fa-bars"></i>
+    </button>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a class="smooth-scroll" routerLink=""></a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="smooth-scroll" href="#">Profile</a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="smooth-scroll" [routerLink]="['/appointments']" [queryParams]="{username: username}">Appointments</a>
+            </li>
+        </ul>
+    </nav>
     <div class="row">
         <div class="col-md-3 register-left">
             <img src="assets/logo.png" alt="" />
@@ -74,7 +90,8 @@
                                     <div class="form-floating" style="margin-bottom: 4%;">
                                         <select class="form-select ng-dirty ng-valid" style="height: unset;"
                                             formControlName="countryControl" id="country">
-                                            <option selected [value]="patient.country">{{patient.country}}</option>
+                                            <option selected [value]="patient.country">
+                                                {{patient.country}}</option>
                                         </select>
                                         <label for="country">Country*</label>
                                     </div>
@@ -122,21 +139,21 @@
                                 </div>
                             </div>
                             <!-- <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-floating" style="margin-bottom: 4%;">
-                                        <input formControlName="passwordControl" id="password" class="form-control"
-                                            type="password" />
-                                        <label for="password">Password*</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating" style="margin-bottom: 4%;">
-                                        <input formControlName="confirmPasswordControl" id="confirmPassword"
-                                            class="form-control" type="password" />
-                                        <label for="confirmPassword">Confirm password*</label>
-                                    </div>
-                                </div>
-                            </div> -->
+                                                <div class="col-md-6">
+                                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                                        <input formControlName="passwordControl" id="password" class="form-control"
+                                                            type="password" />
+                                                        <label for="password">Password*</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                                        <input formControlName="confirmPasswordControl" id="confirmPassword"
+                                                            class="form-control" type="password" />
+                                                        <label for="confirmPassword">Confirm password*</label>
+                                                    </div>
+                                                </div>
+                                            </div> -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-floating" style="margin-bottom: 4%;">

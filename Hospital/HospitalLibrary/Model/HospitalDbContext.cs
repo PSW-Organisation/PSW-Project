@@ -21,6 +21,7 @@ namespace ehealthcare.Model
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<RoomGraphic> RoomGraphics { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Visit> Visits { get; set; }
         public DbSet<FloorGraphic> FloorGraphics { get; set; }
         public DbSet<PatientAllergen> PatientAllergens { get; set; }
         public DbSet<User> Users { get; set; }
@@ -294,6 +295,7 @@ namespace ehealthcare.Model
                     Sector = "WS"
                 }
             );
+
 
             #endregion
 
@@ -716,6 +718,16 @@ namespace ehealthcare.Model
                       Profession = "Professor",
                       DoctorId = "nelex",
                       PatientId = "imbiamba"
+                  },
+                  new MedicalRecord
+                  {
+                      PersonalId = "1209222129123",
+                      BloodType = BloodType.O_positive,
+                      Height = 186,
+                      Weight = 90,
+                      Profession = "Professor",
+                      DoctorId = "nelex",
+                      PatientId = "kristina"
                   });
                 // m.HasKey(m => new { m.Id, m.PatientId });
 
@@ -757,8 +769,31 @@ namespace ehealthcare.Model
                         Address = "Sime Milosevica, 5",
                         IsBlocked = false,
                         IsActivated = false,
-                        Token = new Guid("601ccaa8-3a07-4a7c-89b9-9953e6eac8a7")
-                    });
+                        Token = new Guid("601ccaa8-3a07-4a7c-89b9-9953e6eac8a7"),
+                        City = "Novi Sad",
+                        Country = "Serbia",
+                    },
+                    new Patient("kristina")
+                    {
+                        Id = "kristina",
+                        Name = "Kristina",
+                        Surname = "Tamindzija",
+                        ParentName = "Zoran",
+                        Username = "kristina",
+                        Password = "kristinica",
+                        LoginType = LoginType.patient,
+                        Gender = "female",
+                        DateOfBirth = new DateTime(1999, 11, 9),
+                        Phone = "019919195191",
+                        Email = "sdjfsj@gmail.com",
+                        Address = "Sime Milosevica, 9",
+                        IsBlocked = false,
+                        IsActivated = true,
+                        Token = new Guid("601ccaa8-3a07-4a7c-89b9-9923e6bac8a7"),
+                        City = "Novi Sad",
+                        Country = "Serbia",
+                    }
+                    );
             });
 
             modelBuilder.Entity<Doctor>(d =>
@@ -785,7 +820,29 @@ namespace ehealthcare.Model
                         IsActivated = false,
                         UsedOffDays = 12,
                         Specialization = Specialization.none
-                    });
+                    },
+                    new Doctor("mkisic")
+                    {
+                        Id = "mkisic",
+                        Name = "Mihajlo",
+                        Surname = "Kisic",
+                        ParentName = "Zvezdan",
+                        Username = "mkisic",
+                        Password = "ftn",
+                        LoginType = LoginType.doctor,
+                        Gender = "male",
+                        DateOfBirth = new DateTime(1999, 7, 14),
+                        Phone = "019919199191",
+                        Email = "nemanjar@gmail.com",
+                        Address = "Sime Milutinovica, 2",
+                        City = "Novi Sad",
+                        Country = "Serbia",
+                        IsBlocked = false,
+                        IsActivated = false,
+                        UsedOffDays = 12,
+                        Specialization = Specialization.cardiologist,
+                    }
+                );
             });
 
             modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
@@ -825,6 +882,22 @@ namespace ehealthcare.Model
                 q.HasKey(q => new { q.SurveyId, q.Id });
             });
 
+
+            modelBuilder.Entity<Visit>(v =>
+            {
+                v.HasData(
+                    new Visit()
+                    {
+                        Id = -1,
+                        DoctorId = "nelex",
+                        PatientId = "imbiamba",
+                        StartTime = new DateTime(2021, 11, 30, 19, 00, 00),
+                        EndTime = new DateTime(2021, 11, 30, 19, 30, 00),
+                        VisitType = VisitType.examination,
+                        IsReviewed = false,
+                        IsCanceled = true
+                    });
+            });
         }
     }
 }

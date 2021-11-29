@@ -43,6 +43,9 @@ namespace HospitalAPI.Mapper
             CreateMap<MedicineDTO, Medicine>();
             CreateMap<Medicine, MedicineDTO>();
 
+            CreateMap<Visit, VisitDto>();
+            CreateMap<VisitDto, Visit>();
+
             CreateMap<TermOfRenovation, ScheduleTermDTO>()
         .ForMember(dest =>
             dest.TermState,

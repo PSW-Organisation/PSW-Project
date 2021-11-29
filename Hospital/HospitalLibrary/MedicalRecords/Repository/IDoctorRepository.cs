@@ -10,6 +10,8 @@ namespace HospitalLibrary.MedicalRecord.Repository
     public interface IDoctorRepository : IGenericSTRINGIDRepository<Doctor>
     {
         public int FindLeastNumberOfPatient();
-        List<Doctor> GetLeastOccupiedDoctors(int minPatients);
+        public List<Doctor> GetLeastOccupiedDoctors(int minPatients);
+        public List<Doctor> GetAllDoctors();
+        Doctor GetDoctorById(string doctorId);
     }
 }

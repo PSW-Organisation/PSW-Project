@@ -27,5 +27,10 @@ namespace HospitalLibrary.MedicalRecords.Service
         {
             return _doctorRepository.GetLeastOccupiedDoctors(minPatients);
         }
+
+        public List<Doctor> GetAllDoctors()
+        {
+            return _doctorRepository.GetAllDoctors();
+        }
     }
 }

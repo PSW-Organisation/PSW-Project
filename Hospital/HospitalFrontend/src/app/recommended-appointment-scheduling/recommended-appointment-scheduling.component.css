@@ -1,0 +1,47 @@
+.custom-day {
+    text-align: center;
+    padding: 0.185rem 0.25rem;
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+  }
+  .custom-day.focused {
+    background-color: #e6e6e6;
+  }
+  .custom-day.range, .custom-day:hover {
+    background-color: rgb(2, 117, 216);
+    color: white;
+  }
+  .custom-day.faded {
+    background-color: rgba(2, 117, 216, 0.5);
+  }
+  .backgroundImage{
+    background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("../../assets/doctor.jpg");
+    background-attachment: fixed;
+    min-height: 100%;
+    min-width:1024px;
+    width: 100%;
+    height: auto;
+  
+    /* Set up positioning */
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .my-label {
+    font-size: 14px;
+    margin-bottom: 0.1rem;
+    margin-left: 0.7rem;
+}
+.main-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  }
+  .block {
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 2px 5px #ccc; 
+    background: #fff;
+    }

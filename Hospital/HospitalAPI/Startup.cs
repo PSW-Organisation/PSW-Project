@@ -34,6 +34,8 @@ using HospitalLibrary.RoomsAndEquipment.Terms.Repository;
 using HospitalLibrary.RoomsAndEquipment.Terms.Service;
 using HospitalLibrary.Medicines.Repository;
 using HospitalLibrary.Medicines.Service;
+using HospitalLibrary.Schedule.Service;
+using HospitalLibrary.Schedule.Repository;
 
 namespace HospitalAPI
 {
@@ -116,6 +118,10 @@ namespace HospitalAPI
             services.AddScoped<IAllergenService, AllergenService>();
             services.AddScoped<GenericDbRepository<Allergen>, AllergenDbRepository>();
             services.AddScoped<IAllergenRepository, AllergenDbRepository>();
+
+            services.AddScoped<IVisitService, VisitService>();
+            services.AddScoped<GenericDbRepository<Visit>, VisitDbRepository>();
+            services.AddScoped<IVisitRepository, VisitDbRepository>();
 
             services.AddScoped<IRoomEquipmentService, RoomEquipmentService>();
             services.AddScoped<IRoomEquipmentRepository, RoomEquipmentRepository>();

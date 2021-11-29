@@ -1,189 +1,208 @@
-<div>
-    <body>
-        <div class="main-block">
+<body class="backgroundImage" style="background-attachment: fixed;">
+    <div class="main-block">
         <form action="/">
             <h1>Survey</h1>
             <div>
-            <br>
-            <table>
-                <tr>
-                <th class="first-col">STAFF</th>
-                <th>Rating</th>
-                </tr>
-                <tr>
-                    <td class="first-col">1. How knowledgeable was the staff at this hospital? </td>
-                    <td>
-                    <ngb-rating [(rate)]="answers[0]">
-                        <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                        </ng-template>
-                    </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">2. How professionally did the staff at this hospital behave?</td>
-                    <td>
-                    <ngb-rating [(rate)]="answers[1]">
-                        <ng-template let-fill="fill" let-index="index">
-                        <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                        </ng-template>
-                    </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">3. How easy was it to talk to the staff at this hospital about your medical condition(s)?</td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[2]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">4. How responsive was the staff at this hospital to your questions?</td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[3]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">5. How often did the staff at this hospital describe possible side effects before administering your medicine?</td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[4]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-            </table>
-            <br>
-            <table>
-                <tr>
-                    <th class="first-col">HOSPITAL</th>
-                    <th>Rating</th>
+                <br>
+                <table>
+                    <tr>
+                        <th class="first-col">STAFF</th>
+                        <th>Rating</th>
                     </tr>
-                <tr>
-                    <td class="first-col">1. During this stay at this hospital, how clean was your room kept? </td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[5]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">2. Overall, how hygienic did you find this hospital?</td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[6]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">3. How well did the meals served at this hospital meet your dietary needs?</td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[7]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">4. Over the course of your stay at this hospital, were you satisfied with the care you received </td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[8]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">5. How likely are you to recommend this hospital to others?
-                    </td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[9]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-            </table>
-            <br>
-            <table>
-                <tr>
-                    <th class="first-col">PORTAL</th>
-                    <th>Rating</th>
-                </tr>
-                <tr>
-                    <td class="first-col">1. How would you rate our website design?</td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[10]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">2. How would you rate the usability of our website?</td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[11]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">3. How easy was it to find the information you were looking for?</td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[12]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">4. How would you rate the performance of our website?</td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[13]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="first-col">5. How likely are you to recommend our website to your friends or family?</td>
-                    <td>
-                        <ngb-rating [(rate)]="answers[14]">
-                            <ng-template let-fill="fill" let-index="index">
-                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 1">&#9733;</span>
-                            </ng-template>
-                        </ngb-rating>
-                    </td>
-                </tr>
-            </table>
-            <br>
-            <div class="row">
-                <div class="col text-center">
-                    <button type="submit" href="/" class="btn btn-primary" (click)="createSurvey()" style="background-color: #07bcab; border-color: #07bcab;">Send</button>
+                    <tr>
+                        <td class="first-col">1. How knowledgeable was the staff at this hospital? </td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[0]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">2. How professionally did the staff at this hospital behave?</td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[1]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">3. How easy was it to talk to the staff at this hospital about your
+                            medical condition(s)?</td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[2]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">4. How responsive was the staff at this hospital to your questions?</td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[3]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">5. How often did the staff at this hospital describe possible side effects
+                            before administering your medicine?</td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[4]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <table>
+                    <tr>
+                        <th class="first-col">HOSPITAL</th>
+                        <th>Rating</th>
+                    </tr>
+                    <tr>
+                        <td class="first-col">1. During this stay at this hospital, how clean was your room kept? </td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[5]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">2. Overall, how hygienic did you find this hospital?</td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[6]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">3. How well did the meals served at this hospital meet your dietary needs?
+                        </td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[7]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">4. Over the course of your stay at this hospital, were you satisfied with
+                            the care you received </td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[8]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">5. How likely are you to recommend this hospital to others?
+                        </td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[9]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <table>
+                    <tr>
+                        <th class="first-col">PORTAL</th>
+                        <th>Rating</th>
+                    </tr>
+                    <tr>
+                        <td class="first-col">1. How would you rate our website design?</td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[10]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">2. How would you rate the usability of our website?</td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[11]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">3. How easy was it to find the information you were looking for?</td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[12]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">4. How would you rate the performance of our website?</td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[13]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="first-col">5. How likely are you to recommend our website to your friends or family?
+                        </td>
+                        <td>
+                            <ngb-rating [(rate)]="answers[14]">
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 1">&#9733;</span>
+                                </ng-template>
+                            </ngb-rating>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" href="/" class="btn btn-primary" (click)="createSurvey()"
+                            style="background-color: #07bcab; border-color: #07bcab;">Send</button>
+                    </div>
                 </div>
             </div>
-            </div>
         </form>
-        </div>
-    </body>
-</div>
+    </div>
+</body>

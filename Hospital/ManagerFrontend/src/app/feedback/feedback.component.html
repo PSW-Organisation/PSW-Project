@@ -1,32 +1,55 @@
-<div>
+<div class="titleDiv">
+    <table>
+        <tr>
+            <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"
+                    width="50" height="50"> </td>
+            <td>
+                <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn
+                    Hospital</p>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="backgroundImage">
     <div class="row">
         <div class="col"></div>
-        <div class="col justify-content-center d-flex"><h1 style="color: #02b3e4;">Feedbacks</h1></div>
+        <div class="col justify-content-center d-flex">
+            <h1 style="color: rgb(133 27 27);">Feedbacks</h1>
+        </div>
         <div class="col"></div>
     </div>
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead class="table-secondary">
-                <th scope="col">Username</th>
-                <th scope="col">Date</th>
-                <th scope="col">Text</th>
-                <th scope="col"></th>
-            </thead>
-            <tbody class="table-hover">
-                <tr class="table-primary" *ngFor="let feedback of feedbacks">
-                    <td class="table-primary">{{ feedback.anonymous ? 'Anonymous' : feedback.patientUsername }}</td>
-                    <td class="table-primary">{{ feedback.submissionDate | date:'dd.MM.yyyy.'}}</td>
-                    <td class="table-primary">{{ feedback.text }}</td>
-                    <td class="table-primary justify-content-center display-inline text-center">
-                        <button *ngIf="feedback.publishAllowed && !feedback.isPublished" (click)="publishFeedback(feedback)" class="btn btn-md text-light text-center" style="background-color: #02b3e4;">
-                            Publish
-                        </button>
-                        <button *ngIf="feedback.publishAllowed && feedback.isPublished" (click)="publishFeedback(feedback)" class="btn btn-secondary btn-md text-light text-center">
-                            Hide
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8">
+            <div class="table-responsive table-striped">
+                <table class="table text-center">
+                    <thead style="color:rgb(95, 173, 236); margin-bottom: 15px;">
+                        <th scope="col">Username</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Text</th>
+                        <th scope="col"></th>
+                    </thead>
+                    <tbody class="table-hover">
+                        <tr *ngFor="let feedback of feedbacks">
+                            <td>{{ feedback.anonymous ? 'Anonymous' : feedback.patientUsername }}</td>
+                            <td>{{ feedback.submissionDate | date:'dd.MM.yyyy.'}}</td>
+                            <td>{{ feedback.text }}</td>
+                            <td class="justify-content-center display-inline text-center">
+                                <button *ngIf="feedback.publishAllowed && !feedback.isPublished"
+                                    (click)="publishFeedback(feedback)" class="btn btn-md text-light text-center"
+                                    style="background-color: #02b3e4;">
+                                    Publish
+                                </button>
+                                <button *ngIf="feedback.publishAllowed && feedback.isPublished"
+                                    (click)="publishFeedback(feedback)" class="btn btn-secondary btn-md text-light text-center">
+                                    Hide
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col"></div>
     </div>
 </div>
