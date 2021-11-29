@@ -11,7 +11,7 @@ namespace ehealthcare.Service
         private HolidayRepository holidayRepository;
         private DoctorRepository doctorRepository;
         private WorkdayRepository workdayRepository;
-        private VisitRepository visitRepository;
+        //private VisitRepository visitRepository;
         private PersonalizedNotificationRepository notificationRepository;
        // private AccountRepository accountRepository;
 
@@ -20,7 +20,7 @@ namespace ehealthcare.Service
             holidayRepository = new HolidayXMLRepository();
             doctorRepository = new DoctorXMLRepository();
             workdayRepository = new WorkdayXMLRepository();
-            visitRepository = new VisitXMLRepository();
+            //visitRepository = new VisitXMLRepository();
             notificationRepository = new PersonalizedNotificationXMLRepository();
           //  accountRepository = new AccountXMLRepository();
         }
@@ -54,15 +54,17 @@ namespace ehealthcare.Service
             {
                 List<Account> accounts = new List<Account>();
                 //accounts.Add(accountRepository.GetAccountByPatientId(visit.PatientId));
-                notificationRepository.NotifyPatientOfCancellation(accounts, visit.VisitTime.StartTime);
+                notificationRepository.NotifyPatientOfCancellation(accounts, visit.StartTime);
             }
         }
 
         private List<Visit> CancelVisitsInHolidayRange(Holiday newHoliday)
         {
-            List<VisitTime> visitForCanceling = workdayRepository.GetVisitTimesInHolidayRange(newHoliday);
-            List<Visit> canceledVisits = visitRepository.CancelVisits(visitForCanceling, newHoliday.DoctorId);
+            /*List<VisitTime> visitForCanceling = workdayRepository.GetVisitTimesInHolidayRange(newHoliday);
+            //List<Visit> canceledVisits = visitRepository.CancelVisits(visitForCanceling, newHoliday.DoctorId);
             return canceledVisits;
+            */
+            return null;
         }
 
         private bool IsOverlapping(Holiday newHoliday)

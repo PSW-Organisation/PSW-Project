@@ -1,0 +1,78 @@
+<div class="container register" style="max-width: 100%;">
+    <button class="menu-toggle rounded">
+        <i class="fa fa-bars"></i>
+    </button>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a class="smooth-scroll" routerLink=""></a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="smooth-scroll" [routerLink]="['/profile']" [queryParams]="{username: username}">Profile</a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a class="smooth-scroll" href="#">Appointments</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="assets/logo.png" alt="" />
+            <span style="margin-left: 10px;" class="text-dark">
+                <i> LeanOn Hospital</i>
+            </span>
+        </div>
+        <div class="col-md-9 register-right" style="height: 100vh;">
+            <div class="row">
+                <div class="col">
+                    <h3 class="register-heading">Appointments</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-md-10">
+                    <div class="table-responsive" style="overflow-y: auto; height: 50vh;">
+                        <table class="table table-striped text-center">
+                            <thead style="position: sticky; top: 0; background-color:white;">
+                                <tr>
+                                    <th scope="col">Start time</th>
+                                    <th scope="col">End time</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Visit type</th>
+                                    <th scope="col">Doctor</th>
+                                    <th scope="col">Specialization</th>
+                                    <th scope="col">Survey</th>
+                                    <th scope="col">Cancel</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let visit of visits; index as i">
+                                    <td>{{visit.startTime | date: 'dd.MM.YYYY. HH:mm:ss'}}</td>
+                                    <td>{{visit.endTime | date: 'dd.MM.YYYY. HH:mm:ss'}}</td>
+                                    <td>{{getVisitStatus(visit)}}</td>
+                                    <td *ngIf="visit.visitType === 0">Examination</td>
+                                    <td *ngIf="visit.visitType === 1">Operation</td>
+                                    <td>{{ visit.doctor.fullName }}</td>
+                                    <td *ngIf="visit.doctor.specialization  === 0">Cardiologist</td>
+                                    <td *ngIf="visit.doctor.specialization  === 1">Dermatologist</td>
+                                    <td *ngIf="visit.doctor.specialization  === 2">Internist</td>
+                                    <td *ngIf="visit.doctor.specialization  === 3">Regular</td>
+                                    <td *ngIf="visit.isReviewed">Filled out</td>
+                                    <td *ngIf="!visit.isReviewed">
+                                        <button (click)="openSurvey(visit.id)" style="border-radius: 10px;" [disabled]="!isCompleted(visit) || visit.isCanceled" class="btn btn-warning btn-sm">
+                                            <i style="color: white" class="fa fa-star fa-2x"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button [disabled]="visit.isCanceled || isCompleted(visit)" style="border-radius: 10px;" class="btn btn-danger btn-sm" (click)="cancelAppointment(visit)"><i class="fa fa-times-circle fa-2x"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+        </div>
+    </div>
+</div>

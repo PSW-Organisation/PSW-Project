@@ -19,11 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
     <Folder Include="SharedModel\" />
-    <Folder Include="Schedule\Model\" />
-    <Folder Include="Schedule\Service\" />
-    <Folder Include="Schedule\Repository\" />
   </ItemGroup>
 
 </Project>

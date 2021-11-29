@@ -14,20 +14,21 @@ namespace ehealthcare.Proxies
 		public Visit GetVisit(string id);
 	}
 
-	public class VisitImpl : IVisit
+	public class VisitImpl 
 	{
-		VisitRepository visitRepository;
+		/*VisitRepository visitRepository;
 		public Visit GetVisit(string id)
 		{
 			if (visitRepository == null)
 				visitRepository = new VisitXMLRepository();
 			return visitRepository.Get(id);
-		}
+		}*/
+		
 	}
 
-	public class VisitProxyImpl : IVisit
+	public class VisitProxyImpl
 	{
-		private IVisit visit;
+		/*private IVisit visit;
 		public Visit GetVisit(string id)
 		{
 			if (visit == null)
@@ -36,5 +37,6 @@ namespace ehealthcare.Proxies
 			}
 			return visit.GetVisit(id);
 		}
+		*/
 	}
 }

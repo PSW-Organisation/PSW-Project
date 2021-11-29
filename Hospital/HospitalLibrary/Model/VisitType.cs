@@ -6,9 +6,9 @@ namespace ehealthcare.Model
     [TypeConverter(typeof(EnumDescriptionConverter))]
     public enum VisitType
     {
-        [Description("Pregled")]
+        [Description("Examination")]
         examination,
-        [Description("Operacija")]
+        [Description("Operation")]
         operation
     }
 }

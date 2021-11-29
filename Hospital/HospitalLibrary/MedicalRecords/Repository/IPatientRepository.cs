@@ -11,5 +11,6 @@ namespace HospitalLibrary.MedicalRecords.Repository
     {
         public void MapPatientAllergens(Patient patient, List<Allergen> allergens);
         public int Activate(Guid guid);
+        public List<Patient> GetMaliciousPatients();
     }
 }

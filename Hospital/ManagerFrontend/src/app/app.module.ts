@@ -30,6 +30,7 @@ import { SurveyService } from './survey/survey.service';
 import { ReportsViewComponent } from './reports-view/reports-view.component';
 import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { MaliciousPatientsComponent } from './malicious-patients/malicious-patients.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
     ReportsViewComponent,
     PharmacyProfileComponent,
     NotificationsComponent,
+    MaliciousPatientsComponent
   ],
   imports: [
     BrowserModule,

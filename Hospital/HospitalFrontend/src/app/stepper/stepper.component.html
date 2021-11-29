@@ -1,0 +1,193 @@
+<div class="logo">
+    <i aria-hidden="true">
+        <span class="text-dark">
+            <img src="assets/logo.png" alt="Logo" width="50" height="50">
+            LeanOn Hospital
+        </span>
+    </i>
+</div>
+<div class="backgroundImage" style="background-attachment: fixed;">
+    <div class="row" style="padding: 5%;">
+        <div class="col"></div>
+        <div class="col col-8">
+            <div class="bs-stepper">
+                <div class="bs-stepper-header" role="tablist">
+                    <!-- your steps here -->
+                    <div class="step" data-target="#date-part">
+                        <button type="button" class="step-trigger" role="tab" aria-controls="date-part"
+                            id="date-part-trigger">
+                            <span class="bs-stepper-circle">1</span>
+                            <span class="bs-stepper-label">Select date</span>
+                        </button>
+                    </div>
+                    <div class="line"></div>
+                    <div class="step" data-target="#specialization-part">
+                        <button type="button" class="step-trigger" role="tab" aria-controls="specialization-part"
+                            id="specialization-part-trigger">
+                            <span class="bs-stepper-circle">2</span>
+                            <span class="bs-stepper-label">Select specialization</span>
+                        </button>
+                    </div>
+                    <div class="line"></div>
+                    <div class="step" data-target="#doctor-part">
+                        <button type="button" class="step-trigger" role="tab" aria-controls="doctor-part"
+                            id="doctor-part-trigger">
+                            <span class="bs-stepper-circle">3</span>
+                            <span class="bs-stepper-label">Select doctor</span>
+                        </button>
+                    </div>
+                    <div class="line"></div>
+                    <div class="step" data-target="#confirm-part">
+                        <button type="button" class="step-trigger" role="tab" aria-controls="confirm-part"
+                            id="confirm-part-trigger">
+                            <span class="bs-stepper-circle">4</span>
+                            <span class="bs-stepper-label">Confirm appointment</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="bs-stepper-content">
+                    <!-- your steps content here -->
+                    <div id="date-part" class="content" role="tabpanel" aria-labelledby="date-part-trigger">
+                        <form [formGroup]="dateForm" (ngSubmit)="nextStep()">
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col align-self-center">
+                                    <label for="date" class="my-label">Choose preferred date of an appointment*</label>
+                                    <div class="input-group">
+                                        <input class="form-control form-control=lg" placeholder="dd.MM.yyyy." name="dp"
+                                            formControlName="dateControl" (dateSelect)="onDateSelect($event)"
+                                            id="selectedDate" ngbDatepicker #d="ngbDatepicker"
+                                            (change)="onDateSelect($event)"
+                                            [minDate]="{year: minDate.year(), month: minDate.month(), day: minDate.day()}"
+                                            [startDate]="{year: startDate.year(), month: startDate.month(), day:startDate.day()}"
+                                            [markDisabled]="isDisabled" required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" (click)="d.toggle()"
+                                                type="button">
+                                                <i class="fa fa-calendar"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="selectedDate?.invalid && selectedDate?.touched" class="my-error"
+                                        style="margin-top: 0.5rem;">
+                                        <div *ngIf="selectedDate?.errors?.['required']">
+                                            Appointment date is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <div class="col justify-content-end align-self-center d-flex">
+                                    <button class="btn btn-primary" [disabled]="dateForm.invalid">Next</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="specialization-part" class="content" role="tabpanel"
+                        aria-labelledby="specialization-part-trigger">
+                        <form [formGroup]="specForm" (ngSubmit)="getSelectedSpecialization()">
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <select style="height: unset;" formControlName="specControl" id="specialization"
+                                            class="form-select ng-dirty ng-valid">
+                                            <option *ngFor="let s of specializations; let i = index" [value]="s"
+                                                [selected]="i === 0">{{(s === 0 ? "Cardiology" : s === 1 ? "Dermatology"
+                                                :
+                                                s===2 ? "Internal medicine" : "General practicioner" )}}</option>
+                                        </select>
+                                        <label for="specialization">Select doctor's specialization</label>
+                                    </div>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col justify-content-start align-self-center d-flex">
+                                    <button class="btn btn-primary" (click)="backToPrevious(1)">Back</button>
+                                </div>
+                                <div class="col"></div>
+                                <div class="col justify-content-end align-self-center d-flex">
+                                    <button class="btn btn-primary" (click)="nextStep()">Next</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="doctor-part" class="content" role="tabpanel" aria-labelledby="doctor-part-trigger">
+                        <form [formGroup]="doctorForm" (ngSubmit)="getSelectedDoctor()">
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col-md-6">
+                                    <div class="form-floating" style="margin-bottom: 4%;">
+                                        <select style="height: unset;" formControlName="doctorControl" id="doctor"
+                                            class="form-select ng-dirty ng-valid">
+                                            <option *ngFor="let d of filteredDoctors; let i = index" [value]="d.id"
+                                                [selected]="i === 0">{{d.fullName}}</option>
+                                        </select>
+                                        <label for="specialization">Select preferred doctor</label>
+                                    </div>
+                                </div>
+                                <div class="col"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col justify-content-start align-self-center d-flex">
+                                    <button class="btn btn-primary" (click)="backToPrevious(2)">Back</button>
+                                </div>
+                                <div class="col"></div>
+                                <div class="col justify-content-end align-self-center d-flex">
+                                    <button class="btn btn-primary" (click)="nextStep()">Next</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="confirm-part" class="content" role="tabpanel" aria-labelledby="confirm-part-trigger">
+                        <div class="row">
+                            <div class="col"></div>
+                            <div *ngIf="!checkIfVisitsEmpty()" class="col-12">
+                                <p>Select preferred appointment:</p>
+                                <div class="table-responsive" style="overflow-y: auto; height: 50vh;">
+                                    <table id="myTable" class='table table-hover text-center'>
+                                        <thead
+                                            style="color:rgb(95, 173, 236); position: sticky; top: 0; background-color: #d7d8da;">
+                                            <tr>
+                                                <th scope="col">Start time</th>
+                                                <th scope="col">End time</th>
+                                                <th scope="col">Doctor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-hover">
+                                            <tr style="cursor: pointer;" *ngFor="let visit of visits" (click)="selectedRow(visit);"
+                                                [ngStyle]="{'background-color': visit.isCanceled === true ? 'rgb(95, 173, 236)' : '#d7d8da'}">
+                                                <td>{{visit.startTime | date: 'dd.MM.yyyy. HH:mm'}}</td>
+                                                <td>{{visit.endTime | date: 'dd.MM.yyyy. HH:mm'}}</td>
+                                                <td>{{selectedDoctorFullname}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div *ngIf="checkIfVisitsEmpty()" class="col-12 text-center">
+                                <h3>Doctor's schedule is full, please select another date.</h3>
+                            </div>
+                            <div class="col"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col justify-content-start align-self-center d-flex">
+                                <button class="btn btn-primary" (click)="backToPrevious(3)">Back</button>
+                            </div>
+                            <div class="col"></div>
+                            <div class="col justify-content-end align-self-center d-flex">
+                                <button class="btn btn-primary" (click)="createVisit()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
