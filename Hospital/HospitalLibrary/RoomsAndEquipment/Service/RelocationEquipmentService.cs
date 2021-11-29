@@ -37,8 +37,10 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
         private List<TermOfRelocationEquipment> GetUnionFromTermsOfRelocation(List<TermOfRelocationEquipment> sourceRoomTerms, List<TermOfRelocationEquipment> destinationRoomTerms)
         {
             List<TermOfRelocationEquipment> unionTerms = new List<TermOfRelocationEquipment>();
-            foreach (TermOfRelocationEquipment t in sourceRoomTerms) unionTerms.Add(t);
-            foreach (TermOfRelocationEquipment t in destinationRoomTerms) unionTerms.Add(t);
+            if(sourceRoomTerms != null)
+                foreach (TermOfRelocationEquipment t in sourceRoomTerms) unionTerms.Add(t);
+            if (destinationRoomTerms != null)
+                foreach (TermOfRelocationEquipment t in destinationRoomTerms) unionTerms.Add(t);
             return unionTerms;
         }
 
