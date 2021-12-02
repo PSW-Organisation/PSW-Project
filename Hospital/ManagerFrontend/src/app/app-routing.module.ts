@@ -12,6 +12,7 @@ import { HospitalExteriorViewComponent } from './room-managment/hospital-exterio
 import { SurveyComponent } from './survey/survey.component';
 
 import { BenefitsViewComponent } from './benefits-view/benefits-view.component';
+import { ReportsViewComponent } from './reports-view/reports-view.component';
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'pharmacies', component: PharmaciesViewComponent },
@@ -20,9 +21,10 @@ const routes: Routes = [
   { path: 'feedback', component: FeedBackComponent },
   { path: 'hospitalExterior', component: HospitalExteriorViewComponent },
   { path: 'orderingMedicine', component: OrderingMedicineComponent },
-  { path: 'medicineConsumption', component: MedicineConsumptionComponent},
-  {path:'benefits', component: BenefitsViewComponent},
+  { path: 'createReport', component: MedicineConsumptionComponent},
+  { path:'benefits', component: BenefitsViewComponent},
   { path: 'survey', component: SurveyComponent },
+  { path: 'reports', component: ReportsViewComponent}
 ];
 
 @NgModule({
