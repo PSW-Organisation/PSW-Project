@@ -27,6 +27,7 @@ import { MedicineConsumptionComponent } from './medicine-consumption/medicine-co
 
 import { BenefitsViewComponent } from './benefits-view/benefits-view.component';
 import { SurveyService } from './survey/survey.service';
+import { ReportsViewComponent } from './reports-view/reports-view.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SurveyService } from './survey/survey.service';
     SearchPharmaciesPipe,
     MedicineConsumptionComponent,
     BenefitsViewComponent,
-    SurveyComponent
+    SurveyComponent,
+    ReportsViewComponent
   ],
   imports: [
     BrowserModule,

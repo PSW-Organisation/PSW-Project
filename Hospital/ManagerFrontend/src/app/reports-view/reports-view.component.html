@@ -1,0 +1,20 @@
+<div class="titleDiv"> 
+    <table> 
+        <tr> 
+            <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+            <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn Hospital</p></td>
+        </tr>
+    </table>
+</div>
+
+<div class="backgroundImage">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <ul class="list-group">
+                    <a [routerLink]="" (click)="getReport(reportName)" class="list-group-item list-group-item-action" *ngFor = 'let reportName of reportNames'>{{reportName}}</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
