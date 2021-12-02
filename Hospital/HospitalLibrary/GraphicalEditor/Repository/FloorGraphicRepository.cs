@@ -10,23 +10,22 @@ namespace HospitalLibrary.GraphicalEditor.Repository
 {
     public class FloorGraphicRepository : GenericDbRepository<FloorGraphic>, IFloorGraphicRepository
     {
-        HospitalDbContext _dbContext;
+        private readonly HospitalDbContext _dbContext;
+
         public FloorGraphicRepository(HospitalDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public IList<FloorGraphic> GetAllWithRooms()
+        public List<FloorGraphic> GetAllWithRooms()
         {
-            return _dbContext.FloorGraphics
-                .Include(p => p.RoomGraphics)
-                .ThenInclude(r => r.Room).ToList();
+            return _dbContext.FloorGraphics.Include(p => p.RoomGraphics).ThenInclude(r => r.Room).ToList();
         }
 
         public int GetBuildingForRoom(int roomId)
         {
-            IEnumerable<FloorGraphic> fg = _dbContext.FloorGraphics.ToList().Where(f => f.RoomGraphics.Any(rg=>rg.RoomId.Equals(roomId)));
-            return fg.First().BuildingId;
+            FloorGraphic fg = _dbContext.FloorGraphics.First(f => f.RoomGraphics.Any(rg => rg.RoomId == roomId));
+            return fg.BuildingId;
         }
     }
 }

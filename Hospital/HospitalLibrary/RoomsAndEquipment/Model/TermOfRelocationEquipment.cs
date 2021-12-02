@@ -13,7 +13,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Model
         public int QuantityOfEquipment { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public int durationInMinutes { get; set; }
+        public int DurationInMinutes { get; set; }
         public bool FinishedRelocation { get; set; }
 
         public TermOfRelocationEquipment() {}
@@ -25,8 +25,8 @@ namespace HospitalLibrary.RoomsAndEquipment.Model
             NameOfEquipment = paramsOfRelocationEquipment.NameOfEquipment;
             QuantityOfEquipment = paramsOfRelocationEquipment.QuantityOfEquipment;
             StartTime = paramsOfRelocationEquipment.StartTime;
-            EndTime = paramsOfRelocationEquipment.endTime;
-            durationInMinutes = paramsOfRelocationEquipment.durationInMinutes;
+            EndTime = paramsOfRelocationEquipment.EndTime;
+            DurationInMinutes = paramsOfRelocationEquipment.DurationInMinutes;
             FinishedRelocation = false;
         }
 

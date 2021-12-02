@@ -1,5 +1,4 @@
-﻿using ehealthcare.Model;
-using FluentResults;
+﻿using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.GraphicalEditor.Repository;
 using System;
 using System.Collections.Generic;
@@ -9,18 +8,17 @@ namespace HospitalLibrary.GraphicalEditor.Service
 {
     public class RoomGraphicService : IRoomGraphicService
     {
-        private IRoomGraphicRepository _roomGraphicRepository;
+        private readonly IRoomGraphicRepository _roomGraphicRepository;
 
         public RoomGraphicService(IRoomGraphicRepository roomGraphicRepository)
         {
             _roomGraphicRepository = roomGraphicRepository;
         }
 
-        public Result<IList<RoomGraphic>> GetRoomGraphics()
+        public IList<RoomGraphic> GetRoomGraphics()
         {
-            return Result.Ok(_roomGraphicRepository.GetAll());
+            return _roomGraphicRepository.GetAll();
         }
 
-      
     }
 }

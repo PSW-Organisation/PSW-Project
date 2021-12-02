@@ -8,7 +8,7 @@ namespace ehealthcare.Model
     public class Reminder : Entity
     {
        // private IAccount lazyAccount;
-        private Account account;
+       // private Account account;
         private DateTime startTime;
         private List<DayOfWeek> days;
         private int hour;

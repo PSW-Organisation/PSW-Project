@@ -11,8 +11,8 @@ namespace HospitalLibrary.RoomsAndEquipment.Model
         public string NameOfEquipment { get; set; }
         public int QuantityOfEquipment { get; set; }
         public DateTime StartTime { get; set; }
-        public DateTime endTime { get; set; }
-        public int durationInMinutes { get; set; }
+        public DateTime EndTime { get; set; }
+        public int DurationInMinutes { get; set; }
         public ParamsOfRelocationEquipment() { }
         
     }

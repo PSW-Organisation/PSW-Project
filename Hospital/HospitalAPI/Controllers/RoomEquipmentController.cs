@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using HospitalAPI.DTO;
-using HospitalLibrary.GraphicalEditor.Model;
-using HospitalLibrary.GraphicalEditor.Service;
+using HospitalLibrary.RoomsAndEquipment.Model;
+using HospitalLibrary.RoomsAndEquipment.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,9 +16,8 @@ namespace HospitalAPI.Controllers
     [ApiController]
     public class RoomEquipmentController : ControllerBase
     {
-        private IMapper _mapper;
-        private IRoomEquipmentService _roomEquipmentService;
-
+        private readonly IMapper _mapper;
+        private readonly IRoomEquipmentService _roomEquipmentService;
 
         public RoomEquipmentController(IMapper mapper, IRoomEquipmentService roomEquipmentService)
         {
@@ -30,7 +29,7 @@ namespace HospitalAPI.Controllers
         public ActionResult<List<RoomEquipmentDTO>> GetAllEquipmentInRooms()
         {
             var result = _roomEquipmentService.GetAllEquipmentInRooms();
-            return Ok(result.Value.Select(r => _mapper.Map<RoomEquipmentDTO>(r)).ToList());
+            return Ok(result.Select(r => _mapper.Map<RoomEquipmentDTO>(r)).ToList());
         }
 
         [HttpGet]

@@ -2,9 +2,8 @@ using System;
 using System.ComponentModel;
 using HospitalLibrary.Model;
 
-namespace ehealthcare.Model
+namespace HospitalLibrary.RoomsAndEquipment.Model
 {
-    [Serializable]
     public class Room : EntityDb
     {
         public string Name { get; set; }
@@ -19,10 +18,5 @@ namespace ehealthcare.Model
         {
         }
 
-        override public string ToString()
-        {
-            return "ID Sobe: " + base.Id + " Sektor sobe: " + Sector + " Sprat sobe: " + Floor.ToString() + " Tip sobe: " +
-                   RoomType.ToString() + " Da li se soba renovira: " + IsRenovated.ToString();
-        }
     }
 }

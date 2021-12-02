@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace HospitalLibrary.RoomsAndEquipment.Repository
 {
-    public class RelocationEquipmentRepository : GenericDbRepository<TermOfRelocationEquipment>, IRelocationEquipmentRepository
+    public class TermOfRelocationEquipmentRepository : GenericDbRepository<TermOfRelocationEquipment>, ITermOfRelocationEquipmentRepository
     {
         private HospitalDbContext _dbContext;
 
-        public RelocationEquipmentRepository(HospitalDbContext dbContext) : base(dbContext)
+        public TermOfRelocationEquipmentRepository(HospitalDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }

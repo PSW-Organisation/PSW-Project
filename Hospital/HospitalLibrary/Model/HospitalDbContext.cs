@@ -51,6 +51,8 @@ namespace ehealthcare.Model
                 });
             });
 
+            #region RoomEquipments
+
             modelBuilder.Entity<RoomEquipment>().HasData(
                 new
                 {
@@ -87,6 +89,9 @@ namespace ehealthcare.Model
 
 
                 );
+
+            #endregion
+
             modelBuilder.Entity<PatientFeedback>().HasData(
                 new
                 {
@@ -99,6 +104,7 @@ namespace ehealthcare.Model
                     IsPublished = true
                 });
 
+            #region Rooms
 
             modelBuilder.Entity<Room>().HasData(
                 new
@@ -288,7 +294,10 @@ namespace ehealthcare.Model
                     Sector = "WS"
                 }
             );
-            
+
+            #endregion
+
+            #region FloorGraphicsWithRoomGraphics
 
             modelBuilder.Entity<FloorGraphic>(fg =>
             {
@@ -496,6 +505,9 @@ namespace ehealthcare.Model
                 });
             });
 
+            #endregion
+
+            #region TermOfRelocationEquipments
 
             modelBuilder.Entity<TermOfRelocationEquipment>().HasData(
                 new TermOfRelocationEquipment()
@@ -507,7 +519,7 @@ namespace ehealthcare.Model
                     QuantityOfEquipment = 2,
                     StartTime = new DateTime(2021, 11, 22, 1, 0, 0),
                     EndTime = new DateTime(2021, 11, 22, 1, 10, 0),
-                    durationInMinutes = 10,
+                    DurationInMinutes = 10,
                     FinishedRelocation = false
                 },
                 new TermOfRelocationEquipment()
@@ -519,7 +531,7 @@ namespace ehealthcare.Model
                     QuantityOfEquipment = 14,
                     StartTime = new DateTime(2021, 11, 22, 3, 30, 0),
                     EndTime = new DateTime(2021, 11, 22, 4, 10, 0),
-                    durationInMinutes = 40,
+                    DurationInMinutes = 40,
                     FinishedRelocation = false
                 },
                 new TermOfRelocationEquipment()
@@ -531,7 +543,7 @@ namespace ehealthcare.Model
                     QuantityOfEquipment = 8,
                     StartTime = new DateTime(2021, 11, 23, 7, 30, 0),
                     EndTime = new DateTime(2021, 11, 23, 7, 45, 0),
-                    durationInMinutes = 15,
+                    DurationInMinutes = 15,
                     FinishedRelocation = false
                 },
                 new TermOfRelocationEquipment()
@@ -543,7 +555,7 @@ namespace ehealthcare.Model
                     QuantityOfEquipment = 1,
                     StartTime = new DateTime(2021, 11, 23, 9, 0, 0),
                     EndTime = new DateTime(2021, 11, 23, 9, 25, 0),
-                    durationInMinutes = 25,
+                    DurationInMinutes = 25,
                     FinishedRelocation = false
                 },
                 new TermOfRelocationEquipment()
@@ -555,7 +567,7 @@ namespace ehealthcare.Model
                     QuantityOfEquipment = 1,
                     StartTime = new DateTime(2021, 11, 23, 10, 45, 0),
                     EndTime = new DateTime(2021, 11, 23, 11, 15, 0),
-                    durationInMinutes = 30,
+                    DurationInMinutes = 30,
                     FinishedRelocation = false
                 },
                 new TermOfRelocationEquipment()
@@ -567,13 +579,14 @@ namespace ehealthcare.Model
                     QuantityOfEquipment = 5,
                     StartTime = new DateTime(2021, 11, 23, 14, 30, 0),
                     EndTime = new DateTime(2021, 11, 23, 14, 50, 0),
-                    durationInMinutes = 20,
+                    DurationInMinutes = 20,
                     FinishedRelocation = false
                 }
-
-
-
             );
+
+            #endregion
+
+            #region ExteriorGraphics
 
             modelBuilder.Entity<ExteriorGraphic>().HasData(
             new ExteriorGraphic()
@@ -655,7 +668,7 @@ namespace ehealthcare.Model
             }
             );
 
-
+            #endregion
 
             modelBuilder.Entity<MedicalRecord>(m =>
             {

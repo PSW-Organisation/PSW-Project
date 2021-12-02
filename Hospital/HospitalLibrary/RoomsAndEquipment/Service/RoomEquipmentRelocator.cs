@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using HospitalLibrary.GraphicalEditor.Model;
-using HospitalLibrary.GraphicalEditor.Repository;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.RoomsAndEquipment.Repository;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +13,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
 
         public RoomEquipmentRelocator(IServiceScopeFactory scopeFactory)
         {
-            this._scopeFactory = scopeFactory;
+            _scopeFactory = scopeFactory;
         }
 
         public async Task RelocateEquipment(CancellationToken cancellationToken)
@@ -23,7 +21,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             while (!cancellationToken.IsCancellationRequested)
             {
                 DoRelocation();
-                await Task.Delay(1);
+                await Task.Delay(1 * 60 * 1000);
             }
         }
 
@@ -31,7 +29,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
         {
             using (var scope = _scopeFactory.CreateScope())
             {
-                var _relocationRepo = scope.ServiceProvider.GetRequiredService<IRelocationEquipmentRepository>();
+                var _relocationRepo = scope.ServiceProvider.GetRequiredService<ITermOfRelocationEquipmentRepository>();
                 var _roomEquipmentRepo = scope.ServiceProvider.GetRequiredService<IRoomEquipmentRepository>();
 
                 List<TermOfRelocationEquipment> termOfRelocation = _relocationRepo.CheckTermOfRelocationByDate();
@@ -41,8 +39,8 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
                     {
                         activeTermOfRelocation.FinishedRelocation = true;
                         _relocationRepo.Update(activeTermOfRelocation);
-                        RoomEquipment sourceRoomEquipment = _roomEquipmentRepo.GetEquipmentInRoomByName(activeTermOfRelocation.IdSourceRoom, activeTermOfRelocation.NameOfEquipment);
-                        RoomEquipment destinationRoomEquipment = _roomEquipmentRepo.GetEquipmentInRoomByName(activeTermOfRelocation.IdDestinationRoom, activeTermOfRelocation.NameOfEquipment);
+                        RoomEquipment sourceRoomEquipment = _roomEquipmentRepo.GetEquipmentInRoom(activeTermOfRelocation.IdSourceRoom, activeTermOfRelocation.NameOfEquipment);
+                        RoomEquipment destinationRoomEquipment = _roomEquipmentRepo.GetEquipmentInRoom(activeTermOfRelocation.IdDestinationRoom, activeTermOfRelocation.NameOfEquipment);
 
                         if (sourceRoomEquipment == null) continue;
                         sourceRoomEquipment.Quantity -= activeTermOfRelocation.QuantityOfEquipment;

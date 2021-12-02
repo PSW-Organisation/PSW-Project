@@ -7,27 +7,20 @@ using System.Text;
 
 namespace HospitalLibrary.RoomsAndEquipment.Service
 {
-    public class RelocationEquipmentService : IRelocationEquipmentService
+    public class TermOfRelocationEquipmentService : ITermOfRelocationEquipmentService
     {
 
-        private IRelocationEquipmentRepository _relocationEquipmentRepository;
+        private readonly ITermOfRelocationEquipmentRepository _relocationEquipmentRepository;
 
-        public RelocationEquipmentService(IRelocationEquipmentRepository relocationEquipmentRepository)
+        public TermOfRelocationEquipmentService(ITermOfRelocationEquipmentRepository relocationEquipmentRepository)
         {
             _relocationEquipmentRepository = relocationEquipmentRepository;
         }
-
-        public Result<IList<TermOfRelocationEquipment>> GetTermsOfRelocationEquipment()
-        {
-            throw new NotImplementedException();
-        }
-
         
         public List<TermOfRelocationEquipment> GetTermsOfRelocationByRoomId(int id)
         {
             return _relocationEquipmentRepository.GetTermsOfRelocationByRoomId(id);
         }
-        
 
         public void sortTerms(List<TermOfRelocationEquipment> terms) 
         {
@@ -72,7 +65,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             {
                 if (
                     !((timeInteval.StartTime < paramsOfRelocationEquipment.StartTime && timeInteval.EndTime < paramsOfRelocationEquipment.StartTime) ||
-                    (timeInteval.StartTime > paramsOfRelocationEquipment.endTime))
+                    (timeInteval.StartTime > paramsOfRelocationEquipment.EndTime))
                     )
                 {
                     unionTimeIntevalInRange.Add(timeInteval);
@@ -101,14 +94,14 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
                     );
                 }
                 timeInterval = unionTimeIntevalInRange[unionTimeIntevalInRange.Count - 1];
-                if (timeInterval.EndTime < paramsOfRelocationEquipment.endTime)
+                if (timeInterval.EndTime < paramsOfRelocationEquipment.EndTime)
                 {
-                    freeTimeIntevalInRange.Add(new TimeInterval(timeInterval.EndTime, paramsOfRelocationEquipment.endTime));
+                    freeTimeIntevalInRange.Add(new TimeInterval(timeInterval.EndTime, paramsOfRelocationEquipment.EndTime));
                 }
             }
             else
             {
-                freeTimeIntevalInRange.Add(new TimeInterval(paramsOfRelocationEquipment.StartTime, paramsOfRelocationEquipment.endTime));
+                freeTimeIntevalInRange.Add(new TimeInterval(paramsOfRelocationEquipment.StartTime, paramsOfRelocationEquipment.EndTime));
             }
             return freeTimeIntevalInRange;
         }
@@ -120,12 +113,12 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             {
                 TimeSpan durationOfFreeTimeInteval = freeTimeInteval.EndTime - freeTimeInteval.StartTime;
                 double totalMinutes = durationOfFreeTimeInteval.TotalMinutes;
-                double numberOfPossibleTermins = totalMinutes / paramsOfRelocationEquipment.durationInMinutes;
+                double numberOfPossibleTermins = totalMinutes / paramsOfRelocationEquipment.DurationInMinutes;
                 if (numberOfPossibleTermins >= 1)
                 {
                     int n = (int)numberOfPossibleTermins;
                     DateTime time = freeTimeInteval.StartTime;
-                    int dur = paramsOfRelocationEquipment.durationInMinutes;
+                    int dur = paramsOfRelocationEquipment.DurationInMinutes;
                     for (int i = 0; i < n; i++)
                     {
                         freePossibleTermsOfRelocation.Add(new TimeInterval(time.AddMinutes(i * dur), time.AddMinutes((i + 1) * dur)));

@@ -10,7 +10,7 @@ namespace ehealthcare.Model
     {
         private int numberOfReadNotifications;
         //private IAccount lazyAccount;
-        private Account account;
+        //private Account account;
         private int numberOfSpamActions;
         private List<DateTime> spamActionDates;
         private int numberOfCancelledVisits;

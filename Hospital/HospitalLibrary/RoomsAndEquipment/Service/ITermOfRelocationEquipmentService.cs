@@ -6,9 +6,8 @@ using System.Text;
 
 namespace HospitalLibrary.RoomsAndEquipment.Service
 {
-    public interface IRelocationEquipmentService
+    public interface ITermOfRelocationEquipmentService
     {
-        Result<IList<TermOfRelocationEquipment>> GetTermsOfRelocationEquipment();
         List<TimeInterval> GetFreePossibleTermsOfRelocation(ParamsOfRelocationEquipment paramsOfRelocationEquipment);
         List<TermOfRelocationEquipment> GetTermsOfRelocationByRoomId(int id);
         TermOfRelocationEquipment CreateTermsOfRelocation(ParamsOfRelocationEquipment paramsOfRelocationEquipment);

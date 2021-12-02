@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HospitalLibrary.RoomsAndEquipment.Repository
 {
-    public interface IRelocationEquipmentRepository : IGenericRepository<TermOfRelocationEquipment>
+    public interface ITermOfRelocationEquipmentRepository : IGenericRepository<TermOfRelocationEquipment>
     {
         List<TermOfRelocationEquipment> CheckTermOfRelocationByDate();
         int GetNewID();

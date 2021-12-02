@@ -1,16 +1,16 @@
 ﻿using ehealthcare.Model;
-using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.Repository.DbRepository;
+using HospitalLibrary.RoomsAndEquipment.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HospitalLibrary.GraphicalEditor.Repository
+namespace HospitalLibrary.RoomsAndEquipment.Repository
 {
     public class RoomEquipmentRepository : GenericDbRepository<RoomEquipment>, IRoomEquipmentRepository
     {
-        HospitalDbContext _dbContext;
-        
+        private readonly HospitalDbContext _dbContext;
+
         public RoomEquipmentRepository(HospitalDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
@@ -31,15 +31,15 @@ namespace HospitalLibrary.GraphicalEditor.Repository
         public List<RoomEquipment> GetEquipmentInRooms(string equipmentName)
         {
             return _dbContext.RoomEquipments.Where(c => c.Name.ToLower().Equals(equipmentName.ToLower()))
-        .Select(c => c).ToList();
+                .Select(c => c).ToList();
         }
-        
+
         public List<RoomEquipment> GetAllEquipmentInRoom(int roomId)
         {
             return _dbContext.RoomEquipments.Where(e => e.RoomId == roomId).ToList();
         }
 
-        public RoomEquipment GetEquipmentInRoomByName(int idRoom, string nameOfEquipment)
+        public RoomEquipment GetEquipmentInRoom(int idRoom, string nameOfEquipment)
         {
             return _dbContext.RoomEquipments.SingleOrDefault(c => c.Name.Equals(nameOfEquipment) && c.RoomId == idRoom);
         }
