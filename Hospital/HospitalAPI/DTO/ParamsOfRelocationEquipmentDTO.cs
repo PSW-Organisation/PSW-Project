@@ -13,36 +13,13 @@ namespace HospitalAPI.DTO
         public string NameOfEquipment { get; set; }
         public int QuantityOfEquipment { get; set; }
         public DateTime StartTime { get; set; }
-        public DateTime endTime { get; set; }
-        public int durationInMinutes { get; set; }
+        public DateTime EndTime { get; set; }
+        public int DurationInMinutes { get; set; }
 
-        public ParamsOfRelocationEquipmentDTO(){}
-        
-        public ParamsOfRelocationEquipment GenerateModel()
+        public ParamsOfRelocationEquipmentDTO()
         {
-            ParamsOfRelocationEquipment paramsOfRelocationEquipment = new ParamsOfRelocationEquipment();
-            paramsOfRelocationEquipment.IdSourceRoom = IdSourceRoom;
-            paramsOfRelocationEquipment.IdDestinationRoom = IdDestinationRoom;
-            paramsOfRelocationEquipment.NameOfEquipment = NameOfEquipment;
-            paramsOfRelocationEquipment.QuantityOfEquipment = QuantityOfEquipment;
-            paramsOfRelocationEquipment.StartTime = StartTime;
-            paramsOfRelocationEquipment.endTime = endTime;
-            paramsOfRelocationEquipment.durationInMinutes = durationInMinutes;
-
-            return paramsOfRelocationEquipment;
         }
 
-        public ParamsOfRelocationEquipmentDTO(TermOfRelocationEquipment termOfRelocationEquipment)
-        {
-            IdSourceRoom = termOfRelocationEquipment.IdSourceRoom;
-            IdDestinationRoom = termOfRelocationEquipment.IdDestinationRoom;
-            NameOfEquipment = termOfRelocationEquipment.NameOfEquipment;
-            QuantityOfEquipment = termOfRelocationEquipment.QuantityOfEquipment;
-            StartTime = termOfRelocationEquipment.StartTime;
-            endTime = termOfRelocationEquipment.EndTime;
-            durationInMinutes = termOfRelocationEquipment.durationInMinutes;
-        }
-        
     }
 
 

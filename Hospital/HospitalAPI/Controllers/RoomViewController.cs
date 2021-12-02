@@ -6,10 +6,11 @@ using FluentResults;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ehealthcare.Model;
 using HospitalLibrary.GraphicalEditor.Model;
-using ehealthcare.Service;
 using System;
+using HospitalLibrary.RoomsAndEquipment.Model;
+using ehealthcare.Model;
+using HospitalLibrary.RoomsAndEquipment.Service;
 
 namespace HospitalAPI.Controllers
 {
@@ -17,18 +18,14 @@ namespace HospitalAPI.Controllers
     [ApiController]
     public class RoomViewController : ControllerBase
     {
-        private IMapper _mapper;
-        private IRoomGraphicService _roomGraphicService;
-        private IFloorGraphicService _floorGraphicService;
-        private IRoomService _roomService;
-        private readonly HospitalDbContext _dbcontext;
+        private readonly IMapper _mapper;
+        private readonly IRoomGraphicService _roomGraphicService;
+        private readonly IFloorGraphicService _floorGraphicService;
 
-        public RoomViewController(IMapper mapper, IRoomGraphicService roomGraphicService, IRoomService roomService, IFloorGraphicService floorGraphicService, HospitalDbContext dbcontext)
+        public RoomViewController(IMapper mapper, IRoomGraphicService roomGraphicService, IFloorGraphicService floorGraphicService)
         {
-            _dbcontext = dbcontext;
             _mapper = mapper;
             _roomGraphicService = roomGraphicService;
-            _roomService = roomService;
             _floorGraphicService = floorGraphicService;
         }
 
@@ -36,7 +33,7 @@ namespace HospitalAPI.Controllers
         public ActionResult<List<RoomGraphicDTO>> GetRoomGraphics()
         {
             var result = _roomGraphicService.GetRoomGraphics();
-            return Ok(result.Value.Select(r => _mapper.Map<RoomGraphicDTO>(r)).ToList());
+            return Ok(result.Select(r => _mapper.Map<RoomGraphicDTO>(r)).ToList());
         }
 
         [HttpGet]
@@ -44,37 +41,8 @@ namespace HospitalAPI.Controllers
         public ActionResult<List<FloorGraphicDTO>> GetFloorGraphics()
         {
             var result = _floorGraphicService.GetFloorGraphics();
-            return Ok(result.Value.Select(r => _mapper.Map<FloorGraphicDTO>(r)).ToList());
+            return Ok(result.Select(r => _mapper.Map<FloorGraphicDTO>(r)).ToList());
         }
-
-        [HttpGet]
-        [Route("rooms")]
-        public ActionResult<IList<Room>> GetRoomsByName([FromQuery(Name = "name")] string name)
-        {
-            if (name == null) name = "";
-            var result = Result.Ok(_roomService.GetAllByName(name));
-            return Ok(result.Value.Select(r => _mapper.Map<RoomDTO>(r)).ToList());
-        }
-
-        [HttpPut]
-        public IActionResult Put(RoomDTO dto)
-        {
-            Room room = _dbcontext.Rooms.SingleOrDefault(room => room.Id.Equals(dto.Id));
-            room.RoomType = dto.RoomType;
-            room.Name = dto.Name;
-            room.Sector = dto.Sector;
-            Room updatedRoom = _roomService.SetRoom(room);
-
-            if (updatedRoom == null) {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(_mapper.Map<RoomDTO>(updatedRoom));
-            }
-        }
-
-
 
     }
 }

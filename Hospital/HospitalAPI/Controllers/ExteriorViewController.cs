@@ -16,23 +16,22 @@ namespace HospitalAPI.Controllers
 {
     [Route("api/exterior")]
     [ApiController]
-    public class ExteriorViewController : Controller
+    public class ExteriorViewController : ControllerBase
     {
-        private IMapper _mapper;
-        private IExteriorGraphicService _exteriorGraphicService;
-
+        private readonly IMapper _mapper;
+        private readonly IExteriorGraphicService _exteriorGraphicService;
 
         public ExteriorViewController(IMapper mapper, IExteriorGraphicService exteriorGraphicService)
         {
             _mapper = mapper;
             _exteriorGraphicService = exteriorGraphicService;
         }
+
         [HttpGet]
         public ActionResult<List<ExteriorGraphicDTO>> GetExteriorGraphics()
         {
             var result = _exteriorGraphicService.GetExteriorGraphics();
-            return Ok(result.Value.Select(r => _mapper.Map<ExteriorGraphicDTO>(r)).ToList());
-            //return Ok(new ExteriorGraphicDTO() { Name="a"});
+            return Ok(result.Select(r => _mapper.Map<ExteriorGraphicDTO>(r)).ToList());
         }
 
     }

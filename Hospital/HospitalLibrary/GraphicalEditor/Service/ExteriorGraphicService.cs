@@ -9,15 +9,16 @@ namespace HospitalLibrary.GraphicalEditor.Service
 {
     public class ExteriorGraphicService : IExteriorGraphicService
     {
-        private IExteriorGraphicRepository _exteriorGraphicRepository;
+        private readonly IExteriorGraphicRepository _exteriorGraphicRepository;
+        
         public ExteriorGraphicService(IExteriorGraphicRepository exteriorGraphicRepository)
         {
             _exteriorGraphicRepository = exteriorGraphicRepository;
         }
 
-        public Result<IList<ExteriorGraphic>> GetExteriorGraphics()
+        public IList<ExteriorGraphic> GetExteriorGraphics()
         {
-            return Result.Ok(_exteriorGraphicRepository.GetAll());
+            return _exteriorGraphicRepository.GetAll();
         }
     }
 }

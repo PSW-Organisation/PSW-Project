@@ -1,16 +1,15 @@
-﻿using HospitalLibrary.GraphicalEditor.Model;
-using HospitalLibrary.GraphicalEditor.Repository;
+﻿using HospitalLibrary.RoomsAndEquipment.Model;
+using HospitalLibrary.RoomsAndEquipment.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FluentResults;
 
-namespace HospitalLibrary.GraphicalEditor.Service
+namespace HospitalLibrary.RoomsAndEquipment.Service
 {
     public class RoomEquipmentService : IRoomEquipmentService
     {
-        private IRoomEquipmentRepository _roomEquipmentRepository;
+        private readonly IRoomEquipmentRepository _roomEquipmentRepository;
 
         public RoomEquipmentService(IRoomEquipmentRepository roomEquipmentRepository)
         {
@@ -22,9 +21,9 @@ namespace HospitalLibrary.GraphicalEditor.Service
             return _roomEquipmentRepository.GetEquipmentInRooms(equipmentName);
         }
 
-        public Result<IList<RoomEquipment>> GetAllEquipmentInRooms()
+        public IList<RoomEquipment> GetAllEquipmentInRooms()
         {
-            return Result.Ok(_roomEquipmentRepository.GetAll());
+            return _roomEquipmentRepository.GetAll();
         }
 
         public List<RoomEquipmentQuantityDTO> GetRoomEquipmentQuantity()
@@ -35,7 +34,6 @@ namespace HospitalLibrary.GraphicalEditor.Service
         public List<RoomEquipment> GetAllEquipmentInRoom(int roomId)
         {
             return _roomEquipmentRepository.GetAllEquipmentInRoom(roomId);
-
         }
     }
 }

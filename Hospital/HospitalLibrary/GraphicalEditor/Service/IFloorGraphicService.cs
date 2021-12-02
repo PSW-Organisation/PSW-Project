@@ -7,7 +7,7 @@ namespace HospitalLibrary.GraphicalEditor.Service
 {
     public interface IFloorGraphicService
     {
-        Result<IList<FloorGraphic>> GetFloorGraphics();
-        Result<int> GetBuildingForRoom(int roomId);
+        List<FloorGraphic> GetFloorGraphics();
+        int GetBuildingForRoom(int roomId);
     }
 }

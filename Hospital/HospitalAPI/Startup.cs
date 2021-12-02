@@ -12,8 +12,6 @@ using FluentValidation;
 using AutoMapper;
 using HospitalLibrary.GraphicalEditor.Service;
 using HospitalLibrary.GraphicalEditor.Repository;
-using ehealthcare.Service;
-using ehealthcare.Repository;
 using HospitalLibrary.Repository;
 using HospitalLibrary.Repository.DbRepository;
 using HospitalLibrary.FeedbackAndSurvey.Service;
@@ -87,13 +85,13 @@ namespace HospitalAPI
             services.AddScoped<IFloorGraphicRepository, FloorGraphicRepository>();
 
             services.AddScoped<IRoomService, RoomService>();
-            services.AddScoped<IRoomRepository, RoomDbRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
 
             services.AddScoped<IExteriorGraphicService, ExteriorGraphicService>();
             services.AddScoped<IExteriorGraphicRepository, ExteriorGraphicRepository>();
 
-            services.AddScoped<IRelocationEquipmentService, RelocationEquipmentService>();
-            services.AddScoped<IRelocationEquipmentRepository, RelocationEquipmentRepository>();
+            services.AddScoped<ITermOfRelocationEquipmentService, TermOfRelocationEquipmentService>();
+            services.AddScoped<ITermOfRelocationEquipmentRepository, TermOfRelocationEquipmentRepository>();
             
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<GenericSTRINGIDRepository<User>, UserDbRepository>();

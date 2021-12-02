@@ -1,6 +1,6 @@
-namespace ehealthcare.Model
+namespace HospitalLibrary.RoomsAndEquipment.Model
 {
-	public enum RoomType
+    public enum RoomType
     {
         examination,
         operation,

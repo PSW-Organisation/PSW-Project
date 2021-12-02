@@ -1,7 +1,6 @@
 ﻿using ehealthcare.Model;
 using ehealthcare.PatientApp.ApplicationData;
 using ehealthcare.Repository;
-using ehealthcare.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

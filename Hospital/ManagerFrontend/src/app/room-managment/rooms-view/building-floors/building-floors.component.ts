@@ -44,7 +44,7 @@ export class BuildingFloorsComponent implements OnInit {
 
   change() {
     this._http
-      .put<any>('http://localhost:42789/api/rooms', this.updatedRoom)
+      .put<any>('http://localhost:42789/api/baseRooms', this.updatedRoom)
       .subscribe((data) => {
         this.postId = data.id;
         this.floors[this.selectedFloorNumber].roomGraphics.filter(

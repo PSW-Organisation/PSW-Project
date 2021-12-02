@@ -8,21 +8,21 @@ namespace HospitalLibrary.GraphicalEditor.Service
 {
     public class FloorGraphicService : IFloorGraphicService
     {
-        private IFloorGraphicRepository _floorGraphicRepository;
+        private readonly IFloorGraphicRepository _floorGraphicRepository;
 
         public FloorGraphicService(IFloorGraphicRepository floorGraphicRepository)
         {
             _floorGraphicRepository = floorGraphicRepository;
         }
 
-        public Result<IList<FloorGraphic>> GetFloorGraphics()
+        public List<FloorGraphic> GetFloorGraphics()
         {
-            return Result.Ok(_floorGraphicRepository.GetAllWithRooms());
+            return _floorGraphicRepository.GetAllWithRooms();
         }
 
-        public Result<int> GetBuildingForRoom(int roomId)
+        public int GetBuildingForRoom(int roomId)
         {
-            return Result.Ok(_floorGraphicRepository.GetBuildingForRoom(roomId));
+            return _floorGraphicRepository.GetBuildingForRoom(roomId);
         }
     }
 }

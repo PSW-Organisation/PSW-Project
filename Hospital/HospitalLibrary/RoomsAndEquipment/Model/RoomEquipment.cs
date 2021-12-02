@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HospitalLibrary.GraphicalEditor.Model
+namespace HospitalLibrary.RoomsAndEquipment.Model
 {
     public class RoomEquipment : EntityDb
     {
         public int Quantity { get; set; }
-        public string Name  { get; set; }
+        public string Name { get; set; }
         public string Type { get; set; }
         public int RoomId { get; set; }
 
@@ -23,5 +23,6 @@ namespace HospitalLibrary.GraphicalEditor.Model
             Type = roomEquipment.Type;
             RoomId = roomEquipment.RoomId;
         }
+
     }
 }

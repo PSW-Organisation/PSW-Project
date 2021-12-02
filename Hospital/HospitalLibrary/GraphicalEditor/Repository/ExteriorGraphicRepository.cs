@@ -10,7 +10,7 @@ namespace HospitalLibrary.GraphicalEditor.Repository
 {
     public class ExteriorGraphicRepository : GenericDbRepository<ExteriorGraphic>, IExteriorGraphicRepository
     {
-        private HospitalDbContext _dbContext;
+        private readonly HospitalDbContext _dbContext;
 
         public ExteriorGraphicRepository(HospitalDbContext dbContext) : base(dbContext)
         {

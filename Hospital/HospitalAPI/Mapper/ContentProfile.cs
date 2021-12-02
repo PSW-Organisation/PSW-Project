@@ -9,6 +9,7 @@ using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.Model;
+using HospitalLibrary.RoomsAndEquipment.Model;
 
 namespace HospitalAPI.Mapper
 {
@@ -30,6 +31,9 @@ namespace HospitalAPI.Mapper
 
             CreateMap<PatientDto, Patient>().ConstructUsing(x => new Patient(x.Username)).ReverseMap();
             CreateMap<SurveyQuestionDto, Survey>();
+
+            CreateMap<ParamsOfRelocationEquipmentDTO, ParamsOfRelocationEquipment>();
+            CreateMap<TermOfRelocationEquipment, ParamsOfRelocationEquipmentDTO>();
         }
     }
 }

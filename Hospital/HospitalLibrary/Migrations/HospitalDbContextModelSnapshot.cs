@@ -439,7 +439,7 @@ namespace HospitalLibrary.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("durationInMinutes")
+                    b.Property<int>("DurationInMinutes")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -457,7 +457,7 @@ namespace HospitalLibrary.Migrations
                             NameOfEquipment = "bed",
                             QuantityOfEquipment = 2,
                             StartTime = new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 10
+                            DurationInMinutes = 10
                         },
                         new
                         {
@@ -469,7 +469,7 @@ namespace HospitalLibrary.Migrations
                             NameOfEquipment = "needle",
                             QuantityOfEquipment = 14,
                             StartTime = new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 40
+                            DurationInMinutes = 40
                         },
                         new
                         {
@@ -481,7 +481,7 @@ namespace HospitalLibrary.Migrations
                             NameOfEquipment = "infusion",
                             QuantityOfEquipment = 8,
                             StartTime = new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 15
+                            DurationInMinutes = 15
                         },
                         new
                         {
@@ -493,7 +493,7 @@ namespace HospitalLibrary.Migrations
                             NameOfEquipment = "table",
                             QuantityOfEquipment = 1,
                             StartTime = new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 25
+                            DurationInMinutes = 25
                         },
                         new
                         {
@@ -505,7 +505,7 @@ namespace HospitalLibrary.Migrations
                             NameOfEquipment = "xrayMachine",
                             QuantityOfEquipment = 1,
                             StartTime = new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 30
+                            DurationInMinutes = 30
                         },
                         new
                         {
@@ -517,7 +517,7 @@ namespace HospitalLibrary.Migrations
                             NameOfEquipment = "chair",
                             QuantityOfEquipment = 5,
                             StartTime = new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified),
-                            durationInMinutes = 20
+                            DurationInMinutes = 20
                         });
                 });
 

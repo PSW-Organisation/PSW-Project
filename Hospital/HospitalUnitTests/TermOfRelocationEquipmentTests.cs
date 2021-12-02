@@ -24,10 +24,10 @@ namespace HospitalUnitTests
             int numberOfFreeInterval)
         {
             
-            var stubRepository = new Mock<IRelocationEquipmentRepository>();
+            var stubRepository = new Mock<ITermOfRelocationEquipmentRepository>();
             stubRepository.Setup(par => par.GetTermsOfRelocationByRoomId(It.Is<int>(id => id == sourceRoomId))).Returns(sourceRoomTerms);
             stubRepository.Setup(par => par.GetTermsOfRelocationByRoomId(It.Is<int>(id => id == destinationRoomId))).Returns(destinationRoomTerms);
-            RelocationEquipmentService relocationEquipmentService = new RelocationEquipmentService(stubRepository.Object);
+            TermOfRelocationEquipmentService relocationEquipmentService = new TermOfRelocationEquipmentService(stubRepository.Object);
    
             List<TimeInterval> freeTimeInterval = relocationEquipmentService.GetFreePossibleTermsOfRelocation(paramsOfRelocationEquipment);
 
@@ -55,8 +55,8 @@ namespace HospitalUnitTests
                     NameOfEquipment = "infusion",
                     QuantityOfEquipment = 3,
                     StartTime = new DateTime(2021, 11, 22, 15, 23, 0),
-                    endTime = new DateTime(2021, 11, 22, 16, 20, 0),
-                    durationInMinutes = 10
+                    EndTime = new DateTime(2021, 11, 22, 16, 20, 0),
+                    DurationInMinutes = 10
                 };
             }
             else if (idParams == 2)
@@ -68,8 +68,8 @@ namespace HospitalUnitTests
                     NameOfEquipment = "bed",
                     QuantityOfEquipment = 3,
                     StartTime = new DateTime(2021, 11, 22, 2, 15, 0),
-                    endTime = new DateTime(2021, 11, 22, 6, 30, 0),
-                    durationInMinutes = 15
+                    EndTime = new DateTime(2021, 11, 22, 6, 30, 0),
+                    DurationInMinutes = 15
                 };
             }
             return paramsOfRelocationEquipment;
@@ -91,7 +91,7 @@ namespace HospitalUnitTests
                         QuantityOfEquipment = 2,
                         StartTime = new DateTime(2021, 11, 22, 1, 0, 0),
                         EndTime = new DateTime(2021, 11, 22, 1, 10, 0),
-                        durationInMinutes = 10,
+                        DurationInMinutes = 10,
                         FinishedRelocation = false
                     },
                     new TermOfRelocationEquipment()
@@ -103,7 +103,7 @@ namespace HospitalUnitTests
                         QuantityOfEquipment = 14,
                         StartTime = new DateTime(2021, 11, 22, 3, 30, 0),
                         EndTime = new DateTime(2021, 11, 22, 4, 10, 0),
-                        durationInMinutes = 40,
+                        DurationInMinutes = 40,
                         FinishedRelocation = false
                     },
                     new TermOfRelocationEquipment()
@@ -115,7 +115,7 @@ namespace HospitalUnitTests
                         QuantityOfEquipment = 1,
                         StartTime = new DateTime(2021, 11, 23, 10, 45, 0),
                         EndTime = new DateTime(2021, 11, 23, 11, 15, 0),
-                        durationInMinutes = 30,
+                        DurationInMinutes = 30,
                         FinishedRelocation = false
                     }
                 };

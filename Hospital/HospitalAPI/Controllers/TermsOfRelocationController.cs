@@ -16,36 +16,32 @@ namespace HospitalAPI.Controllers
     [ApiController]
     public class TermsOfRelocationController : ControllerBase
     {
-        private IMapper _mapper;
-        private IRelocationEquipmentService _relocationEquipmentService;
+        private readonly IMapper _mapper;
+        private readonly ITermOfRelocationEquipmentService _relocationEquipmentService;
 
-        public TermsOfRelocationController(IMapper mapper, IRelocationEquipmentService relocationEquipmentService)
+        public TermsOfRelocationController(IMapper mapper, ITermOfRelocationEquipmentService relocationEquipmentService)
         {
             _mapper = mapper;
             _relocationEquipmentService = relocationEquipmentService;
         }
 
-
         [HttpPost]
-        public IActionResult GetTermsOfRelocation([FromBody] ParamsOfRelocationEquipmentDTO paramsOfRelocationEquipmentDTO)
+        public ActionResult<List<TimeInterval>> GetTermsOfRelocation([FromBody] ParamsOfRelocationEquipmentDTO paramsOfRelocationEquipmentDTO)
         {
-            ParamsOfRelocationEquipment paramsOfRelocationEquipment = paramsOfRelocationEquipmentDTO.GenerateModel();
-
-            List<TimeInterval> listOfPossibleTermsOfRelocation =_relocationEquipmentService.GetFreePossibleTermsOfRelocation(paramsOfRelocationEquipment);
+            var paramsOfRelocationEquipment = _mapper.Map<ParamsOfRelocationEquipment>(paramsOfRelocationEquipmentDTO);
+            List<TimeInterval> listOfPossibleTermsOfRelocation = _relocationEquipmentService.GetFreePossibleTermsOfRelocation(paramsOfRelocationEquipment);
             return Ok(listOfPossibleTermsOfRelocation);   
         }
 
         [HttpPut]
-        public IActionResult CreateTermOfRelocation([FromBody] ParamsOfRelocationEquipmentDTO paramsOfRelocationEquipmentDTO)
+        public ActionResult<ParamsOfRelocationEquipmentDTO> CreateTermOfRelocation([FromBody] ParamsOfRelocationEquipmentDTO paramsOfRelocationEquipmentDTO)
         {
-            ParamsOfRelocationEquipment paramsOfRelocationEquipment = paramsOfRelocationEquipmentDTO.GenerateModel();
+            var paramsOfRelocationEquipment = _mapper.Map<ParamsOfRelocationEquipment>(paramsOfRelocationEquipmentDTO);
+            var termOfRelocationEquipment = _relocationEquipmentService.CreateTermsOfRelocation(paramsOfRelocationEquipment);
+            
+            if (termOfRelocationEquipment == null) return BadRequest("unsuccessfully");
 
-            TermOfRelocationEquipment termOfRelocationEquipment = _relocationEquipmentService.CreateTermsOfRelocation(paramsOfRelocationEquipment);
-            if (termOfRelocationEquipment == null)
-            {
-                return BadRequest("unsuccessfully");
-            }
-            ParamsOfRelocationEquipmentDTO termOfRelocationEquipmentDTO = new ParamsOfRelocationEquipmentDTO(termOfRelocationEquipment);
+            ParamsOfRelocationEquipmentDTO termOfRelocationEquipmentDTO = _mapper.Map<ParamsOfRelocationEquipmentDTO>(termOfRelocationEquipment);
             return Ok(termOfRelocationEquipmentDTO);
         }
 

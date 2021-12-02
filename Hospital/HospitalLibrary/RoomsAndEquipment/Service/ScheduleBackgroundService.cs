@@ -11,7 +11,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
 {
     public class ScheduleBackgroundService : BackgroundService
     {
-        private RoomEquipmentRelocator _roomEquipmentRelocator;
+        private readonly RoomEquipmentRelocator _roomEquipmentRelocator;
 
         public ScheduleBackgroundService(IServiceScopeFactory scopeFactory)
         {

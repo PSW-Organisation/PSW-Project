@@ -16,8 +16,9 @@ namespace HospitalAPI.Controllers
     [ApiController]
     public class FloorGraphicController : ControllerBase
     {
-        private IFloorGraphicService _floorGraphicService;
-        private IMapper _mapper;
+        private readonly IFloorGraphicService _floorGraphicService;
+        private readonly IMapper _mapper;
+
         public FloorGraphicController(IFloorGraphicService floorGraphicService, IMapper mapper)
         {
             _floorGraphicService = floorGraphicService;
@@ -27,7 +28,8 @@ namespace HospitalAPI.Controllers
         [HttpGet("{roomId}")]
         public int GetBuildingForRoom(int roomId)
         {
-            return _floorGraphicService.GetBuildingForRoom(roomId).Value;
+            return _floorGraphicService.GetBuildingForRoom(roomId);
         }
+
     }
 }

@@ -119,7 +119,7 @@ namespace HospitalLibrary.Migrations
                     QuantityOfEquipment = table.Column<int>(nullable: false),
                     StartTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
-                    durationInMinutes = table.Column<int>(nullable: false),
+                    DurationInMinutes = table.Column<int>(nullable: false),
                     FinishedRelocation = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -388,7 +388,7 @@ namespace HospitalLibrary.Migrations
 
             migrationBuilder.InsertData(
                 table: "TermOfRelocationEquipments",
-                columns: new[] { "Id", "EndTime", "FinishedRelocation", "IdDestinationRoom", "IdSourceRoom", "NameOfEquipment", "QuantityOfEquipment", "StartTime", "durationInMinutes" },
+                columns: new[] { "Id", "EndTime", "FinishedRelocation", "IdDestinationRoom", "IdSourceRoom", "NameOfEquipment", "QuantityOfEquipment", "StartTime", "DurationInMinutes" },
                 values: new object[,]
                 {
                     { 6, new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified), false, 11, 10, "chair", 5, new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified), 20 },

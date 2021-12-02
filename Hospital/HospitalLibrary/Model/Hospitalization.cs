@@ -14,7 +14,7 @@ namespace ehealthcare.Model
         private DateTime startTime;
         private DateTime endTime;
         private IRoom lazyRoom;
-        private Room room;
+        private RoomOld room;
         private IPatient lazyPatient;
         private Patient patient;
         private bool isActive;
@@ -50,7 +50,7 @@ namespace ehealthcare.Model
         }
 
         [System.Xml.Serialization.XmlIgnore]
-        public Room Room
+        public RoomOld Room
         {
             get
             {
@@ -63,11 +63,11 @@ namespace ehealthcare.Model
             set
             {
                 room = value;
-                //RoomId = value.Id;
+                RoomId = value.Id;
             }
         }
 
-        public int RoomId { get; set; }
+        public String RoomId { get; set; }
 
         [System.Xml.Serialization.XmlIgnore]
         public Patient Patient

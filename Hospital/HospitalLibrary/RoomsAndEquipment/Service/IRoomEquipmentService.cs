@@ -1,17 +1,17 @@
 ﻿using FluentResults;
-using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.Repository;
+using HospitalLibrary.RoomsAndEquipment.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HospitalLibrary.GraphicalEditor.Service
+namespace HospitalLibrary.RoomsAndEquipment.Service
 {
     public interface IRoomEquipmentService
     {
         public List<RoomEquipmentQuantityDTO> GetRoomEquipmentQuantity();
         public List<RoomEquipment> GetEquipmentInRooms(string equipmentName);
-        public Result<IList<RoomEquipment>> GetAllEquipmentInRooms();
+        public IList<RoomEquipment> GetAllEquipmentInRooms();
         public List<RoomEquipment> GetAllEquipmentInRoom(int roomId);
     }
 }
