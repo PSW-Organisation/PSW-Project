@@ -13,6 +13,6 @@ namespace IntegrationLibrary.Service.ServicesInterfaces
         public void Delete(Pharmacy pharmacy);  
         public void Update(Pharmacy pharmacy);
         public void UpdateHospitalApiKey(Pharmacy pharmacy, string updatedHospitalApiKey);
-      
+        public Pharmacy getPharmacyByApiKey(string apiKey);
     }
 }

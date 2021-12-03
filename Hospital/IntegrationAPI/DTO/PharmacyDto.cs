@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntegrationLibrary.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,5 +16,8 @@ namespace IntegrationAPI.DTO
         public string HospitalApiKey { get; set; }
         public string Comment { get; set; }
         public string Picture { get; set; }
+        public PharmacyCommunicationType communicationType { get; set; }
     }
+
 }
+

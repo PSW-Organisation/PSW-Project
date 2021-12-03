@@ -1,5 +1,7 @@
-﻿using IntegrationAPI.Adapters;
+﻿using Grpc.Core;
+using IntegrationAPI.Adapters;
 using IntegrationAPI.DTO;
+using IntegrationAPI.Protos;
 using IntegrationLibrary.Model;
 using IntegrationLibrary.Service;
 using IntegrationLibrary.Service.ServicesInterfaces;
@@ -17,11 +19,12 @@ namespace IntegrationAPI.Controllers
     public class MedicineController : ControllerBase
     {
         private IMedicineService medicineService;
-       
+        private IPharmacyService pharmacyService;
 
-        public MedicineController(IMedicineService medicineService)
+        public MedicineController(IMedicineService medicineService, IPharmacyService pharmacyService)
         {
             this.medicineService = medicineService;
+            this.pharmacyService = pharmacyService;
           
         }
 
@@ -48,6 +51,18 @@ namespace IntegrationAPI.Controllers
             }
         }
 
+        /*[HttpPut]
+          public IActionResult Put(MedicineDTO dto)
+          {
+              Medicine medicine = medicineService.GetMedicine(dto.Id);
+              if (medicine == null)
+              {
+                  return NotFound();
+              }
+              medicineService.SetMedicine(medicine);
+              return Ok();
+          }*/
+
         [HttpPost]      // POST /api/medicine Request body:
         public IActionResult Add(MedicineDTO dto)
         {
@@ -61,6 +76,31 @@ namespace IntegrationAPI.Controllers
 
         }
 
+        [HttpPut("{order}")]
+        public IActionResult Put(MedicineSearchDTO dto)
+        {
+            if (medicineService.checkCommunicationType(dto.ApiKey) == PharmacyCommunicationType.HTTP)
+            {
+                return Ok(medicineService.orderMedicineHTTP(MedicineSearchAdapter.MedicineSearchDtoToMedicineSearch(dto)));
+            }
+            else
+            {
+                return Ok(orderMedicineGRPC(dto));
+            }
+        }
+
+        private bool orderMedicineGRPC(MedicineSearchDTO dto)
+        {
+            bool response = false;
+            Pharmacy pharmacy = pharmacyService.getPharmacyByApiKey(dto.ApiKey);
+            var input = new MedicineOrderRequest { MedicineName = dto.MedicineName, MedicineAmount = dto.MedicineAmount, ApiKey = dto.ApiKey };
+            var channel = new Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
+            var client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
+            var reply = client.orderMedicine(input);
+            response = reply.Response;
+            return response;
+        }
+
         [HttpGet("{medicineName}/{medicineAmount}")]
         public IActionResult SearchMedicine(string medicineName, int medicineAmount)
         {
@@ -70,19 +110,55 @@ namespace IntegrationAPI.Controllers
                 return BadRequest();
             }
             medicineService.searchMedicine(medicineName, medicineAmount).ForEach(pharmacy => result.Add(PharmacyAdapter.PharmacyToPharmacyDto(pharmacy)));
+            searchMedicineGRPC(medicineName, medicineAmount).ForEach(pharmacy => result.Add(PharmacyAdapter.PharmacyToPharmacyDto(pharmacy)));
             return Ok(result);
         }
 
-        [HttpPut]
-        public IActionResult Put(MedicineDTO dto)
+        private List<Pharmacy> searchMedicineGRPC(string medicineName, int medicineAmount)
         {
-            Medicine medicine = medicineService.GetMedicine(dto.Id);
-            if (medicine == null)
+            List<Pharmacy> ret = new List<Pharmacy>();
+            foreach (Pharmacy pharmacy in pharmacyService.GetAll())
             {
-                return NotFound();
+                if (pharmacy.CommunicationType == PharmacyCommunicationType.GRPC)
+                {
+                    bool response = false;
+                    var input = new MedicineOrderRequest { MedicineName = medicineName, MedicineAmount = medicineAmount, ApiKey = pharmacy.HospitalApiKey };
+                    var channel = new Grpc.Core.Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
+                    var client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
+                    var reply = client.checkIfMedicineExists(input);
+                    response = reply.Response;
+                    if (response)
+                    {
+                        ret.Add(pharmacy);
+                    }
+                }
             }
-            medicineService.SetMedicine(medicine);
-            return Ok();
+            return ret;
+        }
+
+        [HttpPut]
+        public IActionResult checkIfMedicineExists(MedicineSearchDTO dto)
+        {
+            if(medicineService.checkCommunicationType(dto.ApiKey) == PharmacyCommunicationType.HTTP)
+            {
+               return Ok(medicineService.checkIfMedicineExistsHTTP(MedicineSearchAdapter.MedicineSearchDtoToMedicineSearch(dto)));
+            } else {
+                return Ok(checkIfMedicineExistsGRPC(dto));
+            }
+        }
+
+        public bool checkIfMedicineExistsGRPC(MedicineSearchDTO dto)
+        {
+            bool response = false;
+            Pharmacy pharmacy = pharmacyService.getPharmacyByApiKey(dto.ApiKey);
+            var input = new MedicineOrderRequest { MedicineName = dto.MedicineName, MedicineAmount = dto.MedicineAmount, ApiKey = dto.ApiKey };
+            var channel = new Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
+            var client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
+            var reply = client.checkIfMedicineExists(input);
+
+            response = reply.Response;
+
+            return response;
         }
 
         [HttpDelete("{id?}")]       // DELETE /api/medicine/1

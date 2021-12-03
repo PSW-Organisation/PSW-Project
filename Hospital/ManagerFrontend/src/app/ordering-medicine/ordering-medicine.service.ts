@@ -22,7 +22,8 @@ export class OrderingMedicineService {
 
   //metoda koja umanjuje kolicinu leka u bazi apoteke
   orderMedicinePharmacy(pharmacyUrl: string, hospitalApiKey: string, name: string, amount: number){
-    return this._http.put(pharmacyUrl +'/api3/medicine/' + hospitalApiKey , {"medicineName": name, "medicineAmount": amount});
+    //return this._http.put(pharmacyUrl +'/api3/medicine/' + hospitalApiKey , {"medicineName": name, "medicineAmount": amount});
+    return this._http.put('http://localhost:16928/api2/medicine/order', {"medicineName": name, "medicineAmount": amount, "apiKey": hospitalApiKey} );
   }
 
 }

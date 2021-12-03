@@ -58,5 +58,17 @@ namespace IntegrationLibrary.Service
         {
             return System.Guid.NewGuid().ToString();
         }
+
+        public Pharmacy getPharmacyByApiKey(string apiKey)
+        {
+            List<Pharmacy> pharmacies = new List<Pharmacy>();
+
+            foreach (Pharmacy pharmacy in GetAll())
+            {
+                if (pharmacy.HospitalApiKey.Equals(apiKey))
+                    return pharmacy;
+            }
+            return null;
+        }
     }
 }

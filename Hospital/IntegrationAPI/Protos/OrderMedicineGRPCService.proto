@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "IntegrationAPI.Protos";
+import "Protos/model.proto";
+
+service OrderMedicineGRPCService {
+	rpc checkIfMedicineExists (MedicineOrderRequest) returns (MedicineOrderResponse);
+	rpc orderMedicine (MedicineOrderRequest) returns (MedicineOrderResponse);
+}
