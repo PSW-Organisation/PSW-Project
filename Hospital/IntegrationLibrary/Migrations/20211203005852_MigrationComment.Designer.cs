@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IntegrationLibrary.Migrations
 {
     [DbContext(typeof(IntegrationDbContext))]
-    [Migration("20211116175238_SecondIngredientMigration")]
-    partial class SecondIngredientMigration
+    [Migration("20211203005852_MigrationComment")]
+    partial class MigrationComment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,9 +24,9 @@ namespace IntegrationLibrary.Migrations
 
             modelBuilder.Entity("IntegrationLibrary.Model.Complaint", b =>
                 {
-                    b.Property<long>("ComplaintId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Content")
@@ -41,15 +41,17 @@ namespace IntegrationLibrary.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.HasKey("ComplaintId");
+                    b.HasKey("Id");
 
                     b.ToTable("Complaints");
                 });
 
             modelBuilder.Entity("IntegrationLibrary.Model.Medicine", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("MedicineAmmount")
                         .HasColumnType("integer");
@@ -68,6 +70,33 @@ namespace IntegrationLibrary.Migrations
                     b.ToTable("Medicine");
                 });
 
+            modelBuilder.Entity("IntegrationLibrary.Model.MedicineBenefit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("MedicineBenefitContent")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("MedicineBenefitDueDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("MedicineBenefitTitle")
+                        .HasColumnType("text");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("Published")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Benefits");
+                });
+
             modelBuilder.Entity("IntegrationLibrary.Model.MedicineIngredient", b =>
                 {
                     b.Property<string>("Name")
@@ -80,14 +109,16 @@ namespace IntegrationLibrary.Migrations
 
             modelBuilder.Entity("IntegrationLibrary.Model.MedicineTransaction", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("MedicineAmmount")
                         .HasColumnType("integer");
 
-                    b.Property<string>("MedicineId")
-                        .HasColumnType("text");
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("TransactionTime")
                         .HasColumnType("timestamp without time zone");
@@ -99,10 +130,13 @@ namespace IntegrationLibrary.Migrations
 
             modelBuilder.Entity("IntegrationLibrary.Model.Pharmacy", b =>
                 {
-                    b.Property<long>("PharmacyId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("text");
 
                     b.Property<string>("HospitalApiKey")
                         .HasColumnType("text");
@@ -119,16 +153,16 @@ namespace IntegrationLibrary.Migrations
                     b.Property<string>("PharmacyUrl")
                         .HasColumnType("text");
 
-                    b.HasKey("PharmacyId");
+                    b.HasKey("Id");
 
                     b.ToTable("Pharmacies");
                 });
 
             modelBuilder.Entity("IntegrationLibrary.Model.ResponseToComplaint", b =>
                 {
-                    b.Property<long>("ResponseToComplaintId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<long>("ComplaintId")
@@ -140,7 +174,7 @@ namespace IntegrationLibrary.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.HasKey("ResponseToComplaintId");
+                    b.HasKey("Id");
 
                     b.ToTable("ResponseToComplaint");
                 });

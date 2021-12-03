@@ -133,6 +133,9 @@ namespace IntegrationLibrary.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("Comment")
+                        .HasColumnType("text");
+
                     b.Property<string>("HospitalApiKey")
                         .HasColumnType("text");
 

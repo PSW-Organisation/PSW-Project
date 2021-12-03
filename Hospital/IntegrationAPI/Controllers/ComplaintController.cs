@@ -21,7 +21,7 @@ namespace IntegrationAPI.Controllers
             this.complaintService = complaintService;
         }
 
-        [HttpGet]       // GET /api/complaint
+        [HttpGet]       // GET /api2/complaint
         public IActionResult Get()
         {
             List<ComplaintDTO> result = new List<ComplaintDTO>();

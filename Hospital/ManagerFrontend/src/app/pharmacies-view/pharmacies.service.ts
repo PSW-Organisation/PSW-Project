@@ -41,5 +41,11 @@ thisUrl: string = "http://localhost:16928/api2/pharmacy";
   deletePharmacy(idPharmacy : number){
     return this._http.delete(this.thisUrl+'/'+idPharmacy);
   }
+  showProfilePharmacy(idPharmacy : number){
+    return this._http.get<IPharmacy>(this.thisUrl+'/'+idPharmacy);
+  }
 
+  editPharmacy(pharmacy: any){
+    return this._http.put<IPharmacy>( this.thisUrl +'/'+ pharmacy.pharmacyId, pharmacy)
+  }
 }

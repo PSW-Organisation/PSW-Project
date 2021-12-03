@@ -5,10 +5,10 @@
   padding: 6px 16px ; /* Some padding */
   font-size: 16px; /* Set a font size */
   cursor: pointer; /* Mouse pointer on hover */
-  margin-top: 5px;
+  margin-top: 10px;
   margin-bottom: 5px;
   margin-right: 3px;
-  width: 80px;
+  width:120px;
 }
 
 .titleDiv {
@@ -47,6 +47,8 @@ th{
   height: 40px;
   font-size: 18px;
   margin-top: 20px;
+
+  width: 220px;
 }
 
 @media screen and (max-width: 1024px) { /* Specific to this particular image */
