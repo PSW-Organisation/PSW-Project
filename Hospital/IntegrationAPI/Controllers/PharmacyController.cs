@@ -54,6 +54,7 @@ namespace IntegrationAPI.Controllers
             {
                 return BadRequest();
             }
+
             string apiKey = pharmacyService.Save(PharmacyAdapter.PharmacyDtoToPharmacy(dto));
 
 

@@ -1,0 +1,73 @@
+<div class="titleDiv"> 
+    <table> 
+        <tr> 
+            <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+            <td><p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn Hospital</p></td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="myModalEdit" class="modal fade" style="display: none;" role="dialog" aria-hidden="true" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Edit pharmacy</h4>
+        </div>
+        <div class="modal-body">
+            <label class="form-label" for="picture">Logo/slika apoteke </label>
+            <!-- <img src={{pharmacy.picture}} style="height: 120px; width: 240px;"> -->
+            <input type="file" class="form-control" placeholder={{pharmacy.picture}} [(ngModel)]="pharmacy.picture" />
+            <label>Name</label>
+            <input type="text" class="form-control" placeholder="Enter pharmacy name" [(ngModel)]="pharmacy.pharmacyName">
+            <label>Address</label>
+            <input type="text" class="form-control" placeholder="Enter pharmacy address" [(ngModel)]="pharmacy.pharmacyAddress">
+            <label>Url</label>
+            <input type="text" class="form-control" placeholder="Enter pharmacy url" [(ngModel)]="pharmacy.pharmacyUrl">
+            <label>ApiKey</label>
+            <input type="text" class="form-control" placeholder="Enter pharmacy api key" [(ngModel)]="pharmacy.hospitalApiKey">
+            <label>comment</label>
+            <textarea type="text" class="form-control" placeholder="Enter comment" [(ngModel)]="pharmacy.comment"> </textarea>
+          <!--  <button type="button btn-secondary" class="btn btn-default" data-dismiss="modal" (click)="editPharmacy(pharmacy)">Edit</button>
+         <button class="btn" data-dismiss="modal" aria-label="Close"></button>-->
+        </div>  
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" style="margin-right:30px; " data-dismiss="modal" (click) ="editPharmacy(pharmacy)">Edit</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<div class="backgroundImage" > 
+
+    <div style = "height: 100px; " > </div>
+    <table style="margin-left: 100px;"> 
+        <tr><!---->
+            
+            <td> <div><img src={{pharmacy.picture}} style="height: 200px; width: 300px"> </div></td> <td> </td></tr>
+        <tr> <td><h1> Ime apoteke:</h1> </td> 
+            <td style="width: 30px" > </td>
+        <td> <h1> {{pharmacy.pharmacyName}}</h1></td></tr>
+        <tr> <td><h1> Adresa :</h1> </td> 
+            <td style="width: 30px" > </td>
+        <td> <h1> {{pharmacy.pharmacyAddress}}</h1></td></tr>
+        <tr> <td><h1> Url:</h1> </td> 
+            <td style="width: 30px" > </td>
+        <td> <h1> {{pharmacy.pharmacyUrl}}</h1></td></tr>
+        <tr> <td><h1> Api key apoteke:</h1> </td> 
+            <td style="width: 30px" > </td>
+        <td> <h1> {{pharmacy.pharmacyApiKey}}</h1></td></tr>
+        <tr> <td><h1> Komentar o ovoj apoteci:</h1> </td> 
+            <td style="width: 30px" > </td>
+        <td> <h1> {{pharmacy.comment}}</h1></td></tr>
+
+        <button class='btn btn-secondary' data-toggle="modal" data-target="#myModalEdit"> Izmeni Profil</button>
+
+        
+        </table>
+
+    
+
+</div>
