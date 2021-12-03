@@ -22,6 +22,13 @@ namespace IntegrationLibrary.Model
         //public DbSet<AccountData> AccountData { get; set; }
         //public DbSet<Allergen> Allergens { get; set; }
         public IntegrationDbContext() { }
-       
+
+        //dodato da bi se mogli raditi integracioni testovi sa bazom
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            String connectionString = "Server=localhost;Port=5432;Database=postgres;User ID=postgres;Password=postgres;";
+            optionsBuilder.UseNpgsql(connectionString);
+        }
+
     }
 }

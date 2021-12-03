@@ -38,7 +38,7 @@ namespace PharmacyAPIUnitTests
             Assert.True(!exists);
         }
 
-        [Fact]
+        /*[Fact]
         public void check_if_quantity_is_reduced()
         {
             var stubMedicineRepository = new Mock<IMedicineRepository>();
@@ -50,7 +50,7 @@ namespace PharmacyAPIUnitTests
             int quantity = medicineService.reduceQuantityOfMedicine("analgin", 1);
 
             Assert.True(quantity.ToString().Equals("9"));
-        }
+        }*/
 
     }
 }

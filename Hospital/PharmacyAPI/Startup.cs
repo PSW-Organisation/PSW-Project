@@ -1,5 +1,6 @@
 using DinkToPdf;
 using DinkToPdf.Contracts;
+using Grpc.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PharmacyAPI.Protos;
+using PharmacyAPI.Service;
 using PharmacyLibrary.Repository.HospitalRepository;
 using PharmacyLibrary.Repository.MedicineBenefitRepository;
 using PharmacyLibrary.Repository.MedicineRepository;
@@ -73,8 +76,10 @@ namespace PharmacyAPI
             //______________________________________________________________________
         }
 
+        private Server server;
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -105,6 +110,23 @@ namespace PharmacyAPI
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
                 RequestPath = new PathString("/Resources")
             });
+
+            server = new Server
+            {
+                Services = { OrderMedicineGRPCService.BindService(new OrderMedicineGRPCController()) },
+                Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
+            };
+            server.Start();
+
+            applicationLifetime.ApplicationStopping.Register(OnShutdown);
+        }
+
+        private void OnShutdown()
+        {
+            if (server != null)
+            {
+                server.ShutdownAsync().Wait();
+            }
 
         }
     }

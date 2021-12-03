@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option csharp_namespace = "IntegrationAPI.Protos";
+
+//tipa adributa - atribut - jedinstveni identifikator
+message MedicineOrderRequest{
+	string medicineName = 1;
+	int64 medicineAmount = 2;
+	string apiKey = 3;
+}
+
+message MedicineOrderResponse{
+	bool response = 1;
+}

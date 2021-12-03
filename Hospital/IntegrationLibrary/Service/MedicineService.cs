@@ -112,18 +112,22 @@ namespace IntegrationLibrary.Service
           
             foreach(Pharmacy pharmacy in pharmacyService.GetAll())
             {
-                var client = new RestSharp.RestClient(pharmacy.PharmacyUrl);
-                var request = new RestRequest("/api3/medicine/" + pharmacy.HospitalApiKey);
-                var values = new Dictionary<string, object>
+                if (pharmacy.CommunicationType == PharmacyCommunicationType.HTTP)
                 {
-                    {"medicineName", medicineName}, {"medicineAmount", medicineAmount}
-                };
-                request.AddJsonBody(values);
-                IRestResponse response = client.Post(request);
-                if (response.Content.Equals("true"))
-                {
-                    pharmacies.Add(pharmacy);
+                    var client = new RestSharp.RestClient(pharmacy.PharmacyUrl);
+                    var request = new RestRequest("/api3/medicine/" + pharmacy.HospitalApiKey);
+                    var values = new Dictionary<string, object>
+                    {
+                      {"medicineName", medicineName}, {"medicineAmount", medicineAmount}
+                    };
+                     request.AddJsonBody(values);
+                     IRestResponse response = client.Post(request);
+                     if (response.Content.Equals("true"))
+                     {
+                        pharmacies.Add(pharmacy);
+                     }
                 }
+                
             }
 
             return pharmacies;
@@ -134,6 +138,62 @@ namespace IntegrationLibrary.Service
             return this.medicineRepository.GetMedicineByName(name);
         }
 
-       
+        public PharmacyCommunicationType checkCommunicationType(string apiKey)
+        {
+            List<Pharmacy> pharmacies = new List<Pharmacy>();
+            PharmacyCommunicationType ret = PharmacyCommunicationType.UNDECLARED;
+            foreach (Pharmacy pharmacy in pharmacyService.GetAll())
+            {
+                if (pharmacy.HospitalApiKey.Equals(apiKey))
+                   ret = pharmacy.CommunicationType;
+            }
+            return ret;
+        }
+
+        public bool checkIfMedicineExistsHTTP(MedicineSearch medicineSearch)
+        {
+            Pharmacy pharmacy = getPharmacyByApi(medicineSearch.ApiKey);
+            var client = new RestSharp.RestClient(pharmacy.PharmacyUrl);
+            var request = new RestRequest("/api3/medicine/" + pharmacy.HospitalApiKey);
+            var values = new Dictionary<string, object>
+                {
+                    {"medicineName", medicineSearch.MedicineName}, {"medicineAmount", medicineSearch.MedicineAmount}
+                };
+            request.AddJsonBody(values);
+            IRestResponse response = client.Post(request);
+            if (response.Content.Equals("true"))
+                return true;
+            else
+                return false;
+        }
+
+        private Pharmacy getPharmacyByApi(object apiKey)
+        {
+            List<Pharmacy> pharmacies = new List<Pharmacy>();
+
+            foreach (Pharmacy pharmacy in pharmacyService.GetAll())
+            {
+                if (pharmacy.HospitalApiKey.Equals(apiKey))
+                    return pharmacy;
+            }
+            return null;
+        }
+
+        public bool orderMedicineHTTP(MedicineSearch medicineSearch)
+        {
+            Pharmacy pharmacy = getPharmacyByApi(medicineSearch.ApiKey);
+            var client = new RestSharp.RestClient(pharmacy.PharmacyUrl);
+            var request = new RestRequest("/api3/medicine/" + pharmacy.HospitalApiKey);
+            var values = new Dictionary<string, object>
+                {
+                    {"medicineName", medicineSearch.MedicineName}, {"medicineAmount", medicineSearch.MedicineAmount}
+                };
+            request.AddJsonBody(values);
+            IRestResponse response = client.Put(request);
+            if (response.Content != null)
+                return true;
+            else
+                return false;
+        }
     }
 }
