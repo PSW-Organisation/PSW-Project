@@ -34,13 +34,17 @@ namespace IntegrationLibrary.Service
         public string Save(Pharmacy pharmacy)
         {
             pharmacy.Id = this.pharmacyRepository.GenerateId();
-            pharmacy.PharmacyApiKey = this.GenerateApiKey();
+  
+           
             this.pharmacyRepository.Save(pharmacy);
             return pharmacy.PharmacyApiKey;
         }
 
         public void Update(Pharmacy pharmacy)
         {
+            string[] separators = { "fakepath\\" };
+            string[] pic = pharmacy.Picture.Split(separators, System.StringSplitOptions.RemoveEmptyEntries);
+            pharmacy.Picture = pic[1];
             this.pharmacyRepository.Update(pharmacy);
         }
 

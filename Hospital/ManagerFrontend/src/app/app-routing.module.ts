@@ -10,6 +10,8 @@ import { OrderingMedicineComponent } from './ordering-medicine/ordering-medicine
 import { MedicineConsumptionComponent } from './medicine-consumption/medicine-consumption.component';
 import { HospitalExteriorViewComponent } from './room-managment/hospital-exterior-view/hospital-exterior-view.component';
 import { SurveyComponent } from './survey/survey.component';
+import { EditPharmacyComponent } from './edit-pharmacy/edit-pharmacy.component';
+import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
 
 import { BenefitsViewComponent } from './benefits-view/benefits-view.component';
 import { ReportsViewComponent } from './reports-view/reports-view.component';
@@ -24,7 +26,9 @@ const routes: Routes = [
   { path: 'createReport', component: MedicineConsumptionComponent},
   { path:'benefits', component: BenefitsViewComponent},
   { path: 'survey', component: SurveyComponent },
-  { path: 'reports', component: ReportsViewComponent}
+  { path: 'reports', component: ReportsViewComponent},
+  { path: 'editPharmacy', component: EditPharmacyComponent},
+  { path: 'pharmacy/:id', component: PharmacyProfileComponent}
 ];
 
 @NgModule({
