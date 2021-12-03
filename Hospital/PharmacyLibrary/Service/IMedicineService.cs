@@ -20,7 +20,7 @@ namespace PharmacyLibrary.Service
         public Boolean CheckAvaliableQuantity(int idMedicine, int quantity);
 
         public Boolean CheckIfExists(string medicineName, int medicineQuantity);
-        public int reduceQuantityOfMedicine(string medicineName, int medicineAmount);
+        public Boolean reduceQuantityOfMedicine(string medicineName, int medicineAmount);
 
         public List<Medicine> Search(string name, string useFor);
     }

@@ -17,7 +17,8 @@ namespace IntegrationLibrary.Service.ServicesInterfaces
         public Medicine GetMedicine(int id);
         public List<Pharmacy> searchMedicine(string medicineName, int medicineAmount);
         public Medicine GetMedicineByName(string name);
-
-       
+        public PharmacyCommunicationType checkCommunicationType(string apiKey);
+        public bool checkIfMedicineExistsHTTP(MedicineSearch medicineSearch);
+        public bool orderMedicineHTTP(MedicineSearch medicineSearch);
     }
 }

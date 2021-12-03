@@ -8,7 +8,6 @@ namespace IntegrationLibrary.Model
     {
         private String name;
         private MedicineStatus medicineStatus;
-
         private List<String> medicineIngredient;
         private int medicineAmmount;
         public Medicine() : base(-1) { }
@@ -92,13 +91,12 @@ namespace IntegrationLibrary.Model
         }
 
         public int MedicineAmmount { get => medicineAmmount; set => medicineAmmount = value; }
-     public Medicine(int argId, String argName, MedicineStatus argMedicineStatus, int argQuantity): base(argId)
-    {
-       
-        name = argName;
-        medicineStatus = argMedicineStatus;
-        medicineAmmount = argQuantity;
-    }
+        public Medicine(int argId, String argName, MedicineStatus argMedicineStatus, int argQuantity): base(argId)
+        {
+            name = argName;
+            medicineStatus = argMedicineStatus;
+            medicineAmmount = argQuantity;
+        }
     
     }
 

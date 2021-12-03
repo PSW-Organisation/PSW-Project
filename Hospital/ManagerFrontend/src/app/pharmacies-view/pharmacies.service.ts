@@ -34,8 +34,8 @@ thisUrl: string = "http://localhost:16928/api2/pharmacy";
     )) ;
   }
 
-  searchMedicine(search : any, hospitalApiKey: string) : Observable<boolean>{
-    return this._http.post<boolean>('http://localhost:29631/api3/medicine/' + hospitalApiKey, search);
+  searchMedicine(search : any) : Observable<boolean>{
+    return this._http.put<boolean>('http://localhost:16928/api2/medicine', search);
   }
 
   deletePharmacy(idPharmacy : number){
