@@ -16,7 +16,7 @@ namespace IntegrationLibrary.Service
         private MedicineRepository medicineRepository;
         private IPharmacyService pharmacyService;
         private IMedicineTransactionService transactionService;
-        
+
         public MedicineService(MedicineRepository medicineRepository, IPharmacyService pharmacyService, IMedicineTransactionService transactionService)
         {
             this.medicineRepository = medicineRepository;
@@ -28,14 +28,14 @@ namespace IntegrationLibrary.Service
         {
             medicineRepository.Update(medicine);
         }
-      
+
         public Medicine AddMedicine(Medicine medicine)
         {
             Medicine existingMedicine = GetMedicineByName(medicine.Name);
             if (existingMedicine == null)
             {
                return  addIfMedicineNotExist(medicine);
-               
+
             }
             else
             {
@@ -49,7 +49,7 @@ namespace IntegrationLibrary.Service
             this.SetMedicine(existing);
             MedicineTransaction transaction = new MedicineTransaction(0, existing.Id, medicine.MedicineAmmount, DateTime.Now);
             transactionService.Save(transaction);
-            return null; 
+            return null;
         }
 
         private Medicine addIfMedicineNotExist(Medicine medicine)
@@ -76,7 +76,7 @@ namespace IntegrationLibrary.Service
             return medicineRepository.GetAll();
         }
 
-        
+
         public void AddMedicineIngredient(Medicine medicine, MedicineIngredient medicineIngredient)
         {
             medicine.MedicineIngredient.Add(medicineIngredient.Name);
@@ -109,23 +109,20 @@ namespace IntegrationLibrary.Service
         public List<Pharmacy> searchMedicine(string medicineName, int medicineAmount)
         {
             List<Pharmacy> pharmacies = new List<Pharmacy>();
-          
+
             foreach(Pharmacy pharmacy in pharmacyService.GetAll())
             {
-                if (pharmacy.CommunicationType == PharmacyCommunicationType.HTTP)
+                var client = new RestSharp.RestClient(pharmacy.PharmacyUrl);
+                var request = new RestRequest("/medicine/" + pharmacy.HospitalApiKey);
+                var values = new Dictionary<string, object>
                 {
-                    var client = new RestSharp.RestClient(pharmacy.PharmacyUrl);
-                    var request = new RestRequest("/api3/medicine/" + pharmacy.HospitalApiKey);
-                    var values = new Dictionary<string, object>
-                    {
-                      {"medicineName", medicineName}, {"medicineAmount", medicineAmount}
-                    };
-                     request.AddJsonBody(values);
-                     IRestResponse response = client.Post(request);
-                     if (response.Content.Equals("true"))
-                     {
-                        pharmacies.Add(pharmacy);
-                     }
+                  {"medicineName", medicineName}, {"medicineAmount", medicineAmount}
+                };
+                request.AddJsonBody(values);
+                IRestResponse response = client.Post(request);
+                if (response.Content.Equals("true"))
+                {
+                    pharmacies.Add(pharmacy);
                 }
                 
             }

@@ -18,6 +18,7 @@ namespace IntegrationLibrary.Model
         public DbSet<MedicineTransaction> MedicineTransactions { get; set; }
         public DbSet<MedicineIngredient> Ingredients { get; set; }
         public DbSet<MedicineBenefit> Benefits { get; set; }
+
         //public DbSet<Account> Accounts { get; set; }
         //public DbSet<AccountData> AccountData { get; set; }
         //public DbSet<Allergen> Allergens { get; set; }

@@ -35,6 +35,7 @@ namespace ehealthcare.Model
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Question> Questions { get; set; }
 
+        public DbSet<MedicinePrescription> Prescriptions { get; set; }
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
         protected HospitalDbContext()
