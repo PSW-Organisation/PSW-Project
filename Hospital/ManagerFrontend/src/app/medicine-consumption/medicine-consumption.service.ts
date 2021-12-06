@@ -40,10 +40,13 @@ export class MedicineConsumptionService {
     mergeMap(response =>  this._http.get('http://localhost:16928/api2/report/' + response ))
     
     ).subscribe(
-   res =>{this.sendNotification("specification", medicineName)
-   this.sendNotificationForMedicineReport2( "New medicine specification is created for " + medicineName + ".Check reports.");},
-    (error:HttpErrorResponse )=>{this.sendNotification("failed_specification", medicineName)
-    this.sendNotificationForMedicineReport2("This pharmacy doesn't have that medicine. Chose another one, or try again later!")} 
+   res =>{  
+     this.sendNotification("specification", medicineName)
+     this.sendNotificationForMedicineReport2( "New medicine specification is created for " + medicineName + ".Check reports.");
+    },
+    (error:HttpErrorResponse )=>{
+      this.sendNotification("failed_specification", medicineName)
+     this.sendNotificationForMedicineReport2("This pharmacy doesn't have that medicine. Chose another one, or try again later!")} 
   
     );
   }
@@ -52,8 +55,10 @@ export class MedicineConsumptionService {
     this._http.post('http://localhost:16928/api2/pdfcreator', timeRange, { responseType: 'text' }).pipe(
       mergeMap(response => this._http.get(pharmacyUrl + '/report/' + response ))
     ).subscribe(
-      (data) =>{ this.sendNotification("report", "Flos")
-      this.sendNotificationForMedicineReport2( "New consumption report is created for Flos pharmacy!");},
+      (data) =>{
+         this.sendNotification("report", "Flos")
+         this.sendNotificationForMedicineReport2( "New consumption report is created for Flos pharmacy! Time range is " + timeRange)
+         this.sendNotificationForConsumptionReportToPharmacy("New consumption report is created from LeanOn hospital! Time range is " + timeRange + " Check your reports.");},
       (error: HttpErrorResponse )=>{this.sendNotification("failed_report", "")
    } 
     );
@@ -88,10 +93,16 @@ showToastrError(message: string, title: string){
      progressAnimation: 'increasing'})
 }
 
+
 sendNotificationForMedicineReport(notification: any){
   this._http.post('http://localhost:16928/api2/notifications' ,notification ).subscribe()
 }
 sendNotificationForMedicineReport2(content: any){
   this._http.get('http://localhost:16928/api2/notifications/' + content ).subscribe()
 }
+
+sendNotificationForConsumptionReportToPharmacy(content: any){
+  this._http.get('http://localhost:29631/api3/notifications/' + content ).subscribe()
+}
+
 }

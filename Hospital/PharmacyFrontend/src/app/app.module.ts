@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ComplaintsViewComponent } from './complaints-view/complaints-view.component';
 import { HospitalViewComponent } from './hospital-view/hospital-view.component';
 import { ReportsViewComponent } from './reports-view/reports-view.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ReportsViewComponent } from './reports-view/reports-view.component';
     ComplaintsViewComponent,
     HospitalViewComponent,
     ReportsViewComponent,
+    NotificationsComponent,
   
   ],
   imports: [

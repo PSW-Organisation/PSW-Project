@@ -1,26 +1,27 @@
-﻿using IntegrationLibrary.Model;
-using IntegrationLibrary.Repository;
-using IntegrationLibrary.Service.ServicesInterfaces;
+﻿
+using PharmacyLibrary.Model;
+using PharmacyLibrary.Repository.NotificationsRepository;
+using PharmacyLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IntegrationLibrary.Service
+namespace PharmacyLibrary.Service
 {
     public class NotificationsForAppService : INotificationsForAppService
     {
 
-        private NotificationsForAppRepository notificationsRepository;
+        private readonly INotificationsForAppRepository notificationsRepository;
 
      
 
-        public NotificationsForAppService(NotificationsForAppRepository repo)
+        public NotificationsForAppService(INotificationsForAppRepository repo)
         {
             this.notificationsRepository = repo;
         }
         public void Delete(NotificationsForApp note)
         {
-            this.notificationsRepository.Delete(note);
+            this.notificationsRepository.Delete(note.Id);
         }
 
         public NotificationsForApp Get(int id)
@@ -43,6 +44,7 @@ namespace IntegrationLibrary.Service
         public NotificationsForApp Update(NotificationsForApp note)
         {
             note.Seen = true;
+
             return this.notificationsRepository.Update(note);
         }
     }

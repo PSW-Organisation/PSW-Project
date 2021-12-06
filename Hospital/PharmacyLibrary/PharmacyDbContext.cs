@@ -15,8 +15,10 @@ namespace PharmacyAPI
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<MedicineBenefit> MedicineBenefits { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
-        public PharmacyDbContext(DbContextOptions<PharmacyDbContext> options) : base(options) { }
+        public DbSet<NotificationsForApp> Notifications { get; set; }
 
+        public PharmacyDbContext(DbContextOptions<PharmacyDbContext> options) : base(options) { }
+        
 
         public PharmacyDbContext() { }
 
