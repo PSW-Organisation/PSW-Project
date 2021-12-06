@@ -51,7 +51,8 @@ namespace PharmacyAPI.Controllers
                 PaperSize = PaperKind.A4,
                 Margins = new MarginSettings { Top = 10 },
                 DocumentTitle = "PDF Report"
-                //Out = @"D:\PDFCreator\Medicine_Report.pdf"
+            //  Out = @"D:\PDFCreator\Medicine_Report.pdf"
+
             };
 
             var objectSettings = new ObjectSettings
@@ -72,7 +73,8 @@ namespace PharmacyAPI.Controllers
             var file = _converter.Convert(pdf);
             var fileName = name + ".pdf";
             var serverFile = @"\hospital\" + fileName;
-            SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
+           SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password"));   //kod Nevene
+           //SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
             if (sftpService.UploadFile(file, serverFile))
                 return Ok(fileName);
             return BadRequest();

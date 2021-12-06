@@ -1,0 +1,38 @@
+
+<!-- Naslov -->
+<div class="titleDiv">
+    <table>
+        <tr>
+            <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+            <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn Hospital</p></td>
+        </tr>
+    </table>
+</div>
+<div class="backgroundImage">
+    <div style="height: 50px"> </div>
+    <h1 style="margin-left: 80px;"> All notifications: </h1>
+     <div class="table-responsive table-striped">
+         <table class='table'>
+             <thead   style="color:rgb(95, 173, 236); opacity: 2.2; background-color: whitesmoke;">
+                 <tr>
+                     <th> </th>
+                     <th  style="width: 200px">Date</th>
+                     <th style="width: 350px">Content</th>
+                     <th style="width: 200px"> Status</th>
+                     <th></th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr *ngFor = 'let notification of notifications'>    
+                   <td></td>
+                     <td style="opacity: 2.2; color: black; font-size: 16px;">{{notification.date | date:'short'}}</td>
+                     <td>{{notification.content}}</td>                   
+                     <td> <button type="button" class="btn btn-outline-secondary" style="width: 150px;" *ngIf="!notification.seen" (click)="changeToSeen(notification)"> <i class="bi-alarm"></i> procitano </button></td>
+                     <td> <button type="button" class="btn btn-outline-secondary" style="width: 150px;"  (click)="deleteNotification(notification.id)"> <i class="bi bi-trash"></i> obrisi </button></td>
+                 </tr>
+             </tbody>
+         </table>
+     </div>
+</div>
+
+

@@ -15,6 +15,8 @@ import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.co
 
 import { BenefitsViewComponent } from './benefits-view/benefits-view.component';
 import { ReportsViewComponent } from './reports-view/reports-view.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'pharmacies', component: PharmaciesViewComponent },
@@ -28,7 +30,8 @@ const routes: Routes = [
   { path: 'survey', component: SurveyComponent },
   { path: 'reports', component: ReportsViewComponent},
   { path: 'editPharmacy', component: EditPharmacyComponent},
-  { path: 'pharmacy/:id', component: PharmacyProfileComponent}
+  { path: 'pharmacy/:id', component: PharmacyProfileComponent},
+  {path: 'notifications', component: NotificationsComponent}
 ];
 
 @NgModule({

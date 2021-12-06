@@ -1,7 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+import { ToastrService } from 'ngx-toastr';
 import { Observable, throwError } from 'rxjs';
-import { mergeMap, tap } from 'rxjs/operators';
+import { catchError, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { IPharmacy } from '../pharmacies-view/pharmacy';
 
 @Injectable({
@@ -9,7 +11,7 @@ import { IPharmacy } from '../pharmacies-view/pharmacy';
 })
 export class MedicineConsumptionService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient,private toastr: ToastrService) { }
 
   getPharmacies(): Observable<IPharmacy[]>{
     const headers= new HttpHeaders()
@@ -33,17 +35,63 @@ export class MedicineConsumptionService {
         e => { throwError(e); }
     );
   }*/
-
   getMedicineDetails(pharmacyUrl: string, medicineName: string){
-    this._http.get(pharmacyUrl + '/pdfcreator/' + medicineName, { responseType: 'text' }).pipe(
-      mergeMap(response => this._http.get('http://localhost:16928/api2/report/' + response ))
-    ).subscribe();
+  return this._http.get(pharmacyUrl + '/pdfcreator/' + medicineName, { responseType: 'text' } ).pipe(
+    mergeMap(response =>  this._http.get('http://localhost:16928/api2/report/' + response ))
+    
+    ).subscribe(
+   res =>{this.sendNotification("specification", medicineName)
+   this.sendNotificationForMedicineReport2( "New medicine specification is created for " + medicineName + ".Check reports.");},
+    (error:HttpErrorResponse )=>{this.sendNotification("failed_specification", medicineName)
+    this.sendNotificationForMedicineReport2("This pharmacy doesn't have that medicine. Chose another one, or try again later!")} 
+  
+    );
   }
   
   sendConsumptionReport(pharmacyUrl: string, timeRange: any){
     this._http.post('http://localhost:16928/api2/pdfcreator', timeRange, { responseType: 'text' }).pipe(
       mergeMap(response => this._http.get(pharmacyUrl + '/report/' + response ))
-    ).subscribe();
+    ).subscribe(
+      (data) =>{ this.sendNotification("report", "Flos")
+      this.sendNotificationForMedicineReport2( "New consumption report is created for Flos pharmacy!");},
+      (error: HttpErrorResponse )=>{this.sendNotification("failed_report", "")
+   } 
+    );
   }
 
+sendNotification(type: string, name: string) {
+  if(type === "specification") { 
+    this.showToastrSuccess("New medicine specification is created for " + name , "Success")  
+  } 
+   if (type ==="report"){   
+    this.showToastrSuccess("New consumption report is created for " + name, "Success")
+  }
+  if(type === "failed_specification"){
+    this.showToastrError("Failed to create. This medication doesn't exist", "Failed");
+  }
+  if(type === "failed_report") {
+    this.showToastrError("This report could not be created. Try again later", "Failed");
+  }
+}
+
+
+showToastrSuccess(message: string, title: string){
+  this.toastr.success(message, title,
+   { timeOut: 3000, 
+    progressBar: true,
+     progressAnimation: 'increasing'})
+}
+showToastrError(message: string, title: string){
+  this.toastr.error(message, title,
+   { timeOut: 3000, 
+    progressBar: true,
+     progressAnimation: 'increasing'})
+}
+
+sendNotificationForMedicineReport(notification: any){
+  this._http.post('http://localhost:16928/api2/notifications' ,notification ).subscribe()
+}
+sendNotificationForMedicineReport2(content: any){
+  this._http.get('http://localhost:16928/api2/notifications/' + content ).subscribe()
+}
 }

@@ -22,13 +22,14 @@ namespace PharmacyAPI.Service
             {
                 try
                 {
-                    client.Connect();
+                    client.Connect(); //ovde pukne
 
                     using (Stream stream = new MemoryStream(file))
                     {
                         client.UploadFile(stream, serverFile, x => { Console.WriteLine(x); });
+                        return true;
                     }
-                    return true;
+                  
                 }
                 catch (Exception exception)
                 {
