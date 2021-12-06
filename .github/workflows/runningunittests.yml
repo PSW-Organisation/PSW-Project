@@ -1,20 +1,62 @@
-name: Run Unit Tests
-
+name: unit-testing
 on:
-  push:
-    branches: [develop]
-  pull_request:
-    branches: [develop]
-env:
- PROJECT-PATH : 'Hospital/IntegrationAPIUnitTests/IntegrationAPIUnitTests.csproj'
+ push:
+   branches: [develop]
+ pull_request:
+   branches: [develop]
 
 jobs:
-  buildUnitTests: 
+  Run-Unit-Tests:
+
     runs-on: ubuntu-latest
+    env:
+      PHARMACY_PROJECT_SOLUTION: 'Hospital/PharmacyAPIUnitTests/PharmacyAPIUnitTests.csproj'
+      INTEGRATION_PROJECT_SOLUTION: 'Hospital/IntegrationAPIUnitTests/IntegrationAPIUnitTests.csproj'
+      HOSPITAL_PROJECT_SOLUTION: 'Hospital/HospitalUnitTests/HospitalUnitTests.csproj'
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Build
-      run: dotnet build ${{ env.PROJECT-PATH }} --configuration Release
-    - name: Test
-      run: dotnet test ${{ env.PROJECT-PATH }} --configuration Release --no-build 
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install dependencies pharmacy
+        run: dotnet restore ${PHARMACY_PROJECT_SOLUTION}
+      - name: Build pharmacy
+        run: dotnet build ${PHARMACY_PROJECT_SOLUTION} --configuration Release --no-restore
+      - name: Test pharmacy
+        run: dotnet test ${PHARMACY_PROJECT_SOLUTION} --no-restore --verbosity quiet 
+
+      - name: Install dependencies hospital
+        run: dotnet restore ${HOSPITAL_PROJECT_SOLUTION}
+      - name: Build hospital
+        run: dotnet build ${HOSPITAL_PROJECT_SOLUTION} --configuration Release --no-restore
+      - name: Test hospital
+        run: dotnet test ${HOSPITAL_PROJECT_SOLUTION} --no-restore --verbosity quiet 
+
+
+      - name: Install dependencies integration
+        run: dotnet restore ${INTEGRATION_PROJECT_SOLUTION}
+      - name: Build integration
+        run: dotnet build ${INTEGRATION_PROJECT_SOLUTION} --configuration Release --no-restore
+      - name: Test integration
+        run: dotnet test ${INTEGRATION_PROJECT_SOLUTION} --no-restore --verbosity quiet 
+
+
+#name: Run Unit Tests
+
+#on:
+#  push:
+#    branches: [develop]
+#  pull_request:
+#    branches: [develop]
+#env:
+# PROJECT-PATH : 'Hospital/IntegrationAPIUnitTests/IntegrationAPIUnitTests.csproj'
+
+#jobs:
+#  buildUnitTests: 
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: Checkout
+#      uses: actions/checkout@v2
+#    - name: Build
+#      run: dotnet build ${{ env.PROJECT-PATH }} --configuration Release
+#    - name: Test
+#      run: dotnet test ${{ env.PROJECT-PATH }} --configuration Release --no-build 
