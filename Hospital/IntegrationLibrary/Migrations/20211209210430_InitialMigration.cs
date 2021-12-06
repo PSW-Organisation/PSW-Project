@@ -5,12 +5,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace IntegrationLibrary.Migrations
 {
-    public partial class MigrationComment : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-           
-
             migrationBuilder.CreateTable(
                 name: "Benefits",
                 columns: table => new
@@ -27,16 +25,33 @@ namespace IntegrationLibrary.Migrations
                 {
                     table.PrimaryKey("PK_Benefits", x => x.Id);
                 });
+
             migrationBuilder.CreateTable(
-               name: "Ingredients",
-               columns: table => new
-               {
-                   Name = table.Column<string>(nullable: false)
-               },
-               constraints: table =>
-               {
-                   table.PrimaryKey("PK_Ingredients", x => x.Name);
-               });
+                name: "Complaints",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    PharmacyId = table.Column<long>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Complaints", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ingredients",
+                columns: table => new
+                {
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ingredients", x => x.Name);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Medicine",
@@ -70,23 +85,6 @@ namespace IntegrationLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Complaints",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    Content = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Complaints", x => x.Id);
-                });
-
-        
-
-migrationBuilder.CreateTable(
                 name: "Pharmacies",
                 columns: table => new
                 {
@@ -97,39 +95,53 @@ migrationBuilder.CreateTable(
                     PharmacyAddress = table.Column<string>(nullable: true),
                     PharmacyApiKey = table.Column<string>(nullable: true),
                     HospitalApiKey = table.Column<string>(nullable: true),
-                    Comment = table.Column<string>(nullable:true),
-                    Picture = table.Column<string>(nullable:true)
+                    Comment = table.Column<string>(nullable: true),
+                    Picture = table.Column<string>(nullable: true),
+                    CommunicationType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pharmacies", x => x.Id);
                 });
 
-         
-            
-
-
-
             migrationBuilder.CreateTable(
-                   name: "ResponseToComplaint",
-                   columns: table => new
-                   {
-                       Id = table.Column<int>(nullable: false)
-                           .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                       ComplaintId = table.Column<long>(nullable: false),
-                       Date = table.Column<DateTime>(nullable: false),
-                       Content = table.Column<string>(nullable: true)
-                   },
-                   constraints: table =>
-                   {
-                       table.PrimaryKey("PK_ResponseToComplaint", x => x.Id);
-                   });
-
+                name: "ResponseToComplaint",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ComplaintId = table.Column<long>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Content = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ResponseToComplaint", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            
-        }   
+            migrationBuilder.DropTable(
+                name: "Benefits");
+
+            migrationBuilder.DropTable(
+                name: "Complaints");
+
+            migrationBuilder.DropTable(
+                name: "Ingredients");
+
+            migrationBuilder.DropTable(
+                name: "Medicine");
+
+            migrationBuilder.DropTable(
+                name: "MedicineTransactions");
+
+            migrationBuilder.DropTable(
+                name: "Pharmacies");
+
+            migrationBuilder.DropTable(
+                name: "ResponseToComplaint");
+        }
     }
 }

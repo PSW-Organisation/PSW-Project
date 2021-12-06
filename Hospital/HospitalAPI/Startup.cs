@@ -127,7 +127,8 @@ namespace HospitalAPI
             services.AddScoped<GenericDbRepository<Survey>, SurveyDbRepository>();
             services.AddScoped<ISurveyRepository, SurveyDbRepository>();
 
-
+            services.AddScoped<IMedicinePrescriptionService, MedicinePrescriptionService>();
+            services.AddScoped<IMedicinePrescriptionRepository, MedicinePrescriptionDbRepository>();
 
         }
 
