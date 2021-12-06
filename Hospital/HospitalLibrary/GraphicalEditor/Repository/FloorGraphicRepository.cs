@@ -1,6 +1,7 @@
 ﻿using ehealthcare.Model;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.Repository.DbRepository;
+using HospitalLibrary.RoomsAndEquipment.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -27,5 +28,18 @@ namespace HospitalLibrary.GraphicalEditor.Repository
             FloorGraphic fg = _dbContext.FloorGraphics.First(f => f.RoomGraphics.Any(rg => rg.RoomId == roomId));
             return fg.BuildingId;
         }
+
+        public RoomGraphic GetRoomGraphicByRoomId(int roomId)
+        {
+            FloorGraphic fg = _dbContext.FloorGraphics.First(f => f.RoomGraphics.Any(rg => rg.RoomId == roomId));
+            return fg.RoomGraphics.Single(r => r.Id == roomId);
+        }
+
+        public List<RoomGraphic> GetAllRoomGraphicOnSameFloor(Room room)
+        {
+            FloorGraphic fg = _dbContext.FloorGraphics.First(f => f.RoomGraphics.Any(rg => rg.RoomId == room.Id));
+            return fg.RoomGraphics;
+        }
+
     }
 }
