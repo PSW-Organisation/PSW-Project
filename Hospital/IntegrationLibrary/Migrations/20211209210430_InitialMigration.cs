@@ -42,32 +42,7 @@ namespace IntegrationLibrary.Migrations
                     table.PrimaryKey("PK_Complaints", x => x.Id);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Ingredients",
-                columns: table => new
-                {
-                    Name = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ingredients", x => x.Name);
-                });
 
-            migrationBuilder.CreateTable(
-                name: "Medicine",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(nullable: true),
-                    MedicineStatus = table.Column<int>(nullable: false),
-                    MedicineIngredient = table.Column<List<string>>(nullable: true),
-                    MedicineAmmount = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Medicine", x => x.Id);
-                });
 
             migrationBuilder.CreateTable(
                 name: "MedicineTransactions",
@@ -97,42 +72,54 @@ namespace IntegrationLibrary.Migrations
                     HospitalApiKey = table.Column<string>(nullable: true),
                     Comment = table.Column<string>(nullable: true),
                     Picture = table.Column<string>(nullable: true),
-                    CommunicationType = table.Column<int>(nullable: false)
+                    PharmacyCommunicationType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pharmacies", x => x.Id);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ResponseToComplaint",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ComplaintId = table.Column<long>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Content = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ResponseToComplaint", x => x.Id);
-                });
+
+                       migrationBuilder.CreateTable(
+                   name: "Notifications",
+                   columns: table => new
+                   {
+                       Id = table.Column<int>(nullable: false)
+                           .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                       Content = table.Column<string>(nullable: true),
+                       Date = table.Column<DateTime>(nullable: true),
+                       Seen = table.Column<bool>(nullable: true)
+                   },
+                   constraints: table =>
+                   {
+                       table.PrimaryKey("PK_Notifications", x => x.Id);
+                   });
+
+                migrationBuilder.CreateTable(
+          name: "ResponseToComplaint",
+          columns: table => new
+          {
+              Id = table.Column<int>(nullable: false)
+                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+              Date = table.Column<DateTime>(nullable: false),
+              Title = table.Column<string>(nullable: true),
+              Content = table.Column<string>(nullable: true)
+          },
+          constraints: table =>
+          {
+              table.PrimaryKey("PK_ResponseToComplaint", x => x.Id);
+          });
         }
+
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Benefits");
 
+
             migrationBuilder.DropTable(
                 name: "Complaints");
-
-            migrationBuilder.DropTable(
-                name: "Ingredients");
-
-            migrationBuilder.DropTable(
-                name: "Medicine");
 
             migrationBuilder.DropTable(
                 name: "MedicineTransactions");

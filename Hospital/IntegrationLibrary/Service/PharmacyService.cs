@@ -40,12 +40,12 @@ namespace IntegrationLibrary.Service
             return pharmacy.PharmacyApiKey;
         }
 
-        public void Update(Pharmacy pharmacy)
+        public Pharmacy Update(Pharmacy pharmacy)
         {
             string[] separators = { "fakepath\\" };
             string[] pic = pharmacy.Picture.Split(separators, System.StringSplitOptions.RemoveEmptyEntries);
             pharmacy.Picture = pic[1];
-            this.pharmacyRepository.Update(pharmacy);
+            return this.pharmacyRepository.Update(pharmacy);
         }
 
         public void UpdateHospitalApiKey(Pharmacy pharmacy, string updatedHospitalApiKey)

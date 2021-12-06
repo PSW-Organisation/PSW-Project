@@ -83,6 +83,7 @@ namespace IntegrationAPI
             services.AddScoped<PharmacyRepository, PharmacyDbRepository>();
             services.AddScoped<ResponseToComplaintRepository, ResponseToComplaintDbRepository>();
             services.AddScoped<MedicineBenefitRepository, MedicineBenefitDbRepository>();
+            services.AddScoped<NotificationsForAppRepository, NotificationsForAppDbRepository>();
             //servisi
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IAccountDataService, AccountDataService>();
@@ -108,6 +109,7 @@ namespace IntegrationAPI
             services.AddScoped<IPharmacyService, PharmacyService>();
             services.AddScoped<IResponseToComplaintService, ResponseToComplaintService>();
             services.AddScoped<IMedicineConsumptionService, MedicineConsumptionService>();
+            services.AddScoped<INotificationsForAppService, NotificationsForAppService>();
 
 
             services.AddScoped<IMedicineBenefitService, MedicineBenefitService>();

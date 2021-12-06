@@ -14,7 +14,9 @@ namespace IntegrationLibrary.Model
         public DbSet<ResponseToComplaint> ResponseToComplaint { get; set; }
         public DbSet<MedicineTransaction> MedicineTransactions { get; set; }
         public DbSet<MedicineBenefit> Benefits { get; set; }
-    
+
+        public DbSet<NotificationsForApp> Notifications { get; set; }
+
         public IntegrationDbContext() { }
 
         //dodato da bi se mogli raditi integracioni testovi sa bazom

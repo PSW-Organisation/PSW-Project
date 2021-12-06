@@ -11,7 +11,7 @@ namespace IntegrationLibrary.Service.ServicesInterfaces
         public Pharmacy Get(int id);
         public string Save(Pharmacy pharmacy);
         public void Delete(Pharmacy pharmacy);  
-        public void Update(Pharmacy pharmacy);
+        public Pharmacy Update(Pharmacy pharmacy);
         public void UpdateHospitalApiKey(Pharmacy pharmacy, string updatedHospitalApiKey);
         public Pharmacy getPharmacyByApiKey(string apiKey);
     }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
+import { ToastrService } from 'ngx-toastr';
+import { INotification } from '../notifications/notification';
 import { IPharmacy } from '../pharmacies-view/pharmacy';
 import { MedicineConsumptionService } from './medicine-consumption.service';
 
@@ -14,8 +17,8 @@ export class MedicineConsumptionComponent implements OnInit {
   errorMessage: string = ""
   timeRange: any = {startTime: Date, endTime: Date};
   medicineName: string = ""
-
-  constructor(private _consumptionService: MedicineConsumptionService) { }
+  notification: any ={id: 0, content: "New medicine specification is created for medicine.Check reports." , date: "", seen:false}
+  constructor(private _consumptionService: MedicineConsumptionService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getPharmacies();
@@ -32,9 +35,14 @@ export class MedicineConsumptionComponent implements OnInit {
 
   getMedicineDetails(){
     this._consumptionService.getMedicineDetails(this.pharmacyUrl, this.medicineName);
+ 
   }
 
   sendConsumptionReport(){
     this._consumptionService.sendConsumptionReport(this.pharmacyUrl, this.timeRange);
+    
   }
+
+
+ 
 }

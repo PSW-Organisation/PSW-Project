@@ -24,8 +24,6 @@
             <input type="text" class="form-control" placeholder="Enter pharmacy address" [(ngModel)]="pharmacy.pharmacyAddress">
             <label>Url</label>
             <input type="text" class="form-control" placeholder="Enter pharmacy url" [(ngModel)]="pharmacy.pharmacyUrl">
-            <label>ApiKey</label>
-            <input type="text" class="form-control" placeholder="Enter pharmacy api key" [(ngModel)]="pharmacy.hospitalApiKey">
             <label>comment</label>
             <textarea type="text" class="form-control" placeholder="Enter comment" [(ngModel)]="pharmacy.comment"> </textarea>
           <!--  <button type="button btn-secondary" class="btn btn-default" data-dismiss="modal" (click)="editPharmacy(pharmacy)">Edit</button>
@@ -56,9 +54,7 @@
         <tr> <td><h1> Url:</h1> </td> 
             <td style="width: 30px" > </td>
         <td> <h1> {{pharmacy.pharmacyUrl}}</h1></td></tr>
-        <tr> <td><h1> Api key apoteke:</h1> </td> 
-            <td style="width: 30px" > </td>
-        <td> <h1> {{pharmacy.pharmacyApiKey}}</h1></td></tr>
+   
         <tr> <td><h1> Komentar o ovoj apoteci:</h1> </td> 
             <td style="width: 30px" > </td>
         <td> <h1> {{pharmacy.comment}}</h1></td></tr>
