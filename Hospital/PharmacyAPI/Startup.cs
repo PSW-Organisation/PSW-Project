@@ -53,6 +53,7 @@ namespace PharmacyAPI
         
             services.AddTransient<IPharmacyRepository, PharmacyRepository>();
             services.AddTransient<IMedicineRepository, MedicineRepository>();
+            services.AddScoped<IPublishService, RabbitMQPublishService>();
             services.AddScoped<IMedicineBenefitRepository, MedicineBenefitRepository>();
             services.AddScoped<IHospitalRepository, HospitalRepository>();
             services.AddScoped<IPharmacyService, PharmacyService>();

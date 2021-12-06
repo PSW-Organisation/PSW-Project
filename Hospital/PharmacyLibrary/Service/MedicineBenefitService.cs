@@ -9,11 +9,14 @@ namespace PharmacyLibrary.Service
     public class MedicineBenefitService : IMedicineBenefitService
     {
         private readonly IMedicineBenefitRepository medicineBenefitRepository;
-        public MedicineBenefitService(IMedicineBenefitRepository medicineBenefitRepository) {
+        private readonly IPublishService publishService;
+        public MedicineBenefitService(IMedicineBenefitRepository medicineBenefitRepository, IPublishService publishService) {
             this.medicineBenefitRepository = medicineBenefitRepository;
+            this.publishService = publishService;
         }
         public bool Add(MedicineBenefit newMedicineBenefit)
         {
+            publishService.SendMedicineBenefit(newMedicineBenefit);
             return medicineBenefitRepository.Add(newMedicineBenefit);
         }
 

@@ -38,32 +38,10 @@ namespace PharmacyAPI.Controllers
         public IActionResult Add(MedicineBenefitDto dto)
         {
             Pharmacy pharmacy =  pharmacyService.Get(1);
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-            using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
-            {
-                channel.QueueDeclare(
-                    queue: "medicineBenefitsQueue/" + "52dcaa9d-5f3a-411d-a79a-ff826d4fa0d9",
-                    durable: false,
-                    exclusive: false,
-                    autoDelete: false,
-                    arguments: null
-                    );
+           
+               
 
-                string message = "Id: " + dto.MedicineBenefitId +
-                                 ", MedicineBenefitTitle: " + dto.MedicineBenefitTitle +
-                                 ", MedicineBenefitContent: " + dto.MedicineBenefitContent +
-                                 ", MedicineBenefitDueDate: " + dto.MedicineBenefitDueDate +
-                                 ", MedicineId: " + dto.MedicineId;
-                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(dto));
-                channel.BasicPublish(
-                    exchange: "",
-                    routingKey: "medicineBenefitsQueue/" + pharmacy.PharmacyApiKey,
-                    basicProperties: null,
-                    body: body
-
-                    );
-            }
+                 
             return Ok(medicineBenefitService.Add(MedicineBenefitAdapter.MedicineBenefitDtoToMedicineBenefit(dto)));
         }
 
