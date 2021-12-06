@@ -14,11 +14,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PharmacyAPI.Protos;
 using PharmacyAPI.Service;
+using PharmacyLibrary.Repository;
 using PharmacyLibrary.Repository.HospitalRepository;
 using PharmacyLibrary.Repository.MedicineBenefitRepository;
 using PharmacyLibrary.Repository.MedicineRepository;
+using PharmacyLibrary.Repository.NotificationsRepository;
 using PharmacyLibrary.Repository.PharmacyRepository;
 using PharmacyLibrary.Service;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,6 +52,7 @@ namespace PharmacyAPI
             });
             services.AddControllers();
             services.AddDbContext<PharmacyDbContext>(options =>
+            
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
                     assembly => assembly.MigrationsAssembly(typeof(PharmacyDbContext).Assembly.FullName));
@@ -63,6 +67,11 @@ namespace PharmacyAPI
             services.AddScoped<IMedicineService, MedicineService>();
             services.AddScoped<IHospitalService, HospitalService>();
             services.AddScoped<IMedicineBenefitService, MedicineBenefitService>();
+           services.AddTransient<INotificationsForAppRepository, NotificationsForAppRepository>(); 
+            services.AddScoped<INotificationsForAppService, NotificationsForAppService>();
+           
+            
+            
             //added for Cors error
             //______________________________________________________________________
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
