@@ -35,19 +35,25 @@ namespace IntegrationLibrary.Service
             };
             connection = factory.CreateConnection();
             channel = connection.CreateModel();
+            channel.ExchangeDeclare(exchange: "medicineBenefit", ExchangeType.Topic);
             using (var scope = serviceScopeFactory.CreateScope()) {
 
                 var pharmacyRepository = scope.ServiceProvider.GetRequiredService<PharmacyRepository>();
                      foreach (Pharmacy p in pharmacyRepository.GetAll())
                      {
-
-                         channel.QueueDeclare(
-                                    queue: "medicineBenefitsQueue/" + p.PharmacyApiKey,
-                                    durable: false,
+                    channel.QueueDeclare(
+                            queue: p.PharmacyName,
+                            durable: false,
                                     exclusive: false,
                                     autoDelete: false,
                                     arguments: null
-                                    );
+                        );
+
+                    channel.QueueBind(
+                               queue: p.PharmacyName,
+                               exchange: "medicineBenefit",
+                               routingKey: p.PharmacyName
+                               ) ;
                     }
             }
 
@@ -81,7 +87,7 @@ namespace IntegrationLibrary.Service
                 {
 
                     channel.BasicConsume(
-                               queue: "medicineBenefitsQueue/" + p.PharmacyApiKey,
+                               queue: p.PharmacyName,
                                autoAck: true,
                                consumer: consumer
                                );

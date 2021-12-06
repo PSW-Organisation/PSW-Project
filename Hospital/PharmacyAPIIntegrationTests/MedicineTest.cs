@@ -18,7 +18,7 @@ namespace PharmacyAPIIntegrationTests
 
             MedicineService medicineService = new MedicineService(stubMedicineRepository);
 
-            Boolean exists = medicineService.CheckIfExists("verapamil", 1);
+            Boolean exists = medicineService.CheckIfExists("panklav", 1);
 
             Assert.True(exists);
         }
