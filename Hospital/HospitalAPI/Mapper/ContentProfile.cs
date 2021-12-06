@@ -34,6 +34,9 @@ namespace HospitalAPI.Mapper
 
             CreateMap<ParamsOfRelocationEquipmentDTO, ParamsOfRelocationEquipment>();
             CreateMap<TermOfRelocationEquipment, ParamsOfRelocationEquipmentDTO>();
+
+            //CreateMap<Room, RoomMinimalInfoDTO>().ConstructUsing(r => new RoomMinimalInfoDTO() { Id=r.Id, Name=r.Name });
+            CreateMap<Room, RoomMinimalInfoDTO>();
         }
     }
 }

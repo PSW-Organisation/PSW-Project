@@ -16,5 +16,6 @@ namespace HospitalLibrary.GraphicalEditor.Repository
         {
             _dbContext = dbContext;
         }
+
     }
 }

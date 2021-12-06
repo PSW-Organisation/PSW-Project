@@ -44,5 +44,18 @@ namespace HospitalAPI.Controllers
             return Ok(result.Select(r => _mapper.Map<FloorGraphicDTO>(r)).ToList());
         }
 
+        [HttpGet]
+        [Route("merge")]
+        public ActionResult<List<RoomMinimalInfoDTO>> GetAllPossibleRoomsForMergWithRoomById([FromQuery(Name = "id")] int id)
+        {
+            List<Room> rooms = _roomGraphicService.GetAllPossibleRoomsForMergWithRoomById(id);
+            if(rooms == null)
+            {
+                return NotFound("error");
+            }
+
+            return Ok(rooms.Select(r => _mapper.Map<RoomMinimalInfoDTO>(r)).ToList());
+        }
+
     }
 }
