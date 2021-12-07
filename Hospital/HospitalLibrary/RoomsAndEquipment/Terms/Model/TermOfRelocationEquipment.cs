@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HospitalLibrary.RoomsAndEquipment.Model
+namespace HospitalLibrary.RoomsAndEquipment.Terms.Model
 {
     public class TermOfRelocationEquipment : EntityDb
     {
@@ -16,7 +16,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Model
         public int DurationInMinutes { get; set; }
         public bool FinishedRelocation { get; set; }
 
-        public TermOfRelocationEquipment() {}
+        public TermOfRelocationEquipment() { }
 
         public TermOfRelocationEquipment(ParamsOfRelocationEquipment paramsOfRelocationEquipment)
         {
