@@ -1,13 +1,14 @@
-﻿using HospitalLibrary.RoomsAndEquipment.Service;
-using HospitalLibrary.RoomsAndEquipment.Model;
-using Moq;
+﻿using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using HospitalLibrary.RoomsAndEquipment.Repository;
 using Shouldly;
 using Xunit.Abstractions;
+using HospitalLibrary.RoomsAndEquipment.Terms.Model;
+using HospitalLibrary.RoomsAndEquipment.Terms.Repository;
+using HospitalLibrary.RoomsAndEquipment.Terms.Service;
+using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 
 namespace HospitalUnitTests
 {
@@ -50,11 +51,13 @@ namespace HospitalUnitTests
             List<TermOfRelocationEquipment> destinationRoomTerms, int destinationRoomId,
             int numberOfFreeInterval)
         {
+            var stubRenovationRepository = new Mock<ITermOfRenovationRepository>();
+            stubRenovationRepository.Setup(par => par.GetTermsOfRenovationByRoomId(It.Is<int>(id => true))).Returns(new List<TermOfRenovation>());
 
             var stubRepository = new Mock<ITermOfRelocationEquipmentRepository>();
             stubRepository.Setup(par => par.GetTermsOfRelocationByRoomId(It.Is<int>(id => id == sourceRoomId))).Returns(sourceRoomTerms);
             stubRepository.Setup(par => par.GetTermsOfRelocationByRoomId(It.Is<int>(id => id == destinationRoomId))).Returns(destinationRoomTerms);
-            TermOfRelocationEquipmentService termOfRelocationEquipmentService = new TermOfRelocationEquipmentService(stubRepository.Object);
+            TermOfRelocationEquipmentService termOfRelocationEquipmentService = new TermOfRelocationEquipmentService(stubRepository.Object, stubRenovationRepository.Object);
 
             List<TimeInterval> freeTimeInterval = termOfRelocationEquipmentService.GetFreePossibleTermsOfRelocation(paramsOfRelocationEquipment);
 

@@ -1,10 +1,11 @@
 ﻿using FluentResults;
-using HospitalLibrary.RoomsAndEquipment.Model;
+using HospitalLibrary.RoomsAndEquipment.Terms.Model;
+using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HospitalLibrary.RoomsAndEquipment.Service
+namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
 {
     public interface ITermOfRelocationEquipmentService
     {

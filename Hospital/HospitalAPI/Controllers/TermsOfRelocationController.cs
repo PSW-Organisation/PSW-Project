@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using HospitalAPI.DTO;
-using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.RoomsAndEquipment.Repository;
-using HospitalLibrary.RoomsAndEquipment.Service;
+using HospitalLibrary.RoomsAndEquipment.Terms.Model;
+using HospitalLibrary.RoomsAndEquipment.Terms.Service;
+using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

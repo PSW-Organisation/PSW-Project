@@ -3,6 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.RoomsAndEquipment.Repository;
+using HospitalLibrary.RoomsAndEquipment.Terms.Model;
+using HospitalLibrary.RoomsAndEquipment.Terms.Repository;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HospitalLibrary.RoomsAndEquipment.Service

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HospitalLibrary.RoomsAndEquipment.Model
+namespace HospitalLibrary.RoomsAndEquipment.Terms.Utils
 {
     public class TimeInterval
     {
