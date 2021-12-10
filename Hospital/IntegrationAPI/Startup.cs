@@ -90,7 +90,7 @@ namespace IntegrationAPI
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<IHolidayService, HolidayService>();
             services.AddScoped<IHospitalizationService, HospitalizationService>();
-            services.AddScoped<IMedicineService, MedicineService>();
+            services.AddScoped<IMedicineOrderService, MedicineOrderService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IPersonalizedNotificationService, PersonalizedNotificationService>();

@@ -24,7 +24,7 @@ namespace IntegrationAPIUnitTests
         private static MedicineRepository CreateMedicineStubRepository()
         {
             var stubMedicineRepository = new Mock<MedicineRepository>();
-            var medicine = new Medicine { Id = 1, MedicineAmmount = 25, MedicineIngredient = new List<string>(), MedicineStatus = MedicineStatus.approved, Name = "Panklav" };
+            var medicine = new Medicine { Id = 1, MedicineAmount = 25, MedicineIngredient = new List<string>(), MedicineStatus = MedicineStatus.approved, MedicineName = "Panklav" };
             stubMedicineRepository.Setup(m => m.Get(1)).Returns(medicine);
             return stubMedicineRepository.Object;
         }

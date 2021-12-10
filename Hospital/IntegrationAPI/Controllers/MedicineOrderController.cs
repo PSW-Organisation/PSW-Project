@@ -16,57 +16,22 @@ namespace IntegrationAPI.Controllers
 {
     [Route("api2/[controller]")]
     [ApiController]
-    public class MedicineController : ControllerBase
+    public class MedicineOrderController : ControllerBase
     {
-        private IMedicineService medicineService;
+        private IMedicineOrderService medicineService;
         private IPharmacyService pharmacyService;
 
-        public MedicineController(IMedicineService medicineService, IPharmacyService pharmacyService)
+        public MedicineOrderController(IMedicineOrderService medicineService, IPharmacyService pharmacyService)
         {
             this.medicineService = medicineService;
             this.pharmacyService = pharmacyService;
           
         }
 
-        [HttpGet]       // GET /api/medicine
-        public IActionResult Get()
-        {
-            List<MedicineDTO> result = new List<MedicineDTO>();
-            medicineService.GetAllMedicine().ForEach(medicine => result.Add(MedicineAdapter.MedicineToMedicineDto(medicine)));
-            return Ok(result);
-        }
-
-        [HttpGet("{id?}")]      // GET /api/medicine/1
-        public IActionResult Get(int id)
-        {
-
-            Medicine medicine = medicineService.GetMedicine(id);
-            if (medicine == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(MedicineAdapter.MedicineToMedicineDto(medicine));
-            }
-        }
-
-        /*[HttpPut]
-          public IActionResult Put(MedicineDTO dto)
-          {
-              Medicine medicine = medicineService.GetMedicine(dto.Id);
-              if (medicine == null)
-              {
-                  return NotFound();
-              }
-              medicineService.SetMedicine(medicine);
-              return Ok();
-          }*/
-
-        [HttpPost]      // POST /api/medicine Request body:
+        [HttpPost]   
         public IActionResult Add(MedicineDTO dto)
         {
-            if (dto.Name.Length <= 0 || dto.MedicineAmount <= 0)
+            if (dto.MedicineName.Length <= 0 || dto.MedicineAmount <= 0)
             {
                 return BadRequest();
             }
@@ -119,7 +84,7 @@ namespace IntegrationAPI.Controllers
             List<Pharmacy> ret = new List<Pharmacy>();
             foreach (Pharmacy pharmacy in pharmacyService.GetAll())
             {
-                if (pharmacy.CommunicationType == PharmacyCommunicationType.GRPC)
+                if (pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.GRPC)
                 {
                     bool response = false;
                     var input = new MedicineOrderRequest { MedicineName = medicineName, MedicineAmount = medicineAmount, ApiKey = pharmacy.HospitalApiKey };
@@ -159,21 +124,6 @@ namespace IntegrationAPI.Controllers
             response = reply.Response;
 
             return response;
-        }
-
-        [HttpDelete("{id?}")]       // DELETE /api/medicine/1
-        public IActionResult Delete(int id)
-        {
-            Medicine medicine = medicineService.GetMedicine(id);
-            if (medicine == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                medicineService.DeleteMedicine(medicine);
-                return Ok();
-            }
         }
     }
 }
