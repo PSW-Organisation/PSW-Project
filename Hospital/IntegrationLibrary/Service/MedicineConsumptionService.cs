@@ -25,7 +25,7 @@ namespace IntegrationLibrary.Service
             var consumption = new List<MedicineConsumption>();
             foreach (var temp in medicineCount)
             {
-                var total = new MedicineConsumption(medicineRepository.Get(temp.Key).Name, temp.Value);
+                var total = new MedicineConsumption(medicineRepository.Get(temp.Key).MedicineName, temp.Value);
                 consumption.Add(total);
             }
             return consumption;

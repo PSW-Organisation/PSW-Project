@@ -103,7 +103,7 @@ namespace ehealthcare.Service
 						Date = closestDateTime,
 						HourAndMinute = hour + ":" + minute,
 						Quantity = therapy.QuantityString,
-						Medicine = therapy.Medicine.Name
+						Medicine = therapy.Medicine.medicineName
 					}); 
 				}
 			}
@@ -157,7 +157,7 @@ namespace ehealthcare.Service
 							Therapy = therapy,
 							Date = therapy.CurrentTimeToTake,
 							Subject = "Uzmite lek",
-							Description = GenerateDescriptionForTherapyNotification(therapy.CurrentTimeToTake, therapy.Medicine.Name),
+							Description = GenerateDescriptionForTherapyNotification(therapy.CurrentTimeToTake, therapy.Medicine.medicineName),
 							MedicineTaken = false
 						};
 						if(!therapyNotificationService.TherapyNotificationExists(therapyNotification))

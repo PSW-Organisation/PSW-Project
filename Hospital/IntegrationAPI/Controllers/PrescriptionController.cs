@@ -21,9 +21,9 @@ namespace IntegrationAPI.Controllers
     public class PrescriptionController : ControllerBase
     {
         private readonly IConverter _converter;
-        private IMedicineService medicineService;
+        private IMedicineOrderService medicineService;
 
-        public PrescriptionController(IConverter _converter, IMedicineService medicineService)
+        public PrescriptionController(IConverter _converter, IMedicineOrderService medicineService)
         {
             this._converter = _converter;
             this.medicineService = medicineService;

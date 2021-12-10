@@ -13,7 +13,7 @@ namespace IntegrationLibrary.Repository.DatabaseRepository
         {
             foreach (Medicine medicine in this.GetAll())
             {
-                if (medicine.Name.Equals(name))
+                if (medicine.MedicineName.Equals(name))
                     return medicine;
             }
             return null;

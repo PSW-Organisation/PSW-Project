@@ -28,14 +28,12 @@ thisUrl: string = "http://localhost:16928/api2/pharmacy";
   }
 
   addPharmacy(newPharmacy : any){
-    return this._http.post('http://localhost:16928/api2/pharmacy', newPharmacy)
-    .pipe(
-    tap(data => alert("hej pbde sam")
-    )) ;
+    newPharmacy.pharmacyCommunicationType = +newPharmacy.pharmacyCommunicationType;  
+    return this._http.post('http://localhost:16928/api2/pharmacy', newPharmacy);
   }
 
   searchMedicine(search : any) : Observable<boolean>{
-    return this._http.put<boolean>('http://localhost:16928/api2/medicine', search);
+    return this._http.put<boolean>('http://localhost:16928/api2/medicineorder', search);
   }
 
   deletePharmacy(idPharmacy : number){
