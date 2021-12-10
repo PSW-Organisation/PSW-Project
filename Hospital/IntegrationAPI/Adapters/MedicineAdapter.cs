@@ -13,10 +13,10 @@ namespace IntegrationAPI.Adapters
         {
             Medicine medicine = new Medicine();
             medicine.Id = dto.Id;
-            medicine.Name = dto.Name;
+            medicine.MedicineName = dto.MedicineName;
             medicine.MedicineStatus = MedicineStatus.approved;
             medicine.MedicineIngredient = new List<String>();
-            medicine.MedicineAmmount = dto.MedicineAmount;
+            medicine.MedicineAmount = dto.MedicineAmount;
             return medicine;
         }
 
@@ -24,8 +24,8 @@ namespace IntegrationAPI.Adapters
         {
             MedicineDTO dto = new MedicineDTO();
             dto.Id = medicine.Id;
-            dto.Name = medicine.Name;
-            dto.MedicineAmount = medicine.MedicineAmmount;
+            dto.MedicineName = medicine.MedicineName;
+            dto.MedicineAmount = medicine.MedicineAmount;
             return dto;
         }
 

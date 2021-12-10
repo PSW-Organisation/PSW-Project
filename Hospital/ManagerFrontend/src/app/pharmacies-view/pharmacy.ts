@@ -6,4 +6,5 @@ export interface IPharmacy{
     hospitalApiKey: string;
     comment: string;
     picture: string;
+    pharmacyCommunicationType: number;
 }

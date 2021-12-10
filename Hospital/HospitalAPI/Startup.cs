@@ -32,6 +32,8 @@ using HospitalAPI.Validators;
 using System;
 using HospitalLibrary.RoomsAndEquipment.Terms.Repository;
 using HospitalLibrary.RoomsAndEquipment.Terms.Service;
+using HospitalLibrary.Medicines.Repository;
+using HospitalLibrary.Medicines.Service;
 
 namespace HospitalAPI
 {
@@ -130,6 +132,8 @@ namespace HospitalAPI
             services.AddScoped<IMedicinePrescriptionService, MedicinePrescriptionService>();
             services.AddScoped<IMedicinePrescriptionRepository, MedicinePrescriptionDbRepository>();
 
+            services.AddScoped<IMedicineRepository, MedicineRepository>();
+            services.AddScoped<IMedicineService, MedicineService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

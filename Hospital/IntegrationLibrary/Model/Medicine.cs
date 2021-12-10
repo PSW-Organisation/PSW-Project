@@ -6,16 +6,16 @@ namespace IntegrationLibrary.Model
     [Serializable]
     public class Medicine : Entity
     {
-        private String name;
+        private String medicineName;
         private MedicineStatus medicineStatus;
         private List<String> medicineIngredient;
-        private int medicineAmmount;
+        private int medicineAmount;
         public Medicine() : base(-1) { }
 
-        public String Name
+        public String MedicineName
         {
-            get { return name; }
-            set { name = value; }
+            get { return medicineName; }
+            set { medicineName = value; }
         }
 
         public MedicineStatus MedicineStatus
@@ -90,12 +90,12 @@ namespace IntegrationLibrary.Model
             }
         }
 
-        public int MedicineAmmount { get => medicineAmmount; set => medicineAmmount = value; }
+        public int MedicineAmount { get => medicineAmount; set => medicineAmount = value; }
         public Medicine(int argId, String argName, MedicineStatus argMedicineStatus, int argQuantity): base(argId)
         {
-            name = argName;
+            medicineName = argName;
             medicineStatus = argMedicineStatus;
-            medicineAmmount = argQuantity;
+            medicineAmount = argQuantity;
         }
     
     }

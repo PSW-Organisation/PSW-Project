@@ -11,6 +11,7 @@ using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.Model;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
+using HospitalLibrary.Medicines.Model;
 
 namespace HospitalAPI.Mapper
 {
@@ -44,6 +45,9 @@ namespace HospitalAPI.Mapper
 
             CreateMap<TermOfRenovation, TermOfRenovationDTO>();
             CreateMap<TermOfRenovationDTO, TermOfRenovation>();
+
+            CreateMap<MedicineDTO, Medicine>();
+            CreateMap<Medicine, MedicineDTO>();
         }
     }
 }

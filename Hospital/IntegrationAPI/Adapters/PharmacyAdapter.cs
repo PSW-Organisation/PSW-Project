@@ -20,6 +20,7 @@ namespace IntegrationAPI.Adapters
             pharmacy.HospitalApiKey = dto.HospitalApiKey;
             pharmacy.Comment = dto.Comment;
             pharmacy.Picture = dto.Picture;
+            pharmacy.PharmacyCommunicationType = dto.pharmacyCommunicationType;
             return pharmacy;
         }
 
@@ -32,6 +33,7 @@ namespace IntegrationAPI.Adapters
             pharmacy.HospitalApiKey = dto.HospitalApiKey;
             pharmacy.Comment = dto.Comment;
             pharmacy.Picture = dto.Picture;
+            pharmacy.PharmacyCommunicationType = dto.pharmacyCommunicationType;
             return pharmacy;
         }
         public static PharmacyDto PharmacyToPharmacyDto(Pharmacy pharmacy)
@@ -45,6 +47,7 @@ namespace IntegrationAPI.Adapters
             dto.HospitalApiKey = pharmacy.HospitalApiKey;
             dto.Comment = pharmacy.Comment;
             dto.Picture = pharmacy.Picture;
+            dto.pharmacyCommunicationType = pharmacy.PharmacyCommunicationType;
             return dto;
         }
     }
