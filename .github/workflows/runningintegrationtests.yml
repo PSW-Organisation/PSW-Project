@@ -38,11 +38,11 @@ jobs:
       - name: Install dependencies
         run: dotnet restore ${SOLUTION_DIRECTORY}
 
-      #- name: Create Migrations Integration
-     #   run:
-     #     dotnet ef migrations add InitialCreate --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_INTEGRATION};
-     # - name: Update Database Integration
-     #   run: dotnet ef database update --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_INTEGRATION};
+      - name: Create Migrations Integration
+        run:
+          dotnet ef migrations add InitialCreate --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_INTEGRATION};
+      - name: Update Database Integration
+        run: dotnet ef database update --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_INTEGRATION};
         
       - name: Create Migrations Pharmacy
         run:
@@ -50,11 +50,11 @@ jobs:
       - name: Update Database Pharmacy
         run: dotnet ef database update --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_PHARMACY};
         
-      #- name: Create Migrations Hospital
-    #    run:
-    #      dotnet ef migrations add InitialCreate --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_HOSPITAL};
-     # - name: Update Database Hospital
-    #    run: dotnet ef database update --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_HOSPITAL};
+      - name: Create Migrations Hospital
+        run:
+          dotnet ef migrations add InitialCreate --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_HOSPITAL};
+      - name: Update Database Hospital
+        run: dotnet ef database update --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_HOSPITAL};
         
       - name: Test
         run: dotnet test ${SOLUTION_DIRECTORY} --no-restore --verbosity quiet 
