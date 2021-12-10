@@ -25,7 +25,7 @@ export class OrderingMedicineComponent implements OnInit {
   //metoda kojom se narucuje lek prosledjenoj apoteci, sa prosledjenim imenom i kolicinom
   order(pharmacy: IPharmacy): void {
     if (window.confirm('Are you sure, you want to order medicine from this pharmacy?')){
-      this._orderingMedicineService.orderMedicineHospital(this.medicineName.toLocaleLowerCase(), this.medicineAmount).subscribe();
+      this._orderingMedicineService.orderMedicineHospital(this.medicineName, this.medicineAmount).subscribe();
       this._orderingMedicineService.orderMedicinePharmacy(pharmacy.pharmacyUrl, pharmacy.hospitalApiKey ,this.medicineName.toLocaleLowerCase(), this.medicineAmount).subscribe();
       alert('Medicine was successfully orderd!');
     }
@@ -37,7 +37,7 @@ export class OrderingMedicineComponent implements OnInit {
       this.pharmacies = [];
       this.notFound = false;
     } else {
-      this._orderingMedicineService.searchMedicine(this.medicineName.toLocaleLowerCase(),this.medicineAmount).subscribe(
+      this._orderingMedicineService.searchMedicine(this.medicineName,this.medicineAmount).subscribe(
       pharmacies => {
         this.pharmacies = pharmacies;
         if (this.pharmacies.length === 0) { //ako nema leka ni u jednoj apoteci

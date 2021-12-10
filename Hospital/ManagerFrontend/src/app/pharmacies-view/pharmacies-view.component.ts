@@ -11,9 +11,9 @@ import { IPharmacy } from './pharmacy';
 export class PharmaciesViewComponent implements OnInit {
   pharmacies: IPharmacy[] = [];
   errorMessage: string = "";
-  pharmacyForEdit: any = { pharmacyId:"", pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey:"", picture: ""};
+  pharmacyForEdit: any = { pharmacyId:"", pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey:"", picture: "", pharmacyCommunicationType:""};
   editing: boolean = false;
-  newPharmacy: any = { pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: "", comment: "", picture: ""};
+  newPharmacy: any = { pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: "", comment: "", picture: "", pharmacyCommunicationType:""};
   fileToUpload: File | null = null;
   medicineName: string = "";
   medicineAmount: number = 0;
@@ -30,9 +30,8 @@ export class PharmaciesViewComponent implements OnInit {
     this._pharmaciesService.addPharmacy(this.newPharmacy).subscribe( res => {
       this.refreshPharmacies();
       alert("Pharmacy added successfully!");
-      alert("Api key for pharmacy is " + res);
     } );
-    this.newPharmacy = {pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: ""};
+    this.newPharmacy = {pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: "",pharmacyCommunicationType: ""};
   }
 
 
@@ -46,13 +45,9 @@ export class PharmaciesViewComponent implements OnInit {
   }
 
   showProfilePharmacy(id: number){
-   
-      this._pharmaciesService.showProfilePharmacy(id).subscribe( data => {
-        
+      this._pharmaciesService.showProfilePharmacy(id).subscribe( data => {  
       });
     }
-
-  
 
   refreshPharmacies(){
     this._pharmaciesService.getPharmacies().subscribe(

@@ -26,8 +26,9 @@ namespace PharmacyLibrary.Repository.MedicineRepository
 
             newMedicine.Id = id;
             newMedicine.MedicineStatus = MedicineStatus.waitingForApproval;
+            newMedicine.Name = newMedicine.Name.First().ToString().ToUpper() + newMedicine.Name.Substring(1);
 
-            if( newMedicine.Quantity < 0)
+            if ( newMedicine.Quantity < 0)
             {
                 newMedicine.Quantity = 0;
             }
@@ -90,7 +91,7 @@ namespace PharmacyLibrary.Repository.MedicineRepository
                 medicine.MedicineStatus = m.MedicineStatus;
             }
 
-
+            medicine.Name = medicine.Name.First().ToString().ToUpper() + medicine.Name.Substring(1);
             pharmacyDbContext.Update(medicine);
             pharmacyDbContext.SaveChanges();
             return true;
@@ -109,7 +110,12 @@ namespace PharmacyLibrary.Repository.MedicineRepository
 
         public Medicine FindByName(string medicineName)
         {
-            return pharmacyDbContext.Medicines.FirstOrDefault(medicine => medicine.Name == medicineName);
+            foreach (Medicine medicine in this.Get())
+            {
+                if (medicine.Name.ToLower().Equals(medicineName.ToLower()))
+                    return medicine;
+            }
+            return null;
         }
 
         public List<Medicine> Search(string name, string useFor)

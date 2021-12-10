@@ -37,7 +37,7 @@
                     <th style="width: 170px;">Name</th>
                     <th style="width: 270px;">Address</th>
                     <th style="width: 270px;">Url</th>
-                   
+                    <th style="width: 270px;">Communication type</th>
                     <th></th>
                     <th></th>
                     <th> </th>
@@ -49,8 +49,8 @@
                     <td>{{pharmacy.pharmacyName}}</td>
                     <td>{{pharmacy.pharmacyAddress}}</td>
                     <td>{{pharmacy.pharmacyUrl}}</td>
-                     <!--<td>{{pharmacy.hospitalApiKey}}</td> -->
-                    
+                    <td *ngIf = 'pharmacy.pharmacyCommunicationType === 0'>HTTP</td>
+                    <td *ngIf = 'pharmacy.pharmacyCommunicationType === 1'>GRPC</td>
                     <td> <button style="color: gray; text-decoration: none;" class="btn"><a style="text-decoration-line: none; color: white;"  [routerLink] ="['/pharmacy' , pharmacy.pharmacyId]"> Show profile</a> </button></td>
                     <button class="btn" (click)="deletePharmacy(pharmacy.pharmacyId)" style="margin-top: 15px !important;"> Delete</button>
             
@@ -73,6 +73,13 @@
           <input type="text" class="form-control" placeholder="Enter pharmacy name" [(ngModel)]="newPharmacy.pharmacyName">
           <label>Address</label>
           <input type="text" class="form-control" placeholder="Enter pharmacy address" [(ngModel)]="newPharmacy.pharmacyAddress">
+          <table style="margin-top: 10px;margin-bottom: 10px;">
+            <tr>Communication type:</tr>
+            <tr ><select  [(ngModel)]="newPharmacy.pharmacyCommunicationType" style="width: 130px;">
+                  <option value="0">HTTP</option>
+                  <option value="1">GRPC</option>
+                </select></tr>
+          </table>
           <label>Url</label>
           <input type="text" class="form-control" placeholder="Enter pharmacy url" [(ngModel)]="newPharmacy.pharmacyUrl">
           <label>ApiKey</label>

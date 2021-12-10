@@ -9,6 +9,7 @@ using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.Model;
 using System.Linq;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
+using HospitalLibrary.Medicines.Model;
 
 namespace ehealthcare.Model
 {
@@ -22,18 +23,16 @@ namespace ehealthcare.Model
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<RoomGraphic> RoomGraphics { get; set; }
         public DbSet<Room> Rooms { get; set; }
-
         public DbSet<FloorGraphic> FloorGraphics { get; set; }
-
         public DbSet<PatientAllergen> PatientAllergens { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<ExteriorGraphic> ExteriorGraphic { get; set; }
         public DbSet<TermOfRelocationEquipment> TermOfRelocationEquipments { get; set; }
         public DbSet<TermOfRenovation> TermOfRenovations { get; set; }
-
         public DbSet<RoomEquipment> RoomEquipments { get; set; }
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Question> Questions { get; set; }
+        //public DbSet<Medicine> Medicines { get; set; }
 
         public DbSet<MedicinePrescription> Prescriptions { get; set; }
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }

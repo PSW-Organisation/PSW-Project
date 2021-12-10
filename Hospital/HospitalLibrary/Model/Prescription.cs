@@ -1,3 +1,4 @@
+using HospitalLibrary.Medicines.Model;
 using System;
 
 
@@ -7,7 +8,7 @@ namespace ehealthcare.Model
     public class Prescription
     {
         private bool active;
-        private Medicine medicine;
+        private HospitalLibrary.Medicines.Model.Medicine medicine;
 
         public bool Active
         {

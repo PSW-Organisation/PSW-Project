@@ -1,4 +1,5 @@
 using ehealthcare.Service;
+using HospitalLibrary.Medicines.Model;
 using System;
 
 namespace ehealthcare.Model

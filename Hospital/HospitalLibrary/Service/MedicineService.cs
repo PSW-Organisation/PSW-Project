@@ -11,7 +11,7 @@ namespace ehealthcare.Service
 {
     public class MedicineService
     {
-        private MedicineRepository medicineRepository;
+        /*private MedicineRepository medicineRepository;
         
         public MedicineService()
         {
@@ -62,6 +62,6 @@ namespace ehealthcare.Service
         public void DeleteMedicine(string id)
         {
             medicineRepository.Delete(id);
-        }
+        }*/
     }
 }
