@@ -56,12 +56,12 @@ namespace PharmacyLibrary.Service
             return true;
         }
 
-        public int reduceQuantityOfMedicine(string medicineName, int medicineAmount)
+        public bool reduceQuantityOfMedicine(string medicineName, int medicineAmount)
         {
             Medicine medicine = medicineRepository.FindByName(medicineName);
             medicine.Quantity = medicine.Quantity - medicineAmount;
             medicineRepository.Update(medicine);
-            return medicine.Quantity;
+            return true;
         }
 
         public List<Medicine> Search(string name, string useFor)

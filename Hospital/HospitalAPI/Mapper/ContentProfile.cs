@@ -10,6 +10,7 @@ using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.Model;
 using HospitalLibrary.RoomsAndEquipment.Model;
+using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 
 namespace HospitalAPI.Mapper
 {
@@ -37,6 +38,12 @@ namespace HospitalAPI.Mapper
 
             //CreateMap<Room, RoomMinimalInfoDTO>().ConstructUsing(r => new RoomMinimalInfoDTO() { Id=r.Id, Name=r.Name });
             CreateMap<Room, RoomMinimalInfoDTO>();
+
+            CreateMap<ParamsOfRenovation, ParamsOfRenovationDTO>();
+            CreateMap<ParamsOfRenovationDTO, ParamsOfRenovation>();
+
+            CreateMap<TermOfRenovation, TermOfRenovationDTO>();
+            CreateMap<TermOfRenovationDTO, TermOfRenovation>();
         }
     }
 }

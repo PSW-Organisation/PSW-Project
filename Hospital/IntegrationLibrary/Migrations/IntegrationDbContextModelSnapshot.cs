@@ -136,6 +136,9 @@ namespace IntegrationLibrary.Migrations
                     b.Property<string>("Comment")
                         .HasColumnType("text");
 
+                    b.Property<int>("CommunicationType")
+                        .HasColumnType("integer");
+
                     b.Property<string>("HospitalApiKey")
                         .HasColumnType("text");
 
@@ -149,6 +152,9 @@ namespace IntegrationLibrary.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("PharmacyUrl")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Picture")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

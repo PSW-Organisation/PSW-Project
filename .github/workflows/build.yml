@@ -1,0 +1,58 @@
+name: Sonar Cloud
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+    name: Sonar Cloud
+    runs-on: windows-latest
+    steps:
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.11
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache SonarCloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v1
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+      - name: Install SonarCloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        shell: powershell
+        run: |
+          New-Item -Path .\.sonar\scanner -ItemType Directory
+          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          hospitalApi_path: Hospital\HospitalAPI\HospitalAPI.csproj
+          hospitalClass_lib_path: Hospital\HospitalLibrary\HospitalLibrary.csproj
+          integrationApi_path: Hospital\IntegrationAPI\IntegrationAPI.csproj
+          integrationClass_lib_path: Hospital\IntegrationLibrary\IntegrationLibrary.csproj
+          pharmacyApi_path: Hospital\PharmacyAPI\PharmacyAPI.csproj
+          pharmacyClass_lib_path: Hospital\PharmacyLibrary\PharmacyLibrary.csproj
+        shell: powershell
+        run: |
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"PSW-Organisation_PSW-Project" /o:"psw-organisation" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet build ${{env.hospitalApi_path}}
+          dotnet build ${{env.hospitalClass_lib_path}}
+          dotnet build ${{env.integrationApi_path}}
+          dotnet build ${{env.integrationClass_lib_path}}
+          dotnet build ${{env.pharmacyApi_path}}
+          dotnet build ${{env.pharmacyClass_lib_path}}
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"

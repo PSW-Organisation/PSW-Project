@@ -8,6 +8,7 @@ using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.Model;
 using System.Linq;
+using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 
 namespace ehealthcare.Model
 {
@@ -28,11 +29,13 @@ namespace ehealthcare.Model
         public DbSet<User> Users { get; set; }
         public DbSet<ExteriorGraphic> ExteriorGraphic { get; set; }
         public DbSet<TermOfRelocationEquipment> TermOfRelocationEquipments { get; set; }
+        public DbSet<TermOfRenovation> TermOfRenovations { get; set; }
 
         public DbSet<RoomEquipment> RoomEquipments { get; set; }
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Question> Questions { get; set; }
 
+        public DbSet<MedicinePrescription> Prescriptions { get; set; }
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
         protected HospitalDbContext()
@@ -582,6 +585,49 @@ namespace ehealthcare.Model
                     DurationInMinutes = 20,
                     FinishedRelocation = false
                 }
+            );
+
+            #endregion
+
+            #region TermOfRenovations
+
+            modelBuilder.Entity<TermOfRenovation>().HasData(
+                  new TermOfRenovation()
+                  {
+                      Id = 1,
+                      StartTime = new DateTime(2021, 12, 7, 10, 30, 0),
+                      EndTime = new DateTime(2021, 12, 7, 11, 30, 0),
+                      DurationInMinutes = 60,
+                      StateOfRenovation = StateOfRenovation.CANCELED,
+                      TypeOfRenovation = TypeOfRenovation.MERGE,
+                      IdRoomA = 1,
+                      IdRoomB = 16,
+                      EquipmentLogic = EquipmentLogic.ALL_EQUIPMENT_IN_A,
+                      NewNameForRoomA = "Operation room 5",
+                      NewSectorForRoomA = "OS",
+                      NewRoomTypeForRoomA = RoomType.operation,
+                      NewNameForRoomB = "",
+                      NewSectorForRoomB = "",
+                      NewRoomTypeForRoomB = RoomType.waitingRoom,
+                  },
+                  new TermOfRenovation()
+                  {
+                      Id = 2,
+                      StartTime = new DateTime(2021, 12, 17, 9, 0, 0),
+                      EndTime = new DateTime(2021, 12, 18, 9, 0, 0),
+                      DurationInMinutes = 1440,
+                      StateOfRenovation = StateOfRenovation.PENDING,
+                      TypeOfRenovation = TypeOfRenovation.SPLIT,
+                      IdRoomA = 4,
+                      IdRoomB = -1,
+                      EquipmentLogic = EquipmentLogic.HALF_IN_A_HALF_IN_B,
+                      NewNameForRoomA = "Operation room 6",
+                      NewSectorForRoomA = "OS",
+                      NewRoomTypeForRoomA = RoomType.operation,
+                      NewNameForRoomB = "Operation room 7",
+                      NewSectorForRoomB = "OS",
+                      NewRoomTypeForRoomB = RoomType.operation,
+                  }
             );
 
             #endregion

@@ -1,9 +1,9 @@
 ﻿using HospitalLibrary.Repository;
-using HospitalLibrary.RoomsAndEquipment.Model;
+using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HospitalLibrary.RoomsAndEquipment.Repository
+namespace HospitalLibrary.RoomsAndEquipment.Terms.Repository
 {
     public interface ITermOfRelocationEquipmentRepository : IGenericRepository<TermOfRelocationEquipment>
     {

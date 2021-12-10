@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HospitalLibrary.RoomsAndEquipment.Model
+namespace HospitalLibrary.RoomsAndEquipment.Terms.Model
 {
     public class ParamsOfRelocationEquipment
     {
@@ -14,6 +14,6 @@ namespace HospitalLibrary.RoomsAndEquipment.Model
         public DateTime EndTime { get; set; }
         public int DurationInMinutes { get; set; }
         public ParamsOfRelocationEquipment() { }
-        
+
     }
 }

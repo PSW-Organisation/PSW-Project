@@ -1,14 +1,14 @@
 ﻿using ehealthcare.Model;
 using HospitalLibrary.Repository.DbRepository;
-using HospitalLibrary.RoomsAndEquipment.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 
-namespace HospitalLibrary.RoomsAndEquipment.Repository
+namespace HospitalLibrary.RoomsAndEquipment.Terms.Repository
 {
     public class TermOfRelocationEquipmentRepository : GenericDbRepository<TermOfRelocationEquipment>, ITermOfRelocationEquipmentRepository
     {

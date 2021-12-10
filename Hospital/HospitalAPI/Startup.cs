@@ -30,6 +30,8 @@ using PatientService = HospitalLibrary.MedicalRecords.Service.PatientService;
 using Newtonsoft.Json;
 using HospitalAPI.Validators;
 using System;
+using HospitalLibrary.RoomsAndEquipment.Terms.Repository;
+using HospitalLibrary.RoomsAndEquipment.Terms.Service;
 
 namespace HospitalAPI
 {
@@ -92,7 +94,11 @@ namespace HospitalAPI
 
             services.AddScoped<ITermOfRelocationEquipmentService, TermOfRelocationEquipmentService>();
             services.AddScoped<ITermOfRelocationEquipmentRepository, TermOfRelocationEquipmentRepository>();
-            
+
+            services.AddScoped<ITermOfRenovationService, TermOfRenovationService>();
+            services.AddScoped<ITermOfRenovationRepository, TermOfRenovationRepository>();
+
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<GenericSTRINGIDRepository<User>, UserDbRepository>();
             services.AddScoped<IUserRepository, UserDbRepository>();
@@ -121,7 +127,8 @@ namespace HospitalAPI
             services.AddScoped<GenericDbRepository<Survey>, SurveyDbRepository>();
             services.AddScoped<ISurveyRepository, SurveyDbRepository>();
 
-
+            services.AddScoped<IMedicinePrescriptionService, MedicinePrescriptionService>();
+            services.AddScoped<IMedicinePrescriptionRepository, MedicinePrescriptionDbRepository>();
 
         }
 

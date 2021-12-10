@@ -72,12 +72,11 @@ export class PharmaciesViewComponent implements OnInit {
     this.refreshPharmacies();
   }
 
-  //metoda koja vraca sve apoteke koje sadrze lek sa prosledjenim imenom i kolicinom
   searchMedicine(hospitalApiKey: string) {
     if (this.medicineName === "" && this.medicineAmount === null){ //da se refresuje nakon sto je izvrseno narucivanje
       this.notFound = false;
     } else {
-      this._pharmaciesService.searchMedicine({"medicineName": this.medicineName.toLocaleLowerCase(), "medicineAmount": this.medicineAmount}, hospitalApiKey).subscribe(
+      this._pharmaciesService.searchMedicine({"medicineName": this.medicineName.toLocaleLowerCase(), "medicineAmount": this.medicineAmount, "apiKey": hospitalApiKey}).subscribe(
       response => { this.notFound = response;
         if (this.notFound === false) { //ako nema leka
           this.notFoundMessage = "We don't have that medicine!";

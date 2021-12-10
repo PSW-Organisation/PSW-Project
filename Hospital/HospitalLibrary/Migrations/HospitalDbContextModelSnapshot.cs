@@ -272,56 +272,12 @@ namespace HospitalLibrary.Migrations
                             Id = 2,
                             BuildingId = 0,
                             Floor = 1L
-                        });
-                });
-
-            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.RoomEquipment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RoomEquipments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Bed",
-                            Quantity = 2,
-                            RoomId = 1,
-                            Type = "Static"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Needle",
-                            Quantity = 200,
-                            RoomId = 2,
-                            Type = "Dynamic"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Needle",
-                            Quantity = 300,
-                            RoomId = 3,
-                            Type = "Dynamic"
+                            BuildingId = 1,
+                            Floor = 0L
                         });
                 });
 
@@ -389,6 +345,33 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.MedicinePrescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Diagnosis")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MedicineId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("PrescriptionDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prescriptions");
+                });
+
             modelBuilder.Entity("HospitalLibrary.Model.PatientAllergen", b =>
                 {
                     b.Property<string>("PatientId")
@@ -411,142 +394,7 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HospitalLibrary.RoomsAndEquipment.Model.TermOfRelocationEquipment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool>("FinishedRelocation")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("IdDestinationRoom")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("IdSourceRoom")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("NameOfEquipment")
-                        .HasColumnType("text");
-
-                    b.Property<int>("QuantityOfEquipment")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("DurationInMinutes")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TermOfRelocationEquipments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EndTime = new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 8,
-                            IdSourceRoom = 7,
-                            NameOfEquipment = "bed",
-                            QuantityOfEquipment = 2,
-                            StartTime = new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified),
-                            DurationInMinutes = 10
-                        },
-                        new
-                        {
-                            Id = 2,
-                            EndTime = new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 9,
-                            IdSourceRoom = 7,
-                            NameOfEquipment = "needle",
-                            QuantityOfEquipment = 14,
-                            StartTime = new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified),
-                            DurationInMinutes = 40
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EndTime = new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 9,
-                            IdSourceRoom = 8,
-                            NameOfEquipment = "infusion",
-                            QuantityOfEquipment = 8,
-                            StartTime = new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified),
-                            DurationInMinutes = 15
-                        },
-                        new
-                        {
-                            Id = 4,
-                            EndTime = new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 11,
-                            IdSourceRoom = 9,
-                            NameOfEquipment = "table",
-                            QuantityOfEquipment = 1,
-                            StartTime = new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified),
-                            DurationInMinutes = 25
-                        },
-                        new
-                        {
-                            Id = 5,
-                            EndTime = new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 7,
-                            IdSourceRoom = 10,
-                            NameOfEquipment = "xrayMachine",
-                            QuantityOfEquipment = 1,
-                            StartTime = new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified),
-                            DurationInMinutes = 30
-                        },
-                        new
-                        {
-                            Id = 6,
-                            EndTime = new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
-                            IdDestinationRoom = 11,
-                            IdSourceRoom = 10,
-                            NameOfEquipment = "chair",
-                            QuantityOfEquipment = 5,
-                            StartTime = new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified),
-                            DurationInMinutes = 20
-                        });
-                });
-
-            modelBuilder.Entity("ehealthcare.Model.MedicalPermit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("DoctorId")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("PatientId")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("MedicalPermits");
-                });
-
-            modelBuilder.Entity("ehealthcare.Model.Room", b =>
+            modelBuilder.Entity("HospitalLibrary.RoomsAndEquipment.Model.Room", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -754,7 +602,211 @@ namespace HospitalLibrary.Migrations
                             NumOfTakenBeds = 0,
                             RoomType = 5,
                             Sector = "WS"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Floor = 0,
+                            IsRenovated = false,
+                            IsRenovatedUntill = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Waiting room 3",
+                            NumOfTakenBeds = 0,
+                            RoomType = 5,
+                            Sector = "WS"
                         });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.RoomsAndEquipment.Model.RoomEquipment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoomEquipments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Bed",
+                            Quantity = 2,
+                            RoomId = 1,
+                            Type = "Static"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Needle",
+                            Quantity = 200,
+                            RoomId = 2,
+                            Type = "Dynamic"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Needle",
+                            Quantity = 300,
+                            RoomId = 3,
+                            Type = "Dynamic"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Picks",
+                            Quantity = 300,
+                            RoomId = 16,
+                            Type = "Dynamic"
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.RoomsAndEquipment.Model.TermOfRelocationEquipment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("DurationInMinutes")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("FinishedRelocation")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("IdDestinationRoom")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdSourceRoom")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("NameOfEquipment")
+                        .HasColumnType("text");
+
+                    b.Property<int>("QuantityOfEquipment")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TermOfRelocationEquipments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DurationInMinutes = 10,
+                            EndTime = new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 8,
+                            IdSourceRoom = 7,
+                            NameOfEquipment = "bed",
+                            QuantityOfEquipment = 2,
+                            StartTime = new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DurationInMinutes = 40,
+                            EndTime = new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 9,
+                            IdSourceRoom = 7,
+                            NameOfEquipment = "needle",
+                            QuantityOfEquipment = 14,
+                            StartTime = new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DurationInMinutes = 15,
+                            EndTime = new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 9,
+                            IdSourceRoom = 8,
+                            NameOfEquipment = "infusion",
+                            QuantityOfEquipment = 8,
+                            StartTime = new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DurationInMinutes = 25,
+                            EndTime = new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 11,
+                            IdSourceRoom = 9,
+                            NameOfEquipment = "table",
+                            QuantityOfEquipment = 1,
+                            StartTime = new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DurationInMinutes = 30,
+                            EndTime = new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 7,
+                            IdSourceRoom = 10,
+                            NameOfEquipment = "xrayMachine",
+                            QuantityOfEquipment = 1,
+                            StartTime = new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DurationInMinutes = 20,
+                            EndTime = new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                            FinishedRelocation = false,
+                            IdDestinationRoom = 11,
+                            IdSourceRoom = 10,
+                            NameOfEquipment = "chair",
+                            QuantityOfEquipment = 5,
+                            StartTime = new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
+            modelBuilder.Entity("ehealthcare.Model.MedicalPermit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("MedicalPermits");
                 });
 
             modelBuilder.Entity("ehealthcare.Model.User", b =>
@@ -889,7 +941,7 @@ namespace HospitalLibrary.Migrations
                             Password = "pecurkaa",
                             Phone = "019919199191",
                             Surname = "Ilic",
-                            Token = new Guid("17893c3e-07de-4e65-aad1-47964225946f"),
+                            Token = new Guid("601ccaa8-3a07-4a7c-89b9-9953e6eac8a7"),
                             Username = "imbiamba"
                         });
                 });
@@ -912,7 +964,7 @@ namespace HospitalLibrary.Migrations
 
             modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.FloorGraphic", b =>
                 {
-                    b.OwnsMany("ehealthcare.Model.RoomGraphic", "RoomGraphics", b1 =>
+                    b.OwnsMany("HospitalLibrary.GraphicalEditor.Model.RoomGraphic", "RoomGraphics", b1 =>
                         {
                             b1.Property<int>("Id")
                                 .ValueGeneratedOnAdd()
@@ -951,7 +1003,7 @@ namespace HospitalLibrary.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("FloorGraphicId");
 
-                            b1.HasOne("ehealthcare.Model.Room", "Room")
+                            b1.HasOne("HospitalLibrary.RoomsAndEquipment.Model.Room", "Room")
                                 .WithMany()
                                 .HasForeignKey("RoomId")
                                 .OnDelete(DeleteBehavior.Cascade)
@@ -1133,6 +1185,17 @@ namespace HospitalLibrary.Migrations
                                     Width = 140,
                                     X = 10,
                                     Y = 220
+                                },
+                                new
+                                {
+                                    Id = 17,
+                                    DoorPosition = "right",
+                                    FloorGraphicId = 3,
+                                    Height = 100,
+                                    RoomId = 17,
+                                    Width = 100,
+                                    X = 0,
+                                    Y = 0
                                 });
                         });
                 });
