@@ -1,0 +1,118 @@
+version: "3.9"
+
+services:
+  hospital:
+    image: hospital
+    build:
+      context: .
+      dockerfile: Hospital/HospitalAPI/Dockerfile
+    ports:
+      - 42789:5000
+    depends_on:
+      - database
+    restart: on-failure
+    networks:
+      - database
+  # integration:
+  #   image: integration
+  #   build:
+  #     context: .
+  #     dockerfile: Hospital/IntegrationAPI/Dockerfile
+  #   ports:
+  #     - 5000:5000
+  #   depends_on:
+  #     - database
+  #     - rabbitmq
+  #   restart: on-failure
+  #   networks:
+  #     - database
+  # pharmacy:
+  #   image: pharmacy
+  #   build:
+  #     context: .
+  #     dockerfile: Hospital/PharmacyAPI/Dockerfile
+  #   ports:
+  #     - 5003:5000
+  #   depends_on:
+  #     - database
+  #   restart: on-failure
+  #   networks:
+  #     - database
+  database:
+    image: postgres:14.1-alpine
+    restart: always
+    networks:
+      - database
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      # POSTGRES_DB: docker
+    volumes:
+      - type: volume
+        source: database-data
+        target: /var/lib/postgresql/data
+    ports:
+      - 5002:5432
+  # manager-frontend:
+  #   image: manager-frontend
+  #   build:
+  #     context: .
+  #     dockerfile: Hospital/ManagerFrontend/Dockerfile
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - hospital
+  #   restart: on-failure
+  #   networks:
+  #     - database
+  # pharmacy-frontend:
+  #   image: pharmacy-frontend
+  #   build:
+  #     context: .
+  #     dockerfile: Hospital/PharmacyFrontend/Dockerfile
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - database
+  #   restart: on-failure
+  #   networks:
+  #     - database
+  hospital-frontend:
+    image: hospital-frontend
+    build:
+      context: .
+      dockerfile: Hospital/HospitalFrontend/Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - hospital
+    restart: on-failure
+    networks:
+      - database
+  # rabbitmq:
+  #   image: rabbitmq:3-management-alpine
+  #   container_name: 'rabbitmq'
+  #   ports:
+  #       - 5672:5672
+  #       - 15672:15672
+  #   volumes:
+  #       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+  #       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+  #   networks:
+  #       - database
+
+volumes:
+  database-data:
+    name: clean-cadet-database
+
+# samo kontejneri na istoj mrezi mogu komunicirati, na 39 min govori o ovome
+networks:
+  public:
+    name: public
+    driver: bridge
+  application:
+    name: application
+    driver: bridge
+  database:
+    name: database
+    driver: bridge
