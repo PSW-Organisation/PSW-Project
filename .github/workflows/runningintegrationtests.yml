@@ -1,20 +1,64 @@
-name: Run Integration Tests
-
+name: integration-testing
 on:
-  push:
-    branches: [develop]
-  pull_request:
-    branches: [develop]
-env:
- PROJECT-PATH : 'Hospital/IntegrationAPIIntegrationTests/IntegrationAPIIntegrationTests.csproj'
+ push:
+   branches: [develop]
+ pull_request:
+   branches: [develop]
+
 
 jobs:
-  build:
+  Run-Integration-Tests:
     runs-on: ubuntu-latest
+    env:
+      SOLUTION_DIRECTORY: Hospital
+      PROJECT_DIRECTORY_INTEGRATION: IntegrationLibrary
+      PROJECT_DIRECTORY_HOSPITAL: HospitalLibrary
+      PROJECT_DIRECTORY_PHARMACY: PharmacyLibrary
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Build
-      run: dotnet build ${{ env.PROJECT-PATH }} --configuration Release
-    - name: Test
-      run: dotnet test ${{ env.PROJECT-PATH }} --configuration Release --no-build 
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install dotnet ef
+        run: dotnet tool install --global dotnet-ef
+
+      - name: Install dependencies
+        run: dotnet restore ${SOLUTION_DIRECTORY}
+
+      - name: Create Migrations Integration
+        run:
+          dotnet ef migrations add InitialCreate --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_INTEGRATION};
+      - name: Update Database Integration
+        run: dotnet ef database update --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_INTEGRATION};
+        
+      - name: Create Migrations Pharmacy
+        run:
+          dotnet ef migrations add InitialCreate --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_PHARMACY};
+      - name: Update Database Pharmacy
+        run: dotnet ef database update --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_PHARMACY};
+        
+      - name: Create Migrations Hospital
+        run:
+          dotnet ef migrations add InitialCreate --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_HOSPITAL};
+      - name: Update Database Hospital
+        run: dotnet ef database update --project ${SOLUTION_DIRECTORY}\/${PROJECT_DIRECTORY_HOSPITAL};
+        
+      - name: Test
+        run: dotnet test ${SOLUTION_DIRECTORY} --no-restore --verbosity quiet 
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: 5432
+          POSTGRES_PASSWORD: postgres
