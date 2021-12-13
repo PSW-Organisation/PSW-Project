@@ -6,12 +6,14 @@ import { HospitalViewComponent} from './hospital-view/hospital-view.component'
 import { ReportsViewComponent } from './reports-view/reports-view.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 
+import { FileCompressionViewComponent } from './file-compression-view/file-compression-view.component';
 const routes: Routes = [
 { path: '', component: WelcomeComponent },
 { path: 'complaints', component: ComplaintsViewComponent},
 { path: 'hospitals', component: HospitalViewComponent},
 { path: 'reports', component: ReportsViewComponent},
-{ path: 'notifications', component: NotificationsComponent}
+{ path: 'notifications', component: NotificationsComponent},
+{path: 'space_occupied', component: FileCompressionViewComponent}
 ];
 
 @NgModule({

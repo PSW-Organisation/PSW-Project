@@ -1,0 +1,123 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+
+nav {
+  margin-left: 500px;
+}
+
+li a{
+    width: 200px;
+    color:rgb(23, 23, 102);
+   font-weight: bold;
+
+}
+li a:hover{
+    color: blue;
+    cursor: pointer;
+}
+
+.logo {
+    margin-top: 10px;
+    margin-left: 20px;
+    background-color: whitesmoke;
+}
+
+.positionOfText{
+
+margin-left: 20px;
+ height: 600px;
+ width: 300px;
+ font-style: italic;
+ color: rgb(48, 48, 202);
+}
+.backgroundImage{
+    background-image: url("../../images/specialist-pharmacy.jpg"), linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5));
+
+    height: 750px;
+   margin-left: 70px;
+    background-repeat: no-repeat;
+     background-position: center center;
+    /* Set up positioning */
+    position: relative;
+    top: 0;
+
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+
+  }
+}
+
+
+.tdInForm {
+    width: 34%;
+}
+.td2{
+    width: 70%
+}
+body {
+  background-color: #f9f9fa
+}
+
+.flex {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto
+}
+
+@media (max-width:991.98px) {
+  .padding {
+      padding: 1.5rem
+  }
+}
+
+@media (max-width:767.98px) {
+  .padding {
+      padding: 1rem
+  }
+}
+
+.padding {
+  padding: 5rem
+}
+
+.card {
+  background: #fff;
+  border-width: 0;
+  border-radius: .25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+  margin-bottom: 1.5rem
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(19, 24, 44, .125);
+  border-radius: .25rem
+}
+
+.card-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(19, 24, 44, .03);
+  border-bottom: 1px solid rgba(19, 24, 44, .125)
+}
+
+.card-header:first-child {
+  border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0
+}
+
+card-footer,
+.card-header {
+  background-color: transparent;
+  border-color: rgba(160, 175, 185, .15);
+  background-clip: padding-box
+}

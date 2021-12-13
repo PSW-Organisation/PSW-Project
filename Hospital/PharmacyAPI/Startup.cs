@@ -1,6 +1,7 @@
 using DinkToPdf;
 using DinkToPdf.Contracts;
 using Grpc.Core;
+using PharmacyLibrary.Compression;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -72,6 +73,7 @@ namespace PharmacyAPI
            
             
             
+            services.AddHostedService<RoutineZipCompressionService>();
             //added for Cors error
             //______________________________________________________________________
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>

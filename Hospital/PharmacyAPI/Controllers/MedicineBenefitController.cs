@@ -38,10 +38,7 @@ namespace PharmacyAPI.Controllers
         public IActionResult Add(MedicineBenefitDto dto)
         {
             Pharmacy pharmacy =  pharmacyService.Get(1);
-           
-               
 
-                 
             return Ok(medicineBenefitService.Add(MedicineBenefitAdapter.MedicineBenefitDtoToMedicineBenefit(dto)));
         }
 

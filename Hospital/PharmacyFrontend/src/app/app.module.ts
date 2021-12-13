@@ -10,7 +10,8 @@ import { ComplaintsViewComponent } from './complaints-view/complaints-view.compo
 import { HospitalViewComponent } from './hospital-view/hospital-view.component';
 import { ReportsViewComponent } from './reports-view/reports-view.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-
+import { FileCompressionViewComponent } from './file-compression-view/file-compression-view.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -20,14 +21,16 @@ import { NotificationsComponent } from './notifications/notifications.component'
     HospitalViewComponent,
     ReportsViewComponent,
     NotificationsComponent,
-  
+    FileCompressionViewComponent,
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
-  ],
+    FormsModule,
+    NgChartsModule
+    ],
   providers: [ RegistrationService],
   bootstrap: [AppComponent]
 })
