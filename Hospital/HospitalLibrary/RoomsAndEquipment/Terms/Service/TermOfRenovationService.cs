@@ -64,6 +64,15 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
             return freePossibleTermsOfRenovation;
         }
 
+        public IList<TermOfRenovation> GetTermsOfRenovation()
+        {
+            return _termOfRenovationRepository.GetAll();
+        }
+
+        public List<TermOfRenovation> GetTermsOfRenovationByRoomId(int id)
+        {
+            return _termOfRenovationRepository.GetTermsOfRenovationByRoomId(id);
+        }
 
         private List<TimeInterval> GetAllTimeInterval(List<TermOfRenovation> termOfRenovationRoom, List<TermOfRelocationEquipment> termOfRelocationRoom)
         {

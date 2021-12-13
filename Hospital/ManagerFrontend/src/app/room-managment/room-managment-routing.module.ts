@@ -8,6 +8,7 @@ import { BuildingFloorsComponent } from './rooms-view/building-floors/building-f
 import { MoveEquipmentComponent } from './move-equipment/move-equipment.component';
 import { SearchEquipmentComponent } from './search-equipment/search-equipment.component';
 import { RenovateRoomsComponent } from './renovate-rooms/renovate-rooms.component';
+import { RoomScheduleComponent } from './room-schedule/room-schedule.component';
 
 const routes: Routes = [
   { path: 'roomManagment', component: RoomManagmentComponent,
@@ -18,7 +19,8 @@ const routes: Routes = [
         { path: 'building/:buidingId/floor/:floorId', component: BuildingFloorsComponent },
         { path: 'building/:buidingId/floor/:floorId/room/:roomId', component: BuildingFloorsComponent },
         { path: 'moveEquipment', component: MoveEquipmentComponent },
-        { path: 'renovateRooms', component: RenovateRoomsComponent }
+        { path: 'renovateRooms', component: RenovateRoomsComponent },
+        { path: 'roomSchedule/:roomId', component: RoomScheduleComponent }
       ]
   }
 ];
