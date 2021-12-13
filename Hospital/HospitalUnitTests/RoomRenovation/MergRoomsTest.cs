@@ -55,5 +55,8 @@ namespace HospitalUnitTests.RoomRenovation
             allPossibleRoomsForMerg.Count.ShouldBeEquivalentTo(2);
         }
 
+
+        // 
+
     }
 }

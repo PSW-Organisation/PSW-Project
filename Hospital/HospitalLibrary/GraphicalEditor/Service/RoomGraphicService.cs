@@ -103,5 +103,15 @@ namespace HospitalLibrary.GraphicalEditor.Service
             }
             return (doorPosition, xA, yA, widthA, heightA, xB, yB, widthB, heightB);
         }
+
+
+        public RoomGraphic MergeRoomGraphic(Room roomA, Room roomB, Room newRoom)
+        {
+            RoomGraphic roomGraphicA = _floorGraphicRepository.GetRoomGraphicByRoomId(roomA.Id);
+            RoomGraphic roomGraphicB = _floorGraphicRepository.GetRoomGraphicByRoomId(roomB.Id);
+            RoomGraphic newRoomGraphics = new RoomGraphic(roomGraphicA, roomGraphicB, newRoom);
+            return newRoomGraphics;
+        }
+
     }
 }
