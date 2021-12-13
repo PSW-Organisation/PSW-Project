@@ -50,9 +50,9 @@ namespace HospitalLibrary.GraphicalEditor.Model
 
             foreach (Point pt in unionPoints)
             {
-                if(pt.X < leftTopPoint.X && pt.Y < leftTopPoint.Y) 
+                if(pt.X <= leftTopPoint.X && pt.Y <= leftTopPoint.Y) 
                     leftTopPoint = pt;
-                else if (pt.X > rightBottomPoint.X && pt.Y > rightBottomPoint.Y) 
+                else if (pt.X >= rightBottomPoint.X && pt.Y >= rightBottomPoint.Y) 
                     rightBottomPoint = pt;
             }
 
@@ -93,6 +93,11 @@ namespace HospitalLibrary.GraphicalEditor.Model
             }
 
             return numberOfCommonPoints == 2;
+        }
+
+        public override string ToString()
+        {
+            return "ID " + Id + " X:" + X + " Y:" + Y + " Width:" + Width + " Height:" + Height;
         }
     }
 }
