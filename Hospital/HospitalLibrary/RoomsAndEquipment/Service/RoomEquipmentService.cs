@@ -66,5 +66,35 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             equipments.AddRange(equipmentB);
             return equipments;
         }
+
+        public List<RoomEquipment> MergeRoomEquipment(Room roomA, Room roomB, Room newRoom)
+        {
+            List<RoomEquipment> newRoomEquipment = new List<RoomEquipment>();
+            if (roomA is null || roomB is null) return newRoomEquipment;
+            List<RoomEquipment> roomEquipmentsA = _roomEquipmentRepository.GetAllEquipmentInRoom(roomA.Id);
+            List<RoomEquipment> roomEquipmentsB = _roomEquipmentRepository.GetAllEquipmentInRoom(roomB.Id);
+            newRoomEquipment.AddRange(roomEquipmentsA.Select(equipment => new RoomEquipment(equipment.Quantity, equipment.Name, equipment.Type, newRoom.Id)));
+            
+            foreach(RoomEquipment equipment in roomEquipmentsB)
+            {
+                //if(newRoomEquipment.Find(eq => eq.Name == equipment.Name).Name == equipment.Name) proveriti dal moze ovakav if
+                bool added = false;
+                foreach(RoomEquipment eq in newRoomEquipment)
+                {
+                    if(eq.Name == equipment.Name && eq.Type == equipment.Type)
+                    {
+                        eq.Quantity += equipment.Quantity;
+                        added = true;
+                        break;
+                    }
+                }
+                if (!added)
+                {
+                    newRoomEquipment.Add(new RoomEquipment(equipment.Quantity, equipment.Name, equipment.Type, newRoom.Id));
+                }
+            }
+
+            return newRoomEquipment;
+        }
     }
 }

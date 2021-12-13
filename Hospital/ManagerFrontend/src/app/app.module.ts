@@ -18,7 +18,7 @@ import { FeedBackComponent } from './feedback/feedback.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeedbackService } from './feedback/feedback.service';
 import { OrderingMedicineComponent } from './ordering-medicine/ordering-medicine.component';
 import { SearchPharmaciesPipe } from './ordering-medicine/search-pharmacies.pipe';
@@ -30,8 +30,6 @@ import { SurveyService } from './survey/survey.service';
 import { ReportsViewComponent } from './reports-view/reports-view.component';
 import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
-
-
 
 @NgModule({
   declarations: [
@@ -50,21 +48,21 @@ import { NotificationsComponent } from './notifications/notifications.component'
     SurveyComponent,
     ReportsViewComponent,
     PharmacyProfileComponent,
-    NotificationsComponent
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    RoomManagmentModule, 
-    ToastrModule.forRoot({preventDuplicates: true}),
-    BrowserAnimationsModule
+    RoomManagmentModule,
+    ToastrModule.forRoot({ preventDuplicates: true }),
+    BrowserAnimationsModule,
   ],
   providers: [
     PharmaciesService,
     FeedbackService,
     EditPharmacyService,
-    SurveyService
+    SurveyService,
   ],
   bootstrap: [AppComponent],
 })
