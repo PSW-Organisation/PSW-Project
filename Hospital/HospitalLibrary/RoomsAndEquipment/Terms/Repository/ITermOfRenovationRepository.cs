@@ -10,5 +10,6 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Repository
     {
         int GetNewID();
         List<TermOfRenovation> GetTermsOfRenovationByRoomId(int id);
+        List<TermOfRenovation> GetPendingTerms();
     }
 }
