@@ -20,8 +20,8 @@ export interface IParamsOfRelocationEquipment
     NameOfEquipment: string,
     QuantityOfEquipment: number,
     StartTime: Date,
-    endTime: Date,
-    durationInMinutes: number
+    EndTime: Date,
+    DurationInMinutes: number
 }
 
 export interface IFreeTerms{
@@ -35,8 +35,8 @@ export class ParamsOfRelocationEquipment implements IParamsOfRelocationEquipment
     NameOfEquipment: string;
     QuantityOfEquipment: number;
     StartTime: Date;
-    endTime: Date;
-    durationInMinutes: number;
+    EndTime: Date;
+    DurationInMinutes: number;
     
     constructor(IdSourceRoom: number, IdDestinationRoom: number, NameOfEquipment: string, QuantityOfEquipment: number,
         StartTime: Date, endTime: Date, durationInMinutes: number)
@@ -46,7 +46,7 @@ export class ParamsOfRelocationEquipment implements IParamsOfRelocationEquipment
         this.NameOfEquipment = NameOfEquipment;
         this.QuantityOfEquipment = QuantityOfEquipment;
         this.StartTime = StartTime;
-        this.endTime = endTime;
-        this.durationInMinutes = durationInMinutes;
+        this.EndTime = endTime;
+        this.DurationInMinutes = durationInMinutes;
     }
 }

@@ -6,6 +6,7 @@ import { RoomManagmentComponent } from './room-managment/room-managment.componen
 import { RoomsViewModule } from './rooms-view/rooms-view.module';
 import { SearchRoomsComponent } from './search-rooms/search-rooms.component';
 import { SearchEquipmentComponent } from './search-equipment/search-equipment.component';
+import { RenovateRoomsComponent } from './renovate-rooms/renovate-rooms.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { SearchEquipmentComponent } from './search-equipment/search-equipment.co
     SearchRoomsComponent,
     MoveEquipmentComponent,
     SearchEquipmentComponent,
+    RenovateRoomsComponent,
   ],
   imports: [SharedModule, RoomManagmentRoutingModule, RoomsViewModule],
   exports: [SharedModule],

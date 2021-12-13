@@ -23,6 +23,17 @@ namespace HospitalLibrary.GraphicalEditor.Model
         {
         }
 
+        public RoomGraphic(int x, int y, int width, int height, string doorPosition, int roomId, Room room)
+        {
+            X = x;
+            Y = y;
+            Width = width;
+            Height = height;
+            DoorPosition = doorPosition;
+            RoomId = roomId;
+            Room = room;
+        }
+
         public bool CanBeMerged(RoomGraphic rg)
         {
             int numberOfCommonPoints = 0;
