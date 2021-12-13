@@ -4,6 +4,8 @@ using IntegrationAPI.DTO;
 using IntegrationAPI.Service;
 using IntegrationAPI.Utility;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Parnership.Service.ServiceInterfaces;
+using IntegrationLibrary.Pharmacies.Model;
 using IntegrationLibrary.Service.ServicesInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

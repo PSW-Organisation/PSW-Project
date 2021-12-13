@@ -1,6 +1,8 @@
 ﻿using IntegrationAPI.Adapters;
 using IntegrationAPI.DTO;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Pharmacies.Model;
+using IntegrationLibrary.Pharmacies.Service.ServiceInterfaces;
 using IntegrationLibrary.Service.ServicesInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;

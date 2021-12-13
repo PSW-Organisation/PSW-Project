@@ -1,6 +1,8 @@
 ﻿using IntegrationAPI.Adapters;
 using IntegrationAPI.DTO;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Parnership.Model;
+using IntegrationLibrary.Parnership.Service.ServiceInterfaces;
 using IntegrationLibrary.Service;
 using IntegrationLibrary.Service.ServicesInterfaces;
 using Microsoft.AspNetCore.Mvc;

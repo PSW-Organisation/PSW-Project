@@ -2,6 +2,10 @@
 using IntegrationLibrary.Repository;
 using IntegrationLibrary.Service;
 using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.SharedModel.Model;
+using IntegrationLibrary.SharedModel.Repository.RepoInterfaces;
+using IntegrationLibrary.SharedModel.Service.ServiceImpl;
+using IntegrationLibrary.SharedModel.Service.ServiceInterfaces;
 using Moq;
 using Shouldly;
 using System;

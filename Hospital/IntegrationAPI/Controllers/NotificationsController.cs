@@ -2,6 +2,8 @@
 using IntegrationLibrary.DTO;
 using IntegrationLibrary.Model;
 using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.SharedModel.Model;
+using IntegrationLibrary.SharedModel.Service.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
