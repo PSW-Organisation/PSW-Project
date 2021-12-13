@@ -8,6 +8,7 @@ namespace IntegrationLibrary.Model
     {
         HTTP,
         GRPC,
-        UNDECLARED
+        UNDECLARED,
+        SFTP
     }
 }

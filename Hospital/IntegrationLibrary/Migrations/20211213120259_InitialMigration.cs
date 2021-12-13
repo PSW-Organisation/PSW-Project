@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -42,8 +41,6 @@ namespace IntegrationLibrary.Migrations
                     table.PrimaryKey("PK_Complaints", x => x.Id);
                 });
 
-
-
             migrationBuilder.CreateTable(
                 name: "MedicineTransactions",
                 columns: table => new
@@ -79,44 +76,26 @@ namespace IntegrationLibrary.Migrations
                     table.PrimaryKey("PK_Pharmacies", x => x.Id);
                 });
 
-
-                       migrationBuilder.CreateTable(
-                   name: "Notifications",
-                   columns: table => new
-                   {
-                       Id = table.Column<int>(nullable: false)
-                           .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                       Content = table.Column<string>(nullable: true),
-                       Date = table.Column<DateTime>(nullable: true),
-                       Seen = table.Column<bool>(nullable: true)
-                   },
-                   constraints: table =>
-                   {
-                       table.PrimaryKey("PK_Notifications", x => x.Id);
-                   });
-
-                migrationBuilder.CreateTable(
-          name: "ResponseToComplaint",
-          columns: table => new
-          {
-              Id = table.Column<int>(nullable: false)
-                  .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-              Date = table.Column<DateTime>(nullable: false),
-              Title = table.Column<string>(nullable: true),
-              Content = table.Column<string>(nullable: true)
-          },
-          constraints: table =>
-          {
-              table.PrimaryKey("PK_ResponseToComplaint", x => x.Id);
-          });
+            migrationBuilder.CreateTable(
+                name: "ResponseToComplaint",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ComplaintId = table.Column<long>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Content = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ResponseToComplaint", x => x.Id);
+                });
         }
-
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Benefits");
-
 
             migrationBuilder.DropTable(
                 name: "Complaints");
