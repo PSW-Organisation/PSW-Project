@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="text-center pt-3">
+    <h1>{{ title }}</h1>
+  </div>
+  <table class="table table-striped zui-table-highlight">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Duration</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let term of terms">
+        <td>{{ term.type }}</td>
+        <td>{{ formatDate(term.startTime) }}</td>
+        <td>{{ formatDate(term.endTime) }}</td>
+        <td>{{ term.durationInMinutes }} min</td>
+        <td>
+          <button type="button" aria-label="Cancel the term" mat-icon-button>
+            <mat-icon aria-label="Delete the term"> delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

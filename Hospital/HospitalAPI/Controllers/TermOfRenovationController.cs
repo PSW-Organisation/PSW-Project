@@ -45,6 +45,35 @@ namespace HospitalAPI.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult<List<ScheduleTermDTO>> GetTermsOfRenovation()
+        {
+            var result = _termOfRenovationService.GetTermsOfRenovation();
+            List<ScheduleTermDTO> scheduleTermDTOS = new List<ScheduleTermDTO>();
+            foreach (TermOfRenovation t in result)
+            {
+                ScheduleTermDTO scheduleTermDTO = _mapper.Map<ScheduleTermDTO>(t);
+                scheduleTermDTO.Type = "Renovation";
+                scheduleTermDTOS.Add(scheduleTermDTO);
+            }
+            return Ok(scheduleTermDTOS);
+        }
+
+        [HttpGet]
+        [Route("{roomId}")]
+        public ActionResult<List<ScheduleTermDTO>> GetTermsOfRenovationByRoomId(int roomId)
+        {
+            var result = _termOfRenovationService.GetTermsOfRenovationByRoomId(roomId);
+            List<ScheduleTermDTO> scheduleTermDTOS = new List<ScheduleTermDTO>();
+            foreach (TermOfRenovation t in result)
+            {
+                ScheduleTermDTO scheduleTermDTO = _mapper.Map<ScheduleTermDTO>(t);
+                scheduleTermDTO.Type = "Renovation";
+                scheduleTermDTOS.Add(scheduleTermDTO);
+            }
+            return Ok(scheduleTermDTOS);
+        }
+
 
     }
 }

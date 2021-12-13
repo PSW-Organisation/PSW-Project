@@ -48,6 +48,13 @@ namespace HospitalAPI.Mapper
 
             CreateMap<MedicineDTO, Medicine>();
             CreateMap<Medicine, MedicineDTO>();
+
+            CreateMap<TermOfRenovation, ScheduleTermDTO>();
+            CreateMap<ScheduleTermDTO, TermOfRenovation>();
+
+            CreateMap<TermOfRelocationEquipment, ScheduleTermDTO>();
+            CreateMap<ScheduleTermDTO, TermOfRelocationEquipment>();
+
         }
     }
 }

@@ -27,6 +27,10 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
             return _relocationEquipmentRepository.GetTermsOfRelocationByRoomId(id);
         }
 
+        public IList<TermOfRelocationEquipment> GetTermsOfRelocation()
+        {
+            return _relocationEquipmentRepository.GetAll();
+        }
 
         public List<TimeInterval> GetFreePossibleTermsOfRelocation(ParamsOfRelocationEquipment paramsOfRelocationEquipment)
         {

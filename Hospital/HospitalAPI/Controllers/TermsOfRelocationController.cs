@@ -46,5 +46,35 @@ namespace HospitalAPI.Controllers
             return Ok(termOfRelocationEquipmentDTO);
         }
 
+        [HttpGet]
+        public ActionResult<List<ScheduleTermDTO>> GetTermsOfRelocation()
+        {
+            var result = _relocationEquipmentService.GetTermsOfRelocation();
+            List<ScheduleTermDTO> scheduleTermDTOS = new List<ScheduleTermDTO>();
+            foreach (TermOfRelocationEquipment t in result)
+            {
+                ScheduleTermDTO scheduleTermDTO = _mapper.Map<ScheduleTermDTO>(t);
+                scheduleTermDTO.Type = "Relocation";
+                scheduleTermDTOS.Add(scheduleTermDTO);
+            }
+            return Ok(scheduleTermDTOS);
+        }
+
+        [HttpGet]
+        [Route("{roomId}")]
+        public ActionResult<List<ScheduleTermDTO>> GetTermsOfRelocationByRoomId(int roomId)
+        {
+            var result = _relocationEquipmentService.GetTermsOfRelocationByRoomId(roomId);
+            List<ScheduleTermDTO> scheduleTermDTOS = new List<ScheduleTermDTO>();
+            foreach(TermOfRelocationEquipment t in result)
+            {
+                ScheduleTermDTO scheduleTermDTO = _mapper.Map<ScheduleTermDTO>(t);
+                scheduleTermDTO.Type = "Relocation";
+                scheduleTermDTOS.Add(scheduleTermDTO);
+            }
+            return Ok(scheduleTermDTOS);
+        }
+
+
     }
 }
