@@ -8,8 +8,6 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Model
 {
     public class TermOfRenovation : EntityDb
     {
-        private TermOfRenovation termOfRenovation;
-
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public int DurationInMinutes { get; set; }
@@ -25,12 +23,9 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Model
         public string NewSectorForRoomB { get; set; }       /* if needed */
         public RoomType NewRoomTypeForRoomB { get; set; }   /* if needed */
 
-
-        public TermOfRenovation() { }
-
-        public TermOfRenovation(TermOfRenovation termOfRenovation)
+        public TermOfRenovation()
         {
-            this.termOfRenovation = termOfRenovation;
         }
+
     }
 }

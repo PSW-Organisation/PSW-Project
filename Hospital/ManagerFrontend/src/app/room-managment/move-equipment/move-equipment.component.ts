@@ -104,15 +104,15 @@ export class MoveEquipmentComponent implements OnInit {
     this.paramsOfRelocationEquipment.IdDestinationRoom = this.selectedDestinationRoom.id;
     this.paramsOfRelocationEquipment.QuantityOfEquipment = this.equipmentAmount;
     this.paramsOfRelocationEquipment.StartTime = new Date(Date.UTC(this.startYear, this.startMonth, this.startDay, this.startHours, this.startMinutes));
-    this.paramsOfRelocationEquipment.endTime = new Date(Date.UTC(this.endYear, this.endMonth, this.endDay, this.endHours, this.endMinutes));
-    this.paramsOfRelocationEquipment.durationInMinutes = this.duration;
+    this.paramsOfRelocationEquipment.EndTime = new Date(Date.UTC(this.endYear, this.endMonth, this.endDay, this.endHours, this.endMinutes));
+    this.paramsOfRelocationEquipment.DurationInMinutes = this.duration;
     this._roomEquipmentService.getAllPosibleRelocationTerms(this.paramsOfRelocationEquipment).subscribe(free => {this.freeTerms = free});
   }
 
   
   activateLast() {
     this.paramsOfRelocationEquipment.StartTime = this.selectedFreeTerm.startTime;
-    this.paramsOfRelocationEquipment.endTime = this.selectedFreeTerm.endTime;
+    this.paramsOfRelocationEquipment.EndTime = this.selectedFreeTerm.endTime;
     this._roomEquipmentService.createTermOfRelocation(this.paramsOfRelocationEquipment).subscribe(create => { this.termOfRelocationEquipment = create; });
   }
 

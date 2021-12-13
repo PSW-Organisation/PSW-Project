@@ -7,6 +7,7 @@ import { HospitalExteriorViewComponent } from './hospital-exterior-view/hospital
 import { BuildingFloorsComponent } from './rooms-view/building-floors/building-floors.component';
 import { MoveEquipmentComponent } from './move-equipment/move-equipment.component';
 import { SearchEquipmentComponent } from './search-equipment/search-equipment.component';
+import { RenovateRoomsComponent } from './renovate-rooms/renovate-rooms.component';
 
 const routes: Routes = [
   { path: 'roomManagment', component: RoomManagmentComponent,
@@ -16,7 +17,8 @@ const routes: Routes = [
         { path: 'hospitalExterior', component: HospitalExteriorViewComponent },
         { path: 'building/:buidingId/floor/:floorId', component: BuildingFloorsComponent },
         { path: 'building/:buidingId/floor/:floorId/room/:roomId', component: BuildingFloorsComponent },
-        { path: 'moveEquipment', component: MoveEquipmentComponent }
+        { path: 'moveEquipment', component: MoveEquipmentComponent },
+        { path: 'renovateRooms', component: RenovateRoomsComponent }
       ]
   }
 ];

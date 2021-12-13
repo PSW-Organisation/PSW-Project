@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 
 namespace HospitalLibrary.RoomsAndEquipment.Service
 {
@@ -41,6 +42,21 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             return _roomRepository.GetAllByName(name);
         }
 
+        public List<Room> SplitRoom(TermOfRenovation term)
+        {
+            List<Room> splitRooms = new List<Room>();
+            if (term.TypeOfRenovation != TypeOfRenovation.SPLIT) return splitRooms;
+            Room room = _roomRepository.Get(term.IdRoomA);
+            if (room == null) return splitRooms;
+            Room roomA = new Room(term.NewNameForRoomA, term.NewSectorForRoomA, room.Floor, term.NewRoomTypeForRoomA);
+            Room roomB = new Room(term.NewNameForRoomB, term.NewSectorForRoomB, room.Floor, term.NewRoomTypeForRoomB);
+            _roomRepository.Delete(room);
+            _roomRepository.Save(roomA);
+            _roomRepository.Save(roomB);
+            splitRooms.Add(roomA);
+            splitRooms.Add(roomB);
+            return splitRooms;
+        }
     }
 }
 

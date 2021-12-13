@@ -17,6 +17,12 @@ namespace HospitalLibrary.RoomsAndEquipment.Model
         public Room()
         {
         }
-
+        public Room(string name, string sector, int floor, RoomType roomType)
+        {
+            Name = name;
+            Sector = sector;
+            Floor = floor;
+            RoomType = roomType;
+        }
     }
 }
