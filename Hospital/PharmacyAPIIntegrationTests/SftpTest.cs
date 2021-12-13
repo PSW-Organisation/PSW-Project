@@ -22,8 +22,8 @@ namespace PharmacyAPIIntegrationTests
 
             var binaryFile = ReadFully(stream);
 
-            //var sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
-            var sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password"));
+            var sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
+            // var sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password"));
             bool success = sftpService.UploadFile(binaryFile, serverFile);
             Assert.True(success);
         }
@@ -36,8 +36,8 @@ namespace PharmacyAPIIntegrationTests
             var localFile = Path.Combine(localDir, fileName);
 
             string serverFile = @"\test\" + fileName;
-            //var sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
-            var sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password"));
+            var sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
+            // var sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password"));
             bool success = sftpService.DownloadFile(serverFile, localFile);
             Assert.True(success);
         }

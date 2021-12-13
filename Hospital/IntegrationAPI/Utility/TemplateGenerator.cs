@@ -77,5 +77,42 @@ namespace IntegrationAPI.Utility
 
             return sb.ToString();
         }
+
+        public static string GetHTMLString(PrescriptionDTO prescription, string base64Image)
+        {
+            var sb = new StringBuilder();
+            sb.AppendFormat(@"
+                <html>
+                    <head></head>
+                    <body>
+                        <div class='header1'><h1>Medicine Prescription</h1></div>
+                        <img src='data:image/bmp;base64,{5}' class='center' />
+                        <table align='center'>
+                            <tr>
+                                <td>Patient: </td>
+                                <td>{0}</td>
+                            </tr>
+                            <tr>
+                                <td>Doctor: </td>
+                                <td>{1}</td>
+                            </tr>
+                            <tr>
+                                <td>Medicine: </td>
+                                <td>{2}</td>
+                            </tr>
+                            <tr>
+                                <td>Prescription date: </td>
+                                <td>{3}</td>
+                            </tr>
+                            <tr>
+                                <td>Diagnosis: </td>
+                                <td>{4}</td>
+                            </tr>
+                         </table>
+                   </body>
+                </html>", prescription.PatientId, prescription.DoctorId, prescription.MedicineId, prescription.PrescriptionDate.ToString("dd/MM/yyyy"), prescription.Diagnosis, base64Image);
+
+            return sb.ToString();
+        }
     }
 }
