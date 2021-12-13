@@ -10,5 +10,8 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
     {
         List<TimeInterval> GetFreePossibleTermsOfRenovation(ParamsOfRenovation paramsOfRenovation);
         TermOfRenovation CreateTermsOfRenovation(TermOfRenovation termOfRenovation);
+        IList<TermOfRenovation> GetTermsOfRenovation();
+        List<TermOfRenovation> GetTermsOfRenovationByRoomId(int id);
+
     }
 }
