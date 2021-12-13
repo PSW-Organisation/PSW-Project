@@ -24,8 +24,9 @@ namespace HospitalLibrary.RoomsAndEquipment.Model
             RoomId = roomEquipment.RoomId;
         }
 
-        public RoomEquipment(int quantity, string name, string type, int roomId)
+        public RoomEquipment(int id, int quantity, string name, string type, int roomId)
         {
+            Id = id;
             Quantity = quantity;
             Name = name;
             Type = type;

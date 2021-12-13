@@ -38,6 +38,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             using var scope = _scopeFactory.CreateScope();
             var renovationRepository = scope.ServiceProvider.GetRequiredService<ITermOfRenovationRepository>();
             var roomRepository = scope.ServiceProvider.GetRequiredService<IRoomRepository>();
+            var floorGraphicRepository = scope.ServiceProvider.GetRequiredService<IFloorGraphicRepository>();
             var roomGraphicRepository = scope.ServiceProvider.GetRequiredService<IRoomGraphicRepository>();
             var roomEquipmentRepository = scope.ServiceProvider.GetRequiredService<IRoomEquipmentRepository>();
             var roomService = scope.ServiceProvider.GetRequiredService<IRoomService>();
@@ -58,16 +59,26 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
                     List<RoomGraphic> splitRoomGraphics = roomGraphicService.SplitRoomGraphic(room, splitRooms);
                     List<RoomEquipment> roomEquipments = roomEquipmentService.SplitRoomEquipment(activeTerm.EquipmentLogic, room, splitRooms);
 
+                    Console.WriteLine(room.Id);
+                    foreach (var splitRoom in splitRooms) Console.WriteLine(splitRoom.Id);
+                    foreach (var splitRoomGraphic in splitRoomGraphics) Console.WriteLine(splitRoomGraphic.Id);
+
                     roomRepository.Delete(room);
-                    foreach (var splitRoom in splitRooms) roomRepository.Save(splitRoom);
-                    
-                    RoomGraphic roomGraphic = roomGraphicRepository.Get(room.Id);
-                    roomGraphicRepository.Delete(roomGraphic);
-                    foreach (var splitRoomGraphic in splitRoomGraphics) roomGraphicRepository.Save(splitRoomGraphic);
+                    foreach (var splitRoom in splitRooms) roomRepository.Insert(splitRoom);
+
+                    RoomGraphic roomGraphic = floorGraphicRepository.GetRoomGraphicByRoomId(room.Id);
+                    FloorGraphic floorGraphic = floorGraphicRepository.GetFloorGraphicByRoomId(room.Id);
+                    floorGraphic.RoomGraphics.Remove(roomGraphic);
+                    foreach (var splitRoomGraphic in splitRoomGraphics)
+                    {
+                        floorGraphic.RoomGraphics.Add(splitRoomGraphic);
+                        floorGraphicRepository.Save(floorGraphic);
+                        roomGraphicRepository.Insert(splitRoomGraphic);
+                    }
                     
                     List<RoomEquipment> roomEquipmentInRoom = roomEquipmentRepository.GetAllEquipmentInRoom(room.Id);
                     foreach (var roomEquipment in roomEquipmentInRoom) roomEquipmentRepository.Delete(roomEquipment);
-                    foreach(var roomEquipment in roomEquipments) roomEquipmentRepository.Save(roomEquipment);
+                    foreach(var roomEquipment in roomEquipments) roomEquipmentRepository.Insert(roomEquipment);
                 }
                 else if (activeTerm.TypeOfRenovation == TypeOfRenovation.MERGE)
                 {
@@ -79,19 +90,19 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
 
                     roomRepository.Delete(roomA);
                     roomRepository.Delete(roomB);
-                    roomRepository.Save(mergeRoom);
+                    roomRepository.Insert(mergeRoom);
 
-                    RoomGraphic roomGraphicA = roomGraphicRepository.Get(roomA.Id);
-                    RoomGraphic roomGraphicB = roomGraphicRepository.Get(roomB.Id);
-                    roomGraphicRepository.Delete(roomGraphicA);
-                    roomGraphicRepository.Delete(roomGraphicB);
-                    roomGraphicRepository.Save(mergeRoomGraphic);
+                    //RoomGraphic roomGraphicA = roomGraphicRepository.Get(roomA.Id);
+                    //RoomGraphic roomGraphicB = roomGraphicRepository.Get(roomB.Id);
+                    //roomGraphicRepository.Delete(roomGraphicA);
+                    //roomGraphicRepository.Delete(roomGraphicB);
+                    //roomGraphicRepository.Insert(mergeRoomGraphic);
 
                     List<RoomEquipment> roomEquipmentInRoomA = roomEquipmentRepository.GetAllEquipmentInRoom(roomA.Id);
                     List<RoomEquipment> roomEquipmentInRoomB = roomEquipmentRepository.GetAllEquipmentInRoom(roomB.Id);
                     foreach (var roomEquipment in roomEquipmentInRoomA) roomEquipmentRepository.Delete(roomEquipment);
                     foreach (var roomEquipment in roomEquipmentInRoomB) roomEquipmentRepository.Delete(roomEquipment);
-                    foreach (var roomEquipment in roomEquipments) roomEquipmentRepository.Save(roomEquipment);
+                    foreach (var roomEquipment in roomEquipments) roomEquipmentRepository.Insert(roomEquipment);
                 }
             }
         }

@@ -69,6 +69,8 @@ namespace HospitalLibrary.GraphicalEditor.Service
             var (doorPosition, xA, yA, widthA, heightA, xB, yB, widthB, heightB) = CalculatePositionAndSize(rg);
             var roomGraphicA = new RoomGraphic(xA, yA, widthA, heightA, doorPosition, rooms[0].Id, rooms[0]);
             var roomGraphicB = new RoomGraphic(xB, yB, widthB, heightB, doorPosition, rooms[1].Id, rooms[1]);
+            roomGraphicA.Id = rooms[0].Id;
+            roomGraphicB.Id = rooms[1].Id;
             splitRoomGraphics.Add(roomGraphicA);
             splitRoomGraphics.Add(roomGraphicB);
             return splitRoomGraphics;

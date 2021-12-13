@@ -12,5 +12,6 @@ namespace HospitalLibrary.GraphicalEditor.Repository
         public int GetBuildingForRoom(int roomId);
         RoomGraphic GetRoomGraphicByRoomId(int idRoom);
         public List<RoomGraphic> GetAllRoomGraphicOnSameFloor(Room room);
+        FloorGraphic GetFloorGraphicByRoomId(int roomId);
     }
 }

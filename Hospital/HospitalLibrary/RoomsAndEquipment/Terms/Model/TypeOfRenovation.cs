@@ -6,6 +6,6 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Model
 {
     public enum TypeOfRenovation
     {
-        MERGE, SPLIT
+        SPLIT, MERGE
     }
 }

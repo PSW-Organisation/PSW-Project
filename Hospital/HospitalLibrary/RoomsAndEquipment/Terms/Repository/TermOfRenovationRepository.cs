@@ -28,7 +28,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Repository
 
         public List<TermOfRenovation> GetPendingTerms()
         {
-            return _dbContext.TermOfRenovations.Where(t => t.StateOfRenovation == StateOfRenovation.PENDING && t.EndTime <= DateTime.Now && t.EndTime >= DateTime.Now.AddMinutes(-2)).ToList();
+            return _dbContext.TermOfRenovations.Where(t => t.StateOfRenovation == StateOfRenovation.PENDING && t.EndTime.AddMinutes(-60) <= DateTime.Now && t.EndTime.AddMinutes(-60) >= DateTime.Now.AddMinutes(-2)).ToList();
         }
     }
 }
