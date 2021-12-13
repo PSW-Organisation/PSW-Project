@@ -9,8 +9,9 @@ namespace PharmacyLibrary.Service
 {
     public class RabbitMQPublishService : IPublishService
     {
-        private IConnection connection;
-        private IModel channel;
+
+        public IConnection connection;
+        public IModel channel;
 
         public RabbitMQPublishService()
         {

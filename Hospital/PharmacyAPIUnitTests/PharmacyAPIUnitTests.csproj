@@ -25,4 +25,8 @@
     <ProjectReference Include="..\PharmacyLibrary\PharmacyLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
 </Project>

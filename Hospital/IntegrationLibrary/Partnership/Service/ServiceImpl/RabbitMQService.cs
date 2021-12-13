@@ -45,20 +45,22 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
                 var pharmacyRepository = scope.ServiceProvider.GetRequiredService<PharmacyRepository>();
                      foreach (Pharmacy p in pharmacyRepository.GetAll())
                      {
+
+
                     channel.QueueDeclare(
-                            queue: p.PharmacyName,
-                            durable: false,
-                                    exclusive: false,
+                        queue: p.PharmacyName,
+                        durable: false,
+                                exclusive: false,
                                     autoDelete: false,
                                     arguments: null
-                        );
-
+                                    );
                     channel.QueueBind(
                                queue: p.PharmacyName,
                                exchange: "medicineBenefit",
                                routingKey: p.PharmacyName
                                ) ;
                     }
+
             }
 
         }
@@ -99,14 +101,18 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
             }
             return base.StartAsync(stoppingToken);
         }
-        private void HandleMessage(MedicineBenefit medicineBenefit)
-        {
+        private bool HandleMessage(MedicineBenefit medicineBenefit)
+        {   if(medicineBenefit == null)
+            {
+                return false;
+            }
             using (var scope = serviceScopeFactory.CreateScope()) {
                 var medicineBenefitRepository = scope.ServiceProvider.GetRequiredService<MedicineBenefitRepository>();
                 medicineBenefit.Id = medicineBenefitRepository.GenerateId();
                 medicineBenefit.Published = true;
                 medicineBenefitRepository.Save(medicineBenefit);
             }
+            return true;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
