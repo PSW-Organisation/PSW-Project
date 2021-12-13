@@ -4,6 +4,7 @@ using IntegrationAPI.DTO;
 using IntegrationAPI.Service;
 using IntegrationAPI.Utility;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Pharmacies.Service.ServiceInterfaces;
 using IntegrationLibrary.Repository;
 using IntegrationLibrary.Service;
 using IntegrationLibrary.Service.ServicesInterfaces;

@@ -1,4 +1,7 @@
 ﻿using IntegrationLibrary.Model;
+using IntegrationLibrary.Parnership.Model;
+using IntegrationLibrary.Parnership.Repository.RepoInterfaces;
+using IntegrationLibrary.Pharmacies.Service.ServiceImpl;
 using IntegrationLibrary.Repository;
 using IntegrationLibrary.Service;
 using Moq;

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IntegrationAPI.DTO;
 using IntegrationLibrary.DTO;
+using IntegrationLibrary.SharedModel.Model;
 
 namespace IntegrationAPI.Adapters
 {

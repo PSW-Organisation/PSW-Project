@@ -1,6 +1,9 @@
 ﻿using IntegrationAPI.Adapters;
 using IntegrationAPI.DTO;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Parnership.Service.ServiceImpl;
+using IntegrationLibrary.Pharmacies.Model;
+using IntegrationLibrary.Pharmacies.Service.ServiceInterfaces;
 using IntegrationLibrary.Service;
 using IntegrationLibrary.Service.ServicesInterfaces;
 using Microsoft.AspNetCore.Cors;

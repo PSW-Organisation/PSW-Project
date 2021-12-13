@@ -23,6 +23,18 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using IntegrationLibrary.Pharmacies.Repository.RepoInterfaces;
+using IntegrationLibrary.Parnership.Repository.RepoInterfaces;
+using IntegrationLibrary.SharedModel.Repository.RepoInterfaces;
+using IntegrationLibrary.Pharmacies.Repository.RepoImpl;
+using IntegrationLibrary.Parnership.Repository.RepoImpl;
+using IntegrationLibrary.SharedModel.Repository.RepoImpl;
+using IntegrationLibrary.Parnership.Service.ServiceInterfaces;
+using IntegrationLibrary.Pharmacies.Service.ServiceImpl;
+using IntegrationLibrary.Pharmacies.Service.ServiceInterfaces;
+using IntegrationLibrary.SharedModel.Service.ServiceInterfaces;
+using IntegrationLibrary.SharedModel.Service.ServiceImpl;
+using IntegrationLibrary.Parnership.Service.ServiceImpl;
 
 namespace IntegrationAPI
 {
@@ -110,10 +122,9 @@ namespace IntegrationAPI
             services.AddScoped<IResponseToComplaintService, ResponseToComplaintService>();
             services.AddScoped<IMedicineConsumptionService, MedicineConsumptionService>();
             services.AddScoped<INotificationsForAppService, NotificationsForAppService>();
-
-
             services.AddScoped<IMedicineBenefitService, MedicineBenefitService>();
             services.AddHostedService<RabbitMQService>();
+
             //added for Cors error
             //______________________________________________________________________
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>

@@ -1,4 +1,8 @@
 ﻿using IntegrationLibrary.Model;
+using IntegrationLibrary.Pharmacies.Model;
+using IntegrationLibrary.Pharmacies.Repository.RepoInterfaces;
+using IntegrationLibrary.Pharmacies.Service.ServiceImpl;
+using IntegrationLibrary.Pharmacies.Service.ServiceInterfaces;
 using IntegrationLibrary.Repository;
 using IntegrationLibrary.Service;
 using IntegrationLibrary.Service.ServicesInterfaces;

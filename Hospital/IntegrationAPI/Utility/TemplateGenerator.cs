@@ -1,5 +1,6 @@
 ﻿using IntegrationAPI.DTO;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Pharmacies.Model;
 using IntegrationLibrary.Service.ServicesInterfaces;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,15 @@
 using IntegrationAPI.Controllers;
 using IntegrationAPI.DTO;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Parnership.Repository.RepoImpl;
+using IntegrationLibrary.Parnership.Repository.RepoInterfaces;
+using IntegrationLibrary.Parnership.Service.ServiceImpl;
+using IntegrationLibrary.Parnership.Service.ServiceInterfaces;
+using IntegrationLibrary.Pharmacies.Model;
+using IntegrationLibrary.Pharmacies.Repository.RepoImpl;
+using IntegrationLibrary.Pharmacies.Repository.RepoInterfaces;
+using IntegrationLibrary.Pharmacies.Service.ServiceImpl;
+using IntegrationLibrary.Pharmacies.Service.ServiceInterfaces;
 using IntegrationLibrary.Repository;
 using IntegrationLibrary.Repository.DatabaseRepository;
 using IntegrationLibrary.Service;

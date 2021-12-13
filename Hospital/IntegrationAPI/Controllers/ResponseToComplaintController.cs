@@ -9,6 +9,8 @@ using IntegrationLibrary.Model;
 using IntegrationAPI.DTO;
 using IntegrationAPI.Adapters;
 using IntegrationLibrary.Service.ServicesInterfaces;
+using IntegrationLibrary.Pharmacies.Model;
+using IntegrationLibrary.Pharmacies.Service.ServiceInterfaces;
 
 namespace IntegrationAPI.Controllers
 {

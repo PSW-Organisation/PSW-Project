@@ -1,5 +1,6 @@
 ﻿using IntegrationAPI.DTO;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Parnership.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
