@@ -60,5 +60,15 @@ namespace HospitalLibrary.GraphicalEditor.Service
             }
             return allPossibleRoomsForMerg;
         }
+
+        public RoomGraphic CreateNewRoomGraphic()
+        {
+            RoomGraphic roomGraphic = new RoomGraphic() {  };
+
+
+
+            return roomGraphic;
+        }
+
     }
 }

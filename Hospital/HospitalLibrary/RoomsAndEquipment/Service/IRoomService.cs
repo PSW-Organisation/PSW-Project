@@ -9,5 +9,6 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
         IList<Room> GetAllRooms();
         Room GetRoomById(int id);
         Room SetRoom(Room room);
+        Room CreateNewRoom(string name, string sector, int floor, RoomType roomType);
     }
 }

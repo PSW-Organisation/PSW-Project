@@ -9,5 +9,6 @@ namespace HospitalLibrary.GraphicalEditor.Service
     {
         List<FloorGraphic> GetFloorGraphics();
         int GetBuildingForRoom(int roomId);
+        RoomGraphic GetRoomGraphicByRoomId(int roomId);
     }
 }

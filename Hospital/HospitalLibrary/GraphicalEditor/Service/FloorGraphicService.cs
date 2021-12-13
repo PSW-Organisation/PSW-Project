@@ -24,5 +24,10 @@ namespace HospitalLibrary.GraphicalEditor.Service
         {
             return _floorGraphicRepository.GetBuildingForRoom(roomId);
         }
+
+        public RoomGraphic GetRoomGraphicByRoomId(int roomId)
+        {
+            return _floorGraphicRepository.GetRoomGraphicByRoomId(roomId);
+        }
     }
 }

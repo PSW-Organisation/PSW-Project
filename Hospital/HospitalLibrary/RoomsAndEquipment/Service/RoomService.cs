@@ -41,6 +41,12 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             return _roomRepository.GetAllByName(name);
         }
 
+        public Room CreateNewRoom(string name, string sector, int floor, RoomType roomType)
+        {
+            Room room = new Room() { Name=name, Sector=sector, Floor=floor, RoomType=roomType, IsRenovated=false, IsRenovatedUntill=new DateTime(), NumOfTakenBeds=0 };
+            _roomRepository.Insert(room);   // setovati id?
+            return room;
+        }
     }
 }
 
