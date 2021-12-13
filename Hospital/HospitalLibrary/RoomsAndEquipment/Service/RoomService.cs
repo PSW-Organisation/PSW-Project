@@ -50,13 +50,20 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             if (room == null) return splitRooms;
             Room roomA = new Room(term.NewNameForRoomA, term.NewSectorForRoomA, room.Floor, term.NewRoomTypeForRoomA);
             Room roomB = new Room(term.NewNameForRoomB, term.NewSectorForRoomB, room.Floor, term.NewRoomTypeForRoomB);
-            _roomRepository.Delete(room);
-            _roomRepository.Save(roomA);
-            _roomRepository.Save(roomB);
             splitRooms.Add(roomA);
             splitRooms.Add(roomB);
             return splitRooms;
         }
+
+        public Room MergeRoom(TermOfRenovation term)
+        {
+            Room roomA = _roomRepository.Get(term.IdRoomA);
+            Room roomB = _roomRepository.Get(term.IdRoomB);
+            if (roomA == null || roomB == null) return null;
+            Room newRoom = new Room(term.NewNameForRoomA, term.NewSectorForRoomA, roomA.Floor, term.NewRoomTypeForRoomA);
+            return newRoom;
+        }
+
     }
 }
 

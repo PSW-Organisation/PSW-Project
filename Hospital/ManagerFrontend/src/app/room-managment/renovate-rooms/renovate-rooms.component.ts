@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { IRoom, RoomType } from '../rooms-view/room';
 import { RoomService } from '../rooms-view/rooms.service';
@@ -15,7 +20,7 @@ import { TermOfRenovationService } from './term-of-renovation.service';
 @Component({
   selector: 'app-renovate-rooms',
   templateUrl: './renovate-rooms.component.html',
-  styleUrls: ['./renovate-rooms.component.css']
+  styleUrls: ['./renovate-rooms.component.css'],
 })
 export class RenovateRoomsComponent implements OnInit {
   isLinear = true;
@@ -29,10 +34,13 @@ export class RenovateRoomsComponent implements OnInit {
 
   renovationTypeKeys!: number[];
   renovationTypes = RenovationType;
-  selectedRenovationType!: RenovationType;
+  selectedRenovationType: RenovationType = RenovationType.split;
 
   selectedRoom!: IRoom;
   rooms!: IRoom[];
+
+  selectedRoomB!: IRoom;
+  roomsB!: IRoom[];
 
   minDate!: Date;
 
@@ -47,7 +55,7 @@ export class RenovateRoomsComponent implements OnInit {
   endDay!: number;
   endHours!: number;
   endMinutes!: number;
-  
+
   duration!: number;
 
   roomTypeKeys!: number[];
@@ -70,11 +78,21 @@ export class RenovateRoomsComponent implements OnInit {
   freeTerms!: IFreeTerms[];
   selectedFreeTerm!: IFreeTerms;
 
-  
-  constructor(private _formBuilder: FormBuilder, private _roomService: RoomService, private _termOfRenovationService: TermOfRenovationService, breakpointObserver: BreakpointObserver) {
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _roomService: RoomService,
+    private _termOfRenovationService: TermOfRenovationService,
+    breakpointObserver: BreakpointObserver
+  ) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
-      .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
+      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+  }
+
+  selectRoomA() {
+    this._roomService
+      .getAllPossibleRoomsForMergWithRoom(this.selectedRoom.id)
+      .subscribe((rooms) => (this.roomsB = rooms));
   }
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
@@ -83,8 +101,7 @@ export class RenovateRoomsComponent implements OnInit {
         this.startYear = event.value.getFullYear();
         this.startMonth = event.value.getMonth();
         this.startDay = event.value.getDate();
-      }
-      else if (type === 'inputEnd' || type === 'changeEnd') {
+      } else if (type === 'inputEnd' || type === 'changeEnd') {
         this.endYear = event.value.getFullYear();
         this.endMonth = event.value.getMonth();
         this.endDay = event.value.getDate();
@@ -93,24 +110,44 @@ export class RenovateRoomsComponent implements OnInit {
   }
 
   activateSecond() {
-    this._roomService.getRooms().subscribe(rooms => this.rooms = rooms);
+    this._roomService.getRooms().subscribe((rooms) => (this.rooms = rooms));
   }
 
-  activateThird() {
-  }
+  activateThird() {}
 
-  activateForth() {
-  }
+  activateForth() {}
 
-  activateFive() {
-  }
-  
+  activateFive() {}
+
   activateSix() {
-    this.paramsOfRenovation.StartTime = new Date(Date.UTC(this.startYear, this.startMonth, this.startDay, this.startHours, this.startMinutes));
-    this.paramsOfRenovation.EndTime = new Date(Date.UTC(this.endYear, this.endMonth, this.endDay, this.endHours, this.endMinutes));
+    this.paramsOfRenovation.StartTime = new Date(
+      Date.UTC(
+        this.startYear,
+        this.startMonth,
+        this.startDay,
+        this.startHours,
+        this.startMinutes
+      )
+    );
+    this.paramsOfRenovation.EndTime = new Date(
+      Date.UTC(
+        this.endYear,
+        this.endMonth,
+        this.endDay,
+        this.endHours,
+        this.endMinutes
+      )
+    );
     this.paramsOfRenovation.DurationInMinutes = this.duration;
     this.paramsOfRenovation.IdRoomA = this.selectedRoom.id;
-    this.paramsOfRenovation.IdRoomB = -1;
+    if (this.selectedRenovationType == 0) {
+      this.paramsOfRenovation.IdRoomB = -1;
+      this.paramsOfRenovation.TypeOfRenovation = 1;
+    } else {
+      this.paramsOfRenovation.IdRoomB = this.selectedRoomB.id;
+      this.paramsOfRenovation.TypeOfRenovation = 0;
+    }
+
     this.paramsOfRenovation.EquipmentLogic = this.selectedEquipmentLogic;
     this.paramsOfRenovation.NewNameForRoomA = this.newRoom1Name;
     this.paramsOfRenovation.NewSectorForRoomA = this.newRoom1Sector;
@@ -118,19 +155,33 @@ export class RenovateRoomsComponent implements OnInit {
     this.paramsOfRenovation.NewNameForRoomB = this.newRoom2Name;
     this.paramsOfRenovation.NewSectorForRoomB = this.newRoom2Sector;
     this.paramsOfRenovation.NewRoomTypeForRoomB = this.selectedRoom2Type;
-    this._termOfRenovationService.getAllPosibleRenovationTerms(this.paramsOfRenovation).subscribe(free => {this.freeTerms = free});
+    this._termOfRenovationService
+      .getAllPosibleRenovationTerms(this.paramsOfRenovation)
+      .subscribe((free) => {
+        this.freeTerms = free;
+      });
   }
 
   activateLast() {
     this.paramsOfRenovation.StartTime = this.selectedFreeTerm.startTime;
     this.paramsOfRenovation.EndTime = this.selectedFreeTerm.endTime;
-    this._termOfRenovationService.createTermOfRelocation(this.paramsOfRenovation).subscribe(create => { this.termOfRelocationEquipment = create; });
+    this._termOfRenovationService
+      .createTermOfRelocation(this.paramsOfRenovation)
+      .subscribe((create) => {
+        this.termOfRelocationEquipment = create;
+      });
   }
 
   ngOnInit() {
-    this.renovationTypeKeys = Object.keys(this.renovationTypes).filter(f => !isNaN(Number(f))).map(Number);
-    this.roomTypeKeys = Object.keys(this.roomTypes).filter(f => !isNaN(Number(f))).map(Number);
-    this.equipmentLogicKeys = Object.keys(this.equipmentLogicTypes).filter(f => !isNaN(Number(f))).map(Number);
+    this.renovationTypeKeys = Object.keys(this.renovationTypes)
+      .filter((f) => !isNaN(Number(f)))
+      .map(Number);
+    this.roomTypeKeys = Object.keys(this.roomTypes)
+      .filter((f) => !isNaN(Number(f)))
+      .map(Number);
+    this.equipmentLogicKeys = Object.keys(this.equipmentLogicTypes)
+      .filter((f) => !isNaN(Number(f)))
+      .map(Number);
 
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required],
@@ -155,19 +206,19 @@ export class RenovateRoomsComponent implements OnInit {
     });
     this.minDate = new Date(Date.now());
     this.paramsOfRenovation = {
+      TypeOfRenovation: 1, // na bekendu 1 je split, a na frontu je 0 split
       StartTime: new Date(),
       EndTime: new Date(),
       DurationInMinutes: 0,
       IdRoomA: -1,
       IdRoomB: -1,
       EquipmentLogic: 0,
-      NewNameForRoomA: "",
-      NewSectorForRoomA: "",
+      NewNameForRoomA: '',
+      NewSectorForRoomA: '',
       NewRoomTypeForRoomA: 0,
-      NewNameForRoomB: "",
-      NewSectorForRoomB: "",
-      NewRoomTypeForRoomB: 0
+      NewNameForRoomB: '',
+      NewSectorForRoomB: '',
+      NewRoomTypeForRoomB: 0,
     };
   }
-
 }

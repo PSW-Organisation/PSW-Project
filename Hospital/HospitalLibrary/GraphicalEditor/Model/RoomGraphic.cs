@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using ehealthcare.Model;
 using HospitalLibrary.Model;
 using HospitalLibrary.RoomsAndEquipment.Model;
@@ -34,10 +35,36 @@ namespace HospitalLibrary.GraphicalEditor.Model
             Room = room;
         }
 
-        public bool CanBeMerged(RoomGraphic rg)
+        public RoomGraphic(RoomGraphic roomGraphicA, RoomGraphic roomGraphicB, Room room)
         {
-            int numberOfCommonPoints = 0;
+            DoorPosition = roomGraphicA.DoorPosition;
+            RoomId = room.Id;
+            Room = room;
 
+            List<Point> unionPoints = new List<Point>();
+            unionPoints.AddRange(roomGraphicA.GetPoints());
+            unionPoints.AddRange(roomGraphicB.GetPoints());
+
+            Point leftTopPoint = new Point(1000000, 1000000);
+            Point rightBottomPoint = new Point(0,0);
+
+            foreach (Point pt in unionPoints)
+            {
+                if(pt.X <= leftTopPoint.X && pt.Y <= leftTopPoint.Y) 
+                    leftTopPoint = pt;
+                else if (pt.X >= rightBottomPoint.X && pt.Y >= rightBottomPoint.Y) 
+                    rightBottomPoint = pt;
+            }
+
+            X = leftTopPoint.X;
+            Y = leftTopPoint.Y;
+            Width = rightBottomPoint.X - X;
+            Height = rightBottomPoint.Y - Y;
+        }
+
+        public List<Point> GetPoints()
+        {   //  1 2
+            //  3 4
             List<Point> points = new List<Point>()
             {
                 new Point(X, Y),
@@ -45,14 +72,16 @@ namespace HospitalLibrary.GraphicalEditor.Model
                 new Point(X, Y + Height),
                 new Point(X + Width, Y + Height)
             };
+            return points;
+        }
 
-            List<Point> rg_points = new List<Point>()
-            {
-                new Point(rg.X, rg.Y),
-                new Point(rg.X + rg.Width, rg.Y),
-                new Point(rg.X, rg.Y + rg.Height),
-                new Point(rg.X + rg.Width, rg.Y + rg.Height)
-            };
+        public bool CanBeMerged(RoomGraphic rg)
+        {
+            int numberOfCommonPoints = 0;
+
+            List<Point> points = GetPoints();
+
+            List<Point> rg_points = rg.GetPoints();
 
             foreach(Point point in points)
             {
@@ -64,6 +93,11 @@ namespace HospitalLibrary.GraphicalEditor.Model
             }
 
             return numberOfCommonPoints == 2;
+        }
+
+        public override string ToString()
+        {
+            return "ID " + Id + " X:" + X + " Y:" + Y + " Width:" + Width + " Height:" + Height;
         }
     }
 }

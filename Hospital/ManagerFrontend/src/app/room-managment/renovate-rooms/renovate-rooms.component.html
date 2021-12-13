@@ -1,194 +1,384 @@
-<mat-stepper [linear]="isLinear" #stepper [orientation]="(stepperOrientation | async)!">
-    <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Renovation</ng-template>
-            <mat-form-field appearance="fill">
-                <mat-label>Select renovation:</mat-label>
-                <mat-select [(ngModel)]="selectedRenovationType" formControlName="firstCtrl">
-                    <mat-option *ngFor="let renovationTypeKey of renovationTypeKeys" [value]="renovationTypeKey">
-                        {{ renovationTypes[renovationTypeKey] }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <div (click)="activateSecond()">
-                <button mat-button matStepperNext>Next</button>
-            </div>
-        </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Room</ng-template>
-            <mat-form-field appearance="fill" *ngIf="rooms">
-                <mat-label>Select room :</mat-label>
-                <mat-select [(ngModel)]="selectedRoom" formControlName="secondCtrl">
-                    <mat-option *ngFor="let room of rooms" [value]="room">
-                        {{ room.id }}: {{ room.name }} - {{ room.sector }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button (click)="activateThird()" mat-button matStepperNext>Next</button>
-            </div>
-        </form>
-    </mat-step>
-    <mat-step [stepControl]="thirdFormGroup">
-        <form [formGroup]="thirdFormGroup">
-            <ng-template matStepLabel>Date interval</ng-template>
+<mat-stepper
+  [linear]="isLinear"
+  #stepper
+  [orientation]="(stepperOrientation | async)!"
+>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Renovation</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Select renovation:</mat-label>
+        <mat-select
+          [(ngModel)]="selectedRenovationType"
+          formControlName="firstCtrl"
+        >
+          <mat-option
+            *ngFor="let renovationTypeKey of renovationTypeKeys"
+            [value]="renovationTypeKey"
+          >
+            {{ renovationTypes[renovationTypeKey] }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div (click)="activateSecond()">
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
 
-            <mat-label>Select starting date</mat-label>
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label>Choose a date</mat-label>
-                    <input matInput [matDatepicker]="pickerStart" [min]="minDate"
-                        (dateInput)="addEvent('inputStart', $event)" (dateChange)="addEvent('changeStart', $event)" />
-                    <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerStart></mat-datepicker>
-                </mat-form-field>
+  <!-- SPLIT -->
+  <mat-step *ngIf="selectedRenovationType == 0" [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Room</ng-template>
+      <mat-form-field appearance="fill" *ngIf="rooms">
+        <mat-label>Select room :</mat-label>
+        <mat-select [(ngModel)]="selectedRoom" formControlName="secondCtrl">
+          <mat-option *ngFor="let room of rooms" [value]="room">
+            {{ room.id }}: {{ room.name }} - {{ room.sector }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button (click)="activateThird()" mat-button matStepperNext>
+          Next
+        </button>
+      </div>
+    </form>
+  </mat-step>
 
-                <mat-form-field appearance="fill">
-                    <input matInput [(ngModel)]="startHours" type="number" formControlName="startHoursCtrl" min="0"
-                        max="23" />
-                    <mat-label>hours</mat-label>
-                </mat-form-field>
+  <!-- MERGE -->
+  <mat-step *ngIf="selectedRenovationType == 1" [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Room</ng-template>
+      <div>
+        <mat-form-field appearance="fill" *ngIf="rooms">
+          <mat-label>Select room A :</mat-label>
+          <mat-select
+            [(ngModel)]="selectedRoom"
+            formControlName="secondCtrl"
+            (selectionChange)="selectRoomA()"
+          >
+            <mat-option *ngFor="let room of rooms" [value]="room">
+              {{ room.id }}: {{ room.name }} - {{ room.sector }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="true">
+        <mat-form-field appearance="fill" *ngIf="rooms">
+          <mat-label>Select room B :</mat-label>
+          <mat-select [(ngModel)]="selectedRoomB" formControlName="secondCtrl">
+            <mat-option *ngFor="let room of roomsB" [value]="room">
+              {{ room.id }}: {{ room.name }} - {{ room.sector }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button (click)="activateThird()" mat-button matStepperNext>
+          Next
+        </button>
+      </div>
+    </form>
+  </mat-step>
 
-                <mat-form-field appearance="fill">
-                    <input matInput [(ngModel)]="startMinutes" type="number" formControlName="startMinutesCtrl" min="0"
-                        max="59" />
-                    <mat-label>minutes</mat-label>
-                </mat-form-field>
-            </div>
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Date interval</ng-template>
 
-            <mat-label>Select ending date</mat-label>
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label>Choose a date</mat-label>
-                    <input matInput [matDatepicker]="pickerEnd" [min]="minDate"
-                        (dateInput)="addEvent('inputEnd', $event)" (dateChange)="addEvent('changeEnd', $event)" />
-                    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
-                    <mat-datepicker #pickerEnd></mat-datepicker>
-                </mat-form-field>
+      <mat-label>Select starting date</mat-label>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="pickerStart"
+            [min]="minDate"
+            (dateInput)="addEvent('inputStart', $event)"
+            (dateChange)="addEvent('changeStart', $event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="pickerStart"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerStart></mat-datepicker>
+        </mat-form-field>
 
-                <mat-form-field appearance="fill">
-                    <input matInput [(ngModel)]="endHours" type="number" formControlName="endHoursCtrl" min="0"
-                        max="23" />
-                    <mat-label>hours</mat-label>
-                </mat-form-field>
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            [(ngModel)]="startHours"
+            type="number"
+            formControlName="startHoursCtrl"
+            min="0"
+            max="23"
+          />
+          <mat-label>hours</mat-label>
+        </mat-form-field>
 
-                <mat-form-field appearance="fill">
-                    <input matInput [(ngModel)]="endMinutes" type="number" formControlName="endMinutesCtrl" min="0"
-                        max="59" />
-                    <mat-label>minutes</mat-label>
-                </mat-form-field>
-            </div>
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            [(ngModel)]="startMinutes"
+            type="number"
+            formControlName="startMinutesCtrl"
+            min="0"
+            max="59"
+          />
+          <mat-label>minutes</mat-label>
+        </mat-form-field>
+      </div>
+
+      <mat-label>Select ending date</mat-label>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="pickerEnd"
+            [min]="minDate"
+            (dateInput)="addEvent('inputEnd', $event)"
+            (dateChange)="addEvent('changeEnd', $event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="pickerEnd"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            [(ngModel)]="endHours"
+            type="number"
+            formControlName="endHoursCtrl"
+            min="0"
+            max="23"
+          />
+          <mat-label>hours</mat-label>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            [(ngModel)]="endMinutes"
+            type="number"
+            formControlName="endMinutesCtrl"
+            min="0"
+            max="59"
+          />
+          <mat-label>minutes</mat-label>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button (click)="activateForth()" mat-button matStepperNext>
+          Next
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="forthFormGroup">
+    <form [formGroup]="forthFormGroup">
+      <ng-template matStepLabel>Duration</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>enter duration</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          [(ngModel)]="duration"
+          formControlName="forthCtrl"
+        />
+        <mat-label>m</mat-label>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button (click)="activateFive()" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- SPLIT -->
+  <mat-step *ngIf="selectedRenovationType == 0" [stepControl]="fiveFormGroup">
+    <form [formGroup]="fiveFormGroup">
+      <ng-template matStepLabel>New rooms</ng-template>
+      <mat-label>Room 1</mat-label>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Room type :</mat-label>
+          <mat-select
+            [(ngModel)]="selectedRoom1Type"
+            formControlName="fiveCtrl"
+            *ngIf="roomTypeKeys"
+          >
+            <mat-option
+              *ngFor="let roomTypeKey of roomTypeKeys"
+              [value]="roomTypeKey"
+            >
+              {{ roomTypes[roomTypeKey] }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Name :</mat-label>
+          <input
+            matInput
+            placeholder="Enter room name"
+            [(ngModel)]="newRoom1Name"
+            formControlName="fiveCtrl"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Sector :</mat-label>
+          <input
+            matInput
+            placeholder="Enter room sector"
+            [(ngModel)]="newRoom1Sector"
+            formControlName="fiveCtrl"
+          />
+        </mat-form-field>
+      </div>
+      <mat-label>Room 2</mat-label>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Room type :</mat-label>
+          <mat-select
+            [(ngModel)]="selectedRoom2Type"
+            formControlName="fiveCtrl"
+            *ngIf="roomTypeKeys"
+          >
+            <mat-option
+              *ngFor="let roomTypeKey of roomTypeKeys"
+              [value]="roomTypeKey"
+            >
+              {{ roomTypes[roomTypeKey] }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Name :</mat-label>
+          <input
+            matInput
+            placeholder="Enter room name"
+            [(ngModel)]="newRoom2Name"
+            formControlName="fiveCtrl"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Sector :</mat-label>
+          <input
+            matInput
+            placeholder="Enter room sector"
+            [(ngModel)]="newRoom2Sector"
+            formControlName="fiveCtrl"
+          />
+        </mat-form-field>
+      </div>
+      <mat-label>Equipment</mat-label>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Move equipment :</mat-label>
+          <mat-select
+            [(ngModel)]="selectedEquipmentLogic"
+            formControlName="fiveCtrl"
+            *ngIf="equipmentLogicKeys"
+          >
+            <mat-option
+              *ngFor="let equipmentLogicTypeKey of equipmentLogicKeys"
+              [value]="equipmentLogicTypeKey"
+            >
+              {{ equipmentLogicTypes[equipmentLogicTypeKey] }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button (click)="activateSix()" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- MERGE -->
+  <mat-step *ngIf="selectedRenovationType == 1" [stepControl]="fiveFormGroup">
+    <form [formGroup]="fiveFormGroup">
+      <ng-template matStepLabel>New rooms</ng-template>
+      <mat-label>new Room</mat-label>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Room type :</mat-label>
+          <mat-select
+            [(ngModel)]="selectedRoom1Type"
+            formControlName="fiveCtrl"
+            *ngIf="roomTypeKeys"
+          >
+            <mat-option
+              *ngFor="let roomTypeKey of roomTypeKeys"
+              [value]="roomTypeKey"
+            >
+              {{ roomTypes[roomTypeKey] }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Name :</mat-label>
+          <input
+            matInput
+            placeholder="Enter room name"
+            [(ngModel)]="newRoom1Name"
+            formControlName="fiveCtrl"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Sector :</mat-label>
+          <input
+            matInput
+            placeholder="Enter room sector"
+            [(ngModel)]="newRoom1Sector"
+            formControlName="fiveCtrl"
+          />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button (click)="activateSix()" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="sixFormGroup">
+    <form [formGroup]="sixFormGroup">
+      <ng-template matStepLabel>Renovation free terms</ng-template>
+      <mat-form-field appearance="fill" class="col-5">
+        <mat-label>Chose one of possible terms</mat-label>
+        <mat-select [(ngModel)]="selectedFreeTerm" formControlName="sixCtrl">
+          <mat-option *ngFor="let freeTerm of freeTerms" [value]="freeTerm">
             <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button (click)="activateForth()" mat-button matStepperNext>Next</button>
+              From {{ freeTerm.startTime | date: "dd.MM.yyyy HH:mm":"UTC" }} To
+              {{ freeTerm.endTime | date: "dd.MM.yyyy HH:mm":"UTC" }}
             </div>
-        </form>
-    </mat-step>
-    <mat-step [stepControl]="forthFormGroup">
-        <form [formGroup]="forthFormGroup">
-            <ng-template matStepLabel>Duration</ng-template>
-            <mat-form-field appearance="fill">
-                <mat-label>enter duration</mat-label>
-                <input matInput type="number" min="0" [(ngModel)]="duration" formControlName="forthCtrl" />
-                <mat-label>m</mat-label>
-            </mat-form-field>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button (click)="activateFive()" mat-button matStepperNext>Next</button>
-            </div>
-        </form>
-    </mat-step>
-    <mat-step [stepControl]="fiveFormGroup">
-        <form [formGroup]="fiveFormGroup">
-            <ng-template matStepLabel>New rooms</ng-template>
-            <mat-label>Room 1</mat-label>
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label>Room type :</mat-label>
-                    <mat-select [(ngModel)]="selectedRoom1Type" formControlName="fiveCtrl" *ngIf="roomTypeKeys">
-                        <mat-option *ngFor="let roomTypeKey of roomTypeKeys" [value]="roomTypeKey">
-                            {{ roomTypes[roomTypeKey] }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Name :</mat-label>
-                    <input matInput placeholder="Enter room name" [(ngModel)]="newRoom1Name" formControlName="fiveCtrl" />
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Sector :</mat-label>
-                    <input matInput placeholder="Enter room sector" [(ngModel)]="newRoom1Sector"
-                        formControlName="fiveCtrl" />
-                </mat-form-field>
-            </div>
-            <mat-label>Room 2</mat-label>
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label>Room type :</mat-label>
-                    <mat-select [(ngModel)]="selectedRoom2Type" formControlName="fiveCtrl" *ngIf="roomTypeKeys">
-                        <mat-option *ngFor="let roomTypeKey of roomTypeKeys" [value]="roomTypeKey">
-                            {{ roomTypes[roomTypeKey] }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Name :</mat-label>
-                    <input matInput placeholder="Enter room name" [(ngModel)]="newRoom2Name" formControlName="fiveCtrl"/>
-                </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Sector :</mat-label>
-                    <input matInput placeholder="Enter room sector" [(ngModel)]="newRoom2Sector"
-                        formControlName="fiveCtrl" />
-                </mat-form-field>
-            </div>
-            <mat-label>Equipment</mat-label>
-            <div>
-                <mat-form-field appearance="fill">
-                    <mat-label>Move equipment :</mat-label>
-                    <mat-select [(ngModel)]="selectedEquipmentLogic" formControlName="fiveCtrl" *ngIf="equipmentLogicKeys">
-                        <mat-option *ngFor="let equipmentLogicTypeKey of equipmentLogicKeys" [value]="equipmentLogicTypeKey">
-                            {{ equipmentLogicTypes[equipmentLogicTypeKey] }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button (click)="activateSix()" mat-button matStepperNext>Next</button>
-            </div>
-        </form>
-    </mat-step>
-    <mat-step [stepControl]="sixFormGroup">
-        <form [formGroup]="sixFormGroup">
-            <ng-template matStepLabel>Renovation free terms</ng-template>
-            <mat-form-field appearance="fill"  class="col-5">
-                <mat-label>Chose one of possible terms</mat-label>
-                <mat-select [(ngModel)]="selectedFreeTerm" formControlName="sixCtrl">
-                    <mat-option *ngFor="let freeTerm of freeTerms" [value]="freeTerm">
-                        <div>
-                            From {{ freeTerm.startTime | date: 'dd.MM.yyyy HH:mm' : 'UTC' }}
-                            To {{ freeTerm.endTime | date: 'dd.MM.yyyy HH:mm' : 'UTC' }}
-                         </div>
-                        <div></div>
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button (click)="activateLast()" mat-button matStepperNext>Next</button>
-            </div>
-        </form>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <div>
-            <p>Successfully scheduled appointment for room renovation</p>
-        </div>
-        <div>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-        </div>
-    </mat-step>
+            <div></div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button (click)="activateLast()" mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <div>
+      <p>Successfully scheduled appointment for room renovation</p>
+    </div>
+    <div>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
 </mat-stepper>

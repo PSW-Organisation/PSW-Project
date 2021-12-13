@@ -1061,7 +1061,7 @@ namespace HospitalLibrary.Migrations
                                     FloorGraphicId = 1,
                                     Height = 80,
                                     RoomId = 4,
-                                    Width = 147,
+                                    Width = 150,
                                     X = 0,
                                     Y = 517
                                 },
@@ -1072,7 +1072,7 @@ namespace HospitalLibrary.Migrations
                                     FloorGraphicId = 1,
                                     Height = 80,
                                     RoomId = 5,
-                                    Width = 147,
+                                    Width = 150,
                                     X = 150,
                                     Y = 517
                                 },
@@ -1160,7 +1160,7 @@ namespace HospitalLibrary.Migrations
                                     FloorGraphicId = 2,
                                     Height = 80,
                                     RoomId = 13,
-                                    Width = 147,
+                                    Width = 150,
                                     X = 0,
                                     Y = 517
                                 },
@@ -1171,7 +1171,7 @@ namespace HospitalLibrary.Migrations
                                     FloorGraphicId = 2,
                                     Height = 80,
                                     RoomId = 14,
-                                    Width = 147,
+                                    Width = 150,
                                     X = 150,
                                     Y = 517
                                 },

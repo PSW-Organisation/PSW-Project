@@ -354,7 +354,7 @@ namespace ehealthcare.Model
                 {
                     Id = 4,
                     DoorPosition = "top",
-                    Width = 147,
+                    Width = 150,
                     Height = 80,
                     X = 0,
                     Y = 517,
@@ -364,7 +364,7 @@ namespace ehealthcare.Model
                 {
                     Id = 5,
                     DoorPosition = "top",
-                    Width = 147,
+                    Width = 150,
                     Height = 80,
                     X = 150,
                     Y = 517,
@@ -456,7 +456,7 @@ namespace ehealthcare.Model
                 {
                     Id = 13,
                     DoorPosition = "top",
-                    Width = 147,
+                    Width = 150,
                     Height = 80,
                     X = 0,
                     Y = 517,
@@ -466,7 +466,7 @@ namespace ehealthcare.Model
                 {
                     Id = 14,
                     DoorPosition = "top",
-                    Width = 147,
+                    Width = 150,
                     Height = 80,
                     X = 150,
                     Y = 517,
