@@ -19,8 +19,8 @@ namespace PharmacyAPI.Controllers
         [HttpGet("{fileName?}")]
         public IActionResult Download(string fileName)
         {
-           // SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password")); 
-            SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password")); //kod Nevene
+            SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password")); 
+            //SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password")); //kod Nevene
             var folderName = Path.Combine("Resources", "Reports");
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             var localFile = Path.Combine(pathToSave, fileName);
@@ -61,6 +61,39 @@ namespace PharmacyAPI.Controllers
 
             var binaryFile = ReadFully(stream);
             return File(binaryFile, "application/pdf");
+        }
+
+        [HttpPost, DisableRequestSizeLimit]
+        public IActionResult UploadHttp()
+        {
+            try
+            {
+                var file = Request.Form.Files[0];
+                var folderName = Path.Combine("Resources", "Reports");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                if (file.Length > 0)
+                {
+                    var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                    var fullPath = Path.Combine(pathToSave, fileName);
+                    var dbPath = Path.Combine(folderName, fileName);
+
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    return Ok(new { dbPath });
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         private static byte[] ReadFully(Stream input)

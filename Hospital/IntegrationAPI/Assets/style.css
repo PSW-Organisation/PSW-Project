@@ -25,3 +25,11 @@ table th {
     background-color: green;
     color: white;
 }
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    padding-bottom: 20px
+}

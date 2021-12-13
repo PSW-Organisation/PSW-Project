@@ -36,20 +36,17 @@ namespace IntegrationLibrary.Service
 
             foreach(Pharmacy pharmacy in pharmacyService.GetAll())
             {
-                if (pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.HTTP)
-                {
-                    var client = new RestSharp.RestClient(pharmacy.PharmacyUrl);
-                    var request = new RestRequest("/medicine/" + pharmacy.HospitalApiKey);
-                    var values = new Dictionary<string, object>
+                var client = new RestClient(pharmacy.PharmacyUrl);
+                var request = new RestRequest("/medicine/" + pharmacy.HospitalApiKey);
+                var values = new Dictionary<string, object>
                     {
                       {"medicineName", medicineName}, {"medicineAmount", medicineAmount}
                     };
-                     request.AddJsonBody(values);
-                     IRestResponse response = client.Post(request);
-                     if (response.Content.Equals("true"))
-                     {
-                        pharmacies.Add(pharmacy);
-                     }
+                request.AddJsonBody(values);
+                IRestResponse response = client.Post(request);
+                if (response.Content.Equals("true"))
+                {
+                    pharmacies.Add(pharmacy);
                 }
             }
             return pharmacies;
