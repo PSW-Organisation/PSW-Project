@@ -30,8 +30,8 @@ namespace IntegrationAPI.Controllers
         public IActionResult Download(string fileName)
         {
 
-            SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password")); //kod nevene
-           // SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
+            //SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password")); //kod nevene
+            SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
             var folderName = Path.Combine("Resources", "Reports");
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             var localFile = Path.Combine(pathToSave, fileName);

@@ -66,8 +66,8 @@ namespace IntegrationAPI.Controllers
             var file = _converter.Convert(pdf);
             var fileName = dto.StartTime.ToString("dd-M-yyyy") + "_" + dto.EndTime.ToString("dd-M-yyyy") + ".pdf";
             var serverFile = @"\pharmacy\" + fileName;
-            SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password")); //kod Nevene
-           // SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
+            // SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password")); //kod Nevene
+            SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
             if (sftpService.UploadFile(file, serverFile)) {
             
                 return Ok(fileName); }

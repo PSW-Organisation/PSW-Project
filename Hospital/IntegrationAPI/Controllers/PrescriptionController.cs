@@ -74,7 +74,7 @@ namespace IntegrationAPI.Controllers
             };
 
             var file = _converter.Convert(pdf);
-            var fileName = prescription.PatientId + "_" + prescription.PrescriptionDate.ToString("dd-M-yyyy") + ".pdf";
+            var fileName = prescription.PatientId + " " + prescription.PrescriptionDate.ToString("dd-M-yyyy") + ".pdf";
             var serverFile = @"\pharmacy\" + fileName;
             SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
 
@@ -101,23 +101,6 @@ namespace IntegrationAPI.Controllers
                     client.ExecuteAsync(request, cancellationTokenSource.Token);
                 }
             }
-
-            /*if (sftpService.UploadFile(file, serverFile))
-            {
-                List<string> pharmacyUrls = new List<string>();
-                medicineService.searchMedicine(prescription.MedicineId, 1).ForEach(pharmacy => pharmacyUrls.Add(pharmacy.PharmacyUrl));
-                
-                foreach(var url in pharmacyUrls)
-                {
-                    var client = new RestClient(url);
-                    var request = new RestRequest("/report/" + fileName, Method.GET);
-                    var cancellationTokenSource = new CancellationTokenSource();
-                    client.ExecuteAsync(request, cancellationTokenSource.Token);
-                }
-
-                return Ok(fileName);
-            }
-            return BadRequest();*/
             return Ok();
         }
     }
