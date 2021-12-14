@@ -49,18 +49,18 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
                 foreach (var equipment in roomEquipments)
                 {
                     int quantityA = equipment.Quantity / 2;
-                    equipmentA.Add(new RoomEquipment(quantityA, equipment.Name, equipment.Type, rooms[0].Id));
+                    equipmentA.Add(new RoomEquipment(rooms[0].Id, quantityA, equipment.Name, equipment.Type, rooms[0].Id));
                     int quantityB = equipment.Quantity / 2 + equipment.Quantity % 2;
-                    equipmentB.Add(new RoomEquipment(quantityB, equipment.Name, equipment.Type, rooms[1].Id));
+                    equipmentB.Add(new RoomEquipment(rooms[1].Id, quantityB, equipment.Name, equipment.Type, rooms[1].Id));
                 }
             }
             else if (equipmentLogic == EquipmentLogic.ALL_EQUIPMENT_IN_A)
             {
-                equipmentA.AddRange(roomEquipments.Select(equipment => new RoomEquipment(equipment.Quantity, equipment.Name, equipment.Type, rooms[0].Id)));
+                equipmentA.AddRange(roomEquipments.Select(equipment => new RoomEquipment(rooms[0].Id, equipment.Quantity, equipment.Name, equipment.Type, rooms[0].Id)));
             }
             else if (equipmentLogic == EquipmentLogic.ALL_EQUIPMENT_IN_B)
             {
-                equipmentA.AddRange(roomEquipments.Select(equipment => new RoomEquipment(equipment.Quantity, equipment.Name, equipment.Type, rooms[1].Id)));
+                equipmentA.AddRange(roomEquipments.Select(equipment => new RoomEquipment(rooms[1].Id, equipment.Quantity, equipment.Name, equipment.Type, rooms[1].Id)));
             }
             equipments.AddRange(equipmentA);
             equipments.AddRange(equipmentB);
@@ -73,7 +73,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             if (roomA is null || roomB is null) return newRoomEquipment;
             List<RoomEquipment> roomEquipmentsA = _roomEquipmentRepository.GetAllEquipmentInRoom(roomA.Id);
             List<RoomEquipment> roomEquipmentsB = _roomEquipmentRepository.GetAllEquipmentInRoom(roomB.Id);
-            newRoomEquipment.AddRange(roomEquipmentsA.Select(equipment => new RoomEquipment(equipment.Quantity, equipment.Name, equipment.Type, newRoom.Id)));
+            newRoomEquipment.AddRange(roomEquipmentsA.Select(equipment => new RoomEquipment(newRoom.Id, equipment.Quantity, equipment.Name, equipment.Type, newRoom.Id)));
             
             foreach(RoomEquipment equipment in roomEquipmentsB)
             {
@@ -90,7 +90,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
                 }
                 if (!added)
                 {
-                    newRoomEquipment.Add(new RoomEquipment(equipment.Quantity, equipment.Name, equipment.Type, newRoom.Id));
+                    newRoomEquipment.Add(new RoomEquipment(newRoom.Id, equipment.Quantity, equipment.Name, equipment.Type, newRoom.Id));
                 }
             }
 
