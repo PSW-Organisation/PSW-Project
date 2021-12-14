@@ -58,27 +58,24 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
                     List<Room> splitRooms = roomService.SplitRoom(activeTerm);
                     List<RoomGraphic> splitRoomGraphics = roomGraphicService.SplitRoomGraphic(room, splitRooms);
                     List<RoomEquipment> roomEquipments = roomEquipmentService.SplitRoomEquipment(activeTerm.EquipmentLogic, room, splitRooms);
-
-                    Console.WriteLine(room.Id);
-                    foreach (var splitRoom in splitRooms) Console.WriteLine(splitRoom.Id);
-                    foreach (var splitRoomGraphic in splitRoomGraphics) Console.WriteLine(splitRoomGraphic.Id);
-
-                    roomRepository.Delete(room);
+                    
                     foreach (var splitRoom in splitRooms) roomRepository.Insert(splitRoom);
 
                     RoomGraphic roomGraphic = floorGraphicRepository.GetRoomGraphicByRoomId(room.Id);
                     FloorGraphic floorGraphic = floorGraphicRepository.GetFloorGraphicByRoomId(room.Id);
-                    floorGraphic.RoomGraphics.Remove(roomGraphic);
+                    roomGraphicRepository.Delete(roomGraphic);
                     foreach (var splitRoomGraphic in splitRoomGraphics)
                     {
-                        floorGraphic.RoomGraphics.Add(splitRoomGraphic);
-                        floorGraphicRepository.Save(floorGraphic);
+                        splitRoomGraphic.FloorGraphicId = floorGraphic.Id;
+                        splitRoomGraphic.FloorGraphic = floorGraphic;
                         roomGraphicRepository.Insert(splitRoomGraphic);
                     }
                     
                     List<RoomEquipment> roomEquipmentInRoom = roomEquipmentRepository.GetAllEquipmentInRoom(room.Id);
                     foreach (var roomEquipment in roomEquipmentInRoom) roomEquipmentRepository.Delete(roomEquipment);
                     foreach(var roomEquipment in roomEquipments) roomEquipmentRepository.Insert(roomEquipment);
+                    
+                    roomRepository.Delete(room);
                 }
                 else if (activeTerm.TypeOfRenovation == TypeOfRenovation.MERGE)
                 {
@@ -88,21 +85,25 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
                     RoomGraphic mergeRoomGraphic = roomGraphicService.MergeRoomGraphic(roomA, roomB, mergeRoom);
                     List<RoomEquipment> roomEquipments = roomEquipmentService.MergeRoomEquipment(roomA, roomB, mergeRoom);
 
-                    roomRepository.Delete(roomA);
-                    roomRepository.Delete(roomB);
                     roomRepository.Insert(mergeRoom);
 
-                    //RoomGraphic roomGraphicA = roomGraphicRepository.Get(roomA.Id);
-                    //RoomGraphic roomGraphicB = roomGraphicRepository.Get(roomB.Id);
-                    //roomGraphicRepository.Delete(roomGraphicA);
-                    //roomGraphicRepository.Delete(roomGraphicB);
-                    //roomGraphicRepository.Insert(mergeRoomGraphic);
+                    RoomGraphic roomGraphicA = roomGraphicRepository.Get(roomA.Id);
+                    RoomGraphic roomGraphicB = roomGraphicRepository.Get(roomB.Id);
+                    FloorGraphic floorGraphic = floorGraphicRepository.GetFloorGraphicByRoomId(roomA.Id);
+                    roomGraphicRepository.Delete(roomGraphicA);
+                    roomGraphicRepository.Delete(roomGraphicB);
+                    mergeRoomGraphic.FloorGraphicId = floorGraphic.Id;
+                    mergeRoomGraphic.FloorGraphic = floorGraphic;
+                    roomGraphicRepository.Insert(mergeRoomGraphic);
 
                     List<RoomEquipment> roomEquipmentInRoomA = roomEquipmentRepository.GetAllEquipmentInRoom(roomA.Id);
                     List<RoomEquipment> roomEquipmentInRoomB = roomEquipmentRepository.GetAllEquipmentInRoom(roomB.Id);
                     foreach (var roomEquipment in roomEquipmentInRoomA) roomEquipmentRepository.Delete(roomEquipment);
                     foreach (var roomEquipment in roomEquipmentInRoomB) roomEquipmentRepository.Delete(roomEquipment);
                     foreach (var roomEquipment in roomEquipments) roomEquipmentRepository.Insert(roomEquipment);
+                    
+                    roomRepository.Delete(roomA);
+                    roomRepository.Delete(roomB);
                 }
             }
         }

@@ -8,6 +8,7 @@ using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.Model;
 using System.Linq;
+using HospitalLibrary.GraphicalEditor.Service;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 using HospitalLibrary.Medicines.Model;
 
@@ -301,16 +302,26 @@ namespace ehealthcare.Model
 
             #region FloorGraphicsWithRoomGraphics
 
-            modelBuilder.Entity<FloorGraphic>(fg =>
-            {
-                fg.HasData(new FloorGraphic
+            modelBuilder.Entity<FloorGraphic>().HasData(
+                new
                 {
                     Id = 1,
                     Floor = 0,
                     BuildingId = 0
-
+                }, new
+                {
+                    Id = 2,
+                    Floor = 1,
+                    BuildingId = 0
+                }, new
+                {
+                    Id = 3,
+                    Floor = 0,
+                    BuildingId = 1
                 });
-                fg.OwnsMany(e => e.RoomGraphics).HasData(new
+
+            modelBuilder.Entity<RoomGraphic>().HasData(
+                new
                 {
                     Id = 16,
                     DoorPosition = "right",
@@ -381,18 +392,9 @@ namespace ehealthcare.Model
                     FloorGraphicId = 1,
                     RoomId = 6
                 });
-            });
 
-            modelBuilder.Entity<FloorGraphic>(fg =>
-            {
-                fg.HasData(new FloorGraphic
-                {
-                    Id = 2,
-                    Floor = 1,
-                    BuildingId = 0
-
-                });
-                fg.OwnsMany(e => e.RoomGraphics).HasData(new
+            modelBuilder.Entity<RoomGraphic>().HasData(
+                new
                 {
                     Id = 7,
                     DoorPosition = "right",
@@ -483,18 +485,9 @@ namespace ehealthcare.Model
                     FloorGraphicId = 2,
                     RoomId = 15
                 });
-            });
 
-            modelBuilder.Entity<FloorGraphic>(fg =>
-            {
-                fg.HasData(new FloorGraphic
-                {
-                    Id = 3,
-                    Floor = 0,
-                    BuildingId = 1
-
-                });
-                fg.OwnsMany(e => e.RoomGraphics).HasData(new
+            modelBuilder.Entity<RoomGraphic>().HasData(
+                new
                 {
                     Id = 17,
                     DoorPosition = "right",
@@ -505,7 +498,6 @@ namespace ehealthcare.Model
                     FloorGraphicId = 3,
                     RoomId = 17
                 });
-            });
 
             #endregion
 

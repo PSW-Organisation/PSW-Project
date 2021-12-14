@@ -112,6 +112,7 @@ namespace HospitalLibrary.GraphicalEditor.Service
             RoomGraphic roomGraphicA = _floorGraphicRepository.GetRoomGraphicByRoomId(roomA.Id);
             RoomGraphic roomGraphicB = _floorGraphicRepository.GetRoomGraphicByRoomId(roomB.Id);
             RoomGraphic newRoomGraphics = new RoomGraphic(roomGraphicA, roomGraphicB, newRoom);
+            newRoomGraphics.Id = newRoom.Id;
             return newRoomGraphics;
         }
 

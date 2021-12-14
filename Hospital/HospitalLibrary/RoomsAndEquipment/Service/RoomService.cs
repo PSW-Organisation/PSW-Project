@@ -70,6 +70,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             Room roomB = _roomRepository.Get(term.IdRoomB);
             if (roomA == null || roomB == null) return null;
             Room newRoom = new Room(term.NewNameForRoomA, term.NewSectorForRoomA, roomA.Floor, term.NewRoomTypeForRoomA);
+            newRoom.Id = GetNewId();
             return newRoom;
         }
 
