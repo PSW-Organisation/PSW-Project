@@ -13,6 +13,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Repository
     public interface IRoomRepository : IGenericRepository<Room>
     {
         List<Room> GetAllByName(string name);
+        int GetNewId();
     }
 
 }

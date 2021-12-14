@@ -19,6 +19,8 @@ namespace HospitalLibrary.GraphicalEditor.Model
 
         public int RoomId { get; set; }
         public virtual Room Room { get; set; }
+        public int FloorGraphicId { get; set; }
+        public virtual FloorGraphic FloorGraphic { get; set; }
 
         public RoomGraphic()
         {

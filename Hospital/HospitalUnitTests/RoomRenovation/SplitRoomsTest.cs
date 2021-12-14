@@ -23,6 +23,7 @@ namespace HospitalUnitTests.RoomRenovation
         {
             var stubRoomRepository = new Mock<IRoomRepository>();
             stubRoomRepository.Setup(r => r.Get(term.IdRoomA)).Returns(room);
+            stubRoomRepository.Setup(r => r.GetNewId()).Returns(room.Id + 1);
             RoomService roomService = new RoomService(stubRoomRepository.Object);
 
             List<Room> splitRooms = roomService.SplitRoom(term);
@@ -60,6 +61,7 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         new Room()
                         {
+                            Id = 2,
                             Floor = 0,
                             Name = "Operation room A",
                             RoomType = RoomType.operation,
@@ -67,6 +69,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new Room()
                         {
+                            Id = 3,
                             Floor = 0,
                             Name = "Examination room B",
                             RoomType = RoomType.examination,
@@ -96,23 +99,6 @@ namespace HospitalUnitTests.RoomRenovation
                         RoomType = RoomType.examination,
                         Sector = "ERS"
                     },
-                    new List<Room>()
-                },
-                new object[]
-                {
-                    new TermOfRenovation()
-                    {
-                        TypeOfRenovation = TypeOfRenovation.SPLIT,
-                        IdRoomA = 1,
-                        IdRoomB = -1,
-                        NewNameForRoomA = "Operation room A",
-                        NewRoomTypeForRoomA = RoomType.operation,
-                        NewSectorForRoomA = "ORS",
-                        NewNameForRoomB = "Examination room B",
-                        NewRoomTypeForRoomB = RoomType.examination,
-                        NewSectorForRoomB = "ERS"
-                    },
-                    null,
                     new List<Room>()
                 }
             };
@@ -156,6 +142,7 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         new RoomGraphic
                         {
+                            Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "right",
                             Height = 150,
@@ -166,6 +153,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new RoomGraphic
                         {
+                            Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "right",
                             Height = 150,
@@ -194,6 +182,7 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         new RoomGraphic
                         {
+                            Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "left",
                             Height = 150,
@@ -204,6 +193,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new RoomGraphic
                         {
+                            Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "left",
                             Height = 150,
@@ -232,6 +222,7 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         new RoomGraphic
                         {
+                            Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "top",
                             Height = 300,
@@ -242,6 +233,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new RoomGraphic
                         {
+                            Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "top",
                             Height = 300,
@@ -270,6 +262,7 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         new RoomGraphic
                         {
+                            Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "bottom",
                             Height = 300,
@@ -280,6 +273,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new RoomGraphic
                         {
+                            Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "bottom",
                             Height = 300,
@@ -308,6 +302,7 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         new RoomGraphic
                         {
+                            Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "right",
                             Height = 150,
@@ -318,6 +313,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new RoomGraphic
                         {
+                            Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "right",
                             Height = 151,
@@ -346,6 +342,7 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         new RoomGraphic
                         {
+                            Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "bottom",
                             Height = 300,
@@ -356,6 +353,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new RoomGraphic
                         {
+                            Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "bottom",
                             Height = 300,
@@ -484,6 +482,7 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         new RoomEquipment()
                         {
+                            Id = 2,
                             Name = "bed",
                             Quantity = 2,
                             Type = "Static",
@@ -491,6 +490,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new RoomEquipment()
                         {
+                            Id = 2,
                             Name = "needle",
                             Quantity = 16,
                             Type = "Dynamic",
@@ -498,6 +498,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new RoomEquipment()
                         {
+                            Id = 3,
                             Name = "bed",
                             Quantity = 2,
                             Type = "Static",
@@ -505,6 +506,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new RoomEquipment()
                         {
+                            Id = 3,
                             Name = "needle",
                             Quantity = 17,
                             Type = "Dynamic",
@@ -546,6 +548,7 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         new RoomEquipment()
                         {
+
                             Name = "bed",
                             Quantity = 4,
                             Type = "Static",
@@ -563,6 +566,7 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         new RoomEquipment()
                         {
+                            Id = 2,
                             Name = "bed",
                             Quantity = 4,
                             Type = "Static",
@@ -570,6 +574,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new RoomEquipment()
                         {
+                            Id = 2,
                             Name = "needle",
                             Quantity = 33,
                             Type = "Dynamic",
@@ -628,6 +633,7 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         new RoomEquipment()
                         {
+                            Id = 3,
                             Name = "bed",
                             Quantity = 4,
                             Type = "Static",
@@ -635,6 +641,7 @@ namespace HospitalUnitTests.RoomRenovation
                         },
                         new RoomEquipment()
                         {
+                            Id = 3,
                             Name = "needle",
                             Quantity = 33,
                             Type = "Dynamic",

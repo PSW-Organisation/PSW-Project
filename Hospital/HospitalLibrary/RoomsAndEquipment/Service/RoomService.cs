@@ -50,6 +50,9 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             if (room == null) return splitRooms;
             Room roomA = new Room(term.NewNameForRoomA, term.NewSectorForRoomA, room.Floor, term.NewRoomTypeForRoomA);
             Room roomB = new Room(term.NewNameForRoomB, term.NewSectorForRoomB, room.Floor, term.NewRoomTypeForRoomB);
+            var id = _roomRepository.GetNewId();
+            roomA.Id = id;
+            roomB.Id = id + 1;
             splitRooms.Add(roomA);
             splitRooms.Add(roomB);
             return splitRooms;
@@ -61,6 +64,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             Room roomB = _roomRepository.Get(term.IdRoomB);
             if (roomA == null || roomB == null) return null;
             Room newRoom = new Room(term.NewNameForRoomA, term.NewSectorForRoomA, roomA.Floor, term.NewRoomTypeForRoomA);
+            newRoom.Id = _roomRepository.GetNewId();
             return newRoom;
         }
 
