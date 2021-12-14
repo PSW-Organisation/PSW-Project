@@ -22,5 +22,9 @@ namespace HospitalLibrary.RoomsAndEquipment.Repository
             return _dbContext.Rooms.Where(r => r.Name.ToUpper().Contains(name.ToUpper())).ToList();
         }
 
+        public int GetNewId()
+        {
+            return _dbContext.Rooms.Max(x => x.Id) + 1;
+        }
     }
 }

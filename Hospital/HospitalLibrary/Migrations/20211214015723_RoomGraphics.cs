@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalLibrary.Migrations
 {
-    public partial class Survey : Migration
+    public partial class RoomGraphics : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,8 +46,8 @@ namespace HospitalLibrary.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Floor = table.Column<long>(nullable: false),
-                    BuildingId = table.Column<int>(nullable: false)
+                    BuildingId = table.Column<int>(nullable: false),
+                    Floor = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,6 +70,23 @@ namespace HospitalLibrary.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PatientFeedbacks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Prescriptions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PatientId = table.Column<string>(nullable: true),
+                    DoctorId = table.Column<string>(nullable: true),
+                    MedicineId = table.Column<string>(nullable: true),
+                    PrescriptionDate = table.Column<DateTime>(nullable: false),
+                    Diagnosis = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Prescriptions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,6 +142,32 @@ namespace HospitalLibrary.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TermOfRelocationEquipments", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TermOfRenovations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<DateTime>(nullable: false),
+                    DurationInMinutes = table.Column<int>(nullable: false),
+                    StateOfRenovation = table.Column<int>(nullable: false),
+                    TypeOfRenovation = table.Column<int>(nullable: false),
+                    IdRoomA = table.Column<int>(nullable: false),
+                    IdRoomB = table.Column<int>(nullable: false),
+                    EquipmentLogic = table.Column<int>(nullable: false),
+                    NewNameForRoomA = table.Column<string>(nullable: true),
+                    NewSectorForRoomA = table.Column<string>(nullable: true),
+                    NewRoomTypeForRoomA = table.Column<int>(nullable: false),
+                    NewNameForRoomB = table.Column<string>(nullable: true),
+                    NewSectorForRoomB = table.Column<string>(nullable: true),
+                    NewRoomTypeForRoomB = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TermOfRenovations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -340,8 +383,9 @@ namespace HospitalLibrary.Migrations
                 columns: new[] { "Id", "BuildingId", "Floor" },
                 values: new object[,]
                 {
-                    { 1, 0, 0L },
-                    { 2, 0, 1L }
+                    { 3, 1, 0 },
+                    { 1, 0, 0 },
+                    { 2, 0, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -358,6 +402,7 @@ namespace HospitalLibrary.Migrations
                 columns: new[] { "Id", "Name", "Quantity", "RoomId", "Type" },
                 values: new object[,]
                 {
+                    { 4, "Picks", 300, 16, "Dynamic" },
                     { 3, "Needle", 300, 3, "Dynamic" },
                     { 2, "Needle", 200, 2, "Dynamic" },
                     { 1, "Bed", 2, 1, "Static" }
@@ -368,46 +413,56 @@ namespace HospitalLibrary.Migrations
                 columns: new[] { "Id", "Floor", "IsRenovated", "IsRenovatedUntill", "Name", "NumOfTakenBeds", "RoomType", "Sector" },
                 values: new object[,]
                 {
+                    { 17, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Waiting room 3", 0, 5, "WS" },
+                    { 15, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Waiting room 2", 0, 5, "WS" },
+                    { 14, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Restroom 4", 0, 3, "RRS" },
                     { 13, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Restroom 3", 0, 3, "RRS" },
                     { 12, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Examination room 4", 0, 0, "ES" },
                     { 11, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Examination room 3", 0, 0, "ES" },
-                    { 10, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Operation room 4", 0, 1, "OS" },
-                    { 9, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Operation room 3", 0, 1, "OS" },
                     { 8, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Operation room 2", 0, 1, "OS" },
-                    { 7, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Operation room 1", 0, 1, "OS" },
-                    { 6, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Waiting room 1", 0, 5, "WS" },
-                    { 5, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Restroom 2", 0, 3, "RRS" },
-                    { 4, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Restroom 1", 0, 3, "RRS" },
-                    { 3, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Examination room 2", 1, 0, "ES" },
-                    { 15, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Waiting room 2", 0, 5, "WS" },
+                    { 9, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Operation room 3", 0, 1, "OS" },
+                    { 10, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Operation room 4", 0, 1, "OS" },
                     { 1, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Counter 2", 0, 4, "CS" },
+                    { 2, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Examination room 1", 1, 0, "ES" },
+                    { 3, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Examination room 2", 1, 0, "ES" },
                     { 16, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Counter 1", 0, 4, "CS" },
-                    { 14, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Restroom 4", 0, 3, "RRS" },
-                    { 2, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Examination room 1", 1, 0, "ES" }
+                    { 5, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Restroom 2", 0, 3, "RRS" },
+                    { 6, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Waiting room 1", 0, 5, "WS" },
+                    { 7, 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Operation room 1", 0, 1, "OS" },
+                    { 4, 0, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Restroom 1", 0, 3, "RRS" }
                 });
 
             migrationBuilder.InsertData(
                 table: "TermOfRelocationEquipments",
-                columns: new[] { "Id", "EndTime", "FinishedRelocation", "IdDestinationRoom", "IdSourceRoom", "NameOfEquipment", "QuantityOfEquipment", "StartTime", "DurationInMinutes" },
+                columns: new[] { "Id", "DurationInMinutes", "EndTime", "FinishedRelocation", "IdDestinationRoom", "IdSourceRoom", "NameOfEquipment", "QuantityOfEquipment", "StartTime" },
                 values: new object[,]
                 {
-                    { 6, new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified), false, 11, 10, "chair", 5, new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified), 20 },
-                    { 4, new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified), false, 11, 9, "table", 1, new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified), 25 },
-                    { 3, new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified), false, 9, 8, "infusion", 8, new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified), 15 },
-                    { 2, new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified), false, 9, 7, "needle", 14, new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified), 40 },
-                    { 1, new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified), false, 8, 7, "bed", 2, new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified), 10 },
-                    { 5, new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified), false, 7, 10, "xrayMachine", 1, new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified), 30 }
+                    { 1, 10, new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified), false, 8, 7, "bed", 2, new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 40, new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified), false, 9, 7, "needle", 14, new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 15, new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified), false, 9, 8, "infusion", 8, new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, 25, new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified), false, 11, 9, "table", 1, new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, 30, new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified), false, 7, 10, "xrayMachine", 1, new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, 20, new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified), false, 11, 10, "chair", 5, new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Address", "City", "Country", "DateOfBirth", "Discriminator", "Email", "Gender", "IsActivated", "IsBlocked", "LoginType", "Name", "ParentName", "Password", "Phone", "Surname", "Token", "Username", "DoctorId" },
-                values: new object[] { "imbiamba", "Sime Milosevica, 5", null, null, new DateTime(2001, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Patient", "markoilic@gmail.com", "male", false, false, 0, "Marko", "Milan", "pecurkaa", "019919199191", "Ilic", new Guid("17893c3e-07de-4e65-aad1-47964225946f"), "imbiamba", null });
+                table: "TermOfRenovations",
+                columns: new[] { "Id", "DurationInMinutes", "EndTime", "EquipmentLogic", "IdRoomA", "IdRoomB", "NewNameForRoomA", "NewNameForRoomB", "NewRoomTypeForRoomA", "NewRoomTypeForRoomB", "NewSectorForRoomA", "NewSectorForRoomB", "StartTime", "StateOfRenovation", "TypeOfRenovation" },
+                values: new object[,]
+                {
+                    { 1, 60, new DateTime(2021, 12, 7, 11, 30, 0, 0, DateTimeKind.Unspecified), 0, 1, 16, "Operation room 5", "", 1, 5, "OS", "", new DateTime(2021, 12, 7, 10, 30, 0, 0, DateTimeKind.Unspecified), 3, 1 },
+                    { 2, 1440, new DateTime(2021, 12, 18, 9, 0, 0, 0, DateTimeKind.Unspecified), 2, 4, -1, "Operation room 6", "Operation room 7", 1, 1, "OS", "OS", new DateTime(2021, 12, 17, 9, 0, 0, 0, DateTimeKind.Unspecified), 0, 0 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Address", "City", "Country", "DateOfBirth", "Discriminator", "Email", "Gender", "IsActivated", "IsBlocked", "LoginType", "Name", "ParentName", "Password", "Phone", "Surname", "Token", "Username", "Specialization", "UsedOffDays" },
                 values: new object[] { "nelex", "Sime Milutinovica, 2", "Novi Sad", "Serbia", new DateTime(1999, 7, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "nemanjar@gmail.com", "male", false, false, 2, "Nemanja", "Zoran", "najjacapecurka", "019919199191", "Radojcic", new Guid("00000000-0000-0000-0000-000000000000"), "nelex", 3, 12 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Address", "City", "Country", "DateOfBirth", "Discriminator", "Email", "Gender", "IsActivated", "IsBlocked", "LoginType", "Name", "ParentName", "Password", "Phone", "Surname", "Token", "Username", "DoctorId" },
+                values: new object[] { "imbiamba", "Sime Milosevica, 5", null, null, new DateTime(2001, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Patient", "markoilic@gmail.com", "male", false, false, 0, "Marko", "Milan", "pecurkaa", "019919199191", "Ilic", new Guid("601ccaa8-3a07-4a7c-89b9-9953e6eac8a7"), "imbiamba", null });
 
             migrationBuilder.InsertData(
                 table: "MedicalRecords",
@@ -424,22 +479,23 @@ namespace HospitalLibrary.Migrations
                 columns: new[] { "Id", "DoorPosition", "FloorGraphicId", "Height", "RoomId", "Width", "X", "Y" },
                 values: new object[,]
                 {
-                    { 6, "none", 1, 160, 6, 140, 150, 20 },
+                    { 17, "right", 3, 100, 17, 100, 0, 0 },
+                    { 15, "none", 2, 100, 15, 140, 10, 220 },
+                    { 14, "top", 2, 80, 14, 150, 150, 517 },
                     { 13, "top", 2, 80, 13, 150, 0, 517 },
                     { 12, "left", 2, 145, 12, 75, 222, 340 },
                     { 11, "right", 2, 145, 11, 75, 0, 340 },
                     { 10, "left", 2, 100, 10, 100, 197, 100 },
                     { 9, "right", 2, 100, 9, 100, 0, 100 },
-                    { 8, "left", 2, 100, 8, 100, 197, 0 },
                     { 7, "right", 2, 100, 7, 100, 0, 0 },
-                    { 15, "none", 2, 100, 15, 140, 10, 220 },
+                    { 6, "none", 1, 160, 6, 140, 150, 20 },
                     { 5, "top", 1, 80, 5, 150, 150, 517 },
                     { 4, "top", 1, 80, 4, 150, 0, 517 },
                     { 3, "left", 1, 145, 3, 75, 222, 340 },
                     { 2, "right", 1, 145, 2, 75, 0, 340 },
                     { 1, "right", 1, 100, 1, 100, 0, 100 },
-                    { 16, "right", 1, 100, 16, 100, 0, 0 },
-                    { 14, "top", 2, 80, 14, 150, 150, 517 }
+                    { 8, "left", 2, 100, 8, 100, 197, 0 },
+                    { 16, "right", 1, 100, 16, 100, 0, 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -511,6 +567,9 @@ namespace HospitalLibrary.Migrations
                 name: "PatientFeedbacks");
 
             migrationBuilder.DropTable(
+                name: "Prescriptions");
+
+            migrationBuilder.DropTable(
                 name: "Questions");
 
             migrationBuilder.DropTable(
@@ -521,6 +580,9 @@ namespace HospitalLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "TermOfRelocationEquipments");
+
+            migrationBuilder.DropTable(
+                name: "TermOfRenovations");
 
             migrationBuilder.DropTable(
                 name: "Allergens");

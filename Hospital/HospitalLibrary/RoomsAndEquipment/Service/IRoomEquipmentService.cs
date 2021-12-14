@@ -1,17 +1,16 @@
-﻿using FluentResults;
-using HospitalLibrary.Repository;
+﻿using System.Collections.Generic;
 using HospitalLibrary.RoomsAndEquipment.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 
 namespace HospitalLibrary.RoomsAndEquipment.Service
 {
     public interface IRoomEquipmentService
     {
-        public List<RoomEquipmentQuantityDTO> GetRoomEquipmentQuantity();
-        public List<RoomEquipment> GetEquipmentInRooms(string equipmentName);
-        public IList<RoomEquipment> GetAllEquipmentInRooms();
-        public List<RoomEquipment> GetAllEquipmentInRoom(int roomId);
+        List<RoomEquipment> GetEquipmentInRooms(string equipmentName);
+        IList<RoomEquipment> GetAllEquipmentInRooms();
+        List<RoomEquipmentQuantityDTO> GetRoomEquipmentQuantity();
+        List<RoomEquipment> GetAllEquipmentInRoom(int roomId);
+        List<RoomEquipment> SplitRoomEquipment(EquipmentLogic equipmentLogic, Room room, List<Room> rooms);
+        List<RoomEquipment> MergeRoomEquipment(Room roomA, Room roomB, Room newRoom);
     }
 }

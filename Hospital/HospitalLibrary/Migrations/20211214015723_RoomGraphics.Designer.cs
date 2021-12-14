@@ -10,8 +10,8 @@ using ehealthcare.Model;
 namespace HospitalLibrary.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    [Migration("20211207184459_termOfRenovation")]
-    partial class termOfRenovation
+    [Migration("20211214015723_RoomGraphics")]
+    partial class RoomGraphics
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -255,8 +255,8 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("BuildingId")
                         .HasColumnType("integer");
 
-                    b.Property<long>("Floor")
-                        .HasColumnType("bigint");
+                    b.Property<int>("Floor")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -267,19 +267,245 @@ namespace HospitalLibrary.Migrations
                         {
                             Id = 1,
                             BuildingId = 0,
-                            Floor = 0L
+                            Floor = 0
                         },
                         new
                         {
                             Id = 2,
                             BuildingId = 0,
-                            Floor = 1L
+                            Floor = 1
                         },
                         new
                         {
                             Id = 3,
                             BuildingId = 1,
-                            Floor = 0L
+                            Floor = 0
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.RoomGraphic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("DoorPosition")
+                        .HasColumnType("text");
+
+                    b.Property<int>("FloorGraphicId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Width")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("X")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Y")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FloorGraphicId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("RoomGraphics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 16,
+                            DoorPosition = "right",
+                            FloorGraphicId = 1,
+                            Height = 100,
+                            RoomId = 16,
+                            Width = 100,
+                            X = 0,
+                            Y = 0
+                        },
+                        new
+                        {
+                            Id = 1,
+                            DoorPosition = "right",
+                            FloorGraphicId = 1,
+                            Height = 100,
+                            RoomId = 1,
+                            Width = 100,
+                            X = 0,
+                            Y = 100
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DoorPosition = "right",
+                            FloorGraphicId = 1,
+                            Height = 145,
+                            RoomId = 2,
+                            Width = 75,
+                            X = 0,
+                            Y = 340
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DoorPosition = "left",
+                            FloorGraphicId = 1,
+                            Height = 145,
+                            RoomId = 3,
+                            Width = 75,
+                            X = 222,
+                            Y = 340
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DoorPosition = "top",
+                            FloorGraphicId = 1,
+                            Height = 80,
+                            RoomId = 4,
+                            Width = 150,
+                            X = 0,
+                            Y = 517
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DoorPosition = "top",
+                            FloorGraphicId = 1,
+                            Height = 80,
+                            RoomId = 5,
+                            Width = 150,
+                            X = 150,
+                            Y = 517
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DoorPosition = "none",
+                            FloorGraphicId = 1,
+                            Height = 160,
+                            RoomId = 6,
+                            Width = 140,
+                            X = 150,
+                            Y = 20
+                        },
+                        new
+                        {
+                            Id = 7,
+                            DoorPosition = "right",
+                            FloorGraphicId = 2,
+                            Height = 100,
+                            RoomId = 7,
+                            Width = 100,
+                            X = 0,
+                            Y = 0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            DoorPosition = "left",
+                            FloorGraphicId = 2,
+                            Height = 100,
+                            RoomId = 8,
+                            Width = 100,
+                            X = 197,
+                            Y = 0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            DoorPosition = "right",
+                            FloorGraphicId = 2,
+                            Height = 100,
+                            RoomId = 9,
+                            Width = 100,
+                            X = 0,
+                            Y = 100
+                        },
+                        new
+                        {
+                            Id = 10,
+                            DoorPosition = "left",
+                            FloorGraphicId = 2,
+                            Height = 100,
+                            RoomId = 10,
+                            Width = 100,
+                            X = 197,
+                            Y = 100
+                        },
+                        new
+                        {
+                            Id = 11,
+                            DoorPosition = "right",
+                            FloorGraphicId = 2,
+                            Height = 145,
+                            RoomId = 11,
+                            Width = 75,
+                            X = 0,
+                            Y = 340
+                        },
+                        new
+                        {
+                            Id = 12,
+                            DoorPosition = "left",
+                            FloorGraphicId = 2,
+                            Height = 145,
+                            RoomId = 12,
+                            Width = 75,
+                            X = 222,
+                            Y = 340
+                        },
+                        new
+                        {
+                            Id = 13,
+                            DoorPosition = "top",
+                            FloorGraphicId = 2,
+                            Height = 80,
+                            RoomId = 13,
+                            Width = 150,
+                            X = 0,
+                            Y = 517
+                        },
+                        new
+                        {
+                            Id = 14,
+                            DoorPosition = "top",
+                            FloorGraphicId = 2,
+                            Height = 80,
+                            RoomId = 14,
+                            Width = 150,
+                            X = 150,
+                            Y = 517
+                        },
+                        new
+                        {
+                            Id = 15,
+                            DoorPosition = "none",
+                            FloorGraphicId = 2,
+                            Height = 100,
+                            RoomId = 15,
+                            Width = 140,
+                            X = 10,
+                            Y = 220
+                        },
+                        new
+                        {
+                            Id = 17,
+                            DoorPosition = "right",
+                            FloorGraphicId = 3,
+                            Height = 100,
+                            RoomId = 17,
+                            Width = 100,
+                            X = 0,
+                            Y = 0
                         });
                 });
 
@@ -345,6 +571,33 @@ namespace HospitalLibrary.Migrations
                             Profession = "Professor",
                             Weight = 90
                         });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.MedicinePrescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Diagnosis")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MedicineId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("PrescriptionDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Prescriptions");
                 });
 
             modelBuilder.Entity("HospitalLibrary.Model.PatientAllergen", b =>
@@ -829,7 +1082,7 @@ namespace HospitalLibrary.Migrations
                             NewSectorForRoomB = "",
                             StartTime = new DateTime(2021, 12, 7, 10, 30, 0, 0, DateTimeKind.Unspecified),
                             StateOfRenovation = 3,
-                            TypeOfRenovation = 0
+                            TypeOfRenovation = 1
                         },
                         new
                         {
@@ -847,7 +1100,7 @@ namespace HospitalLibrary.Migrations
                             NewSectorForRoomB = "OS",
                             StartTime = new DateTime(2021, 12, 17, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             StateOfRenovation = 0,
-                            TypeOfRenovation = 1
+                            TypeOfRenovation = 0
                         });
                 });
 
@@ -1029,242 +1282,19 @@ namespace HospitalLibrary.Migrations
                         .HasForeignKey("PatientId");
                 });
 
-            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.FloorGraphic", b =>
+            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.RoomGraphic", b =>
                 {
-                    b.OwnsMany("HospitalLibrary.GraphicalEditor.Model.RoomGraphic", "RoomGraphics", b1 =>
-                        {
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                    b.HasOne("HospitalLibrary.GraphicalEditor.Model.FloorGraphic", "FloorGraphic")
+                        .WithMany("RoomGraphics")
+                        .HasForeignKey("FloorGraphicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<string>("DoorPosition")
-                                .HasColumnType("text");
-
-                            b1.Property<int>("FloorGraphicId")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("Height")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("RoomId")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("Width")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("X")
-                                .HasColumnType("integer");
-
-                            b1.Property<int>("Y")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("Id");
-
-                            b1.HasIndex("FloorGraphicId");
-
-                            b1.HasIndex("RoomId");
-
-                            b1.ToTable("RoomGraphics");
-
-                            b1.WithOwner()
-                                .HasForeignKey("FloorGraphicId");
-
-                            b1.HasOne("HospitalLibrary.RoomsAndEquipment.Model.Room", "Room")
-                                .WithMany()
-                                .HasForeignKey("RoomId")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
-
-                            b1.HasData(
-                                new
-                                {
-                                    Id = 16,
-                                    DoorPosition = "right",
-                                    FloorGraphicId = 1,
-                                    Height = 100,
-                                    RoomId = 16,
-                                    Width = 100,
-                                    X = 0,
-                                    Y = 0
-                                },
-                                new
-                                {
-                                    Id = 1,
-                                    DoorPosition = "right",
-                                    FloorGraphicId = 1,
-                                    Height = 100,
-                                    RoomId = 1,
-                                    Width = 100,
-                                    X = 0,
-                                    Y = 100
-                                },
-                                new
-                                {
-                                    Id = 2,
-                                    DoorPosition = "right",
-                                    FloorGraphicId = 1,
-                                    Height = 145,
-                                    RoomId = 2,
-                                    Width = 75,
-                                    X = 0,
-                                    Y = 340
-                                },
-                                new
-                                {
-                                    Id = 3,
-                                    DoorPosition = "left",
-                                    FloorGraphicId = 1,
-                                    Height = 145,
-                                    RoomId = 3,
-                                    Width = 75,
-                                    X = 222,
-                                    Y = 340
-                                },
-                                new
-                                {
-                                    Id = 4,
-                                    DoorPosition = "top",
-                                    FloorGraphicId = 1,
-                                    Height = 80,
-                                    RoomId = 4,
-                                    Width = 147,
-                                    X = 0,
-                                    Y = 517
-                                },
-                                new
-                                {
-                                    Id = 5,
-                                    DoorPosition = "top",
-                                    FloorGraphicId = 1,
-                                    Height = 80,
-                                    RoomId = 5,
-                                    Width = 147,
-                                    X = 150,
-                                    Y = 517
-                                },
-                                new
-                                {
-                                    Id = 6,
-                                    DoorPosition = "none",
-                                    FloorGraphicId = 1,
-                                    Height = 160,
-                                    RoomId = 6,
-                                    Width = 140,
-                                    X = 150,
-                                    Y = 20
-                                },
-                                new
-                                {
-                                    Id = 7,
-                                    DoorPosition = "right",
-                                    FloorGraphicId = 2,
-                                    Height = 100,
-                                    RoomId = 7,
-                                    Width = 100,
-                                    X = 0,
-                                    Y = 0
-                                },
-                                new
-                                {
-                                    Id = 8,
-                                    DoorPosition = "left",
-                                    FloorGraphicId = 2,
-                                    Height = 100,
-                                    RoomId = 8,
-                                    Width = 100,
-                                    X = 197,
-                                    Y = 0
-                                },
-                                new
-                                {
-                                    Id = 9,
-                                    DoorPosition = "right",
-                                    FloorGraphicId = 2,
-                                    Height = 100,
-                                    RoomId = 9,
-                                    Width = 100,
-                                    X = 0,
-                                    Y = 100
-                                },
-                                new
-                                {
-                                    Id = 10,
-                                    DoorPosition = "left",
-                                    FloorGraphicId = 2,
-                                    Height = 100,
-                                    RoomId = 10,
-                                    Width = 100,
-                                    X = 197,
-                                    Y = 100
-                                },
-                                new
-                                {
-                                    Id = 11,
-                                    DoorPosition = "right",
-                                    FloorGraphicId = 2,
-                                    Height = 145,
-                                    RoomId = 11,
-                                    Width = 75,
-                                    X = 0,
-                                    Y = 340
-                                },
-                                new
-                                {
-                                    Id = 12,
-                                    DoorPosition = "left",
-                                    FloorGraphicId = 2,
-                                    Height = 145,
-                                    RoomId = 12,
-                                    Width = 75,
-                                    X = 222,
-                                    Y = 340
-                                },
-                                new
-                                {
-                                    Id = 13,
-                                    DoorPosition = "top",
-                                    FloorGraphicId = 2,
-                                    Height = 80,
-                                    RoomId = 13,
-                                    Width = 147,
-                                    X = 0,
-                                    Y = 517
-                                },
-                                new
-                                {
-                                    Id = 14,
-                                    DoorPosition = "top",
-                                    FloorGraphicId = 2,
-                                    Height = 80,
-                                    RoomId = 14,
-                                    Width = 147,
-                                    X = 150,
-                                    Y = 517
-                                },
-                                new
-                                {
-                                    Id = 15,
-                                    DoorPosition = "none",
-                                    FloorGraphicId = 2,
-                                    Height = 100,
-                                    RoomId = 15,
-                                    Width = 140,
-                                    X = 10,
-                                    Y = 220
-                                },
-                                new
-                                {
-                                    Id = 17,
-                                    DoorPosition = "right",
-                                    FloorGraphicId = 3,
-                                    Height = 100,
-                                    RoomId = 17,
-                                    Width = 100,
-                                    X = 0,
-                                    Y = 0
-                                });
-                        });
+                    b.HasOne("HospitalLibrary.RoomsAndEquipment.Model.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.MedicalRecord", b =>

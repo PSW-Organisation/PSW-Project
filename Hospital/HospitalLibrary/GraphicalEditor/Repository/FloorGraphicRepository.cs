@@ -41,5 +41,9 @@ namespace HospitalLibrary.GraphicalEditor.Repository
             return fg.RoomGraphics;
         }
 
+        public FloorGraphic GetFloorGraphicByRoomId(int roomId)
+        {
+            return _dbContext.FloorGraphics.First(f => f.RoomGraphics.Any(rg => rg.RoomId == roomId));
+        }
     }
 }

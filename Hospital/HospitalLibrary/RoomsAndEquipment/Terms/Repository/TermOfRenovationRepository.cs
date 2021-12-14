@@ -10,7 +10,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Repository
 {
     public class TermOfRenovationRepository : GenericDbRepository<TermOfRenovation>, ITermOfRenovationRepository
     {
-        private HospitalDbContext _dbContext;
+        private readonly HospitalDbContext _dbContext;
         public TermOfRenovationRepository(HospitalDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
@@ -24,6 +24,11 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Repository
         public List<TermOfRenovation> GetTermsOfRenovationByRoomId(int id)
         {
             return _dbContext.TermOfRenovations.Where(t => t.IdRoomA == id || t.IdRoomB == id).ToList();
+        }
+
+        public List<TermOfRenovation> GetPendingTerms()
+        {
+            return _dbContext.TermOfRenovations.Where(t => t.StateOfRenovation == StateOfRenovation.PENDING && t.EndTime <= DateTime.Now && t.EndTime >= DateTime.Now.AddMinutes(-2)).ToList();
         }
     }
 }

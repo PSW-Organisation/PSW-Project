@@ -187,7 +187,7 @@ namespace HospitalUnitTests.RoomRenovation
                     GetRoom(2),
                     GetRoomGraphic(2),
                     GetRoom(3),
-                    new RoomGraphic() { Id = 0, X = 0, Y = 0, Height = 100, Width = 200, RoomId = 3, Room = GetRoom(3)}
+                    new RoomGraphic() { Id = 3, X = 0, Y = 0, Height = 100, Width = 200, RoomId = 3, Room = GetRoom(3)}
                 },
                 new object[]
                 {
@@ -196,7 +196,7 @@ namespace HospitalUnitTests.RoomRenovation
                     GetRoom(2),
                     GetRoomGraphic(5),
                     GetRoom(3),
-                    new RoomGraphic() { Id = 0, X = 130, Y = 270, Height = 200, Width = 58, RoomId = 3, Room = GetRoom(3)}
+                    new RoomGraphic() { Id = 3, X = 130, Y = 270, Height = 200, Width = 58, RoomId = 3, Room = GetRoom(3)}
                 }
             };
 
@@ -362,12 +362,12 @@ namespace HospitalUnitTests.RoomRenovation
             {
                 roomEquipment = new List<RoomEquipment>()
                 {
-                    new RoomEquipment(){ Name = "Makaze", Type = "oprema", Quantity = 11, RoomId = 3 },
-                    new RoomEquipment(){ Name = "Stolica", Type = "oprema", Quantity = 6, RoomId = 3 },
-                    new RoomEquipment(){ Name = "XRay", Type = "aparat", Quantity = 1, RoomId = 3 },
-                    new RoomEquipment(){ Name = "TV", Type = "oprema", Quantity = 2, RoomId = 3 },
-                    new RoomEquipment(){ Name = "UV Lampa", Type = "oprema", Quantity = 25, RoomId = 3 },
-                    new RoomEquipment(){ Name = "Infuzija", Type = "oprema", Quantity = 100, RoomId = 3 },
+                    new RoomEquipment(){ Id = 3, Name = "Makaze", Type = "oprema", Quantity = 11, RoomId = 3 },
+                    new RoomEquipment(){ Id = 3, Name = "Stolica", Type = "oprema", Quantity = 6, RoomId = 3 },
+                    new RoomEquipment(){ Id = 3, Name = "XRay", Type = "aparat", Quantity = 1, RoomId = 3 },
+                    new RoomEquipment(){ Id = 3, Name = "TV", Type = "oprema", Quantity = 2, RoomId = 3 },
+                    new RoomEquipment(){ Id = 3, Name = "UV Lampa", Type = "oprema", Quantity = 25, RoomId = 3 },
+                    new RoomEquipment(){ Id = 3, Name = "Infuzija", Type = "oprema", Quantity = 100, RoomId = 3 },
                 };
             }
             else if(i == 4)
@@ -383,15 +383,15 @@ namespace HospitalUnitTests.RoomRenovation
             {
                 roomEquipment = new List<RoomEquipment>()
                 {
-                    new RoomEquipment(){ Name = "Makaze", Type = "oprema", Quantity = 11, RoomId = 5 },
-                    new RoomEquipment(){ Name = "Stolica", Type = "oprema", Quantity = 6, RoomId = 5 },
-                    new RoomEquipment(){ Name = "XRay", Type = "aparat", Quantity = 1, RoomId = 5 },
-                    new RoomEquipment(){ Name = "TV", Type = "oprema", Quantity = 2, RoomId = 5 },
-                    new RoomEquipment(){ Name = "UV Lampa", Type = "oprema", Quantity = 25, RoomId = 5 },
-                    new RoomEquipment(){ Name = "Infuzija", Type = "oprema", Quantity = 100, RoomId = 5 },
-                    new RoomEquipment(){ Name = "Nos", Type = "oprema", Quantity = 2, RoomId = 5 },
-                    new RoomEquipment(){ Name = "Igla", Type = "oprema", Quantity = 4, RoomId = 5 },
-                    new RoomEquipment(){ Name = "Zavoj", Type = "oprema", Quantity = 5, RoomId = 5 },
+                    new RoomEquipment(){ Id = 5, Name = "Makaze", Type = "oprema", Quantity = 11, RoomId = 5 },
+                    new RoomEquipment(){ Id = 5, Name = "Stolica", Type = "oprema", Quantity = 6, RoomId = 5 },
+                    new RoomEquipment(){ Id = 5, Name = "XRay", Type = "aparat", Quantity = 1, RoomId = 5 },
+                    new RoomEquipment(){ Id = 5, Name = "TV", Type = "oprema", Quantity = 2, RoomId = 5 },
+                    new RoomEquipment(){ Id = 5, Name = "UV Lampa", Type = "oprema", Quantity = 25, RoomId = 5 },
+                    new RoomEquipment(){ Id = 5, Name = "Infuzija", Type = "oprema", Quantity = 100, RoomId = 5 },
+                    new RoomEquipment(){ Id = 5, Name = "Nos", Type = "oprema", Quantity = 2, RoomId = 5 },
+                    new RoomEquipment(){ Id = 5, Name = "Igla", Type = "oprema", Quantity = 4, RoomId = 5 },
+                    new RoomEquipment(){ Id = 5, Name = "Zavoj", Type = "oprema", Quantity = 5, RoomId = 5 },
                 };
             }
 

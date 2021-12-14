@@ -140,12 +140,12 @@ export class RenovateRoomsComponent implements OnInit {
     );
     this.paramsOfRenovation.DurationInMinutes = this.duration;
     this.paramsOfRenovation.IdRoomA = this.selectedRoom.id;
-    if (this.selectedRenovationType == 0) {
+    if (this.selectedRenovationType == RenovationType.split) {
       this.paramsOfRenovation.IdRoomB = -1;
-      this.paramsOfRenovation.TypeOfRenovation = 1;
+      this.paramsOfRenovation.TypeOfRenovation = RenovationType.split;
     } else {
       this.paramsOfRenovation.IdRoomB = this.selectedRoomB.id;
-      this.paramsOfRenovation.TypeOfRenovation = 0;
+      this.paramsOfRenovation.TypeOfRenovation = RenovationType.merge;
     }
 
     this.paramsOfRenovation.EquipmentLogic = this.selectedEquipmentLogic;
