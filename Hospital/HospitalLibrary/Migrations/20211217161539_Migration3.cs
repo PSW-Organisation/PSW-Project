@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalLibrary.Migrations
 {
-    public partial class RoomGraphics : Migration
+    public partial class Migration3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -137,7 +137,7 @@ namespace HospitalLibrary.Migrations
                     StartTime = table.Column<DateTime>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
                     DurationInMinutes = table.Column<int>(nullable: false),
-                    FinishedRelocation = table.Column<bool>(nullable: false)
+                    RelocationState = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -434,15 +434,15 @@ namespace HospitalLibrary.Migrations
 
             migrationBuilder.InsertData(
                 table: "TermOfRelocationEquipments",
-                columns: new[] { "Id", "DurationInMinutes", "EndTime", "FinishedRelocation", "IdDestinationRoom", "IdSourceRoom", "NameOfEquipment", "QuantityOfEquipment", "StartTime" },
+                columns: new[] { "Id", "DurationInMinutes", "EndTime", "IdDestinationRoom", "IdSourceRoom", "NameOfEquipment", "QuantityOfEquipment", "RelocationState", "StartTime" },
                 values: new object[,]
                 {
-                    { 1, 10, new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified), false, 8, 7, "bed", 2, new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 40, new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified), false, 9, 7, "needle", 14, new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 15, new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified), false, 9, 8, "infusion", 8, new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, 25, new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified), false, 11, 9, "table", 1, new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, 30, new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified), false, 7, 10, "xrayMachine", 1, new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified) },
-                    { 6, 20, new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified), false, 11, 10, "chair", 5, new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 10, new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified), 8, 7, "bed", 2, 0, new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 40, new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified), 9, 7, "needle", 14, 0, new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 15, new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified), 9, 8, "infusion", 8, 0, new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, 25, new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified), 11, 9, "table", 1, 0, new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, 30, new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified), 7, 10, "xrayMachine", 1, 0, new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified) },
+                    { 6, 20, new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified), 11, 10, "chair", 5, 0, new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified) }
                 });
 
             migrationBuilder.InsertData(

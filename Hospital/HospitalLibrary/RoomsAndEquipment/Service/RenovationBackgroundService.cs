@@ -50,7 +50,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             
             foreach (TermOfRenovation activeTerm in termOfRenovations)
             {
-                activeTerm.StateOfRenovation = StateOfRenovation.SUCCESSFULLY;
+                activeTerm.StateOfRenovation = StateOfTerm.SUCCESSFULLY;
                 renovationRepository.Save(activeTerm);
                 if (activeTerm.TypeOfRenovation == TypeOfRenovation.SPLIT)
                 {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace HospitalLibrary.RoomsAndEquipment.Terms.Repository
 {
     public class TermOfRenovationRepository : GenericDbRepository<TermOfRenovation>, ITermOfRenovationRepository
@@ -28,7 +29,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Repository
 
         public List<TermOfRenovation> GetPendingTerms()
         {
-            return _dbContext.TermOfRenovations.Where(t => t.StateOfRenovation == StateOfRenovation.PENDING && t.EndTime <= DateTime.Now && t.EndTime >= DateTime.Now.AddMinutes(-2)).ToList();
+            return _dbContext.TermOfRenovations.Where(t => t.StateOfRenovation == StateOfTerm.PENDING && t.EndTime <= DateTime.Now && t.EndTime >= DateTime.Now.AddMinutes(-2)).ToList();
         }
     }
 }

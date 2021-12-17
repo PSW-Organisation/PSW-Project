@@ -39,7 +39,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
                 {
                     foreach (TermOfRelocationEquipment activeTermOfRelocation in termOfRelocation)
                     {
-                        activeTermOfRelocation.FinishedRelocation = true;
+                        activeTermOfRelocation.RelocationState = StateOfTerm.SUCCESSFULLY;
                         _relocationRepo.Update(activeTermOfRelocation);
                         RoomEquipment sourceRoomEquipment = _roomEquipmentRepo.GetEquipmentInRoom(activeTermOfRelocation.IdSourceRoom, activeTermOfRelocation.NameOfEquipment);
                         RoomEquipment destinationRoomEquipment = _roomEquipmentRepo.GetEquipmentInRoom(activeTermOfRelocation.IdDestinationRoom, activeTermOfRelocation.NameOfEquipment);

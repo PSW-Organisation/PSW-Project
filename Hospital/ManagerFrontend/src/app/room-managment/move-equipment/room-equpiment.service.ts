@@ -56,4 +56,10 @@ export class RoomEqupimentService {
     console.log(err.message);
     return throwError(err.message);
   }
+
+  cancelTermOfRelocation(termId: number): Observable<boolean> {
+  return this._http.put<boolean>(this._termsOfRelocationUrl + `/cancel/${termId}`, {}).
+      pipe(tap((data) => console.log('All: ', JSON.stringify(data))), catchError(this.handleError));
+  }
+  
 }

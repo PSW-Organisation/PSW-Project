@@ -141,5 +141,10 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Utils
             return freePossibleTermsOfRelocation;
         }
 
+        public bool IsCancelAllowed(DateTime termStartTime)
+        {
+            return (DateTime.Now <= termStartTime.AddHours(-24) && DateTime.Now <= termStartTime);
+        }
+
     }
 }

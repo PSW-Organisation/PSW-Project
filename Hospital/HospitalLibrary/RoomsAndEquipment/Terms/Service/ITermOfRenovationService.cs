@@ -12,6 +12,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
         TermOfRenovation CreateTermsOfRenovation(TermOfRenovation termOfRenovation);
         IList<TermOfRenovation> GetTermsOfRenovation();
         List<TermOfRenovation> GetTermsOfRenovationByRoomId(int id);
+        public bool CancelRenovationTerm(int id);
 
     }
 }

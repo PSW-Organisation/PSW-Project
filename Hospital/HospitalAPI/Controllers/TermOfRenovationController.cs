@@ -46,7 +46,7 @@ namespace HospitalAPI.Controllers
 
 
         [HttpGet]
-        public ActionResult<List<ScheduleTermDTO>> GetTermsOfRenovation()
+        public ActionResult<List<ScheduleTermDTO>> GetAllTermsOfRenovation()
         {
             var result = _termOfRenovationService.GetTermsOfRenovation();
             List<ScheduleTermDTO> scheduleTermDTOS = new List<ScheduleTermDTO>();
@@ -74,6 +74,12 @@ namespace HospitalAPI.Controllers
             return Ok(scheduleTermDTOS);
         }
 
+        [HttpPut]
+        [Route("cancel/{termId}")]
+        public ActionResult<bool> CancelRenovationTerm(int termId)
+        {
+            return Ok(_termOfRenovationService.CancelRenovationTerm(termId));
+        }
 
     }
 }

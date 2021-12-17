@@ -78,6 +78,19 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
             return allTimeInteval;
         }
 
-    }
+        public bool CancelRelocationTerm(int id)
+        {   
+            TermOfRelocationEquipment termOfRelocation = _relocationEquipmentRepository.Get(id);
+            if (_termsUtils.IsCancelAllowed(termOfRelocation.StartTime)){
+                termOfRelocation.RelocationState = StateOfTerm.CANCELED;
+                _relocationEquipmentRepository.Save(termOfRelocation);
+                return true; 
+            }
+            else
+            {
+                return false;
+            }
+        }
 
+    }
 }
