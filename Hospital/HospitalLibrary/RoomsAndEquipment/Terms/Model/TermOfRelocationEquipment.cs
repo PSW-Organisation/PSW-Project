@@ -14,7 +14,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Model
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public int DurationInMinutes { get; set; }
-        public bool FinishedRelocation { get; set; }
+        public StateOfTerm RelocationState { get; set; }
 
         public TermOfRelocationEquipment() { }
 
@@ -27,7 +27,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Model
             StartTime = paramsOfRelocationEquipment.StartTime;
             EndTime = paramsOfRelocationEquipment.EndTime;
             DurationInMinutes = paramsOfRelocationEquipment.DurationInMinutes;
-            FinishedRelocation = false;
+            RelocationState = StateOfTerm.PENDING;
         }
 
     }

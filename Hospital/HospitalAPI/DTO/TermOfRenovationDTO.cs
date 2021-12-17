@@ -12,7 +12,7 @@ namespace HospitalAPI.DTO
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public int DurationInMinutes { get; set; }
-        public StateOfRenovation StateOfRenovation { get; set; }
+        public StateOfTerm StateOfRenovation { get; set; }
         public TypeOfRenovation TypeOfRenovation { get; set; }
         public int IdRoomA { get; set; }
         public int IdRoomB { get; set; }    /* if needed */

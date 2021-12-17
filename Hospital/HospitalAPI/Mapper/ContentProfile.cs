@@ -1,17 +1,11 @@
 ﻿using AutoMapper;
 using ehealthcare.Model;
 using HospitalAPI.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.GraphicalEditor.Model;
-using HospitalLibrary.MedicalRecords.Model;
-using HospitalLibrary.Model;
+using HospitalLibrary.Medicines.Model;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
-using HospitalLibrary.Medicines.Model;
 
 namespace HospitalAPI.Mapper
 {
@@ -49,12 +43,23 @@ namespace HospitalAPI.Mapper
             CreateMap<MedicineDTO, Medicine>();
             CreateMap<Medicine, MedicineDTO>();
 
-            CreateMap<TermOfRenovation, ScheduleTermDTO>();
-            CreateMap<ScheduleTermDTO, TermOfRenovation>();
+            CreateMap<TermOfRenovation, ScheduleTermDTO>()
+        .ForMember(dest =>
+            dest.TermState,
+            opt => opt.MapFrom(src => src.StateOfRenovation));
+            CreateMap<ScheduleTermDTO, TermOfRenovation>()
+        .ForMember(dest =>
+            dest.StateOfRenovation,
+            opt => opt.MapFrom(src => src.TermState));
 
-            CreateMap<TermOfRelocationEquipment, ScheduleTermDTO>();
-            CreateMap<ScheduleTermDTO, TermOfRelocationEquipment>();
-
+            CreateMap<TermOfRelocationEquipment, ScheduleTermDTO>()
+        .ForMember(dest =>
+            dest.TermState,
+            opt => opt.MapFrom(src => src.RelocationState));
+            CreateMap<ScheduleTermDTO, TermOfRelocationEquipment>()
+        .ForMember(dest =>
+            dest.RelocationState,
+            opt => opt.MapFrom(src => src.TermState));
         }
     }
 }

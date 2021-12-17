@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IRoom } from '../rooms-view/room';
 import { RoomScheduleService } from './room-schedule.service';
-import { IScheduleTerm } from './schedule-term';
+import { IScheduleTerm, StateOfRenovation } from './schedule-term';
 import dateFormat from "dateformat";
 import { RoomService } from '../rooms-view/rooms.service';
+import { TermOfRenovationService } from '../renovate-rooms/term-of-renovation.service';
+import { RoomEqupimentService } from '../move-equipment/room-equpiment.service';
 
 @Component({
   selector: 'app-room-schedule',
@@ -20,23 +22,59 @@ export class RoomScheduleComponent implements OnInit {
 
   constructor(private _roomScheduleService: RoomScheduleService,
     private _route: ActivatedRoute,
-    private _roomService: RoomService) { }
+    private _roomService: RoomService,
+    private _renovationService: TermOfRenovationService,
+    private _relocationService: RoomEqupimentService) { }
 
   ngOnInit(): void {
-    this.roomId = this._route.snapshot.paramMap.get('roomId');
+    this.getTerms();
+  }
+
+  getTerms():void {
+      this.roomId = this._route.snapshot.paramMap.get('roomId');
     let roomId = Number(this.roomId);
     this._roomService.getRoomById(roomId).subscribe(rooms=>{
     this._roomScheduleService.getAllRelocationTermsForRoom(roomId).subscribe(relocationTerms => {
-      this._roomScheduleService.getAllRelocationTermsForRoom(roomId).subscribe(renovationTerms => {
+      this._roomScheduleService.getAllRenovationTermsForRoom(roomId).subscribe(renovationTerms => {
         this.room = rooms;
         this.title = this.room.name+"'s "+'Terms Schedule';
-        this.terms = relocationTerms;
-        this.terms.concat(renovationTerms);
+        console.log(renovationTerms);
+        this.terms = relocationTerms.concat(renovationTerms);
       });
     });
   });
-  }
+ }
+  
   formatDate(date:Date):string{
     return dateFormat(date, "dddd, mmmm dS, yyyy, h:MM:ss TT");
   }
+  termShow(renovationState:StateOfRenovation):boolean{
+    let show = true;
+    if(renovationState === StateOfRenovation.pending){
+      show = true;
+    }
+    else if(renovationState === StateOfRenovation.successfull){
+      show = true;
+    }
+    else if(renovationState === StateOfRenovation.unsuccessfull){
+      show = false;
+    }
+    else if(renovationState === StateOfRenovation.cancelled){
+      show = false;
+    }
+    return show;
+  }
+
+  cancelTerm(term: IScheduleTerm):void {
+  if(term.type === 'Renovation'){
+    this._renovationService.cancelTermOfRenovation(term.id).subscribe((a) => { this.getTerms(); }
+    );
+  }
+  else if(term.type === 'Relocation'){
+    this._relocationService.cancelTermOfRelocation(term.id).subscribe((a) => { this.getTerms(); }
+    );
+  }
+}
+
+
 }

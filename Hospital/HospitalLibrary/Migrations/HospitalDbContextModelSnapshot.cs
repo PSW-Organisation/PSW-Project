@@ -913,9 +913,6 @@ namespace HospitalLibrary.Migrations
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<bool>("FinishedRelocation")
-                        .HasColumnType("boolean");
-
                     b.Property<int>("IdDestinationRoom")
                         .HasColumnType("integer");
 
@@ -926,6 +923,9 @@ namespace HospitalLibrary.Migrations
                         .HasColumnType("text");
 
                     b.Property<int>("QuantityOfEquipment")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RelocationState")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("StartTime")
@@ -941,11 +941,11 @@ namespace HospitalLibrary.Migrations
                             Id = 1,
                             DurationInMinutes = 10,
                             EndTime = new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
                             IdDestinationRoom = 8,
                             IdSourceRoom = 7,
                             NameOfEquipment = "bed",
                             QuantityOfEquipment = 2,
+                            RelocationState = 0,
                             StartTime = new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -953,11 +953,11 @@ namespace HospitalLibrary.Migrations
                             Id = 2,
                             DurationInMinutes = 40,
                             EndTime = new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
                             IdDestinationRoom = 9,
                             IdSourceRoom = 7,
                             NameOfEquipment = "needle",
                             QuantityOfEquipment = 14,
+                            RelocationState = 0,
                             StartTime = new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -965,11 +965,11 @@ namespace HospitalLibrary.Migrations
                             Id = 3,
                             DurationInMinutes = 15,
                             EndTime = new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
                             IdDestinationRoom = 9,
                             IdSourceRoom = 8,
                             NameOfEquipment = "infusion",
                             QuantityOfEquipment = 8,
+                            RelocationState = 0,
                             StartTime = new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -977,11 +977,11 @@ namespace HospitalLibrary.Migrations
                             Id = 4,
                             DurationInMinutes = 25,
                             EndTime = new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
                             IdDestinationRoom = 11,
                             IdSourceRoom = 9,
                             NameOfEquipment = "table",
                             QuantityOfEquipment = 1,
+                            RelocationState = 0,
                             StartTime = new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -989,11 +989,11 @@ namespace HospitalLibrary.Migrations
                             Id = 5,
                             DurationInMinutes = 30,
                             EndTime = new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
                             IdDestinationRoom = 7,
                             IdSourceRoom = 10,
                             NameOfEquipment = "xrayMachine",
                             QuantityOfEquipment = 1,
+                            RelocationState = 0,
                             StartTime = new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -1001,11 +1001,11 @@ namespace HospitalLibrary.Migrations
                             Id = 6,
                             DurationInMinutes = 20,
                             EndTime = new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified),
-                            FinishedRelocation = false,
                             IdDestinationRoom = 11,
                             IdSourceRoom = 10,
                             NameOfEquipment = "chair",
                             QuantityOfEquipment = 5,
+                            RelocationState = 0,
                             StartTime = new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified)
                         });
                 });

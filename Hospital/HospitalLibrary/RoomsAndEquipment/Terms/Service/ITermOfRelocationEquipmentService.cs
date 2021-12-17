@@ -13,5 +13,6 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
         List<TermOfRelocationEquipment> GetTermsOfRelocationByRoomId(int id);
         TermOfRelocationEquipment CreateTermsOfRelocation(ParamsOfRelocationEquipment paramsOfRelocationEquipment);
         IList<TermOfRelocationEquipment> GetTermsOfRelocation();
+        public bool CancelRelocationTerm(int id);
     }
 }

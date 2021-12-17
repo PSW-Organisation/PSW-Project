@@ -47,7 +47,7 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<ScheduleTermDTO>> GetTermsOfRelocation()
+        public ActionResult<List<ScheduleTermDTO>> GetAllTermsOfRelocation()
         {
             var result = _relocationEquipmentService.GetTermsOfRelocation();
             List<ScheduleTermDTO> scheduleTermDTOS = new List<ScheduleTermDTO>();
@@ -75,6 +75,11 @@ namespace HospitalAPI.Controllers
             return Ok(scheduleTermDTOS);
         }
 
-
+        [HttpPut]
+        [Route("cancel/{termId}")]
+        public ActionResult<bool> CancelRelocationTerm(int termId)
+        {
+            return Ok(_relocationEquipmentService.CancelRelocationTerm(termId));
+        }
     }
 }

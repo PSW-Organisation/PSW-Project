@@ -12,18 +12,19 @@
         <th></th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let term of terms">
+    <tbody *ngFor="let term of terms">
+      <tr *ngIf="termShow(term.termState)">
         <td>{{ term.type }}</td>
         <td>{{ formatDate(term.startTime) }}</td>
         <td>{{ formatDate(term.endTime) }}</td>
         <td>{{ term.durationInMinutes }} min</td>
         <td>
-          <button type="button" aria-label="Cancel the term" mat-icon-button>
+          <button type="button" (click)="cancelTerm(term)" aria-label="Cancel the term" mat-icon-button>
             <mat-icon aria-label="Delete the term"> delete</mat-icon>
           </button>
         </td>
       </tr>
+  
     </tbody>
   </table>
 </div>

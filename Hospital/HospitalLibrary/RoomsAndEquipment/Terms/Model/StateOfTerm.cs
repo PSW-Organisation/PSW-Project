@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HospitalLibrary.RoomsAndEquipment.Terms.Model
 {
-    public enum StateOfRenovation
+    public enum StateOfTerm
     {
         PENDING, SUCCESSFULLY, UNSUCCESSFULLY, CANCELED
     }

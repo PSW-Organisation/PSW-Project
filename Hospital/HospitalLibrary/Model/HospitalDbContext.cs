@@ -1,16 +1,13 @@
+using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using HospitalLibrary.FeedbackAndSurvey.Model;
-using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.Model;
 using System.Linq;
 using HospitalLibrary.GraphicalEditor.Service;
+using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
-using HospitalLibrary.Medicines.Model;
+using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace ehealthcare.Model
 {
@@ -514,7 +511,7 @@ namespace ehealthcare.Model
                     StartTime = new DateTime(2021, 11, 22, 1, 0, 0),
                     EndTime = new DateTime(2021, 11, 22, 1, 10, 0),
                     DurationInMinutes = 10,
-                    FinishedRelocation = false
+                    RelocationState = StateOfTerm.PENDING
                 },
                 new TermOfRelocationEquipment()
                 {
@@ -526,7 +523,7 @@ namespace ehealthcare.Model
                     StartTime = new DateTime(2021, 11, 22, 3, 30, 0),
                     EndTime = new DateTime(2021, 11, 22, 4, 10, 0),
                     DurationInMinutes = 40,
-                    FinishedRelocation = false
+                    RelocationState = StateOfTerm.PENDING
                 },
                 new TermOfRelocationEquipment()
                 {
@@ -538,7 +535,7 @@ namespace ehealthcare.Model
                     StartTime = new DateTime(2021, 11, 23, 7, 30, 0),
                     EndTime = new DateTime(2021, 11, 23, 7, 45, 0),
                     DurationInMinutes = 15,
-                    FinishedRelocation = false
+                    RelocationState = StateOfTerm.PENDING
                 },
                 new TermOfRelocationEquipment()
                 {
@@ -550,7 +547,7 @@ namespace ehealthcare.Model
                     StartTime = new DateTime(2021, 11, 23, 9, 0, 0),
                     EndTime = new DateTime(2021, 11, 23, 9, 25, 0),
                     DurationInMinutes = 25,
-                    FinishedRelocation = false
+                    RelocationState = StateOfTerm.PENDING
                 },
                 new TermOfRelocationEquipment()
                 {
@@ -562,7 +559,7 @@ namespace ehealthcare.Model
                     StartTime = new DateTime(2021, 11, 23, 10, 45, 0),
                     EndTime = new DateTime(2021, 11, 23, 11, 15, 0),
                     DurationInMinutes = 30,
-                    FinishedRelocation = false
+                    RelocationState = StateOfTerm.PENDING
                 },
                 new TermOfRelocationEquipment()
                 {
@@ -574,7 +571,7 @@ namespace ehealthcare.Model
                     StartTime = new DateTime(2021, 11, 23, 14, 30, 0),
                     EndTime = new DateTime(2021, 11, 23, 14, 50, 0),
                     DurationInMinutes = 20,
-                    FinishedRelocation = false
+                    RelocationState = StateOfTerm.PENDING
                 }
             );
 
@@ -589,7 +586,7 @@ namespace ehealthcare.Model
                       StartTime = new DateTime(2021, 12, 7, 10, 30, 0),
                       EndTime = new DateTime(2021, 12, 7, 11, 30, 0),
                       DurationInMinutes = 60,
-                      StateOfRenovation = StateOfRenovation.CANCELED,
+                      StateOfRenovation = StateOfTerm.CANCELED,
                       TypeOfRenovation = TypeOfRenovation.MERGE,
                       IdRoomA = 1,
                       IdRoomB = 16,
@@ -607,7 +604,7 @@ namespace ehealthcare.Model
                       StartTime = new DateTime(2021, 12, 17, 9, 0, 0),
                       EndTime = new DateTime(2021, 12, 18, 9, 0, 0),
                       DurationInMinutes = 1440,
-                      StateOfRenovation = StateOfRenovation.PENDING,
+                      StateOfRenovation = StateOfTerm.PENDING,
                       TypeOfRenovation = TypeOfRenovation.SPLIT,
                       IdRoomA = 4,
                       IdRoomB = -1,
@@ -720,7 +717,7 @@ namespace ehealthcare.Model
                       DoctorId = "nelex",
                       PatientId = "imbiamba"
                   });
-               // m.HasKey(m => new { m.Id, m.PatientId });
+                // m.HasKey(m => new { m.Id, m.PatientId });
 
             });
 
@@ -740,7 +737,7 @@ namespace ehealthcare.Model
 
             });
 
-            
+
             modelBuilder.Entity<Patient>(p =>
             {
                 p.HasData(
@@ -789,7 +786,7 @@ namespace ehealthcare.Model
                         UsedOffDays = 12,
                         Specialization = Specialization.none
                     });
-            }); 
+            });
 
             modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
             {

@@ -27,4 +27,10 @@ export class TermOfRenovationService {
     console.log(err.message);
     return throwError(err.message);
   }
+
+  cancelTermOfRenovation(termId: number): Observable<boolean> {
+    return this._http.put<boolean>( this._termsOfRenovationUrl+`/cancel/${termId}`,{}).
+      pipe(tap((data) => console.log('All: ', JSON.stringify(data))), catchError(this.handleError));
+  }
+
 }
