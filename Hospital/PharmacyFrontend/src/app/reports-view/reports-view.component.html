@@ -16,6 +16,14 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-8">
+                <select class="form-control" (change)='getReportNames()' [(ngModel)]="directory" aria-label="Default select example">
+                    <option selected>Consumption reports</option>
+                    <option>Prescriptions</option>
+                </select>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
                 <ul class="list-group">
                     <a [routerLink]="" (click)="getReport(reportName)" class="list-group-item list-group-item-action" *ngFor = 'let reportName of reportNames'>{{reportName}}</a>
                 </ul>

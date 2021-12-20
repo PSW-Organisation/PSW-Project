@@ -88,14 +88,14 @@ namespace IntegrationAPI.Controllers
                 if(pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.SFTP)
                 {
                     var client = new RestClient(pharmacy.PharmacyUrl);
-                    var request = new RestRequest("/report/" + fileName, Method.GET);
+                    var request = new RestRequest("/report/Prescriptions/" + fileName, Method.GET);
                     var cancellationTokenSource = new CancellationTokenSource();
                     client.ExecuteAsync(request, cancellationTokenSource.Token);
                 }
                 else if(pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.HTTP)
                 {
                     var client = new RestClient(pharmacy.PharmacyUrl);
-                    var request = new RestRequest("/report", Method.POST);
+                    var request = new RestRequest("/report/Prescriptions/", Method.POST);
                     request.AddFile("file", file, fileName);
                     var cancellationTokenSource = new CancellationTokenSource();
                     client.ExecuteAsync(request, cancellationTokenSource.Token);

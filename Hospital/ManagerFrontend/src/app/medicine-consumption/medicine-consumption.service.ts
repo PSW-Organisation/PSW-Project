@@ -23,18 +23,6 @@ export class MedicineConsumptionService {
     )
   }
 
-  /*requestMedicineReport(pharmacyUrl: string, medicineName: string) {
-    var mediaType = 'application/pdf';
-    this._http.get(pharmacyUrl + '/pdfcreator/' + medicineName, { responseType: 'blob' }).subscribe(
-        (response) => {
-            this._http.get('http://localhost:16928/api2/report/' + medicineName )
-            var blob = new Blob([response], { type: mediaType });
-            const url= window.URL.createObjectURL(blob);
-            window.open(url);
-        },
-        e => { throwError(e); }
-    );
-  }*/
   getMedicineDetails(pharmacyUrl: string, medicineName: string){
   return this._http.get(pharmacyUrl + '/pdfcreator/' + medicineName, { responseType: 'text' } ).pipe(
     mergeMap(response =>  this._http.get('http://localhost:16928/api2/report/' + response ))
@@ -53,7 +41,7 @@ export class MedicineConsumptionService {
   
   sendConsumptionReport(pharmacyUrl: string, timeRange: any){
     this._http.post('http://localhost:16928/api2/pdfcreator', timeRange, { responseType: 'text' }).pipe(
-      mergeMap(response => this._http.get(pharmacyUrl + '/report/' + response ))
+      mergeMap(response => this._http.get(pharmacyUrl + '/report/Consumption reports/' + response ))
     ).subscribe(
       (data) =>{
          this.sendNotification("report", "Flos")

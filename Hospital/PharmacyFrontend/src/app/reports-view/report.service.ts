@@ -10,16 +10,16 @@ export class ReportService {
 
   constructor(private _http: HttpClient) { }
 
-  getReportNames() : Observable<string[]> {
-    return this._http.get<string[]>('http://localhost:29631/api3/report')
+  getReportNames(directory: string) : Observable<string[]> {
+    return this._http.get<string[]>('http://localhost:29631/api3/report/names/' + directory)
     .pipe(
       tap(data => console.log("Report names :", data))
     )
   }
 
-  getReport(reportName: string): any {
+  getReport(directory: string, reportName: string): any {
     var mediaType = 'application/pdf';
-    this._http.get('http://localhost:29631/api3/report/pdf/' + reportName, { responseType: 'blob' }).subscribe(
+    this._http.get('http://localhost:29631/api3/report/pdf/' + directory + '/' + reportName, { responseType: 'blob' }).subscribe(
         (response) => {
             var blob = new Blob([response], { type: mediaType });
             const url= window.URL.createObjectURL(blob);

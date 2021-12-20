@@ -16,12 +16,12 @@ namespace PharmacyAPI.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
-        [HttpGet("{fileName?}")]
-        public IActionResult Download(string fileName)
+        [HttpGet("{directory?}/{fileName?}")]
+        public IActionResult Download(string directory, string fileName)
         {
             SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password")); 
             //SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password")); //kod Nevene
-            var folderName = Path.Combine("Resources", "Reports");
+            var folderName = Path.Combine("Resources", directory);
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             var localFile = Path.Combine(pathToSave, fileName);
             string serverFile = @"\pharmacy\" + fileName;
@@ -30,10 +30,10 @@ namespace PharmacyAPI.Controllers
             return BadRequest();
         }
 
-        [HttpGet]
-        public IActionResult GetAllFileNames()
+        [HttpGet("names/{directory?}")]
+        public IActionResult GetAllFileNames(string directory)
         {
-            var folderName = Path.Combine("Resources", "Reports");
+            var folderName = Path.Combine("Resources", directory);
             var fullPath = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             DirectoryInfo d = new DirectoryInfo(fullPath);
 
@@ -49,12 +49,12 @@ namespace PharmacyAPI.Controllers
         }
 
         [HttpGet]
-        [Route("pdf/{fileName?}")]
-        public IActionResult GetReport(string fileName)
+        [Route("pdf/{directory?}/{fileName?}")]
+        public IActionResult GetReport(string directory, string fileName)
         {
             if (fileName == null)
                 return BadRequest();
-            var folderName = Path.Combine("Resources", "Reports");
+            var folderName = Path.Combine("Resources", directory);
             var fullPath = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             var localFile = Path.Combine(fullPath, fileName);
             Stream stream = System.IO.File.OpenRead(localFile);
@@ -63,13 +63,13 @@ namespace PharmacyAPI.Controllers
             return File(binaryFile, "application/pdf");
         }
 
-        [HttpPost, DisableRequestSizeLimit]
-        public IActionResult UploadHttp()
+        [HttpPost("{directory?}"), DisableRequestSizeLimit]
+        public IActionResult UploadHttp(string directory)
         {
             try
             {
                 var file = Request.Form.Files[0];
-                var folderName = Path.Combine("Resources", "Reports");
+                var folderName = Path.Combine("Resources", directory);
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
                 if (file.Length > 0)

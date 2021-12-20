@@ -35,9 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Resources\Consumption reports\" />
     <Folder Include="Resources\Reports\" />
-    <Folder Include="Resources\Reports\" />
-    <Folder Include="Resources\Reports\" />
+    <Folder Include="Resources\Prescriptions\" />
   </ItemGroup>
 
   <ItemGroup>

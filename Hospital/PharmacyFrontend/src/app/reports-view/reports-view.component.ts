@@ -9,15 +9,17 @@ import { ReportService } from './report.service';
 export class ReportsViewComponent implements OnInit {
 
   reportNames: string[] = []
+  directory = ''
 
   constructor(private _reportService: ReportService) { }
 
   ngOnInit(): void {
-    this.getReportNames();
+    this.directory = "Consumption reports"
+    this.getReportNames()
   }
 
   getReportNames() {
-      this._reportService.getReportNames().subscribe(
+      this._reportService.getReportNames(this.directory).subscribe(
         reportNames => {
           this.reportNames = reportNames;
         }
@@ -25,6 +27,6 @@ export class ReportsViewComponent implements OnInit {
   }
 
   getReport(reportName: string) {
-      this._reportService.getReport(reportName)
+      this._reportService.getReport(this.directory, reportName)
   }
 }
