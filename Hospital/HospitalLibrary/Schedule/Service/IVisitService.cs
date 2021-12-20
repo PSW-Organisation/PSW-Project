@@ -16,5 +16,6 @@ namespace HospitalLibrary.Schedule.Service
         public void ReviewVisit(Visit visitForUpdate);
         public List<Visit> GetForthcomingVisitsByDateAndDoctor(DateTime beginning, DateTime ending, string doctorId);
         public List<Visit> GetАllGeneratedFreeVisits(VisitRecommendation recommendation);
+        public List<Visit> GetVisitsForRoom(int roomId);
     }
 }

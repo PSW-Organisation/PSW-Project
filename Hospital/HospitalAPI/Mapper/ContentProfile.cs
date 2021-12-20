@@ -63,6 +63,13 @@ namespace HospitalAPI.Mapper
         .ForMember(dest =>
             dest.RelocationState,
             opt => opt.MapFrom(src => src.TermState));
+
+            CreateMap<Visit, ScheduleTermDTO>()
+                 .ForMember(d => d.TermState,
+            m => m.MapFrom(d => d.IsCanceled ?  StateOfTerm.CANCELED : d.EndTime < System.DateTime.Now ? StateOfTerm.SUCCESSFULLY: StateOfTerm.PENDING))
+          .ForMember(d => d.DurationInMinutes,
+           m => m.MapFrom(s => s.EndTime.Subtract(s.StartTime).TotalMinutes));
+
         }
     }
 }

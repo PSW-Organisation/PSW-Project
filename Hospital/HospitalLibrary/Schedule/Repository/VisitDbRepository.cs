@@ -53,5 +53,10 @@ namespace HospitalLibrary.Schedule.Repository
         {
             return _dbContext.Visits.ToList();
         }
+
+        public List<Visit> GetVisitsForRoom(int roomId)
+        {
+            return _dbContext.Visits.Where(v => v.Doctor.RoomId == roomId).ToList();
+        }
     }
 }

@@ -819,7 +819,8 @@ namespace ehealthcare.Model
                         IsBlocked = false,
                         IsActivated = false,
                         UsedOffDays = 12,
-                        Specialization = Specialization.none
+                        Specialization = Specialization.none,
+                        RoomId = 1
                     },
                     new Doctor("mkisic")
                     {
@@ -841,6 +842,7 @@ namespace ehealthcare.Model
                         IsActivated = false,
                         UsedOffDays = 12,
                         Specialization = Specialization.cardiologist,
+                        RoomId = 7
                     }
                 );
             });
@@ -895,7 +897,7 @@ namespace ehealthcare.Model
                         EndTime = new DateTime(2021, 11, 30, 19, 30, 00),
                         VisitType = VisitType.examination,
                         IsReviewed = false,
-                        IsCanceled = true
+                        IsCanceled = false
                     });
             });
         }
