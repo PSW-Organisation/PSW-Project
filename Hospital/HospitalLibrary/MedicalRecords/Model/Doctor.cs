@@ -14,7 +14,7 @@ namespace ehealthcare.Model
         public Specialization Specialization { get; set; }
         
         public int UsedOffDays { get; set; }
-
+        public int RoomId { get; set; }
         public virtual ICollection<Patient> Patients { get; set; }
 
         [JsonConstructor]

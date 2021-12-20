@@ -43,6 +43,20 @@ namespace HospitalAPI.Controllers
             return _visitService.GetVisitById(id);
         }
 
+        [HttpGet("room/{id}")]
+        public ActionResult<List<ScheduleTermDTO>> GetVisitByRoomId(int id)
+        {
+            var result = _visitService.GetVisitsForRoom(id);
+            List<ScheduleTermDTO> scheduleTermDTOS = new List<ScheduleTermDTO>();
+            foreach (Visit v in result)
+            {
+                ScheduleTermDTO scheduleTermDTO = _mapper.Map<ScheduleTermDTO>(v);
+                scheduleTermDTO.Type = "Appointment";
+                scheduleTermDTOS.Add(scheduleTermDTO);
+            }
+            return Ok(scheduleTermDTOS);
+        }
+
 
         [HttpGet]
         [Route("doctors")]

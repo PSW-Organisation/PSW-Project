@@ -242,5 +242,9 @@ namespace HospitalLibrary.Schedule.Service
             return startOfShift > ending;
         }
 
+        public List<Visit> GetVisitsForRoom(int roomId)
+        {
+            return _visitRepository.GetVisitsForRoom(roomId);
+        }
     }
 }

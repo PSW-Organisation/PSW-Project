@@ -36,12 +36,14 @@ export class RoomScheduleComponent implements OnInit {
     this._roomService.getRoomById(roomId).subscribe(rooms=>{
     this._roomScheduleService.getAllRelocationTermsForRoom(roomId).subscribe(relocationTerms => {
       this._roomScheduleService.getAllRenovationTermsForRoom(roomId).subscribe(renovationTerms => {
+        this._roomScheduleService.getAllAppointmentsForRoom(roomId).subscribe(appointments => {
         this.room = rooms;
         this.title = this.room.name+"'s "+'Terms Schedule';
         console.log(renovationTerms);
-        this.terms = relocationTerms.concat(renovationTerms);
+        this.terms = relocationTerms.concat(renovationTerms).concat(appointments);
       });
     });
+  });
   });
  }
   

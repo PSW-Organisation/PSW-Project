@@ -15,5 +15,6 @@ namespace HospitalLibrary.Schedule.Repository
         public bool CheckIfPatientBusy(Visit visit);
         public List<Visit> GetForthcomingVisitsByDateAndDoctor(DateTime begining, DateTime ending, string doctorId);
         public List<Visit> GetAllVisits();
+        public List<Visit> GetVisitsForRoom(int roomId);
     }
 }
