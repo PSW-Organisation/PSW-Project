@@ -66,10 +66,15 @@ namespace HospitalAPI.Mapper
 
             CreateMap<Visit, ScheduleTermDTO>()
                  .ForMember(d => d.TermState,
-            m => m.MapFrom(d => d.IsCanceled ?  StateOfTerm.CANCELED : d.EndTime < System.DateTime.Now ? StateOfTerm.SUCCESSFULLY: StateOfTerm.PENDING))
+            m => m.MapFrom(d => d.IsCanceled ? StateOfTerm.CANCELED : IsFinished(d)))
           .ForMember(d => d.DurationInMinutes,
            m => m.MapFrom(s => s.EndTime.Subtract(s.StartTime).TotalMinutes));
 
+        }
+
+        private StateOfTerm IsFinished(Visit d)
+        {
+            return d.EndTime < System.DateTime.Now ? StateOfTerm.SUCCESSFULLY : StateOfTerm.PENDING;
         }
     }
 }
