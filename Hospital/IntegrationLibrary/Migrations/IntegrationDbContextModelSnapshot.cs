@@ -19,31 +19,7 @@ namespace IntegrationLibrary.Migrations
                 .HasAnnotation("ProductVersion", "3.1.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("IntegrationLibrary.Model.Complaint", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<long>("PharmacyId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Complaints");
-                });
-
-            modelBuilder.Entity("IntegrationLibrary.Model.MedicineBenefit", b =>
+            modelBuilder.Entity("IntegrationLibrary.Parnership.Model.MedicineBenefit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +46,7 @@ namespace IntegrationLibrary.Migrations
                     b.ToTable("Benefits");
                 });
 
-            modelBuilder.Entity("IntegrationLibrary.Model.MedicineTransaction", b =>
+            modelBuilder.Entity("IntegrationLibrary.Parnership.Model.MedicineTransaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,7 +67,7 @@ namespace IntegrationLibrary.Migrations
                     b.ToTable("MedicineTransactions");
                 });
 
-            modelBuilder.Entity("IntegrationLibrary.Model.NotificationsForApp", b =>
+            modelBuilder.Entity("IntegrationLibrary.Pharmacies.Model.Complaint", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,15 +80,18 @@ namespace IntegrationLibrary.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<bool>("Seen")
-                        .HasColumnType("boolean");
+                    b.Property<long>("PharmacyId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Complaints");
                 });
 
-            modelBuilder.Entity("IntegrationLibrary.Model.Pharmacy", b =>
+            modelBuilder.Entity("IntegrationLibrary.Pharmacies.Model.Pharmacy", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -148,7 +127,7 @@ namespace IntegrationLibrary.Migrations
                     b.ToTable("Pharmacies");
                 });
 
-            modelBuilder.Entity("IntegrationLibrary.Model.ResponseToComplaint", b =>
+            modelBuilder.Entity("IntegrationLibrary.Pharmacies.Model.ResponseToComplaint", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -167,6 +146,139 @@ namespace IntegrationLibrary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ResponseToComplaint");
+                });
+
+            modelBuilder.Entity("IntegrationLibrary.SharedModel.Model.NotificationsForApp", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("Seen")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("IntegrationLibrary.Tendering.Model.Tender", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("ApiKeyPharmacy")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Open")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("TenderCloseDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("TenderOpenDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tenders");
+                });
+
+            modelBuilder.Entity("IntegrationLibrary.Tendering.Model.TenderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("TenderId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TenderItemName")
+                        .HasColumnType("text");
+
+                    b.Property<double>("TenderItemPrice")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("TenderItemQuantity")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("TenderResponseId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenderId");
+
+                    b.HasIndex("TenderResponseId");
+
+                    b.ToTable("TenderItems");
+                });
+
+            modelBuilder.Entity("IntegrationLibrary.Tendering.Model.TenderResponse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<double>("IsWinner")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("PharmacyId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("ResponseReciveTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("TenderId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PharmacyId");
+
+                    b.HasIndex("TenderId");
+
+                    b.ToTable("TenderResponses");
+                });
+
+            modelBuilder.Entity("IntegrationLibrary.Tendering.Model.TenderItem", b =>
+                {
+                    b.HasOne("IntegrationLibrary.Tendering.Model.Tender", null)
+                        .WithMany("TenderItems")
+                        .HasForeignKey("TenderId");
+
+                    b.HasOne("IntegrationLibrary.Tendering.Model.TenderResponse", null)
+                        .WithMany("MedicineTransactions")
+                        .HasForeignKey("TenderResponseId");
+                });
+
+            modelBuilder.Entity("IntegrationLibrary.Tendering.Model.TenderResponse", b =>
+                {
+                    b.HasOne("IntegrationLibrary.Pharmacies.Model.Pharmacy", "Pharmacy")
+                        .WithMany()
+                        .HasForeignKey("PharmacyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IntegrationLibrary.Tendering.Model.Tender", "Tender")
+                        .WithMany("TenderResponses")
+                        .HasForeignKey("TenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

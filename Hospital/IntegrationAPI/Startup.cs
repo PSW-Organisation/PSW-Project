@@ -35,6 +35,11 @@ using IntegrationLibrary.Pharmacies.Service.ServiceInterfaces;
 using IntegrationLibrary.SharedModel.Service.ServiceInterfaces;
 using IntegrationLibrary.SharedModel.Service.ServiceImpl;
 using IntegrationLibrary.Parnership.Service.ServiceImpl;
+using IntegrationLibrary.Tendering.Service;
+using IntegrationLibrary.Tendering.Service.ServiceImpl;
+using IntegrationLibrary.Tendering.Service.ServiceInterfaces;
+using IntegrationLibrary.Tendering.Repository.RepoInterfaces;
+using IntegrationLibrary.Tendering.Repository.RepoImpl;
 
 namespace IntegrationAPI
 {
@@ -64,8 +69,13 @@ namespace IntegrationAPI
             services.AddDbContext<IntegrationDbContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
-                    assembly => assembly.MigrationsAssembly(typeof(IntegrationDbContext).Assembly.FullName));
+                    assembly => assembly.MigrationsAssembly(typeof(IntegrationDbContext).Assembly.FullName)).UseLazyLoadingProxies();
             });
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             //repozitorijumi
             services.AddScoped<AccountRepository, AccountDbRepository>();
@@ -96,6 +106,9 @@ namespace IntegrationAPI
             services.AddScoped<ResponseToComplaintRepository, ResponseToComplaintDbRepository>();
             services.AddScoped<MedicineBenefitRepository, MedicineBenefitDbRepository>();
             services.AddScoped<NotificationsForAppRepository, NotificationsForAppDbRepository>();
+            services.AddScoped<TenderRepository, TenderDbRepository>();
+            services.AddScoped<TenderItemRepository, TenderItemDbRepository>();
+
             //servisi
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IAccountDataService, AccountDataService>();
@@ -123,6 +136,10 @@ namespace IntegrationAPI
             services.AddScoped<IMedicineConsumptionService, MedicineConsumptionService>();
             services.AddScoped<INotificationsForAppService, NotificationsForAppService>();
             services.AddScoped<IMedicineBenefitService, MedicineBenefitService>();
+            services.AddScoped<ITenderService, TenderService>();
+            
+            services.AddScoped<ITenderPublishingService, TenderRabbitMQService>();
+
             services.AddHostedService<RabbitMQService>();
 
             //added for Cors error

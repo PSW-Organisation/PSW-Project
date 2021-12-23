@@ -1,0 +1,120 @@
+
+<!-- Naslov -->
+<div class="titleDiv">
+    <table>
+        <tr>
+            <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+            <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn Hospital</p></td>
+        </tr>
+    </table>
+</div>
+
+<!-- Modal -->
+<div id="newTender" class="modal fade " style="display: none; " role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <!-- Modal for complaint-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" style="font-size: x-large;">New tender</h4>
+        </div>
+        <div class="modal-body">
+
+            <div> 
+
+
+              <table> 
+                  <tr style="height: 10px;"> </tr>
+                  <div >
+                  <tr *ngFor = 'let item of newTender.medicineTransactions' > 
+                    <td class="tdInForm"> <label style="font-size: medium;">Tender items: </label></td>
+                    <td ><label   >{{item.medicineName}}</label> </td>
+                    <td ><label   >{{item.medicineAmount}}</label> </td>
+                </tr></div>
+                  <tr> 
+                      <td class="tdInForm"> <label style="font-size: medium;">Medicine</label></td>
+                      <td ><input type="text" class="form-control" placeholder="Enter medicine" [(ngModel)]="medicine.medicineName"  > </td>
+                  </tr>
+                  <tr style="height: 10px;"> </tr>
+                  <tr> 
+                      <td class="tdInForm"> <label style="font-size: medium;">Amount</label> </td>
+                      <td style= "width: 250px"><input type="number" class="form-control" placeholder="Enter amount"  [(ngModel)]="medicine.medicineAmount" > </td>
+                   </tr>
+                 <tr>
+                     <td class="tdInForm"> </td><td><button class="btn btn-secondary" (click)="addMedicine(medicine)" >  <i class="bi bi-plus-lg"></i>Add more medicines </button> </td></tr> 
+              </table>
+
+            </div>       
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" style="margin-right:30px; " data-dismiss="modal" >Post</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="backgroundImage">
+   <!--<div style="height: 50px"> </div>--> 
+    <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newTender"> Create new tender</button>
+
+
+
+   <!-- <div class="card" >
+        <div class="card-body">
+          <h5 class="card-title">Tender 1</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
+          <p class="card-text">Panklav 52</p>
+          <p class="card-text">Verapamil 20</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div> -->
+
+
+      <div class="container-fluid">
+
+        <div class="mx-auto card " style="background: transparent;">
+            <div class="card-body" style="background: transparent;">
+                <h1 style="margin-left: 5rem;"> All active tenders: </h1>
+                <hr />
+
+                  <div class="card-columns mx-auto">
+
+                      <div class="card text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">Tender 1</h5>
+                          <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
+                          <p class="card-text">Panklav 52</p>
+                          <p class="card-text">Verapamil 20</p>
+                          <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
+                          <p class="card-text"> 20/12/2021</p>
+                          <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
+                          <p class="card-text"> 20/02/2022  </p>
+                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
+                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
+
+                        </div>
+                      </div>
+
+                      <div class="card text-center">
+                        <div class="card-body">
+                          <h5 class="card-title">Tender 2</h5>
+                          <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
+                          <p class="card-text">Brufen 30</p>
+                          <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
+                          <p class="card-text"> 20/12/2021</p>
+                          <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
+                          <p class="card-text"> 20/02/2022  </p>
+                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
+                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
+
+                        </div>
+                      </div>
+
+                  </div>
+
+            </div>
+        </div>
+
+      </div>
+</div>

@@ -28,6 +28,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using PharmacyLibrary.Tendering.Service;
+using PharmacyLibrary.Tendering.Repository.RepoInterfaces;
+using PharmacyLibrary.Tendering.Repository.RepoImpl;
 
 namespace PharmacyAPI
 {
@@ -61,18 +64,18 @@ namespace PharmacyAPI
         
             services.AddTransient<IPharmacyRepository, PharmacyRepository>();
             services.AddTransient<IMedicineRepository, MedicineRepository>();
-            services.AddScoped<IPublishService, RabbitMQPublishService>();
             services.AddScoped<IMedicineBenefitRepository, MedicineBenefitRepository>();
             services.AddScoped<IHospitalRepository, HospitalRepository>();
+            services.AddScoped<ITenderRepository, TenderRepository>();
             services.AddScoped<IPharmacyService, PharmacyService>();
             services.AddScoped<IMedicineService, MedicineService>();
             services.AddScoped<IHospitalService, HospitalService>();
             services.AddScoped<IMedicineBenefitService, MedicineBenefitService>();
            services.AddTransient<INotificationsForAppRepository, NotificationsForAppRepository>(); 
             services.AddScoped<INotificationsForAppService, NotificationsForAppService>();
-           
-            
-            
+            services.AddScoped<IPublishService, RabbitMQPublishService>();
+
+            services.AddHostedService<RabbitMQService>();
             services.AddHostedService<RoutineZipCompressionService>();
             //added for Cors error
             //______________________________________________________________________

@@ -1,0 +1,68 @@
+.logo {
+    margin-top: 10px;
+    margin-left: 20px;
+    background-color: whitesmoke;
+}
+  .titleDiv {
+    height: 70px;
+    background-color: whitesmoke;
+  }
+
+  li{
+      list-style: none;
+  }
+/**/
+  .card{
+
+    margin-left: 2rem ;
+    background-color: whitesmoke;
+    opacity:2;
+  }
+
+
+
+    .card-title{
+      font-size: 1.5rem;
+      color: rgb(27, 46, 133);
+  } 
+   .card-subtitle{
+      font-size: 1rem;
+  }
+  .card-text{
+    font-size: 1rem;
+    color: black;
+    }
+
+    .backgroundImage{
+        background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("../../images/specialist-pharmacy.jpg");
+
+       height: 100%;
+        min-width:1024px;
+        width: 100%;
+
+
+
+
+
+        /* Set up positioning */
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+  .addButton{
+    margin-right: 50px;
+    height: 40px;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 1rem;
+  margin-left: 100px;
+    width: 220px;
+  }
+
+  @media screen and (max-width: 1024px) { /* Specific to this particular image */
+    img.bg {
+      left: 50%;
+      margin-left: -512px;   /* 50% */
+    }
+  } 

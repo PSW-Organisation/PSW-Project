@@ -190,6 +190,63 @@ namespace PharmacyLibrary.Migrations
 
                     b.ToTable("Notifications");
                 });
+
+            modelBuilder.Entity("PharmacyLibrary.Tendering.Model.Tender", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("ApiKeyPharmacy")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Open")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("TenderCloseDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("TenderOpenDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tenders");
+                });
+
+            modelBuilder.Entity("PharmacyLibrary.Tendering.Model.TenderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("TenderId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TenderItemName")
+                        .HasColumnType("text");
+
+                    b.Property<double>("TenderItemPrice")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("TenderItemQuantity")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenderId");
+
+                    b.ToTable("TenderItem");
+                });
+
+            modelBuilder.Entity("PharmacyLibrary.Tendering.Model.TenderItem", b =>
+                {
+                    b.HasOne("PharmacyLibrary.Tendering.Model.Tender", null)
+                        .WithMany("TenderItems")
+                        .HasForeignKey("TenderId");
+                });
 #pragma warning restore 612, 618
         }
     }

@@ -2,6 +2,7 @@
 using IntegrationLibrary.Parnership.Model;
 using IntegrationLibrary.Pharmacies.Model;
 using IntegrationLibrary.SharedModel.Model;
+using IntegrationLibrary.Tendering.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,10 @@ namespace IntegrationLibrary.Model
         public DbSet<MedicineTransaction> MedicineTransactions { get; set; }
         public DbSet<MedicineBenefit> Benefits { get; set; }
         public DbSet<NotificationsForApp> Notifications { get; set; }
+        public DbSet<Tender> Tenders { get; set; }
+        public DbSet<TenderResponse> TenderResponses { get; set; }
+
+        public DbSet<TenderItem> TenderItems { get; set; }
 
         public IntegrationDbContext() { }
 

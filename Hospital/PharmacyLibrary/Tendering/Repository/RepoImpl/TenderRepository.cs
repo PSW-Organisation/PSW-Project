@@ -1,0 +1,50 @@
+﻿using PharmacyAPI;
+using PharmacyLibrary.Tendering.Model;
+using PharmacyLibrary.Tendering.Repository.RepoInterfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PharmacyLibrary.Tendering.Repository.RepoImpl
+{
+    public class TenderRepository : ITenderRepository
+    {
+        private readonly PharmacyDbContext pharmacyDbContext;
+        public TenderRepository(PharmacyDbContext pharmacyDbContext)
+        {
+            this.pharmacyDbContext = pharmacyDbContext;
+        }
+        public bool Add(Tender tender)
+        {
+            int itemId = pharmacyDbContext.TenderItems.ToList().Count > 0 ? pharmacyDbContext.TenderItems.Max(item => item.Id) + 1 : 1;
+            for (int i = 0; i < tender.TenderItems.Count; i++) {
+                tender.TenderItems[i].Id = itemId + i;
+            }
+            tender.Id = pharmacyDbContext.Tenders.ToList().Count > 0 ? pharmacyDbContext.Tenders.Max(tender => tender.Id) + 1 : 1;
+            pharmacyDbContext.Tenders.Add(tender);
+            pharmacyDbContext.SaveChanges();
+            return true;
+        }
+
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Tender> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Tender Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(Tender tender)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
