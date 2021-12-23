@@ -61,7 +61,6 @@ namespace PharmacyAPI
         
             services.AddTransient<IPharmacyRepository, PharmacyRepository>();
             services.AddTransient<IMedicineRepository, MedicineRepository>();
-            services.AddScoped<IPublishService, RabbitMQPublishService>();
             services.AddScoped<IMedicineBenefitRepository, MedicineBenefitRepository>();
             services.AddScoped<IHospitalRepository, HospitalRepository>();
             services.AddScoped<IPharmacyService, PharmacyService>();
@@ -70,9 +69,10 @@ namespace PharmacyAPI
             services.AddScoped<IMedicineBenefitService, MedicineBenefitService>();
            services.AddTransient<INotificationsForAppRepository, NotificationsForAppRepository>(); 
             services.AddScoped<INotificationsForAppService, NotificationsForAppService>();
-           
-            
-            
+            services.AddScoped<IPublishService, RabbitMQPublishService>();
+
+
+
             services.AddHostedService<RoutineZipCompressionService>();
             //added for Cors error
             //______________________________________________________________________
