@@ -1,9 +1,10 @@
-import { IMedicine } from "./medicine";
-import { ITenderResponse } from "./tenderResponses";
+import { ITenderItem } from "./tenderItem"
+import { ITenderResponse } from "./tenderResponse";
+
 
 export interface ITender{
-    id: any;
-   medicineTransactions: IMedicine[];
+    id: number;
+    tenderItems: ITenderItem[];
     tenderOpenDate: Date;
     tenderCloseDate: Date;
     open: Boolean;

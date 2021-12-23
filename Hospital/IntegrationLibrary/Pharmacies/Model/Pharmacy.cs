@@ -16,6 +16,7 @@ namespace IntegrationLibrary.Pharmacies.Model
         private string comment;
         private string picture;
         private PharmacyCommunicationType pharmacyCommunicationType;
+        private string email;
 
         public string PharmacyUrl { get => pharmacyUrl; set => pharmacyUrl = value; }
         public string PharmacyName { get => pharmacyName; set => pharmacyName = value; }
@@ -25,9 +26,10 @@ namespace IntegrationLibrary.Pharmacies.Model
         public string Comment { get => comment; set => comment = value; }
         public string Picture { get => picture; set => picture = value; }
         public PharmacyCommunicationType PharmacyCommunicationType { get => pharmacyCommunicationType; set => pharmacyCommunicationType = value; }
+        public string Email { get => email; set => email = value; }
 
         public Pharmacy() : base(-1) { }
-        public Pharmacy(string pharmacyUrl, string pharmacyName, string pharmacyAddress, string pharmacyApiKey, string hospitalApiKey, string comment, string picture, PharmacyCommunicationType communicationType) : base(-1)
+        public Pharmacy(string pharmacyUrl, string pharmacyName, string pharmacyAddress, string pharmacyApiKey, string hospitalApiKey, string comment, string picture, PharmacyCommunicationType communicationType, string email) : base(-1)
         {
             this.pharmacyUrl = pharmacyUrl;
             this.pharmacyName = pharmacyName;
@@ -37,6 +39,7 @@ namespace IntegrationLibrary.Pharmacies.Model
             this.comment = comment;
             this.picture = picture;
             this.pharmacyCommunicationType = communicationType;
+            this.email = email;
         }
     }
 }

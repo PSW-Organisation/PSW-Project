@@ -9,6 +9,8 @@ import { INotification } from './notification';
 })
 export class NotificationsService {
 
+
+
   constructor(private _http: HttpClient) { }
 
   getNotifications(): Observable<INotification[]>{
@@ -25,5 +27,9 @@ export class NotificationsService {
 
   deleteNotification(notificationId: any){
     return this._http.delete('http://localhost:29631/api3/notifications/' + notificationId)
+  }
+  
+  countNumber(){
+    return this._http.get('http://localhost:29631/api3/notifications/count')
   }
 }

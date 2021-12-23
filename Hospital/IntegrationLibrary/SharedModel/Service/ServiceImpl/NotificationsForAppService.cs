@@ -36,6 +36,17 @@ namespace IntegrationLibrary.SharedModel.Service.ServiceImpl
             return this.notificationsRepository.GetAll();
         }
 
+        public int GetNumberOfUnseen()
+        {
+            int number = 0;
+            List<NotificationsForApp> allNotifications = GetAll();
+            foreach(NotificationsForApp n in allNotifications)
+            {
+                if (!n.Seen) number++;
+            }
+            return number;
+        }
+
         public void Save(NotificationsForApp note)
         {
             note.Id = notificationsRepository.GenerateId();
@@ -48,5 +59,7 @@ namespace IntegrationLibrary.SharedModel.Service.ServiceImpl
             note.Seen = true;
             return this.notificationsRepository.Update(note);
         }
+
+
     }
 }

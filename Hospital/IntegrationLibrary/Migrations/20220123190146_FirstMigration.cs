@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace IntegrationLibrary.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,6 +42,21 @@ namespace IntegrationLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MedicineTransactions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    MedicineId = table.Column<int>(nullable: false),
+                    MedicineAmmount = table.Column<int>(nullable: false),
+                    TransactionTime = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicineTransactions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Notifications",
                 columns: table => new
                 {
@@ -69,7 +84,8 @@ namespace IntegrationLibrary.Migrations
                     HospitalApiKey = table.Column<string>(nullable: true),
                     Comment = table.Column<string>(nullable: true),
                     Picture = table.Column<string>(nullable: true),
-                    PharmacyCommunicationType = table.Column<int>(nullable: false)
+                    PharmacyCommunicationType = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -99,7 +115,8 @@ namespace IntegrationLibrary.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TenderOpenDate = table.Column<DateTime>(nullable: false),
                     TenderCloseDate = table.Column<DateTime>(nullable: false),
-                    Open = table.Column<bool>(nullable: false)
+                    Open = table.Column<bool>(nullable: false),
+                    ApiKeyPharmacy = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -112,9 +129,12 @@ namespace IntegrationLibrary.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ResponseReciveTime = table.Column<DateTime>(nullable: false),
+                    ResponseReceivedTime = table.Column<DateTime>(nullable: false),
                     PharmacyId = table.Column<int>(nullable: false),
-                    TenderId = table.Column<int>(nullable: false)
+                    TenderId = table.Column<int>(nullable: false),
+                    TotalPrice = table.Column<double>(nullable: false),
+                    IsWinner = table.Column<bool>(nullable: false),
+                    PharmacyApiKey = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -134,28 +154,28 @@ namespace IntegrationLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedicineTransactions",
+                name: "TenderItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    MedicineId = table.Column<int>(nullable: false),
-                    MedicineAmmount = table.Column<int>(nullable: false),
-                    TransactionTime = table.Column<DateTime>(nullable: false),
+                    TenderItemName = table.Column<string>(nullable: true),
+                    TenderItemQuantity = table.Column<int>(nullable: false),
+                    TenderItemPrice = table.Column<double>(nullable: false),
                     TenderId = table.Column<int>(nullable: true),
                     TenderResponseId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedicineTransactions", x => x.Id);
+                    table.PrimaryKey("PK_TenderItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MedicineTransactions_Tenders_TenderId",
+                        name: "FK_TenderItems_Tenders_TenderId",
                         column: x => x.TenderId,
                         principalTable: "Tenders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_MedicineTransactions_TenderResponses_TenderResponseId",
+                        name: "FK_TenderItems_TenderResponses_TenderResponseId",
                         column: x => x.TenderResponseId,
                         principalTable: "TenderResponses",
                         principalColumn: "Id",
@@ -163,13 +183,13 @@ namespace IntegrationLibrary.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicineTransactions_TenderId",
-                table: "MedicineTransactions",
+                name: "IX_TenderItems_TenderId",
+                table: "TenderItems",
                 column: "TenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicineTransactions_TenderResponseId",
-                table: "MedicineTransactions",
+                name: "IX_TenderItems_TenderResponseId",
+                table: "TenderItems",
                 column: "TenderResponseId");
 
             migrationBuilder.CreateIndex(
@@ -199,6 +219,9 @@ namespace IntegrationLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "ResponseToComplaint");
+
+            migrationBuilder.DropTable(
+                name: "TenderItems");
 
             migrationBuilder.DropTable(
                 name: "TenderResponses");

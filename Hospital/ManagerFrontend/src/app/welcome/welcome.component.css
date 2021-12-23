@@ -3,3 +3,27 @@
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 @import url("../../assets/styles/custom-responsive-styles.css");
 @import url("../../assets/styles/styles.css");
+
+a.fa-bell {
+    position: relative;
+    font-size: 1.2em;
+    color: grey;
+    cursor: pointer;
+    width: 2em;
+  }
+  span.fa-comment {
+    position: absolute;
+    font-size: 0.6em;
+    top: -4px;
+    color: red;
+    right: -3px;
+  }
+  span.num {
+    position: absolute;
+    font-size: 1.1em;
+    font-weight: bold;
+    top: 1px;
+    right: -2px;
+    color: red;
+   
+  }

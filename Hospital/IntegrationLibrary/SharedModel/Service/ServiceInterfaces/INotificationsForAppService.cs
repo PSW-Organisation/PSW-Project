@@ -14,7 +14,8 @@ namespace IntegrationLibrary.SharedModel.Service.ServiceInterfaces
         public void Save(NotificationsForApp note);
         public void Delete(NotificationsForApp note);
         public NotificationsForApp Update(NotificationsForApp note);
-      
+
+        public int GetNumberOfUnseen();
 
     }
 }

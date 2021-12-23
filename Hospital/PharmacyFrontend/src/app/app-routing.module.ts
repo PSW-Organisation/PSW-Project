@@ -6,8 +6,8 @@ import { HospitalViewComponent} from './hospital-view/hospital-view.component'
 import { ReportsViewComponent } from './reports-view/reports-view.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { TendersComponent } from './tenders/tenders.component';
-
 import { FileCompressionViewComponent } from './file-compression-view/file-compression-view.component';
+
 const routes: Routes = [
 { path: '', component: WelcomeComponent },
 { path: 'complaints', component: ComplaintsViewComponent},

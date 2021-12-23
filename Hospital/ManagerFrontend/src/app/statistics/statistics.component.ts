@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {Chart, registerables} from 'chart.js'
+import { StatisticsService } from './statistics.service';
 
 @Component({
   selector: 'app-statistics',
@@ -11,28 +12,72 @@ export class StatisticsComponent implements OnInit {
   chartWinnings: any;
   chartWinningPrice: any;
   chartParticipate: any;
-  constructor() { }
+  chartWinningsStat : any;
+  chartParticipateStat: any;
+  chartWinnerOffersStatX: any;
+  chartWinnerOffersStatY: any;
+  chartActiveTenderOffersStatX: any;
+  chartActiveTenderOffersStatY: any;
+  @Input() apiKey: string = "";
+
+  constructor(private statisticService: StatisticsService) { }
 
   ngOnInit(): void {
-    this.chartOfferInACtiveTender = document.getElementById('offerInACtiveTenderChart');
-    this.chartWinnings = document.getElementById('winningsChart');
-    this.chartWinningPrice = document.getElementById('winningPriceChart');
-    this.chartParticipate = document.getElementById('participateChart');
-    Chart.register(...registerables);
-    this.loadChartOffesrInACtiveTender();
-    this.loadChartWinnings();
-    this.loadchartWinningPrice();
-    this.loadChartParticipate();
+    this.getChartWinningsStat(this.apiKey);
+    this.getChartParticipateStat("bc56df25-0d34-4801-b76a-931e61b4c752");
+    this.getChartWinnerOffersStat("bc56df25-0d34-4801-b76a-931e61b4c752");
+    this.getActiveTenderOffersStat("bc56df25-0d34-4801-b76a-931e61b4c752");
+    setTimeout(() => {
+      this.chartOfferInACtiveTender = document.getElementById('offerInACtiveTenderChart');
+      this.chartWinnings = document.getElementById('winningsChart');
+      this.chartWinningPrice = document.getElementById('winningPriceChart');
+      this.chartParticipate = document.getElementById('participateChart');
+      Chart.register(...registerables);
+      this.loadChartOffesrInACtiveTender();
+      this.loadChartWinnings();
+      this.loadchartWinningPrice();
+      this.loadChartParticipate();
+    }, 1000);
+  }
+
+  getChartWinningsStat(apikey: string){
+    this.statisticService.getStatWinnDefeat(apikey).subscribe(
+      ret => {this.chartWinningsStat = ret.statistic;}
+    )
+  }
+
+  getChartParticipateStat(apikey: string){
+    this.statisticService.getStatParticipate(apikey).subscribe(
+      ret => {this.chartParticipateStat = ret.statistic;}
+    ) 
+  }
+
+  getChartWinnerOffersStat(apikey: string){
+    this.statisticService.getStatWinnerOffers(apikey).subscribe(
+      ret => {
+        this.chartWinnerOffersStatX = ret.x;
+        this.chartWinnerOffersStatY = ret.y;
+      }
+    )
+  }
+
+  getActiveTenderOffersStat(apikey: string){
+    this.statisticService.getStatActiveTenderOffers(apikey).subscribe(
+      ret => {
+        this.chartActiveTenderOffersStatX = ret.x;
+        this.chartActiveTenderOffersStatY = ret.y;
+      }
+    )
   }
 
   loadChartOffesrInACtiveTender()  : void {
     new Chart( this.chartOfferInACtiveTender, {
       type: 'bar',
       data: {
-          labels: ['10.12.2021.', '16.12.2021.', '20.12.2021.', '24.12.2021.'],
+          labels: this.chartActiveTenderOffersStatX,
           datasets: [{
               label: '#ponude u toku aktivnog tendera',
-              data: [80000, 60000, 70000, 50000],
+              data: this.chartActiveTenderOffersStatY,
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -73,7 +118,7 @@ export class StatisticsComponent implements OnInit {
         ],
         datasets: [{
           label: 'Pobede u tenderima',
-          data: [6,2],
+          data: this.chartWinningsStat,
           backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',
@@ -89,10 +134,10 @@ export class StatisticsComponent implements OnInit {
     new Chart( this.chartWinningPrice, {
       type: 'bar',
       data: {
-          labels: ['11.01.2021.', '23.05.2021.', '20.06.2021.', '24.09.2021.', '24.10.2021.'],
+          labels: this.chartWinnerOffersStatX,
           datasets: [{
               label: '# pobednicke ponude',
-              data: [80000, 60000, 70000, 50000, 65000],
+              data: this.chartWinnerOffersStatY,
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -133,7 +178,7 @@ export class StatisticsComponent implements OnInit {
         ],
         datasets: [{
           label: 'Ucesca',
-          data: [6,3],
+          data: this.chartParticipateStat,
           backgroundColor: [
             'rgb(255, 99, 132)',
             'rgb(54, 162, 235)',

@@ -31,7 +31,6 @@ import { ReportsViewComponent } from './reports-view/reports-view.component';
 import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { MaliciousPatientsComponent } from './malicious-patients/malicious-patients.component';
-import { StatisticsComponent } from './statistics/statistics.component';
 import { TendersComponent } from './tenders/tenders.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
@@ -43,9 +42,8 @@ import { TokenInterceptor } from './shared/jwt/token.interceptor';
 import { DoctorOnCallShiftComponent } from './doctor-on-call-shift/doctor-on-call-shift.component';
 import { ManageShiftsComponent } from './manage-shifts/manage-shifts.component';
 import { DoctorStatisticsComponent } from './doctor-statistics/doctor-statistics.component';
-
-
-
+import { TenderDetailComponent } from './tender-detail/tender-detail.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +73,8 @@ import { DoctorStatisticsComponent } from './doctor-statistics/doctor-statistics
     CuFormComponent,
     DoctorOnCallShiftComponent,
     ManageShiftsComponent,
-    DoctorStatisticsComponent
+    DoctorStatisticsComponent,
+    TenderDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +87,9 @@ import { DoctorStatisticsComponent } from './doctor-statistics/doctor-statistics
       progressAnimation: 'increasing'
     }),
     BrowserAnimationsModule,
+
   ],
+
   providers: [
     PharmaciesService,
     FeedbackService,

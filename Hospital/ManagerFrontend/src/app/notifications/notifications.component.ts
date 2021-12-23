@@ -10,6 +10,7 @@ import { NotificationsService } from './notifications.service';
 })
 export class NotificationsComponent implements OnInit {
 notifications: INotification[] =[];
+numberOfUnseen: any;
 
 
   constructor(private notificationsService: NotificationsService) { }
@@ -25,6 +26,14 @@ notifications: INotification[] =[];
       }
     )
  }
+
+getCountOfUnseen(){
+ this.notificationsService.countNumber().subscribe(
+  numberOfUnseen => {
+    this.numberOfUnseen = numberOfUnseen;
+  }
+ )
+}
 
  changeToSeen(notification:any){
    this.notificationsService.changeToSeen(notification).subscribe(data => {

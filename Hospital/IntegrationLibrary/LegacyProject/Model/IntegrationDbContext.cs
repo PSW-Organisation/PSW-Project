@@ -22,6 +22,8 @@ namespace IntegrationLibrary.Model
         public DbSet<Tender> Tenders { get; set; }
         public DbSet<TenderResponse> TenderResponses { get; set; }
 
+        public DbSet<TenderItem> TenderItems { get; set; }
+
         public IntegrationDbContext() { }
 
         //dodato da bi se mogli raditi integracioni testovi sa bazom

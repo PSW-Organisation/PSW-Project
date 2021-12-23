@@ -25,6 +25,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { ScheduleComponent } from './doctor-vacation/schedule/schedule.component';
 import { DoctorOnCallShiftComponent } from './doctor-on-call-shift/doctor-on-call-shift.component';
 import { ManageShiftsComponent } from './manage-shifts/manage-shifts.component';
+import { TenderDetailComponent } from './tender-detail/tender-detail.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -43,12 +44,14 @@ const routes: Routes = [
   { path: 'notifications', component: NotificationsComponent, canActivate: [ManagerGuard] },
   { path: 'malicious', component: MaliciousPatientsComponent, canActivate: [ManagerGuard] },
   { path: 'tenders', component: TendersComponent, canActivate: [ManagerGuard] },
+  { path: 'tender/:id', component: TenderDetailComponent},
   { path: 'doctors', component: DoctorsComponent, canActivate: [ManagerGuard] },
   { path: 'doctorView/:id', component: DoctorViewComponent, canActivate: [ManagerGuard] },
   { path: 'home', component: HomePageComponent, canActivate: [ManagerGuard] },
   { path: 'doctorVacation/:doctorId', component: ScheduleComponent, canActivate: [ManagerGuard] },
   { path: 'doctorOnCallShift', component: DoctorOnCallShiftComponent, canActivate: [ManagerGuard]},
   { path: 'manageShifts', component: ManageShiftsComponent, canActivate: [ManagerGuard]}
+
 ];
 
 @NgModule({

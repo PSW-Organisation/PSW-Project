@@ -5,10 +5,26 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace PharmacyLibrary.Migrations
 {
-    public partial class PharmacyMigration : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Ads",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    CreationDate = table.Column<DateTime>(nullable: true),
+                    PromotionEndTime = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ads", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Complaints",
                 columns: table => new
@@ -121,6 +137,76 @@ namespace PharmacyLibrary.Migrations
                 {
                     table.PrimaryKey("PK_ResponsesToComplaint", x => x.ResponseToComplaintId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Tenders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TenderOpenDate = table.Column<DateTime>(nullable: false),
+                    TenderCloseDate = table.Column<DateTime>(nullable: false),
+                    Open = table.Column<bool>(nullable: false),
+                    ApiKeyPharmacy = table.Column<string>(nullable: true),
+                    IsWon = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tenders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MedicineAds",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    MedicineId = table.Column<long>(nullable: false),
+                    PromotionPrice = table.Column<double>(nullable: false),
+                    AdId = table.Column<long>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicineAds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MedicineAds_Ads_AdId",
+                        column: x => x.AdId,
+                        principalTable: "Ads",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TenderItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TenderItemName = table.Column<string>(nullable: true),
+                    TenderItemQuantity = table.Column<int>(nullable: false),
+                    TenderItemPrice = table.Column<double>(nullable: false),
+                    TenderId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TenderItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TenderItems_Tenders_TenderId",
+                        column: x => x.TenderId,
+                        principalTable: "Tenders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicineAds_AdId",
+                table: "MedicineAds",
+                column: "AdId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TenderItems_TenderId",
+                table: "TenderItems",
+                column: "TenderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -130,6 +216,9 @@ namespace PharmacyLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "Hospitals");
+
+            migrationBuilder.DropTable(
+                name: "MedicineAds");
 
             migrationBuilder.DropTable(
                 name: "MedicineBenefits");
@@ -145,6 +234,15 @@ namespace PharmacyLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "ResponsesToComplaint");
+
+            migrationBuilder.DropTable(
+                name: "TenderItems");
+
+            migrationBuilder.DropTable(
+                name: "Ads");
+
+            migrationBuilder.DropTable(
+                name: "Tenders");
         }
     }
 }

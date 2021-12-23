@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationsService } from '../notifications/notifications.service';
 import { RegistrationService } from './reistration.service';
 @Component({
   selector: 'app-welcome',
@@ -9,12 +10,13 @@ export class WelcomeComponent implements OnInit {
 
   hospital: any={ hospitalId: 0, hospitalUrl: "", hospitalName: "", hospitalAddress:"", hospitalApiKey:"notDefinedYet", pharmacyApiKey:"notDefinedYet"}
   apiKeyForHospital : string=""
+  numberOfUnseen: any;
 
-
-  constructor(private _registrationService: RegistrationService) { }
+  constructor(private _registrationService: RegistrationService, private notificationsService: NotificationsService) { }
 
 
   ngOnInit(): void {
+    this.getCountOfUnseen();
   }
   register(){
     this._registrationService.register(this.hospital).subscribe((data:any) => {
@@ -22,7 +24,15 @@ export class WelcomeComponent implements OnInit {
       this.apiKeyForHospital = data.data;
   
     });
-    
-    
   }
+  
+  getCountOfUnseen(){
+      this.notificationsService.countNumber().subscribe(
+       numberOfUnseen => {
+         this.numberOfUnseen = numberOfUnseen;
+       }
+      )
+     }
 }
+
+
