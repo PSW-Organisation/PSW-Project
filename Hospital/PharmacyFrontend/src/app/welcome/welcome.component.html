@@ -24,12 +24,26 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/reports">Reports</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/notifications">Notifications</a>
-        </li>
+
+        <li class="nav-item" >
+          <table style="margin-top:6px ;" >
+          <tr>
+             <td>
+               <a class="smooth-scroll" routerLink="/notifications">Notifications</a> </td> 
+               <td class="td3 ">   <a class="fa fa-bell" style="width: 70px; margin-top: 3px; margin-left: 5px; color: grey; " routerLink="/notifications">
+            <span class="num">{{numberOfUnseen}}</span></a> </td>
+          </tr> </table>
+           
+           
+          
+
+       </li>
+        
         <li class="nav-item">
           <a class="nav-link" routerLink="/space_occupied">Disk Management</a>
-        </li>
+       </li>
+        
+        
         <li class="nav-item">
           <a class="nav-link" routerLink="/tenders">Tenders</a>
           

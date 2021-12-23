@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalLibrary.Migrations
 {
-    public partial class MigrationName : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -511,7 +511,7 @@ namespace HospitalLibrary.Migrations
                 columns: new[] { "Id", "Anonymous", "IsPublished", "PatientUsername", "PublishAllowed", "SubmissionDate", "Text" },
                 values: new object[,]
                 {
-                    { 1, false, false, "imbiamba", false, new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "alallalal" },
+                    { -2, false, false, "kristina", true, new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Test on me" },
                     { -1, false, true, "imbiamba", true, new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Sehr gut!" }
                 });
 
@@ -619,13 +619,14 @@ namespace HospitalLibrary.Migrations
                 columns: new[] { "Id", "DoorPosition", "FloorGraphicId", "RoomId", "Height", "Width", "X", "Y" },
                 values: new object[,]
                 {
+                    { 16, "right", 1, 16, 100, 100, 0, 0 },
                     { 17, "right", 3, 17, 100, 100, 0, 0 },
                     { 15, "none", 2, 15, 100, 140, 10, 220 },
                     { 14, "top", 2, 14, 80, 150, 150, 517 },
                     { 13, "top", 2, 13, 80, 150, 0, 517 },
-                    { 12, "left", 2, 12, 145, 75, 222, 340 },
                     { 11, "right", 2, 11, 145, 75, 0, 340 },
                     { 10, "left", 2, 10, 100, 100, 197, 100 },
+                    { 12, "left", 2, 12, 145, 75, 222, 340 },
                     { 8, "left", 2, 8, 100, 100, 197, 0 },
                     { 7, "right", 2, 7, 100, 100, 0, 0 },
                     { 6, "none", 1, 6, 160, 140, 150, 20 },
@@ -634,8 +635,7 @@ namespace HospitalLibrary.Migrations
                     { 3, "left", 1, 3, 145, 75, 222, 340 },
                     { 2, "right", 1, 2, 145, 75, 0, 340 },
                     { 1, "right", 1, 1, 100, 100, 0, 100 },
-                    { 9, "right", 2, 9, 100, 100, 0, 100 },
-                    { 16, "right", 1, 16, 100, 100, 0, 0 }
+                    { 9, "right", 2, 9, 100, 100, 0, 100 }
                 });
 
             migrationBuilder.InsertData(
@@ -646,7 +646,13 @@ namespace HospitalLibrary.Migrations
             migrationBuilder.InsertData(
                 table: "Visits",
                 columns: new[] { "Id", "DoctorId", "EndTime", "IsCanceled", "IsReviewed", "PatientId", "StartTime", "VisitType" },
-                values: new object[] { -1, "nelex", new DateTime(2021, 11, 30, 19, 30, 0, 0, DateTimeKind.Unspecified), false, false, "imbiamba", new DateTime(2021, 11, 30, 19, 0, 0, 0, DateTimeKind.Unspecified), 0 });
+                values: new object[,]
+                {
+                    { -3, "nelex", new DateTime(2021, 12, 29, 19, 30, 0, 0, DateTimeKind.Unspecified), true, false, "kristina", new DateTime(2021, 12, 29, 19, 0, 0, 0, DateTimeKind.Unspecified), 0 },
+                    { -1, "nelex", new DateTime(2021, 11, 30, 19, 30, 0, 0, DateTimeKind.Unspecified), false, false, "kristina", new DateTime(2021, 11, 30, 19, 0, 0, 0, DateTimeKind.Unspecified), 0 },
+                    { -2, "nelex", new DateTime(2022, 1, 30, 19, 30, 0, 0, DateTimeKind.Unspecified), false, false, "kristina", new DateTime(2022, 1, 30, 19, 0, 0, 0, DateTimeKind.Unspecified), 0 },
+                    { -4, "nelex", new DateTime(2022, 1, 3, 19, 30, 0, 0, DateTimeKind.Unspecified), true, false, "kristina", new DateTime(2022, 1, 3, 19, 0, 0, 0, DateTimeKind.Unspecified), 0 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Questions",

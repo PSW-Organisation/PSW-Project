@@ -59,20 +59,10 @@ namespace IntegrationLibrary.Migrations
                     b.Property<int>("MedicineId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("TenderId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("TenderResponseId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("TransactionTime")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenderId");
-
-                    b.HasIndex("TenderResponseId");
 
                     b.ToTable("MedicineTransactions");
                 });
@@ -109,6 +99,9 @@ namespace IntegrationLibrary.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Comment")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
                         .HasColumnType("text");
 
                     b.Property<string>("HospitalApiKey")
@@ -186,6 +179,9 @@ namespace IntegrationLibrary.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("ApiKeyPharmacy")
+                        .HasColumnType("text");
+
                     b.Property<bool>("Open")
                         .HasColumnType("boolean");
 
@@ -200,6 +196,37 @@ namespace IntegrationLibrary.Migrations
                     b.ToTable("Tenders");
                 });
 
+            modelBuilder.Entity("IntegrationLibrary.Tendering.Model.TenderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("TenderId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TenderItemName")
+                        .HasColumnType("text");
+
+                    b.Property<double>("TenderItemPrice")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("TenderItemQuantity")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("TenderResponseId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenderId");
+
+                    b.HasIndex("TenderResponseId");
+
+                    b.ToTable("TenderItems");
+                });
+
             modelBuilder.Entity("IntegrationLibrary.Tendering.Model.TenderResponse", b =>
                 {
                     b.Property<int>("Id")
@@ -207,14 +234,23 @@ namespace IntegrationLibrary.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<bool>("IsWinner")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("PharmacyApiKey")
+                        .HasColumnType("text");
+
                     b.Property<int>("PharmacyId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("ResponseReciveTime")
+                    b.Property<DateTime>("ResponseReceivedTime")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("TenderId")
                         .HasColumnType("integer");
+
+                    b.Property<double>("TotalPrice")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -225,14 +261,14 @@ namespace IntegrationLibrary.Migrations
                     b.ToTable("TenderResponses");
                 });
 
-            modelBuilder.Entity("IntegrationLibrary.Parnership.Model.MedicineTransaction", b =>
+            modelBuilder.Entity("IntegrationLibrary.Tendering.Model.TenderItem", b =>
                 {
                     b.HasOne("IntegrationLibrary.Tendering.Model.Tender", null)
-                        .WithMany("MedicineTransactions")
+                        .WithMany("TenderItems")
                         .HasForeignKey("TenderId");
 
                     b.HasOne("IntegrationLibrary.Tendering.Model.TenderResponse", null)
-                        .WithMany("MedicineTransactions")
+                        .WithMany("TenderItems")
                         .HasForeignKey("TenderResponseId");
                 });
 

@@ -1,25 +1,81 @@
- <!-- zaglavlje -->
- <div class="logo" > 
-    <table> 
-        <tr> 
+<!-- zaglavlje -->
+ <div class="logo" >
+    <table>
+        <tr>
             <td><img src="../../favicon.ico" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
             <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; font-weight: bold;  color:rgb(23, 23, 102); " >Flos</p></td>
             <td style="margin-left:1200px;">
-            <li class="nav-item" style="margin-left: 1200px; font-size: larger;"> 
+            <li class="nav-item" style="margin-left: 1200px; font-size: larger;">
            <a class="nav-link" routerLink="" >Home</a>
        </li> </td>
         </tr>
-        
-       </table>      
+
+       </table>
 </div>
 
+<!-- Modal -->
+<div id="newResponse" class="modal fade " style="display: none; " role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <!-- Modal for complaint-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" style="font-size: x-large;" >Response</h4>
+        </div>
+        <div class="modal-body">
 
+            <div>    <label style="font-size: medium;">Response items: </label>
+               <table>
+                  <tr style="height: 10px;"><td class="tdInForm" style="width: 60px;"> </td> </tr>
+
+                  <tr *ngFor = 'let item of tenderItems' >
+                    <td style="width: 30px;"> </td>
+                    <td ><label   >{{item.tenderItemName}}</label> </td>
+                    <td style="width: 15px;"> </td>
+                    <td  ><label   >{{item.tenderItemQuantity}}</label> </td>
+                    <td style="width: 15px;"> </td>
+                    <td ><label   >{{item.tenderItemPrice}}</label> </td>
+                </tr></table>
+              <table>
+
+                  <tr>
+                      <td class="tdInForm"> <label style="font-size: medium;">Medicine</label></td>
+
+                      <td ><input type="text" class="form-control" placeholder="Enter medicine"  [(ngModel)]="tenderItem.tenderItemName" style="margin-left: 10px;" > </td>
+                  </tr>
+
+                  <tr style="height: 5px;"> </tr>
+                  <tr>
+                      <td class="tdInForm"> <label style="font-size: medium;">Amount</label> </td>
+
+                      <td style= "width: 250px"><input type="number" class="form-control" placeholder="Enter amount" style="margin-left: 10px;"  [(ngModel)]="tenderItem.tenderItemQuantity"  > </td>
+                   </tr>
+                   <tr style="height: 5px;"> </tr>
+                   <tr>
+                    <td class="tdInForm"> <label style="font-size: medium;">Price</label></td>
+
+                    <td style= "width: 250px"><input type="number" class="form-control" placeholder="Enter price" style="margin-left: 10px;"  [(ngModel)]="tenderItem.tenderItemPrice"  > </td>
+                    <td ><label style="font-size: medium;" style="margin-left: 10px;"  > rsd </label></td>
+                </tr>
+                <tr style="height: 5px;"> </tr>
+                 <tr>
+                     <td  > </td><td><button class="btn btn-secondary" (click) = "addMedicine(tenderItem)" style="margin-left: 10px; width: 260px;">  <i class="bi bi-plus-lg"></i>Add more medicines </button> </td></tr>
+              </table>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" style="margin-right:30px; " data-toggle="modal" (click)='sendTenderOffer()'  >Send response </button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <div class="backgroundImage">
-   <!--<div style="height: 50px"> </div>--> 
+   <!--<div style="height: 50px"> </div>-->
 
-    
-   
-   
+
+
+
    <!-- <div class="card" >
         <div class="card-body">
           <h5 class="card-title">Tender 1</h5>
@@ -33,7 +89,7 @@
 
 
       <div class="container-fluid">
-            
+
         <div class="mx-auto card " style="background: transparent;">
             <div class="card-body" style="background: transparent;">
                 <h3 style="margin-left: 5rem;"> All active tenders: </h3>
@@ -41,36 +97,22 @@
 
                   <div class="card-columns mx-auto">
 
-                      <div class="card text-center">
+                      <div class="card text-center" *ngFor = 'let tender of tenders' >
                         <div class="card-body">
                           <h5 class="card-title">Flos Pharmacy</h5>
                           <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
-                          <p class="card-text">Panklav 52</p>
-                          <p class="card-text">Verapamil 20</p>
+                          <p class="card-text" *ngFor = 'let item of tender.tenderItems' >{{item.tenderItemName}} {{item.tenderItemQuantity}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
-                          <p class="card-text"> 20/12/2021</p>
+                          <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
-                          <p class="card-text"> 20/02/2022  </p>
-                        
-                          <a href="#" class="card-link" style="text-decoration: darkred;    color: rgb(27, 46, 133); ; font-size:large ;">Response </a>
-
+                          <p class="card-text"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
+                          <div *ngIf="tender.open">
+                          <button href="#" class="button" style="text-decoration: darkred;    color: rgb(27, 46, 133); ; font-size:large ;" (click) = 'setModalTender(tender)' data-toggle="modal" data-target="#newResponse">Response </button>
+                          <button href="#" class="button" style="text-decoration: darkred;    color: rgb(27, 46, 133); ; font-size:large ;" (click) = 'closeTender(tender)' >Close Tender </button>
+                        </div>
                         </div>
                       </div>
 
-                      <div class="card text-center">
-                        <div class="card-body">
-                          <h5 class="card-title">Flos Pharmacy</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
-                          <p class="card-text">Brufen 30</p>
-                          <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
-                          <p class="card-text"> 20/12/2021</p>
-                          <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
-                          <p class="card-text"> 20/02/2022  </p>
-                          <a href="#" class="card-link" style="text-decoration: darkred;    color: rgb(27, 46, 133); ; font-size:large ;">Response </a>
-                         
-                        </div>
-                      </div>
-                      
                   </div>
 
             </div>
@@ -78,4 +120,3 @@
 
       </div>
 </div>
-

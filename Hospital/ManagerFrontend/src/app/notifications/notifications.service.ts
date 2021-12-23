@@ -8,6 +8,9 @@ import { INotification } from './notification';
   providedIn: 'root'
 })
 export class NotificationsService {
+  getCount() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private _http: HttpClient) { }
 
@@ -24,6 +27,9 @@ export class NotificationsService {
     return this._http.put('http://localhost:16928/api2/notifications', note)
   }
 
+  countNumber(){
+    return this._http.get('http://localhost:16928/api2/notifications/count')
+  }
  
   deleteNotification(notificationId: any){
     return this._http.delete('http://localhost:16928/api2/notifications/' + notificationId)

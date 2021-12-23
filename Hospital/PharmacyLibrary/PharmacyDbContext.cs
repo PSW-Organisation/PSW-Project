@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PharmacyAPI.Model;
 using PharmacyLibrary.Model;
+using PharmacyLibrary.Tendering.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,9 +17,13 @@ namespace PharmacyAPI
         public DbSet<MedicineBenefit> MedicineBenefits { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<NotificationsForApp> Notifications { get; set; }
+        public DbSet<Tender> Tenders { get; set; }
+
+        public DbSet<TenderItem> TenderItems { get; set; }
 
         public DbSet<Ad> Ads { get; set; }
         public DbSet<MedicineAd> MedicineAds { get; set; }
+
 
 
         public PharmacyDbContext(DbContextOptions<PharmacyDbContext> options) : base(options) { }

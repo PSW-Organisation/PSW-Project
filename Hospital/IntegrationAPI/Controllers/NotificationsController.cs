@@ -78,5 +78,15 @@ namespace IntegrationAPI.Controllers
                 return Ok();
             }
         }
+
+
+        [HttpGet]       // GET /api2/notifications/count
+        [Route("count")]
+        public IActionResult GetNumberOfUnseen()
+        {
+            int number=0;
+            number = notificationService.GetNumberOfUnseen();
+            return Ok(number);
+        }
     }
 }

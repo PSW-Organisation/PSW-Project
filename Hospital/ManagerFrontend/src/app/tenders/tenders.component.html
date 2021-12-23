@@ -1,7 +1,13 @@
-<app-navbar>
-  <div app-navbar-button>
-  </div>
-</app-navbar>
+<!-- Naslov -->
+<div class="titleDiv">
+    <table>
+        <tr>
+            <td><img src="../../assets/favicon.png" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+            <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; "> LeanOn Hospital</p></td>
+        </tr>
+    </table>
+</div>
+
 <!-- Modal -->
 <div id="newTender" class="modal fade " style="display: none; " role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -11,44 +17,48 @@
           <h4 class="modal-title" style="font-size: x-large;">New tender</h4>
         </div>
         <div class="modal-body">
-          
-            <div>      
-              <table> 
-                  <tr style="height: 10px;"> </tr>
-                  <div >
-                  <tr *ngFor = 'let item of newTender.medicineTransactions' > 
-                    <td class="tdInForm"> <label style="font-size: medium;">Tender items: </label></td>
-                    <td ><label   >{{item.medicineName}}</label> </td>
-                    <td ><label   >{{item.medicineAmount}}</label> </td>
-                </tr></div>
-                  <tr> 
-                      <td class="tdInForm"> <label style="font-size: medium;">Medicine</label></td>
-                      <td ><input type="text" class="form-control" placeholder="Enter medicine" [(ngModel)]="medicine.medicineName"  > </td>
-                  </tr>
-                  <tr style="height: 10px;"> </tr>
-                  <tr> 
-                      <td class="tdInForm"> <label style="font-size: medium;">Amount</label> </td>
-                      <td style= "width: 250px"><input type="number" class="form-control" placeholder="Enter amount"  [(ngModel)]="medicine.medicineAmount" > </td>
-                   </tr>
-                 <tr>
-                     <td class="tdInForm"> </td><td><button class="btn btn-secondary" (click)="addMedicine(medicine)" >  <i class="bi bi-plus-lg"></i>Add more medicines </button> </td></tr> 
-              </table>
-            </div>       
-              
+          <table>
+            <tr style="height: 10px;"> </tr>
+            <tr>
+              <td class="tdInForm"> <label style="font-size: medium;">Tender items: </label></td>
+            </tr>
+            <tr *ngFor = 'let item of newTender.tenderItems'>
+              <td ><label>{{item.tenderItemName}}</label></td>
+              <td ><label>{{item.tenderItemQuantity}}</label></td>
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td class="tdInForm"> <label style="font-size: medium;">Item</label></td>
+              <td ><input type="text" class="form-control" placeholder="Enter medicine" [(ngModel)]="tenderItem.tenderItemName"  > </td>
+            </tr>
+            <tr style="height: 10px;"> </tr>
+            <tr>
+              <td class="tdInForm"> <label style="font-size: medium;">Ammount</label> </td>
+              <td style= "width: 250px"><input type="number" class="form-control" placeholder="Enter amount"  [(ngModel)]="tenderItem.tenderItemQuantity" > </td>
+            </tr>
+            <tr>
+              <td class="tdInForm"> </td><td><button class="btn btn-secondary" (click)="addTenderItem(tenderItem)" >  <i class="bi bi-plus-lg"></i>Add item </button> </td>
+            </tr>
+            <tr>
+              <td class="tdInForm"> <label style="font-size: medium;">Active until</label> </td>
+              <td style= "width: 250px"><input type="date" class="form-control" placeholder="Enter amount"  [(ngModel)]="newTender.tenderCloseDate" > </td>
+            </tr>
+          </table>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" style="margin-right:30px; " data-dismiss="modal" (click)="addNewTender(newTender)" >Post</button>
+            <button type="button" class="btn btn-danger" style="margin-right:30px; " data-dismiss="modal" (click)="saveTender()">Post</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
 </div>
 <div class="backgroundImage">
-   <!--<div style="height: 50px"> </div>--> 
+   <!--<div style="height: 50px"> </div>-->
     <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newTender"> Create new tender</button>
-    
-   
-   
+
+
+
    <!-- <div class="card" >
         <div class="card-body">
           <h5 class="card-title">Tender 1</h5>
@@ -62,65 +72,79 @@
 
 
       <div class="container-fluid">
-            
+
         <div class="mx-auto card " style="background: transparent;">
             <div class="card-body" style="background: transparent;">
-
+              <!-----------------------------------------STATISTIKA----------------------------------------------->  
               <div>
                 <table>
                   <tr>
                     <td><h1 style="margin-left: 5rem;margin-top: 5px;"> Generate report for specific period: </h1> </td>
-                    <td><input id="startDate" type="date" class="form-control" placeholder="Start date" style="margin-left: 10px;"></td>
-                    <td><input id="endDate" type="date" class="form-control" placeholder="End date" style="margin-left: 15px;"></td>
-                    <td><button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-left: 30px;" (click)="generateReportPdf()">Generate</button></td>
+                    <td><input id="startDate" type="date" class="form-control" placeholder="Start date" style="margin-left: 10px;" [(ngModel)]="start"></td>
+                    <td><input id="endDate" type="date" class="form-control" placeholder="End date" style="margin-left: 15px;" [(ngModel)]="end"></td>
+                    <td><button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-left: 30px;" (click)="generateReportPdf(start, end)">Generate</button></td>
                   </tr>
                 </table>
                 <hr/>
               </div>
-
-                <h1 style="margin-left: 5rem;"> All active tenders: </h1>
+              
+              
+              
+              <h1 style="margin-left: 5rem;"> All active tenders: </h1>
                 <hr />
 
                   <div class="card-columns mx-auto">
 
-                      <div class="card text-center">
+                      <div class="card text-center" *ngFor = 'let tender of tenders'>
                         <div class="card-body">
-                          <h5 class="card-title">Tender 1</h5>
+                          <h5 class="card-title">Tender {{tender.id}}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
-                          <p class="card-text">Panklav 52</p>
-                          <p class="card-text">Verapamil 20</p>
+                          <p *ngFor = 'let item of tender.tenderItems' class="card-text">{{item.tenderItemName}} {{item.tenderItemQuantity}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
-                          <p class="card-text"> 20/12/2021</p>
+                          <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
-                          <p class="card-text"> 20/02/2022  </p>
-                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
-                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
-
+                          <div><p class="card-text" *ngIf="compareDates(tender.tenderCloseDate); else elseBlock"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
+                          </div>
+                            <ng-template #elseBlock><p class="card-text">Indefinite</p></ng-template>
+                          <a [routerLink]="" (click)="closeTender(tender.id)" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
+                          <a [routerLink]="['/tender', tender.id]" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
                         </div>
                       </div>
-
-                      <div class="card text-center">
-                        <div class="card-body">
-                          <h5 class="card-title">Tender 2</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
-                          <p class="card-text">Brufen 30</p>
-                          <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
-                          <p class="card-text"> 20/12/2021</p>
-                          <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
-                          <p class="card-text"> 20/02/2022  </p>
-                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
-                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
-                         
-                        </div>
-                      </div>
-                      
                   </div>
 
             </div>
         </div>
 
+        <div class="mx-auto card " style="background: transparent;">
+          <div class="card-body" style="background: transparent;">
+              <h1 style="margin-left: 5rem;"> Closed tenders: </h1>
+              <hr />
+
+                <div class="card-columns mx-auto">
+
+                    <div class="card text-center" *ngFor = 'let tender of closedTenders'>
+                      <div class="card-body">
+                        <h5 class="card-title">Tender {{tender.id}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
+                        <p *ngFor = 'let item of tender.tenderItems' class="card-text">{{item.tenderItemName}} {{item.tenderItemQuantity}}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
+                        <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
+                        <div>
+                        <p class="card-text" *ngIf="compareDates(tender.tenderCloseDate); else elseBlock"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
+                      </div>
+                        <ng-template #elseBlock><p class="card-text">Indefinite</p></ng-template>
+                        <a [routerLink]="['/tender', tender.id]" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
+                      </div>
+                    </div>
+                </div>
+
+          </div>
       </div>
 
+      </div>
+
+      <!-----------------------------------------STATISTIKA----------------------------------------------->
       <div class="card" style="margin-top: 100px;margin-right: 100px;margin-left: 100px;margin-bottom: 200px;background-color: lightgray;">
         <table>
             <tr>

@@ -2,13 +2,14 @@
 
 
 nav {
-  margin-left: 100px;
+  margin-left: 3em;
 }
 
 li a{
-    width: 200px;
+    width: 12em;
     color:rgb(23, 23, 102);
    font-weight: bold;
+ text-decoration: none; /* da ne bi bila podvucena linija!*/
    
 }
 li a:hover{
@@ -17,8 +18,7 @@ li a:hover{
 }
 
 .logo {
-    margin-top: 10px;
-    margin-left: 20px;
+    margin-top: 1em;
     background-color: whitesmoke;
 }
 
@@ -58,3 +58,34 @@ margin-left: 20px;
 .td2{
     width: 70%
 }
+.td3{
+  width: 34%;
+}
+
+
+@import url("../../assets/styles/styles.css");
+
+a.fa-bell {
+    position: relative;
+    font-size: 1.2em;
+    color: grey;
+    cursor: pointer;
+    margin-left: 5px;
+    width: 1em;
+    text-decoration: none;
+  }
+  span.fa-comment {
+    position: absolute;
+    font-size: 0.6em;
+    top: -4px;
+    color: blue;
+
+  }
+span.num {
+    position: absolute;
+    font-size: 1em;
+    font-weight: bold;
+    top: -4px;
+    color:blue;
+
+  }

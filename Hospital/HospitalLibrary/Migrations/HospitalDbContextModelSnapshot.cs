@@ -187,13 +187,13 @@ namespace HospitalLibrary.Migrations
                         },
                         new
                         {
-                            Id = 1,
+                            Id = -2,
                             Anonymous = false,
                             IsPublished = false,
-                            PatientUsername = "imbiamba",
-                            PublishAllowed = false,
+                            PatientUsername = "kristina",
+                            PublishAllowed = true,
                             SubmissionDate = new DateTime(2021, 11, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Text = "alallalal"
+                            Text = "Test on me"
                         });
                 });
 
@@ -1223,8 +1223,41 @@ namespace HospitalLibrary.Migrations
                             EndTime = new DateTime(2021, 11, 30, 19, 30, 0, 0, DateTimeKind.Unspecified),
                             IsCanceled = false,
                             IsReviewed = false,
-                            PatientId = "imbiamba",
+                            PatientId = "kristina",
                             StartTime = new DateTime(2021, 11, 30, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            VisitType = 0
+                        },
+                        new
+                        {
+                            Id = -2,
+                            DoctorId = "nelex",
+                            EndTime = new DateTime(2022, 1, 30, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            IsCanceled = false,
+                            IsReviewed = false,
+                            PatientId = "kristina",
+                            StartTime = new DateTime(2022, 1, 30, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            VisitType = 0
+                        },
+                        new
+                        {
+                            Id = -3,
+                            DoctorId = "nelex",
+                            EndTime = new DateTime(2021, 12, 29, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            IsCanceled = true,
+                            IsReviewed = false,
+                            PatientId = "kristina",
+                            StartTime = new DateTime(2021, 12, 29, 19, 0, 0, 0, DateTimeKind.Unspecified),
+                            VisitType = 0
+                        },
+                        new
+                        {
+                            Id = -4,
+                            DoctorId = "nelex",
+                            EndTime = new DateTime(2022, 1, 3, 19, 30, 0, 0, DateTimeKind.Unspecified),
+                            IsCanceled = true,
+                            IsReviewed = false,
+                            PatientId = "kristina",
+                            StartTime = new DateTime(2022, 1, 3, 19, 0, 0, 0, DateTimeKind.Unspecified),
                             VisitType = 0
                         });
                 });

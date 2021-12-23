@@ -46,7 +46,7 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
                      foreach (Pharmacy p in pharmacyRepository.GetAll())
                      {
 
-
+                    Console.WriteLine(p.PharmacyName);
                     channel.QueueDeclare(
                         queue: p.PharmacyName,
                         durable: false,
@@ -57,7 +57,7 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
                     channel.QueueBind(
                                queue: p.PharmacyName,
                                exchange: "medicineBenefit",
-                               routingKey: p.PharmacyName
+                               routingKey: p.PharmacyName //
                                ) ;
                     }
 

@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IPharmacy } from '../pharmacies-view/pharmacy';
+import { IStatBarChart } from '../statistics/model/IStatBarChart';
+import { IStatWinnDefeat } from '../statistics/model/IStatWinnDefeat';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,4 +15,21 @@ export class PharmacyProfileService {
   editPharmacy(pharmacy: any){
     return this._http.put<IPharmacy>( this.thisUrl +'/'+ pharmacy.pharmacyId, pharmacy)
   }
+
+  getStatWinnDefeat(apiKey: string){
+    return this._http.get<IStatWinnDefeat>('http://localhost:16928/api2/tender/statisticsPharmacyWinningsDefeat/' + apiKey)
+  }
+
+  getStatParticipate(apiKey: string){
+    return this._http.get<IStatWinnDefeat>('http://localhost:16928/api2/tender/statisticsPharmacyParticipate/' + apiKey)
+  }
+
+  getStatWinnerOffers(apiKey: string){
+    return this._http.get<IStatBarChart>('http://localhost:16928/api2/tender/statisticPharmacyWinnerOffers/' + apiKey)
+  }
+
+  getStatActiveTenderOffers(apiKey: string){
+    return this._http.get<IStatBarChart>('http://localhost:16928/api2/tender/statisticPharmacyAcitiveTenderOffers/' + apiKey)
+  }
+
 }

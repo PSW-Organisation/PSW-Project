@@ -34,6 +34,17 @@ namespace PharmacyLibrary.Service
             return this.notificationsRepository.GetAll();
         }
 
+        public int GetNumberOfUnseen()
+        {
+            int number = 0;
+            List<NotificationsForApp> allNotifications = GetAll();
+            foreach (NotificationsForApp n in allNotifications)
+            {
+                if (!n.Seen) number++;
+            }
+            return number;
+        }
+
         public void Save(NotificationsForApp note)
         {
             note.Id = notificationsRepository.GenerateId();
@@ -47,5 +58,7 @@ namespace PharmacyLibrary.Service
 
             return this.notificationsRepository.Update(note);
         }
+
+
     }
 }
