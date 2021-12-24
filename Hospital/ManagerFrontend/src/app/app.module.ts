@@ -31,6 +31,8 @@ import { ReportsViewComponent } from './reports-view/reports-view.component';
 import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { MaliciousPatientsComponent } from './malicious-patients/malicious-patients.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { TendersComponent } from './tenders/tenders.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { MaliciousPatientsComponent } from './malicious-patients/malicious-patie
     ReportsViewComponent,
     PharmacyProfileComponent,
     NotificationsComponent,
-    MaliciousPatientsComponent
+    MaliciousPatientsComponent,
+    StatisticsComponent,
+    TendersComponent
   ],
   imports: [
     BrowserModule,
