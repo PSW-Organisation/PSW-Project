@@ -30,9 +30,6 @@
     <li class="sidebar-nav-item">
       <a class="smooth-scroll" href="#Contact">Contact</a>
     </li>
-    <li class="sidebar-nav-item">
-      <a class="smooth-scroll" routerLink="/feedback">Feedback</a>
-    </li>
   </ul>
 </nav>
 <!-- Header Starts -->
@@ -55,7 +52,7 @@
             </div>
             <div class="d-flex justify-content-center" style="margin-top: 4%;">
               <button type="submit" form="loginform" value="submit"
-                class="btn btn-secondary text-light btn-xl"><b>Login</b></button>
+                class="btn btn-secondary text-light btn-xl" [routerLink]="['/profile']" [queryParams]="{username: username}"><b>Login</b></button>
             </div>
           </div>
         </form>

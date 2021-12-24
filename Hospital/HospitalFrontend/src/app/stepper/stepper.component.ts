@@ -1,7 +1,8 @@
 import { DatePipe, DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, Event } from '@angular/router';
+import { NavigationStart, NavigationError, NavigationEnd } from '@angular/router';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import Stepper from 'bs-stepper';
 import * as moment from 'moment';
@@ -39,7 +40,7 @@ export class StepperComponent implements OnInit {
       patientId: '',
       isReviewed: false,
       isCanceled: false,
-    }  
+    }
   isSelected: boolean = false;
   canCreate: boolean = false;
 
@@ -66,17 +67,36 @@ export class StepperComponent implements OnInit {
 
 
   constructor(@Inject(DOCUMENT) private document: Document, private schedulingService: SchedulingService,
-    private toastr: ToastrService, private router: Router, private datepipe: DatePipe) { }
+    private toastr: ToastrService, private router: Router, private datepipe: DatePipe) {
+      this.router.events.subscribe((event: Event) => {
+        if (event instanceof NavigationStart) {
+          
+        }
+
+        if (event instanceof NavigationError) {
+            // Handle error
+            console.error(event.error);
+        }
+
+        if (event instanceof NavigationEnd) {
+          let bsstepper = this.document.querySelector('.bs-stepper')
+          if (bsstepper != null)
+            this.stepper = new Stepper(bsstepper)
+            this.getDoctors();
+            this.configDatePicker();
+        }
+    });
+     }
 
   ngOnInit(): void {
-    var self = this
-    this.document.addEventListener('DOMContentLoaded', function () {
-      let bsstepper = self.document.querySelector('.bs-stepper')
-      if (bsstepper != null)
-        self.stepper = new Stepper(bsstepper)
-    })
-    this.getDoctors();
-    this.configDatePicker();
+    // var self = this
+    // this.document.addEventListener('DOMContentLoaded', function () {
+    //   let bsstepper = self.document.querySelector('.bs-stepper')
+    //   if (bsstepper != null)
+    //     self.stepper = new Stepper(bsstepper)
+    // })
+    // this.getDoctors();
+    // this.configDatePicker();
   }
 
   getDoctors() {
@@ -96,10 +116,10 @@ export class StepperComponent implements OnInit {
     })
   }
 
-  getSelectedDoctor(){
+  getSelectedDoctor() {
     this.selectedDoc = (document.getElementById("doctor") as HTMLSelectElement).value
     this.doctors.forEach(element => {
-      if(element.id === this.selectedDoc){
+      if (element.id === this.selectedDoc) {
         this.selectedDoctorFullname = element.fullName
       }
     });
@@ -113,10 +133,10 @@ export class StepperComponent implements OnInit {
     });
   }
 
-  getSelectedSpecialization(){
+  getSelectedSpecialization() {
     this.selectedSpec = this.specForm.get('specControl')?.value
     this.filteredDoctors = []
-    this.filteredDoctors = this.doctors.filter( d => d.specialization == this.selectedSpec)
+    this.filteredDoctors = this.doctors.filter(d => d.specialization == this.selectedSpec)
     this.doctorForm.get('doctorControl')?.setValue(this.filteredDoctors[0])
   }
   nextStep() {
@@ -137,11 +157,11 @@ export class StepperComponent implements OnInit {
   isDisabled = (date: NgbDate) =>
     moment({ year: date.year, month: date.month - 1, day: date.day }).isBefore(moment());
 
-  selectedRow(visit : Visit){
-    this.visits.map( x => {
+  selectedRow(visit: Visit) {
+    this.visits.map(x => {
       x.isCanceled = false
-      return x 
-    }) 
+      return x
+    })
     this.selectedVisit = {
       startTime: visit.startTime,
       endTime: visit.endTime,
@@ -154,28 +174,28 @@ export class StepperComponent implements OnInit {
     visit.isCanceled = true;
     this.canCreate = true;
   }
-  generateFreeVisits(){
+  generateFreeVisits() {
     let self = this
     let dateParts = this.date.split('-');
-    this.schedulingService.getGeneratedFreeVisits(this.selectedDoc, false, false, 
+    this.schedulingService.getGeneratedFreeVisits(this.selectedDoc, false, false,
       `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`,
       `${dateParts[1]}/${dateParts[0]}/${dateParts[2]}`).subscribe({
-      next: response => {
-        this.visits = response
-        //this.visits = []
-      }
-    })
+        next: response => {
+          this.visits = response
+          //this.visits = []
+        }
+      })
   }
 
   createVisit() {
-    if(this.canCreate){
+    if (this.canCreate) {
       this.schedulingService.createVisit(this.selectedVisit).subscribe({
         next: response => {
           this.showSuccess("Appointment successfully scheduled!")
-          this.router.navigate(['/appointments'], {queryParams:{username: this.selectedVisit.patientId}})
-        }, 
+          this.router.navigate(['/appointments'], { queryParams: { username: this.selectedVisit.patientId } })
+        },
         error: e => {
-          if(e.status === 400) this.showError("The selected appointment has been taken in the meantime. Please try selecting another one.")   
+          if (e.status === 400) this.showError("The selected appointment has been taken in the meantime. Please try selecting another one.")
           else this.showError("Failed.")
         }
       })
@@ -186,12 +206,12 @@ export class StepperComponent implements OnInit {
     this.toastr.success(message);
   }
 
-  showError(message: string) {  
+  showError(message: string) {
     this.toastr.error(message);
   }
 
   checkIfVisitsEmpty(): boolean {
-    return this.visits.length === 0 
+    return this.visits.length === 0
   }
 
 }
