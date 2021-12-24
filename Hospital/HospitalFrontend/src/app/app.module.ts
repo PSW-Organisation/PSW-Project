@@ -26,6 +26,7 @@ import { CustomAdapter, CustomDateParserFormatter } from './shared/services/date
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { RecommendedAppointmentSchedulingComponent } from './recommended-appointment-scheduling/recommended-appointment-scheduling.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 export function playerFactory() {
   return player;
@@ -41,7 +42,8 @@ export function playerFactory() {
     ProfileComponent,
     AppointmentsComponent,
     StepperComponent,
-    RecommendedAppointmentSchedulingComponent
+    RecommendedAppointmentSchedulingComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -57,14 +59,14 @@ export function playerFactory() {
     }),
     RouterModule.forRoot([
       { path: '', component: WelcomeComponent },
-      { path: 'feedback', component: FeedbackComponent },
+      { path: 'home', component: WelcomeComponent },
       { path: 'registration', component: RegistrationComponent },
       { path: 'verification', component: WelcomeComponent },
       { path: 'survey', component: SurveyComponent},
       { path: 'profile', component: ProfileComponent },
       { path: 'appointments', component: AppointmentsComponent },
       { path: 'basic-scheduling', component: StepperComponent },
-      { path: 'recommended-appointment-scheduling', component: RecommendedAppointmentSchedulingComponent },
+      { path: 'recommended-scheduling', component: RecommendedAppointmentSchedulingComponent },
       { path: '**', redirectTo: '' }
     ]),
     NgbModule,

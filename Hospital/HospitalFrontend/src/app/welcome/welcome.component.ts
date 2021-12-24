@@ -7,6 +7,7 @@ import { switchMap } from 'rxjs/operators';
 import { RegistrationService } from '../registration/registration.service';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -17,8 +18,9 @@ export class WelcomeComponent implements OnInit, AfterViewInit {
 
   feedbacks: Array<Feedback> = [];
   token: string = '';
+  username: string = 'imbiamba';
   constructor(private feedbackService: FeedbackService, private route: ActivatedRoute,
-    private regitrationService: RegistrationService, private toastr: ToastrService, private location: Location) { }
+    private regitrationService: RegistrationService, private toastr: ToastrService, private location: Location, public router: Router,) { }
   ngAfterViewInit(): void {
     this.getAllFeedbacks();
   }
@@ -37,8 +39,9 @@ export class WelcomeComponent implements OnInit, AfterViewInit {
           else this.showError('Your account is already activated.')
         }
       })
-      this.location.replaceState('/')
+      this.location.replaceState('/home')
     }
+    this.router.navigate(['/home']);
   }
 
   getAllFeedbacks(): void {
