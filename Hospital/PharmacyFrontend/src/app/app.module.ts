@@ -12,6 +12,7 @@ import { ReportsViewComponent } from './reports-view/reports-view.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { FileCompressionViewComponent } from './file-compression-view/file-compression-view.component';
 import { NgChartsModule } from 'ng2-charts';
+import { TendersComponent } from './tenders/tenders.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NgChartsModule } from 'ng2-charts';
     ReportsViewComponent,
     NotificationsComponent,
     FileCompressionViewComponent,
+    TendersComponent,
 
   ],
   imports: [
