@@ -15,6 +15,12 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Utils
         {
             StartTime = startTime;
             EndTime = endTime;
+            Validate();
+        }
+
+        private bool Validate()
+        {
+            return StartTime < EndTime;
         }
     }
 }

@@ -22,11 +22,10 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
         public TermOfRenovation CreateTermsOfRenovation(TermOfRenovation termOfRenovation)
         {
             TermOfRenovation newTermOfRelocationEquipment = termOfRenovation;
-            List<TimeInterval> termForRelocation = GetFreePossibleTermsOfRenovation(new ParamsOfRenovation(termOfRenovation.StartTime, termOfRenovation.EndTime, termOfRenovation.DurationInMinutes, termOfRenovation.IdRoomA, termOfRenovation.IdRoomB));
+            List<TimeInterval> termForRelocation = GetFreePossibleTermsOfRenovation(new ParamsOfRenovation(termOfRenovation.Time.StartTime, termOfRenovation.Time.EndTime, termOfRenovation.DurationInMinutes, termOfRenovation.IdRoomA, termOfRenovation.IdRoomB));
             if (termForRelocation.Count == 1)
             {
-                newTermOfRelocationEquipment.StartTime = termForRelocation[0].StartTime;
-                newTermOfRelocationEquipment.EndTime = termForRelocation[0].EndTime;
+                newTermOfRelocationEquipment.Time = new TimeInterval(termForRelocation[0].StartTime, termForRelocation[0].EndTime);
                 newTermOfRelocationEquipment.Id = _termOfRenovationRepository.GetNewID();
 
                 _termOfRenovationRepository.Insert(newTermOfRelocationEquipment);
@@ -78,9 +77,9 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
         {
             List<TimeInterval> allTimeInteval = new List<TimeInterval>();
             if (termOfRenovationRoom != null)
-                foreach (TermOfRenovation term in termOfRenovationRoom) allTimeInteval.Add(new TimeInterval(term.StartTime, term.EndTime));
+                foreach (TermOfRenovation term in termOfRenovationRoom) allTimeInteval.Add(new TimeInterval(term.Time.StartTime, term.Time.EndTime));
             if (termOfRelocationRoom != null)
-                foreach (TermOfRelocationEquipment term in termOfRelocationRoom) allTimeInteval.Add(new TimeInterval(term.StartTime, term.EndTime));
+                foreach (TermOfRelocationEquipment term in termOfRelocationRoom) allTimeInteval.Add(new TimeInterval(term.Time.StartTime, term.Time.EndTime));
 
             return allTimeInteval;
         }
@@ -88,7 +87,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
         public bool CancelRenovationTerm(int id)
         {
             TermOfRenovation termOfRenovation = _termOfRenovationRepository.Get(id);
-            if (_termsUtils.IsCancelAllowed(termOfRenovation.StartTime))
+            if (_termsUtils.IsCancelAllowed(termOfRenovation.Time.StartTime))
             {
                 termOfRenovation.StateOfRenovation = StateOfTerm.CANCELED;
                 _termOfRenovationRepository.Save(termOfRenovation);

@@ -29,15 +29,31 @@ namespace HospitalAPI.Mapper
             CreateMap<SurveyQuestionDto, Survey>();
 
             CreateMap<ParamsOfRelocationEquipmentDTO, ParamsOfRelocationEquipment>();
-            CreateMap<TermOfRelocationEquipment, ParamsOfRelocationEquipmentDTO>();
-
+            CreateMap<TermOfRelocationEquipment, ParamsOfRelocationEquipmentDTO>()
+                .ForMember(
+                    dest => dest.StartTime, 
+                    act => act.MapFrom(src => src.Time.StartTime )
+                )
+                .ForMember(
+                    dest => dest.EndTime,
+                    act => act.MapFrom(src => src.Time.EndTime)
+                ); 
+            
             //CreateMap<Room, RoomMinimalInfoDTO>().ConstructUsing(r => new RoomMinimalInfoDTO() { Id=r.Id, Name=r.Name });
             CreateMap<Room, RoomMinimalInfoDTO>();
 
             CreateMap<ParamsOfRenovation, ParamsOfRenovationDTO>();
             CreateMap<ParamsOfRenovationDTO, ParamsOfRenovation>();
 
-            CreateMap<TermOfRenovation, TermOfRenovationDTO>();
+            CreateMap<TermOfRenovation, TermOfRenovationDTO>()
+                .ForMember(
+                    dest => dest.StartTime,
+                    act => act.MapFrom(src => src.Time.StartTime)
+                )
+                .ForMember(
+                    dest => dest.EndTime,
+                    act => act.MapFrom(src => src.Time.EndTime)
+                );
             CreateMap<TermOfRenovationDTO, TermOfRenovation>();
 
             CreateMap<MedicineDTO, Medicine>();
@@ -47,18 +63,34 @@ namespace HospitalAPI.Mapper
             CreateMap<VisitDto, Visit>();
 
             CreateMap<TermOfRenovation, ScheduleTermDTO>()
-        .ForMember(dest =>
-            dest.TermState,
-            opt => opt.MapFrom(src => src.StateOfRenovation));
+                .ForMember(dest =>
+                    dest.TermState,
+                    opt => opt.MapFrom(src => src.StateOfRenovation))
+                .ForMember(
+                    dest => dest.StartTime,
+                    act => act.MapFrom(src => src.Time.StartTime)
+                )
+                .ForMember(
+                    dest => dest.EndTime,
+                    act => act.MapFrom(src => src.Time.EndTime)
+                );
             CreateMap<ScheduleTermDTO, TermOfRenovation>()
         .ForMember(dest =>
             dest.StateOfRenovation,
             opt => opt.MapFrom(src => src.TermState));
 
             CreateMap<TermOfRelocationEquipment, ScheduleTermDTO>()
-        .ForMember(dest =>
-            dest.TermState,
-            opt => opt.MapFrom(src => src.RelocationState));
+            .ForMember(
+                dest =>dest.TermState,
+                opt => opt.MapFrom(src => src.RelocationState))
+            .ForMember(
+                dest => dest.StartTime,
+                act => act.MapFrom(src => src.Time.StartTime)
+            ).ForMember(
+                dest => dest.EndTime,
+                act => act.MapFrom(src => src.Time.EndTime)
+            );
+
             CreateMap<ScheduleTermDTO, TermOfRelocationEquipment>()
         .ForMember(dest =>
             dest.RelocationState,

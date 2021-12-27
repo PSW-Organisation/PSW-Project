@@ -38,7 +38,7 @@ namespace HospitalAPI.Controllers
         public ActionResult<ParamsOfRelocationEquipmentDTO> CreateTermOfRelocation([FromBody] ParamsOfRelocationEquipmentDTO paramsOfRelocationEquipmentDTO)
         {
             var paramsOfRelocationEquipment = _mapper.Map<ParamsOfRelocationEquipment>(paramsOfRelocationEquipmentDTO);
-            var termOfRelocationEquipment = _relocationEquipmentService.CreateTermsOfRelocation(paramsOfRelocationEquipment);
+            TermOfRelocationEquipment termOfRelocationEquipment = _relocationEquipmentService.CreateTermsOfRelocation(paramsOfRelocationEquipment);
             
             if (termOfRelocationEquipment == null) return BadRequest("unsuccessfully");
 

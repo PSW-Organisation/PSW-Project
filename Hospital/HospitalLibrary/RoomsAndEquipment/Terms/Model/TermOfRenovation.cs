@@ -1,5 +1,6 @@
 ﻿using HospitalLibrary.Model;
 using HospitalLibrary.RoomsAndEquipment.Model;
+using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,8 +9,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Model
 {
     public class TermOfRenovation : EntityDb
     {
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public TimeInterval Time { get; set; }
         public int DurationInMinutes { get; set; }
         public StateOfTerm StateOfRenovation { get; set; }
         public TypeOfRenovation TypeOfRenovation { get; set; }

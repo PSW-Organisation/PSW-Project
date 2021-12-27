@@ -8,6 +8,7 @@ using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
+using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 
 namespace ehealthcare.Model
 {
@@ -510,8 +511,7 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 8,
                     NameOfEquipment = "bed",
                     QuantityOfEquipment = 2,
-                    StartTime = new DateTime(2021, 11, 22, 1, 0, 0),
-                    EndTime = new DateTime(2021, 11, 22, 1, 10, 0),
+                    Time = new TimeInterval(new DateTime(2021, 11, 22, 1, 0, 0), new DateTime(2021, 11, 22, 1, 10, 0)),
                     DurationInMinutes = 10,
                     RelocationState = StateOfTerm.PENDING
                 },
@@ -522,8 +522,7 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 9,
                     NameOfEquipment = "needle",
                     QuantityOfEquipment = 14,
-                    StartTime = new DateTime(2021, 11, 22, 3, 30, 0),
-                    EndTime = new DateTime(2021, 11, 22, 4, 10, 0),
+                    Time = new TimeInterval(new DateTime(2021, 11, 22, 3, 30, 0), new DateTime(2021, 11, 22, 4, 10, 0)),
                     DurationInMinutes = 40,
                     RelocationState = StateOfTerm.PENDING
                 },
@@ -534,8 +533,7 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 9,
                     NameOfEquipment = "infusion",
                     QuantityOfEquipment = 8,
-                    StartTime = new DateTime(2021, 11, 23, 7, 30, 0),
-                    EndTime = new DateTime(2021, 11, 23, 7, 45, 0),
+                    Time = new TimeInterval(new DateTime(2021, 11, 23, 7, 30, 0), new DateTime(2021, 11, 23, 7, 45, 0)),
                     DurationInMinutes = 15,
                     RelocationState = StateOfTerm.PENDING
                 },
@@ -546,8 +544,7 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 11,
                     NameOfEquipment = "table",
                     QuantityOfEquipment = 1,
-                    StartTime = new DateTime(2021, 11, 23, 9, 0, 0),
-                    EndTime = new DateTime(2021, 11, 23, 9, 25, 0),
+                    Time = new TimeInterval(new DateTime(2021, 11, 23, 9, 0, 0),new DateTime(2021, 11, 23, 9, 25, 0)),
                     DurationInMinutes = 25,
                     RelocationState = StateOfTerm.PENDING
                 },
@@ -558,8 +555,7 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 7,
                     NameOfEquipment = "xrayMachine",
                     QuantityOfEquipment = 1,
-                    StartTime = new DateTime(2021, 11, 23, 10, 45, 0),
-                    EndTime = new DateTime(2021, 11, 23, 11, 15, 0),
+                    Time = new TimeInterval(new DateTime(2021, 11, 23, 10, 45, 0),new DateTime(2021, 11, 23, 11, 15, 0)),
                     DurationInMinutes = 30,
                     RelocationState = StateOfTerm.PENDING
                 },
@@ -570,8 +566,7 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 11,
                     NameOfEquipment = "chair",
                     QuantityOfEquipment = 5,
-                    StartTime = new DateTime(2021, 11, 23, 14, 30, 0),
-                    EndTime = new DateTime(2021, 11, 23, 14, 50, 0),
+                    Time = new TimeInterval(new DateTime(2021, 11, 23, 14, 30, 0), new DateTime(2021, 11, 23, 14, 50, 0)),
                     DurationInMinutes = 20,
                     RelocationState = StateOfTerm.PENDING
                 }
@@ -585,8 +580,7 @@ namespace ehealthcare.Model
                   new TermOfRenovation()
                   {
                       Id = 1,
-                      StartTime = new DateTime(2021, 12, 7, 10, 30, 0),
-                      EndTime = new DateTime(2021, 12, 7, 11, 30, 0),
+                      Time = new TimeInterval( new DateTime(2021, 12, 7, 10, 30, 0), new DateTime(2021, 12, 7, 11, 30, 0)),
                       DurationInMinutes = 60,
                       StateOfRenovation = StateOfTerm.CANCELED,
                       TypeOfRenovation = TypeOfRenovation.MERGE,
@@ -603,8 +597,7 @@ namespace ehealthcare.Model
                   new TermOfRenovation()
                   {
                       Id = 2,
-                      StartTime = new DateTime(2021, 12, 17, 9, 0, 0),
-                      EndTime = new DateTime(2021, 12, 18, 9, 0, 0),
+                      Time = new TimeInterval(new DateTime(2021, 12, 17, 9, 0, 0), new DateTime(2021, 12, 18, 9, 0, 0)),
                       DurationInMinutes = 1440,
                       StateOfRenovation = StateOfTerm.PENDING,
                       TypeOfRenovation = TypeOfRenovation.SPLIT,
