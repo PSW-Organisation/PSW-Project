@@ -11,7 +11,7 @@ import { Survey } from "./survey";
   
     createSurvey(survey : Survey): Observable<any>{
         return this._http.post<any>('/api/survey', survey, {observe: 'response'});
-      }
+    }
 
     getVisitById(id: number): Observable<any>{
        return this._http.get<any>(`/api/appointment/visit/${id}`, {observe: 'response'});

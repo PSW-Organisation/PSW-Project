@@ -1,21 +1,18 @@
 using ehealthcare.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FluentValidation.AspNetCore;
 using FluentValidation;
-using AutoMapper;
 using HospitalLibrary.GraphicalEditor.Service;
 using HospitalLibrary.GraphicalEditor.Repository;
-using HospitalLibrary.Repository;
 using HospitalLibrary.Repository.DbRepository;
 using HospitalLibrary.FeedbackAndSurvey.Service;
 using HospitalLibrary.FeedbackAndSurvey.Model;
+using HospitalLibrary.Shared.Service;
 using HospitalLibrary.FeedbackAndSurvey.Repository;
 using HospitalAPI.DTO;
 using HospitalLibrary.RoomsAndEquipment.Service;
@@ -29,8 +26,6 @@ using HospitalLibrary;
 using PatientService = HospitalLibrary.MedicalRecords.Service.PatientService;
 using Newtonsoft.Json;
 using HospitalAPI.Validators;
-using System;
-using HospitalLibrary.DoctorSchedule.Repository;
 using HospitalLibrary.RoomsAndEquipment.Terms.Repository;
 using HospitalLibrary.RoomsAndEquipment.Terms.Service;
 using HospitalLibrary.Medicines.Repository;
@@ -38,25 +33,55 @@ using HospitalLibrary.Medicines.Service;
 using HospitalLibrary.Schedule.Service;
 using HospitalLibrary.Schedule.Repository;
 using HospitalLibrary.DoctorSchedule.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using HospitalLibrary.Shared.Repository;
+using HospitalAPI.JWT;
+using Microsoft.AspNetCore.Authorization;
+using HospitalLibrary.DoctorSchedule.Repository;
 
 namespace HospitalAPI
 {
     public class Startup
     {
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        public IConfiguration Configuration { get; private set; }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
+            services.AddAuthentication(auth =>
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            })
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["JwtToken:Audience"],
+                    ValidIssuer = Configuration["JwtToken:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtToken:SigningKey"]))
+                };
+            });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Patient", policy => policy.Requirements.Add(new RoleRequirement("patient")));
+                options.AddPolicy("Manager", policy => policy.Requirements.Add(new RoleRequirement("manager")));
+            });
+            services.AddSingleton<IAuthorizationHandler, RoleAuthorizationHandler>();
+
             services.AddDbContext<HospitalDbContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
@@ -79,10 +104,10 @@ namespace HospitalAPI
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
                 builder
-                    .WithOrigins(new[] { "http://localhost:4200" })
+                    .AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials();
+                    .AllowAnyHeader();
+                //.AllowCredentials();
             }));
             services.AddAutoMapper(typeof(Startup));
 
@@ -129,11 +154,11 @@ namespace HospitalAPI
 
             services.AddScoped<IRoomEquipmentService, RoomEquipmentService>();
             services.AddScoped<IRoomEquipmentRepository, RoomEquipmentRepository>();
-           
+
             services.AddScoped<IPatientFeedbackService, PatientFeedbackService>();
             services.AddScoped<GenericDbRepository<PatientFeedback>, PatientFeedbackDbRepository>();
             services.AddScoped<IPatientFeedbackRepository, PatientFeedbackDbRepository>();
-            
+
             services.AddHostedService<ScheduleBackgroundService>();
             services.AddScoped<ISurveyService, SurveyService>();
             services.AddScoped<GenericDbRepository<Survey>, SurveyDbRepository>();
@@ -144,11 +169,11 @@ namespace HospitalAPI
 
             services.AddScoped<IMedicineRepository, MedicineRepository>();
             services.AddScoped<IMedicineService, MedicineService>();
-            
+
             services.AddHostedService<RenovationBackgroundService>();
+
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -156,18 +181,11 @@ namespace HospitalAPI
                 app.UseDeveloperExceptionPage();
             }
 
-
-            app.UseRouting();
-
-            app.UseCors("CorsPolicy");
-
-
             app.UseHttpsRedirection();
-
-            app.UseCors(options => options.AllowAnyOrigin());
-
+            app.UseRouting();
+            app.UseCors("CorsPolicy");
+            app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

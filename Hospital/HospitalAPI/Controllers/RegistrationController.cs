@@ -8,11 +8,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using HospitalLibrary.MedicalRecords.Service;
 using HospitalAPI.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class RegistrationController : ControllerBase
     {
         private readonly HospitalDbContext _context;

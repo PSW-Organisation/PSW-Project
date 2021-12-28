@@ -1,7 +1,9 @@
 using HospitalLibrary.Model;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
+
 
 namespace ehealthcare.Model
 {
@@ -9,6 +11,7 @@ namespace ehealthcare.Model
     {
         public LoginType LoginType { get; set; }
         public string Username { get; set; }
+        [JsonIgnore]
         public string Password { get; set; }
         public Guid Token { get; set; }
         public bool IsActivated { get; set; }
@@ -25,7 +28,9 @@ namespace ehealthcare.Model
         public string City { get; set; }
         public string Country { get; set; }
 
-        public User(string id) : base(id) { }
+        public User(string id) : base(id) {
+            Username = id;
+        }
 
     }
 }

@@ -1,6 +1,6 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +27,8 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { RecommendedAppointmentSchedulingComponent } from './recommended-appointment-scheduling/recommended-appointment-scheduling.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { TokenInterceptor } from './shared/token.interceptor';
+import { PatientGuard } from './shared/jwt-guard';
 
 export function playerFactory() {
   return player;
@@ -58,25 +60,26 @@ export function playerFactory() {
       progressAnimation: 'increasing'
     }),
     RouterModule.forRoot([
-      { path: '', component: WelcomeComponent },
       { path: 'home', component: WelcomeComponent },
+      { path: 'feedback', component: FeedbackComponent, canActivate: [PatientGuard] },
       { path: 'registration', component: RegistrationComponent },
       { path: 'verification', component: WelcomeComponent },
-      { path: 'survey', component: SurveyComponent},
-      { path: 'profile', component: ProfileComponent },
-      { path: 'appointments', component: AppointmentsComponent },
-      { path: 'basic-scheduling', component: StepperComponent },
-      { path: 'recommended-scheduling', component: RecommendedAppointmentSchedulingComponent },
-      { path: '**', redirectTo: '' }
+      { path: 'survey', component: SurveyComponent, canActivate: [PatientGuard] },
+      { path: 'profile', component: ProfileComponent, canActivate: [PatientGuard] },
+      { path: 'appointments', component: AppointmentsComponent, canActivate: [PatientGuard] },
+      { path: 'basic-scheduling', component: StepperComponent, canActivate: [PatientGuard] },
+      { path: 'recommended-scheduling', component: RecommendedAppointmentSchedulingComponent, canActivate: [PatientGuard] },
+      { path: '**', redirectTo: 'home' }
     ]),
     NgbModule,
     LottieModule.forRoot({ player: playerFactory }),
     AngularMultiSelectModule
   ],
-  providers: [FeedbackService, RandomUserService, DatePipe, Location, 
+  providers: [FeedbackService, RandomUserService, DatePipe, Location, PatientGuard, 
     //{ provide: LOCALE_ID, useValue: 'sr-Latn'},
     {provide: NgbDateAdapter, useClass: CustomAdapter},
-    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter}
+    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter},
+    {provide:  HTTP_INTERCEPTORS,  useClass: TokenInterceptor,  multi: true}
   ],
     
   bootstrap: [AppComponent]

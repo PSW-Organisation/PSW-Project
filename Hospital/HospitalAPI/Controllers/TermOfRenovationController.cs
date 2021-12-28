@@ -3,6 +3,7 @@ using HospitalAPI.DTO;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Service;
 using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace HospitalAPI.Controllers
 {
     [Route("api/termsofrenovation")]
     [ApiController]
+    [Authorize(Policy = "Manager")]
+
     public class TermOfRenovationController : ControllerBase
     {
         private readonly IMapper _mapper;

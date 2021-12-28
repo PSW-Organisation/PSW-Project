@@ -8,11 +8,13 @@ using System.Linq;
 using HospitalLibrary.RoomsAndEquipment.Service;
 using ehealthcare.Model;
 using HospitalLibrary.RoomsAndEquipment.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
     [Route("api/baseRooms")]
     [ApiController]
+    [Authorize(Policy = "Manager")]
     public class RoomController : ControllerBase
     {
         private readonly IMapper _mapper;

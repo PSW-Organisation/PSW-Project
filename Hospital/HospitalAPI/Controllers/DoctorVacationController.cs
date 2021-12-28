@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 using HospitalAPI.DTO;
 using HospitalLibrary.DoctorSchedule.Model;
 using HospitalLibrary.DoctorSchedule.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "Manager")]
+
     public class DoctorVacationController : ControllerBase
     {
         private readonly IMapper _mapper;

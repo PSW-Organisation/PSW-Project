@@ -301,7 +301,7 @@ export class RegistrationComponent implements OnInit {
         if (c.statusText === 'OK') {
           this.toastr.success('Verification email has been sent! Redirecting to home page');
           this.registrationForm.reset();
-          setTimeout(() => { this.router.navigate(['/']); }, 5000);
+          setTimeout(() => { this.router.navigate(['home']); }, 5000);
         }
       }, error: e => this.showError('An error occured.')
     })

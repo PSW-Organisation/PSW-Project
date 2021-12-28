@@ -8,6 +8,7 @@ using ehealthcare.Model;
 using HospitalAPI.DTO;
 using HospitalLibrary.MedicalRecords.Service;
 using HospitalLibrary.RoomsAndEquipment.Terms.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -15,6 +16,7 @@ namespace HospitalAPI.Controllers
 {
     [Route("api/doctor")]
     [ApiController]
+    [Authorize(Policy = "Manager")]
     public class DoctorController : ControllerBase
     {
         private readonly IMapper _mapper;

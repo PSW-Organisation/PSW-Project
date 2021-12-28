@@ -17,33 +17,34 @@ import { BenefitsViewComponent } from './benefits-view/benefits-view.component';
 import { ReportsViewComponent } from './reports-view/reports-view.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { MaliciousPatientsComponent } from './malicious-patients/malicious-patients.component';
-import { TendersComponent } from "./tenders/tenders.component"
-import { DoctorsComponent } from "./doctors/doctors.component"
+import { ManagerGuard } from './shared/jwt/jwt-guard';
+import { TendersComponent } from './tenders/tenders.component';
+import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ScheduleComponent } from './doctor-vacation/schedule/schedule.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
-  { path: 'pharmacies', component: PharmaciesViewComponent },
-  { path: 'complaints', component: ComplaintsViewComponent },
-  { path: 'complaint/:id', component: ComplaintDetailComponent },
-  { path: 'feedback', component: FeedBackComponent },
-  { path: 'hospitalExterior', component: HospitalExteriorViewComponent },
-  { path: 'orderingMedicine', component: OrderingMedicineComponent },
-  { path: 'createReport', component: MedicineConsumptionComponent},
-  { path: 'benefits', component: BenefitsViewComponent},
-  { path: 'survey', component: SurveyComponent },
-  { path: 'reports', component: ReportsViewComponent},
-  { path: 'editPharmacy', component: EditPharmacyComponent},
-  { path: 'pharmacy/:id', component: PharmacyProfileComponent},
-  { path: 'notifications', component: NotificationsComponent},
-  { path: 'malicious', component: MaliciousPatientsComponent },
-  { path: 'tenders', component: TendersComponent },
-  { path: 'doctors', component: DoctorsComponent },
-  { path: 'doctorView/:id', component: DoctorViewComponent },
-  { path: 'home', component: HomePageComponent },
-  { path: 'doctorVacation/:doctorId', component: ScheduleComponent}
+  { path: 'pharmacies', component: PharmaciesViewComponent, canActivate: [ManagerGuard] },
+  { path: 'complaints', component: ComplaintsViewComponent, canActivate: [ManagerGuard] },
+  { path: 'complaint/:id', component: ComplaintDetailComponent, canActivate: [ManagerGuard] },
+  { path: 'feedback', component: FeedBackComponent, canActivate: [ManagerGuard] },
+  { path: 'hospitalExterior', component: HospitalExteriorViewComponent, canActivate: [ManagerGuard] },
+  { path: 'orderingMedicine', component: OrderingMedicineComponent, canActivate: [ManagerGuard] },
+  { path: 'createReport', component: MedicineConsumptionComponent, canActivate: [ManagerGuard] },
+  { path: 'benefits', component: BenefitsViewComponent, canActivate: [ManagerGuard] },
+  { path: 'survey', component: SurveyComponent, canActivate: [ManagerGuard] },
+  { path: 'reports', component: ReportsViewComponent, canActivate: [ManagerGuard] },
+  { path: 'editPharmacy', component: EditPharmacyComponent, canActivate: [ManagerGuard] },
+  { path: 'pharmacy/:id', component: PharmacyProfileComponent, canActivate: [ManagerGuard] },
+  { path: 'notifications', component: NotificationsComponent, canActivate: [ManagerGuard] },
+  { path: 'malicious', component: MaliciousPatientsComponent, canActivate: [ManagerGuard] },
+  { path: 'tenders', component: TendersComponent, canActivate: [ManagerGuard] },
+  { path: 'doctors', component: DoctorsComponent, canActivate: [ManagerGuard] },
+  { path: 'doctorView/:id', component: DoctorViewComponent, canActivate: [ManagerGuard] },
+  { path: 'home', component: HomePageComponent, canActivate: [ManagerGuard] },
+  { path: 'doctorVacation/:doctorId', component: ScheduleComponent, canActivate: [ManagerGuard] }
 ];
 
 @NgModule({
