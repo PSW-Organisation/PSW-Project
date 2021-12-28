@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -38,6 +38,8 @@ import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ScheduleComponent } from './doctor-vacation/schedule/schedule.component';
 import { CuFormComponent } from './doctor-vacation/cu-form/cu-form.component';
+import { ManagerGuard } from './shared/jwt/jwt-guard';
+import { TokenInterceptor } from './shared/jwt/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,11 @@ import { CuFormComponent } from './doctor-vacation/cu-form/cu-form.component';
     HttpClientModule,
     AppRoutingModule,
     RoomManagmentModule,
-    ToastrModule.forRoot({ preventDuplicates: true }),
+    ToastrModule.forRoot({
+      positionClass: 'toast-custom',
+      progressBar: true,
+      progressAnimation: 'increasing'
+    }),
     BrowserAnimationsModule,
   ],
   providers: [
@@ -79,6 +85,8 @@ import { CuFormComponent } from './doctor-vacation/cu-form/cu-form.component';
     FeedbackService,
     EditPharmacyService,
     SurveyService,
+    ManagerGuard,
+    {provide:  HTTP_INTERCEPTORS,  useClass: TokenInterceptor,  multi: true}
   ],
   bootstrap: [AppComponent],
 })

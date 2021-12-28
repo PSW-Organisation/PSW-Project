@@ -5,6 +5,7 @@ using HospitalLibrary.Model;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 using Microsoft.EntityFrameworkCore;
+using HospitalLibrary.Shared.Model;
 using System;
 using HospitalLibrary.DoctorSchedule.Model;
 
@@ -18,6 +19,7 @@ namespace ehealthcare.Model
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<MedicalPermit> MedicalPermits { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Manager> Managers { get; set; }
         public DbSet<RoomGraphic> RoomGraphics { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Visit> Visits { get; set; }
@@ -930,6 +932,53 @@ namespace ehealthcare.Model
                         IsReviewed = false,
                         IsCanceled = false
                     });
+            });
+
+            modelBuilder.Entity<Manager>(m =>
+            {
+
+                m.HasData(
+                    new Manager("laki")
+                    {
+                        Id = "laki",
+                        Name = "Igor",
+                        Surname = "Maric",
+                        ParentName = "Ivan",
+                        Username = "laki",
+                        Password = "Laki123!",
+                        LoginType = LoginType.manager,
+                        Gender = "male",
+                        DateOfBirth = new DateTime(1990, 5, 10),
+                        Phone = "129572904354",
+                        Email = "igor.m@gmail.com",
+                        Address = "Hajduk Veljka, 5",
+                        City = "Novi Sad",
+                        Country = "Serbia",
+                        IsBlocked = false,
+                        IsActivated = true,
+                        Token = Guid.Empty,
+                    },
+                    new Manager("jagodica")
+                    {
+                        Id = "jagodica",
+                        Name = "Jagoda",
+                        Surname = "Vasic",
+                        ParentName = "Petar",
+                        Username = "jagodica",
+                        Password = "Jagodica123!",
+                        LoginType = LoginType.manager,
+                        Gender = "female",
+                        DateOfBirth = new DateTime(1985, 1, 7),
+                        Phone = "6820543267243",
+                        Email = "jagodica@gmail.com",
+                        Address = "Rumenacka, 23",
+                        City = "Novi Sad",
+                        Country = "Serbia",
+                        IsBlocked = false,
+                        IsActivated = true,
+                        Token = Guid.Empty,
+                    }
+                );
             });
         }
     }

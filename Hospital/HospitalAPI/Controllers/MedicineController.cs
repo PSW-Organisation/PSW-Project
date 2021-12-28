@@ -2,6 +2,7 @@
 using HospitalAPI.DTO;
 using HospitalLibrary.Medicines.Model;
 using HospitalLibrary.Medicines.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace HospitalAPI.Controllers
 {
     [Route("api/medicine")]
     [ApiController]
+    [Authorize(Policy = "Manager")]
     public class MedicineController : ControllerBase
     {
         private readonly IMapper _mapper;

@@ -1,4 +1,5 @@
 using HospitalLibrary.RoomsAndEquipment.Service;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,9 @@ namespace HospitalAPI
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            /*var host = WebHost.CreateDefaultBuilder(args).ConfigureAppConfiguration(builder => { })
+                .UseStartup<Startup>().Build();
+            host.Run();*/
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

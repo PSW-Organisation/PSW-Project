@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.AspNetCore.Identity;
 
 namespace ehealthcare.Model
 {
 	[Serializable]
-	public class Entity
+	public class Entity 
 	{
 		private string id;
 

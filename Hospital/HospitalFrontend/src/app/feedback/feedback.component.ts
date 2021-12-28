@@ -7,6 +7,7 @@ import { Feedback } from './feedback';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { formatDate } from '@angular/common';
+import { Patient } from '../registration/patient';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class FeedbackComponent implements OnInit {
     text: new FormControl('')
   });
   feedbacks: any;
+
+  user: Patient = JSON.parse(localStorage.getItem('currentUser') || '{}')
 
   constructor(private service: FeedbackService, private modalService: NgbModal,
     private toastr: ToastrService) { }
@@ -47,7 +50,7 @@ export class FeedbackComponent implements OnInit {
 
   sendFeedback(modal: any) {
     let feedback: Feedback = {
-      patientUsername: 'imbiamba',
+      patientUsername: this.user.username,
       submissionDate: new Date((Date.now())),
       text: this.feedbackForm.get("textControl")?.value,
       anonymous: this.feedbackForm.get("anonymityControl")?.value,

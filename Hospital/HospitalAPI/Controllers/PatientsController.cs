@@ -8,12 +8,13 @@ using AutoMapper;
 using ehealthcare.Model;
 using HospitalAPI.DTO;
 using HospitalLibrary.MedicalRecords.Service;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "Manager")]
     public class PatientsController : ControllerBase
     {
         private readonly HospitalDbContext _context;

@@ -4,6 +4,7 @@ using HospitalAPI.DTO;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Service;
 using HospitalLibrary.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,7 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpGet("{username}")]
+        [Authorize(Policy = "Patient")]
         public ActionResult<PatientDto> GetProfileData(string username)
         {
             Patient patient = _patientService.GetProfileData(username);

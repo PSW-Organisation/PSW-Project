@@ -9,6 +9,7 @@ using HospitalAPI.DTO;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.FeedbackAndSurvey.Service;
 using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
@@ -37,6 +38,7 @@ namespace HospitalAPI.Controllers
 
         [HttpGet]
         [Route("surveyStats")]
+        [Authorize(Policy = "Manager")]
         public ActionResult<IEnumerable<SurveyStats>> GetSurveyStats()
         {
             return _surveyService.GetSurveyStats().ToList();
@@ -51,6 +53,7 @@ namespace HospitalAPI.Controllers
 
         // POST api/<SurveyController>
         [HttpPost]
+        [Authorize(Policy = "Patient")]
         public ActionResult PostSurvey(SurveyQuestionDto surveyQuestionDto)
         {
             if (!ModelState.IsValid)

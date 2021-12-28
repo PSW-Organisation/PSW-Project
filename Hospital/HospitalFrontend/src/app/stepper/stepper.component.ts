@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Doctor } from './doctor';
 import { Visit } from '../recommended-appointment-scheduling/visits';
 import { SchedulingService } from '../scheduling.service'
+import { Patient } from '../registration/patient';
 
 @Component({
   selector: 'app-stepper',
@@ -64,6 +65,7 @@ export class StepperComponent implements OnInit {
   get selectedSpecialization() { return this.specForm.get('specControl') }
   get selectedDoctor() { return this.doctorForm.get('doctorControl') }
 
+  user: Patient = JSON.parse(localStorage.getItem('currentUser') || '{}')
 
 
   constructor(@Inject(DOCUMENT) private document: Document, private schedulingService: SchedulingService,
@@ -167,7 +169,7 @@ export class StepperComponent implements OnInit {
       endTime: visit.endTime,
       visitType: visit.visitType,
       doctorId: visit.doctorId,
-      patientId: 'imbiamba',
+      patientId: this.user.username,
       isReviewed: false,
       isCanceled: false
     }

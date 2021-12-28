@@ -11,11 +11,15 @@ using FluentResults;
 using ehealthcare.Model;
 using Microsoft.Extensions.DependencyInjection;
 using HospitalLibrary.RoomsAndEquipment.Service;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 
 namespace HospitalAPI.Controllers
 {
     [Route("api/exterior")]
     [ApiController]
+    [EnableCors("CorsPolicy")]
+    [Authorize(Policy = "Manager")]
     public class ExteriorViewController : ControllerBase
     {
         private readonly IMapper _mapper;
