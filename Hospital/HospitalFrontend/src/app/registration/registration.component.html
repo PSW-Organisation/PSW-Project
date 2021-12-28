@@ -354,6 +354,16 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col">
+                                        <div>
+                                            <h5>Upload image</h5>
+                                            <input type="file" id="imgInput" accept=".png,.jpg,.jpeg"
+                                                class="form-control-file" formControlName="imgControl"
+                                                (change)="handleFileInput($any($event.target).files)">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col text-center">
                                     <input type="submit" class="btnRegister" [disabled]="registrationForm.invalid">
                                 </div>

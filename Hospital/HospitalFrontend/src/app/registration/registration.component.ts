@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { MedicalRecord } from './medical-record';
 import * as XRegExp from 'xregexp';
 import * as moment from 'moment';
+import { ProfileService } from '../profile/profile.service';
 
 @Component({
   selector: 'app-registration',
@@ -70,6 +71,9 @@ export class RegistrationComponent implements OnInit {
       doctor: null
     }
   }
+
+  image: any;
+  imageUrl: any;
 
   repeatPassword: string = ''
 
@@ -156,7 +160,9 @@ export class RegistrationComponent implements OnInit {
       Validators.pattern(this.repeatPassword),
     ]),
     allergensControl: new FormControl(this.patient.allergens, [
-    ])
+    ]),
+    imgControl: new FormControl([
+    ]),
   });
 
   get name() { return this.registrationForm.get('nameControl') }
@@ -175,7 +181,7 @@ export class RegistrationComponent implements OnInit {
   get weight() { return this.registrationForm.get('weightControl') }
 
   constructor(private registrationService: RegistrationService, private modalService: NgbModal,
-    private toastr: ToastrService, private router: Router) { }
+    private toastr: ToastrService, private router: Router, private profileService: ProfileService) { }
 
   ngOnInit(): void {
     this.configDatePicker()
@@ -288,7 +294,7 @@ export class RegistrationComponent implements OnInit {
       medicalPermits: []
     }
 
-
+    this.saveImage()
     this.registrationService.register(patient).subscribe({
       next: c => {
         console.log(c)
@@ -307,5 +313,31 @@ export class RegistrationComponent implements OnInit {
 
   showError(message: string) {
     this.toastr.error(message);
+  }
+
+  handleFileInput(e: File[]) {
+    this.image = e[0];
+    console.log(this.image)
+    this.updateImage(e);
+  }
+
+  updateImage(e: any) {
+    let self = this;
+    var reader = new FileReader();
+    reader.readAsDataURL(e[0]); // read file as data url
+    reader.onload = (event) => { // called once readAsDataURL is completed
+      if (event.target != null) {
+        self.imageUrl = event.target.result;
+      }
+    }
+  }
+
+  saveImage() {
+    if (this.image == null) return
+    this.profileService.postFile(this.image, this.registrationForm.get('usernameControl')?.value).subscribe(data => {
+      this.showSuccess("Successfully saved image!");
+    }, error => {
+      this.showError("Error while saving image, please check format!")
+    });
   }
 }
