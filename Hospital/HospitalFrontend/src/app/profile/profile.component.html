@@ -1,20 +1,4 @@
 <div class="container register" style="max-width: 100%;">
-    <!-- <button class="menu-toggle rounded">
-        <i class="fa fa-bars"></i>
-    </button>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a class="smooth-scroll" routerLink=""></a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a class="smooth-scroll" href="#">Profile</a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a class="smooth-scroll" [routerLink]="['/appointments']" [queryParams]="{username: username}">Appointments</a>
-            </li>
-        </ul>
-    </nav> -->
     <div class="row">
         <div class="col-md-3 register-left">
             <img src="assets/logo.png" alt="" />
@@ -23,6 +7,36 @@
             </span>
         </div>
         <div class="col-md-9 register-right">
+            <div class="row">
+                <div class="col-7"></div>
+                <div class="col" style="padding-top: 2%; padding-right: 3%;">
+                    <div class="row" style="padding-bottom: 2%;">
+                        <div class="col">
+                        </div>
+                        <div class="col-6">
+                            <div class="row">
+                                <div class="col">
+                                    <img [src]="imageUrl" class="img-fluid rounded img-thumbnail"  alt="Your image here">
+                                </div>
+                                <div class="col">
+                                    <form [formGroup]="imgForm" (ngSubmit)="saveImage()">
+                                        <div style="width: 100px;">
+                                            <input type="file" id="imgInput" accept=".png,.jpg,.jpeg" required
+                                                class="form-control-file" formControlName="imgControl"
+                                                (change)="handleFileInput($any($event.target).files)">
+                                        </div>
+                                        <div style="padding-top: 2%; width: 100px;">
+                                            <button type="submit" class="btn btn-secondary btn-sm">Save
+                                                image</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+            </div>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <h3 class="register-heading">Profile</h3>

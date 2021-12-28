@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Patient } from '../registration/patient';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from './profile.service';
-import { formatDate } from '@angular/common';
+import { DOCUMENT, formatDate } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Visit } from './visit';
 import { HttpParameterCodec } from '@angular/common/http';
+import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-profile',
@@ -59,6 +61,9 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  image: any;
+  imageUrl: any;
+
   profile: FormGroup = new FormGroup({
     usernameControl: new FormControl(this.patient.username, [
     ]),
@@ -99,15 +104,20 @@ export class ProfileComponent implements OnInit {
     // confirmPasswordControl: new FormControl(this.repeatPassword, [
     // ]),
     allergensControl: new FormControl(this.patient.allergens, [
-    ])
+    ]),
   });
+
+  imgForm: FormGroup = new FormGroup({
+    imgControl: new FormControl([
+    ]),
+  })
 
   visits: Visit[] = [];
 
   username: string = '';
 
-  constructor(private route: ActivatedRoute, private profileService: ProfileService,
-    private toastr: ToastrService, private router: Router) { }
+  constructor(@Inject(DOCUMENT) public document: Document, private route: ActivatedRoute, private profileService: ProfileService,
+    private toastr: ToastrService, private router: Router, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -123,6 +133,11 @@ export class ProfileComponent implements OnInit {
           }, error: e => {
             this.router.navigate(['/'])
             this.showError('An error has occured.')
+          }
+        })
+        this.profileService.getImage(params['username']).subscribe({
+          next: response => {
+            this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(response.image);;
           }
         })
       }
@@ -172,4 +187,30 @@ export class ProfileComponent implements OnInit {
     this.toastr.error(message);
   }
 
+  handleFileInput(e: File[]) {
+    this.image = e[0];
+    console.log(this.image)
+    this.updateImage(e);
+  }
+
+  updateImage(e: any) {
+    let self = this;
+    var reader = new FileReader();
+    reader.readAsDataURL(e[0]); // read file as data url
+    reader.onload = (event) => { // called once readAsDataURL is completed
+      if (event.target != null) {
+        self.imageUrl = event.target.result;
+      }
+    }
+  }
+
+  saveImage() {
+    if (this.image != null) {
+      this.profileService.postFile(this.image, this.username).subscribe(data => {
+        this.showSuccess("Successfully saved image!");
+      }, error => {
+        this.showError("Error while saving image, please check format!")
+      });
+    }
+  }
 }
