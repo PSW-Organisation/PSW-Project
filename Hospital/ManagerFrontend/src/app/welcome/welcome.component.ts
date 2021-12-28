@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../shared/jwt/auth.service';
 
 @Component({
   selector: 'app-welcome',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { }
+  username: string = '';
+  password: string = '';
+
+  constructor(private authService: AuthService, private toastr: ToastrService) { }
 
   public loadExternalScript(url: string) {
     const body = <HTMLDivElement>document.body; const script =
@@ -21,6 +26,26 @@ export class WelcomeComponent implements OnInit {
     this.loadExternalScript("../../assets/scripts/jquery-3.2.1.min.js");
     this.loadExternalScript("../../assets/scripts/all-plugins.js");
     this.loadExternalScript("../../assets/scripts/plugins-activate.js");
+  }
+
+  login() {
+    this.authService.login(this.username, this.password).subscribe(response => {
+      // this.profileService.getProfileData(this.username).subscribe((res: any) => {
+      //   if (res.loginType === 0) {
+      //     this.router.navigate(['/profile']);
+      //   } else {
+      //    this.showError('Incorrect username or password!')
+      //   }
+      // });
+    });
+  }
+
+  showSuccess(message: string) {
+    this.toastr.success(message);
+  }
+
+  showError(message: string) {
+    this.toastr.error(message);
   }
 
 }

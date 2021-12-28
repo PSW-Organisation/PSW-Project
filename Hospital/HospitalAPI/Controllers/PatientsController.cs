@@ -8,7 +8,7 @@ using AutoMapper;
 using ehealthcare.Model;
 using HospitalAPI.DTO;
 using HospitalLibrary.MedicalRecords.Service;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
@@ -28,12 +28,14 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "Manager")]
         public ActionResult<IEnumerable<Patient>> GetAllPatients()
         {
             return _patientService.GetMaliciousPatients();
         }
 
         [HttpPut("{username}")]
+        [Authorize(Policy = "Manager")]
         public IActionResult BlockPatient(string username)
         {
             Patient maliciousPatient = _patientService.GetProfileData(username);

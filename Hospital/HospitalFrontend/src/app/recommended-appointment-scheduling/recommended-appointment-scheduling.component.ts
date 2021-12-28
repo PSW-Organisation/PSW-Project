@@ -9,6 +9,7 @@ import { SchedulingService } from '../scheduling.service';
 import { Doctor } from '../stepper/doctor';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Patient } from '../registration/patient';
 
 @Component({
   selector: 'recommended-appointment-scheduling',
@@ -24,7 +25,7 @@ export class RecommendedAppointmentSchedulingComponent implements OnInit {
   toDate:  NgbDate | null = null;
   selectedD: string = '22222';
   
-  username: string = '';
+  user: Patient = JSON.parse(localStorage.getItem('currentUser') || '{}')
   generatedFreeVisits: any[] = [];
   selectedVisit: Visit =
     {
@@ -130,7 +131,7 @@ export class RecommendedAppointmentSchedulingComponent implements OnInit {
       endTime: visit.endTime,
       visitType: visit.visitType,
       doctorId: visit.doctorId,
-      patientId: 'imbiamba',
+      patientId: this.user?.username,
       isReviewed: false,
       isCanceled: false
     }
@@ -143,7 +144,7 @@ export class RecommendedAppointmentSchedulingComponent implements OnInit {
       this.schedulingService.createVisit(this.selectedVisit).subscribe({
         next: response => {
           this.showSuccess("Appointment successfully scheduled!")
-          this.router.navigate(['/appointments'], {queryParams:{username: this.selectedVisit.patientId}})
+          this.router.navigate(['/appointments'])
         }, 
         error: e => {
           if(e.status === 400) this.showError("The selected appointment has been taken in the meantime. Please try selecting another one.")   

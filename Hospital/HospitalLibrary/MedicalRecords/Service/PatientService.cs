@@ -92,6 +92,11 @@ namespace HospitalLibrary.MedicalRecords.Service
             maliciousPatient.IsBlocked = true;
             _patientRepository.Update(maliciousPatient);
         }
+
+        public Patient GetUsingCredentials(string username, string password)
+        {
+           return _patientRepository.GetUsingCredentials(username, password);
+        }
     }
 }
 

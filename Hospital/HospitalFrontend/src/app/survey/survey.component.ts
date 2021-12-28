@@ -62,7 +62,7 @@ export class SurveyComponent implements OnInit {
                 this.service.reviewVisit(this.visit.id).subscribe({
                     next: response => {
                         this.showSuccess("SUCCESS")
-                        this.router.navigate(['/appointments'], {queryParams:{username: this.visit.patientId}})
+                        this.router.navigate(['/appointments'])
                       }, error: e => (this.showError("FAILED"))
                 })
             } else {

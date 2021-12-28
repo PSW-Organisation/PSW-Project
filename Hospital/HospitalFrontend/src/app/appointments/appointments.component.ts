@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileService } from '../profile/profile.service';
 import { Visit } from '../profile/visit';
+import { Patient } from '../registration/patient';
 
 @Component({
   selector: 'app-appointments',
@@ -14,26 +15,24 @@ export class AppointmentsComponent implements OnInit {
 
   visits: Visit[] = [];
 
-  username: string = '';
+  user: Patient = JSON.parse(localStorage.getItem('currentUser') || '{}')
 
   constructor(private route: ActivatedRoute, private profileService: ProfileService,
     private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      if (params['username']) {
-        this.username = params['username'];
-        this.profileService.getVisits(params['username']).subscribe({
-          next: response => {
-            this.visits = response
-            /*this.visits = this.visits.flatMap(v => {
-               doctorFullName : v.doctorFullName,
-               
-            } )*/
+    if (this.user?.username !== null) {
+      this.profileService.getVisits(this.user.username).subscribe({
+        next: response => {
+          this.visits = response
+        }, error: e => {
+          if (e.status == 401) {
+            this.showError('You need to login!')
+            this.router.navigate(['/'])
           }
-        })
-      }
-    });
+        }
+      })
+    }
   }
 
   getVisitStatus(visit: Visit): string {
@@ -43,15 +42,15 @@ export class AppointmentsComponent implements OnInit {
     return "Completed";
   }
 
-  openSurvey(id: number): void{
-    this.router.navigate(["/survey"], {queryParams: {visitId: id}});
+  openSurvey(id: number): void {
+    this.router.navigate(["/survey"], { queryParams: { visitId: id } });
   }
 
   cancelAppointment(visit: Visit): void {
-    this.profileService.cancelVisit(visit.id).subscribe({ 
+    this.profileService.cancelVisit(visit.id).subscribe({
       next: response => {
-          visit.isCanceled = true;
-          this.showSuccess('Successfully canceled appointment!');
+        visit.isCanceled = true;
+        this.showSuccess('Successfully canceled appointment!');
       }, error: e => (this.showError('An error occured.'))
     })
   }

@@ -38,6 +38,7 @@ import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ScheduleComponent } from './doctor-vacation/schedule/schedule.component';
 import { CuFormComponent } from './doctor-vacation/cu-form/cu-form.component';
+import { ManagerGuard } from './shared/jwt/jwt-guard';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,11 @@ import { CuFormComponent } from './doctor-vacation/cu-form/cu-form.component';
     HttpClientModule,
     AppRoutingModule,
     RoomManagmentModule,
-    ToastrModule.forRoot({ preventDuplicates: true }),
+    ToastrModule.forRoot({
+      positionClass: 'toast-custom',
+      progressBar: true,
+      progressAnimation: 'increasing'
+    }),
     BrowserAnimationsModule,
   ],
   providers: [
@@ -79,6 +84,7 @@ import { CuFormComponent } from './doctor-vacation/cu-form/cu-form.component';
     FeedbackService,
     EditPharmacyService,
     SurveyService,
+    ManagerGuard
   ],
   bootstrap: [AppComponent],
 })

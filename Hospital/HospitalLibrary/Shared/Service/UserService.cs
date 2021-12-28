@@ -1,13 +1,10 @@
 ﻿using ehealthcare.Model;
-using HospitalLibrary.MedicalRecord.Repository;
-using HospitalLibrary.MedicalRecords.Repository;
+using HospitalLibrary.Shared.Repository;
 using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Mail;
 using System.Text;
 
-namespace HospitalLibrary.MedicalRecords.Service
+namespace HospitalLibrary.Shared.Service
 {
     public class UserService : IUserService
     {
@@ -16,6 +13,11 @@ namespace HospitalLibrary.MedicalRecords.Service
         public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
+        }
+
+        public User GetUser(string username)
+        {
+            return _userRepository.Get(username);
         }
     }
 }

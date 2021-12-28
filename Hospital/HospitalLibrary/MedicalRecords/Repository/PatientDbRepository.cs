@@ -57,5 +57,10 @@ namespace HospitalLibrary.MedicalRecords.Repository
             foreach (string key in canceledVisits.Select(v => v.Key).ToList()) maliciousPatients.Add(Get(key));
             return maliciousPatients;
         }
+
+        public Patient GetUsingCredentials(string username, string password)
+        {
+            return _dbContext.Patients.Where(p => p.Username == username && p.Password == password && p.IsActivated && !p.IsBlocked).FirstOrDefault();
+        }
     }
 }
