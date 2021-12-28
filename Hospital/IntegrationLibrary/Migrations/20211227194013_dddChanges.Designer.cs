@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IntegrationLibrary.Migrations
 {
     [DbContext(typeof(IntegrationDbContext))]
-    [Migration("20211213120259_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20211227194013_dddChanges")]
+    partial class dddChanges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,31 +21,7 @@ namespace IntegrationLibrary.Migrations
                 .HasAnnotation("ProductVersion", "3.1.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("IntegrationLibrary.Model.Complaint", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Content")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<long>("PharmacyId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Complaints");
-                });
-
-            modelBuilder.Entity("IntegrationLibrary.Model.MedicineBenefit", b =>
+            modelBuilder.Entity("IntegrationLibrary.Parnership.Model.MedicineBenefit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,7 +48,7 @@ namespace IntegrationLibrary.Migrations
                     b.ToTable("Benefits");
                 });
 
-            modelBuilder.Entity("IntegrationLibrary.Model.MedicineTransaction", b =>
+            modelBuilder.Entity("IntegrationLibrary.Parnership.Model.MedicineTransaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,7 +69,31 @@ namespace IntegrationLibrary.Migrations
                     b.ToTable("MedicineTransactions");
                 });
 
-            modelBuilder.Entity("IntegrationLibrary.Model.Pharmacy", b =>
+            modelBuilder.Entity("IntegrationLibrary.Pharmacies.Model.Complaint", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<long>("PharmacyId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Complaints");
+                });
+
+            modelBuilder.Entity("IntegrationLibrary.Pharmacies.Model.Pharmacy", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -104,9 +104,6 @@ namespace IntegrationLibrary.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("HospitalApiKey")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PharmacyAddress")
                         .HasColumnType("text");
 
                     b.Property<string>("PharmacyApiKey")
@@ -129,7 +126,7 @@ namespace IntegrationLibrary.Migrations
                     b.ToTable("Pharmacies");
                 });
 
-            modelBuilder.Entity("IntegrationLibrary.Model.ResponseToComplaint", b =>
+            modelBuilder.Entity("IntegrationLibrary.Pharmacies.Model.ResponseToComplaint", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -148,6 +145,57 @@ namespace IntegrationLibrary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ResponseToComplaint");
+                });
+
+            modelBuilder.Entity("IntegrationLibrary.SharedModel.Model.NotificationsForApp", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("Seen")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("IntegrationLibrary.Pharmacies.Model.Pharmacy", b =>
+                {
+                    b.OwnsOne("IntegrationLibrary.Pharmacies.Model.Address", "PharmacyAddress", b1 =>
+                        {
+                            b1.Property<int>("PharmacyId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<string>("City")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Country")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Number")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("Street")
+                                .HasColumnType("text");
+
+                            b1.HasKey("PharmacyId");
+
+                            b1.ToTable("Pharmacies");
+
+                            b1.WithOwner()
+                                .HasForeignKey("PharmacyId");
+                        });
                 });
 #pragma warning restore 612, 618
         }

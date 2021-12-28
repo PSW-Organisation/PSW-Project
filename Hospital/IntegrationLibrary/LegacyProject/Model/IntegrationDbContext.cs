@@ -1,5 +1,6 @@
 ﻿using IntegrationLibrary.Model;
 using IntegrationLibrary.Parnership.Model;
+
 using IntegrationLibrary.Pharmacies.Model;
 using IntegrationLibrary.SharedModel.Model;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,15 @@ namespace IntegrationLibrary.Model
             optionsBuilder.UseNpgsql(connectionString);
         }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new PharmacyConfigurations());
+
+          //  modelBuilder.Entity<Pharmacy>().HasData(
+             //   new Pharmacy { Id = 1, PharmacyName = "Flos", PharmacyAddress = new IntegrationLibrary.Pharmacies.Model.Address { Street = "Pavla Papa", Number = "54", City = "Novi Sad", Country = "Srbija" }  , PharmacyUrl = "http://localhost:29631/api3", PharmacyApiKey = "bc56df25-0d34-4801-b76a-931e61b4c752", HospitalApiKey = "108817cf-dc25-40f4-a18f-244c1315840a", PharmacyCommunicationType = 0, Comment = "Sve je super!", Picture = "pharmacy.jpg" }
+             // );
+        }
 
     }
 }

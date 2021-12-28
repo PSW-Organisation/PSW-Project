@@ -20,7 +20,14 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
         }
         public void ChangeBenefitStatus(MedicineBenefit medicineBenefit, bool published)
         {
-            medicineBenefit.Published = published;
+            if(published == true)
+            {
+                medicineBenefit.PublishBenefit();
+            }
+            else
+            {
+                medicineBenefit.UnpublishBenefit();
+            }
             this.Update(medicineBenefit);
         }
 

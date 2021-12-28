@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace IntegrationLibrary.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class dddChanges : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,6 +57,21 @@ namespace IntegrationLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Content = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Seen = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Pharmacies",
                 columns: table => new
                 {
@@ -64,7 +79,10 @@ namespace IntegrationLibrary.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PharmacyUrl = table.Column<string>(nullable: true),
                     PharmacyName = table.Column<string>(nullable: true),
-                    PharmacyAddress = table.Column<string>(nullable: true),
+                    PharmacyAddress_Street = table.Column<string>(nullable: true),
+                    PharmacyAddress_Number = table.Column<string>(nullable: true),
+                    PharmacyAddress_City = table.Column<string>(nullable: true),
+                    PharmacyAddress_Country = table.Column<string>(nullable: true),
                     PharmacyApiKey = table.Column<string>(nullable: true),
                     HospitalApiKey = table.Column<string>(nullable: true),
                     Comment = table.Column<string>(nullable: true),
@@ -102,6 +120,9 @@ namespace IntegrationLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "MedicineTransactions");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "Pharmacies");

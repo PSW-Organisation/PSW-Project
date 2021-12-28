@@ -10,7 +10,7 @@ namespace IntegrationLibrary.Pharmacies.Model
     {
         private string pharmacyUrl;
         private string pharmacyName;
-        private string pharmacyAddress;
+        private Address pharmacyAddress;
         private string pharmacyApiKey;
         private string hospitalApiKey;
         private string comment;
@@ -19,7 +19,7 @@ namespace IntegrationLibrary.Pharmacies.Model
 
         public string PharmacyUrl { get => pharmacyUrl; set => pharmacyUrl = value; }
         public string PharmacyName { get => pharmacyName; set => pharmacyName = value; }
-        public string PharmacyAddress { get => pharmacyAddress; set => pharmacyAddress = value; }
+        public Address PharmacyAddress { get => pharmacyAddress; set => pharmacyAddress = value; }
         public string PharmacyApiKey { get => pharmacyApiKey; set => pharmacyApiKey = value; }
         public string HospitalApiKey { get => hospitalApiKey; set => hospitalApiKey = value; }
         public string Comment { get => comment; set => comment = value; }
@@ -27,11 +27,12 @@ namespace IntegrationLibrary.Pharmacies.Model
         public PharmacyCommunicationType PharmacyCommunicationType { get => pharmacyCommunicationType; set => pharmacyCommunicationType = value; }
 
         public Pharmacy() : base(-1) { }
-        public Pharmacy(string pharmacyUrl, string pharmacyName, string pharmacyAddress, string pharmacyApiKey, string hospitalApiKey, string comment, string picture, PharmacyCommunicationType communicationType) : base(-1)
+        public Pharmacy(string pharmacyUrl, string pharmacyName, Address address, string pharmacyApiKey, string hospitalApiKey, string comment, string picture, PharmacyCommunicationType communicationType) : base(-1)
         {
             this.pharmacyUrl = pharmacyUrl;
             this.pharmacyName = pharmacyName;
-            this.pharmacyAddress = pharmacyAddress;
+            this.pharmacyAddress = address;
+
             this.pharmacyApiKey = pharmacyApiKey;
             this.hospitalApiKey = hospitalApiKey;
             this.comment = comment;

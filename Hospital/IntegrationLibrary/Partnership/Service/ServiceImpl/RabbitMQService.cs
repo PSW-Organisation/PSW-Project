@@ -109,7 +109,7 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
             using (var scope = serviceScopeFactory.CreateScope()) {
                 var medicineBenefitRepository = scope.ServiceProvider.GetRequiredService<MedicineBenefitRepository>();
                 medicineBenefit.Id = medicineBenefitRepository.GenerateId();
-                medicineBenefit.Published = true;
+                medicineBenefit.PublishBenefit();
                 medicineBenefitRepository.Save(medicineBenefit);
             }
             return true;
