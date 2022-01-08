@@ -32,5 +32,10 @@ namespace HospitalLibrary.MedicalRecords.Service
         {
             return _doctorRepository.GetAllDoctors();
         }
+
+        public Doctor GetDoctorById(string id)
+        {
+            return _doctorRepository.Get(id);
+        }
     }
 }

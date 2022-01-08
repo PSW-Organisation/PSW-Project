@@ -10,5 +10,6 @@ namespace HospitalLibrary.MedicalRecords.Service
         public int FindLeastNumberOfPatient();
         public List<Doctor> GetLeastOccupiedDoctors(int minPatients);
         public List<Doctor> GetAllDoctors();
+        public Doctor GetDoctorById(string id);
     }
 }

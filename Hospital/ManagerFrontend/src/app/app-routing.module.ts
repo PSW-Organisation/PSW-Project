@@ -17,7 +17,9 @@ import { BenefitsViewComponent } from './benefits-view/benefits-view.component';
 import { ReportsViewComponent } from './reports-view/reports-view.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { MaliciousPatientsComponent } from './malicious-patients/malicious-patients.component';
-import { TendersComponent} from "./tenders/tenders.component"
+import { TendersComponent } from "./tenders/tenders.component"
+import { DoctorsComponent } from "./doctors/doctors.component"
+import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -36,6 +38,8 @@ const routes: Routes = [
   {path: 'notifications', component: NotificationsComponent},
   { path: 'malicious', component: MaliciousPatientsComponent },
   { path: 'tenders', component: TendersComponent },
+  { path: 'doctors', component: DoctorsComponent },
+  { path: 'doctorView/:id', component: DoctorViewComponent },
 ];
 
 @NgModule({

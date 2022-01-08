@@ -1,0 +1,58 @@
+<app-navbar>
+    <div app-navbar-button>
+    </div>
+</app-navbar>
+<div class="container">
+
+    <div class="row ">
+        <div class="col d-flex align-items-center justify-content-center">
+            <h1>Doctors</h1>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card align-items-start">
+                <div class="card-body justify-content-start text-start">
+                    <div class="mb-3">
+                        <label for="inputNameSurname" class="form-label">Search by name</label>
+                        <input [(ngModel)]="searchByNameAndSurname" type="text" class="form-control" id="inputNameSurname">
+                      </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            
+            <div *ngFor="let doctor of doctors">
+                <div *ngIf="renderIf(doctor)">
+                    <div class="card" (click)="goToDoctorView(doctor)">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-1">
+                                    
+                                </div>
+                                <div class="col-sm-4">
+                                    <h2 class="card-title text-start"><mat-icon>perm_identity</mat-icon>{{doctor.name}} {{doctor.surname}}</h2> 
+                                    <h3 class="card-title text-start">Specialization: {{doctor.specialization}}</h3> 
+                                </div>
+                                <div class="col-sm-4">
+                                    <h4 class="card-subtitle mb-2 text-muted text-start">Email: {{doctor.email}}</h4>
+                                    <h4 class="card-title text-start">phone: {{doctor.phone}}</h4>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h4 class="card-title text-start">Country: {{doctor.country}}</h4>
+                                    <h4 class="card-title text-start">City: {{doctor.city}}</h4>
+                                </div>
+                            </div>
+                        </div>         
+                    </div>
+                    <br>
+                </div>
+            </div>
+          
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,72 @@
+<app-navbar>
+    <div app-navbar-button>
+    </div>
+</app-navbar>
+<div class="container">
+    
+    
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-sm-3">
+            <img class="img-fluid" style="height: 250px; width: 250px;" src="../../assets/images/doctor-img.jpg">
+        </div>
+        <div class="col-sm-5">
+            <h2 class="card-title text-start"><mat-icon>perm_identity</mat-icon>{{doctor.name}} {{doctor.surname}}</h2> 
+            <h3 class="card-title text-start">Specialization: {{doctor.specialization}}</h3> 
+            <h4 class="card-subtitle mb-2 text-muted text-start">Email: {{doctor.email}}</h4>
+            <h4 class="card-title text-start">phone: {{doctor.phone}}</h4>
+            <h4 class="card-title text-start">Country: {{doctor.country}}</h4>
+            <h4 class="card-title text-start">City: {{doctor.city}}</h4>
+        </div>
+        <div class="col-sm-4">
+            <h2 class="card-title text-start">Shift</h2>
+            <select class="form-select" aria-label="Default select example">
+                <option value="1">Jutarnja Smena</option>
+                <option value="2">Popodnevna smena</option>
+                <option value="3">Vecernja Smena</option>
+            </select>
+        </div>
+    </div>
+
+    <br> <br> <br>
+
+    <div class="row">
+        <div class="col">
+            <div style="width: 100%; height: 400px; background-color: rgb(255, 208, 121);">
+                Godisnji odmori
+            </div>
+        </div>
+    </div>
+    <br> <br> <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card overflow-auto" style="height: 300px;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let onCallshift of onCallShifts; index as i">
+                            <td>{{i+1}}</td>
+                            <td>{{onCallshift}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <br> <br> <br>
+    <div class="row">
+        <div class="col">
+            <div style="width: 100%; height: 600px; background-color: rgb(172, 121, 255);">
+                Grafici i statistika
+            </div>
+        </div>
+    </div>
+
+</div>

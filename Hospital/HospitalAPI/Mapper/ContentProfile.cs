@@ -70,6 +70,10 @@ namespace HospitalAPI.Mapper
           .ForMember(d => d.DurationInMinutes,
            m => m.MapFrom(s => s.EndTime.Subtract(s.StartTime).TotalMinutes));
 
+
+            CreateMap<Doctor, DoctorDTO>().ForMember(dest => dest.Specialization,
+            opt => opt.MapFrom(src => src.Specialization.ToString()));
+
         }
 
         private StateOfTerm IsFinished(Visit d)
