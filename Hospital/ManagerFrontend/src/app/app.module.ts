@@ -33,6 +33,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { MaliciousPatientsComponent } from './malicious-patients/malicious-patients.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { TendersComponent } from './tenders/tenders.component';
+import { DoctorsComponent } from './doctors/doctors.component';
+import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { TendersComponent } from './tenders/tenders.component';
     NotificationsComponent,
     MaliciousPatientsComponent,
     StatisticsComponent,
-    TendersComponent
+    TendersComponent,
+    DoctorsComponent,
+    DoctorViewComponent
   ],
   imports: [
     BrowserModule,

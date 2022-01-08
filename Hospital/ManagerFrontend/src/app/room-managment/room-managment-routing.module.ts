@@ -10,6 +10,8 @@ import { SearchEquipmentComponent } from './search-equipment/search-equipment.co
 import { RenovateRoomsComponent } from './renovate-rooms/renovate-rooms.component';
 import { RoomScheduleComponent } from './room-schedule/room-schedule.component';
 
+
+
 const routes: Routes = [
   { path: 'roomManagment', component: RoomManagmentComponent,
       children: [
@@ -20,7 +22,9 @@ const routes: Routes = [
         { path: 'building/:buidingId/floor/:floorId/room/:roomId', component: BuildingFloorsComponent },
         { path: 'moveEquipment', component: MoveEquipmentComponent },
         { path: 'renovateRooms', component: RenovateRoomsComponent },
-        { path: 'roomSchedule/:roomId', component: RoomScheduleComponent }
+        { path: 'roomSchedule/:roomId', component: RoomScheduleComponent },
+        { path: 'roomSchedule/:roomId', component: RoomScheduleComponent },
+
       ]
   }
 ];
