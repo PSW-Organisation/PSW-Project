@@ -1,5 +1,6 @@
 ﻿using IntegrationAPI.Adapters;
 using IntegrationAPI.DTO;
+using IntegrationLibrary.Tendering.Model;
 using IntegrationLibrary.Tendering.Service.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,6 +32,20 @@ namespace IntegrationAPI.Controllers
         public IActionResult Add(TenderDTO dto)
         {
             return Ok(tenderService.Add(TenderAdapter.TenderDtoToTender(dto)));
+        }
+
+        [HttpGet("{id?}")]
+        public IActionResult Get(int id)
+        {
+            Tender tender = tenderService.Get(id);
+            if (tender == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(TenderAdapter.TenderToTenderDto(tender));
+            }
         }
     }
 }

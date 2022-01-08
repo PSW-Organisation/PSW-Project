@@ -44,7 +44,7 @@ namespace IntegrationLibrary.Tendering.Service.ServiceImpl
 
         public Tender Get(int id)
         {
-            throw new NotImplementedException();
+            return tenderRepository.Get(id);
         }
 
         public bool Update(Tender t)

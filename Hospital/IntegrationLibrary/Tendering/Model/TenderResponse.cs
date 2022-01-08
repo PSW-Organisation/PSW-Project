@@ -17,7 +17,7 @@ namespace IntegrationLibrary.Tendering.Model
         private DateTime _responseReceivedTime;
         private double _totalPrice;
         private bool _isWinner;
-        public DateTime ResponseRecivedTime { get => _responseReceivedTime; set => _responseReceivedTime = value; }
+        public DateTime ResponseReceivedTime { get => _responseReceivedTime; set => _responseReceivedTime = value; }
         public int PharmacyId { get => _pharmacyId; set => _pharmacyId = value; }
         public virtual Pharmacy Pharmacy { get => _pharmacy; set => _pharmacy = value; }
         public virtual List<TenderItem> TenderItems { get => _tenderItems; set => _tenderItems = value; }
