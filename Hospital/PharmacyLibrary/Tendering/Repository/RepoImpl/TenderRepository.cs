@@ -34,7 +34,11 @@ namespace PharmacyLibrary.Tendering.Repository.RepoImpl
 
         public List<Tender> GetAll()
         {
-            throw new NotImplementedException();
+            List<Tender> result = new List<Tender>();
+            List<TenderItem> items = new List<TenderItem>();
+            pharmacyDbContext.Tenders.ToList().ForEach(tender => result.Add(tender));
+            pharmacyDbContext.TenderItems.ToList().ForEach(item => items.Add(item));
+            return result;
         }
 
         public Tender Get(int id)

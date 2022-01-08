@@ -14,7 +14,6 @@ namespace PharmacyLibrary.Tendering.Model
         //private List<TenderResponse> _tenderResponses;
         private string _apiKeyPharmacy;
 
-
         public virtual List<TenderItem> TenderItems { get => _tenderItems; set => _tenderItems = value; }
         public DateTime TenderOpenDate { get => _tenderOpenDate; set => _tenderOpenDate = value; }
 

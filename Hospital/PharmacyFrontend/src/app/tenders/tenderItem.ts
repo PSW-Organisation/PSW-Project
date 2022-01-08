@@ -1,7 +1,7 @@
 export interface ITenderItem{
 
-    name: string;
-    amount: number;
-    price: number;
+    tenderItemName: string;
+    tenderItemQuantity: number;
+    tenderItemPrice: number;
 
 }

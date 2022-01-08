@@ -11,8 +11,8 @@ using PharmacyAPI;
 namespace PharmacyLibrary.Migrations
 {
     [DbContext(typeof(PharmacyDbContext))]
-    [Migration("20211227214833_TenderMigration")]
-    partial class TenderMigration
+    [Migration("20220108192118_NewDbMigratoin")]
+    partial class NewDbMigratoin
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -240,7 +240,7 @@ namespace PharmacyLibrary.Migrations
 
                     b.HasIndex("TenderId");
 
-                    b.ToTable("TenderItem");
+                    b.ToTable("TenderItems");
                 });
 
             modelBuilder.Entity("PharmacyLibrary.Tendering.Model.TenderItem", b =>

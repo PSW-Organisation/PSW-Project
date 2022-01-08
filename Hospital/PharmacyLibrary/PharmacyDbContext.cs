@@ -20,7 +20,6 @@ namespace PharmacyAPI
         public DbSet<Tender> Tenders { get; set; }
 
         public DbSet<TenderItem> TenderItems { get; set; }
-
         public PharmacyDbContext(DbContextOptions<PharmacyDbContext> options) : base(options) { }
         
 

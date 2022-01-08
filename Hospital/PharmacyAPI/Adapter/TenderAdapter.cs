@@ -1,13 +1,26 @@
-﻿using PharmacyLibrary.Tendering.DTO;
+﻿using PharmacyAPI.DTO;
 using PharmacyLibrary.Tendering.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace PharmacyLibrary.Tendering.Adapters
+namespace PharmacyAPI.Adapter
 {
     public class TenderAdapter
     {
+        public static TenderDTO TenderToTenderDto(Tender tender)
+        {
+            TenderDTO dto = new TenderDTO();
+            dto.Id = tender.Id;
+            dto.TenderOpenDate = tender.TenderOpenDate;
+            dto.TenderCloseDate = tender.TenderCloseDate;
+            dto.Open = tender.Open;
+            dto.ApiKeyPharmacy = tender.ApiKeyPharmacy;
+            dto.TenderItems = tender.TenderItems;
+            return dto;
+        }
+
         public static Tender TenderDtoToTender(TenderDTO dto)
         {
             Tender tender = new Tender();

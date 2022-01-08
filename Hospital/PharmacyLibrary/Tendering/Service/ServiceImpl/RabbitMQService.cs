@@ -3,8 +3,8 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using PharmacyAPI.Model;
 using PharmacyLibrary.Repository.HospitalRepository;
-using PharmacyLibrary.Tendering.Adapters;
-using PharmacyLibrary.Tendering.DTO;
+
+using PharmacyLibrary.Tendering.Model;
 using PharmacyLibrary.Tendering.Repository.RepoImpl;
 using PharmacyLibrary.Tendering.Repository.RepoInterfaces;
 using RabbitMQ.Client;
@@ -77,8 +77,9 @@ namespace PharmacyLibrary.Tendering.Service
             {
                 byte[] body = ea.Body.ToArray();
                 var jsonMessage = Encoding.UTF8.GetString(body);
-                TenderDTO dto = JsonConvert.DeserializeObject<TenderDTO>(jsonMessage);
-                HandleMessage(dto);
+                Tender dto = JsonConvert.DeserializeObject<Tender>(jsonMessage);
+                string name = ea.ConsumerTag;
+                HandleMessage(dto, name);
 
                 Console.WriteLine(jsonMessage);
                 //channel.BasicAck(ea.DeliveryTag, false);
@@ -92,13 +93,14 @@ namespace PharmacyLibrary.Tendering.Service
                     channel.BasicConsume(
                                queue: h.HospitalName,
                                autoAck: true,
-                               consumer: consumer
-                               );
+                               consumer: consumer,
+                               consumerTag: h.PharmacyApiKey
+                               ) ;
                 }
             }
             return base.StartAsync(stoppingToken);
         }
-        private bool HandleMessage(TenderDTO dto)
+        private bool HandleMessage(Tender dto, string apikey)
         {
             if (dto == null)
             {
@@ -107,7 +109,8 @@ namespace PharmacyLibrary.Tendering.Service
             using (var scope = serviceScopeFactory.CreateScope())
             {
                 var tenderRepository = scope.ServiceProvider.GetRequiredService<ITenderRepository>();
-                tenderRepository.Add(TenderAdapter.TenderDtoToTender(dto));
+                dto.ApiKeyPharmacy = apikey;
+                tenderRepository.Add(dto);
             }
             return true;
         }

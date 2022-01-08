@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace PharmacyLibrary.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class NewDbMigratoin : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -121,6 +121,49 @@ namespace PharmacyLibrary.Migrations
                 {
                     table.PrimaryKey("PK_ResponsesToComplaint", x => x.ResponseToComplaintId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Tenders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TenderOpenDate = table.Column<DateTime>(nullable: false),
+                    TenderCloseDate = table.Column<DateTime>(nullable: false),
+                    Open = table.Column<bool>(nullable: false),
+                    ApiKeyPharmacy = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tenders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TenderItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TenderItemName = table.Column<string>(nullable: true),
+                    TenderItemQuantity = table.Column<int>(nullable: false),
+                    TenderItemPrice = table.Column<double>(nullable: false),
+                    TenderId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TenderItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TenderItems_Tenders_TenderId",
+                        column: x => x.TenderId,
+                        principalTable: "Tenders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TenderItems_TenderId",
+                table: "TenderItems",
+                column: "TenderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -145,6 +188,12 @@ namespace PharmacyLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "ResponsesToComplaint");
+
+            migrationBuilder.DropTable(
+                name: "TenderItems");
+
+            migrationBuilder.DropTable(
+                name: "Tenders");
         }
     }
 }

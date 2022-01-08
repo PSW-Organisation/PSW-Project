@@ -74,7 +74,8 @@ namespace PharmacyAPI
            services.AddTransient<INotificationsForAppRepository, NotificationsForAppRepository>(); 
             services.AddScoped<INotificationsForAppService, NotificationsForAppService>();
             services.AddScoped<IPublishService, RabbitMQPublishService>();
-
+            services.AddScoped<ITenderResponsePublishService, TenderResponsePublishRabbitMQService>();
+            services.AddScoped<ITenderService, TenderService>();
             services.AddHostedService<RabbitMQService>();
             services.AddHostedService<RoutineZipCompressionService>();
             //added for Cors error
