@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace IntegrationLibrary.Migrations
 {
-    public partial class IntitalMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -128,11 +128,11 @@ namespace IntegrationLibrary.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ResponseReciveTime = table.Column<DateTime>(nullable: false),
+                    ResponseRecivedTime = table.Column<DateTime>(nullable: false),
                     PharmacyId = table.Column<int>(nullable: false),
                     TenderId = table.Column<int>(nullable: false),
                     TotalPrice = table.Column<double>(nullable: false),
-                    IsWinner = table.Column<double>(nullable: false)
+                    IsWinner = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -152,7 +152,7 @@ namespace IntegrationLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TenderItem",
+                name: "TenderItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -165,15 +165,15 @@ namespace IntegrationLibrary.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TenderItem", x => x.Id);
+                    table.PrimaryKey("PK_TenderItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TenderItem_Tenders_TenderId",
+                        name: "FK_TenderItems_Tenders_TenderId",
                         column: x => x.TenderId,
                         principalTable: "Tenders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_TenderItem_TenderResponses_TenderResponseId",
+                        name: "FK_TenderItems_TenderResponses_TenderResponseId",
                         column: x => x.TenderResponseId,
                         principalTable: "TenderResponses",
                         principalColumn: "Id",
@@ -181,13 +181,13 @@ namespace IntegrationLibrary.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TenderItem_TenderId",
-                table: "TenderItem",
+                name: "IX_TenderItems_TenderId",
+                table: "TenderItems",
                 column: "TenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TenderItem_TenderResponseId",
-                table: "TenderItem",
+                name: "IX_TenderItems_TenderResponseId",
+                table: "TenderItems",
                 column: "TenderResponseId");
 
             migrationBuilder.CreateIndex(
@@ -219,7 +219,7 @@ namespace IntegrationLibrary.Migrations
                 name: "ResponseToComplaint");
 
             migrationBuilder.DropTable(
-                name: "TenderItem");
+                name: "TenderItems");
 
             migrationBuilder.DropTable(
                 name: "TenderResponses");

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IntegrationLibrary.Migrations
 {
     [DbContext(typeof(IntegrationDbContext))]
-    [Migration("20211227165848_IntitalMigration")]
-    partial class IntitalMigration
+    [Migration("20220108174053_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -223,7 +223,7 @@ namespace IntegrationLibrary.Migrations
 
                     b.HasIndex("TenderResponseId");
 
-                    b.ToTable("TenderItem");
+                    b.ToTable("TenderItems");
                 });
 
             modelBuilder.Entity("IntegrationLibrary.Tendering.Model.TenderResponse", b =>
@@ -233,13 +233,13 @@ namespace IntegrationLibrary.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<double>("IsWinner")
-                        .HasColumnType("double precision");
+                    b.Property<bool>("IsWinner")
+                        .HasColumnType("boolean");
 
                     b.Property<int>("PharmacyId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("ResponseReciveTime")
+                    b.Property<DateTime>("ResponseRecivedTime")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("TenderId")
@@ -264,7 +264,7 @@ namespace IntegrationLibrary.Migrations
                         .HasForeignKey("TenderId");
 
                     b.HasOne("IntegrationLibrary.Tendering.Model.TenderResponse", null)
-                        .WithMany("MedicineTransactions")
+                        .WithMany("TenderItems")
                         .HasForeignKey("TenderResponseId");
                 });
 
