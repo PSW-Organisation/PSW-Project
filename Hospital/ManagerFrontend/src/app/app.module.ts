@@ -32,6 +32,7 @@ import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.co
 import { NotificationsComponent } from './notifications/notifications.component';
 import { MaliciousPatientsComponent } from './malicious-patients/malicious-patients.component';
 import { TendersComponent } from './tenders/tenders.component';
+import { TenderDetailComponent } from './tender-detail/tender-detail.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { TendersComponent } from './tenders/tenders.component';
     PharmacyProfileComponent,
     NotificationsComponent,
     MaliciousPatientsComponent,
-    TendersComponent
+    TendersComponent,
+    TenderDetailComponent
   ],
   imports: [
     BrowserModule,
