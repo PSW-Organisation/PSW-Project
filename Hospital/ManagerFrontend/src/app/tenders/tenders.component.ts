@@ -10,8 +10,8 @@ import { TendersService } from './tenders.service';
 })
 export class TendersComponent implements OnInit {
   newTender: any={ id: 0, tenderItems: [ ] , 
-  tenderOpenDate: "", tenderCloseDate: "", open: true, 
-  tenderResponses: [{}] }
+  tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, 
+  tenderResponses: [ ] }
 
   tenderResponse: any={}
 
@@ -23,8 +23,9 @@ export class TendersComponent implements OnInit {
   ngOnInit(): void {
     this.getTenders();
   }
-  addTenderItem(medicine: any){
-    this.newTender.tenderItems.push(medicine);
+  addTenderItem(tenderItem: any){
+    this.newTender.tenderItems.push(Object.assign({}, tenderItem));
+    //tenderItem = {tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice: 0}
   }
 
   getTenders(): void {
@@ -33,5 +34,16 @@ export class TendersComponent implements OnInit {
         this.tenders = tenders;
       }
     )
+  }
+
+  saveTender(): void {
+    this.tenderService.saveTender(this.newTender).subscribe(
+      data => {
+        this.newTender = { id: 0, tenderItems: [ ] , tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, tenderResponses: [ ] };
+        this.tenderItem = {tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice: 0}
+        this.getTenders();
+      },
+      err => console.log(err)
+    );
   }
 }

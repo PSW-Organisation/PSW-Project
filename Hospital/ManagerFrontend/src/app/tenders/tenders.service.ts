@@ -17,4 +17,8 @@ export class TendersService {
       tap(data => console.log("Data: ", data))
     )
   }
+
+  saveTender(tender: ITender){
+    return this._http.post('http://localhost:16928/api2/tender', tender);
+  }
 }

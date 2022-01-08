@@ -11,6 +11,7 @@ namespace PharmacyLibrary.Tendering.Adapters
         public static Tender TenderDtoToTender(TenderDTO dto)
         {
             Tender tender = new Tender();
+            tender.Id = dto.Id;
             tender.TenderOpenDate = dto.TenderOpenDate;
             tender.TenderCloseDate = dto.TenderCloseDate;
             tender.Open = dto.Open;

@@ -25,10 +25,12 @@
               <table> 
                   <tr style="height: 10px;"> </tr>
                   <div >
-                  <tr *ngFor = 'let item of newTender.tenderItems' > 
+                  <tr> 
                     <td class="tdInForm"> <label style="font-size: medium;">Tender items: </label></td>
-                    <td ><label   >{{item.tenderItemName}}</label> </td>
-                    <td ><label   >{{item.tenderItemName}}</label> </td>
+                    <div *ngFor = 'let item of newTender.tenderItems'>
+                      <td ><label   >{{item.tenderItemName}}</label> </td>
+                      <td ><label   >{{item.tenderItemQuantity}}</label> </td>
+                    </div>
                 </tr></div>
                   <tr> 
                       <td class="tdInForm"> <label style="font-size: medium;">Item</label></td>
@@ -40,14 +42,14 @@
                       <td style= "width: 250px"><input type="number" class="form-control" placeholder="Enter amount"  [(ngModel)]="tenderItem.tenderItemQuantity" > </td>
                    </tr>
                  <tr>
-                     <td class="tdInForm"> </td><td><button class="btn btn-secondary" (click)="addTenderItem(tenderItem)" >  <i class="bi bi-plus-lg"></i>Add more medicines </button> </td></tr> 
+                     <td class="tdInForm"> </td><td><button class="btn btn-secondary" (click)="addTenderItem(tenderItem)" >  <i class="bi bi-plus-lg"></i>Add item </button> </td></tr> 
               </table>
 
             </div>       
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" style="margin-right:30px; " data-dismiss="modal" >Post</button>
+            <button type="button" class="btn btn-danger" style="margin-right:30px; " data-dismiss="modal" (click)="saveTender()">Post</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
