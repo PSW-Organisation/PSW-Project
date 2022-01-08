@@ -9,31 +9,10 @@ namespace IntegrationAPI.Adapters
 {
     public class TenderAdapter
     {
-        /*public static Tender ComplaintDtoToComplaint(TenderDTO dto)
-        {
-            Tender complaint = new Complaint();
-            complaint.Id = dto.ComplaintId;
-            complaint.Date = dto.Date;
-            complaint.Title = dto.Title;
-            complaint.Content = dto.Content;
-            complaint.PharmacyId = dto.PharmacyId;
-            return complaint;
-        }
-
-        public static ComplaintDTO ComplaintToComplaintDto(Complaint complaint)
-        {
-            ComplaintDTO dto = new ComplaintDTO();
-            dto.ComplaintId = complaint.Id;
-
-            dto.Date = complaint.Date;
-            dto.Title = complaint.Title;
-            dto.Content = complaint.Content;
-            dto.PharmacyId = complaint.PharmacyId;
-            return dto;
-        }*/
         public static TenderDTO TenderToTenderDto(Tender tender)
         {
             TenderDTO dto = new TenderDTO();
+            dto.Id = tender.Id;
             dto.TenderOpenDate = tender.TenderOpenDate;
             dto.TenderCloseDate = tender.TenderCloseDate;
             dto.Open = tender.Open;
@@ -45,6 +24,7 @@ namespace IntegrationAPI.Adapters
         public static Tender TenderDtoToTender(TenderDTO dto)
         {
             Tender tender = new Tender();
+            tender.Id = dto.Id;
             tender.TenderOpenDate = dto.TenderOpenDate;
             tender.TenderCloseDate = dto.TenderCloseDate;
             tender.Open = dto.Open;

@@ -25,22 +25,22 @@
               <table> 
                   <tr style="height: 10px;"> </tr>
                   <div >
-                  <tr *ngFor = 'let item of newTender.medicineTransactions' > 
+                  <tr *ngFor = 'let item of newTender.tenderItems' > 
                     <td class="tdInForm"> <label style="font-size: medium;">Tender items: </label></td>
-                    <td ><label   >{{item.medicineName}}</label> </td>
-                    <td ><label   >{{item.medicineAmount}}</label> </td>
+                    <td ><label   >{{item.tenderItemName}}</label> </td>
+                    <td ><label   >{{item.tenderItemName}}</label> </td>
                 </tr></div>
                   <tr> 
-                      <td class="tdInForm"> <label style="font-size: medium;">Medicine</label></td>
-                      <td ><input type="text" class="form-control" placeholder="Enter medicine" [(ngModel)]="medicine.medicineName"  > </td>
+                      <td class="tdInForm"> <label style="font-size: medium;">Item</label></td>
+                      <td ><input type="text" class="form-control" placeholder="Enter medicine" [(ngModel)]="tenderItem.tenderItemName"  > </td>
                   </tr>
                   <tr style="height: 10px;"> </tr>
                   <tr> 
                       <td class="tdInForm"> <label style="font-size: medium;">Amount</label> </td>
-                      <td style= "width: 250px"><input type="number" class="form-control" placeholder="Enter amount"  [(ngModel)]="medicine.medicineAmount" > </td>
+                      <td style= "width: 250px"><input type="number" class="form-control" placeholder="Enter amount"  [(ngModel)]="tenderItem.tenderItemQuantity" > </td>
                    </tr>
                  <tr>
-                     <td class="tdInForm"> </td><td><button class="btn btn-secondary" (click)="addMedicine(medicine)" >  <i class="bi bi-plus-lg"></i>Add more medicines </button> </td></tr> 
+                     <td class="tdInForm"> </td><td><button class="btn btn-secondary" (click)="addTenderItem(tenderItem)" >  <i class="bi bi-plus-lg"></i>Add more medicines </button> </td></tr> 
               </table>
 
             </div>       
@@ -80,37 +80,20 @@
 
                   <div class="card-columns mx-auto">
 
-                      <div class="card text-center">
+                      <div class="card text-center" *ngFor = 'let tender of tenders'>
                         <div class="card-body">
-                          <h5 class="card-title">Tender 1</h5>
+                          <h5 class="card-title">Tender {{tender.id}}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
-                          <p class="card-text">Panklav 52</p>
-                          <p class="card-text">Verapamil 20</p>
+                          <p *ngFor = 'let item of tender.tenderItems' class="card-text">{{item.tenderItemName}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
-                          <p class="card-text"> 20/12/2021</p>
+                          <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
-                          <p class="card-text"> 20/02/2022  </p>
+                          <p class="card-text"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
                           <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
                           <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
 
                         </div>
                       </div>
-
-                      <div class="card text-center">
-                        <div class="card-body">
-                          <h5 class="card-title">Tender 2</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
-                          <p class="card-text">Brufen 30</p>
-                          <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
-                          <p class="card-text"> 20/12/2021</p>
-                          <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
-                          <p class="card-text"> 20/02/2022  </p>
-                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
-                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
-
-                        </div>
-                      </div>
-
                   </div>
 
             </div>

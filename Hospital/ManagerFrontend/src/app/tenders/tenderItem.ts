@@ -1,5 +1,5 @@
 export interface ITenderItem{
-    medicineName: any;
-    medicineAmount: number;
-
+    tenderItemName: String;
+    tenderItemQuantity: number;
+    tenderItemPrice: number
 }
