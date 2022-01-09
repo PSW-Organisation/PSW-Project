@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Castle.Core.Internal;
 using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using FluentResults;
 using Microsoft.AspNetCore.Hosting;
@@ -76,10 +77,18 @@ namespace HospitalAPI.Controllers
             string[] paths = HttpContext.Request.Path.Value.Split("/");
             string uploads = Path.Combine(_env.ContentRootPath, "ProfileImages");
             string filePath = Path.Combine(uploads, username + ".jpeg");
-
-            byte[] imageArray = System.IO.File.ReadAllBytes(filePath);
-
-            return new {image = "data:image/jpeg;base64," + Convert.ToBase64String(imageArray)};
+            var imageArray = ReadOnlySpan<byte>.Empty;
+            try
+            {
+                imageArray = System.IO.File.ReadAllBytes(filePath);
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+            if(imageArray.Length != 0)
+                return new {image = "data:image/jpeg;base64," + Convert.ToBase64String(imageArray)};
+            return null;
         }
     }
 }
