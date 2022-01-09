@@ -12,6 +12,7 @@ namespace IntegrationAPI.Adapters
         public static TenderResponseDTO TenderResponseToTenderResponseDTO(TenderResponse tenderResponse)
         {
             TenderResponseDTO dto = new TenderResponseDTO();
+            dto.Id = tenderResponse.Id;
             dto.Pharmacy = PharmacyAdapter.PharmacyToPharmacyDto(tenderResponse.Pharmacy);
             dto.TenderItems = tenderResponse.TenderItems;
             dto.ResponseReceivedTime = tenderResponse.ResponseReceivedTime;

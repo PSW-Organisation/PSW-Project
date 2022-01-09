@@ -8,6 +8,7 @@ namespace IntegrationAPI.DTO
 {
     public class TenderResponseDTO
     {
+        public int Id { get; set; }
         public PharmacyDto Pharmacy { get; set; }
         public List<TenderItem> TenderItems { get; set; }
         public DateTime ResponseReceivedTime { get; set; }

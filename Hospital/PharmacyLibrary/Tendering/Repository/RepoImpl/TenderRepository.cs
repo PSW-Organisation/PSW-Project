@@ -57,14 +57,14 @@ namespace PharmacyLibrary.Tendering.Repository.RepoImpl
 
         public bool Update(Tender updatedTender)
         {
-            Tender tenderForEdit = this.Get(tender.Id);
+            Tender tenderForEdit = this.Get(updatedTender.Id);
             if (tenderForEdit == null)
             {
                 return false;
             }
             else
             {
-                pharmacyDbContext.Entry(tenderForEdit).CurrentValues.SetValues(tender);
+                pharmacyDbContext.Entry(tenderForEdit).CurrentValues.SetValues(updatedTender);
                 pharmacyDbContext.SaveChanges();
                 return true;
             }

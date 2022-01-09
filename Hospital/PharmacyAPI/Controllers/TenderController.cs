@@ -84,5 +84,18 @@ namespace PharmacyAPI.Controllers
 
         }
 
+        [HttpGet("accept/{id?}")]
+        public IActionResult AcceptOffer(int id)
+        {
+            Tender tender = tenderService.Get(id);
+            if (tender == null)
+            {
+                return NotFound();
+            }
+            tender.IsWon = true;
+            tenderService.Update(tender);
+            return Ok();
+        }
+
     }
 }

@@ -23,7 +23,7 @@
             <p class="card-text"> {{response.responseReceivedTime | date: 'short'}}</p>
             <h6 class="card-subtitle mb-2 text-muted">Total price: </h6>
             <p class="card-text"> {{response.totalPrice}} din</p>
-            <button *ngIf = "tender.apiKeyPharmacy == null && tender.open" type="button" class="btn btn-danger" (click)="acceptOffer(tender.id)">Accept</button>
+            <button *ngIf = "tender.apiKeyPharmacy == null && tender.open" type="button" class="btn btn-danger" (click)="acceptOffer(response.id)">Accept</button>
             <p *ngIf = "response.isWinner" class="card-text"> Winning offer</p>
           </div>
         </div>
