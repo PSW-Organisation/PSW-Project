@@ -18,35 +18,34 @@
           <h4 class="modal-title" style="font-size: x-large;">New tender</h4>
         </div>
         <div class="modal-body">
-
-            <div> 
-
-
-              <table> 
-                  <tr style="height: 10px;"> </tr>
-                  <div >
-                  <tr> 
-                    <td class="tdInForm"> <label style="font-size: medium;">Tender items: </label></td>
-                    <div *ngFor = 'let item of newTender.tenderItems'>
-                      <td ><label   >{{item.tenderItemName}}</label> </td>
-                      <td ><label   >{{item.tenderItemQuantity}}</label> </td>
-                    </div>
-                </tr></div>
-                  <tr> 
-                      <td class="tdInForm"> <label style="font-size: medium;">Item</label></td>
-                      <td ><input type="text" class="form-control" placeholder="Enter medicine" [(ngModel)]="tenderItem.tenderItemName"  > </td>
-                  </tr>
-                  <tr style="height: 10px;"> </tr>
-                  <tr> 
-                      <td class="tdInForm"> <label style="font-size: medium;">Amount</label> </td>
-                      <td style= "width: 250px"><input type="number" class="form-control" placeholder="Enter amount"  [(ngModel)]="tenderItem.tenderItemQuantity" > </td>
-                   </tr>
-                 <tr>
-                     <td class="tdInForm"> </td><td><button class="btn btn-secondary" (click)="addTenderItem(tenderItem)" >  <i class="bi bi-plus-lg"></i>Add item </button> </td></tr> 
-              </table>
-
-            </div>       
-
+          <table> 
+            <tr style="height: 10px;"> </tr>
+            <tr> 
+              <td class="tdInForm"> <label style="font-size: medium;">Tender items: </label></td>
+            </tr>
+            <tr *ngFor = 'let item of newTender.tenderItems'>
+              <td ><label>{{item.tenderItemName}}</label></td>
+              <td ><label>{{item.tenderItemQuantity}}</label></td>
+            </tr>
+          </table>
+          <table>
+            <tr> 
+              <td class="tdInForm"> <label style="font-size: medium;">Item</label></td>
+              <td ><input type="text" class="form-control" placeholder="Enter medicine" [(ngModel)]="tenderItem.tenderItemName"  > </td>
+            </tr>
+            <tr style="height: 10px;"> </tr>
+            <tr> 
+              <td class="tdInForm"> <label style="font-size: medium;">Ammount</label> </td>
+              <td style= "width: 250px"><input type="number" class="form-control" placeholder="Enter amount"  [(ngModel)]="tenderItem.tenderItemQuantity" > </td>
+            </tr>
+            <tr>
+              <td class="tdInForm"> </td><td><button class="btn btn-secondary" (click)="addTenderItem(tenderItem)" >  <i class="bi bi-plus-lg"></i>Add item </button> </td>
+            </tr> 
+            <tr> 
+              <td class="tdInForm"> <label style="font-size: medium;">Active until</label> </td>
+              <td style= "width: 250px"><input type="date" class="form-control" placeholder="Enter amount"  [(ngModel)]="newTender.tenderCloseDate" > </td>
+            </tr>
+          </table>      
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" style="margin-right:30px; " data-dismiss="modal" (click)="saveTender()">Post</button>
@@ -86,14 +85,13 @@
                         <div class="card-body">
                           <h5 class="card-title">Tender {{tender.id}}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
-                          <p *ngFor = 'let item of tender.tenderItems' class="card-text">{{item.tenderItemName}}</p>
+                          <p *ngFor = 'let item of tender.tenderItems' class="card-text">{{item.tenderItemName}} {{item.tenderItemQuantity}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
                           <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
                           <p class="card-text"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
                           <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
-                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
-
+                          <a [routerLink]="['/tender', tender.id]" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
                         </div>
                       </div>
                   </div>

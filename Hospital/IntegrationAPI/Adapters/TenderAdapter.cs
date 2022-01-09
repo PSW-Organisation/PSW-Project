@@ -18,6 +18,12 @@ namespace IntegrationAPI.Adapters
             dto.Open = tender.Open;
             dto.ApiKeyPharmacy = tender.ApiKeyPharmacy;
             dto.TenderItems = tender.TenderItems;
+            List<TenderResponseDTO> tenderResponses = new List<TenderResponseDTO>();
+            foreach(TenderResponse tenderResponse in tender.TenderResponses)
+            {
+                tenderResponses.Add(TenderResponseAdapter.TenderResponseToTenderResponseDTO(tenderResponse));
+            }
+            dto.TenderResponses = tenderResponses;
             return dto;
         }
 

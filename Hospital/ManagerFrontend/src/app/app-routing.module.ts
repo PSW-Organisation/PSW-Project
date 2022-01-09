@@ -18,6 +18,7 @@ import { ReportsViewComponent } from './reports-view/reports-view.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { MaliciousPatientsComponent } from './malicious-patients/malicious-patients.component';
 import { TendersComponent} from "./tenders/tenders.component"
+import { TenderDetailComponent } from './tender-detail/tender-detail.component';
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
   { path: 'pharmacies', component: PharmaciesViewComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'notifications', component: NotificationsComponent},
   { path: 'malicious', component: MaliciousPatientsComponent },
   { path: 'tenders', component: TendersComponent },
+  { path: 'tender/:id', component: TenderDetailComponent}
 
 ];
 

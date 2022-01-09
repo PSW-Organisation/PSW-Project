@@ -20,5 +20,6 @@ namespace IntegrationAPI.DTO
 
         public List<TenderItem> TenderItems { get; set; }
 
+        public List<TenderResponseDTO> TenderResponses { get; set; }
     }
 }

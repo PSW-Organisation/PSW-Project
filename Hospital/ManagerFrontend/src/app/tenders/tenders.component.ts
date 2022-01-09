@@ -25,7 +25,7 @@ export class TendersComponent implements OnInit {
   }
   addTenderItem(tenderItem: any){
     this.newTender.tenderItems.push(Object.assign({}, tenderItem));
-    //tenderItem = {tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice: 0}
+    this.tenderItem = {tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice: 0}
   }
 
   getTenders(): void {
