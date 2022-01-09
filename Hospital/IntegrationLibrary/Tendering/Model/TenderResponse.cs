@@ -17,6 +17,7 @@ namespace IntegrationLibrary.Tendering.Model
         private DateTime _responseReceivedTime;
         private double _totalPrice;
         private bool _isWinner;
+        private string _pharmacyApiKey;
         public DateTime ResponseReceivedTime { get => _responseReceivedTime; set => _responseReceivedTime = value; }
         public int PharmacyId { get => _pharmacyId; set => _pharmacyId = value; }
         public virtual Pharmacy Pharmacy { get => _pharmacy; set => _pharmacy = value; }
@@ -25,6 +26,7 @@ namespace IntegrationLibrary.Tendering.Model
         public int TenderId { get => _tenderId; set => _tenderId = value; }
         public double TotalPrice { get => _totalPrice; set => _totalPrice = value; }
         public bool IsWinner { get => _isWinner; set => _isWinner = value; }
+        public string PharmacyApiKey { get => _pharmacyApiKey; set => _pharmacyApiKey = value; }
 
         public TenderResponse() : base(-1) { }
 

@@ -108,7 +108,7 @@ namespace IntegrationAPI
             services.AddScoped<NotificationsForAppRepository, NotificationsForAppDbRepository>();
             services.AddScoped<TenderRepository, TenderDbRepository>();
             services.AddScoped<TenderItemRepository, TenderItemDbRepository>();
-
+            services.AddScoped<TenderResponseRepository, TenderResponseDbRepository>();
             //servisi
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IAccountDataService, AccountDataService>();
@@ -139,7 +139,7 @@ namespace IntegrationAPI
             services.AddScoped<ITenderService, TenderService>();
             
             services.AddScoped<ITenderPublishingService, TenderRabbitMQService>();
-
+            services.AddHostedService<TenderResponseRabbitMqService>();
             services.AddHostedService<RabbitMQService>();
 
             //added for Cors error
