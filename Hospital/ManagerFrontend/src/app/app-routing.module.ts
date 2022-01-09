@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PharmaciesViewComponent } from './pharmacies-view/pharmacies-view.component';
 
-import { FeedBackComponent } from './feedback/feedback.component'
+import { FeedBackComponent } from './feedback/feedback.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ComplaintsViewComponent } from './complaints-view/complaints-view.component';
 import { ComplaintDetailComponent } from './complaint-detail/complaint-detail.component';
@@ -21,6 +21,7 @@ import { TendersComponent } from "./tenders/tenders.component"
 import { DoctorsComponent } from "./doctors/doctors.component"
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ScheduleComponent } from './doctor-vacation/schedule/schedule.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -42,11 +43,11 @@ const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent },
   { path: 'doctorView/:id', component: DoctorViewComponent },
   { path: 'home', component: HomePageComponent },
-
+  { path: 'doctorVacation/:doctorId', component: ScheduleComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

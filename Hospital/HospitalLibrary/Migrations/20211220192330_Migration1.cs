@@ -9,6 +9,28 @@ namespace HospitalLibrary.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "DoctorVacations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    StartTime = table.Column<DateTime>(nullable: true),
+                    EndTime = table.Column<DateTime>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    DoctorId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DoctorVacations", x => x.Id);
+                });
+
+            migrationBuilder.InsertData(
+                table: "DoctorVacations",
+                columns: new[] { "Id", "Description", "DoctorId", "EndTime", "StartTime" },
+                values: new object[] { 1, "Zimovanje", "mkisic", new DateTime(2022, 1, 10, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2022, 1, 9, 0, 0, 0, 0, DateTimeKind.Local) });
+
+            migrationBuilder.CreateTable(
                 name: "Allergens",
                 columns: table => new
                 {
@@ -662,6 +684,9 @@ namespace HospitalLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "DoctorVacations");
         }
     }
 }

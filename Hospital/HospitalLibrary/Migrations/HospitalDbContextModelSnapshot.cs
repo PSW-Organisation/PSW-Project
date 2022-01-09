@@ -19,6 +19,33 @@ namespace HospitalLibrary.Migrations
                 .HasAnnotation("ProductVersion", "3.1.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.DoctorVacation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DoctorVacations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Zimovanje",
+                            DoctorId = "mkisic"
+                        });
+                });
+
             modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.PatientFeedback", b =>
                 {
                     b.Property<int>("Id")
@@ -1370,6 +1397,40 @@ namespace HospitalLibrary.Migrations
                             Surname = "Tamindzija",
                             Token = new Guid("601ccaa8-3a07-4a7c-89b9-9923e6bac8a7"),
                             Username = "kristina"
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.DoctorVacation", b =>
+                {
+                    b.OwnsOne("HospitalLibrary.RoomsAndEquipment.Terms.Utils.TimeInterval", "DateSpecification", b1 =>
+                        {
+                            b1.Property<int>("DoctorVacationId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<DateTime>("EndTime")
+                                .HasColumnName("EndTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<DateTime>("StartTime")
+                                .HasColumnName("StartTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("DoctorVacationId");
+
+                            b1.ToTable("DoctorVacations");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorVacationId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    DoctorVacationId = 1,
+                                    EndTime = new DateTime(2022, 1, 10, 0, 0, 0, 0, DateTimeKind.Local),
+                                    StartTime = new DateTime(2022, 1, 9, 0, 0, 0, 0, DateTimeKind.Local)
+                                });
                         });
                 });
 

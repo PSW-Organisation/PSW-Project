@@ -30,12 +30,14 @@ using PatientService = HospitalLibrary.MedicalRecords.Service.PatientService;
 using Newtonsoft.Json;
 using HospitalAPI.Validators;
 using System;
+using HospitalLibrary.DoctorSchedule.Repository;
 using HospitalLibrary.RoomsAndEquipment.Terms.Repository;
 using HospitalLibrary.RoomsAndEquipment.Terms.Service;
 using HospitalLibrary.Medicines.Repository;
 using HospitalLibrary.Medicines.Service;
 using HospitalLibrary.Schedule.Service;
 using HospitalLibrary.Schedule.Repository;
+using HospitalLibrary.DoctorSchedule.Service;
 
 namespace HospitalAPI
 {
@@ -102,6 +104,8 @@ namespace HospitalAPI
             services.AddScoped<ITermOfRenovationService, TermOfRenovationService>();
             services.AddScoped<ITermOfRenovationRepository, TermOfRenovationRepository>();
 
+            services.AddScoped<IDoctorVacationService, DoctorVacationService>();
+            services.AddScoped<IDoctorVacationRepository, DoctorVacationRepository>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<GenericSTRINGIDRepository<User>, UserDbRepository>();

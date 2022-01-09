@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ehealthcare.Model;
 using HospitalAPI.DTO;
+using HospitalLibrary.DoctorSchedule.Model;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.Medicines.Model;
@@ -74,6 +75,8 @@ namespace HospitalAPI.Mapper
             CreateMap<Doctor, DoctorDTO>().ForMember(dest => dest.Specialization,
             opt => opt.MapFrom(src => src.Specialization.ToString()));
 
+            CreateMap<DoctorVacation, DoctorVacationDTO>();
+            CreateMap<DoctorVacationDTO, DoctorVacation>();
         }
 
         private StateOfTerm IsFinished(Visit d)
