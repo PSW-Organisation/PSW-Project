@@ -13,10 +13,10 @@ export class TendersComponent implements OnInit {
   tenderItems: ITenderItem[]=[];
   item : any;
   modalTender: ITender = {id: 0, tenderItems: [ ] ,
-    tenderOpenDate: new Date, tenderCloseDate: new Date, open: true};
+    tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, isWon: false};
   tenders: ITender[] = [];
   tenderOffer: ITenderResponse = {tender: {id: 0, tenderItems: [ ] ,
-    tenderOpenDate: new Date, tenderCloseDate: new Date, open: true}, tenderId: 0, tenderItems: []}
+    tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, isWon: false}, tenderId: 0, tenderItems: []}
   tenderItem : ITenderItem ={tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice:0};
   constructor(private tenderService: TendersService) { }
 
@@ -24,13 +24,19 @@ export class TendersComponent implements OnInit {
     this.getTenders()
   }
   addMedicine(medicine: ITenderItem){
-    this.tenderItems.push(medicine);
+    this.tenderItems.push(Object.assign({}, medicine));
   }
   setModalTender(tender: any): void{
     this.modalTender = tender
     console.log(this.modalTender)
   }
-
+  closeTender(tender: ITender){
+    this.tenderService.closeTender(tender).subscribe(
+      res => {
+        alert("Tender has been closed");
+      }
+    );
+  }
   sendTenderOffer(): void{
     this.tenderOffer.tender = this.modalTender
     this.tenderOffer.tenderId = this.modalTender.id
@@ -39,7 +45,7 @@ export class TendersComponent implements OnInit {
     this.tenderService.sendOffer(this.tenderOffer).subscribe(
       data=>{
         this.tenderOffer = {tender: {id: 0, tenderItems: [ ] ,
-          tenderOpenDate: new Date, tenderCloseDate: new Date, open: true}, tenderId: 0, tenderItems: []};
+          tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, isWon: false}, tenderId: 0, tenderItems: []};
           this.getTenders();
 
       }, err=> console.log(err)

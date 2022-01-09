@@ -18,6 +18,7 @@ namespace PharmacyAPI.Adapter
             dto.Open = tender.Open;
             dto.ApiKeyPharmacy = tender.ApiKeyPharmacy;
             dto.TenderItems = tender.TenderItems;
+            dto.IsWon = tender.IsWon;
             return dto;
         }
 
@@ -30,6 +31,7 @@ namespace PharmacyAPI.Adapter
             tender.Open = dto.Open;
             tender.ApiKeyPharmacy = dto.ApiKeyPharmacy;
             tender.TenderItems = dto.TenderItems;
+            tender.IsWon = dto.IsWon;
             return tender;
         }
     }

@@ -18,5 +18,7 @@ namespace PharmacyAPI.DTO
         public string ApiKeyPharmacy { get; set; }
 
         public List<TenderItem> TenderItems { get; set; }
+
+        public bool IsWon { get; set; }
     }
 }

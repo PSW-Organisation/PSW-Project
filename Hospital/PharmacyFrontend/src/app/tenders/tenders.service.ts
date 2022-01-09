@@ -12,6 +12,11 @@ export class TendersService {
 
   constructor(private _http: HttpClient) { }
 
+  closeTender(tender: ITender){
+    console.log('cao iz zatvaranja')
+    return this._http.get('http://localhost:29631/api3/tender/close/' + tender.id)
+  }
+
   sendOffer(Offer: ITenderResponse){
     console.log('cao')
     return this._http.post('http://localhost:29631/api3/tenderresponse', Offer);

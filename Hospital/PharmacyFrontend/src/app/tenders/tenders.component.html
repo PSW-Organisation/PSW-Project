@@ -102,14 +102,15 @@
                         <div class="card-body">
                           <h5 class="card-title">Flos Pharmacy</h5>
                           <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
-                          <p class="card-text" *ngFor = 'let item of tender.tenderItems' >{{item.tenderItemName}}</p>
+                          <p class="card-text" *ngFor = 'let item of tender.tenderItems' >{{item.tenderItemName}} {{item.tenderItemQuantity}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
                           <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
                           <p class="card-text"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
-
+                          <div *ngIf="tender.open">
                           <button href="#" class="button" style="text-decoration: darkred;    color: rgb(27, 46, 133); ; font-size:large ;" (click) = 'setModalTender(tender)' data-toggle="modal" data-target="#newResponse">Response </button>
-
+                          <button href="#" class="button" style="text-decoration: darkred;    color: rgb(27, 46, 133); ; font-size:large ;" (click) = 'closeTender(tender)' >Close Tender </button>
+                        </div>
                         </div>
                       </div>
 

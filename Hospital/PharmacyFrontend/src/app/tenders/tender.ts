@@ -7,5 +7,6 @@ export interface ITender{
     tenderOpenDate: Date;
     tenderCloseDate: Date;
     open: Boolean;
+    isWon: Boolean;
 
 }

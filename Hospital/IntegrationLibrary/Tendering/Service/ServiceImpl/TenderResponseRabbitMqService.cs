@@ -108,6 +108,12 @@ namespace IntegrationLibrary.Tendering.Service.ServiceImpl
             {
                 var tenderResponseRepository = scope.ServiceProvider.GetRequiredService<TenderResponseRepository>();
                 tenderResponse.Id = tenderResponseRepository.GenerateId();
+                var tenderItemRepositor = scope.ServiceProvider.GetRequiredService<TenderItemRepository>();
+                foreach(TenderItem tenderItem in tenderResponse.TenderItems)
+                {
+                    tenderItem.Id = tenderItemRepositor.GenerateId();
+                    tenderItemRepositor.Save(tenderItem);
+                }
                 var pharmacyRepository = scope.ServiceProvider.GetRequiredService<PharmacyRepository>();
                 foreach(Pharmacy p in pharmacyRepository.GetAll())
                 {

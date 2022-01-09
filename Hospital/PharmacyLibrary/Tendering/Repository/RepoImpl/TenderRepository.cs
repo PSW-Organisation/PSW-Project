@@ -43,12 +43,30 @@ namespace PharmacyLibrary.Tendering.Repository.RepoImpl
 
         public Tender Get(int id)
         {
-            throw new NotImplementedException();
+            Tender tender = pharmacyDbContext.Tenders.FirstOrDefault(tender => tender.Id == id);
+            if (tender == null)
+            {
+                return null;
+            }
+            else
+            {
+                return tender;
+            }
         }
 
         public bool Update(Tender tender)
         {
-            throw new NotImplementedException();
+            Tender tenderForEdit = this.Get(tender.Id);
+            if (tenderForEdit == null)
+            {
+                return false;
+            }
+            else
+            {
+                pharmacyDbContext.Entry(tenderForEdit).CurrentValues.SetValues(tender);
+                pharmacyDbContext.SaveChanges();
+                return true;
+            }
         }
     }
 }
