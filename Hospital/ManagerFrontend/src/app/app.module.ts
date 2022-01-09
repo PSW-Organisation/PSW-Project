@@ -36,6 +36,8 @@ import { TendersComponent } from './tenders/tenders.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { ScheduleComponent } from './doctor-vacation/schedule/schedule.component';
+import { CuFormComponent } from './doctor-vacation/cu-form/cu-form.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { HomePageComponent } from './home-page/home-page.component';
     TendersComponent,
     DoctorsComponent,
     DoctorViewComponent,
-    HomePageComponent
+    HomePageComponent,
+    ScheduleComponent,
+    CuFormComponent
   ],
   imports: [
     BrowserModule,

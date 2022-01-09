@@ -2,12 +2,11 @@ using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.Model;
-using System.Linq;
-using HospitalLibrary.GraphicalEditor.Service;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
+using HospitalLibrary.DoctorSchedule.Model;
 
 namespace ehealthcare.Model
 {
@@ -34,6 +33,7 @@ namespace ehealthcare.Model
         //public DbSet<Medicine> Medicines { get; set; }
 
         public DbSet<MedicinePrescription> Prescriptions { get; set; }
+        public DbSet<DoctorVacation> DoctorVacations { get; set; }
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
         protected HospitalDbContext()
@@ -299,7 +299,38 @@ namespace ehealthcare.Model
 
             #endregion
 
+            #region DoctorVacations
+
+            modelBuilder.Entity<DoctorVacation>().OwnsOne(v => v.DateSpecification).HasData(
+                new
+                {
+                    StartTime = DateTime.Today,
+                    EndTime = DateTime.Today.AddDays(1),
+                    DoctorVacationId = 1,
+                });
+
+            modelBuilder.Entity<DoctorVacation>().OwnsOne(v => v.DateSpecification, a =>
+                {
+                    a.Property(d => d.StartTime).HasColumnName("StartTime");
+                    a.Property(d => d.EndTime).HasColumnName("EndTime");
+                    a.Ignore(d => d.Duration);
+                });
+
+            modelBuilder.Entity<DoctorVacation>().HasData(
+                    new
+                    {
+                        Id = 1,
+                        Description = "Zimovanje",
+                        DoctorId = "mkisic"
+                    }
+                );
+
+            modelBuilder.Entity<DoctorVacation>().Property(v => v.Id).HasIdentityOptions(startValue: 10);
+
+            #endregion
+
             #region FloorGraphicsWithRoomGraphics
+
 
             modelBuilder.Entity<FloorGraphic>().HasData(
                 new

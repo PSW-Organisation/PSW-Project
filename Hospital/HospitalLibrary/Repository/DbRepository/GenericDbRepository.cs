@@ -14,7 +14,6 @@ namespace HospitalLibrary.Repository.DbRepository
     {
         private readonly HospitalDbContext _dbContext;
 
-
         public GenericDbRepository(HospitalDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -63,10 +62,10 @@ namespace HospitalLibrary.Repository.DbRepository
         public T Update(T entity)
         {
             //_dbContext.Set<T>().Update(entity);
-            T oldEntitiy = this.Get(entity.Id); //dodato
-            _dbContext.Entry(oldEntitiy).CurrentValues.SetValues(entity); //dodato
-            Save(entity);
-            return entity;
+            T oldEntity = Get(entity.Id); //dodato
+            _dbContext.Entry(oldEntity).CurrentValues.SetValues(entity); //dodato 
+            Save(oldEntity);
+            return oldEntity;
         }
     }
 }
