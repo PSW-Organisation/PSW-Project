@@ -1,4 +1,17 @@
 <div class="container-fluid">
+  <div class="card-body mx-auto col-8 text-center">
+    <h5 class="card-title">Tender {{tender.id}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
+    <p *ngFor = 'let item of tender.tenderItems' class="card-text">{{item.tenderItemName}} {{item.tenderItemQuantity}}</p>
+    <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
+    <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
+    <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
+    <p class="card-text"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
+    <h6 class="card-subtitle mb-2 text-muted">Status: </h6>
+    <p *ngIf = "tender.apiKeyPharmacy != null && tender.open" class="card-text"> Waiting for confirmation </p>
+    <p *ngIf = "tender.apiKeyPharmacy == null && tender.open" class="card-text"> Taking offers </p>
+    <p *ngIf = "!tender.open" class="card-text"> Closed </p>
+  </div>
     <h1 style="text-align: center; margin-top: 10px;"> Tender offers: </h1>
     <div class="card-rows mx-auto col-8">
         <div class="card text-center" *ngFor = 'let response of tender.tenderResponses'>
@@ -10,7 +23,8 @@
             <p class="card-text"> {{response.responseReceivedTime | date: 'short'}}</p>
             <h6 class="card-subtitle mb-2 text-muted">Total price: </h6>
             <p class="card-text"> {{response.totalPrice}} din</p>
-            <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Accept offer</a>
+            <button *ngIf = "tender.apiKeyPharmacy == null && tender.open" type="button" class="btn btn-danger" (click)="acceptOffer(tender.id)">Accept</button>
+            <p *ngIf = "response.isWinner" class="card-text"> Winning offer din</p>
           </div>
         </div>
     </div>

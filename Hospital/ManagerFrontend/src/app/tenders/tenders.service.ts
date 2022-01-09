@@ -21,4 +21,11 @@ export class TendersService {
   saveTender(tender: ITender){
     return this._http.post('http://localhost:16928/api2/tender', tender);
   }
+
+  closeTender(id: number) {
+    return this._http.get('http://localhost:16928/api2/tender/close/' + id)
+    .pipe(
+      tap(data => console.log("Data: ", data))
+    )
+  }
 }

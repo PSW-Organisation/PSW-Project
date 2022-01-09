@@ -47,5 +47,18 @@ namespace IntegrationAPI.Controllers
                 return Ok(TenderAdapter.TenderToTenderDto(tender));
             }
         }
+
+        [HttpGet("close/{id?}")]
+        public IActionResult CloseTender(int id)
+        {
+            Tender tender = tenderService.Get(id);
+            if (tender == null)
+            {
+                return NotFound();
+            }
+            tender.Open = false;
+            tenderService.Update(tender);
+            return Ok(TenderAdapter.TenderToTenderDto(tender));
+        }
     }
 }

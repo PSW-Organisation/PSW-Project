@@ -137,7 +137,7 @@ namespace IntegrationAPI
             services.AddScoped<INotificationsForAppService, NotificationsForAppService>();
             services.AddScoped<IMedicineBenefitService, MedicineBenefitService>();
             services.AddScoped<ITenderService, TenderService>();
-            
+            services.AddScoped<ITenderResponseService, TenderResponseService>();
             services.AddScoped<ITenderPublishingService, TenderRabbitMQService>();
             services.AddHostedService<TenderResponseRabbitMqService>();
             services.AddHostedService<RabbitMQService>();

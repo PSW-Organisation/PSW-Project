@@ -16,6 +16,7 @@ export class TendersComponent implements OnInit {
   tenderResponse: any={}
 
   tenders: ITender[]=[]
+  closedTenders: ITender[] = []
   tenderItem : ITenderItem= {tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice: 0}
 
   constructor(private tenderService: TendersService) { }
@@ -31,13 +32,33 @@ export class TendersComponent implements OnInit {
   getTenders(): void {
     this.tenderService.getTenders().subscribe(
       tenders => {
-        this.tenders = tenders;
+        this.tenders = []
+        this.closedTenders = []
+        tenders.forEach(tender => {
+          if(tender.open) {
+            this.tenders.push(tender)
+          }
+          else {
+            this.closedTenders.push(tender);
+          }
+        })
       }
     )
   }
 
   saveTender(): void {
     this.tenderService.saveTender(this.newTender).subscribe(
+      data => {
+        this.newTender = { id: 0, tenderItems: [ ] , tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, tenderResponses: [ ] };
+        this.tenderItem = {tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice: 0}
+        this.getTenders();
+      },
+      err => console.log(err)
+    );
+  }
+
+  closeTender(id: number):void {
+    this.tenderService.closeTender(id).subscribe(
       data => {
         this.newTender = { id: 0, tenderItems: [ ] , tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, tenderResponses: [ ] };
         this.tenderItem = {tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice: 0}

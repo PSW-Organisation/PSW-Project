@@ -17,4 +17,11 @@ export class TenderDetailService {
       tap(data => console.log("Data: ", data))
     )
   }
+
+  acceptOffer(id: number) {
+    return this._http.get<ITender>('http://localhost:16928/api2/tenderresponse/accept/' + id)
+    .pipe(
+      tap(data => console.log("Data: ", data))
+    )
+  }
 }
