@@ -58,7 +58,7 @@ namespace IntegrationAPI.Controllers
             }
             tender.Open = false;
             tenderService.Update(tender);
-            return Ok(TenderAdapter.TenderToTenderDto(tender));
+            return Ok();
         }
     }
 }

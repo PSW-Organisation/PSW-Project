@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PharmacyAPI.Adapter;
 using PharmacyAPI.DTO;
+using PharmacyLibrary.Tendering.Model;
 using PharmacyLibrary.Tendering.Service;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,19 @@ namespace PharmacyAPI.Controllers
         public IActionResult Add(TenderDTO dto)
         {
             return Ok(tenderService.Add(TenderAdapter.TenderDtoToTender(dto)));
+        }
+
+        [HttpGet("accept/{id?}")]
+        public IActionResult AcceptOffer(int id)
+        {
+            Tender tender = tenderService.Get(id);
+            if (tender == null)
+            {
+                return NotFound();
+            }
+            tender.IsWon = true;
+            tenderService.Update(tender);
+            return Ok();
         }
     }
 }

@@ -3,9 +3,11 @@ using IntegrationLibrary.Tendering.Model;
 using IntegrationLibrary.Tendering.Service.ServiceInterfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace IntegrationAPI.Controllers
@@ -34,6 +36,10 @@ namespace IntegrationAPI.Controllers
             Pharmacy pharmacy = tenderResponse.Pharmacy;
             tender.ApiKeyPharmacy = pharmacy.PharmacyApiKey;
             tenderResponseService.Update(tenderResponse);
+            var client = new RestClient(pharmacy.PharmacyUrl);
+            var request = new RestRequest("/tender/accept/" + tender.Id, Method.GET);
+            var cancellationTokenSource = new CancellationTokenSource();
+            client.ExecuteAsync(request, cancellationTokenSource.Token);
             return Ok();
         }
     }
