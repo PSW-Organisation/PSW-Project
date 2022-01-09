@@ -51,7 +51,7 @@ namespace PharmacyAPI.Controllers
                 return NotFound();
             }
             tender.Open = false;
-            string hospitalUrl = ""; 
+            string hospitalUrl = "";
             foreach(Hospital hospital in hospitalService.Get())
             {
                 if (hospital.PharmacyApiKey.Equals(tender.ApiKeyPharmacy))

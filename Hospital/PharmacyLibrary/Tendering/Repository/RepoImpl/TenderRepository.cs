@@ -17,9 +17,10 @@ namespace PharmacyLibrary.Tendering.Repository.RepoImpl
         }
         public bool Add(Tender tender)
         {
-            int itemId = pharmacyDbContext.TenderItems.ToList().Count > 0 ? pharmacyDbContext.TenderItems.Max(item => item.Id) + 1 : 1;
-            for (int i = 0; i < tender.TenderItems.Count; i++) {
-                tender.TenderItems[i].Id = itemId + i;
+            foreach (TenderItem tenderItem in tender.TenderItems) {
+                tenderItem.Id = pharmacyDbContext.TenderItems.ToList().Count > 0 ? pharmacyDbContext.TenderItems.Max(item => item.Id) + 1 : 1;
+                pharmacyDbContext.TenderItems.Add(tenderItem);
+                pharmacyDbContext.SaveChanges();
             }
             tender.Id = pharmacyDbContext.Tenders.ToList().Count > 0 ? pharmacyDbContext.Tenders.Max(tender => tender.Id) + 1 : 1;
             pharmacyDbContext.Tenders.Add(tender);
@@ -54,7 +55,7 @@ namespace PharmacyLibrary.Tendering.Repository.RepoImpl
             }
         }
 
-        public bool Update(Tender tender)
+        public bool Update(Tender updatedTender)
         {
             Tender tenderForEdit = this.Get(tender.Id);
             if (tenderForEdit == null)

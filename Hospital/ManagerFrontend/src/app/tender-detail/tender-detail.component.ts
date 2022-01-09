@@ -30,4 +30,10 @@ export class TenderDetailComponent implements OnInit {
       }
     )
   }
+
+  acceptOffer(id: number): void {
+    this.tenderDetailService.acceptOffer(id).subscribe(
+      response => {this.getTender(this.tenderId); }
+    )
+  }
 }

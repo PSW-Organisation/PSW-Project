@@ -90,7 +90,7 @@
                           <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
                           <p class="card-text"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
-                          <a href="#" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
+                          <a [routerLink]="" (click)="closeTender(tender.id)" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
                           <a [routerLink]="['/tender', tender.id]" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
                         </div>
                       </div>
@@ -98,6 +98,30 @@
 
             </div>
         </div>
+
+        <div class="mx-auto card " style="background: transparent;">
+          <div class="card-body" style="background: transparent;">
+              <h1 style="margin-left: 5rem;"> Closed tenders: </h1>
+              <hr />
+
+                <div class="card-columns mx-auto">
+
+                    <div class="card text-center" *ngFor = 'let tender of closedTenders'>
+                      <div class="card-body">
+                        <h5 class="card-title">Tender {{tender.id}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
+                        <p *ngFor = 'let item of tender.tenderItems' class="card-text">{{item.tenderItemName}} {{item.tenderItemQuantity}}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
+                        <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
+                        <p class="card-text"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
+                        <a [routerLink]="['/tender', tender.id]" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
+                      </div>
+                    </div>
+                </div>
+
+          </div>
+      </div>
 
       </div>
 </div>
