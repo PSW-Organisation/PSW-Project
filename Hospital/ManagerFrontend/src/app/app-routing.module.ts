@@ -20,6 +20,7 @@ import { MaliciousPatientsComponent } from './malicious-patients/malicious-patie
 import { TendersComponent } from "./tenders/tenders.component"
 import { DoctorsComponent } from "./doctors/doctors.component"
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -30,16 +31,18 @@ const routes: Routes = [
   { path: 'hospitalExterior', component: HospitalExteriorViewComponent },
   { path: 'orderingMedicine', component: OrderingMedicineComponent },
   { path: 'createReport', component: MedicineConsumptionComponent},
-  { path:'benefits', component: BenefitsViewComponent},
+  { path: 'benefits', component: BenefitsViewComponent},
   { path: 'survey', component: SurveyComponent },
   { path: 'reports', component: ReportsViewComponent},
   { path: 'editPharmacy', component: EditPharmacyComponent},
   { path: 'pharmacy/:id', component: PharmacyProfileComponent},
-  {path: 'notifications', component: NotificationsComponent},
+  { path: 'notifications', component: NotificationsComponent},
   { path: 'malicious', component: MaliciousPatientsComponent },
   { path: 'tenders', component: TendersComponent },
   { path: 'doctors', component: DoctorsComponent },
   { path: 'doctorView/:id', component: DoctorViewComponent },
+  { path: 'home', component: HomePageComponent },
+
 ];
 
 @NgModule({

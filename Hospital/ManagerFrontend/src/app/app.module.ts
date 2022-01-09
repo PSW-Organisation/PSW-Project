@@ -35,6 +35,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { TendersComponent } from './tenders/tenders.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { DoctorViewComponent } from './doctor-view/doctor-view.component';
     StatisticsComponent,
     TendersComponent,
     DoctorsComponent,
-    DoctorViewComponent
+    DoctorViewComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

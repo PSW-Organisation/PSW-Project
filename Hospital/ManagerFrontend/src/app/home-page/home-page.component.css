@@ -1,0 +1,48 @@
+.backgroundImage{
+    background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("../../assets/doctor.jpg");
+    background-attachment: fixed;
+    min-height: 100%;
+    min-width:1024px;
+    width: 100%;
+    height: auto;
+  
+    /* Set up positioning */
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .example-card {
+    width: 250px;
+    height: 150px;
+    color: white;
+  }
+ i {
+    font-size: 40px;
+}
+
+  .example-card:hover{
+      background-color: #dabbbb;
+      cursor: pointer;
+  }
+
+  button{
+      background-color: gray;
+  }
+  .card1{
+      background-color: #6a1616;
+  }
+  .card2{
+    background-color: #aa5f5f;
+  }
+  .card3{
+    background-color: #280808;
+}
+  .card4{
+  background-color: #350b0b;
+}
+.card5{
+    background-color: #913232;
+}
+  .card6{
+  background-color: #851b1b;
+}
