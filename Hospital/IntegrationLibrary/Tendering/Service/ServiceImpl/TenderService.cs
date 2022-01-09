@@ -21,10 +21,10 @@ namespace IntegrationLibrary.Tendering.Service.ServiceImpl
         }
         public bool Add(Tender tender)
         {
-            int itemId = itemRepository.GenerateId();
-            for (int i = 0; i < tender.TenderItems.Count; i++)
+            foreach (TenderItem tenderItem in tender.TenderItems)
             {
-                tender.TenderItems[i].Id = itemId + i;
+                tenderItem.Id = itemRepository.GenerateId();
+                itemRepository.Save(tenderItem);
             }
             tender.Id = tenderRepository.GenerateId();
             tenderPublishingService.AnnounceTender(tender, "tenders");
