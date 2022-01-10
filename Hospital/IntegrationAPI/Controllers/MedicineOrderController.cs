@@ -62,7 +62,7 @@ namespace IntegrationAPI.Controllers
             bool response = false;
             Pharmacy pharmacy = pharmacyService.getPharmacyByApiKey(dto.ApiKey);
             var input = new MedicineOrderRequest { MedicineName = dto.MedicineName, MedicineAmount = dto.MedicineAmount, ApiKey = dto.ApiKey };
-            var channel = new Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
+            var channel = new Channel(pharmacy.PharmacyComunicationInfo.PharmacyUrl, ChannelCredentials.Insecure);
             var client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
             var reply = client.orderMedicine(input);
             response = reply.Response;
@@ -87,11 +87,11 @@ namespace IntegrationAPI.Controllers
             List<Pharmacy> ret = new List<Pharmacy>();
             foreach (Pharmacy pharmacy in pharmacyService.GetAll())
             {
-                if (pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.GRPC)
+                if (pharmacy.PharmacyComunicationInfo.PharmacyCommunicationType == PharmacyCommunicationType.GRPC)
                 {
                     bool response = false;
-                    var input = new MedicineOrderRequest { MedicineName = medicineName, MedicineAmount = medicineAmount, ApiKey = pharmacy.HospitalApiKey };
-                    var channel = new Grpc.Core.Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
+                    var input = new MedicineOrderRequest { MedicineName = medicineName, MedicineAmount = medicineAmount, ApiKey = pharmacy.PharmacyComunicationInfo.HospitalApiKey };
+                    var channel = new Grpc.Core.Channel(pharmacy.PharmacyComunicationInfo.PharmacyUrl, ChannelCredentials.Insecure);
                     var client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
                     var reply = client.checkIfMedicineExists(input);
                     response = reply.Response;
@@ -120,7 +120,7 @@ namespace IntegrationAPI.Controllers
             bool response = false;
             Pharmacy pharmacy = pharmacyService.getPharmacyByApiKey(dto.ApiKey);
             var input = new MedicineOrderRequest { MedicineName = dto.MedicineName, MedicineAmount = dto.MedicineAmount, ApiKey = dto.ApiKey };
-            var channel = new Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
+            var channel = new Channel(pharmacy.PharmacyComunicationInfo.PharmacyUrl, ChannelCredentials.Insecure);
             var client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
             var reply = client.checkIfMedicineExists(input);
 

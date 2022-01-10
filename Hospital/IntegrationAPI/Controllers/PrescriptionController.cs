@@ -85,16 +85,16 @@ namespace IntegrationAPI.Controllers
 
             foreach (var pharmacy in pharmacies)
             {
-                if(pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.SFTP)
+                if(pharmacy.PharmacyComunicationInfo.PharmacyCommunicationType == PharmacyCommunicationType.SFTP)
                 {
-                    var client = new RestClient(pharmacy.PharmacyUrl);
+                    var client = new RestClient(pharmacy.PharmacyComunicationInfo.PharmacyUrl);
                     var request = new RestRequest("/report/" + fileName, Method.GET);
                     var cancellationTokenSource = new CancellationTokenSource();
                     client.ExecuteAsync(request, cancellationTokenSource.Token);
                 }
-                else if(pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.HTTP)
+                else if(pharmacy.PharmacyComunicationInfo.PharmacyCommunicationType == PharmacyCommunicationType.HTTP)
                 {
-                    var client = new RestClient(pharmacy.PharmacyUrl);
+                    var client = new RestClient(pharmacy.PharmacyComunicationInfo.PharmacyUrl);
                     var request = new RestRequest("/report", Method.POST);
                     request.AddFile("file", file, fileName);
                     var cancellationTokenSource = new CancellationTokenSource();

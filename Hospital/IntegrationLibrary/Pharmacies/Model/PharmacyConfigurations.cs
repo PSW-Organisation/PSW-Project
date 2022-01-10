@@ -14,6 +14,7 @@ namespace IntegrationLibrary.Pharmacies.Model
             builder.ToTable("Pharmacies");
             builder.HasKey(pharmacies => pharmacies.Id);
             builder.OwnsOne(pharmacies => pharmacies.PharmacyAddress);
+            builder.OwnsOne(pharmacies => pharmacies.PharmacyComunicationInfo);
         }
     }
 }

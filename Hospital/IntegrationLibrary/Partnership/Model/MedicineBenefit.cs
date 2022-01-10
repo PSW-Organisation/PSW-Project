@@ -9,11 +9,11 @@ namespace IntegrationLibrary.Parnership.Model
 {
     public class MedicineBenefit : Entity
     {
-        public string MedicineBenefitTitle { get; private set; }
-        public string MedicineBenefitContent { get; private set; }
-        public DateTime MedicineBenefitDueDate { get; private set; }
-        public int MedicineId { get; private set; }
-        public bool Published { get; private set; }
+        public string MedicineBenefitTitle { get;  set; }
+        public string MedicineBenefitContent { get;  set; }
+        public DateTime MedicineBenefitDueDate { get;  set; }
+        public int MedicineId { get;  set; }
+        public bool Published { get;  set; }
 
         public MedicineBenefit() : base(-1) { }
 

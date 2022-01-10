@@ -38,9 +38,9 @@ namespace IntegrationLibrary.Pharmacies.Service.ServiceImpl
         {
             pharmacy.Id = this.pharmacyRepository.GenerateId();
 
-            pharmacy.PharmacyApiKey = this.GenerateApiKey();
+            pharmacy.PharmacyComunicationInfo.PharmacyApiKey = this.GenerateApiKey();
             this.pharmacyRepository.Save(pharmacy);
-            return pharmacy.PharmacyApiKey;
+            return pharmacy.PharmacyComunicationInfo.PharmacyApiKey;
         }
 
         public Pharmacy Update(Pharmacy pharmacy)
@@ -53,7 +53,7 @@ namespace IntegrationLibrary.Pharmacies.Service.ServiceImpl
 
         public void UpdateHospitalApiKey(Pharmacy pharmacy, string updatedHospitalApiKey)
         {
-            pharmacy.HospitalApiKey = updatedHospitalApiKey;
+            pharmacy.PharmacyComunicationInfo.HospitalApiKey = updatedHospitalApiKey;
             this.pharmacyRepository.Update(pharmacy);
         }
 
@@ -68,7 +68,7 @@ namespace IntegrationLibrary.Pharmacies.Service.ServiceImpl
 
             foreach (Pharmacy pharmacy in GetAll())
             {
-                if (pharmacy.HospitalApiKey.Equals(apiKey))
+                if (pharmacy.PharmacyComunicationInfo.HospitalApiKey.Equals(apiKey))
                     return pharmacy;
             }
             return null;
