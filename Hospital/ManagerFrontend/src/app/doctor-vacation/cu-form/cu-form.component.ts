@@ -27,7 +27,7 @@ export class CuFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.minDate = new Date(Date.now());
-    this.doctorId = this._route.snapshot.paramMap.get('doctorId')!;
+    this.doctorId = this._route.snapshot.paramMap.get('id')!;
     this.vacation.doctorId = this.doctorId;
     this.myForm = this._formBuilder.group({
       startTimeCtrl: ['', Validators.required],

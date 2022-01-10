@@ -31,9 +31,8 @@ export class ScheduleComponent implements OnInit {
               private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    if (this.doctorId == '') {
-      this.doctorId = this._route.snapshot.paramMap.get('doctorId')!;      
-    }
+    
+    this.doctorId = this._route.snapshot.paramMap.get('id')!;      
 
     this._doctorVacationService.getDoctorVacations(this.doctorId).subscribe(vacations =>{
       this.vacations = vacations;
