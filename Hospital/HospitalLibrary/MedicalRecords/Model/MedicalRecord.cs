@@ -15,13 +15,8 @@ namespace HospitalLibrary.MedicalRecords.Model
     {
         [Key]
         public string PatientId { get; set; }
-
         public virtual Patient Patient { get; set; }
-        public string PersonalId { get; set; }
-        public BloodType BloodType { get; set; }
-        public int Height { get; set; }
-        public int Weight { get; set; }
-        public string Profession { get; set; }
+        public virtual MedicalRecordInfo Info { get; set; }
         public virtual Doctor Doctor { get; set; }
         public string DoctorId { get; set; }
        
@@ -32,11 +27,7 @@ namespace HospitalLibrary.MedicalRecords.Model
         {
             PatientId = patientId;
             Patient = patient;
-            PersonalId = personalId;
-            BloodType = bloodType;
-            Height = height;
-            Weight = weight;
-            Profession = profession;
+            Info = new MedicalRecordInfo(patientId, personalId, bloodType, height, weight, profession);
             Doctor = doctor;
             DoctorId = doctorId;
         }

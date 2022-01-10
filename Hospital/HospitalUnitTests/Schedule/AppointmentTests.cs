@@ -7,6 +7,7 @@ using System.Text;
 using Xunit;
 using System.Linq;
 using HospitalLibrary.MedicalRecords.Repository;
+using HospitalLibrary.Schedule.Model;
 
 namespace HospitalUnitTests.Schedule
 {
@@ -42,7 +43,7 @@ namespace HospitalUnitTests.Schedule
             Visit visit = visits.Find(v=> v.Id == id);
             service.CancelVisit(visit);
 
-            Assert.True(visit.IsCanceled);
+            Assert.True(visit.Status.IsCanceled);
         }
 
         [Theory]
@@ -75,7 +76,7 @@ namespace HospitalUnitTests.Schedule
             Visit visit = visits.Find(v => v.Id == id);
             service.ReviewVisit(visit);
 
-            Assert.True(visit.IsReviewed);
+            Assert.True(visit.Status.IsReviewed);
         }
 
 
@@ -108,11 +109,9 @@ namespace HospitalUnitTests.Schedule
                 
                 DoctorId = "nelex",
                 PatientId = "luka",
-                StartTime = new DateTime(2021, 11, 30, 19, 00, 00),
-                EndTime = new DateTime(2021, 11, 30, 19, 30, 00),
+                Interval = VisitTimeInterval(new DateTime(2021, 11, 30, 19, 00, 00), new DateTime(2021, 11, 30, 19, 30, 00)),
                 VisitType = VisitType.examination,
-                IsReviewed = false,
-                IsCanceled = false,
+                Status = new VisitStatus(false, false)
 
             });
             context.Visits.Add(new Visit()
@@ -120,14 +119,16 @@ namespace HospitalUnitTests.Schedule
 
                 DoctorId = "mihajlo",
                 PatientId = "imbiamba",
-                StartTime = new DateTime(2021, 11, 30, 19, 00, 00),
-                EndTime = new DateTime(2021, 11, 30, 19, 30, 00),
+                Interval = VisitTimeInterval(new DateTime(2021, 11, 30, 19, 00, 00), new DateTime(2021, 11, 30, 19, 30, 00)),
                 VisitType = VisitType.examination,
-                IsReviewed = false,
-                IsCanceled = false,
+                Status = new VisitStatus(false, false)
             });
             context.SaveChanges();
         }
 
+        private static VisitTimeInterval VisitTimeInterval(DateTime dateTime1, DateTime dateTime2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -98,9 +98,9 @@ namespace HospitalAPI.Mapper
 
             CreateMap<Visit, ScheduleTermDTO>()
                  .ForMember(d => d.TermState,
-            m => m.MapFrom(d => d.IsCanceled ? StateOfTerm.CANCELED : IsFinished(d)))
+            m => m.MapFrom(d => d.Status.IsCanceled ? StateOfTerm.CANCELED : IsFinished(d)))
           .ForMember(d => d.DurationInMinutes,
-           m => m.MapFrom(s => s.EndTime.Subtract(s.StartTime).TotalMinutes));
+           m => m.MapFrom(s => s.Interval.EndTime.Subtract(s.Interval.StartTime).TotalMinutes));
 
 
             CreateMap<Doctor, DoctorDTO>().ForMember(dest => dest.Specialization,
@@ -167,7 +167,7 @@ namespace HospitalAPI.Mapper
 
         private static StateOfTerm IsFinished(Visit d)
         {
-            return d.EndTime < System.DateTime.Now ? StateOfTerm.SUCCESSFULLY : StateOfTerm.PENDING;
+            return d.Interval.EndTime < System.DateTime.Now ? StateOfTerm.SUCCESSFULLY : StateOfTerm.PENDING;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace ehealthcare.Repository.XMLRepository
         {
             foreach (Doctor doctor in base.GetAll())
             {
-                if (doctor.FullName == fullName)
+                if (doctor.Info.FullName == fullName)
                 {
                     return doctor;
                 }

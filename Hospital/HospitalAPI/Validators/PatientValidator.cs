@@ -24,11 +24,11 @@ namespace HospitalAPI.Validators
             RuleFor(x => x.Country).Must(x => x == "Serbia" || x == "Bosnia and Herzegovina" || x == "Montenegro");
             RuleFor(x => x.City).Matches("^[\\p{L}\\s]{2,}$");
             RuleFor(x => x.Medical).NotEmpty();
-            RuleFor(x => x.Medical.PersonalId).Matches("\\d{13}");
-            RuleFor(x => x.Medical.BloodType).IsInEnum();
-            RuleFor(x => x.Medical.Profession).Matches("^[\\p{L}\\s,\\/-]+$").Length(3, 100);
-            RuleFor(x => x.Medical.Height).InclusiveBetween(50, 280);
-            RuleFor(x => x.Medical.Weight).InclusiveBetween(30, 650);
+            RuleFor(x => x.Medical.Info.PersonalId).Matches("\\d{13}");
+            RuleFor(x => x.Medical.Info.BloodType).IsInEnum();
+            RuleFor(x => x.Medical.Info.Profession).Matches("^[\\p{L}\\s,\\/-]+$").Length(3, 100);
+            RuleFor(x => x.Medical.Info.Height).InclusiveBetween(50, 280);
+            RuleFor(x => x.Medical.Info.Weight).InclusiveBetween(30, 650);
             RuleFor(x => x.Medical.DoctorId).Matches("^(?=[a-zA-Z0-9._]{4,20}$)(?!.*[_.]{2})[^_.].*[^_.]$");
         }
     }

@@ -33,20 +33,20 @@ namespace HospitalLibrary.Schedule.Repository
 
         public bool CheckIfDoctorBusy(Visit visit)
         {
-            if (_dbContext.Visits.Count(v => v.DoctorId == visit.DoctorId && v.StartTime == visit.StartTime) == 0) return false;
+            if (_dbContext.Visits.Count(v => v.DoctorId == visit.DoctorId && v.Interval.StartTime == visit.Interval.StartTime) == 0) return false;
             return true;
         }
 
         public bool CheckIfPatientBusy(Visit visit)
         {
-            if (_dbContext.Visits.Count(v => v.PatientId == visit.PatientId && v.StartTime == visit.StartTime) == 0) return false;
+            if (_dbContext.Visits.Count(v => v.PatientId == visit.PatientId && v.Interval.StartTime == visit.Interval.StartTime) == 0) return false;
             return true;
         }
 
         public List<Visit> GetForthcomingVisitsByDateAndDoctor(DateTime begining, DateTime ending, string doctorId)
         {
-            return _dbContext.Visits.Where(v => v.StartTime >= begining && v.EndTime <= ending && v.DoctorId == doctorId 
-                    && v.EndTime > DateTime.Now && !v.IsCanceled).ToList();
+            return _dbContext.Visits.Where(v => v.Interval.StartTime >= begining && v.Interval.EndTime <= ending && v.DoctorId == doctorId 
+                    && v.Interval.EndTime > DateTime.Now && !v.Status.IsCanceled).ToList();
         }
 
         public List<Visit> GetAllVisits()

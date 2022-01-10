@@ -54,7 +54,7 @@ namespace ehealthcare.Service
             {
                 List<Account> accounts = new List<Account>();
                 //accounts.Add(accountRepository.GetAccountByPatientId(visit.PatientId));
-                notificationRepository.NotifyPatientOfCancellation(accounts, visit.StartTime);
+                notificationRepository.NotifyPatientOfCancellation(accounts, visit.Interval.StartTime);
             }
         }
 

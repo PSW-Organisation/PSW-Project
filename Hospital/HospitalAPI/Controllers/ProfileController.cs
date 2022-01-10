@@ -51,7 +51,7 @@ namespace HospitalAPI.Controllers
             if (!patient.IsActivated) return BadRequest();
             PatientDto profile = _mapper.Map<PatientDto>(patient);
             profile.Password = "";
-            profile.Medical.DoctorId = patient.Medical.Doctor.FullName;
+            profile.Medical.DoctorId = patient.Medical.Doctor.Info.FullName;
             profile.Medical.Doctor = null;
             return profile;
         }

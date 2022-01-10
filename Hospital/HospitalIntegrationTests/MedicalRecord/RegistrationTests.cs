@@ -124,11 +124,7 @@ namespace HospitalIntegrationTests.MedicalRecord
                 Medical = new HospitalLibrary.MedicalRecords.Model.MedicalRecord()
                 {
                     PatientId = "micko",
-                    PersonalId = "1234567891234",
-                    BloodType = BloodType.A_positive,
-                    Height = 183,
-                    Weight = 80,
-                    Profession = "Software Engineer",
+                    Info = new MedicalRecordInfo("micko", "1234567891234", BloodType.A_positive, 183, 80, "Software Engineer"),
                     DoctorId = "nelex"
                 },
                 Token = new Guid("3e8549d0-db22-4d38-bd30-84b6c3e3e344"),

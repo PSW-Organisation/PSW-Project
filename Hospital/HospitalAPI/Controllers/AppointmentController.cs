@@ -134,7 +134,7 @@ namespace HospitalAPI.Controllers
         public IActionResult CancelVisit(int id)
         {
             Visit visitForUpdate = _visitService.GetVisitById(id);
-            if (DateTime.Now >= visitForUpdate.EndTime || visitForUpdate.IsCanceled)
+            if (DateTime.Now >= visitForUpdate.Interval.EndTime || visitForUpdate.Status.IsCanceled)
                 return BadRequest();
             _visitService.CancelVisit(visitForUpdate);
             return Ok();
@@ -144,7 +144,7 @@ namespace HospitalAPI.Controllers
         public IActionResult ReviewVisit(int id)
         {
             Visit visitForUpdate = _visitService.GetVisitById(id);
-            if (DateTime.Now <= visitForUpdate.EndTime || visitForUpdate.IsReviewed)
+            if (DateTime.Now <= visitForUpdate.Interval.EndTime || visitForUpdate.Status.IsReviewed)
                 return BadRequest();
             _visitService.ReviewVisit(visitForUpdate);
             return Ok();

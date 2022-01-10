@@ -501,7 +501,7 @@ namespace HospitalLibrary.Schedule.Service
 
         public void CancelVisit(Visit visit)
         {
-            visit.IsCanceled = true;
+            visit.Status = visit.Status.Create(visit.Id, visit.Status.IsReviewed, true);
            _visitRepository.Update(visit);
         }
 
@@ -564,7 +564,7 @@ namespace HospitalLibrary.Schedule.Service
         private static List<Visit> GetGeneratedVisitsByDoctor(string doctorId, List<Visit> generatedVisitsByDoctor, List<Visit> visits, Doctor doctor, Visit generatedVisit)
         {
             if (!IsDoctorAdded(doctorId, visits, generatedVisit))
-                generatedVisitsByDoctor.Add(new Visit(generatedVisit.StartTime, generatedVisit.EndTime, VisitType.examination,
+                generatedVisitsByDoctor.Add(new Visit(generatedVisit.Interval.StartTime, generatedVisit.Interval.EndTime, VisitType.examination,
                             doctor, doctorId, null, "", false, false));
 
             return generatedVisitsByDoctor;
@@ -625,7 +625,7 @@ namespace HospitalLibrary.Schedule.Service
             if (!IsDoctorAdded(visits, generatedVisit, doctor))
             {
                 doctor.Password = "";
-                generatedVisitsByDate.Add(new Visit(generatedVisit.StartTime, generatedVisit.EndTime, VisitType.examination,
+                generatedVisitsByDate.Add(new Visit(generatedVisit.Interval.StartTime, generatedVisit.Interval.EndTime, VisitType.examination,
                             doctor, doctor.Username, null, "", false, false));
             }
             return generatedVisitsByDate;
@@ -647,7 +647,7 @@ namespace HospitalLibrary.Schedule.Service
 
         private static bool IsVisitForthcoming(Visit generatedVisit, Visit visit)
         {
-            return visit.StartTime == generatedVisit.StartTime && visit.EndTime > DateTime.Now && !visit.IsCanceled;
+            return visit.Interval.StartTime == generatedVisit.Interval.StartTime && visit.Interval.EndTime > DateTime.Now && !visit.Status.IsCanceled;
         }
 
         private List<Visit> GetGeneratedVisits(DateTime begining, DateTime ending)
@@ -679,7 +679,7 @@ namespace HospitalLibrary.Schedule.Service
 
         public void ReviewVisit(Visit visitForUpdate)
         {
-            visitForUpdate.IsReviewed = true;
+            visitForUpdate.Status = visitForUpdate.Status.Create(visitForUpdate.Id, true, visitForUpdate.Status.IsCanceled);
             _visitRepository.Update(visitForUpdate);
         }
 

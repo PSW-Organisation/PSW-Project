@@ -15,7 +15,7 @@ namespace ehealthcare.Repository.XMLRepository
         {
             foreach (Patient patient in base.GetAll())
             {
-                if (patient.FullName == fullName)
+                if (patient.Info.FullName == fullName)
                 {
                     return patient;
                 }

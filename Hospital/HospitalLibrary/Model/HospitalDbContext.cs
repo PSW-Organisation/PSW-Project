@@ -10,6 +10,7 @@ using System;
 using HospitalLibrary.DoctorSchedule.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 using HospitalLibrary.Events.Model;
+using HospitalLibrary.Schedule.Model;
 
 namespace ehealthcare.Model
 {
@@ -1115,31 +1116,44 @@ namespace ehealthcare.Model
             });
 
             #endregion
+            modelBuilder.Entity<MedicalRecord>().OwnsOne(p => p.Info,
+                navigationBuilder =>
+                {
+                    navigationBuilder.Property(info => info.MedicalRecordId)
+                                     .HasColumnName("PatientId");
+                    navigationBuilder.Property(info => info.PersonalId)
+                                     .HasColumnName("PersonalId");
+                    navigationBuilder.Property(info => info.BloodType)
+                                     .HasColumnName("BloodType");
+                    navigationBuilder.Property(info => info.Height)
+                                     .HasColumnName("Height");
+                    navigationBuilder.Property(info => info.Weight)
+                                     .HasColumnName("Weight");
+                    navigationBuilder.Property(info => info.Profession)
+                                     .HasColumnName("Profession");
+                });
 
             modelBuilder.Entity<MedicalRecord>(m =>
             {
                 m.HasData(
                     new MedicalRecord
                     {
-                        PersonalId = "1209001129123",
-                        BloodType = BloodType.AB_positive,
-                        Height = 186,
-                        Weight = 90,
-                        Profession = "Professor",
                         DoctorId = "nelex",
                         PatientId = "imbiamba"
-                    },
-                    new MedicalRecord
-                    {
-                        PersonalId = "1209222129123",
-                        BloodType = BloodType.O_positive,
-                        Height = 186,
-                        Weight = 90,
-                        Profession = "Professor",
-                        DoctorId = "nelex",
-                        PatientId = "kristina"
                     });
-                // m.HasKey(m => new { m.Id, m.PatientId });
+                m.OwnsOne(v => v.Info).HasData(new MedicalRecordInfo("imbiamba", "1209001129123", BloodType.AB_positive, 186, 90, "Professor"));
+                    
+            });
+            modelBuilder.Entity<MedicalRecord>(m =>
+            {
+                m.HasData(
+                  new MedicalRecord
+                  {
+                      DoctorId = "nelex",
+                      PatientId = "kristina"
+                  });
+                m.OwnsOne(v => v.Info).HasData(new MedicalRecordInfo("kristina", "1209222129123", BloodType.O_positive, 186, 90, "Professor"));
+
             });
 
             modelBuilder.Entity<PatientAllergen>(a =>
@@ -1156,103 +1170,141 @@ namespace ehealthcare.Model
                     .HasForeignKey(pa => pa.AllergenId);
             });
 
-
+            modelBuilder.Entity<Patient>().OwnsOne(p => p.Address,
+                navigationBuilder =>
+                {
+                    navigationBuilder.Property(address => address.UserId)
+                                     .HasColumnName("Id");
+                    navigationBuilder.Property(address => address.Phone)
+                                     .HasColumnName("Phone");
+                    navigationBuilder.Property(address => address.Email)
+                                     .HasColumnName("Email");
+                    navigationBuilder.Property(address => address.Address)
+                                     .HasColumnName("Address");
+                    navigationBuilder.Property(address => address.City)
+                                     .HasColumnName("City");
+                    navigationBuilder.Property(address => address.Country)
+                                     .HasColumnName("Country");
+                });
+            modelBuilder.Entity<Patient>().OwnsOne(p => p.Info,
+                navigationBuilder =>
+                {
+                    navigationBuilder.Property(info => info.UserId)
+                                     .HasColumnName("Id");
+                    navigationBuilder.Property(info => info.Name)
+                                     .HasColumnName("Name");
+                    navigationBuilder.Property(info => info.Surname)
+                                     .HasColumnName("Surname");
+                    navigationBuilder.Property(info => info.ParentName)
+                                     .HasColumnName("ParentName");
+                    navigationBuilder.Property(info => info.Gender)
+                                     .HasColumnName("Gender");
+                    navigationBuilder.Property(info => info.DateOfBirth)
+                                     .HasColumnName("DateOfBirth");
+                });
             modelBuilder.Entity<Patient>(p =>
             {
                 p.HasData(
                     new Patient("imbiamba")
                     {
                         Id = "imbiamba",
-                        Name = "Marko",
-                        Surname = "Ilic",
-                        ParentName = "Milan",
                         Username = "imbiamba",
                         Password = "pecurkaa",
                         LoginType = LoginType.patient,
-                        Gender = "male",
-                        DateOfBirth = new DateTime(2001, 11, 9),
-                        Phone = "019919199191",
-                        Email = "markoilic@gmail.com",
-                        Address = "Sime Milosevica, 5",
                         IsBlocked = false,
                         IsActivated = false,
                         Token = new Guid("601ccaa8-3a07-4a7c-89b9-9953e6eac8a7"),
-                        City = "Novi Sad",
-                        Country = "Serbia",
-                    },
+                    });
+                p.OwnsOne(v => v.Address).HasData(new UserAddress("imbiamba", "019919199191", "markoilic@gmail.com", "Sime Milosevica, 5", "Novi Sad", "Serbia"));
+                p.OwnsOne(v => v.Info).HasData(new UserPersonalInfo("imbiamba", "Marko", "Ilic", "Milan", "male", new DateTime(2001, 11, 9)));
+            });
+            modelBuilder.Entity<Patient>(p =>
+            {
+                p.HasData(
                     new Patient("kristina")
                     {
                         Id = "kristina",
-                        Name = "Kristina",
-                        Surname = "Tamindzija",
-                        ParentName = "Zoran",
                         Username = "kristina",
                         Password = "kristinica",
                         LoginType = LoginType.patient,
-                        Gender = "female",
-                        DateOfBirth = new DateTime(1999, 11, 9),
-                        Phone = "019919195191",
-                        Email = "sdjfsj@gmail.com",
-                        Address = "Sime Milosevica, 9",
                         IsBlocked = false,
                         IsActivated = true,
-                        Token = new Guid("601ccaa8-3a07-4a7c-89b9-9923e6bac8a7"),
-                        City = "Novi Sad",
-                        Country = "Serbia",
-                    }
-                );
+                        Token = new Guid("601ccaa8-3a07-4a7c-89b9-9923e6bac8a7")
+                    });
+                p.OwnsOne(v => v.Address).HasData(new UserAddress("kristina", "019919195191", "sdjfsj@gmail.com", "Sime Milosevica, 9", "Novi Sad", "Serbia"));
+                p.OwnsOne(v => v.Info).HasData(new UserPersonalInfo("kristina", "Kristina", "Tamindzija", "Zoran", "male", new DateTime(1999, 11, 9)));
             });
 
+            modelBuilder.Entity<Doctor>().OwnsOne(p => p.Address,
+                navigationBuilder =>
+                {
+                    navigationBuilder.Property(address => address.UserId)
+                                     .HasColumnName("Id");
+                    navigationBuilder.Property(address => address.Phone)
+                                     .HasColumnName("Phone");
+                    navigationBuilder.Property(address => address.Email)
+                                     .HasColumnName("Email");
+                    navigationBuilder.Property(address => address.Address)
+                                     .HasColumnName("Address");
+                    navigationBuilder.Property(address => address.City)
+                                     .HasColumnName("City");
+                    navigationBuilder.Property(address => address.Country)
+                                     .HasColumnName("Country");
+                });
+            modelBuilder.Entity<Doctor>().OwnsOne(p => p.Info,
+                navigationBuilder =>
+                {
+                    navigationBuilder.Property(info => info.UserId)
+                                     .HasColumnName("Id");
+                    navigationBuilder.Property(info => info.Name)
+                                     .HasColumnName("Name");
+                    navigationBuilder.Property(info => info.Surname)
+                                     .HasColumnName("Surname");
+                    navigationBuilder.Property(info => info.ParentName)
+                                     .HasColumnName("ParentName");
+                    navigationBuilder.Property(info => info.Gender)
+                                     .HasColumnName("Gender");
+                    navigationBuilder.Property(info => info.DateOfBirth)
+                                     .HasColumnName("DateOfBirth");
+                });
             modelBuilder.Entity<Doctor>(d =>
             {
                 d.HasData(
                     new Doctor("nelex")
                     {
                         Id = "nelex",
-                        Name = "Nemanja",
-                        Surname = "Radojcic",
-                        ParentName = "Zoran",
                         Username = "nelex",
                         Password = "najjacapecurka",
                         LoginType = LoginType.doctor,
-                        Gender = "male",
-                        DateOfBirth = new DateTime(1999, 7, 14),
-                        Phone = "019919199191",
-                        Email = "nemanjar@gmail.com",
-                        Address = "Sime Milutinovica, 2",
-                        City = "Novi Sad",
-                        Country = "Serbia",
                         IsBlocked = false,
                         IsActivated = false,
                         UsedOffDays = 12,
                         Specialization = Specialization.none,
                         RoomId = 1,
                         ShiftOrder = 1
-                    },
+                    });
+                d.OwnsOne(v => v.Address).HasData(new UserAddress("nelex", "019919199191", "nemanjar@gmail.com", "Sime Milutinovica, 2", "Novi Sad", "Serbia"));
+                d.OwnsOne(v => v.Info).HasData(new UserPersonalInfo("nelex", "Nemanja", "Radojcic", "Zoran", "male", new DateTime(1999, 7, 14)));
+            });
+            modelBuilder.Entity<Doctor>(d =>
+            {
+
+                d.HasData(
                     new Doctor("mkisic")
                     {
                         Id = "mkisic",
-                        Name = "Mihajlo",
-                        Surname = "Kisic",
-                        ParentName = "Zvezdan",
                         Username = "mkisic",
                         Password = "ftn",
                         LoginType = LoginType.doctor,
-                        Gender = "male",
-                        DateOfBirth = new DateTime(1999, 7, 14),
-                        Phone = "019919199191",
-                        Email = "nemanjar@gmail.com",
-                        Address = "Sime Milutinovica, 2",
-                        City = "Novi Sad",
-                        Country = "Serbia",
                         IsBlocked = false,
                         IsActivated = false,
                         UsedOffDays = 12,
                         Specialization = Specialization.cardiologist,
                         RoomId = 7,
                         ShiftOrder = 1
-                    }
-                );
+                    });
+                d.OwnsOne(v => v.Address).HasData(new UserAddress("mkisic", "019919199191", "nemanjar@gmail.com", "Sime Milutinovica, 2", "Novi Sad", "Serbia"));
+                d.OwnsOne(v => v.Info).HasData(new UserPersonalInfo("mkisic", "Mihajlo", "Kisic", "Zvezdan", "male", new DateTime(1999, 7, 14)));
             });
 
             modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
@@ -1292,103 +1344,142 @@ namespace ehealthcare.Model
                 q.HasKey(q => new {q.SurveyId, q.Id});
             });
 
+            modelBuilder.Entity<Visit>().OwnsOne(p => p.Interval,
+                navigationBuilder =>
+                {
+                    navigationBuilder.Property(interval => interval.VisitId)
+                                     .HasColumnName("Id");
+                    navigationBuilder.Property(interval => interval.StartTime)
+                                     .HasColumnName("StartTime");
+                    navigationBuilder.Property(interval => interval.EndTime)
+                                     .HasColumnName("EndTime");
+                });
 
-            modelBuilder.Entity<Visit>(v =>
-            {
+            modelBuilder.Entity<Visit>().OwnsOne(p => p.Status,
+                navigationBuilder =>
+                {
+                    navigationBuilder.Property(status => status.VisitId)
+                                     .HasColumnName("Id");
+                    navigationBuilder.Property(status => status.IsReviewed)
+                                     .HasColumnName("IsReviewed");
+                    navigationBuilder.Property(status => status.IsCanceled)
+                                     .HasColumnName("IsCanceled");
+                });
+
+            modelBuilder.Entity<Visit>(v => {
                 v.HasData(
-                    new Visit()
+                    new Visit
                     {
                         Id = -1,
                         DoctorId = "nelex",
                         PatientId = "kristina",
-                        StartTime = new DateTime(2021, 11, 30, 19, 00, 00),
-                        EndTime = new DateTime(2021, 11, 30, 19, 30, 00),
-                        VisitType = VisitType.examination,
-                        IsReviewed = false,
-                        IsCanceled = false
+                        VisitType = VisitType.examination
                     });
+                v.OwnsOne(v => v.Interval).HasData(new VisitTimeInterval(-1, new DateTime(2021, 11, 30, 19, 00, 00), new DateTime(2021, 11, 30, 19, 30, 00)));
+                v.OwnsOne(v => v.Status).HasData(new VisitStatus(-1, false, false));
+            });
+
+            modelBuilder.Entity<Visit>(v => {
                 v.HasData(
                     new Visit()
                     {
                         Id = -2,
                         DoctorId = "nelex",
                         PatientId = "kristina",
-                        StartTime = new DateTime(2022, 01, 30, 19, 00, 00),
-                        EndTime = new DateTime(2022, 01, 30, 19, 30, 00),
-                        VisitType = VisitType.examination,
-                        IsReviewed = false,
-                        IsCanceled = false
+                        VisitType = VisitType.examination
                     });
+                v.OwnsOne(v => v.Interval).HasData(new VisitTimeInterval(-2, new DateTime(2022, 01, 30, 19, 00, 00), new DateTime(2022, 01, 30, 19, 30, 00)));
+                v.OwnsOne(v => v.Status).HasData(new VisitStatus(-2, false, false));
+            });
+
+            modelBuilder.Entity<Visit>(v => {
                 v.HasData(
                     new Visit()
                     {
                         Id = -3,
                         DoctorId = "nelex",
                         PatientId = "kristina",
-                        StartTime = new DateTime(2021, 12, 29, 19, 00, 00),
-                        EndTime = new DateTime(2021, 12, 29, 19, 30, 00),
-                        VisitType = VisitType.examination,
-                        IsReviewed = false,
-                        IsCanceled = true
+                        VisitType = VisitType.examination
                     });
+                v.OwnsOne(v => v.Interval).HasData(new VisitTimeInterval(-1, new DateTime(2021, 12, 29, 19, 00, 00), new DateTime(2021, 12, 29, 19, 30, 00)));
+                v.OwnsOne(v => v.Status).HasData(new VisitStatus(-3, false, true));
+            });
+            modelBuilder.Entity<Visit>(v => {
                 v.HasData(
                     new Visit()
                     {
                         Id = -4,
                         DoctorId = "nelex",
                         PatientId = "kristina",
-                        StartTime = new DateTime(2022, 1, 3, 19, 00, 00),
-                        EndTime = new DateTime(2022, 1, 3, 19, 30, 00),
                         VisitType = VisitType.examination,
-                        IsReviewed = false,
-                        IsCanceled = true
                     });
+                v.OwnsOne(v => v.Interval).HasData(new VisitTimeInterval(-4, new DateTime(2022, 1, 3, 19, 00, 00), new DateTime(2022, 1, 3, 19, 30, 00)));
+                v.OwnsOne(v => v.Status).HasData(new VisitStatus(-4, false, true));
             });
 
+            modelBuilder.Entity<Manager>().OwnsOne(p => p.Address,
+                navigationBuilder =>
+                {
+                    navigationBuilder.Property(address => address.UserId)
+                                     .HasColumnName("Id");
+                    navigationBuilder.Property(address => address.Phone)
+                                     .HasColumnName("Phone");
+                    navigationBuilder.Property(address => address.Email)
+                                     .HasColumnName("Email");
+                    navigationBuilder.Property(address => address.Address)
+                                     .HasColumnName("Address");
+                    navigationBuilder.Property(address => address.City)
+                                     .HasColumnName("City");
+                    navigationBuilder.Property(address => address.Country)
+                                     .HasColumnName("Country");
+                });
+            modelBuilder.Entity<Manager>().OwnsOne(p => p.Info,
+                navigationBuilder =>
+                {
+                    navigationBuilder.Property(info => info.UserId)
+                                     .HasColumnName("Id");
+                    navigationBuilder.Property(info => info.Name)
+                                     .HasColumnName("Name");
+                    navigationBuilder.Property(info => info.Surname)
+                                     .HasColumnName("Surname");
+                    navigationBuilder.Property(info => info.ParentName)
+                                     .HasColumnName("ParentName");
+                    navigationBuilder.Property(info => info.Gender)
+                                     .HasColumnName("Gender");
+                    navigationBuilder.Property(info => info.DateOfBirth)
+                                     .HasColumnName("DateOfBirth");
+                });
             modelBuilder.Entity<Manager>(m =>
             {
                 m.HasData(
                     new Manager("laki")
                     {
                         Id = "laki",
-                        Name = "Igor",
-                        Surname = "Maric",
-                        ParentName = "Ivan",
                         Username = "laki",
                         Password = "Laki123!",
                         LoginType = LoginType.manager,
-                        Gender = "male",
-                        DateOfBirth = new DateTime(1990, 5, 10),
-                        Phone = "129572904354",
-                        Email = "igor.m@gmail.com",
-                        Address = "Hajduk Veljka, 5",
-                        City = "Novi Sad",
-                        Country = "Serbia",
                         IsBlocked = false,
                         IsActivated = true,
                         Token = Guid.Empty,
-                    },
+                    });
+                m.OwnsOne(v => v.Address).HasData(new UserAddress("laki", "129572904354", "igor.m@gmail.com", "Hajduk Veljka, 5", "Novi Sad", "Serbia"));
+                m.OwnsOne(v => v.Info).HasData(new UserPersonalInfo("laki", "Igor", "Maric", "Ivan", "male", new DateTime(1999, 5, 10)));
+            });
+            modelBuilder.Entity<Manager>(m =>
+            {
+                m.HasData(
                     new Manager("jagodica")
                     {
                         Id = "jagodica",
-                        Name = "Jagoda",
-                        Surname = "Vasic",
-                        ParentName = "Petar",
                         Username = "jagodica",
                         Password = "Jagodica123!",
                         LoginType = LoginType.manager,
-                        Gender = "female",
-                        DateOfBirth = new DateTime(1985, 1, 7),
-                        Phone = "6820543267243",
-                        Email = "jagodica@gmail.com",
-                        Address = "Rumenacka, 23",
-                        City = "Novi Sad",
-                        Country = "Serbia",
                         IsBlocked = false,
                         IsActivated = true,
                         Token = Guid.Empty,
-                    }
-                );
+                    });
+                m.OwnsOne(v => v.Address).HasData(new UserAddress("jagodica", "6820543267243", "jagodica@gmail.com", "Rumenacka, 23", "Novi Sad", "Serbia"));
+                m.OwnsOne(v => v.Info).HasData(new UserPersonalInfo("jagodica", "Jagoda", "Vasic", "Petar", "male", new DateTime(1985, 1, 7)));
             });
         }
     }
