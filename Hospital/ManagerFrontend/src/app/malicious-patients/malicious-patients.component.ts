@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Patient } from './patient';
 import { PatientService } from './patient.service';
 
@@ -9,7 +10,7 @@ import { PatientService } from './patient.service';
 })
 export class MaliciousPatientsComponent implements OnInit {
   patients: Patient[] = []
-  constructor(private paitentService: PatientService) { }
+  constructor(private paitentService: PatientService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getMaliciousPatients();
@@ -36,8 +37,8 @@ export class MaliciousPatientsComponent implements OnInit {
     this.paitentService.blockPatient(patient.username).subscribe({ 
       next: response => {
           patient.isBlocked = true;
-          alert('Successfully blocked malicious patient.');
-      }, error: e => (alert('An error occured.'))
+          this.toastr.success('Successfully blocked malicious patient.');
+      }, error: e => (this.toastr.error('An error occured.'))
     })
   }
 }

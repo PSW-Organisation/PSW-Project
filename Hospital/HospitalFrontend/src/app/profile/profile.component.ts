@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Visit } from './visit';
 import { HttpParameterCodec } from '@angular/common/http';
 import { UserService } from '../welcome/user.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -112,7 +113,7 @@ export class ProfileComponent implements OnInit {
   user: Patient = JSON.parse(localStorage.getItem('currentUser') || '{}')
 
   constructor(private route: ActivatedRoute, private profileService: ProfileService,
-    private toastr: ToastrService, private router: Router, private userService: UserService) { }
+    private toastr: ToastrService, private router: Router, private userService: UserService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     if(this.user?.username == null){
@@ -131,6 +132,10 @@ export class ProfileComponent implements OnInit {
         this.showError('An error has occured.')
       }
     })
+    this.profileService.getImage(this.user.username).subscribe({
+      next: response => {
+        this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(response.image);
+      }})
   }
 
   navigateToAppointments(): void {

@@ -64,7 +64,7 @@
                                         </button>
                                     </td>
                                     <td>
-                                        <button [disabled]="visit.isCanceled || isCompleted(visit)" style="border-radius: 10px;" class="btn btn-danger btn-sm" (click)="cancelAppointment(visit)"><i class="fa fa-times-circle fa-2x"></i></button>
+                                        <button name="cancelButton" [disabled]="visit.isCanceled || isCompleted(visit)" style="border-radius: 10px;" class="btn btn-danger btn-sm" (click)="cancelAppointment(visit)"><i class="fa fa-times-circle fa-2x"></i></button>
                                     </td>
                                 </tr>
                             </tbody>

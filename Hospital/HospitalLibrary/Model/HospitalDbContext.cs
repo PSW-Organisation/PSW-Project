@@ -1254,12 +1254,12 @@ namespace ehealthcare.Model
 
             modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
             {
-                Id = 1,
-                PatientUsername = "imbiamba",
+                Id = -2,
+                PatientUsername = "kristina",
                 SubmissionDate = new DateTime(2021, 11, 4),
-                Text = "alallalal",
+                Text = "Test on me",
                 Anonymous = false,
-                PublishAllowed = false,
+                PublishAllowed = true,
                 IsPublished = false
             });
 
@@ -1297,12 +1297,48 @@ namespace ehealthcare.Model
                     {
                         Id = -1,
                         DoctorId = "nelex",
-                        PatientId = "imbiamba",
+                        PatientId = "kristina",
                         StartTime = new DateTime(2021, 11, 30, 19, 00, 00),
                         EndTime = new DateTime(2021, 11, 30, 19, 30, 00),
                         VisitType = VisitType.examination,
                         IsReviewed = false,
                         IsCanceled = false
+                    });
+                v.HasData(
+                    new Visit()
+                    {
+                        Id = -2,
+                        DoctorId = "nelex",
+                        PatientId = "kristina",
+                        StartTime = new DateTime(2022, 01, 30, 19, 00, 00),
+                        EndTime = new DateTime(2022, 01, 30, 19, 30, 00),
+                        VisitType = VisitType.examination,
+                        IsReviewed = false,
+                        IsCanceled = false
+                    });
+                v.HasData(
+                    new Visit()
+                    {
+                        Id = -3,
+                        DoctorId = "nelex",
+                        PatientId = "kristina",
+                        StartTime = new DateTime(2021, 12, 29, 19, 00, 00),
+                        EndTime = new DateTime(2021, 12, 29, 19, 30, 00),
+                        VisitType = VisitType.examination,
+                        IsReviewed = false,
+                        IsCanceled = true
+                    });
+                v.HasData(
+                    new Visit()
+                    {
+                        Id = -4,
+                        DoctorId = "nelex",
+                        PatientId = "kristina",
+                        StartTime = new DateTime(2022, 1, 3, 19, 00, 00),
+                        EndTime = new DateTime(2022, 1, 3, 19, 30, 00),
+                        VisitType = VisitType.examination,
+                        IsReviewed = false,
+                        IsCanceled = true
                     });
             });
 
