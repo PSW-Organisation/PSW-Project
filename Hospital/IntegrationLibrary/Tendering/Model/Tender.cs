@@ -20,22 +20,22 @@ namespace IntegrationLibrary.Tendering.Model
       
         public Tender() : base(-1) { }
 
-        public Tender(int id, List<TenderItem> items, DateTime tod, DateTime tcd, bool open, List<TenderResponse> responses, string api) :base(id)
+        public Tender(int id, List<TenderItem> items, DateTime tenderOpenDate, DateTime tenderCloseDate, bool open, List<TenderResponse> responses, string api) :base(id)
         {
-            Validate(items, tod,  tcd);
+            Validate(items, tenderOpenDate, tenderCloseDate);
             this.Id = id;
             TenderItems = items;
-            TenderOpenDate = tod;
-            TenderCloseDate = tcd;
+            TenderOpenDate = tenderOpenDate;
+            TenderCloseDate = tenderCloseDate;
             Open = open;
             TenderResponses = responses;
             ApiKeyPharmacy = api;
         }
 
-        private void Validate(List<TenderItem> items, DateTime tod, DateTime tcd)
+        private void Validate(List<TenderItem> items, DateTime tenderOpenDate, DateTime tenderCloseDate)
         {
             if (items.IsNullOrEmpty()) throw new  ArgumentException("Tender must have items!");
-            if( tcd < tod ) throw new ArgumentException("Tender close date must be after open date!");
+            if(tenderCloseDate < tenderOpenDate) throw new ArgumentException("Tender close date must be after open date!");
         }
 
         public void OpenTender()
