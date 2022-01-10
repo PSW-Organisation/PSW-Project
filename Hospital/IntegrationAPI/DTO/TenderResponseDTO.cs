@@ -12,7 +12,8 @@ namespace IntegrationAPI.DTO
         public PharmacyDto Pharmacy { get; set; }
         public List<TenderItem> TenderItems { get; set; }
         public DateTime ResponseReceivedTime { get; set; }
-        public double TotalPrice { get; set; }
+      
+        public TenderPrice TotalPrice { get; set; }
         public bool IsWinner { get; set; }
         public int TenderId { get; set; }
     }

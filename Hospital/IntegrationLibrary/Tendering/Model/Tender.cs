@@ -1,4 +1,5 @@
-﻿using IntegrationLibrary.Model;
+﻿using Castle.Core.Internal;
+using IntegrationLibrary.Model;
 using IntegrationLibrary.Parnership.Model;
 using System;
 using System.Collections.Generic;
@@ -8,24 +9,45 @@ namespace IntegrationLibrary.Tendering.Model
 {
     public class Tender : Entity
     {
-        private List<TenderItem> _tenderItems;
-        private DateTime _tenderOpenDate;
-        private DateTime _tenderCloseDate;
-        private bool _open;
-        private List<TenderResponse> _tenderResponses;
-        private string _apiKeyPharmacy;
+        public List<TenderItem> TenderItems;
+        public DateTime TenderOpenDate;
+        public DateTime TenderCloseDate;
+        public bool Open;
+        public List<TenderResponse> TenderResponses;
+        public string ApiKeyPharmacy;
         
 
-        public virtual List<TenderItem> TenderItems { get => _tenderItems; set => _tenderItems = value; }
-        public DateTime TenderOpenDate { get => _tenderOpenDate; set => _tenderOpenDate = value; }
-
-        public DateTime TenderCloseDate { get => _tenderCloseDate; set => _tenderCloseDate = value; }
-
-        public bool Open { get => _open; set => _open = value; }
-        public virtual List<TenderResponse> TenderResponses { get => _tenderResponses; set => _tenderResponses = value; }
-        public string ApiKeyPharmacy { get => _apiKeyPharmacy; set => _apiKeyPharmacy = value; }
-
+      
         public Tender() : base(-1) { }
+
+        public Tender(int id, List<TenderItem> items, DateTime tod, DateTime tcd, bool open, List<TenderResponse> responses, string api) :base(id)
+        {
+            Validate(items, tod,  tcd);
+            this.Id = id;
+            TenderItems = items;
+            TenderOpenDate = tod;
+            TenderCloseDate = tcd;
+            Open = open;
+            TenderResponses = responses;
+            ApiKeyPharmacy = api;
+        }
+
+        private void Validate(List<TenderItem> items, DateTime tod, DateTime tcd)
+        {
+            if (items.IsNullOrEmpty()) throw new  ArgumentException("Tender must have items!");
+            if( tcd < tod ) throw new ArgumentException("Tender close date must be after open date!");
+        }
+
+        public void OpenTender()
+        {
+            this.Open = true;
+        }
+        public void CloseTender()
+        {
+            this.Open = false;
+        }
+
+     
 
     }
 }

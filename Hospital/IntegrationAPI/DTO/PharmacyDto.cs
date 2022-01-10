@@ -1,9 +1,10 @@
-﻿using IntegrationLibrary.Model;
+﻿
 using IntegrationLibrary.Pharmacies.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Address = IntegrationLibrary.Pharmacies.Model.Address;
 
 namespace IntegrationAPI.DTO
 {
@@ -12,7 +13,7 @@ namespace IntegrationAPI.DTO
         public int PharmacyId { get; set; }
         public string PharmacyUrl { get; set; }
         public string PharmacyName { get; set; }
-        public string PharmacyAddress { get; set; }
+        public Address PharmacyAddress { get; set; }
         public string PharmacyApiKey { get; set; }
         public string HospitalApiKey { get; set; }
         public string Comment { get; set; }

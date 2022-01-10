@@ -34,9 +34,9 @@ namespace IntegrationAPI.Controllers
             tenderResponse.IsWinner = true;
             Tender tender = tenderResponse.Tender;
             Pharmacy pharmacy = tenderResponse.Pharmacy;
-            tender.ApiKeyPharmacy = pharmacy.PharmacyApiKey;
+            tender.ApiKeyPharmacy = pharmacy.PharmacyComunicationInfo.PharmacyApiKey;
             tenderResponseService.Update(tenderResponse);
-            var client = new RestClient(pharmacy.PharmacyUrl);
+            var client = new RestClient(pharmacy.PharmacyComunicationInfo.PharmacyUrl);
             var request = new RestRequest("/tender/accept/" + tender.Id, Method.GET);
             var cancellationTokenSource = new CancellationTokenSource();
             client.ExecuteAsync(request, cancellationTokenSource.Token);

@@ -18,7 +18,8 @@ namespace IntegrationAPI.Adapters
             medicineBenefit.MedicineBenefitContent = medicineBenefitDto.MedicineBenefitContent;
             medicineBenefit.MedicineBenefitDueDate = medicineBenefitDto.MedicineBenefitDueDate;
             medicineBenefit.MedicineId = medicineBenefitDto.MedicineId;
-            medicineBenefit.Published = medicineBenefitDto.Published;
+            if (medicineBenefitDto.Published == true) medicineBenefit.PublishBenefit(); else medicineBenefit.UnpublishBenefit();
+         
             return medicineBenefit;
         }
         public static MedicineBenefitDto MedicineBenefitToMedicineBenefitDto(MedicineBenefit medicineBenefit)
@@ -29,7 +30,7 @@ namespace IntegrationAPI.Adapters
             medicineBenefitDto.MedicineBenefitContent = medicineBenefit.MedicineBenefitContent;
             medicineBenefitDto.MedicineBenefitDueDate = medicineBenefit.MedicineBenefitDueDate;
             medicineBenefitDto.MedicineId = medicineBenefit.MedicineId;
-            medicineBenefitDto.Published = medicineBenefit.Published;
+            if (medicineBenefit.Published == true) medicineBenefitDto.Published=true; else medicineBenefitDto.Published=false;
 
             return medicineBenefitDto;
         }

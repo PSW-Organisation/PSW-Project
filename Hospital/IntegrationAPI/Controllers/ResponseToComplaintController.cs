@@ -66,7 +66,7 @@ namespace IntegrationAPI.Controllers
             //Pharmacy pharmacy = dbContext.Pharmacies.FirstOrDefault(pharmacy => pharmacy.PharmacyApiKey == pharmaciesAccessApiKey);
             foreach(Pharmacy p in allPharmacies)
             {
-                if (p.PharmacyApiKey == pharmaciesAccessApiKey)
+                if (p.PharmacyComunicationInfo.PharmacyApiKey == pharmaciesAccessApiKey)
                     pharmacy = p;
             }
 

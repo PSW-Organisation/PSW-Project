@@ -45,16 +45,16 @@ namespace IntegrationLibrary.Tendering.Service.ServiceImpl
 
                     Console.WriteLine(p.PharmacyName);
                     channel.QueueDeclare(
-                        queue: p.PharmacyApiKey,
+                        queue: p.PharmacyComunicationInfo.PharmacyApiKey,
                         durable: false,
                                 exclusive: false,
                                     autoDelete: false,
                                     arguments: null
                                     );
                     channel.QueueBind(
-                               queue: p.PharmacyApiKey,
+                               queue: p.PharmacyComunicationInfo.PharmacyApiKey,
                                exchange: "tenderResponses",
-                               routingKey: p.PharmacyApiKey //
+                               routingKey: p.PharmacyComunicationInfo.PharmacyApiKey //
                                );
                 }
 
@@ -90,7 +90,7 @@ namespace IntegrationLibrary.Tendering.Service.ServiceImpl
                 {
 
                     channel.BasicConsume(
-                               queue: p.PharmacyApiKey,
+                               queue: p.PharmacyComunicationInfo.PharmacyApiKey,
                                autoAck: true,
                                consumer: consumer
                                );
@@ -117,7 +117,7 @@ namespace IntegrationLibrary.Tendering.Service.ServiceImpl
                 var pharmacyRepository = scope.ServiceProvider.GetRequiredService<PharmacyRepository>();
                 foreach(Pharmacy p in pharmacyRepository.GetAll())
                 {
-                    if (p.PharmacyApiKey.Equals(tenderResponse.PharmacyApiKey)){
+                    if (p.PharmacyComunicationInfo.PharmacyApiKey.Equals(tenderResponse.PharmacyApiKey)){
                         tenderResponse.PharmacyId = p.Id;
                     }
                 }

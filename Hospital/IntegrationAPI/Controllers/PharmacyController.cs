@@ -53,7 +53,7 @@ namespace IntegrationAPI.Controllers
         [HttpPost]      // POST /api/pharmacy Request body: {"pharmacyUrl":"someUrl", "pharmacyName":"someName", "pharmacyAddress":"someAddress", "hospitalApiKey":"someApiKey"}
         public IActionResult Add(PharmacyDto dto)
         {
-            if (dto.PharmacyName.Length <= 0 || dto.PharmacyUrl.Length <= 0 || dto.PharmacyAddress.Length <= 0)
+            if (dto.PharmacyName.Length <= 0 || dto.PharmacyUrl.Length <= 0 )
             {
                 return BadRequest();
             }

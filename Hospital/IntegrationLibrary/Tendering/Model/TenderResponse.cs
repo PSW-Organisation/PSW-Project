@@ -15,7 +15,7 @@ namespace IntegrationLibrary.Tendering.Model
         private Tender _tender;
         private int _tenderId;
         private DateTime _responseReceivedTime;
-        private double _totalPrice;
+        private TenderPrice _totalPrice;                      //VALUE OBJECT FOR TOTAL PRICE
         private bool _isWinner;
         private string _pharmacyApiKey;
         public DateTime ResponseReceivedTime { get => _responseReceivedTime; set => _responseReceivedTime = value; }
@@ -24,7 +24,7 @@ namespace IntegrationLibrary.Tendering.Model
         public virtual List<TenderItem> TenderItems { get => _tenderItems; set => _tenderItems = value; }
         public virtual Tender Tender { get => _tender; set => _tender = value; }
         public int TenderId { get => _tenderId; set => _tenderId = value; }
-        public double TotalPrice { get => _totalPrice; set => _totalPrice = value; }
+        public TenderPrice TotalPrice { get => _totalPrice; set => _totalPrice = value; }
         public bool IsWinner { get => _isWinner; set => _isWinner = value; }
         public string PharmacyApiKey { get => _pharmacyApiKey; set => _pharmacyApiKey = value; }
 

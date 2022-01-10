@@ -76,7 +76,7 @@ namespace IntegrationAPI.Controllers
             tenderService.Update(tender);
             foreach(Pharmacy pharmacy in pharmacyService.GetAll())
             {
-                var client = new RestClient(pharmacy.PharmacyUrl);
+                var client = new RestClient(pharmacy.PharmacyComunicationInfo.PharmacyUrl);
                 var request = new RestRequest("/tender/notwon/" + id, Method.GET);
                 var cancellationTokenSource = new CancellationTokenSource();
                 client.ExecuteAsync(request, cancellationTokenSource.Token);
