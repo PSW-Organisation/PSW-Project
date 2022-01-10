@@ -5,7 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using HospitalLibrary.DoctorSchedule.Model;
+using HospitalLibrary.DoctorSchedule.Service;
 using Microsoft.AspNetCore.Http;
 
 
@@ -16,36 +17,64 @@ namespace HospitalAPI.Controllers
     public class OnCallShiftController : ControllerBase
     {
         private readonly IMapper _mapper;
-        
+        private readonly IOnCallShiftService _onCallShiftService;
 
-        public OnCallShiftController(IMapper mapper)
+        public OnCallShiftController(IMapper mapper, IOnCallShiftService onCallShiftService)
         {
             _mapper = mapper;
+            _onCallShiftService = onCallShiftService;
         }
 
         [HttpGet]
-        [Route("doctorsoncallshift")] // [Route("doctorsoncallshift/{time}")]
-        public ActionResult<List<DoctorDTO>> GetDoctorsOnCallShift()    // DateTime time
+        public ActionResult<List<OnCallShiftDTO>> GetAllOnCallShifts()
         {
-            List<DoctorDTO> doctors = new List<DoctorDTO>() 
-            {
-                new DoctorDTO(){Address="Marka kralja", City="Novi Sad", Country="Serbia", Email="email", Id="PavleID", Name="Pavle", Phone="02434", RoomId=1, Specialization="specializacija", Surname="Pavlovic", Username="pavlekk"},
-                new DoctorDTO(){Address="Marka kralja", City="Novi Sad", Country="Serbia", Email="email", Id="MikiID", Name="Mikica", Phone="02434", RoomId=1, Specialization="specializacija", Surname="Mikitovic", Username="mikiii"},
-                new DoctorDTO(){Address="Marka kralja", City="Novi Sad", Country="Serbia", Email="email", Id="KikiID", Name="Kikica", Phone="02434", RoomId=1, Specialization="specializacija", Surname="Kikitovic", Username="kikiii"}
-            };
-            return Ok(doctors);
+            var result = _onCallShiftService.GetAllOnCallShifts();
+            return Ok(result.Select(v => _mapper.Map<OnCallShiftDTO>(v)).ToList());
         }
 
         [HttpGet]
-        [Route("doctorsnotoncallshift")] //[Route("doctorsnotoncallshift/{time}")]
-        public ActionResult<List<DoctorDTO>> GetDoctorsNOTOnCallShift() // DateTime time
+        [Route("doctorsoncallshift/{date}")]
+        public ActionResult<List<DoctorDTO>> GetDoctorsOnCallShift(DateTime date) 
         {
-            List<DoctorDTO> doctors = new List<DoctorDTO>()
-            {
-                new DoctorDTO(){Address="Marka kralja", City="Novi Sad", Country="Serbia", Email="email", Id="stefanID", Name="Stefan", Phone="02434", RoomId=1, Specialization="specializacija", Surname="Steganovic", Username="stefankk"},
-                new DoctorDTO(){Address="Marka kralja", City="Novi Sad", Country="Serbia", Email="email", Id="zikaID", Name="Zika", Phone="02434", RoomId=1, Specialization="specializacija", Surname="Zikic", Username="zika"}
-            };
-            return Ok(doctors);
+            var result = _onCallShiftService.GetDoctorsOnCallShifts(date);
+            return Ok(result.Select(d => _mapper.Map<DoctorDTO>(d)).ToList());
+        }
+
+        [HttpGet]
+        [Route("doctorsnotoncallshift/{date}")]
+        public ActionResult<List<DoctorDTO>> GetDoctorsNotOnCallShift(DateTime date)  
+        {
+            var result = _onCallShiftService.GetDoctorsNotOnCallShift(date);
+            return Ok(result.Select(d => _mapper.Map<DoctorDTO>(d)).ToList());
+        }
+
+        [HttpPost]
+        public ActionResult<OnCallShiftDTO> CreateOnCallShift(OnCallShiftDTO doctorVacation)
+        {
+            var result = _onCallShiftService.CreateOnCallShift(_mapper.Map<OnCallShift>(doctorVacation));
+            return Ok(_mapper.Map<OnCallShiftDTO>(result));
+        }
+
+        [HttpPut]
+        public ActionResult<OnCallShiftDTO> UpdateOnCallShift(OnCallShiftDTO onCallShift)
+        {
+            var result = _onCallShiftService.UpdateOnCallShift(_mapper.Map<OnCallShift>(onCallShift));
+            return Ok(_mapper.Map<OnCallShiftDTO>(result));
+        }
+
+        [HttpGet]
+        [Route("{doctorId}")]
+        public ActionResult<List<OnCallShiftDTO>> GetAllOnCallShiftByDoctorId(string doctorId)
+        {
+            var result = _onCallShiftService.GetAllOnCallShiftByDoctorId(doctorId);
+            return Ok(result.Select(v => _mapper.Map<OnCallShiftDTO>(v)).ToList());
+        }
+
+        [HttpDelete]
+        public ActionResult<OnCallShiftDTO> DeleteOnCallShift(OnCallShiftDTO doctorVacation)
+        {
+            var result = _onCallShiftService.DeleteOnCallShift(_mapper.Map<OnCallShift>(doctorVacation));
+            return Ok(result);
         }
     }
 }

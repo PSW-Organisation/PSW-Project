@@ -34,6 +34,8 @@ namespace ehealthcare.Model
 
         public DbSet<MedicinePrescription> Prescriptions { get; set; }
         public DbSet<DoctorVacation> DoctorVacations { get; set; }
+        public DbSet<OnCallShift> OnCallShifts { get; set; }
+
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
         protected HospitalDbContext()
@@ -297,6 +299,21 @@ namespace ehealthcare.Model
             );
 
 
+            #endregion
+
+            #region OnCallShifts
+
+            modelBuilder.Entity<OnCallShift>().HasData(
+                new
+                {
+                    Id = 1,
+                    Date = DateTime.Today,
+                    DoctorId = "mkisic"
+                }
+            );
+
+            modelBuilder.Entity<OnCallShift>().Property(o => o.Id).HasIdentityOptions(startValue: 10);
+             
             #endregion
 
             #region DoctorVacations
