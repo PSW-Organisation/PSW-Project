@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Doctor } from './Doctor';
 import { DoctorsService } from './doctors.service';
 import { Router } from '@angular/router';
+import {ScheduleComponent} from '../doctor-vacation/schedule/schedule.component'
 
 @Component({
   selector: 'app-doctors',
