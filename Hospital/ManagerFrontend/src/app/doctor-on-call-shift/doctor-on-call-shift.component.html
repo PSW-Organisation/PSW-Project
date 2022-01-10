@@ -39,7 +39,7 @@
                                     <h4 class="card-title text-start">phone: {{doctor.phone}}</h4>
                                 </div>
                                 <div class="col-sm-3">
-                                    <button type="button" class="btn btn-danger">Remove</button>
+                                    <button type="button" (click)="removeDoctor(doctor)" class="btn btn-danger">Remove</button>
                                 </div>
                             </div>
                         </div>         
@@ -86,7 +86,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let newDoctor of selectedDateDoctorsNOTOnCallShift; index as i" (click)="selectDoctor(newDoctor)">
+                        <tr [ngClass]="{'selectedTRr': selectCSS(newDoctor)}" *ngFor="let newDoctor of selectedDateDoctorsNOTOnCallShift; index as i" (click)="selectDoctor(newDoctor)">
                             <td>{{newDoctor.name}}</td>
                             <td>{{newDoctor.surname}}</td>
                             <td>{{newDoctor.phone}}</td>
@@ -98,14 +98,14 @@
 
         </div>
         <div class="modal-footer">
-          <button v-on:click="cancelAdd()"
+          <button (click)="cancelAdd()"
             type="button"
             class="btn btn-secondary"
             data-bs-dismiss="modal"
           >
             Cancel
           </button>
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal" v-on:click="addNewDoctor()">Add</button>
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal" [ngClass]="{'disabled': selectedDoctorBool==false}" (click)="addNewDoctor()">Add</button>
         </div>
       </div>
     </div>

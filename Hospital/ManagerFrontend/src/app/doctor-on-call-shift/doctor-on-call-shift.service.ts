@@ -46,20 +46,14 @@ export class DoctorOnCallShiftService {
     */
   }
 
-  AddDoctorOnCallShift(doctorID: string, date: Date): boolean {
+  AddDoctorOnCallShift(doctorID: string, date: Date): Observable<OnCallShift> {
     //treba posalti date, dal preko body ili preko param parametar
-    //return this._http.get<boolean>(this._onCallShiftUri).catch(this.handleError);
-
-    // delete this
-    return true;
+    return this._http.get<OnCallShift>(this._onCallShiftUri).catch(this.handleError);
   }
 
-  RemoveDoctorOnCallShift(doctorID: string, date: Date): boolean {
+  RemoveDoctorOnCallShift(doctorID: string, date: Date): Observable<Doctor> {
     //treba posalti date, dal preko body ili preko param parametar
-    //return this._http.get<boolean>(this._onCallShiftUri).catch(this.handleError);
-
-    // delete this
-    return true;
+    return this._http.get<Doctor>(this._onCallShiftUri).catch(this.handleError);
   }
 
   GetAllOnCallShiftByDoctorId(doctorID: string): Observable<OnCallShift[]> {
