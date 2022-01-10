@@ -12,7 +12,7 @@ namespace IntegrationAPI.DTO
         public int Id { get; set; }
         public DateTime TenderOpenDate { get; set; }
 
-        public DateTime TenderCloseDate { get; set; }
+        public DateTime? TenderCloseDate { get; set; }
 
         public bool Open { get; set; }
 

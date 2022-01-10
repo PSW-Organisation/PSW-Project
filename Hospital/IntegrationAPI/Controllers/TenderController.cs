@@ -31,7 +31,16 @@ namespace IntegrationAPI.Controllers
         public IActionResult Get()
         {
             List<TenderDTO> tenderDtos = new List<TenderDTO>();
-            tenderService.Get().ToList().ForEach(tender => tenderDtos.Add(TenderAdapter.TenderToTenderDto(tender)));
+            //tenderService.Get().ToList().ForEach(tender => tenderDtos.Add(TenderAdapter.TenderToTenderDto(tender)));
+            foreach(Tender tender in tenderService.Get())
+            {
+                if(tender.TenderCloseDate < DateTime.Now)
+                {
+                    CloseTender(tender.Id);
+                    
+                }
+                tenderDtos.Add(TenderAdapter.TenderToTenderDto(tender));
+            }
             return Ok(tenderDtos);
         }
 

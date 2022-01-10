@@ -6,7 +6,10 @@
     <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
     <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
     <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
-    <p class="card-text"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
+    <div>
+      <p class="card-text" *ngIf="compareDates(tender.tenderCloseDate); else elseBlock"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
+    </div>
+      <ng-template #elseBlock><p class="card-text">Indefinite</p></ng-template>
     <h6 class="card-subtitle mb-2 text-muted">Status: </h6>
     <p *ngIf = "tender.apiKeyPharmacy != null && tender.open" class="card-text"> Waiting for confirmation </p>
     <p *ngIf = "tender.apiKeyPharmacy == null && tender.open" class="card-text"> Taking offers </p>

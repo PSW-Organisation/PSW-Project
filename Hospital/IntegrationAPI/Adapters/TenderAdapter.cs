@@ -32,10 +32,11 @@ namespace IntegrationAPI.Adapters
             Tender tender = new Tender();
             tender.Id = dto.Id;
             tender.TenderOpenDate = dto.TenderOpenDate;
-            tender.TenderCloseDate = dto.TenderCloseDate;
+            tender.TenderCloseDate = dto.TenderCloseDate.GetValueOrDefault(new DateTime(2200, 12,12));
             tender.Open = dto.Open;
             tender.ApiKeyPharmacy = dto.ApiKeyPharmacy;
             tender.TenderItems = dto.TenderItems;
+            
             return tender;
         }
     }

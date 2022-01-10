@@ -18,9 +18,9 @@
           <h4 class="modal-title" style="font-size: x-large;">New tender</h4>
         </div>
         <div class="modal-body">
-          <table> 
+          <table>
             <tr style="height: 10px;"> </tr>
-            <tr> 
+            <tr>
               <td class="tdInForm"> <label style="font-size: medium;">Tender items: </label></td>
             </tr>
             <tr *ngFor = 'let item of newTender.tenderItems'>
@@ -29,23 +29,23 @@
             </tr>
           </table>
           <table>
-            <tr> 
+            <tr>
               <td class="tdInForm"> <label style="font-size: medium;">Item</label></td>
               <td ><input type="text" class="form-control" placeholder="Enter medicine" [(ngModel)]="tenderItem.tenderItemName"  > </td>
             </tr>
             <tr style="height: 10px;"> </tr>
-            <tr> 
+            <tr>
               <td class="tdInForm"> <label style="font-size: medium;">Ammount</label> </td>
               <td style= "width: 250px"><input type="number" class="form-control" placeholder="Enter amount"  [(ngModel)]="tenderItem.tenderItemQuantity" > </td>
             </tr>
             <tr>
               <td class="tdInForm"> </td><td><button class="btn btn-secondary" (click)="addTenderItem(tenderItem)" >  <i class="bi bi-plus-lg"></i>Add item </button> </td>
-            </tr> 
-            <tr> 
+            </tr>
+            <tr>
               <td class="tdInForm"> <label style="font-size: medium;">Active until</label> </td>
               <td style= "width: 250px"><input type="date" class="form-control" placeholder="Enter amount"  [(ngModel)]="newTender.tenderCloseDate" > </td>
             </tr>
-          </table>      
+          </table>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" style="margin-right:30px; " data-dismiss="modal" (click)="saveTender()">Post</button>
@@ -55,7 +55,7 @@
     </div>
 </div>
 <div class="backgroundImage">
-   <!--<div style="height: 50px"> </div>--> 
+   <!--<div style="height: 50px"> </div>-->
     <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newTender"> Create new tender</button>
 
 
@@ -89,7 +89,9 @@
                           <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
                           <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
-                          <p class="card-text"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
+                          <div><p class="card-text" *ngIf="compareDates(tender.tenderCloseDate); else elseBlock"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
+                          </div>
+                            <ng-template #elseBlock><p class="card-text">Indefinite</p></ng-template>
                           <a [routerLink]="" (click)="closeTender(tender.id)" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
                           <a [routerLink]="['/tender', tender.id]" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
                         </div>
@@ -114,7 +116,10 @@
                         <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
                         <p class="card-text"> {{tender.tenderOpenDate | date: 'shortDate'}}</p>
                         <h6 class="card-subtitle mb-2 text-muted">Date end: </h6>
-                        <p class="card-text"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
+                        <div>
+                        <p class="card-text" *ngIf="compareDates(tender.tenderCloseDate); else elseBlock"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
+                      </div>
+                        <ng-template #elseBlock><p class="card-text">Indefinite</p></ng-template>
                         <a [routerLink]="['/tender', tender.id]" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
                       </div>
                     </div>

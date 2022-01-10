@@ -9,12 +9,11 @@ import { TendersService } from './tenders.service';
   styleUrls: ['./tenders.component.css']
 })
 export class TendersComponent implements OnInit {
-  newTender: any={ id: 0, tenderItems: [ ] , 
-  tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, 
+  newTender: any={ id: 0, tenderItems: [ ] ,
+  tenderOpenDate: new Date, tenderCloseDate: null, open: true,
   tenderResponses: [ ] }
 
   tenderResponse: any={}
-
   tenders: ITender[]=[]
   closedTenders: ITender[] = []
   tenderItem : ITenderItem= {tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice: 0}
@@ -28,7 +27,15 @@ export class TendersComponent implements OnInit {
     this.newTender.tenderItems.push(Object.assign({}, tenderItem));
     this.tenderItem = {tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice: 0}
   }
+  compareDates(date: Date){
+    var date2 = new Date(2199, 12,12)
+    var date1 = new Date(date)
+    var year1 = date1.getFullYear()
+    var year2 = date2.getFullYear()
 
+    return year1 < year2
+
+  }
   getTenders(): void {
     this.tenderService.getTenders().subscribe(
       tenders => {
@@ -49,7 +56,7 @@ export class TendersComponent implements OnInit {
   saveTender(): void {
     this.tenderService.saveTender(this.newTender).subscribe(
       data => {
-        this.newTender = { id: 0, tenderItems: [ ] , tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, tenderResponses: [ ] };
+        this.newTender = { id: 0, tenderItems: [ ] , tenderOpenDate: new Date, tenderCloseDate: null, open: true, tenderResponses: [ ] };
         this.tenderItem = {tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice: 0}
         this.getTenders();
       },
@@ -60,7 +67,7 @@ export class TendersComponent implements OnInit {
   closeTender(id: number):void {
     this.tenderService.closeTender(id).subscribe(
       data => {
-        this.newTender = { id: 0, tenderItems: [ ] , tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, tenderResponses: [ ] };
+        this.newTender = { id: 0, tenderItems: [ ] , tenderOpenDate: new Date, tenderCloseDate: null, open: true, tenderResponses: [ ] };
         this.tenderItem = {tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice: 0}
         this.getTenders();
       },
