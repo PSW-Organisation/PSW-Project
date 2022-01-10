@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ehealthcare.Model;
@@ -9,100 +10,16 @@ using ehealthcare.Model;
 namespace HospitalLibrary.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    partial class HospitalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220109173505_Shifts")]
+    partial class Shifts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
-
-            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.DoctorVacation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy",
-                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("DoctorId")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DoctorVacations");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "Zimovanje",
-                            DoctorId = "mkisic"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "Letovanje",
-                            DoctorId = "nelex"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "Bolovanje",
-                            DoctorId = "mkisic"
-                        });
-                });
-
-            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.OnCallShift", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("DoctorId")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("OnCallShifts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Date = new DateTime(2022, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "mkisic"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Date = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "nelex"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Date = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "mkisic"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Date = new DateTime(2022, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DoctorId = "nelex"
-                        });
-                });
 
             modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.Shift", b =>
                 {
@@ -114,8 +31,8 @@ namespace HospitalLibrary.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int>("ShiftOrder")
-                        .HasColumnType("integer");
+                    b.Property<long>("ShiftOrder")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -1476,53 +1393,7 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.DoctorVacation", b =>
-                {
-                    b.OwnsOne("HospitalLibrary.RoomsAndEquipment.Terms.Utils.TimeInterval", "DateSpecification", b1 =>
-                        {
-                            b1.Property<int>("DoctorVacationId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("integer")
-                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                            b1.Property<DateTime>("EndTime")
-                                .HasColumnName("EndTime")
-                                .HasColumnType("timestamp without time zone");
-
-                            b1.Property<DateTime>("StartTime")
-                                .HasColumnName("StartTime")
-                                .HasColumnType("timestamp without time zone");
-
-                            b1.HasKey("DoctorVacationId");
-
-                            b1.ToTable("DoctorVacations");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DoctorVacationId");
-
-                            b1.HasData(
-                                new
-                                {
-                                    DoctorVacationId = 1,
-                                    EndTime = new DateTime(2022, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                                    StartTime = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                                },
-                                new
-                                {
-                                    DoctorVacationId = 2,
-                                    EndTime = new DateTime(2022, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                                    StartTime = new DateTime(2022, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                                },
-                                new
-                                {
-                                    DoctorVacationId = 3,
-                                    EndTime = new DateTime(2022, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                                    StartTime = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                                });
-                        });
-                });
-
-                    modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.Shift", b =>
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.Shift", b =>
                 {
                     b.OwnsOne("HospitalLibrary.RoomsAndEquipment.Terms.Utils.TimeInterval", "TimeInterval", b1 =>
                         {

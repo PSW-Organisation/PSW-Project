@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="text-center pt-3">
+        <h1> {{title}} </h1>
+    </div>
+    <div class="table-responsive" *ngIf="shifts">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Shift Order</th>
+                    <th>Shift Name</th>
+                    <th>Shift Start</th>
+                    <th>Shift End</th>
+                    <th></th>
+                    <th>
+                        <button type="button" aria-label="Add" mat-icon-button (click)="createShift()">
+                            <mat-icon aria-label="Add">add</mat-icon>
+                        </button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody *ngIf="shifts.length !== 0">
+                <tr class="align-middle" *ngFor="let shift of shifts">
+                    <td>{{shift.shiftOrder}}</td>
+                    <td>{{shift.name}}</td>
+                    <td>{{shift.startTime | date:'H:mm'}}</td>
+                    <td>{{shift.endTime | date:'H:mm'}}</td>
+                    <td>
+                        <button type="button" aria-label="Edit" mat-icon-button (click)="updateShift(shift)">
+                            <mat-icon aria-label="Edit"> edit</mat-icon>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" aria-label="Delete" mat-icon-button (click)="removeShift(shift)">
+                            <mat-icon aria-label="Delete">delete</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center" *ngIf="shifts.length === 0">
+            <h3>There are no defined shifts.</h3>
+        </div>
+    </div>
+
+    <form [formGroup]="myForm" *ngIf="formOpened">
+        <mat-label>Shift name</mat-label>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Enter a name</mat-label>
+                <input id="name" matInput type="text" formControlName="name" required />
+            </mat-form-field>
+        </div>
+        <mat-label>Enter starting time</mat-label>
+        <div>
+            <mat-form-field appearance="fill">
+                <input matInput type="number" formControlName="startHours" min="0" max="23" />
+                <mat-label>hours</mat-label>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <input matInput type="number" formControlName="startMinutes" min="0" max="59" />
+                <mat-label>minutes</mat-label>
+            </mat-form-field>
+        </div>
+        <mat-label>Enter ending time</mat-label>
+        <div>
+            <mat-form-field appearance="fill">
+                <input matInput type="number" formControlName="endHours" min="0" max="23" />
+                <mat-label>hours</mat-label>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <input matInput type="number" formControlName="endMinutes" min="0" max="59" />
+                <mat-label>minutes</mat-label>
+            </mat-form-field>
+        </div>
+        <div>
+            <button type="submit" [disabled]="myForm.invalid" (click)="submit()" mat-button>Submit</button>
+            <button (click)="cancel()" mat-button>Cancel</button>
+        </div>
+    </form>
+</div>

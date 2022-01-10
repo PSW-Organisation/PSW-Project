@@ -41,6 +41,7 @@ import { CuFormComponent } from './doctor-vacation/cu-form/cu-form.component';
 import { ManagerGuard } from './shared/jwt/jwt-guard';
 import { TokenInterceptor } from './shared/jwt/token.interceptor';
 import { DoctorOnCallShiftComponent } from './doctor-on-call-shift/doctor-on-call-shift.component';
+import { ManageShiftsComponent } from './manage-shifts/manage-shifts.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { DoctorOnCallShiftComponent } from './doctor-on-call-shift/doctor-on-cal
     HomePageComponent,
     ScheduleComponent,
     CuFormComponent,
-    DoctorOnCallShiftComponent
+    DoctorOnCallShiftComponent,
+    ManageShiftsComponent
   ],
   imports: [
     BrowserModule,
