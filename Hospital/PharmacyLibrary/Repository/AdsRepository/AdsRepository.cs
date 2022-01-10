@@ -9,43 +9,50 @@ namespace PharmacyLibrary.Repository.AdsRepository
 {
     public class AdsRepository : IAdsRepository
     {
-        private PharmacyDbContext dbContext = new PharmacyDbContext();
+        private readonly PharmacyDbContext pharmacyDbContext;
+
+        public AdsRepository(PharmacyDbContext pharmacyDbContext)
+        {
+            this.pharmacyDbContext = pharmacyDbContext;
+        }
+
+
         public void AddAd(Ad ad)
         {
-            Ad newAd = dbContext.Ads.ToList().FirstOrDefault(a => a.Id == ad.Id);
+            Ad newAd = pharmacyDbContext.Ads.ToList().FirstOrDefault(a => a.Id == ad.Id);
             if (newAd != null)
             {
                 return;
             }
             foreach (MedicineAd medicineAd in ad.MedicinesOnPromotion)
             {
-                dbContext.MedicineAds.Add(medicineAd);
+                pharmacyDbContext.MedicineAds.Add(medicineAd);
             }
-            dbContext.Ads.Add(ad);
-            dbContext.SaveChanges();
+            pharmacyDbContext.Ads.Add(ad);
+            pharmacyDbContext.SaveChanges();
         }
 
         public void DeleteAd(long adId)
         {
-            Ad adToDelete = dbContext.Ads.ToList().FirstOrDefault(ad => ad.Id == adId);
+            Ad adToDelete = pharmacyDbContext.Ads.ToList().FirstOrDefault(ad => ad.Id == adId);
             foreach (MedicineAd medicineAd in adToDelete.MedicinesOnPromotion)
             {
-                dbContext.MedicineAds.Remove(medicineAd);
+                pharmacyDbContext.MedicineAds.Remove(medicineAd);
             }
-            dbContext.Ads.Remove(adToDelete);
-            dbContext.SaveChanges();
+            pharmacyDbContext.Ads.Remove(adToDelete);
+            pharmacyDbContext.SaveChanges();
         }
 
         public List<Ad> GetAll()
         {
             List<Ad> ads = new List<Ad>();
-            dbContext.Ads.ToList().ForEach(ad => ads.Add(ad));
+            pharmacyDbContext.Ads.ToList().ForEach(ad => ads.Add(ad));
             return ads;
         }
 
         public Ad GetById(long adId)
         {
-            return dbContext.Ads.ToList().FirstOrDefault(ad => ad.Id == adId);
+            return pharmacyDbContext.Ads.ToList().FirstOrDefault(ad => ad.Id == adId);
         }
     }
 }

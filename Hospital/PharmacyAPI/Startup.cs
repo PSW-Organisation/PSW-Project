@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using PharmacyLibrary.Repository.AdsRepository;
 
 namespace PharmacyAPI
 {
@@ -70,6 +71,8 @@ namespace PharmacyAPI
            services.AddTransient<INotificationsForAppRepository, NotificationsForAppRepository>(); 
             services.AddScoped<INotificationsForAppService, NotificationsForAppService>();
             services.AddScoped<IPublishService, RabbitMQPublishService>();
+            services.AddScoped<IAdsService, AdsService > ();
+            services.AddTransient<IAdsRepository, AdsRepository>();
 
 
 

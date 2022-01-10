@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using PharmacyLibrary.Model;
 using PharmacyLibrary.Repository.AdsRepository;
@@ -10,18 +10,41 @@ using System.Text;
 namespace PharmacyAPI.Controllers
 
 {
+    [Route("api3/[controller]")]
     [ApiController]
-    [Microsoft.AspNetCore.Components.Route("api3/[controller]")]
+   
     public class AdsController : ControllerBase
     {
-        AdsService service = new AdsService(new AdsRepository());
+        private readonly IAdsService adsService;
 
-        // za svrhe testiranja
-        [HttpGet]
-        public IActionResult GetAll()
+        public AdsController(IAdsService adsService)
         {
-            ICollection<Ad> ads = service.GetAll();
-            return Ok(ads);
+            this.adsService = adsService;
+        }
+
+
+        [HttpGet]       // GET /api3/adds
+        public List<Ad> GetAllAdds()
+        {
+            return adsService.GetAll();
+        }
+
+        [HttpGet("{id?}")]
+        public Ad Get(long id)
+        {
+            return adsService.GetById(id);
+        }
+
+        [HttpPost]
+        public void Add(Ad newAd)
+        {
+            adsService.Add(newAd);
+        }
+
+        [HttpDelete("{id?}")]
+        public void Delete(long id)
+        {
+            adsService.Delete(id);
         }
     }
-}
+    }

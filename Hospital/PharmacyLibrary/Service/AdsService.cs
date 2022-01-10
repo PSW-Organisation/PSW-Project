@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PharmacyLibrary.Service
 {
-    public class AdsService
+    public class AdsService : IAdsService
     {
         IAdsRepository adsRepository;
 
