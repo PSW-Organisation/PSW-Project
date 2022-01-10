@@ -16,6 +16,7 @@ using HospitalLibrary.FeedbackAndSurvey.Service;
 using HospitalLibrary.MedicalRecords.Service;
 using HospitalLibrary.MedicalRecords.Repository;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
@@ -27,7 +28,6 @@ namespace HospitalAPI.Controllers
         private readonly IPatientFeedbackService _patientFeedbackService;
         private readonly IMapper _mapper;
 
-
         public PatientFeedbacksController(IPatientFeedbackService patientFeedbackService, IMapper mapper, HospitalDbContext context)
         {
             _patientFeedbackService = patientFeedbackService;
@@ -37,6 +37,7 @@ namespace HospitalAPI.Controllers
 
         // GET: api/Feedbacks
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult<IEnumerable<PatientFeedback>> GetFeedbacks()
         {
             return _patientFeedbackService.GetAllFeedbacks().ToList();  
@@ -60,6 +61,7 @@ namespace HospitalAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
+        [Authorize(Policy = "Manager")]
         public IActionResult PutFeedback(int id, PatientFeedbackDTO feedbackDto)
         {
             if (!ModelState.IsValid)
@@ -74,6 +76,7 @@ namespace HospitalAPI.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Authorize(Policy = "Patient")]
         public ActionResult PostFeedback(PatientFeedbackDTO feedbackDto)
         {
             if (!ModelState.IsValid)

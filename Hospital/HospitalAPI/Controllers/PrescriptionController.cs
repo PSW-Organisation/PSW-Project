@@ -1,5 +1,6 @@
 ﻿using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.MedicalRecords.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
@@ -13,6 +14,7 @@ namespace HospitalAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "Manager")]
     public class PrescriptionController : ControllerBase
     {
         private IMedicinePrescriptionService prescriptionService;

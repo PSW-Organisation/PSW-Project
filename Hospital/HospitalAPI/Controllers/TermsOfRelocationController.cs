@@ -4,6 +4,7 @@ using HospitalLibrary.RoomsAndEquipment.Repository;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Service;
 using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,6 +16,7 @@ namespace HospitalAPI.Controllers
 {
     [Route("api/termsofrelocation")]
     [ApiController]
+    [Authorize(Policy = "Manager")]
     public class TermsOfRelocationController : ControllerBase
     {
         private readonly IMapper _mapper;

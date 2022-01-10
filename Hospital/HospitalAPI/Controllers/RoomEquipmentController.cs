@@ -2,6 +2,7 @@
 using HospitalAPI.DTO;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.RoomsAndEquipment.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,6 +15,7 @@ namespace HospitalAPI.Controllers
 {
     [Route("api/roomEquipments")]
     [ApiController]
+    [Authorize(Policy = "Manager")]
     public class RoomEquipmentController : ControllerBase
     {
         private readonly IMapper _mapper;

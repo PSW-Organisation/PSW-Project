@@ -10,11 +10,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using HospitalLibrary.MedicalRecords.Service;
 using HospitalLibrary.Schedule.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace HospitalAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "Patient")]
     public class AppointmentController : ControllerBase
     {
         private readonly HospitalDbContext _context;
@@ -30,6 +34,8 @@ namespace HospitalAPI.Controllers
             _doctorService = doctorService;
         }
 
+       
+        [Authorize]
         [HttpGet("{username}")]
         public ActionResult<IEnumerable<Visit>> GetVisitsByUsername(string username)
         {
@@ -68,8 +74,6 @@ namespace HospitalAPI.Controllers
         [HttpPost]
         public ActionResult PostVisit(VisitDto visitDto)
         {
-            //if (!ModelState.IsValid)
-            //  return BadRequest();
             Visit mappedVisit = _mapper.Map<Visit>(visitDto);
             if (_visitService.AddVisit(mappedVisit))
                 return Ok();

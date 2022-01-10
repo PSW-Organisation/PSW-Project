@@ -11,11 +11,14 @@ using System;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using ehealthcare.Model;
 using HospitalLibrary.RoomsAndEquipment.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
     [Route("api/rooms")]
     [ApiController]
+    [Authorize(Policy = "Manager")]
+
     public class RoomViewController : ControllerBase
     {
         private readonly IMapper _mapper;

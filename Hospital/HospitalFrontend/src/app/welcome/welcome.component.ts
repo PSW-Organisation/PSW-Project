@@ -1,13 +1,15 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Feedback } from '../feedback/feedback';
 import { FeedbackService } from '../feedback/feedback.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { RegistrationService } from '../registration/registration.service';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
+import { UserService } from './user.service';
+import { ProfileService } from '../profile/profile.service';
 
 @Component({
   selector: 'app-welcome',
@@ -18,9 +20,15 @@ export class WelcomeComponent implements OnInit, AfterViewInit {
 
   feedbacks: Array<Feedback> = [];
   token: string = '';
-  username: string = 'imbiamba';
+  username: string = '';
+  password: string = '';
+
   constructor(private feedbackService: FeedbackService, private route: ActivatedRoute,
-    private regitrationService: RegistrationService, private toastr: ToastrService, private location: Location, public router: Router,) { }
+    private regitrationService: RegistrationService, private toastr: ToastrService, 
+    private location: Location, private authService: AuthService, private userService: UserService,
+    private profileService: ProfileService, private router: Router) { }
+  
+    
   ngAfterViewInit(): void {
     this.getAllFeedbacks();
   }
@@ -47,6 +55,18 @@ export class WelcomeComponent implements OnInit, AfterViewInit {
   getAllFeedbacks(): void {
     this.feedbackService.getAllFeedbacks().subscribe(feedbacks => this.feedbacks = feedbacks.filter(f => f.isPublished == true),
       error => console.log(error));
+  }
+
+  login() {
+    this.authService.login(this.username, this.password).subscribe(res => {
+      this.profileService.getProfileData(this.username).subscribe((res: any) => {
+        if (res.loginType === 0) {
+          this.router.navigate(['/profile']);
+        } else {
+         this.showError('Incorrect username or password!')
+        }
+      });
+    });
   }
 
   showSuccess(message: string) {

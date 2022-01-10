@@ -7,8 +7,7 @@ import { DOCUMENT, formatDate } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Visit } from './visit';
 import { HttpParameterCodec } from '@angular/common/http';
-import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
-
+import { UserService } from '../welcome/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -67,8 +66,6 @@ export class ProfileComponent implements OnInit {
   profile: FormGroup = new FormGroup({
     usernameControl: new FormControl(this.patient.username, [
     ]),
-    // passwordControl: new FormControl(this.patient.password, [
-    // ]),
     nameControl: new FormControl(this.patient.name, [
     ]),
     parentNameControl: new FormControl(this.patient.parentName, [
@@ -101,8 +98,6 @@ export class ProfileComponent implements OnInit {
     ]),
     weightControl: new FormControl(this.patient.medical.weight, [
     ]),
-    // confirmPasswordControl: new FormControl(this.repeatPassword, [
-    // ]),
     allergensControl: new FormControl(this.patient.allergens, [
     ]),
   });
@@ -114,38 +109,32 @@ export class ProfileComponent implements OnInit {
 
   visits: Visit[] = [];
 
-  username: string = '';
+  user: Patient = JSON.parse(localStorage.getItem('currentUser') || '{}')
 
-  constructor(@Inject(DOCUMENT) public document: Document, private route: ActivatedRoute, private profileService: ProfileService,
-    private toastr: ToastrService, private router: Router, private sanitizer: DomSanitizer) { }
+  constructor(private route: ActivatedRoute, private profileService: ProfileService,
+    private toastr: ToastrService, private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      if (params['username']) {
-        this.username = params['username'];
-        this.profileService.getProfileData(params['username']).subscribe({
-          next: response => {
-            this.patient = response
-            this.patient.allergens = this.patient.medical.patient.patientAllergens
-              .flatMap((a: { allergen: any; }) => a.allergen);
-            this.updateControls();
-            this.profile.disable();
-          }, error: e => {
-            this.router.navigate(['/'])
-            this.showError('An error has occured.')
-          }
-        })
-        this.profileService.getImage(params['username']).subscribe({
-          next: response => {
-            this.imageUrl = this.sanitizer.bypassSecurityTrustUrl(response.image);;
-          }
-        })
+    if(this.user?.username == null){
+      this.showError('You are not logged in!')
+      this.router.navigate(['home'])
+    }
+    this.profileService.getProfileData(this.user.username).subscribe({
+      next: response => {
+        this.patient = response
+        this.patient.allergens = this.patient.medical.patient.patientAllergens
+          .flatMap((a: { allergen: any; }) => a.allergen);
+        this.updateControls();
+        this.profile.disable();
+      }, error: e => {
+        this.router.navigate(['home'])
+        this.showError('An error has occured.')
       }
-    });
+    })
   }
 
   navigateToAppointments(): void {
-    this.router.navigate(['/appointments?username=' + this.username])
+    this.router.navigate(['/appointments'])
     console.log(this.router.url);
   }
 
@@ -206,7 +195,7 @@ export class ProfileComponent implements OnInit {
 
   saveImage() {
     if (this.image != null) {
-      this.profileService.postFile(this.image, this.username).subscribe(data => {
+      this.profileService.postFile(this.image, this.user?.username).subscribe(data => {
         this.showSuccess("Successfully saved image!");
       }, error => {
         this.showError("Error while saving image, please check format!")

@@ -40,14 +40,14 @@ export class SurveyComponent implements OnInit {
                 this.service.getVisitById(params['visitId']).subscribe({
                     next: response => {
                         if (response.body.isReviewed || moment(response.body.startTime).isAfter(moment())) {
-                            this.router.navigate(['/'])
+                            this.router.navigate(['home'])
                             this.showError('An error has occured.')
                         } 
                         else {
                             this.visit = response.body;
                         }
                     }, error: e => {
-                        this.router.navigate(['/'])
+                        this.router.navigate(['home'])
                         this.showError('An error has occured.')
                     }
                 })
@@ -62,7 +62,7 @@ export class SurveyComponent implements OnInit {
                 this.service.reviewVisit(this.visit.id).subscribe({
                     next: response => {
                         this.showSuccess("SUCCESS")
-                        this.router.navigate(['/appointments'], {queryParams:{username: this.visit.patientId}})
+                        this.router.navigate(['/appointments'])
                       }, error: e => (this.showError("FAILED"))
                 })
             } else {

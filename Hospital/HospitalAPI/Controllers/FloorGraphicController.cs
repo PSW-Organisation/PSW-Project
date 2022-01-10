@@ -9,11 +9,13 @@ using ehealthcare.Service;
 using HospitalAPI.DTO;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.GraphicalEditor.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAPI.Controllers
 {
     [Route("api/floorGraphics")]
     [ApiController]
+    [Authorize(Policy = "Manager")]
     public class FloorGraphicController : ControllerBase
     {
         private readonly IFloorGraphicService _floorGraphicService;
