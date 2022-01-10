@@ -11,8 +11,8 @@ using PharmacyAPI;
 namespace PharmacyLibrary.Migrations
 {
     [DbContext(typeof(PharmacyDbContext))]
-    [Migration("20211213123905_NewNotificationsMigration")]
-    partial class NewNotificationsMigration
+    [Migration("20220110181521_PharmacyMigration")]
+    partial class PharmacyMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
