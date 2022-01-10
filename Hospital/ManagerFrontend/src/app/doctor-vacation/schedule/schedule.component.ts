@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IDoctorVacation } from '../doctor-vacation';
 import { DoctorVacationService } from '../doctor-vacation.service';
@@ -12,7 +12,7 @@ import { TimeSpan } from '../timespan';
 export class ScheduleComponent implements OnInit {
 
   title : string = 'Doctors Vacations';
-  doctorId! : string;
+  @Input() doctorId! : string;
   vacations! : IDoctorVacation[];
   vacation : IDoctorVacation=  {
     id: 0,
@@ -31,7 +31,10 @@ export class ScheduleComponent implements OnInit {
               private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.doctorId = this._route.snapshot.paramMap.get('doctorId')!;
+    if (this.doctorId == '') {
+      this.doctorId = this._route.snapshot.paramMap.get('doctorId')!;      
+    }
+
     this._doctorVacationService.getDoctorVacations(this.doctorId).subscribe(vacations =>{
       this.vacations = vacations;
     })
