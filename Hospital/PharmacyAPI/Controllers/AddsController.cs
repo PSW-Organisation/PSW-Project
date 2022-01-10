@@ -1,15 +1,17 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using PharmacyLibrary.Model;
 using PharmacyLibrary.Repository.AdsRepository;
 using PharmacyLibrary.Service;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace PharmacyAPI.Controllers
 
 {
-    [Microsoft.AspNetCore.Components.Route("[controller]")]
     [ApiController]
+    [Microsoft.AspNetCore.Components.Route("api3/[controller]")]
     public class AdsController : ControllerBase
     {
         AdsService service = new AdsService(new AdsRepository());
