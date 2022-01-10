@@ -38,6 +38,7 @@ import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ScheduleComponent } from './doctor-vacation/schedule/schedule.component';
 import { CuFormComponent } from './doctor-vacation/cu-form/cu-form.component';
+import { DoctorOnCallShiftComponent } from './doctor-on-call-shift/doctor-on-call-shift.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { CuFormComponent } from './doctor-vacation/cu-form/cu-form.component';
     DoctorViewComponent,
     HomePageComponent,
     ScheduleComponent,
-    CuFormComponent
+    CuFormComponent,
+    DoctorOnCallShiftComponent
   ],
   imports: [
     BrowserModule,

@@ -22,6 +22,7 @@ import { DoctorsComponent } from "./doctors/doctors.component"
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ScheduleComponent } from './doctor-vacation/schedule/schedule.component';
+import { DoctorOnCallShiftComponent } from './doctor-on-call-shift/doctor-on-call-shift.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -43,7 +44,8 @@ const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent },
   { path: 'doctorView/:id', component: DoctorViewComponent },
   { path: 'home', component: HomePageComponent },
-  { path: 'doctorVacation/:doctorId', component: ScheduleComponent}
+  { path: 'doctorVacation/:doctorId', component: ScheduleComponent },
+  { path: 'doctorOnCallShift', component: DoctorOnCallShiftComponent}
 ];
 
 @NgModule({
