@@ -17,18 +17,28 @@ namespace HospitalLibrary.DoctorSchedule.Service
 
         public OnCallShift CreateOnCallShift(OnCallShift onCallShift)
         {
-            foreach(OnCallShift onCall in GetAllOnCallShiftByDoctorId(onCallShift.DoctorId))
-            {
-                if (!onCallShift.Date.Equals(onCall.Date))
+            //if (GetAllOnCallShiftByDoctorId(onCallShift.DoctorId).Count < 1)
+            //{
+            //    _onCallShiftRepository.Insert(onCallShift);
+            //    return onCallShift;
+            //}
+            //foreach (OnCallShift onCall in GetAllOnCallShiftByDoctorId(onCallShift.DoctorId))
+            //{
+            //    if (onCall.Date.Year != onCallShift.Date.Year || onCall.Date.Month != onCallShift.Date.Month ||
+            //        onCall.Date.Day != onCallShift.Date.Day)
+            //    {
+             //       _onCallShiftRepository.GetNewId();
                     _onCallShiftRepository.Insert(onCallShift);
-                else return null;
-            }
+            //    }
+            //    else return null;
+            //}
             return onCallShift;
         }
 
         public bool DeleteOnCallShift(OnCallShift onCallShift)
         {
-            _onCallShiftRepository.Delete(onCallShift);
+            OnCallShift onCall = _onCallShiftRepository.GetAllOnCallShiftByDateAndDoctor(onCallShift.Date, onCallShift.DoctorId);
+            _onCallShiftRepository.Delete(onCall);
             return true;
         }
 

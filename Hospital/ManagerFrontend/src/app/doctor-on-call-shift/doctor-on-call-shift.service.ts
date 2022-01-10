@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Doctor } from '../doctors/Doctor';
-import { OnCallShift } from './OnCallShift';
+import { IOnCallShift } from './on-call-shift';
 
 
 @Injectable({
@@ -14,63 +14,34 @@ export class DoctorOnCallShiftService {
 
   constructor(private _http: HttpClient) { }
 
-  GetDoctorsOnCallShift(date: Date): Observable<Doctor[]> {
+  GetDoctorsOnCallShift(date: string): Observable<Doctor[]> {
     //treba posalti date, dal preko body ili preko param parametar
-    return this._http.get<Doctor[]>(this._onCallShiftUri+'/doctorsoncallshift').catch(this.handleError);
-
-    // delete this
-    /*
-    var retVal = Observable.create((observer: { next: (arg0: Doctor) => void; complete: () => void; }) => {
-      observer.next(new Doctor('rikiID', 'Specializacija', 1, 'Riki@', 'Riki','Rikic', '343253', 'email@', 'marka kralja', 'Novi Sad', 'Serbia'));
-      observer.next(new Doctor('mikiID', 'Specializacija', 1, 'Mika@', 'Mika', 'Mikic', '343253', 'email@', 'marka kralja', 'Novi Sad', 'Serbia'));
-      observer.next(new Doctor('pavleID', 'Specializacija', 1, 'Pavle@', 'Pavle','Pavlovic', '343253', 'email@', 'marka kralja', 'Novi Sad', 'Serbia'));
-      observer.complete();
-    });
-    return retVal;
-    */
+    return this._http.get<Doctor[]>(this._onCallShiftUri+'/doctorsoncallshift/'+`${date}`).catch(this.handleError);
   }
 
-  GetDoctorsNOTOnCallShift(date: Date): Observable<Doctor[]> {
+  GetDoctorsNotOnCallShift(date: string): Observable<Doctor[]> {
     //treba posalti date, dal preko body ili preko param parametar
-    return this._http.get<Doctor[]>(this._onCallShiftUri+'/doctorsnotoncallshift').catch(this.handleError);
-
-    // delete this
-    /*
-    var retVal = Observable.create((observer: { next: (arg0: Doctor) => void; complete: () => void; }) => {
-      observer.next(new Doctor('stefanID', 'Specializacija', 1, 'stefke@', 'Stefan', 'Stefanovic', '343253', 'email@', 'marka kralja', 'Novi Sad', 'Serbia'));
-      observer.next(new Doctor('kikiID', 'Specializacija', 1, 'kristijan@', 'Kristijan','kriki', '343253', 'email@', 'marka kralja', 'Novi Sad', 'Serbia'));
-  
-      observer.complete();
-    });
-    return retVal;
-    */
+    return this._http.get<Doctor[]>(this._onCallShiftUri+'/doctorsnotoncallshift/'+`${date}`).catch(this.handleError);
   }
 
-  AddDoctorOnCallShift(doctorID: string, date: Date): Observable<OnCallShift> {
+  AddDoctorOnCallShift(onCallShift:IOnCallShift): Observable<IOnCallShift> {
     //treba posalti date, dal preko body ili preko param parametar
-    return this._http.get<OnCallShift>(this._onCallShiftUri).catch(this.handleError);
+    return this._http.post<IOnCallShift>(this._onCallShiftUri,onCallShift).catch(this.handleError);
   }
 
-  RemoveDoctorOnCallShift(doctorID: string, date: Date): Observable<Doctor> {
+  RemoveDoctorOnCallShift(onCallShift:IOnCallShift): Observable<Doctor> {
     //treba posalti date, dal preko body ili preko param parametar
-    return this._http.get<Doctor>(this._onCallShiftUri).catch(this.handleError);
+    return this._http.delete<Doctor>(this._onCallShiftUri,{
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: onCallShift
+    }).catch(this.handleError);
   }
 
-  GetAllOnCallShiftByDoctorId(doctorID: string): Observable<OnCallShift[]> {
+  GetAllOnCallShiftByDoctorId(doctorId: string): Observable<IOnCallShift[]> {
     //treba posalti date, dal preko body ili preko param parametar
-    //return this._http.get<OnCallShift[]>(this._onCallShiftUri).catch(this.handleError);
-
-    // delete this
-    
-    var retVal = Observable.create((observer: { next: (arg0: OnCallShift) => void; complete: () => void; }) => {
-      observer.next(new OnCallShift('', new Date(Date.now())));
-      observer.next(new OnCallShift('', new Date(Date.now())));
-      observer.next(new OnCallShift('', new Date(Date.now())));
-
-      observer.complete();
-    });
-    return retVal;
-    
+    return this._http.get<IOnCallShift[]>(this._onCallShiftUri+`/${doctorId}`).catch(this.handleError);
   }
 
   private handleError(err: HttpErrorResponse) {

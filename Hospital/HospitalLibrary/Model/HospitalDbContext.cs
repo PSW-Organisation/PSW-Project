@@ -307,30 +307,61 @@ namespace ehealthcare.Model
                 new
                 {
                     Id = 1,
-                    Date = DateTime.Today,
+                    Date = new DateTime(2022, 1, 20),
                     DoctorId = "mkisic"
+                },
+                new
+                {
+                    Id = 2,
+                    Date = new DateTime(2022,1,25),
+                    DoctorId = "nelex"
+                },
+                new
+                {
+                    Id = 3,
+                    Date = new DateTime(2022, 1, 15),
+                    DoctorId = "mkisic"
+                },
+
+                new
+                {
+                    Id = 4,
+                    Date = new DateTime(2022, 1, 13),
+                    DoctorId = "nelex"
                 }
             );
 
             modelBuilder.Entity<OnCallShift>().Property(o => o.Id).HasIdentityOptions(startValue: 10);
-             
+
             #endregion
 
             #region DoctorVacations
 
+            modelBuilder.Entity<DoctorVacation>().OwnsOne(v => v.DateSpecification, a =>
+            {
+                a.Property(d => d.StartTime).HasColumnName("StartTime");
+                a.Property(d => d.EndTime).HasColumnName("EndTime");
+                a.Ignore(d => d.Duration);
+            });
+
             modelBuilder.Entity<DoctorVacation>().OwnsOne(v => v.DateSpecification).HasData(
                 new
                 {
-                    StartTime = DateTime.Today,
-                    EndTime = DateTime.Today.AddDays(1),
+                    StartTime = new DateTime(2022, 1, 15),
+                    EndTime = new DateTime(2022, 1, 20),
                     DoctorVacationId = 1,
-                });
-
-            modelBuilder.Entity<DoctorVacation>().OwnsOne(v => v.DateSpecification, a =>
+                },
+                new
                 {
-                    a.Property(d => d.StartTime).HasColumnName("StartTime");
-                    a.Property(d => d.EndTime).HasColumnName("EndTime");
-                    a.Ignore(d => d.Duration);
+                    StartTime = new DateTime(2022, 6, 25),
+                    EndTime = new DateTime(2022, 6, 30),
+                    DoctorVacationId = 2,
+                },
+                new
+                {
+                    StartTime = new DateTime(2022, 1, 25),
+                    EndTime = new DateTime(2022, 1, 28),
+                    DoctorVacationId = 3,
                 });
 
             modelBuilder.Entity<DoctorVacation>().HasData(
@@ -338,6 +369,18 @@ namespace ehealthcare.Model
                     {
                         Id = 1,
                         Description = "Zimovanje",
+                        DoctorId = "mkisic"
+                    },
+                    new
+                    {
+                        Id = 2,
+                        Description = "Letovanje",
+                        DoctorId = "nelex"
+                    },
+                    new
+                    {
+                        Id = 3,
+                        Description = "Bolovanje",
                         DoctorId = "mkisic"
                     }
                 );

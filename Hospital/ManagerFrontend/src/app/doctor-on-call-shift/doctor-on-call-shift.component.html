@@ -16,7 +16,7 @@
             <div class="align-items-start">
                 <div class="justify-content-start text-start">
                     <mat-card class="demo-inline-calendar-card" style="width: 272px;">
-                        <mat-calendar [(selected)]="selectedDate"></mat-calendar>
+                        <mat-calendar [selected]="selectedDate" (selectedChange)="dateChange($event)"></mat-calendar>
                       </mat-card> <br>
                       <p>Selected date: {{selectedDate}}</p>
                 </div>
@@ -39,7 +39,7 @@
                                     <h4 class="card-title text-start">phone: {{doctor.phone}}</h4>
                                 </div>
                                 <div class="col-sm-3">
-                                    <button type="button" (click)="removeDoctor(doctor)" class="btn btn-danger">Remove</button>
+                                    <button *ngIf="pastDate" type="button" (click)="removeDoctor(doctor)" class="btn btn-danger">Remove</button>
                                 </div>
                             </div>
                         </div>         
@@ -50,7 +50,7 @@
                 <div class="col">
                     <br>
                     <div class="d-flex justify-content-center">
-                        <button data-bs-target="#enroll" data-bs-toggle="modal" class="btn btn-secondary btnAdd"><mat-icon>person_add</mat-icon></button>
+                        <button *ngIf="pastDate" data-bs-target="#enroll" data-bs-toggle="modal" class="btn btn-secondary btnAdd"><mat-icon>person_add</mat-icon></button>
                     </div>
                 </div>
             </div>
@@ -68,6 +68,7 @@
         <div class="modal-header">
           <h3 class="modal-title" id="enrollLabel">Add Doctor to onCall shift</h3>
           <button
+          (click)="cancelAdd()"
             type="button"
             class="btn-close"
             data-bs-dismiss="modal"
@@ -86,7 +87,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr [ngClass]="{'selectedTRr': selectCSS(newDoctor)}" *ngFor="let newDoctor of selectedDateDoctorsNOTOnCallShift; index as i" (click)="selectDoctor(newDoctor)">
+                        <tr [ngClass]="{'selectedTRr': selectCSS(newDoctor)}" *ngFor="let newDoctor of selectedDateDoctorsNotOnCallShift; index as i" (click)="selectDoctor(newDoctor)">
                             <td>{{newDoctor.name}}</td>
                             <td>{{newDoctor.surname}}</td>
                             <td>{{newDoctor.phone}}</td>

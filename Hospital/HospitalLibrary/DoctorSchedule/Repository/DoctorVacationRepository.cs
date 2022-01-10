@@ -14,6 +14,11 @@ namespace HospitalLibrary.DoctorSchedule.Repository
             _dbContext = dbContext;
         }
 
+        public int GetNewId()
+        {
+            return _dbContext.Rooms.Max(x => x.Id) + 1;
+        }
+
         public List<DoctorVacation> GetDoctorVacations(string doctorId)
         {
             return _dbContext.DoctorVacations.Where(d => d.DoctorId.Equals(doctorId)).ToList();

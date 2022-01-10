@@ -23,7 +23,7 @@ export class ScheduleComponent implements OnInit {
     },
     description: '',
     doctorId: "0",
-  };;
+  };
   formAction! : string;
   formOpened : boolean = false;
 
@@ -69,7 +69,7 @@ export class ScheduleComponent implements OnInit {
     var dd = String(newDate.getDate()).padStart(2, '0');
     var mm = String(newDate.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = newDate.getFullYear();
-    return mm + '/' + dd + '/' + yyyy;
+    return dd + '/' + mm + '/'  + yyyy;
   }
 
 }
