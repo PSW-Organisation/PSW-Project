@@ -58,12 +58,36 @@
         <tr> <td><h1> Komentar o ovoj apoteci:</h1> </td> 
             <td style="width: 30px" > </td>
         <td> <h1> {{pharmacy.comment}}</h1></td></tr>
-
         <button class='btn btn-secondary' data-toggle="modal" data-target="#myModalEdit"> Izmeni Profil</button>
-
-        
         </table>
+        <!--<div>
+            <app-statistics [apiKey] = 'pharmacyApiKey'></app-statistics>
+        </div>-->
 
-    
-
+        <div class="card" style="margin-top: 50px;margin-right: 100px;margin-left: 100px;margin-bottom: 200px;background-color: lightgray;">
+            <table>
+                <tr>
+                    <td>
+                        <div class="card" style="width: 400px;margin-top: 20px;margin-right: 20px;margin-left: 40px;margin-bottom: 20px;">
+                            <canvas id="offerInACtiveTenderChart"></canvas>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card" style="width: 400px;margin-top: 20px;margin-right: 20px;margin-left: 20px;margin-bottom: 20px;">
+                            <canvas id="winningPriceChart"></canvas>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card" style="width: 300px;margin-top: 20px;margin-right: 20px;margin-left: 0px;margin-bottom: 20px;">
+                            <canvas id="winningsChart"></canvas>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card" style="width: 300px;margin-top: 20px;margin-right: 20px;margin-left: 0px;margin-bottom: 20px;">
+                            <canvas id="participateChart"></canvas>
+                        </div>
+                    </td>
+                </tr>
+            </table>  
+        </div>
 </div>

@@ -1,24 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PharmaciesService } from '../pharmacies-view/pharmacies.service';
-import { IPharmacy } from '../pharmacies-view/pharmacy';
-import { EditPharmacyService } from '../edit-pharmacy/edit-pharmacy.service';
-import { StatisticsService } from '../statistics/statistics.service';
-import { Chart, registerables } from 'chart.js';
+import { Component, Input, OnInit } from '@angular/core';
+import {Chart, registerables} from 'chart.js'
+import { StatisticsService } from './statistics.service';
 
 @Component({
-  selector: 'app-pharmacy-profile',
-  templateUrl: './pharmacy-profile.component.html',
-  styleUrls: ['./pharmacy-profile.component.css']
+  selector: 'app-statistics',
+  templateUrl: './statistics.component.html',
+  styleUrls: ['./statistics.component.css']
 })
-export class PharmacyProfileComponent implements OnInit {
- 
-pharmacyId: number=0 
-pharmacy: any = { pharmacyId:"", pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey:"", comment: ""};
-pharmacyApiKey : string = "";
-picture: any;
-
-//----------------------------------------STATISTIKA--------------------------------------
+export class StatisticsComponent implements OnInit {
   chartOfferInACtiveTender: any;
   chartWinnings: any;
   chartWinningPrice: any;
@@ -29,69 +18,32 @@ picture: any;
   chartWinnerOffersStatY: any;
   chartActiveTenderOffersStatX: any;
   chartActiveTenderOffersStatY: any;
+  @Input() apiKey: string = "";
 
+  constructor(private statisticService: StatisticsService) { }
 
-  constructor(private route: ActivatedRoute,
-    private router: Router, private pharmacyService: PharmaciesService, private statisticService: StatisticsService) { }
-
-  ngOnInit(): void { 
-    this.pharmacyId = Number(this.route.snapshot.paramMap.get('id'));
-    if(this.pharmacyId) {
-      this.showProfilePharmacy(this.pharmacyId);
-      
-    }
-    //----------------------------------------STATISTIKA--------------------------------------
+  ngOnInit(): void {
+    this.getChartWinningsStat(this.apiKey);
+    this.getChartParticipateStat("bc56df25-0d34-4801-b76a-931e61b4c752");
+    this.getChartWinnerOffersStat("bc56df25-0d34-4801-b76a-931e61b4c752");
+    this.getActiveTenderOffersStat("bc56df25-0d34-4801-b76a-931e61b4c752");
     setTimeout(() => {
-      this.getChartWinningsStat(this.pharmacyApiKey);
-      this.getChartParticipateStat(this.pharmacyApiKey);
-      this.getChartWinnerOffersStat(this.pharmacyApiKey);
-      this.getActiveTenderOffersStat(this.pharmacyApiKey);
-      setTimeout(() => {
-        this.chartOfferInACtiveTender = document.getElementById('offerInACtiveTenderChart');
-        this.chartWinnings = document.getElementById('winningsChart');
-        this.chartWinningPrice = document.getElementById('winningPriceChart');
-        this.chartParticipate = document.getElementById('participateChart');
-        Chart.register(...registerables);
-        this.loadChartOffesrInACtiveTender();
-        this.loadChartWinnings();
-        this.loadchartWinningPrice();
-        this.loadChartParticipate();
-      }, 2000);
-    }, 1000)
+      this.chartOfferInACtiveTender = document.getElementById('offerInACtiveTenderChart');
+      this.chartWinnings = document.getElementById('winningsChart');
+      this.chartWinningPrice = document.getElementById('winningPriceChart');
+      this.chartParticipate = document.getElementById('participateChart');
+      Chart.register(...registerables);
+      this.loadChartOffesrInACtiveTender();
+      this.loadChartWinnings();
+      this.loadchartWinningPrice();
+      this.loadChartParticipate();
+    }, 1000);
   }
-
-  showProfilePharmacy(pharmacyId: number) {
-    this.pharmacyService.showProfilePharmacy(pharmacyId).subscribe(
-      pharmacy =>  {
-        var picture = "../../assets/images/" + pharmacy.picture
-        this.pharmacy = pharmacy;
-        this.pharmacy.picture= picture;
-        this.pharmacyApiKey = pharmacy.hospitalApiKey;
-        alert("IMAM API KEY")
-      }
-
-    )
-  }
-
-  editPharmacy(pharmacy: any) {
-   this.pharmacyService.editPharmacy(pharmacy).subscribe(
-    pharmacy =>  {
-    
-      this.pharmacy = pharmacy;
-      this.showProfilePharmacy(this.pharmacyId);
-    }
-
-  )
-  }
-
-  //----------------------------------------STATISTIKA--------------------------------------
 
   getChartWinningsStat(apikey: string){
-    //alert("UZIMAM PODATKE ZA CHART")
     this.statisticService.getStatWinnDefeat(apikey).subscribe(
       ret => {this.chartWinningsStat = ret.statistic;}
     )
-    alert("UZIMAM PODATKE ZA CHART")
   }
 
   getChartParticipateStat(apikey: string){
@@ -157,7 +109,6 @@ picture: any;
   }
 
   loadChartWinnings() : void {
-    alert("CRTAM CHART")
     new Chart( this.chartWinnings,{
       type: 'pie',
       data: {
@@ -238,6 +189,5 @@ picture: any;
       }
     })
   }
-
 
 }

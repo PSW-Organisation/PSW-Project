@@ -76,7 +76,22 @@
 
         <div class="mx-auto card " style="background: transparent;">
             <div class="card-body" style="background: transparent;">
-                <h1 style="margin-left: 5rem;"> All active tenders: </h1>
+              <!-----------------------------------------STATISTIKA----------------------------------------------->  
+              <div>
+                <table>
+                  <tr>
+                    <td><h1 style="margin-left: 5rem;margin-top: 5px;"> Generate report for specific period: </h1> </td>
+                    <td><input id="startDate" type="date" class="form-control" placeholder="Start date" style="margin-left: 10px;" [(ngModel)]="start"></td>
+                    <td><input id="endDate" type="date" class="form-control" placeholder="End date" style="margin-left: 15px;" [(ngModel)]="end"></td>
+                    <td><button type="button" class="btn btn-secondary" data-dismiss="modal" style="margin-left: 30px;" (click)="generateReportPdf(start, end)">Generate</button></td>
+                  </tr>
+                </table>
+                <hr/>
+              </div>
+              
+              
+              
+              <h1 style="margin-left: 5rem;"> All active tenders: </h1>
                 <hr />
 
                   <div class="card-columns mx-auto">
@@ -129,4 +144,33 @@
       </div>
 
       </div>
+
+      <!-----------------------------------------STATISTIKA----------------------------------------------->
+      <div class="card" style="margin-top: 100px;margin-right: 100px;margin-left: 100px;margin-bottom: 200px;background-color: lightgray;">
+        <table>
+            <tr>
+                <td>
+                    <div class="card" style="width: 400px;margin-top: 20px;margin-right: 20px;margin-left: 40px;margin-bottom: 20px;">
+                        <canvas id="offerInACtiveTenderChart"></canvas>
+                    </div>
+                </td>
+                <td>
+                    <div class="card" style="width: 400px;margin-top: 20px;margin-right: 20px;margin-left: 20px;margin-bottom: 20px;">
+                        <canvas id="chartsWinn"></canvas>
+                    </div>
+                </td>
+                <td>
+                    <div class="card" style="width: 300px;margin-top: 20px;margin-right: 20px;margin-left: 0px;margin-bottom: 20px;">
+                        <canvas id="winningsChart"></canvas>
+                    </div>
+                </td>
+                <td>
+                    <div class="card" style="width: 400px;margin-top: 20px;margin-right: 20px;margin-left: 0px;margin-bottom: 20px;">
+                        <canvas id="chartsParticipation"></canvas>
+                    </div>
+                </td>
+            </tr>
+        </table>  
+    </div>
+
 </div>
