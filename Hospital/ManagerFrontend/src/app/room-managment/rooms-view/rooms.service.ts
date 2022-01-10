@@ -32,7 +32,7 @@ export class RoomService {
   }
 
   getRoomsByName(name: string): Observable<IRoom[]> {
-    return this._http.get<IRoom[]>(`${this._baseRoomsUrl}?name=${name}`).pipe(
+    return this._http.get<IRoom[]>(`${this._baseRoomsUrl}/rooms?name=${name}`).pipe(
       tap((data) => console.log('All: ', JSON.stringify(data))),
       catchError(this.handleError)
     );

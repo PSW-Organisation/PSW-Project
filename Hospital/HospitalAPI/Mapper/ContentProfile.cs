@@ -80,6 +80,11 @@ namespace HospitalAPI.Mapper
 
             CreateMap<OnCallShift, OnCallShiftDTO>();
             CreateMap<OnCallShiftDTO, OnCallShift>();
+            
+            CreateMap<Shift, ShiftDTO>()
+                .ForMember(s => s.StartTime, m => m.MapFrom(s => s.TimeInterval.StartTime))
+                .ForMember(s => s.EndTime, m => m.MapFrom(s => s.TimeInterval.EndTime))
+                .ReverseMap();
         }
 
         private static StateOfTerm IsFinished(Visit d)

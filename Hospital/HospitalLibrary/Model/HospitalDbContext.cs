@@ -33,10 +33,10 @@ namespace ehealthcare.Model
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Question> Questions { get; set; }
         //public DbSet<Medicine> Medicines { get; set; }
-
         public DbSet<MedicinePrescription> Prescriptions { get; set; }
         public DbSet<DoctorVacation> DoctorVacations { get; set; }
         public DbSet<OnCallShift> OnCallShifts { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
 
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
 
@@ -796,6 +796,17 @@ namespace ehealthcare.Model
                 IdElement = -1
             }
             );
+
+            #endregion
+
+            #region Shifts
+            
+            modelBuilder.Entity<Shift>().OwnsOne(s => s.TimeInterval, s =>
+            {
+                s.Property(t => t.StartTime).HasColumnName("StartTime");
+                s.Property(t => t.EndTime).HasColumnName("EndTime");
+                s.Ignore(t => t.Duration);
+            });
 
             #endregion
 
