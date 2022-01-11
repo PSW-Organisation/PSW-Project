@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HospitalAPI.DTO;
 
 namespace HospitalLibrary.GraphicalEditor.Model
 {
@@ -6,6 +7,6 @@ namespace HospitalLibrary.GraphicalEditor.Model
     {
         public long Floor { get; set; }
         public string BuildingId { get; set; }
-        public List<RoomGraphic> RoomGraphics { get; set; }
+        public List<RoomGraphicDTO> RoomGraphics { get; set; }
     }
 }

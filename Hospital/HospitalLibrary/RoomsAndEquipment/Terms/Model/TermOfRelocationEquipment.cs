@@ -1,4 +1,5 @@
 ﻿using HospitalLibrary.Model;
+using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,10 +12,21 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Model
         public int IdDestinationRoom { get; set; }
         public string NameOfEquipment { get; set; }
         public int QuantityOfEquipment { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public virtual TimeInterval TimeInterval { get; set; }
         public int DurationInMinutes { get; set; }
-        public StateOfTerm RelocationState { get; set; }
+
+        private StateOfTerm relocationState; 
+        public StateOfTerm RelocationState
+        {
+            get { return relocationState; }
+            set 
+            {   
+                if(relocationState == StateOfTerm.PENDING)
+                {
+                    relocationState = value;
+                }
+            }
+        }
 
         public TermOfRelocationEquipment() { }
 
@@ -24,8 +36,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Model
             IdDestinationRoom = paramsOfRelocationEquipment.IdDestinationRoom;
             NameOfEquipment = paramsOfRelocationEquipment.NameOfEquipment;
             QuantityOfEquipment = paramsOfRelocationEquipment.QuantityOfEquipment;
-            StartTime = paramsOfRelocationEquipment.StartTime;
-            EndTime = paramsOfRelocationEquipment.EndTime;
+            TimeInterval = new TimeInterval(paramsOfRelocationEquipment.StartTime, paramsOfRelocationEquipment.EndTime);
             DurationInMinutes = paramsOfRelocationEquipment.DurationInMinutes;
             RelocationState = StateOfTerm.PENDING;
         }

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using HospitalLibrary.Shared.Model;
 using System;
 using HospitalLibrary.DoctorSchedule.Model;
+using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 
 namespace ehealthcare.Model
 {
@@ -31,6 +32,7 @@ namespace ehealthcare.Model
         public DbSet<TermOfRenovation> TermOfRenovations { get; set; }
         public DbSet<RoomEquipment> RoomEquipments { get; set; }
         public DbSet<Survey> Surveys { get; set; }
+
         public DbSet<Question> Questions { get; set; }
         //public DbSet<Medicine> Medicines { get; set; }
         public DbSet<MedicinePrescription> Prescriptions { get; set; }
@@ -38,7 +40,9 @@ namespace ehealthcare.Model
         public DbSet<OnCallShift> OnCallShifts { get; set; }
         public DbSet<Shift> Shifts { get; set; }
 
-        public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options) { }
+        public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options)
+        {
+        }
 
         protected HospitalDbContext()
         {
@@ -46,7 +50,6 @@ namespace ehealthcare.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Allergen>(a =>
             {
                 a.HasData(new Allergen()
@@ -91,9 +94,7 @@ namespace ehealthcare.Model
                     Type = "Dynamic",
                     RoomId = 16
                 }
-
-
-                );
+            );
 
             #endregion
 
@@ -300,7 +301,6 @@ namespace ehealthcare.Model
                 }
             );
 
-
             #endregion
 
             #region OnCallShifts
@@ -386,13 +386,23 @@ namespace ehealthcare.Model
                         DoctorId = "mkisic"
                     }
                 );
-
+                
             modelBuilder.Entity<DoctorVacation>().Property(v => v.Id).HasIdentityOptions(startValue: 10);
 
             #endregion
 
             #region FloorGraphicsWithRoomGraphics
 
+            modelBuilder.Entity<RoomGraphic>().OwnsOne(v => v.Position, a =>
+            {
+                a.Property(d => d.X).HasColumnName("X");
+                a.Property(d => d.Y).HasColumnName("Y");
+            });
+            modelBuilder.Entity<RoomGraphic>().OwnsOne(v => v.Dimension, a =>
+            {
+                a.Property(d => d.Width).HasColumnName("Width");
+                a.Property(d => d.Height).HasColumnName("Height");
+            });
 
             modelBuilder.Entity<FloorGraphic>().HasData(
                 new
@@ -412,6 +422,203 @@ namespace ehealthcare.Model
                     BuildingId = 1
                 });
 
+            modelBuilder.Entity<RoomGraphic>().OwnsOne(v => v.Position).HasData(
+                new
+                {
+                    RoomGraphicId = 16,
+                    X = 0,
+                    Y = 0,
+                },
+                new
+                {
+                    RoomGraphicId = 1,
+                    X = 0,
+                    Y = 100,
+                },
+                new
+                {
+                    RoomGraphicId = 2,
+                    X = 0,
+                    Y = 340,
+                },
+                new
+                {
+                    RoomGraphicId = 3,
+                    X = 222,
+                    Y = 340,
+                },
+                new
+                {
+                    RoomGraphicId = 4,
+                    X = 0,
+                    Y = 517,
+                },
+                new
+                {
+                    RoomGraphicId = 5,
+                    X = 150,
+                    Y = 517,
+                },
+                new
+                {
+                    RoomGraphicId = 6,
+                    X = 150,
+                    Y = 20,
+                },
+                new
+                {
+                    RoomGraphicId = 7,
+                    X = 0,
+                    Y = 0,
+                },
+                new
+                {
+                    RoomGraphicId = 8,
+                    X = 197,
+                    Y = 0,
+                },
+                new
+                {
+                    RoomGraphicId = 9,
+                    X = 0,
+                    Y = 100,
+                },
+                new
+                {
+                    RoomGraphicId = 10,
+                    X = 197,
+                    Y = 100,
+                },
+                new
+                {
+                    RoomGraphicId = 11,
+                    X = 0,
+                    Y = 340,
+                },
+                new
+                {
+                    RoomGraphicId = 12,
+                    X = 222,
+                    Y = 340,
+                },
+                new
+                {
+                    RoomGraphicId = 13,
+                    X = 0,
+                    Y = 517,
+                },
+                new
+                {
+                    RoomGraphicId = 14,
+                    X = 150,
+                    Y = 517,
+                },
+                new
+                {
+                    RoomGraphicId = 15,
+                    X = 10,
+                    Y = 220,
+                },
+                new
+                {
+                    RoomGraphicId = 17,
+                    X = 0,
+                    Y = 0,
+                }
+            );
+
+
+            modelBuilder.Entity<RoomGraphic>().OwnsOne(v => v.Dimension).HasData(
+                new
+                {
+                    RoomGraphicId = 16,
+                    Width = 100,
+                    Height = 100,
+                }, new
+                {
+                    RoomGraphicId = 1,
+                    Width = 100,
+                    Height = 100,
+                }, new
+                {
+                    RoomGraphicId = 2,
+                    Width = 75,
+                    Height = 145,
+                }, new
+                {
+                    RoomGraphicId = 3,
+                    Width = 75,
+                    Height = 145,
+                }, new
+                {
+                    RoomGraphicId = 4,
+                    Width = 150,
+                    Height = 80,
+                }, new
+                {
+                    RoomGraphicId = 5,
+                    Width = 150,
+                    Height = 80,
+                }, new
+                {
+                    RoomGraphicId = 6,
+                    Width = 140,
+                    Height = 160,
+                },
+                new
+                {
+                    RoomGraphicId = 7,
+                    Width = 100,
+                    Height = 100,
+                }, new
+                {
+                    RoomGraphicId = 8,
+                    Width = 100,
+                    Height = 100,
+                }, new
+                {
+                    RoomGraphicId = 9,
+                    Width = 100,
+                    Height = 100,
+                }, new
+                {
+                    RoomGraphicId = 10,
+                    Width = 100,
+                    Height = 100,
+                }, new
+                {
+                    RoomGraphicId = 11,
+                    Width = 75,
+                    Height = 145,
+                }, new
+                {
+                    RoomGraphicId = 12,
+                    Width = 75,
+                    Height = 145,
+                }, new
+                {
+                    RoomGraphicId = 13,
+                    Width = 150,
+                    Height = 80,
+                }, new
+                {
+                    RoomGraphicId = 14,
+                    Width = 150,
+                    Height = 80,
+                }, new
+                {
+                    RoomGraphicId = 15,
+                    Width = 140,
+                    Height = 100,
+                },
+                new
+                {
+                    RoomGraphicId = 17,
+                    Width = 100,
+                    Height = 100,
+                }
+            );
+
             modelBuilder.Entity<RoomGraphic>().HasData(
                 new
                 {
@@ -419,8 +626,6 @@ namespace ehealthcare.Model
                     DoorPosition = "right",
                     Width = 100,
                     Height = 100,
-                    X = 0,
-                    Y = 0,
                     FloorGraphicId = 1,
                     RoomId = 16
                 }, new
@@ -429,8 +634,6 @@ namespace ehealthcare.Model
                     DoorPosition = "right",
                     Width = 100,
                     Height = 100,
-                    X = 0,
-                    Y = 100,
                     FloorGraphicId = 1,
                     RoomId = 1
                 }, new
@@ -439,8 +642,6 @@ namespace ehealthcare.Model
                     DoorPosition = "right",
                     Width = 75,
                     Height = 145,
-                    X = 0,
-                    Y = 340,
                     FloorGraphicId = 1,
                     RoomId = 2
                 }, new
@@ -449,8 +650,6 @@ namespace ehealthcare.Model
                     DoorPosition = "left",
                     Width = 75,
                     Height = 145,
-                    X = 222,
-                    Y = 340,
                     FloorGraphicId = 1,
                     RoomId = 3
                 }, new
@@ -459,8 +658,6 @@ namespace ehealthcare.Model
                     DoorPosition = "top",
                     Width = 150,
                     Height = 80,
-                    X = 0,
-                    Y = 517,
                     FloorGraphicId = 1,
                     RoomId = 4
                 }, new
@@ -469,8 +666,6 @@ namespace ehealthcare.Model
                     DoorPosition = "top",
                     Width = 150,
                     Height = 80,
-                    X = 150,
-                    Y = 517,
                     FloorGraphicId = 1,
                     RoomId = 5
                 }, new
@@ -479,8 +674,6 @@ namespace ehealthcare.Model
                     DoorPosition = "none",
                     Width = 140,
                     Height = 160,
-                    X = 150,
-                    Y = 20,
                     FloorGraphicId = 1,
                     RoomId = 6
                 });
@@ -492,8 +685,6 @@ namespace ehealthcare.Model
                     DoorPosition = "right",
                     Width = 100,
                     Height = 100,
-                    X = 0,
-                    Y = 0,
                     FloorGraphicId = 2,
                     RoomId = 7
                 }, new
@@ -502,8 +693,6 @@ namespace ehealthcare.Model
                     DoorPosition = "left",
                     Width = 100,
                     Height = 100,
-                    X = 197,
-                    Y = 0,
                     FloorGraphicId = 2,
                     RoomId = 8
                 }, new
@@ -512,8 +701,6 @@ namespace ehealthcare.Model
                     DoorPosition = "right",
                     Width = 100,
                     Height = 100,
-                    X = 0,
-                    Y = 100,
                     FloorGraphicId = 2,
                     RoomId = 9
                 }, new
@@ -522,8 +709,6 @@ namespace ehealthcare.Model
                     DoorPosition = "left",
                     Width = 100,
                     Height = 100,
-                    X = 197,
-                    Y = 100,
                     FloorGraphicId = 2,
                     RoomId = 10
                 }, new
@@ -532,8 +717,6 @@ namespace ehealthcare.Model
                     DoorPosition = "right",
                     Width = 75,
                     Height = 145,
-                    X = 0,
-                    Y = 340,
                     FloorGraphicId = 2,
                     RoomId = 11
                 }, new
@@ -542,8 +725,6 @@ namespace ehealthcare.Model
                     DoorPosition = "left",
                     Width = 75,
                     Height = 145,
-                    X = 222,
-                    Y = 340,
                     FloorGraphicId = 2,
                     RoomId = 12
                 }, new
@@ -552,8 +733,6 @@ namespace ehealthcare.Model
                     DoorPosition = "top",
                     Width = 150,
                     Height = 80,
-                    X = 0,
-                    Y = 517,
                     FloorGraphicId = 2,
                     RoomId = 13
                 }, new
@@ -562,8 +741,6 @@ namespace ehealthcare.Model
                     DoorPosition = "top",
                     Width = 150,
                     Height = 80,
-                    X = 150,
-                    Y = 517,
                     FloorGraphicId = 2,
                     RoomId = 14
                 }, new
@@ -572,8 +749,6 @@ namespace ehealthcare.Model
                     DoorPosition = "none",
                     Width = 140,
                     Height = 100,
-                    X = 10,
-                    Y = 220,
                     FloorGraphicId = 2,
                     RoomId = 15
                 });
@@ -585,8 +760,6 @@ namespace ehealthcare.Model
                     DoorPosition = "right",
                     Width = 100,
                     Height = 100,
-                    X = 0,
-                    Y = 0,
                     FloorGraphicId = 3,
                     RoomId = 17
                 });
@@ -594,6 +767,53 @@ namespace ehealthcare.Model
             #endregion
 
             #region TermOfRelocationEquipments
+
+            modelBuilder.Entity<TermOfRelocationEquipment>().OwnsOne(v => v.TimeInterval, a =>
+            {
+                a.Property(d => d.StartTime).HasColumnName("StartTime");
+                a.Property(d => d.EndTime).HasColumnName("EndTime");
+                a.Ignore(d => d.Duration);
+            });
+
+            modelBuilder.Entity<TermOfRelocationEquipment>().OwnsOne(v => v.TimeInterval).HasData(
+                new
+                {
+                    StartTime = new DateTime(2021, 11, 22, 1, 0, 0),
+                    EndTime = new DateTime(2021, 11, 22, 1, 10, 0),
+                    TermOfRelocationEquipmentId = 1
+                },
+                new
+                {
+                    StartTime = new DateTime(2021, 11, 22, 3, 30, 0),
+                    EndTime = new DateTime(2021, 11, 22, 4, 10, 0),
+                    TermOfRelocationEquipmentId = 2
+                },
+                new
+                {
+                    StartTime = new DateTime(2021, 11, 23, 7, 30, 0),
+                    EndTime = new DateTime(2021, 11, 23, 7, 45, 0),
+                    TermOfRelocationEquipmentId = 3
+                },
+                new
+                {
+                    StartTime = new DateTime(2021, 11, 23, 9, 0, 0),
+                    EndTime = new DateTime(2021, 11, 23, 9, 25, 0),
+                    TermOfRelocationEquipmentId = 4
+                },
+                new
+                {
+                    StartTime = new DateTime(2021, 11, 23, 10, 45, 0),
+                    EndTime = new DateTime(2021, 11, 23, 11, 15, 0),
+                    TermOfRelocationEquipmentId = 5
+                },
+                new
+                {
+                    StartTime = new DateTime(2021, 11, 23, 14, 30, 0),
+                    EndTime = new DateTime(2021, 11, 23, 14, 50, 0),
+                    TermOfRelocationEquipmentId = 6
+                }
+            );
+
 
             modelBuilder.Entity<TermOfRelocationEquipment>().HasData(
                 new TermOfRelocationEquipment()
@@ -603,8 +823,6 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 8,
                     NameOfEquipment = "bed",
                     QuantityOfEquipment = 2,
-                    StartTime = new DateTime(2021, 11, 22, 1, 0, 0),
-                    EndTime = new DateTime(2021, 11, 22, 1, 10, 0),
                     DurationInMinutes = 10,
                     RelocationState = StateOfTerm.PENDING
                 },
@@ -615,8 +833,6 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 9,
                     NameOfEquipment = "needle",
                     QuantityOfEquipment = 14,
-                    StartTime = new DateTime(2021, 11, 22, 3, 30, 0),
-                    EndTime = new DateTime(2021, 11, 22, 4, 10, 0),
                     DurationInMinutes = 40,
                     RelocationState = StateOfTerm.PENDING
                 },
@@ -627,8 +843,6 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 9,
                     NameOfEquipment = "infusion",
                     QuantityOfEquipment = 8,
-                    StartTime = new DateTime(2021, 11, 23, 7, 30, 0),
-                    EndTime = new DateTime(2021, 11, 23, 7, 45, 0),
                     DurationInMinutes = 15,
                     RelocationState = StateOfTerm.PENDING
                 },
@@ -639,8 +853,6 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 11,
                     NameOfEquipment = "table",
                     QuantityOfEquipment = 1,
-                    StartTime = new DateTime(2021, 11, 23, 9, 0, 0),
-                    EndTime = new DateTime(2021, 11, 23, 9, 25, 0),
                     DurationInMinutes = 25,
                     RelocationState = StateOfTerm.PENDING
                 },
@@ -651,8 +863,6 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 7,
                     NameOfEquipment = "xrayMachine",
                     QuantityOfEquipment = 1,
-                    StartTime = new DateTime(2021, 11, 23, 10, 45, 0),
-                    EndTime = new DateTime(2021, 11, 23, 11, 15, 0),
                     DurationInMinutes = 30,
                     RelocationState = StateOfTerm.PENDING
                 },
@@ -663,8 +873,6 @@ namespace ehealthcare.Model
                     IdDestinationRoom = 11,
                     NameOfEquipment = "chair",
                     QuantityOfEquipment = 5,
-                    StartTime = new DateTime(2021, 11, 23, 14, 30, 0),
-                    EndTime = new DateTime(2021, 11, 23, 14, 50, 0),
                     DurationInMinutes = 20,
                     RelocationState = StateOfTerm.PENDING
                 }
@@ -674,127 +882,222 @@ namespace ehealthcare.Model
 
             #region TermOfRenovations
 
+            modelBuilder.Entity<TermOfRenovation>().OwnsOne(v => v.TimeInterval, a =>
+            {
+                a.Property(d => d.StartTime).HasColumnName("StartTime");
+                a.Property(d => d.EndTime).HasColumnName("EndTime");
+                a.Ignore(d => d.Duration);
+            });
+
+            modelBuilder.Entity<TermOfRenovation>().OwnsOne(v => v.TimeInterval).HasData(
+                new
+                {
+                    StartTime = new DateTime(2021, 12, 7, 10, 30, 0),
+                    EndTime = new DateTime(2021, 12, 7, 11, 30, 0),
+                    TermOfRenovationId = 1
+                },
+                new
+                {
+                    StartTime = new DateTime(2021, 12, 17, 9, 0, 0),
+                    EndTime = new DateTime(2021, 12, 18, 9, 0, 0),
+                    TermOfRenovationId = 2
+                }
+            );
+
             modelBuilder.Entity<TermOfRenovation>().HasData(
-                  new TermOfRenovation()
-                  {
-                      Id = 1,
-                      StartTime = new DateTime(2021, 12, 7, 10, 30, 0),
-                      EndTime = new DateTime(2021, 12, 7, 11, 30, 0),
-                      DurationInMinutes = 60,
-                      StateOfRenovation = StateOfTerm.CANCELED,
-                      TypeOfRenovation = TypeOfRenovation.MERGE,
-                      IdRoomA = 1,
-                      IdRoomB = 16,
-                      EquipmentLogic = EquipmentLogic.ALL_EQUIPMENT_IN_A,
-                      NewNameForRoomA = "Operation room 5",
-                      NewSectorForRoomA = "OS",
-                      NewRoomTypeForRoomA = RoomType.operation,
-                      NewNameForRoomB = "",
-                      NewSectorForRoomB = "",
-                      NewRoomTypeForRoomB = RoomType.waitingRoom,
-                  },
-                  new TermOfRenovation()
-                  {
-                      Id = 2,
-                      StartTime = new DateTime(2021, 12, 17, 9, 0, 0),
-                      EndTime = new DateTime(2021, 12, 18, 9, 0, 0),
-                      DurationInMinutes = 1440,
-                      StateOfRenovation = StateOfTerm.PENDING,
-                      TypeOfRenovation = TypeOfRenovation.SPLIT,
-                      IdRoomA = 4,
-                      IdRoomB = -1,
-                      EquipmentLogic = EquipmentLogic.HALF_IN_A_HALF_IN_B,
-                      NewNameForRoomA = "Operation room 6",
-                      NewSectorForRoomA = "OS",
-                      NewRoomTypeForRoomA = RoomType.operation,
-                      NewNameForRoomB = "Operation room 7",
-                      NewSectorForRoomB = "OS",
-                      NewRoomTypeForRoomB = RoomType.operation,
-                  }
+                new TermOfRenovation()
+                {
+                    Id = 1,
+                    DurationInMinutes = 60,
+                    StateOfRenovation = StateOfTerm.CANCELED,
+                    TypeOfRenovation = TypeOfRenovation.MERGE,
+                    IdRoomA = 1,
+                    IdRoomB = 16,
+                    EquipmentLogic = EquipmentLogic.ALL_EQUIPMENT_IN_A,
+                    NewNameForRoomA = "Operation room 5",
+                    NewSectorForRoomA = "OS",
+                    NewRoomTypeForRoomA = RoomType.operation,
+                    NewNameForRoomB = "",
+                    NewSectorForRoomB = "",
+                    NewRoomTypeForRoomB = RoomType.waitingRoom,
+                },
+                new TermOfRenovation()
+                {
+                    Id = 2,
+                    DurationInMinutes = 1440,
+                    StateOfRenovation = StateOfTerm.PENDING,
+                    TypeOfRenovation = TypeOfRenovation.SPLIT,
+                    IdRoomA = 4,
+                    IdRoomB = -1,
+                    EquipmentLogic = EquipmentLogic.HALF_IN_A_HALF_IN_B,
+                    NewNameForRoomA = "Operation room 6",
+                    NewSectorForRoomA = "OS",
+                    NewRoomTypeForRoomA = RoomType.operation,
+                    NewNameForRoomB = "Operation room 7",
+                    NewSectorForRoomB = "OS",
+                    NewRoomTypeForRoomB = RoomType.operation,
+                }
             );
 
             #endregion
 
             #region ExteriorGraphics
 
+            modelBuilder.Entity<ExteriorGraphic>().OwnsOne(v => v.Position, a =>
+            {
+                a.Property(d => d.X).HasColumnName("X");
+                a.Property(d => d.Y).HasColumnName("Y");
+            });
+            modelBuilder.Entity<ExteriorGraphic>().OwnsOne(v => v.Dimension, a =>
+            {
+                a.Property(d => d.Width).HasColumnName("Width");
+                a.Property(d => d.Height).HasColumnName("Height");
+            });
+
+            modelBuilder.Entity<ExteriorGraphic>().OwnsOne(v => v.Position).HasData(
+                new
+                {
+                    ExteriorGraphicId = 1,
+                    X = 180,
+                    Y = 30,
+                },
+                new
+                {
+                    ExteriorGraphicId = 2,
+                    X = 380,
+                    Y = 120,
+                },
+                new
+                {
+                    ExteriorGraphicId = 7,
+                    X = 0,
+                    Y = 250,
+                },
+                new
+                {
+                    ExteriorGraphicId = 3,
+                    X = 0,
+                    Y = 290,
+                },
+                new
+                {
+                    ExteriorGraphicId = 4,
+                    X = 305,
+                    Y = 0,
+                },
+                new
+                {
+                    ExteriorGraphicId = 5,
+                    X = 245,
+                    Y = 310,
+                },
+                new
+                {
+                    ExteriorGraphicId = 6,
+                    X = 380,
+                    Y = 20,
+                }
+            );
+
+            modelBuilder.Entity<ExteriorGraphic>().OwnsOne(v => v.Dimension).HasData(
+                new
+                {
+                    ExteriorGraphicId = 1,
+                    Width = 100,
+                    Height = 200,
+                },
+                new
+                {
+                    ExteriorGraphicId = 2,
+                    Width = 180,
+                    Height = 110,
+                },
+                new
+                {
+                    ExteriorGraphicId = 7,
+
+                    Width = 600,
+                    Height = 50,
+                },
+                new
+                {
+                    ExteriorGraphicId = 3,
+
+                    Width = 50,
+                    Height = 110,
+                },
+                new
+                {
+                    ExteriorGraphicId = 4,
+
+                    Width = 50,
+                    Height = 400,
+                },
+                new
+                {
+                    ExteriorGraphicId = 5,
+
+                    Width = 50,
+                    Height = 80,
+                },
+                new
+                {
+                    ExteriorGraphicId = 6,
+                    Width = 50,
+                    Height = 80,
+                }
+            );
+
             modelBuilder.Entity<ExteriorGraphic>().HasData(
-            new ExteriorGraphic()
-            {
-                Id = 1,
-                X = 180,
-                Y = 30,
-                Width = 100,
-                Height = 200,
-                Name = "ZGR1",
-                Type = "building",
-                IdElement = 0
-            },
-            new ExteriorGraphic()
-            {
-                Id = 2,
-                X = 380,
-                Y = 120,
-                Width = 180,
-                Height = 110,
-                Name = "ZGR2",
-                Type = "building",
-                IdElement = 1
-            },
-            new ExteriorGraphic()
-            {
-                Id = 7,
-                X = 0,
-                Y = 250,
-                Width = 600,
-                Height = 50,
-                Name = "",
-                Type = "road",
-                IdElement = -1
-            },
-            new ExteriorGraphic()
-            {
-                Id = 3,
-                X = 0,
-                Y = 290,
-                Width = 50,
-                Height = 110,
-                Name = "",
-                Type = "road",
-                IdElement = -1
-            },
-            new ExteriorGraphic()
-            {
-                Id = 4,
-                X = 305,
-                Y = 0,
-                Width = 50,
-                Height = 400,
-                Name = "",
-                Type = "road",
-                IdElement = -1
-            },
-            new ExteriorGraphic()
-            {
-                Id = 5,
-                X = 245,
-                Y = 310,
-                Width = 50,
-                Height = 80,
-                Name = "P",
-                Type = "parking",
-                IdElement = -1
-            },
-            new ExteriorGraphic()
-            {
-                Id = 6,
-                X = 380,
-                Y = 20,
-                Width = 50,
-                Height = 80,
-                Name = "P",
-                Type = "parking",
-                IdElement = -1
-            }
+                new ExteriorGraphic()
+                {
+                    Id = 1,
+                    Name = "ZGR1",
+                    Type = "building",
+                    IdElement = 0
+                },
+                new ExteriorGraphic()
+                {
+                    Id = 2,
+                    Name = "ZGR2",
+                    Type = "building",
+                    IdElement = 1
+                },
+                new ExteriorGraphic()
+                {
+                    Id = 7,
+                    Name = "",
+                    Type = "road",
+                    IdElement = -1
+                },
+                new ExteriorGraphic()
+                {
+                    Id = 3,
+                    Name = "",
+                    Type = "road",
+                    IdElement = -1
+                },
+                new ExteriorGraphic()
+                {
+                    Id = 4,
+                    Name = "",
+                    Type = "road",
+                    IdElement = -1
+                },
+                new ExteriorGraphic()
+                {
+                    Id = 5,
+                    Name = "P",
+                    Type = "parking",
+                    IdElement = -1
+                },
+                new ExteriorGraphic()
+                {
+                    Id = 6,
+                    Name = "P",
+                    Type = "parking",
+                    IdElement = -1
+                }
             );
 
             #endregion
@@ -813,28 +1116,27 @@ namespace ehealthcare.Model
             modelBuilder.Entity<MedicalRecord>(m =>
             {
                 m.HasData(
-                  new MedicalRecord
-                  {
-                      PersonalId = "1209001129123",
-                      BloodType = BloodType.AB_positive,
-                      Height = 186,
-                      Weight = 90,
-                      Profession = "Professor",
-                      DoctorId = "nelex",
-                      PatientId = "imbiamba"
-                  },
-                  new MedicalRecord
-                  {
-                      PersonalId = "1209222129123",
-                      BloodType = BloodType.O_positive,
-                      Height = 186,
-                      Weight = 90,
-                      Profession = "Professor",
-                      DoctorId = "nelex",
-                      PatientId = "kristina"
-                  });
+                    new MedicalRecord
+                    {
+                        PersonalId = "1209001129123",
+                        BloodType = BloodType.AB_positive,
+                        Height = 186,
+                        Weight = 90,
+                        Profession = "Professor",
+                        DoctorId = "nelex",
+                        PatientId = "imbiamba"
+                    },
+                    new MedicalRecord
+                    {
+                        PersonalId = "1209222129123",
+                        BloodType = BloodType.O_positive,
+                        Height = 186,
+                        Weight = 90,
+                        Profession = "Professor",
+                        DoctorId = "nelex",
+                        PatientId = "kristina"
+                    });
                 // m.HasKey(m => new { m.Id, m.PatientId });
-
             });
 
             modelBuilder.Entity<PatientAllergen>(a =>
@@ -843,14 +1145,12 @@ namespace ehealthcare.Model
                 {
                     PatientId = "imbiamba",
                     AllergenId = 1
-
                 });
-                a.HasKey(pa => new { pa.PatientId, pa.AllergenId });
+                a.HasKey(pa => new {pa.PatientId, pa.AllergenId});
                 a.HasOne<Patient>(p => p.Patient).WithMany(p => p.PatientAllergens)
-                .HasForeignKey(pa => pa.PatientId);
+                    .HasForeignKey(pa => pa.PatientId);
                 a.HasOne<Allergen>(a => a.Allergen).WithMany(p => p.PatientAllergens)
-                .HasForeignKey(pa => pa.AllergenId);
-
+                    .HasForeignKey(pa => pa.AllergenId);
             });
 
 
@@ -897,12 +1197,11 @@ namespace ehealthcare.Model
                         City = "Novi Sad",
                         Country = "Serbia",
                     }
-                    );
+                );
             });
 
             modelBuilder.Entity<Doctor>(d =>
             {
-
                 d.HasData(
                     new Doctor("nelex")
                     {
@@ -965,16 +1264,16 @@ namespace ehealthcare.Model
             });
 
             modelBuilder.Entity<Survey>(s =>
-                {
-                    s.HasData(
-                        new Survey()
-                        {
-                            Id = -1,
-                            PatientId = "imbiamba",
-                            SubmissionDate = new DateTime(2021, 11, 18),
-                            VisitId = 1
-                        });
-                });
+            {
+                s.HasData(
+                    new Survey()
+                    {
+                        Id = -1,
+                        PatientId = "imbiamba",
+                        SubmissionDate = new DateTime(2021, 11, 18),
+                        VisitId = 1
+                    });
+            });
 
             modelBuilder.Entity<Question>(q =>
             {
@@ -987,7 +1286,7 @@ namespace ehealthcare.Model
                         Category = QuestionCategory.hospital
                     });
 
-                q.HasKey(q => new { q.SurveyId, q.Id });
+                q.HasKey(q => new {q.SurveyId, q.Id});
             });
 
 
@@ -1009,7 +1308,6 @@ namespace ehealthcare.Model
 
             modelBuilder.Entity<Manager>(m =>
             {
-
                 m.HasData(
                     new Manager("laki")
                     {

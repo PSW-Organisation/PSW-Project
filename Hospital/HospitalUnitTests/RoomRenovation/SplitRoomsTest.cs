@@ -132,11 +132,9 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         Room = GetRoom(0),
                         DoorPosition = "right",
-                        Height = 300,
-                        Width = 100,
+                        Dimension = new Dimension(100, 300),
                         RoomId = 1,
-                        X = 0,
-                        Y = 0,
+                        Position = new Position(0, 0)
                     },
                     new List<RoomGraphic>()
                     {
@@ -145,22 +143,18 @@ namespace HospitalUnitTests.RoomRenovation
                             Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "right",
-                            Height = 150,
-                            Width = 100,
+                            Dimension = new Dimension(100, 150),
                             RoomId = 2,
-                            X = 0,
-                            Y = 0
+                            Position = new Position(0, 0)
                         },
                         new RoomGraphic
                         {
                             Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "right",
-                            Height = 150,
-                            Width = 100,
+                            Dimension = new Dimension(100, 150),
                             RoomId = 3,
-                            X = 0,
-                            Y = 150
+                            Position = new Position(0, 150)
                         }
                     }
                 },
@@ -172,11 +166,9 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         Room = GetRoom(0),
                         DoorPosition = "left",
-                        Height = 300,
-                        Width = 100,
+                        Dimension = new Dimension(100, 300),
                         RoomId = 1,
-                        X = 0,
-                        Y = 0,
+                        Position = new Position(0, 0)
                     },
                     new List<RoomGraphic>()
                     {
@@ -185,22 +177,18 @@ namespace HospitalUnitTests.RoomRenovation
                             Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "left",
-                            Height = 150,
-                            Width = 100,
+                            Dimension = new Dimension(100, 150),
                             RoomId = 2,
-                            X = 0,
-                            Y = 0
+                            Position = new Position(0, 0)
                         },
                         new RoomGraphic
                         {
                             Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "left",
-                            Height = 150,
-                            Width = 100,
+                            Dimension = new Dimension(100, 150),
                             RoomId = 3,
-                            X = 0,
-                            Y = 150
+                            Position = new Position(0, 150)
                         }
                     }
                 },
@@ -212,11 +200,9 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         Room = GetRoom(0),
                         DoorPosition = "top",
-                        Height = 300,
-                        Width = 100,
+                        Dimension = new Dimension(100, 300),
                         RoomId = 1,
-                        X = 0,
-                        Y = 0,
+                        Position = new Position(0, 0)
                     },
                     new List<RoomGraphic>()
                     {
@@ -225,22 +211,18 @@ namespace HospitalUnitTests.RoomRenovation
                             Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "top",
-                            Height = 300,
-                            Width = 50,
+                            Dimension = new Dimension(50, 300),
                             RoomId = 2,
-                            X = 0,
-                            Y = 0
+                            Position = new Position(0, 0)
                         },
                         new RoomGraphic
                         {
                             Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "top",
-                            Height = 300,
-                            Width = 50,
+                            Dimension = new Dimension(50, 300),
                             RoomId = 3,
-                            X = 50,
-                            Y = 0
+                            Position = new Position(50, 0)
                         }
                     },
                 },
@@ -252,11 +234,9 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         Room = GetRoom(0),
                         DoorPosition = "bottom",
-                        Height = 300,
-                        Width = 100,
+                        Dimension = new Dimension(100, 300),
                         RoomId = 1,
-                        X = 0,
-                        Y = 0,
+                        Position = new Position(0, 0)
                     },
                     new List<RoomGraphic>()
                     {
@@ -265,22 +245,18 @@ namespace HospitalUnitTests.RoomRenovation
                             Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "bottom",
-                            Height = 300,
-                            Width = 50,
+                            Dimension = new Dimension(50, 300),
                             RoomId = 2,
-                            X = 0,
-                            Y = 0
+                            Position = new Position(0, 0)
                         },
                         new RoomGraphic
                         {
                             Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "bottom",
-                            Height = 300,
-                            Width = 50,
+                            Dimension = new Dimension(50, 300),
                             RoomId = 3,
-                            X = 50,
-                            Y = 0
+                            Position = new Position(50, 0)
                         }
                     }
                 },
@@ -292,11 +268,9 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         Room = GetRoom(0),
                         DoorPosition = "right",
-                        Height = 301,
-                        Width = 100,
+                        Dimension = new Dimension(100, 301),
                         RoomId = 1,
-                        X = 0,
-                        Y = 0,
+                        Position = new Position(0, 0)
                     },
                     new List<RoomGraphic>()
                     {
@@ -305,22 +279,18 @@ namespace HospitalUnitTests.RoomRenovation
                             Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "right",
-                            Height = 150,
-                            Width = 100,
+                            Dimension = new Dimension(100, 150),
                             RoomId = 2,
-                            X = 0,
-                            Y = 0
+                            Position = new Position(0, 0)
                         },
                         new RoomGraphic
                         {
                             Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "right",
-                            Height = 151,
-                            Width = 100,
+                            Dimension = new Dimension(100, 151),
                             RoomId = 3,
-                            X = 0,
-                            Y = 150
+                            Position = new Position(0, 150)
                         }
                     }
                 },
@@ -332,11 +302,9 @@ namespace HospitalUnitTests.RoomRenovation
                     {
                         Room = GetRoom(0),
                         DoorPosition = "bottom",
-                        Height = 300,
-                        Width = 101,
+                        Dimension = new Dimension(101, 300),
                         RoomId = 1,
-                        X = 0,
-                        Y = 0,
+                        Position = new Position(0, 0)
                     },
                     new List<RoomGraphic>()
                     {
@@ -345,22 +313,18 @@ namespace HospitalUnitTests.RoomRenovation
                             Id = 2,
                             Room = GetRooms(0)[0],
                             DoorPosition = "bottom",
-                            Height = 300,
-                            Width = 50,
+                            Dimension = new Dimension(50, 300),
                             RoomId = 2,
-                            X = 0,
-                            Y = 0
+                            Position = new Position(0, 0)
                         },
                         new RoomGraphic
                         {
                             Id = 3,
                             Room = GetRooms(0)[1],
                             DoorPosition = "bottom",
-                            Height = 300,
-                            Width = 51,
+                            Dimension = new Dimension(51, 300),
                             RoomId = 3,
-                            X = 50,
-                            Y = 0
+                            Position = new Position(50, 0)
                         }
                     }
                 }

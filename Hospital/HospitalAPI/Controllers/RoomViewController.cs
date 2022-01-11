@@ -12,6 +12,7 @@ using HospitalLibrary.RoomsAndEquipment.Model;
 using ehealthcare.Model;
 using HospitalLibrary.RoomsAndEquipment.Service;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace HospitalAPI.Controllers
 {
@@ -38,7 +39,7 @@ namespace HospitalAPI.Controllers
             var result = _roomGraphicService.GetRoomGraphics();
             return Ok(result.Select(r => _mapper.Map<RoomGraphicDTO>(r)).ToList());
         }
-
+        /*
         [HttpGet]
         [Route("floors")]
         public ActionResult<List<FloorGraphicDTO>> GetFloorGraphics()
@@ -46,7 +47,28 @@ namespace HospitalAPI.Controllers
             var result = _floorGraphicService.GetFloorGraphics();
             return Ok(result.Select(r => _mapper.Map<FloorGraphicDTO>(r)).ToList());
         }
+        */
+        
+        [HttpGet]
+        [Route("floors")]
+        public ActionResult<List<FloorGraphicDTO>> GetFloorGraphics()
+        {
+            var result = _floorGraphicService.GetFloorGraphics();
+            List<FloorGraphicDTO> lfloorGDTO = new List<FloorGraphicDTO>();
+            foreach(FloorGraphic floor in result){
+                FloorGraphicDTO f = new FloorGraphicDTO();
+                f.Floor = floor.Floor;
+                f.BuildingId = floor.BuildingId.ToString();
+                f.RoomGraphics = new List<RoomGraphicDTO>();
+                foreach(RoomGraphic r in floor.RoomGraphics){
+                    f.RoomGraphics.Add(_mapper.Map<RoomGraphicDTO>(r));
+                }
 
+                lfloorGDTO.Add(f);
+            }
+            return Ok(lfloorGDTO);
+        }
+    
         [HttpGet]
         [Route("merge")]
         public ActionResult<List<RoomMinimalInfoDTO>> GetAllPossibleRoomsForMergWithRoomById([FromQuery(Name = "id")] int id)

@@ -32,7 +32,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Repository
 
         public List<TermOfRelocationEquipment> CheckTermOfRelocationByDate()
         {
-            return _dbContext.TermOfRelocationEquipments.Where(t => t.RelocationState == StateOfTerm.PENDING && t.EndTime <= DateTime.Now && t.EndTime >= DateTime.Now.AddMinutes(-2)).ToList();
+            return _dbContext.TermOfRelocationEquipments.Where(t => t.RelocationState == StateOfTerm.PENDING && t.TimeInterval.EndTime <= DateTime.Now && t.TimeInterval.EndTime >= DateTime.Now.AddMinutes(-2)).ToList();
         }
 
     }
