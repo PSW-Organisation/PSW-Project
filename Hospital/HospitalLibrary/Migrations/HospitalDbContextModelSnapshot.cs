@@ -1354,6 +1354,55 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HospitalLibrary.Shared.Model.Manager", b =>
+                {
+                    b.HasBaseType("ehealthcare.Model.User");
+
+                    b.HasDiscriminator().HasValue("Manager");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "laki",
+                            Address = "Hajduk Veljka, 5",
+                            City = "Novi Sad",
+                            Country = "Serbia",
+                            DateOfBirth = new DateTime(1990, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "igor.m@gmail.com",
+                            Gender = "male",
+                            IsActivated = true,
+                            IsBlocked = false,
+                            LoginType = 1,
+                            Name = "Igor",
+                            ParentName = "Ivan",
+                            Password = "Laki123!",
+                            Phone = "129572904354",
+                            Surname = "Maric",
+                            Token = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Username = "laki"
+                        },
+                        new
+                        {
+                            Id = "jagodica",
+                            Address = "Rumenacka, 23",
+                            City = "Novi Sad",
+                            Country = "Serbia",
+                            DateOfBirth = new DateTime(1985, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jagodica@gmail.com",
+                            Gender = "female",
+                            IsActivated = true,
+                            IsBlocked = false,
+                            LoginType = 1,
+                            Name = "Jagoda",
+                            ParentName = "Petar",
+                            Password = "Jagodica123!",
+                            Phone = "6820543267243",
+                            Surname = "Vasic",
+                            Token = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Username = "jagodica"
+                        });
+                });
+
             modelBuilder.Entity("ehealthcare.Model.Doctor", b =>
                 {
                     b.HasBaseType("ehealthcare.Model.User");
