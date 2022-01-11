@@ -1463,10 +1463,11 @@ namespace ehealthcare.Model
                         Token = Guid.Empty,
                     });
                 m.OwnsOne(v => v.Address).HasData(new UserAddress("laki", "129572904354", "igor.m@gmail.com", "Hajduk Veljka, 5", "Novi Sad", "Serbia"));
-                m.OwnsOne(v => v.Info).HasData(new UserPersonalInfo("laki", "Igor", "Maric", "Ivan", "male", new DateTime(1999, 5, 10)));
+                m.OwnsOne(v => v.Info).HasData(new UserPersonalInfo("laki", "Igor", "Maric", "Ivan", "male", new DateTime(1990, 5, 10)));
             });
             modelBuilder.Entity<Manager>(m =>
             {
+
                 m.HasData(
                     new Manager("jagodica")
                     {
@@ -1477,9 +1478,10 @@ namespace ehealthcare.Model
                         IsBlocked = false,
                         IsActivated = true,
                         Token = Guid.Empty,
-                    });
+                    }
+                );
                 m.OwnsOne(v => v.Address).HasData(new UserAddress("jagodica", "6820543267243", "jagodica@gmail.com", "Rumenacka, 23", "Novi Sad", "Serbia"));
-                m.OwnsOne(v => v.Info).HasData(new UserPersonalInfo("jagodica", "Jagoda", "Vasic", "Petar", "male", new DateTime(1985, 1, 7)));
+                m.OwnsOne(v => v.Info).HasData(new UserPersonalInfo("jagodica", "Jagoda", "Vasic", "Petar", "female", new DateTime(1985, 1, 7)));
             });
         }
     }
