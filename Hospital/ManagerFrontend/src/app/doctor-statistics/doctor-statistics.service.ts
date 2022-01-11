@@ -13,6 +13,7 @@ export class DoctorStatisticsService {
   // http://localhost:42789/api/appointment/nelex/appointmentWeekly
   // http://localhost:42789/api/appointment/nelex/appointmentDaily
   appointmentUrl = 'http://localhost:42789/api/appointment/';
+  onCallUrl = 'http://localhost:42789/api/oncallshift/';
   constructor(private _http: HttpClient) {}
 
   getAppointmentsCountYearly(
@@ -32,6 +33,16 @@ export class DoctorStatisticsService {
     return this._http
       .get<IAppointmentCount>(
         this.appointmentUrl + doctorUsername + '/patientYearly'
+      )
+      .pipe(
+        tap((data) => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+  getOnCallCountYearly(doctorUsername: string): Observable<IAppointmentCount> {
+    return this._http
+      .get<IAppointmentCount>(
+        this.onCallUrl + doctorUsername + '/onCallYearly'
       )
       .pipe(
         tap((data) => console.log('All: ', JSON.stringify(data))),
@@ -65,6 +76,19 @@ export class DoctorStatisticsService {
       );
   }
 
+  getOnCallCountMonthly(
+    doctorUsername: string
+  ): Observable<IAppointmentCount> {
+    return this._http
+      .get<IAppointmentCount>(
+        this.onCallUrl + doctorUsername + '/onCallMonthly'
+      )
+      .pipe(
+        tap((data) => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
   getAppointmentsCountWeekly(
     doctorUsername: string
   ): Observable<IAppointmentCount> {
@@ -89,6 +113,17 @@ export class DoctorStatisticsService {
       );
   }
 
+  getOnCallCountWeekly(doctorUsername: string): Observable<IAppointmentCount> {
+    return this._http
+      .get<IAppointmentCount>(
+        this.onCallUrl + doctorUsername + '/onCallWeekly'
+      )
+      .pipe(
+        tap((data) => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
   getAppointmentsCountDaily(
     doctorUsername: string
   ): Observable<IAppointmentCount> {
@@ -106,6 +141,17 @@ export class DoctorStatisticsService {
     return this._http
       .get<IAppointmentCount>(
         this.appointmentUrl + doctorUsername + '/patientDaily'
+      )
+      .pipe(
+        tap((data) => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
+  getOnCallCountDaily(doctorUsername: string): Observable<IAppointmentCount> {
+    return this._http
+      .get<IAppointmentCount>(
+        this.onCallUrl + doctorUsername + '/onCallDaily'
       )
       .pipe(
         tap((data) => console.log('All: ', JSON.stringify(data))),

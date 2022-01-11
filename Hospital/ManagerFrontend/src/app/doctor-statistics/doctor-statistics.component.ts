@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Chart, registerables, ChartItem, ChartType } from 'chart.js';
 import { DoctorStatisticsService } from './doctor-statistics.service';
 
@@ -8,6 +9,7 @@ import { DoctorStatisticsService } from './doctor-statistics.service';
   styleUrls: ['./doctor-statistics.component.css'],
 })
 export class DoctorStatisticsComponent implements OnInit {
+  doctorId = "" + this._route.snapshot.paramMap.get('id');
   appChart!: Chart;
   patiChart!: Chart;
   onCallChart!: Chart;
@@ -82,7 +84,8 @@ export class DoctorStatisticsComponent implements OnInit {
     180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310,
   ];
 
-  constructor(private _doctorStatisticsService: DoctorStatisticsService) {}
+  constructor(private _doctorStatisticsService: DoctorStatisticsService,
+    private _route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.appChartItem = document.getElementById('appChart');
@@ -96,12 +99,9 @@ export class DoctorStatisticsComponent implements OnInit {
     this.daysLabels = this.addDaysLabels();
     this.appChart.data.labels = this.monthsLabels;
     this.appChart.update();
-    this._doctorStatisticsService
-      .getPatientCountWeekly('nelex')
-      .subscribe((data) => {
-        this.patiChart.data.datasets[0].data = data.weeklySum;
-        this.patiChart.update();
-      });
+    this.appChartWeekly();
+    this.patiChartWeekly();
+    this.onCallChartWeekly();
   }
 
   addDaysLabels(): string[] {
@@ -121,7 +121,7 @@ export class DoctorStatisticsComponent implements OnInit {
   appChartYearly() {
     this.appChart.data.labels = this.yearLabels;
     this._doctorStatisticsService
-      .getAppointmentsCountYearly('nelex')
+      .getAppointmentsCountYearly(this.doctorId)
       .subscribe((data) => {
         this.appChart.data.datasets[0].data = data.yearlySum;
         this.appChart.update();
@@ -133,7 +133,7 @@ export class DoctorStatisticsComponent implements OnInit {
     this.appChart.data.labels = this.monthsLabels;
     this.appChart.config.type = 'bar' as ChartType;
     this._doctorStatisticsService
-      .getAppointmentsCountMonthly('nelex')
+      .getAppointmentsCountMonthly(this.doctorId)
       .subscribe((data) => {
         this.appChart.data.datasets[0].data = data.monthlySum;
         this.appChart.update();
@@ -144,7 +144,7 @@ export class DoctorStatisticsComponent implements OnInit {
     this.appChart.data.labels = this.daysLabels;
     this.appChart.config.type = 'bar' as ChartType;
     this._doctorStatisticsService
-      .getAppointmentsCountWeekly('nelex')
+      .getAppointmentsCountWeekly(this.doctorId)
       .subscribe((data) => {
         this.appChart.data.datasets[0].data = data.weeklySum;
         this.appChart.update();
@@ -155,7 +155,7 @@ export class DoctorStatisticsComponent implements OnInit {
     this.appChart.data.labels = this.hoursLabels;
     this.appChart.config.type = 'bar' as ChartType;
     this._doctorStatisticsService
-      .getAppointmentsCountDaily('nelex')
+      .getAppointmentsCountDaily(this.doctorId)
       .subscribe((data) => {
         this.appChart.data.datasets[0].data = data.dailySum;
         this.appChart.update();
@@ -167,7 +167,7 @@ export class DoctorStatisticsComponent implements OnInit {
     this.patiChart.data.labels = this.yearLabels;
     this.patiChart.config.type = 'pie' as ChartType;
     this._doctorStatisticsService
-      .getPatientCountYearly('nelex')
+      .getPatientCountYearly(this.doctorId)
       .subscribe((data) => {
         this.patiChart.data.datasets[0].data = data.yearlySum;
         this.patiChart.update();
@@ -178,7 +178,7 @@ export class DoctorStatisticsComponent implements OnInit {
     this.patiChart.data.labels = this.monthsLabels;
     this.patiChart.config.type = 'bar' as ChartType;
     this._doctorStatisticsService
-      .getPatientCountMonthly('nelex')
+      .getPatientCountMonthly(this.doctorId)
       .subscribe((data) => {
         this.patiChart.data.datasets[0].data = data.monthlySum;
         this.patiChart.update();
@@ -189,7 +189,7 @@ export class DoctorStatisticsComponent implements OnInit {
     this.patiChart.data.labels = this.daysLabels;
     this.patiChart.config.type = 'bar' as ChartType;
     this._doctorStatisticsService
-      .getPatientCountWeekly('nelex')
+      .getPatientCountWeekly(this.doctorId)
       .subscribe((data) => {
         this.patiChart.data.datasets[0].data = data.weeklySum;
         this.patiChart.update();
@@ -200,7 +200,7 @@ export class DoctorStatisticsComponent implements OnInit {
     this.patiChart.data.labels = this.hoursLabels;
     this.patiChart.config.type = 'bar' as ChartType;
     this._doctorStatisticsService
-      .getPatientCountDaily('nelex')
+      .getPatientCountDaily(this.doctorId)
       .subscribe((data) => {
         this.patiChart.data.datasets[0].data = data.dailySum;
         this.patiChart.update();
@@ -211,34 +211,45 @@ export class DoctorStatisticsComponent implements OnInit {
   onCallChartYearly() {
     this.onCallChart.data.labels = this.yearLabels;
     this.onCallChart.config.type = 'pie' as ChartType;
-    this.onCallChart.data.datasets[0].data = [10, 20, 30, 40];
+    this._doctorStatisticsService
+      .getOnCallCountYearly(this.doctorId)
+      .subscribe((data) => {
+        this.onCallChart.data.datasets[0].data = data.yearlySum;
+        this.onCallChart.update();
+      });
     this.onCallChart.update();
   }
   onCallChartMonthly() {
     this.onCallChart.data.labels = this.monthsLabels;
     this.onCallChart.config.type = 'bar' as ChartType;
-    this.onCallChart.data.datasets[0].data = [
-      10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160,
-      170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310,
-    ];
+    this._doctorStatisticsService
+    .getOnCallCountMonthly(this.doctorId)
+    .subscribe((data) => {
+      this.onCallChart.data.datasets[0].data = data.monthlySum;
+      this.onCallChart.update();
+    });
     this.onCallChart.update();
   }
   onCallChartWeekly() {
     this.onCallChart.data.labels = this.daysLabels;
     this.onCallChart.config.type = 'bar' as ChartType;
-    this.onCallChart.data.datasets[0].data = [
-      10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160,
-      170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310,
-    ];
+    this._doctorStatisticsService
+    .getOnCallCountWeekly(this.doctorId)
+    .subscribe((data) => {
+      this.onCallChart.data.datasets[0].data = data.weeklySum;
+      this.onCallChart.update();
+    });
     this.onCallChart.update();
   }
   onCallChartlDaily() {
     this.onCallChart.data.labels = this.hoursLabels;
     this.onCallChart.config.type = 'bar' as ChartType;
-    this.onCallChart.data.datasets[0].data = [
-      10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160,
-      170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310,
-    ];
+    this._doctorStatisticsService
+    .getOnCallCountDaily(this.doctorId)
+    .subscribe((data) => {
+      this.onCallChart.data.datasets[0].data = data.dailySum;
+      this.onCallChart.update();
+    });
     this.onCallChart.update();
   }
 
@@ -332,7 +343,7 @@ export class DoctorStatisticsComponent implements OnInit {
         datasets: [
           {
             label: '#Number of on-call shifts',
-            data: this.data2,
+            data: this.data,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',

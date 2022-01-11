@@ -15,6 +15,9 @@ namespace ehealthcare.Model
         
         public int UsedOffDays { get; set; }
         public int RoomId { get; set; }
+
+        public int ShiftOrder { get; set; }
+       
         public virtual ICollection<Patient> Patients { get; set; }
 
         [JsonConstructor]

@@ -23,6 +23,11 @@ export class DoctorViewService {
     return this._http.get<IOnCallShift[]>(this._onCallShiftUri+`/${doctorId}`).catch(this.handleError);
   }
 
+  updateDoctor(doctorId: string,doctor: Doctor): Observable<Doctor> {
+    return this._http.put<Doctor>(this._doctorUri+'/'+doctorId,doctor).catch(this.handleError);
+  }
+
+
   private handleError(err: HttpErrorResponse) {
     console.log(err.message);
     return Observable.throw(err.message)

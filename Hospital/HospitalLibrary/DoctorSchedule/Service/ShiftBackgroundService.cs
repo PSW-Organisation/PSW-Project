@@ -31,7 +31,8 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
             while (!stoppingToken.IsCancellationRequested)
             {
                 UpdateCurrentDoctorShift();
-                await Task.Delay(7 * 24 * 60 * 60 * 1000, stoppingToken);
+                await Task.Delay(1 * 1000, stoppingToken);
+                //await Task.Delay(7 * 24 * 60 * 60 * 1000, stoppingToken);
             }
         }
 

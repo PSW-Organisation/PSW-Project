@@ -11,5 +11,7 @@ namespace HospitalLibrary.MedicalRecords.Service
         public List<Doctor> GetLeastOccupiedDoctors(int minPatients);
         public List<Doctor> GetAllDoctors();
         public Doctor GetDoctorById(string id);
+
+        public Doctor UpdateDoctor(Doctor doctor);
     }
 }

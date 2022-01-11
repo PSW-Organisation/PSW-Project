@@ -18,7 +18,7 @@ export class DoctorOnCallShiftComponent implements OnInit {
   selectedDate!: Date;
   selectedDateDoctorsOnCallShift!: Doctor[];
   selectedDateDoctorsNotOnCallShift!: Doctor[];
-  selectedDoctor: Doctor=new Doctor('0','',0,'','','','','','','','');
+  selectedDoctor: Doctor=new Doctor('0','',0,'','','','','','','','',1);
   selectedDoctorBool: boolean = false;
   pastDate : boolean = false;
 

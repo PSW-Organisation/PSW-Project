@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalLibrary.Migrations
 {
-    public partial class Migration1 : Migration
+    public partial class Migration441 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -157,6 +157,22 @@ namespace HospitalLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Shifts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(nullable: true),
+                    StartTime = table.Column<DateTime>(nullable: true),
+                    EndTime = table.Column<DateTime>(nullable: true),
+                    ShiftOrder = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shifts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TermOfRelocationEquipments",
                 columns: table => new
                 {
@@ -227,6 +243,7 @@ namespace HospitalLibrary.Migrations
                     Specialization = table.Column<int>(nullable: true),
                     UsedOffDays = table.Column<int>(nullable: true),
                     RoomId = table.Column<int>(nullable: true),
+                    ShiftOrder = table.Column<int>(nullable: true),
                     DoctorId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -555,11 +572,11 @@ namespace HospitalLibrary.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "Address", "City", "Country", "DateOfBirth", "Discriminator", "Email", "Gender", "IsActivated", "IsBlocked", "LoginType", "Name", "ParentName", "Password", "Phone", "Surname", "Token", "Username", "RoomId", "Specialization", "UsedOffDays" },
+                columns: new[] { "Id", "Address", "City", "Country", "DateOfBirth", "Discriminator", "Email", "Gender", "IsActivated", "IsBlocked", "LoginType", "Name", "ParentName", "Password", "Phone", "Surname", "Token", "Username", "RoomId", "ShiftOrder", "Specialization", "UsedOffDays" },
                 values: new object[,]
                 {
-                    { "nelex", "Sime Milutinovica, 2", "Novi Sad", "Serbia", new DateTime(1999, 7, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "nemanjar@gmail.com", "male", false, false, 2, "Nemanja", "Zoran", "najjacapecurka", "019919199191", "Radojcic", new Guid("00000000-0000-0000-0000-000000000000"), "nelex", 1, 3, 12 },
-                    { "mkisic", "Sime Milutinovica, 2", "Novi Sad", "Serbia", new DateTime(1999, 7, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "nemanjar@gmail.com", "male", false, false, 2, "Mihajlo", "Zvezdan", "ftn", "019919199191", "Kisic", new Guid("00000000-0000-0000-0000-000000000000"), "mkisic", 7, 0, 12 }
+                    { "nelex", "Sime Milutinovica, 2", "Novi Sad", "Serbia", new DateTime(1999, 7, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "nemanjar@gmail.com", "male", false, false, 2, "Nemanja", "Zoran", "najjacapecurka", "019919199191", "Radojcic", new Guid("00000000-0000-0000-0000-000000000000"), "nelex", 1, 1, 3, 12 },
+                    { "mkisic", "Sime Milutinovica, 2", "Novi Sad", "Serbia", new DateTime(1999, 7, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Doctor", "nemanjar@gmail.com", "male", false, false, 2, "Mihajlo", "Zvezdan", "ftn", "019919199191", "Kisic", new Guid("00000000-0000-0000-0000-000000000000"), "mkisic", 7, 1, 0, 12 }
                 });
 
             migrationBuilder.InsertData(
@@ -705,6 +722,9 @@ namespace HospitalLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "RoomGraphics");
+
+            migrationBuilder.DropTable(
+                name: "Shifts");
 
             migrationBuilder.DropTable(
                 name: "TermOfRelocationEquipments");
