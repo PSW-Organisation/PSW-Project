@@ -29,10 +29,10 @@ namespace HospitalUnitTests
                 _output.WriteLine("duration: " + paramsOfRelocationEquipment.DurationInMinutes.ToString());
                 _output.WriteLine("sourceRoomTerms");
                 foreach (TermOfRelocationEquipment tr in sourceRoomTerms)
-                    _output.WriteLine(tr.StartTime + " - " + tr.EndTime);
+                    _output.WriteLine(tr.TimeInterval.StartTime + " - " + tr.TimeInterval.EndTime);
                 _output.WriteLine("destinationRoomTerms");
                 foreach (TermOfRelocationEquipment tr in destinationRoomTerms)
-                    _output.WriteLine(tr.StartTime + " - " + tr.EndTime);
+                    _output.WriteLine(tr.TimeInterval.StartTime + " - " + tr.TimeInterval.EndTime);
 
                 _output.WriteLine("Free time interval");
                 foreach (TimeInterval t in freeTimeInterval)
@@ -264,8 +264,7 @@ namespace HospitalUnitTests
                         IdDestinationRoom = 3,
                         NameOfEquipment = "bed",
                         QuantityOfEquipment = 2,
-                        StartTime = new DateTime(2021, 11, 22, 8, 10, 0),
-                        EndTime = new DateTime(2021, 11, 22, 8, 20, 0),
+                        TimeInterval = new TimeInterval(new DateTime(2021, 11, 22, 8, 10, 0), new DateTime(2021, 11, 22, 8, 20, 0)),
                         DurationInMinutes = 10
                         //FinishedRelocation = false
                     },
@@ -276,8 +275,7 @@ namespace HospitalUnitTests
                         IdDestinationRoom = 4,
                         NameOfEquipment = "needle",
                         QuantityOfEquipment = 14,
-                        StartTime = new DateTime(2021, 11, 22, 8, 25, 0),
-                        EndTime = new DateTime(2021, 11, 22, 8, 30, 0),
+                        TimeInterval = new TimeInterval(new DateTime(2021, 11, 22, 8, 25, 0), new DateTime(2021, 11, 22, 8, 30, 0)),
                         DurationInMinutes = 5
                         //FinishedRelocation = false
                     },
@@ -288,8 +286,7 @@ namespace HospitalUnitTests
                         IdDestinationRoom = 5,
                         NameOfEquipment = "xrayMachine",
                         QuantityOfEquipment = 1,
-                        StartTime = new DateTime(2021, 11, 22, 8, 45, 0),
-                        EndTime = new DateTime(2021, 11, 22, 8, 48, 0),
+                        TimeInterval = new TimeInterval(new DateTime(2021, 11, 22, 8, 45, 0), new DateTime(2021, 11, 22, 8, 48, 0)),
                         DurationInMinutes = 3
                         //FinishedRelocation = false
                     }
@@ -306,8 +303,7 @@ namespace HospitalUnitTests
                         IdDestinationRoom = 3,
                         NameOfEquipment = "bed",
                         QuantityOfEquipment = 2,
-                        StartTime = new DateTime(2021, 11, 22, 6, 30, 0),
-                        EndTime = new DateTime(2021, 11, 22, 11, 30, 0),
+                        TimeInterval = new TimeInterval(new DateTime(2021, 11, 22, 6, 30, 0), new DateTime(2021, 11, 22, 11, 30, 0)),
                         DurationInMinutes = 300
                         //FinishedRelocation = false
                     }
@@ -324,8 +320,7 @@ namespace HospitalUnitTests
                         IdDestinationRoom = 3,
                         NameOfEquipment = "bed",
                         QuantityOfEquipment = 2,
-                        StartTime = new DateTime(2021, 11, 22, 6, 0, 0),
-                        EndTime = new DateTime(2021, 11, 22, 8, 30, 0),
+                        TimeInterval = new TimeInterval(new DateTime(2021, 11, 22, 6, 0, 0), new DateTime(2021, 11, 22, 8, 30, 0)),
                         DurationInMinutes = 150
                         // FinishedRelocation = false
                     }
@@ -342,8 +337,7 @@ namespace HospitalUnitTests
                         IdDestinationRoom = 5,
                         NameOfEquipment = "chair",
                         QuantityOfEquipment = 2,
-                        StartTime = new DateTime(2021, 11, 22, 8, 20, 0),
-                        EndTime = new DateTime(2021, 11, 22, 10, 15, 0),
+                        TimeInterval = new TimeInterval(new DateTime(2021, 11, 22, 8, 20, 0), new DateTime(2021, 11, 22, 10, 15, 0)),
                         DurationInMinutes = 175
                         //FinishedRelocation = false
                     }
@@ -360,8 +354,7 @@ namespace HospitalUnitTests
                         IdDestinationRoom = 5,
                         NameOfEquipment = "chair",
                         QuantityOfEquipment = 2,
-                        StartTime = new DateTime(2021, 11, 22, 8, 40, 0),
-                        EndTime = new DateTime(2021, 11, 22, 10, 15, 0),
+                        TimeInterval = new TimeInterval(new DateTime(2021, 11, 22, 8, 40, 0), new DateTime(2021, 11, 22, 10, 15, 0)),
                         DurationInMinutes = 155
                         //FinishedRelocation = false
                     }
@@ -378,8 +371,7 @@ namespace HospitalUnitTests
                         IdDestinationRoom = 3,
                         NameOfEquipment = "sugar",
                         QuantityOfEquipment = 2,
-                        StartTime = new DateTime(2021, 11, 22, 6, 0, 0),
-                        EndTime = new DateTime(2021, 11, 22, 8, 35, 0),
+                        TimeInterval = new TimeInterval(new DateTime(2021, 11, 22, 6, 0, 0), new DateTime(2021, 11, 22, 8, 35, 0)),
                         DurationInMinutes = 150
                         //FinishedRelocation = false
                     }
@@ -396,8 +388,7 @@ namespace HospitalUnitTests
                         IdDestinationRoom = 6,
                         NameOfEquipment = "scisors",
                         QuantityOfEquipment = 2,
-                        StartTime = new DateTime(2021, 11, 22, 7, 20, 0),
-                        EndTime = new DateTime(2021, 11, 22, 7, 25, 0),
+                        TimeInterval = new TimeInterval(new DateTime(2021, 11, 22, 7, 20, 0), new DateTime(2021, 11, 22, 7, 25, 0)),
                         DurationInMinutes = 5
                         //FinishedRelocation = false
                     },
@@ -408,8 +399,7 @@ namespace HospitalUnitTests
                         IdDestinationRoom = 7,
                         NameOfEquipment = "needle",
                         QuantityOfEquipment = 14,
-                        StartTime = new DateTime(2021, 11, 22, 7, 30, 0),
-                        EndTime = new DateTime(2021, 11, 22, 7, 45, 0),
+                        TimeInterval = new TimeInterval(new DateTime(2021, 11, 22, 7, 30, 0), new DateTime(2021, 11, 22, 7, 45, 0)),
                         DurationInMinutes = 15
                         //FinishedRelocation = false
                     },
@@ -420,8 +410,7 @@ namespace HospitalUnitTests
                         IdDestinationRoom = 7,
                         NameOfEquipment = "xrayMachine",
                         QuantityOfEquipment = 1,
-                        StartTime = new DateTime(2021, 11, 22, 8, 30, 0),
-                        EndTime = new DateTime(2021, 11, 22, 8, 45, 0),
+                        TimeInterval = new TimeInterval(new DateTime(2021, 11, 22, 8, 30, 0), new DateTime(2021, 11, 22, 8, 45, 0)),
                         DurationInMinutes = 15
                         //FinishedRelocation = false
                     }

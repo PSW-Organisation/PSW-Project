@@ -83,25 +83,25 @@ namespace HospitalLibrary.GraphicalEditor.Service
             int xA = 0, yA = 0, widthA = 0, heightA = 0, xB = 0, yB = 0, widthB = 0, heightB = 0;
             if (doorPosition == "right" || doorPosition == "left")
             {
-                xA = rg.X;
-                yA = rg.Y;
-                widthA = rg.Width;
-                widthB = rg.Width;
-                heightA = rg.Height / 2;
-                heightB = rg.Height / 2 + rg.Height % 2;
-                xB = rg.X;
+                xA = rg.Position.X;
+                yA = rg.Position.Y;
+                widthA = rg.Dimension.Width;
+                widthB = rg.Dimension.Width;
+                heightA = rg.Dimension.Height / 2;
+                heightB = rg.Dimension.Height / 2 + rg.Dimension.Height % 2;
+                xB = rg.Position.X;
                 yB = yA + heightA;
             }
             else if (doorPosition == "top" || doorPosition == "bottom")
             {
-                xA = rg.X;
-                yA = rg.Y;
-                widthA = rg.Width / 2;
-                widthB = rg.Width / 2 + rg.Width % 2;
-                heightA = rg.Height;
-                heightB = rg.Height;
+                xA = rg.Position.X;
+                yA = rg.Position.Y;
+                widthA = rg.Dimension.Width / 2;
+                widthB = rg.Dimension.Width / 2 + rg.Dimension.Width % 2;
+                heightA = rg.Dimension.Height;
+                heightB = rg.Dimension.Height;
                 xB = xA + widthA;
-                yB = rg.Y;
+                yB = rg.Position.Y;
             }
             return (doorPosition, xA, yA, widthA, heightA, xB, yB, widthB, heightB);
         }

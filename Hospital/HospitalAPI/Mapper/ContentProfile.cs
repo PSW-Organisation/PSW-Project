@@ -14,16 +14,49 @@ namespace HospitalAPI.Mapper
     {
         public ContentProfile()
         {
-            CreateMap<RoomGraphic, RoomGraphicDTO>();
 
-            CreateMap<Room, RoomDTO>();
+            CreateMap<FloorGraphic, FloorGraphicDTO>();
 
-            CreateMap<ExteriorGraphic, ExteriorGraphicDTO>();
+            CreateMap<RoomGraphic, RoomGraphicDTO>()
+                .ForMember(
+                    dest => dest.X,
+                    act => act.MapFrom(src => src.Position.X)
+                )
+                .ForMember(
+                    dest => dest.Y,
+                    act => act.MapFrom(src => src.Position.Y)
+                )
+                .ForMember(
+                    dest => dest.Width,
+                    act => act.MapFrom(src => src.Dimension.Width)
+                )
+                .ForMember(
+                    dest => dest.Height,
+                    act => act.MapFrom(src => src.Dimension.Height)
+                ).ReverseMap();
 
+
+            CreateMap<ExteriorGraphic, ExteriorGraphicDTO>()
+                .ForMember(
+                    dest => dest.X,
+                    act => act.MapFrom(src => src.Position.X)
+                )
+                .ForMember(
+                    dest => dest.Y,
+                    act => act.MapFrom(src => src.Position.Y)
+                )
+                .ForMember(
+                    dest => dest.Width,
+                    act => act.MapFrom(src => src.Dimension.Width)
+                )
+                .ForMember(
+                    dest => dest.Height,
+                    act => act.MapFrom(src => src.Dimension.Height)
+                ).ReverseMap();
+                
             CreateMap<PatientFeedback, PatientFeedbackDTO>();
             CreateMap<PatientFeedbackDTO, PatientFeedback>();
 
-            CreateMap<FloorGraphic, FloorGraphicDTO>();
             CreateMap<RoomEquipment, RoomEquipmentDTO>();
 
             CreateMap<PatientDto, Patient>().ConstructUsing(x => new Patient(x.Username)).ReverseMap();
@@ -38,8 +71,6 @@ namespace HospitalAPI.Mapper
             CreateMap<ParamsOfRenovation, ParamsOfRenovationDTO>();
             CreateMap<ParamsOfRenovationDTO, ParamsOfRenovation>();
 
-            CreateMap<TermOfRenovation, TermOfRenovationDTO>();
-            CreateMap<TermOfRenovationDTO, TermOfRenovation>();
 
             CreateMap<MedicineDTO, Medicine>();
             CreateMap<Medicine, MedicineDTO>();
@@ -85,6 +116,53 @@ namespace HospitalAPI.Mapper
                 .ForMember(s => s.StartTime, m => m.MapFrom(s => s.TimeInterval.StartTime))
                 .ForMember(s => s.EndTime, m => m.MapFrom(s => s.TimeInterval.EndTime))
                 .ReverseMap();
+
+            CreateMap<TermOfRelocationEquipment, ParamsOfRelocationEquipmentDTO>()
+                .ForMember(
+                    dest => dest.StartTime,
+                    act => act.MapFrom(src => src.TimeInterval.StartTime)
+                )
+                .ForMember(
+                    dest => dest.EndTime,
+                    act => act.MapFrom(src => src.TimeInterval.EndTime)
+                ).ReverseMap();
+
+            CreateMap<TermOfRenovation, TermOfRenovationDTO>()
+                .ForMember(
+                    dest => dest.StartTime,
+                    act => act.MapFrom(src => src.TimeInterval.StartTime)
+                )
+                .ForMember(
+                    dest => dest.EndTime,
+                    act => act.MapFrom(src => src.TimeInterval.EndTime)
+                ).ReverseMap();
+
+            CreateMap<TermOfRenovation, ScheduleTermDTO>()
+                .ForMember(dest =>
+                    dest.TermState,
+                    opt => opt.MapFrom(src => src.StateOfRenovation))
+                .ForMember(
+                    dest => dest.StartTime,
+                    act => act.MapFrom(src => src.TimeInterval.StartTime)
+                )
+                .ForMember(
+                    dest => dest.EndTime,
+                    act => act.MapFrom(src => src.TimeInterval.EndTime)
+                );
+
+            CreateMap<TermOfRelocationEquipment, ScheduleTermDTO>()
+                .ForMember(
+                dest => dest.TermState,
+                opt => opt.MapFrom(src => src.RelocationState))
+            .ForMember(
+                dest => dest.StartTime,
+                act => act.MapFrom(src => src.TimeInterval.StartTime)
+            ).ForMember(
+                dest => dest.EndTime,
+                act => act.MapFrom(src => src.TimeInterval.EndTime)
+            );
+
+
         }
 
         private static StateOfTerm IsFinished(Visit d)

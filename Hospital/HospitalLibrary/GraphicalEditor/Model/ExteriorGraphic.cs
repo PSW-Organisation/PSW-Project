@@ -8,10 +8,8 @@ namespace HospitalLibrary.GraphicalEditor.Model
 {
     public class ExteriorGraphic : EntityDb
     {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Width { get; set; }
-        public double Height { get; set; }
+        public virtual Position Position { get; set; }
+        public virtual Dimension Dimension { get; set; }
         public string Type { get; set; }
         public string Name { get; set; }
         public int IdElement { get; set; }

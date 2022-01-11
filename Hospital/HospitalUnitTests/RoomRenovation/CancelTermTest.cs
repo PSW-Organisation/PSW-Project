@@ -7,6 +7,7 @@ using Shouldly;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Repository;
 using HospitalLibrary.RoomsAndEquipment.Terms.Service;
+using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 
 namespace HospitalUnitTests.RoomRenovation
 {
@@ -23,8 +24,7 @@ namespace HospitalUnitTests.RoomRenovation
                         IdDestinationRoom = 3,
                         NameOfEquipment = "sugar",
                         QuantityOfEquipment = 2,
-                        StartTime = DateTime.Now.AddHours(30),
-                        EndTime = DateTime.Now.AddHours(90),
+                        TimeInterval = new TimeInterval(DateTime.Now.AddHours(30), DateTime.Now.AddHours(90)),
                         DurationInMinutes = 150
                         //FinishedRelocation = false   
                 };
@@ -53,8 +53,7 @@ namespace HospitalUnitTests.RoomRenovation
                         IdDestinationRoom = 3,
                         NameOfEquipment = "sugar",
                         QuantityOfEquipment = 2,
-                        StartTime = DateTime.Now.AddHours(20),
-                        EndTime = DateTime.Now.AddHours(90),
+                        TimeInterval = new TimeInterval(DateTime.Now.AddHours(20), DateTime.Now.AddHours(90)),
                         DurationInMinutes = 150
                         //FinishedRelocation = false   
                     };

@@ -11,16 +11,15 @@ namespace HospitalLibrary.GraphicalEditor.Model
 {
     public class RoomGraphic : EntityDb
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
+        public virtual Position Position { get; set; }
+        public virtual Dimension Dimension { get; set; }
         public string DoorPosition { get; set; }
 
         public int RoomId { get; set; }
         public virtual Room Room { get; set; }
         public int FloorGraphicId { get; set; }
         public virtual FloorGraphic FloorGraphic { get; set; }
+        
 
         public RoomGraphic()
         {
@@ -28,10 +27,8 @@ namespace HospitalLibrary.GraphicalEditor.Model
 
         public RoomGraphic(int x, int y, int width, int height, string doorPosition, int roomId, Room room)
         {
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
+            Position = new Position(x, y);
+            Dimension = new Dimension(width, height);
             DoorPosition = doorPosition;
             RoomId = roomId;
             Room = room;
@@ -42,7 +39,7 @@ namespace HospitalLibrary.GraphicalEditor.Model
             DoorPosition = roomGraphicA.DoorPosition;
             RoomId = room.Id;
             Room = room;
-
+            
             List<Point> unionPoints = new List<Point>();
             unionPoints.AddRange(roomGraphicA.GetPoints());
             unionPoints.AddRange(roomGraphicB.GetPoints());
@@ -58,10 +55,8 @@ namespace HospitalLibrary.GraphicalEditor.Model
                     rightBottomPoint = pt;
             }
 
-            X = leftTopPoint.X;
-            Y = leftTopPoint.Y;
-            Width = rightBottomPoint.X - X;
-            Height = rightBottomPoint.Y - Y;
+            Position = new Position(leftTopPoint.X, leftTopPoint.Y);
+            Dimension = new Dimension(rightBottomPoint.X - Position.X, rightBottomPoint.Y - Position.Y);
         }
 
         public List<Point> GetPoints()
@@ -69,10 +64,10 @@ namespace HospitalLibrary.GraphicalEditor.Model
             //  3 4
             List<Point> points = new List<Point>()
             {
-                new Point(X, Y),
-                new Point(X + Width, Y),
-                new Point(X, Y + Height),
-                new Point(X + Width, Y + Height)
+                new Point(Position.X, Position.Y),
+                new Point(Position.X + Dimension.Width, Position.Y),
+                new Point(Position.X, Position.Y + Dimension.Height),
+                new Point(Position.X + Dimension.Width, Position.Y + Dimension.Height)
             };
             return points;
         }
@@ -99,7 +94,7 @@ namespace HospitalLibrary.GraphicalEditor.Model
 
         public override string ToString()
         {
-            return "ID " + Id + " X:" + X + " Y:" + Y + " Width:" + Width + " Height:" + Height;
+            return "ID " + Id + " X:" + Position.X + " Y:" + Position.Y + " Width:" + Dimension.Width + " Height:" + Dimension.Height;
         }
     }
 }
