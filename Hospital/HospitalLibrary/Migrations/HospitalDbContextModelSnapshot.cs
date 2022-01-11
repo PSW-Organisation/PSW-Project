@@ -43,6 +43,63 @@ namespace HospitalLibrary.Migrations
                             Id = 1,
                             Description = "Zimovanje",
                             DoctorId = "mkisic"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Letovanje",
+                            DoctorId = "nelex"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Bolovanje",
+                            DoctorId = "mkisic"
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.OnCallShift", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OnCallShifts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2022, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "mkisic"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "nelex"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "mkisic"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Date = new DateTime(2022, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "nelex"
                         });
                 });
 
@@ -1428,8 +1485,20 @@ namespace HospitalLibrary.Migrations
                                 new
                                 {
                                     DoctorVacationId = 1,
-                                    EndTime = new DateTime(2022, 1, 10, 0, 0, 0, 0, DateTimeKind.Local),
-                                    StartTime = new DateTime(2022, 1, 9, 0, 0, 0, 0, DateTimeKind.Local)
+                                    EndTime = new DateTime(2022, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    DoctorVacationId = 2,
+                                    EndTime = new DateTime(2022, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2022, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    DoctorVacationId = 3,
+                                    EndTime = new DateTime(2022, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
                                 });
                         });
                 });

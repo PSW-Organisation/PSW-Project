@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IOnCallShift } from '../doctor-on-call-shift/on-call-shift';
 import { Doctor } from '../doctors/Doctor';
 import { DoctorViewService } from './doctor-view.service';
 
@@ -12,16 +13,24 @@ export class DoctorViewComponent implements OnInit {
 
   doctorId: string = "";
   doctor!: Doctor;
-  onCallShifts: string[];
+  onCallShifts!: IOnCallShift[];
 
   constructor(private _route: ActivatedRoute, private _doctorViewService: DoctorViewService) {
-    this.onCallShifts = ['1999-11-09 00:00:00','1999-11-09 00:00:00','1999-11-09 00:00:00','1999-11-09 00:00:00','1999-11-09 00:00:00','1999-11-09 00:00:00','1999-11-09 00:00:00','1999-11-09 00:00:00','1999-11-09 00:00:00'];
    }
 
   ngOnInit(): void {
 
     this.doctorId = "" + this._route.snapshot.paramMap.get('id');
     this._doctorViewService.getDoctorById(this.doctorId).subscribe(doctor => this.doctor = doctor);
+    this._doctorViewService.GetAllOnCallShiftByDoctorId(this.doctorId).subscribe(shifts => { this.onCallShifts = shifts; console.log(shifts); });
+  }
+
+  formatDate(date:Date):string{
+    var newDate = new Date(date);
+    var dd = String(newDate.getDate()).padStart(2, '0');
+    var mm = String(newDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = newDate.getFullYear();
+    return dd + '/' + mm + '/'  + yyyy;
   }
 
 }

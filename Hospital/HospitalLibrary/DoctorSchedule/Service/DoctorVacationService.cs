@@ -22,6 +22,7 @@ namespace HospitalLibrary.DoctorSchedule.Service
                     doctorVacation.DateSpecification.StartTime < dv.DateSpecification.EndTime ||
                     doctorVacation.DateSpecification.EndTime > dv.DateSpecification.StartTime &&
                     doctorVacation.DateSpecification.EndTime < dv.DateSpecification.EndTime)) return null;
+            doctorVacation.Id = _doctorVacationRepository.GetNewId();
             _doctorVacationRepository.Insert(doctorVacation);
             return doctorVacation;
         }
