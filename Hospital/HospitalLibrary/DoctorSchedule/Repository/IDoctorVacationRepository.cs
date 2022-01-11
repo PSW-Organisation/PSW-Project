@@ -7,5 +7,6 @@ namespace HospitalLibrary.DoctorSchedule.Repository
     public interface IDoctorVacationRepository : IGenericRepository<DoctorVacation>
     {
         List<DoctorVacation> GetDoctorVacations(string doctorId);
+        public int GetNewId();
     }
 }

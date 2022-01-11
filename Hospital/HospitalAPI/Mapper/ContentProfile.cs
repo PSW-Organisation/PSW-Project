@@ -77,9 +77,12 @@ namespace HospitalAPI.Mapper
 
             CreateMap<DoctorVacation, DoctorVacationDTO>();
             CreateMap<DoctorVacationDTO, DoctorVacation>();
+
+            CreateMap<OnCallShift, OnCallShiftDTO>();
+            CreateMap<OnCallShiftDTO, OnCallShift>();
         }
 
-        private StateOfTerm IsFinished(Visit d)
+        private static StateOfTerm IsFinished(Visit d)
         {
             return d.EndTime < System.DateTime.Now ? StateOfTerm.SUCCESSFULLY : StateOfTerm.PENDING;
         }

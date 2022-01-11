@@ -1,34 +1,42 @@
 <div class="table-responsive" *ngIf="vacations">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Vacation Start</th>
-                <th>Vacation End</th>
-                <th>Desription</th>
-                <th></th>
-                <th><button type="button" aria-label="Add" mat-icon-button (click)="createVacation()">
-                    <mat-icon aria-label="Add">add</mat-icon>
-                </button></th>
-            </tr>
-        </thead>
-        <tbody *ngIf="vacations.length !== 0">
-            <tr *ngFor="let vacation of vacations" class="align-middle">
-                <td>{{formatDate(vacation.dateSpecification.startTime)}}</td>
-                <td>{{formatDate(vacation.dateSpecification.endTime)}}</td>
-                <td>{{vacation.description}}</td>
-                <td>
-                    <button type="button" aria-label="Edit" mat-icon-button (click)="updateVacation(vacation)">
-                        <mat-icon aria-label="Edit"> edit</mat-icon>
-                    </button>
-                </td>
-                <td>
-                    <button type="button" aria-label="Delete" mat-icon-button (click)="removeVacation(vacation)">
-                        <mat-icon aria-label="Delete">delete</mat-icon>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <app-cu-form *ngIf="formOpened" (formCloseEvent)="closeForm($event)" [vacation]="vacation" [formAction]="formAction"></app-cu-form>
+   <div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Vacation Start</th>
+                        <th>Vacation End</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th><button type="button" aria-label="Add" mat-icon-button (click)="createVacation()">
+                            <mat-icon aria-label="Add">add</mat-icon>
+                        </button></th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="vacations.length !== 0">
+                    <tr *ngFor="let vacation of vacations" class="align-middle">
+                        <td>{{formatDate(vacation.dateSpecification.startTime)}}</td>
+                        <td>{{formatDate(vacation.dateSpecification.endTime)}}</td>
+                        <td>{{vacation.description}}</td>
+                        <td>
+                            <button type="button" aria-label="Edit" mat-icon-button (click)="updateVacation(vacation)">
+                                <mat-icon aria-label="Edit"> edit</mat-icon>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" aria-label="Delete" mat-icon-button (click)="removeVacation(vacation)">
+                                <mat-icon aria-label="Delete">delete</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="com-sm-6">
+            <app-cu-form *ngIf="formOpened" (formCloseEvent)="closeForm($event)" [vacation]="vacation" [formAction]="formAction"></app-cu-form>
+        </div>
+    </div>
+   </div>
 </div>
 
