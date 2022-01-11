@@ -924,7 +924,8 @@ namespace ehealthcare.Model
                         IsActivated = false,
                         UsedOffDays = 12,
                         Specialization = Specialization.none,
-                        RoomId = 1
+                        RoomId = 1,
+                        ShiftOrder = 1
                     },
                     new Doctor("mkisic")
                     {
@@ -946,7 +947,8 @@ namespace ehealthcare.Model
                         IsActivated = false,
                         UsedOffDays = 12,
                         Specialization = Specialization.cardiologist,
-                        RoomId = 7
+                        RoomId = 7,
+                        ShiftOrder = 1
                     }
                 );
             });

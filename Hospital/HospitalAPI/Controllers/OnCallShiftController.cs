@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HospitalLibrary.DoctorSchedule.Model;
 using HospitalLibrary.DoctorSchedule.Service;
+using HospitalLibrary.Model;
 using Microsoft.AspNetCore.Http;
 
 
@@ -48,6 +49,29 @@ namespace HospitalAPI.Controllers
         {
             var result = _onCallShiftService.GetDoctorsNotOnCallShift(DateTime.Parse(date));
             return Ok(result.Select(d => _mapper.Map<DoctorDTO>(d)).ToList());
+        }
+
+        [HttpGet("{username}/onCallYearly")]
+        public AppointmentCount GetOnCallCountYearly(string username)
+        {
+            return  _onCallShiftService.GetOnCallCountYearly(username);
+        }
+
+        [HttpGet("{username}/onCallMonthly")]
+        public AppointmentCount GetOnCallCountMonthly(string username)
+        {
+            return _onCallShiftService.GetOnCallCountMonthly(username);
+        }
+
+        [HttpGet("{username}/onCallWeekly")]
+        public AppointmentCount GetOnCallCountWeekly(string username)
+        {
+            return _onCallShiftService.GetOnCallCountWeekly(username);
+        }
+        [HttpGet("{username}/onCallDaily")]
+        public AppointmentCount GetOnCallCountDaily(string username)
+        {
+            return _onCallShiftService.GetOnCallCountDaily(username);
         }
 
         [HttpPost]

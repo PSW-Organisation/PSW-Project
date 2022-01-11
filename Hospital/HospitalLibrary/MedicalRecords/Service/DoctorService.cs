@@ -37,5 +37,10 @@ namespace HospitalLibrary.MedicalRecords.Service
         {
             return _doctorRepository.Get(id);
         }
+
+        public Doctor UpdateDoctor(Doctor doctor)
+        {
+            return _doctorRepository.Update(doctor);
+        }
     }
 }

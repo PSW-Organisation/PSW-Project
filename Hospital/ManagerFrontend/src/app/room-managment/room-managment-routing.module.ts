@@ -9,7 +9,6 @@ import { MoveEquipmentComponent } from './move-equipment/move-equipment.componen
 import { SearchEquipmentComponent } from './search-equipment/search-equipment.component';
 import { RenovateRoomsComponent } from './renovate-rooms/renovate-rooms.component';
 import { RoomScheduleComponent } from './room-schedule/room-schedule.component';
-import { DoctorStatisticsComponent } from './doctor-statistics/doctor-statistics.component';
 
 
 
@@ -24,7 +23,6 @@ const routes: Routes = [
         { path: 'moveEquipment', component: MoveEquipmentComponent },
         { path: 'renovateRooms', component: RenovateRoomsComponent },
         { path: 'roomSchedule/:roomId', component: RoomScheduleComponent },
-        { path: 'testChart', component: DoctorStatisticsComponent }
       ]
   }
 ];

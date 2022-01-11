@@ -25,8 +25,7 @@ namespace HospitalLibrary.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy",
-                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -1410,6 +1409,9 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("RoomId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("ShiftOrder")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Specialization")
                         .HasColumnType("integer");
 
@@ -1441,6 +1443,7 @@ namespace HospitalLibrary.Migrations
                             Token = new Guid("00000000-0000-0000-0000-000000000000"),
                             Username = "nelex",
                             RoomId = 1,
+                            ShiftOrder = 1,
                             Specialization = 3,
                             UsedOffDays = 12
                         },
@@ -1464,6 +1467,7 @@ namespace HospitalLibrary.Migrations
                             Token = new Guid("00000000-0000-0000-0000-000000000000"),
                             Username = "mkisic",
                             RoomId = 7,
+                            ShiftOrder = 1,
                             Specialization = 0,
                             UsedOffDays = 12
                         });
@@ -1571,7 +1575,7 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
-                    modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.Shift", b =>
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.Shift", b =>
                 {
                     b.OwnsOne("HospitalLibrary.RoomsAndEquipment.Terms.Utils.TimeInterval", "TimeInterval", b1 =>
                         {

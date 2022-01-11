@@ -1,7 +1,7 @@
 export interface IShift {
-    id: Number,
+    id: number,
     name: string,
     startTime: Date,
     endTime: Date,
-    shiftOrder: Number
+    shiftOrder: number
 }

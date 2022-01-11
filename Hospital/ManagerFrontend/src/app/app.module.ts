@@ -42,6 +42,10 @@ import { ManagerGuard } from './shared/jwt/jwt-guard';
 import { TokenInterceptor } from './shared/jwt/token.interceptor';
 import { DoctorOnCallShiftComponent } from './doctor-on-call-shift/doctor-on-call-shift.component';
 import { ManageShiftsComponent } from './manage-shifts/manage-shifts.component';
+import { DoctorStatisticsComponent } from './doctor-statistics/doctor-statistics.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -70,7 +74,8 @@ import { ManageShiftsComponent } from './manage-shifts/manage-shifts.component';
     ScheduleComponent,
     CuFormComponent,
     DoctorOnCallShiftComponent,
-    ManageShiftsComponent
+    ManageShiftsComponent,
+    DoctorStatisticsComponent
   ],
   imports: [
     BrowserModule,
