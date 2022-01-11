@@ -1,8 +1,10 @@
-﻿using HospitalLibrary.DoctorSchedule.Model;
+﻿using System;
+using HospitalLibrary.DoctorSchedule.Model;
 using HospitalLibrary.DoctorSchedule.Repository;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace HospitalLibrary.DoctorSchedule.Service
 {
@@ -15,14 +17,24 @@ namespace HospitalLibrary.DoctorSchedule.Service
             _doctorVacationRepository = doctorVacationRepository;
         }
 
+        private bool CheckIfDatesConflict(DateTime date1Start, DateTime date1End, DateTime date2Start, DateTime date2End)
+        {
+            return date1Start > date2Start &&
+                   date1Start < date2End ||
+                   date1End > date2Start &&
+                   date1End < date2End ||
+                   date2Start > date1Start &&
+                   date2Start < date1End ||
+                   date2End > date1Start &&
+                   date2End < date1End;
+        }
+
         public DoctorVacation CreateDoctorVacation(DoctorVacation doctorVacation)
         {
             if (GetDoctorVacations(doctorVacation.DoctorId).Any(dv =>
-                    doctorVacation.DateSpecification.StartTime > dv.DateSpecification.StartTime &&
-                    doctorVacation.DateSpecification.StartTime < dv.DateSpecification.EndTime ||
-                    doctorVacation.DateSpecification.EndTime > dv.DateSpecification.StartTime &&
-                    doctorVacation.DateSpecification.EndTime < dv.DateSpecification.EndTime)) return null;
-            doctorVacation.Id = _doctorVacationRepository.GetNewId();
+                    CheckIfDatesConflict(doctorVacation.DateSpecification.StartTime,
+                        doctorVacation.DateSpecification.EndTime, dv.DateSpecification.StartTime,
+                        dv.DateSpecification.EndTime))) return null;
             _doctorVacationRepository.Insert(doctorVacation);
             return doctorVacation;
         }
@@ -52,11 +64,12 @@ namespace HospitalLibrary.DoctorSchedule.Service
                 break;
             }
 
-            return doctorVacations.Any(dv =>
-                doctorVacation.DateSpecification.StartTime > dv.DateSpecification.StartTime &&
-                doctorVacation.DateSpecification.StartTime < dv.DateSpecification.EndTime ||
-                doctorVacation.DateSpecification.EndTime > dv.DateSpecification.StartTime &&
-                doctorVacation.DateSpecification.EndTime < dv.DateSpecification.EndTime) ? null : _doctorVacationRepository.Update(doctorVacation);
+            if (doctorVacations.Any(dv =>
+                    CheckIfDatesConflict(doctorVacation.DateSpecification.StartTime,
+                        doctorVacation.DateSpecification.EndTime, dv.DateSpecification.StartTime,
+                        dv.DateSpecification.EndTime))) return null;
+            _doctorVacationRepository.Update(doctorVacation);
+            return doctorVacation;
         }
     }
 }
