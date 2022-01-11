@@ -13,6 +13,7 @@ using HospitalLibrary.Schedule.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using HospitalLibrary.Model;
 
 namespace HospitalAPI.Controllers
 {
@@ -40,6 +41,55 @@ namespace HospitalAPI.Controllers
         public ActionResult<IEnumerable<Visit>> GetVisitsByUsername(string username)
         {
             return _visitService.GetVisitsByUsername(username);
+        }
+
+        [HttpGet("{username}/appointmentYearly")]
+        public ActionResult<AppointmentCount> GetVisitsCountYearly(string username)
+        {
+            return _visitService.GetVisitsCountYearly(username);
+        }
+
+        [HttpGet("{username}/patientYearly")]
+        public ActionResult<AppointmentCount> GetPatientsCountYearly(string username)
+        {
+            return _visitService.GetPatientsCountYearly(username);
+        }
+
+
+        [HttpGet("{username}/appointmentMonthly")]
+        public ActionResult<AppointmentCount> GetVisitsCountMonthly(string username)
+        {
+            return _visitService.GetVisitsCountMonthly(username);
+        }
+
+        [HttpGet("{username}/patientMonthly")]
+        public ActionResult<AppointmentCount> GetPatientsCountMonthly(string username)
+        {
+            return _visitService.GetPatientsCountMonthly(username);
+        }
+
+        [HttpGet("{username}/appointmentWeekly")]
+        public ActionResult<AppointmentCount> GetVisitsCountWeekly(string username)
+        {
+            return _visitService.GetVisitsCountWeekly(username);
+        }
+
+        [HttpGet("{username}/patientWeekly")]
+        public ActionResult<AppointmentCount> GetPatientsCountWeekly(string username)
+        {
+            return _visitService.GetPatientsCountWeekly(username);
+        }
+
+        [HttpGet("{username}/appointmentDaily")]
+        public ActionResult<AppointmentCount> GetVisitsCountDaily(string username)
+        {
+            return _visitService.GetVisitsCountDaily(username);
+        }
+
+        [HttpGet("{username}/patientDaily")]
+        public ActionResult<AppointmentCount> GetPatientsCountDaily(string username)
+        {
+            return _visitService.GetPatientsCountDaily(username);
         }
 
 
