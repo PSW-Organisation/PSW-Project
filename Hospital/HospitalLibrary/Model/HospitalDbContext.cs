@@ -938,11 +938,11 @@ namespace ehealthcare.Model
                         Id = -2,
                         DoctorId = "nelex",
                         PatientId = "kristina",
-                        StartTime = new DateTime(2021, 12, 30, 19, 00, 00),
-                        EndTime = new DateTime(2021, 12, 30, 19, 30, 00),
+                        StartTime = new DateTime(2022, 01, 30, 19, 00, 00),
+                        EndTime = new DateTime(2022, 01, 30, 19, 30, 00),
                         VisitType = VisitType.examination,
                         IsReviewed = false,
-                        IsCanceled = true
+                        IsCanceled = false
                     });
                 v.HasData(
                     new Visit()

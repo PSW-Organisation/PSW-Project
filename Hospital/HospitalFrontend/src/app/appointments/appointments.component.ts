@@ -25,6 +25,7 @@ export class AppointmentsComponent implements OnInit {
       this.profileService.getVisits(this.user.username).subscribe({
         next: response => {
           this.visits = response
+          this.visits = this.visits.sort((a, b)=> a.id - b.id)
         }, error: e => {
           if (e.status == 401) {
             this.showError('You need to login!')
