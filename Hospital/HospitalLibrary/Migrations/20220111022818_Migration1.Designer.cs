@@ -10,8 +10,8 @@ using ehealthcare.Model;
 namespace HospitalLibrary.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    [Migration("20211223022324_MigrationName")]
-    partial class MigrationName
+    [Migration("20220111022818_Migration1")]
+    partial class Migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,90 @@ namespace HospitalLibrary.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.DoctorVacation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DoctorVacations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Zimovanje",
+                            DoctorId = "mkisic"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Letovanje",
+                            DoctorId = "nelex"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Bolovanje",
+                            DoctorId = "mkisic"
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.OnCallShift", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OnCallShifts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2022, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "mkisic"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "nelex"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "mkisic"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Date = new DateTime(2022, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "nelex"
+                        });
+                });
 
             modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.PatientFeedback", b =>
                 {
@@ -1253,6 +1337,55 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HospitalLibrary.Shared.Model.Manager", b =>
+                {
+                    b.HasBaseType("ehealthcare.Model.User");
+
+                    b.HasDiscriminator().HasValue("Manager");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "laki",
+                            Address = "Hajduk Veljka, 5",
+                            City = "Novi Sad",
+                            Country = "Serbia",
+                            DateOfBirth = new DateTime(1990, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "igor.m@gmail.com",
+                            Gender = "male",
+                            IsActivated = true,
+                            IsBlocked = false,
+                            LoginType = 1,
+                            Name = "Igor",
+                            ParentName = "Ivan",
+                            Password = "Laki123!",
+                            Phone = "129572904354",
+                            Surname = "Maric",
+                            Token = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Username = "laki"
+                        },
+                        new
+                        {
+                            Id = "jagodica",
+                            Address = "Rumenacka, 23",
+                            City = "Novi Sad",
+                            Country = "Serbia",
+                            DateOfBirth = new DateTime(1985, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jagodica@gmail.com",
+                            Gender = "female",
+                            IsActivated = true,
+                            IsBlocked = false,
+                            LoginType = 1,
+                            Name = "Jagoda",
+                            ParentName = "Petar",
+                            Password = "Jagodica123!",
+                            Phone = "6820543267243",
+                            Surname = "Vasic",
+                            Token = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Username = "jagodica"
+                        });
+                });
+
             modelBuilder.Entity("ehealthcare.Model.Doctor", b =>
                 {
                     b.HasBaseType("ehealthcare.Model.User");
@@ -1372,6 +1505,52 @@ namespace HospitalLibrary.Migrations
                             Surname = "Tamindzija",
                             Token = new Guid("601ccaa8-3a07-4a7c-89b9-9923e6bac8a7"),
                             Username = "kristina"
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.DoctorVacation", b =>
+                {
+                    b.OwnsOne("HospitalLibrary.RoomsAndEquipment.Terms.Utils.TimeInterval", "DateSpecification", b1 =>
+                        {
+                            b1.Property<int>("DoctorVacationId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<DateTime>("EndTime")
+                                .HasColumnName("EndTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<DateTime>("StartTime")
+                                .HasColumnName("StartTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("DoctorVacationId");
+
+                            b1.ToTable("DoctorVacations");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorVacationId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    DoctorVacationId = 1,
+                                    EndTime = new DateTime(2022, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    DoctorVacationId = 2,
+                                    EndTime = new DateTime(2022, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2022, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    DoctorVacationId = 3,
+                                    EndTime = new DateTime(2022, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                                });
                         });
                 });
 
