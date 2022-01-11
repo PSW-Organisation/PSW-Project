@@ -1,0 +1,92 @@
+<div class="container-fluid">
+  <div
+    class="row d-flex"
+    style="
+      margin-top: 50px;
+      margin-right: 100px;
+      margin-left: 100px;
+      margin-bottom: 200px;
+    "
+  >
+    <div
+      class="card mx-auto"
+      style="
+        width: 400px;
+        margin-top: 20px;
+        margin-right: 20px;
+        margin-left: 40px;
+        margin-bottom: 20px;
+      "
+    >
+      <canvas id="appChart"></canvas>
+      <div>
+        <button (click)="appChartYearly()" mat-button color="primary">
+          Yearly
+        </button>
+        <button (click)="appChartMonthly()" mat-button color="primary">
+          Monthly
+        </button>
+        <button (click)="appChartWeekly()" mat-button color="primary">
+          Weekly
+        </button>
+        <button (click)="appChartDaily()" mat-button color="primary">
+          Daily
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="card mx-auto"
+      style="
+        width: 400px;
+        margin-top: 20px;
+        margin-right: 20px;
+        margin-left: 40px;
+        margin-bottom: 20px;
+      "
+    >
+      <canvas id="patiChart"></canvas>
+      <div>
+        <button (click)="patiChartYearly()" mat-button color="primary">
+          Yearly
+        </button>
+        <button (click)="patiChartMonthly()" mat-button color="primary">
+          Monthly
+        </button>
+        <button (click)="patiChartWeekly()" mat-button color="primary">
+          Weekly
+        </button>
+        <button (click)="patiChartlDaily()" mat-button color="primary">
+          Daily
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="card mx-auto"
+      style="
+        width: 400px;
+        margin-top: 20px;
+        margin-right: 20px;
+        margin-left: 40px;
+        margin-bottom: 20px;
+      "
+    >
+      <canvas id="onCallChart"></canvas>
+      <div>
+        <button (click)="onCallChartYearly()" mat-button color="primary">
+          Yearly
+        </button>
+        <button (click)="onCallChartMonthly()" mat-button color="primary">
+          Monthly
+        </button>
+        <button (click)="onCallChartWeekly()" mat-button color="primary">
+          Weekly
+        </button>
+        <button (click)="onCallChartlDaily()" mat-button color="primary">
+          Daily
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
