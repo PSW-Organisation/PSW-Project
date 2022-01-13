@@ -12,9 +12,12 @@ namespace IntegrationAPIIntegrationTests
 {
     public class SftpTest
     {
-        [Fact]
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
+
+        [SkippableFact]
         public void Upload_file()
         {
+            Skip.If(skippable);
             var fileName = "test.txt";
             var localDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName.Replace("bin", "Data");
             var localFile = Path.Combine(localDir, fileName);
@@ -29,9 +32,10 @@ namespace IntegrationAPIIntegrationTests
             Assert.True(success);
         }
 
-        [Fact]
+        [SkippableFact]
         public void Dowload_file()
         {
+            Skip.If(skippable);
             var fileName = "test.txt";
             var localDir = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName.Replace("bin", "Data");
             var localFile = Path.Combine(localDir, fileName);

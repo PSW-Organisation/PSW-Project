@@ -23,10 +23,12 @@ namespace IntegrationAPIIntegrationTests
 {
     public class OrderingMedicineTest
     {
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
 
-        [Fact]
+        [SkippableFact]
         public void search_medicine_found_HTTP()
         {
+            Skip.If(skippable);
             var stubRepositoryPharmacy = new Mock<PharmacyRepository>();
             var stubRepositoryMedicine = new Mock<MedicineRepository>();
             var stubRepositoryTransaction = new Mock<MedicineTransactionRepository>();
@@ -43,9 +45,10 @@ namespace IntegrationAPIIntegrationTests
             Assert.True(retVal.Count.ToString().Equals("1"));
         }
 
-        [Fact]
+        [SkippableFact]
         public void search_medicine_not_found_HTTP()
         {
+            Skip.If(skippable);
             var stubRepositoryPharmacy = new Mock<PharmacyRepository>();
             var stubRepositoryMedicine = new Mock<MedicineRepository>();
             var stubRepositoryTransaction = new Mock<MedicineTransactionRepository>();
@@ -61,9 +64,10 @@ namespace IntegrationAPIIntegrationTests
             Assert.True(retVal.Count.ToString().Equals("0"));
         }
 
-        [Fact]
+        [SkippableFact]
         public void search_medicine_found_GRPC()
         {
+            Skip.If(skippable);
             MedicineOrderController medicineController = new MedicineOrderController(new MedicineOrderService( new PharmacyService(new PharmacyDbRepository(new IntegrationDbContext())), new MedicineTransactionService(new MedicineTransactionDbRepository(new IntegrationDbContext()))), new PharmacyService(new PharmacyDbRepository(new IntegrationDbContext())));
 
             bool retVal = medicineController.checkIfMedicineExistsGRPC(new MedicineSearchDTO("rapidol",2, "108817cf-dc25-40f4-a18f-244c1315840a33"));
@@ -71,9 +75,10 @@ namespace IntegrationAPIIntegrationTests
             Assert.True(retVal);
         }
 
-        [Fact]
+        [SkippableFact]
         public void search_medicine_not_found_GRPC()
         {
+            Skip.If(skippable);
             MedicineOrderController medicineController = new MedicineOrderController(new MedicineOrderService(new PharmacyService(new PharmacyDbRepository(new IntegrationDbContext())), new MedicineTransactionService(new MedicineTransactionDbRepository(new IntegrationDbContext()))), new PharmacyService(new PharmacyDbRepository(new IntegrationDbContext())));
 
             bool retVal = medicineController.checkIfMedicineExistsGRPC(new MedicineSearchDTO("panklav", 2, "108817cf-dc25-40f4-a18f-244c1315840a33"));
