@@ -47,7 +47,17 @@
             <a class="smooth-scroll" routerLink="/reports">Reports</a>
         </li>
         <li class="sidebar-nav-item">
-            <a class="smooth-scroll" routerLink="/notifications">Notifications</a>
+            <table> <tr> 
+                <td> <a class="smooth-scroll" routerLink="/notifications">Notifications</a> </td>
+                <td>  <a class="fa fa-bell" routerLink="/notifications">
+                <span class="fa fa-comment"></span>
+                <span class="num">{{numberOfUnseen}}</span>
+              </a> </td>
+                
+            </tr>
+            </table>
+           
+            
         </li>
         <li class="sidebar-nav-item">
             <a class="smooth-scroll" routerLink="/benefits">See available benefits</a>

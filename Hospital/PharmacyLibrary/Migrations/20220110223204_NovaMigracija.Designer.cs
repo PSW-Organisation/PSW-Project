@@ -11,8 +11,8 @@ using PharmacyAPI;
 namespace PharmacyLibrary.Migrations
 {
     [DbContext(typeof(PharmacyDbContext))]
-    [Migration("20220108192118_NewDbMigratoin")]
-    partial class NewDbMigratoin
+    [Migration("20220110223204_NovaMigracija")]
+    partial class NovaMigracija
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -202,6 +202,9 @@ namespace PharmacyLibrary.Migrations
 
                     b.Property<string>("ApiKeyPharmacy")
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsWon")
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("Open")
                         .HasColumnType("boolean");

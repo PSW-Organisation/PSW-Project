@@ -13,7 +13,6 @@ namespace PharmacyLibrary.Service
         public void Save(NotificationsForApp note);
         public void Delete(NotificationsForApp note);
         public NotificationsForApp Update(NotificationsForApp note);
-      
-
+        int GetNumberOfUnseen();
     }
 }

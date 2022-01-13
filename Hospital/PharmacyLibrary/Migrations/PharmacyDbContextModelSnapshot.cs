@@ -201,6 +201,9 @@ namespace PharmacyLibrary.Migrations
                     b.Property<string>("ApiKeyPharmacy")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsWon")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("Open")
                         .HasColumnType("boolean");
 
@@ -234,39 +237,11 @@ namespace PharmacyLibrary.Migrations
                     b.Property<int>("TenderItemQuantity")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("TenderResponseId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TenderId");
-
-                    b.HasIndex("TenderResponseId");
 
                     b.ToTable("TenderItems");
-                });
-
-            modelBuilder.Entity("PharmacyLibrary.Tendering.Model.TenderResponse", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<DateTime>("ResponseReceivedTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("TenderId")
-                        .HasColumnType("integer");
-
-                    b.Property<double>("TotalPrice")
-                        .HasColumnType("double precision");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TenderId");
-
-                    b.ToTable("TenderResponses");
                 });
 
             modelBuilder.Entity("PharmacyLibrary.Tendering.Model.TenderItem", b =>
@@ -274,19 +249,6 @@ namespace PharmacyLibrary.Migrations
                     b.HasOne("PharmacyLibrary.Tendering.Model.Tender", null)
                         .WithMany("TenderItems")
                         .HasForeignKey("TenderId");
-
-                    b.HasOne("PharmacyLibrary.Tendering.Model.TenderResponse", null)
-                        .WithMany("TenderItems")
-                        .HasForeignKey("TenderResponseId");
-                });
-
-            modelBuilder.Entity("PharmacyLibrary.Tendering.Model.TenderResponse", b =>
-                {
-                    b.HasOne("PharmacyLibrary.Tendering.Model.Tender", "Tender")
-                        .WithMany()
-                        .HasForeignKey("TenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

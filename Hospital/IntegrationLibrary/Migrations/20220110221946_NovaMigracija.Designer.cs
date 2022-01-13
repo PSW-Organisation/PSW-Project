@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace IntegrationLibrary.Migrations
 {
     [DbContext(typeof(IntegrationDbContext))]
-    [Migration("20220108184400_NewDbMigratoin")]
-    partial class NewDbMigratoin
+    [Migration("20220110221946_NovaMigracija")]
+    partial class NovaMigracija
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -236,10 +236,13 @@ namespace IntegrationLibrary.Migrations
                     b.Property<bool>("IsWinner")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("PharmacyApiKey")
+                        .HasColumnType("text");
+
                     b.Property<int>("PharmacyId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("ResponseRecivedTime")
+                    b.Property<DateTime>("ResponseReceivedTime")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("TenderId")

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace IntegrationLibrary.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class NovaMigracija : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -128,11 +128,12 @@ namespace IntegrationLibrary.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ResponseRecivedTime = table.Column<DateTime>(nullable: false),
+                    ResponseReceivedTime = table.Column<DateTime>(nullable: false),
                     PharmacyId = table.Column<int>(nullable: false),
                     TenderId = table.Column<int>(nullable: false),
                     TotalPrice = table.Column<double>(nullable: false),
-                    IsWinner = table.Column<bool>(nullable: false)
+                    IsWinner = table.Column<bool>(nullable: false),
+                    PharmacyApiKey = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

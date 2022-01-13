@@ -65,7 +65,9 @@ import { StatisticsComponent } from './statistics/statistics.component';
     RoomManagmentModule,
     ToastrModule.forRoot({ preventDuplicates: true }),
     BrowserAnimationsModule,
+    
   ],
+
   providers: [
     PharmaciesService,
     FeedbackService,

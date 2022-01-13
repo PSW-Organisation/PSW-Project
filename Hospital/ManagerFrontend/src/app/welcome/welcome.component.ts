@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationsService } from '../notifications/notifications.service';
+
 
 @Component({
   selector: 'app-welcome',
@@ -6,8 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
+  numberOfUnseen: any;
 
-  constructor() { }
+  constructor(private notificationsService: NotificationsService) { }
 
   public loadExternalScript(url: string) {
     const body = <HTMLDivElement>document.body; const script =
@@ -21,6 +24,15 @@ export class WelcomeComponent implements OnInit {
     this.loadExternalScript("../../assets/scripts/jquery-3.2.1.min.js");
     this.loadExternalScript("../../assets/scripts/all-plugins.js");
     this.loadExternalScript("../../assets/scripts/plugins-activate.js");
+
+    this.getCountOfUnseen(); //notifikacije za bolnicu
   }
+  getCountOfUnseen(){
+    this.notificationsService.countNumber().subscribe(
+     numberOfUnseen => {
+       this.numberOfUnseen = numberOfUnseen;
+     }
+    )
+   }
 
 }

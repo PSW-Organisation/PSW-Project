@@ -25,7 +25,7 @@ namespace PharmacyAPI.Controllers
         }
 
 
-        [HttpGet]       // GET /api2/notifications
+        [HttpGet]       // GET /api3/notifications
         public IActionResult Get()
         {
             List<NotificationsForAppDto> result = new List<NotificationsForAppDto>();
@@ -64,7 +64,7 @@ namespace PharmacyAPI.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id?}")]       // DELETE /api/notifications/1
+        [HttpDelete("{id?}")]       // DELETE /api3/notifications/1
         public IActionResult Delete(int id)
         {
             NotificationsForApp notification = notificationService.Get(id);
@@ -77,6 +77,15 @@ namespace PharmacyAPI.Controllers
                 notificationService.Delete(notification);
                 return Ok();
             }
+        }
+
+        [HttpGet]       // GET /api3/notifications/count
+        [Route("count")]
+        public IActionResult GetNumberOfUnseen()
+        {
+            int number = 0;
+            number = notificationService.GetNumberOfUnseen();
+            return Ok(number);
         }
     }
 }

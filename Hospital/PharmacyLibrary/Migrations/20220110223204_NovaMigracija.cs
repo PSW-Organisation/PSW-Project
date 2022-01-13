@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace PharmacyLibrary.Migrations
 {
-    public partial class NewDbMigratoin : Migration
+    public partial class NovaMigracija : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -131,7 +131,8 @@ namespace PharmacyLibrary.Migrations
                     TenderOpenDate = table.Column<DateTime>(nullable: false),
                     TenderCloseDate = table.Column<DateTime>(nullable: false),
                     Open = table.Column<bool>(nullable: false),
-                    ApiKeyPharmacy = table.Column<string>(nullable: true)
+                    ApiKeyPharmacy = table.Column<string>(nullable: true),
+                    IsWon = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
