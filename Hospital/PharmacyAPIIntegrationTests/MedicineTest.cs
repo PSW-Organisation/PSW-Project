@@ -10,10 +10,12 @@ namespace PharmacyAPIIntegrationTests
 {
     public class MedicineTest
     {
-       
-        [Fact]
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
+
+        [SkippableFact]
         public void check_if_medicine_existsTrue()
         {
+            Skip.If(skippable);
             IMedicineRepository stubMedicineRepository = new MedicineRepository(new PharmacyDbContext());
 
             MedicineService medicineService = new MedicineService(stubMedicineRepository);
@@ -23,9 +25,10 @@ namespace PharmacyAPIIntegrationTests
             Assert.True(exists);
         }
 
-        [Fact]
+        [SkippableFact]
         public void check_if_medicine_existsFalse()
         {
+            Skip.If(skippable);
             IMedicineRepository stubMedicineRepository = new MedicineRepository(new PharmacyDbContext());
 
             MedicineService medicineService = new MedicineService(stubMedicineRepository);

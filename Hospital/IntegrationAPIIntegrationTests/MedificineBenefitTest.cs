@@ -21,19 +21,17 @@ namespace IntegrationAPIIntegrationTests
             Assert.NotNull(m);
             medicineBenefitService.Delete(benefit);
         }
+
         [Fact]
-        public void check_if_benefit_not_exits()
+        public void Check_if_benefit_not_exits()
         {
             MedicineBenefitRepository medineBenefitRepository = new MedicineBenefitDbRepository(new IntegrationDbContext());
-            
             MedicineBenefit benefit = new MedicineBenefit() { Id = 20, MedicineBenefitContent = "Neki String", MedicineBenefitTitle = "Neki String", MedicineBenefitDueDate = DateTime.Now, MedicineId = 0 };
             medineBenefitRepository.Save(benefit);
             MedicineBenefitService medicineBenefitService = new MedicineBenefitService(medineBenefitRepository);
             MedicineBenefit m = medicineBenefitService.Get(55);
             Assert.Null(m);
             medicineBenefitService.Delete(benefit);
-        }
-
-       
+        }    
     }
 }
