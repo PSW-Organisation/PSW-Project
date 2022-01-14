@@ -27,7 +27,7 @@ export class CuFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.minDate = new Date(Date.now());
-    this.doctorId = this._route.snapshot.paramMap.get('doctorId')!;
+    this.doctorId = this._route.snapshot.paramMap.get('id')!;
     this.vacation.doctorId = this.doctorId;
     this.myForm = this._formBuilder.group({
       startTimeCtrl: ['', Validators.required],
@@ -53,25 +53,25 @@ export class CuFormComponent implements OnInit {
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     if (event.value != null) {
       if (type === 'inputStart' || type === 'changeStart') {
-        this.vacation.dateSpecification.startTime.setFullYear(
+        this.vacation.dateSpecification.startTime.setUTCFullYear(
           event.value.getFullYear()
         );
-        this.vacation.dateSpecification.startTime.setMonth(
+        this.vacation.dateSpecification.startTime.setUTCMonth(
           event.value.getMonth()
         );
-        this.vacation.dateSpecification.startTime.setDate(
+        this.vacation.dateSpecification.startTime.setUTCDate(
           event.value.getDate()
         );
-        this.vacation.dateSpecification.startTime.setHours(0,0,0,0);
+        this.vacation.dateSpecification.startTime.setUTCHours(0,0,0,0);
       } else if (type === 'inputEnd' || type === 'changeEnd') {
-        this.vacation.dateSpecification.endTime.setFullYear(
+        this.vacation.dateSpecification.endTime.setUTCFullYear(
           event.value.getFullYear()
         );
-        this.vacation.dateSpecification.endTime.setMonth(
+        this.vacation.dateSpecification.endTime.setUTCMonth(
           event.value.getMonth()
         );
-        this.vacation.dateSpecification.endTime.setDate(event.value.getDate());
-        this.vacation.dateSpecification.endTime.setHours(0,0,0,0);
+        this.vacation.dateSpecification.endTime.setUTCDate(event.value.getDate());
+        this.vacation.dateSpecification.endTime.setUTCHours(0,0,0,0);
       }
     }
   }

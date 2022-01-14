@@ -40,6 +40,12 @@ import { ScheduleComponent } from './doctor-vacation/schedule/schedule.component
 import { CuFormComponent } from './doctor-vacation/cu-form/cu-form.component';
 import { ManagerGuard } from './shared/jwt/jwt-guard';
 import { TokenInterceptor } from './shared/jwt/token.interceptor';
+import { DoctorOnCallShiftComponent } from './doctor-on-call-shift/doctor-on-call-shift.component';
+import { ManageShiftsComponent } from './manage-shifts/manage-shifts.component';
+import { DoctorStatisticsComponent } from './doctor-statistics/doctor-statistics.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -66,7 +72,10 @@ import { TokenInterceptor } from './shared/jwt/token.interceptor';
     DoctorViewComponent,
     HomePageComponent,
     ScheduleComponent,
-    CuFormComponent
+    CuFormComponent,
+    DoctorOnCallShiftComponent,
+    ManageShiftsComponent,
+    DoctorStatisticsComponent
   ],
   imports: [
     BrowserModule,

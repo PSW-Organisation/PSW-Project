@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
 import { Feedback } from "./feedback";
 import { FeedbackService } from "./feedback.service";
 
@@ -11,7 +12,7 @@ import { FeedbackService } from "./feedback.service";
 export class FeedBackComponent {
         feedbacks: Array<Feedback> = [];
 
-        constructor(private service: FeedbackService){}
+        constructor(private service: FeedbackService, private toastr: ToastrService){}
         
         ngOnInit(): void {
             this.getAllFeedbacks();
@@ -21,16 +22,19 @@ export class FeedBackComponent {
             feedback.isPublished = !feedback.isPublished;
             this.service.publishFeedback(feedback, feedback.id).subscribe(response =>{ 
               if(response.status === 200){
-                alert("SUCESS");
+                this.toastr.success("Request successful!");
               }else{
                 feedback.isPublished = !feedback.isPublished;
-                console.log("FAILED");
+                this.toastr.error("Request failed")
               }
             })
         }
         
         getAllFeedbacks(): void{ 
-            this.service.getAllFeedbacks().subscribe(feedbacks => this.feedbacks = feedbacks, 
+            this.service.getAllFeedbacks().subscribe(feedbacks => {
+              this.feedbacks = feedbacks
+              this.feedbacks = this.feedbacks.sort((a, b) => a.id - b.id)
+            }, 
               error => console.log(error));
           }
     }

@@ -12,6 +12,7 @@ export class DoctorVacationService {
   constructor(private _http: HttpClient) { }
 
   getDoctorVacations(doctorId : string): Observable<IDoctorVacation[]> {
+    console.log(doctorId);
     return this._http.get<IDoctorVacation[]>(this._vacationUrl+`/${doctorId}`).pipe(
       tap((data) => console.log('Doctors vacations: ', JSON.stringify(data))),
       catchError(this.handleError)

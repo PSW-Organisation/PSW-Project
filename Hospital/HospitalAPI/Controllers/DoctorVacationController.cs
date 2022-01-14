@@ -31,8 +31,6 @@ namespace HospitalAPI.Controllers
         public ActionResult<DoctorVacationDTO> CreateDoctorVacation(DoctorVacationDTO doctorVacation)
         {
             var result = _doctorVacationService.CreateDoctorVacation(_mapper.Map<DoctorVacation>(doctorVacation));
-            if (result != null)
-                return Ok(_mapper.Map<DoctorVacationDTO>(result));
             return Ok(_mapper.Map<DoctorVacationDTO>(result));
         }
 
@@ -55,8 +53,6 @@ namespace HospitalAPI.Controllers
         public ActionResult<DoctorVacationDTO> UpdateDoctorVacation(DoctorVacationDTO doctorVacation)
         {
             var result = _doctorVacationService.UpdateDoctorVacation(_mapper.Map<DoctorVacation>(doctorVacation));
-            if (result != null)
-                return Ok(_mapper.Map<DoctorVacationDTO>(result));
             return Ok(_mapper.Map<DoctorVacationDTO>(result));
         }
 

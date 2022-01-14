@@ -9,6 +9,7 @@ import { SearchEquipmentComponent } from './search-equipment/search-equipment.co
 import { RenovateRoomsComponent } from './renovate-rooms/renovate-rooms.component';
 import { RoomScheduleModule } from './room-schedule/room-schedule.module';
 
+
 @NgModule({
   declarations: [
     RoomManagmentComponent,

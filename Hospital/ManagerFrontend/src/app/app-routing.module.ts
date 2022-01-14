@@ -23,6 +23,8 @@ import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorViewComponent } from './doctor-view/doctor-view.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { ScheduleComponent } from './doctor-vacation/schedule/schedule.component';
+import { DoctorOnCallShiftComponent } from './doctor-on-call-shift/doctor-on-call-shift.component';
+import { ManageShiftsComponent } from './manage-shifts/manage-shifts.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -44,7 +46,9 @@ const routes: Routes = [
   { path: 'doctors', component: DoctorsComponent, canActivate: [ManagerGuard] },
   { path: 'doctorView/:id', component: DoctorViewComponent, canActivate: [ManagerGuard] },
   { path: 'home', component: HomePageComponent, canActivate: [ManagerGuard] },
-  { path: 'doctorVacation/:doctorId', component: ScheduleComponent, canActivate: [ManagerGuard] }
+  { path: 'doctorVacation/:doctorId', component: ScheduleComponent, canActivate: [ManagerGuard] },
+  { path: 'doctorOnCallShift', component: DoctorOnCallShiftComponent, canActivate: [ManagerGuard]},
+  { path: 'manageShifts', component: ManageShiftsComponent, canActivate: [ManagerGuard]}
 ];
 
 @NgModule({

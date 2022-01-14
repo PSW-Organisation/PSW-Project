@@ -23,7 +23,12 @@
                 <a class="nav-link" [routerLink]="['/recommended-scheduling']" routerLinkActive="router-link-active">Recommended scheduling<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item align-self-center">
-                <app-feedback></app-feedback>
+                <app-feedback name="feedbackModal"></app-feedback>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <i class="fa fa-sign-out fa-3x" style="cursor: pointer;" title="Log out" (click)="logOut()"></i>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">

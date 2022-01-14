@@ -23,8 +23,6 @@ const routes: Routes = [
         { path: 'moveEquipment', component: MoveEquipmentComponent },
         { path: 'renovateRooms', component: RenovateRoomsComponent },
         { path: 'roomSchedule/:roomId', component: RoomScheduleComponent },
-        { path: 'roomSchedule/:roomId', component: RoomScheduleComponent },
-
       ]
   }
 ];

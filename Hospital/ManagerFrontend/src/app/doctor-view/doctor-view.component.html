@@ -21,12 +21,19 @@
             <h4 class="card-title text-start">City: {{doctor.city}}</h4>
         </div>
         <div class="col-sm-4">
-            <h2 class="card-title text-start">Shift</h2>
-            <select class="form-select" aria-label="Default select example">
-                <option value="1">Jutarnja Smena</option>
-                <option value="2">Popodnevna smena</option>
-                <option value="3">Vecernja Smena</option>
-            </select>
+            
+            <mat-form-field appearance="fill">
+                <mat-label>Shift :</mat-label>
+                <mat-select [(ngModel)]="selectedShiftOrder" (selectionChange)="select()">
+                  <mat-option *ngFor="let shift of shifts" [value]="shift.shiftOrder">
+                    {{ shift.name }}
+                    <div></div>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div style="width: 150px; height: 80px;" *ngIf="selected">
+                    <button class="btn-primary" (click)="changeDoctorShiftOrder()">Izmeni</button>
+              </div>
         </div>
     </div>
 
@@ -34,13 +41,19 @@
 
     <div class="row">
         <div class="col">
+            <!-- 
             <div style="width: 100%; height: 400px; background-color: rgb(255, 208, 121);">
                 Godisnji odmori
+            </div>
+            -->
+            <div class="card">
+                <app-schedule [doctorId]="doctorId"></app-schedule>
             </div>
         </div>
     </div>
     <br> <br> <br>
     <div class="row">
+        <div class="col-sm-3"></div>
         <div class="col-sm-6">
             <div class="card overflow-auto" style="height: 300px;">
                 <table class="table table-striped">
@@ -53,18 +66,19 @@
                     <tbody>
                         <tr *ngFor="let onCallshift of onCallShifts; index as i">
                             <td>{{i+1}}</td>
-                            <td>{{onCallshift}}</td>
+                            <td>{{formatDate(onCallshift.date)}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="col-sm-3"></div>
     </div>
     <br> <br> <br>
     <div class="row">
         <div class="col">
-            <div style="width: 100%; height: 600px; background-color: rgb(172, 121, 255);">
-                Grafici i statistika
+            <div style="width: 100%; height: 600px;">
+               <app-doctor-statistics></app-doctor-statistics>
             </div>
         </div>
     </div>

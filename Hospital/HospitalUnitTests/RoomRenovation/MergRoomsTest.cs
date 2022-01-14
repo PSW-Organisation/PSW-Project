@@ -33,14 +33,14 @@ namespace HospitalUnitTests.RoomRenovation
             var stubRoomRepository = new Mock<IRoomService>();
 
             Room room = new Room() { Floor = 2, Id = 1, Name = "Soba 1" };
-            RoomGraphic rg = new RoomGraphic() { Id = 1, X = 0, Y = 0, Height = 100, Width = 100, RoomId = 1 };
+            RoomGraphic rg = new RoomGraphic() { Id = 1, Position = new Position(0, 0), Dimension = new Dimension(100, 100), RoomId = 1 };
 
             List<RoomGraphic> roomGraphicsOnSameFloor = new List<RoomGraphic>()
             {
-                new RoomGraphic() { Id = 1, X = 0, Y = 0, Height = 100, Width = 100, RoomId = 1 },
-                new RoomGraphic() { Id = 2, X = 100, Y = 0, Height = 100, Width = 100, RoomId = 3 },
-                new RoomGraphic() { Id = 3, X = 0, Y = 100, Height = 100, Width = 100, RoomId = 6 },
-                new RoomGraphic() { Id = 4, X = 100, Y = 100, Height = 100, Width = 100, RoomId = 8 }
+                new RoomGraphic() { Id = 1, Position = new Position(0, 0), Dimension = new Dimension(100, 100), RoomId = 1 },
+                new RoomGraphic() { Id = 2, Position = new Position(100,0), Dimension = new Dimension(100, 100), RoomId = 3 },
+                new RoomGraphic() { Id = 3, Position = new Position(0,100), Dimension = new Dimension(100, 100), RoomId = 6 },
+                new RoomGraphic() { Id = 4, Position = new Position(100,100), Dimension = new Dimension(100, 100), RoomId = 8 }
             };
 
             stubFloorGraphicRepository.Setup(par => par.GetAllRoomGraphicOnSameFloor(It.Is<Room>(r => r.Id == room.Id))).Returns(roomGraphicsOnSameFloor);
@@ -187,7 +187,7 @@ namespace HospitalUnitTests.RoomRenovation
                     GetRoom(2),
                     GetRoomGraphic(2),
                     GetRoom(3),
-                    new RoomGraphic() { Id = 3, X = 0, Y = 0, Height = 100, Width = 200, RoomId = 3, Room = GetRoom(3)}
+                    new RoomGraphic() { Id = 3, Position = new Position(0,0), Dimension = new Dimension(200, 100), RoomId = 3, Room = GetRoom(3)}
                 },
                 new object[]
                 {
@@ -196,7 +196,7 @@ namespace HospitalUnitTests.RoomRenovation
                     GetRoom(2),
                     GetRoomGraphic(5),
                     GetRoom(3),
-                    new RoomGraphic() { Id = 3, X = 130, Y = 270, Height = 200, Width = 58, RoomId = 3, Room = GetRoom(3)}
+                    new RoomGraphic() { Id = 3, Position = new Position(130, 270), Dimension = new Dimension(58, 200), RoomId = 3, Room = GetRoom(3)}
                 }
             };
 
@@ -267,23 +267,23 @@ namespace HospitalUnitTests.RoomRenovation
             RoomGraphic roomGraphic = new RoomGraphic();
             if(i == 1)
             {
-                roomGraphic = new RoomGraphic() { Id = 1, X = 0, Y = 0, Height = 100, Width = 100, RoomId = 1 };
+                roomGraphic = new RoomGraphic() { Id = 1, Position = new Position(0,0), Dimension =  new Dimension(100, 100), RoomId = 1 };
             }
             else if(i == 2)
             {
-                roomGraphic = new RoomGraphic() { Id = 2, X = 100, Y = 0, Height = 100, Width = 100, RoomId = 1 };
+                roomGraphic = new RoomGraphic() { Id = 2, Position = new Position(100,0), Dimension = new Dimension(100,100), RoomId = 1 };
             }
             else if(i == 3)
             {
-                roomGraphic = new RoomGraphic() { Id = 3, X = 0, Y = 0, Height = 100, Width = 200, RoomId = 1 };
+                roomGraphic = new RoomGraphic() { Id = 3, Position = new Position(0,0), Dimension = new Dimension(200, 100), RoomId = 1 };
             }
             else if(i == 4)
             {
-                roomGraphic = new RoomGraphic() { Id = 4, X = 130, Y = 270, Height = 80, Width = 58, RoomId = 1 };
+                roomGraphic = new RoomGraphic() { Id = 4, Position = new Position(130,270), Dimension = new Dimension(58, 80), RoomId = 1 };
             }
             else if (i == 5)
             {
-                roomGraphic = new RoomGraphic() { Id = 5, X = 130, Y = 350, Height = 120, Width = 58, RoomId = 1 };
+                roomGraphic = new RoomGraphic() { Id = 5, Position = new Position(130,350), Dimension = new Dimension(58, 120), RoomId = 1 };
             }
 
             return roomGraphic;

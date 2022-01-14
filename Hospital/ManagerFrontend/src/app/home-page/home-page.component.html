@@ -87,7 +87,7 @@
                 </mat-card>
             </div>
             <div class="col-4 mt-5 text-center">
-                <mat-card class="example-card card4" routerLink="/feedback">
+                <mat-card class="example-card card4" name="feedbackCard" routerLink="/feedback">
                     <mat-card-title>Feedbacks</mat-card-title>
                     <mat-card-subtitle class="text-light">Manage feedbacks</mat-card-subtitle>
                     <mat-card-actions>
@@ -139,7 +139,24 @@
                     </mat-card-actions>
                 </mat-card>
             </div>
-            <div class="col-4 mt-5 text-center"></div>
+            <div class="col-4 mt-5 text-center">
+                <mat-card class="example-card card3" routerLink="/doctorOnCallShift">
+                    <mat-card-title>On call shifts</mat-card-title>
+                    <mat-card-subtitle class="text-light">Manage on call shifts</mat-card-subtitle>
+                    <mat-card-actions>
+                        <button mat-button>Enter</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+                <div class="col-4 mt-5 text-center">
+                <mat-card class="example-card card5" routerLink="/manageShifts">
+                    <mat-card-title>Manage Shifts</mat-card-title>
+                    <mat-card-subtitle class="text-light">Manage Shifts</mat-card-subtitle>
+                    <mat-card-actions>
+                        <button mat-button>Enter</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
             <div class="col-4 mt-5 text-center">
                 <mat-card class="example-card card1" (click)="logOut()">
                     <mat-card-title>Log out</mat-card-title>

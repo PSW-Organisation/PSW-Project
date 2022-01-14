@@ -27,12 +27,12 @@
                             <td>{{ feedback.submissionDate | date:'dd.MM.yyyy.'}}</td>
                             <td>{{ feedback.text }}</td>
                             <td class="justify-content-center display-inline text-center">
-                                <button *ngIf="feedback.publishAllowed && !feedback.isPublished"
+                                <button *ngIf="feedback.publishAllowed && !feedback.isPublished" name="publishButton"
                                     (click)="publishFeedback(feedback)" class="btn btn-md text-light text-center"
                                     style="background-color: rgb(133 27 27);">
                                     Publish
                                 </button>
-                                <button *ngIf="feedback.publishAllowed && feedback.isPublished"
+                                <button *ngIf="feedback.publishAllowed && feedback.isPublished" name="hideButton"
                                     (click)="publishFeedback(feedback)" class="btn btn-secondary btn-md text-light text-center">
                                     Hide
                                 </button>

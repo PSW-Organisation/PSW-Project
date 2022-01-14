@@ -50,7 +50,7 @@ namespace HospitalAPI
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; private set; }
+        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -132,6 +132,9 @@ namespace HospitalAPI
             services.AddScoped<IDoctorVacationService, DoctorVacationService>();
             services.AddScoped<IDoctorVacationRepository, DoctorVacationRepository>();
 
+            services.AddScoped<IOnCallShiftService, OnCallShiftService>();
+            services.AddScoped<IOnCallShiftRepository, OnCallShiftRepository>();
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<GenericSTRINGIDRepository<User>, UserDbRepository>();
             services.AddScoped<IUserRepository, UserDbRepository>();
@@ -169,9 +172,11 @@ namespace HospitalAPI
 
             services.AddScoped<IMedicineRepository, MedicineRepository>();
             services.AddScoped<IMedicineService, MedicineService>();
-
+            services.AddScoped<IShiftRepository, ShiftRepository>();
+            services.AddScoped<IShiftService, ShiftService>();
+            
             services.AddHostedService<RenovationBackgroundService>();
-
+            services.AddHostedService<ShiftBackgroundService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -10,6 +10,7 @@ export class Doctor {
     address: string;
     city: string;
     country: string;
+    shiftOrder: number;
 
     constructor(id: string,
         specialization: string,
@@ -21,7 +22,8 @@ export class Doctor {
         email: string,
         address: string,
         city: string,
-        country: string,) {
+        country: string,
+        shiftOrder: number) {
         
         this.id = id;
         this.specialization = specialization;
@@ -34,6 +36,7 @@ export class Doctor {
         this.address = address;
         this.city = city;
         this.country = country;
+        this.shiftOrder = shiftOrder;
 
     }
 

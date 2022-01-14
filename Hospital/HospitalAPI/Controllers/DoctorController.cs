@@ -49,5 +49,14 @@ namespace HospitalAPI.Controllers
             return Ok(doctorDTO);
         }
 
+        [HttpPut]
+        [Route("{id}")]
+        public ActionResult<DoctorDTO> UpdateDoctor(string id,Doctor newDoctor)
+        {
+            Doctor doctor = _doctorService.UpdateDoctor(newDoctor);
+            DoctorDTO doctorDTO = _mapper.Map<DoctorDTO>(doctor);
+            return Ok(doctorDTO);
+        }
+
     }
 }

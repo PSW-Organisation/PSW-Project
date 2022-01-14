@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IDoctorVacation } from '../doctor-vacation';
 import { DoctorVacationService } from '../doctor-vacation.service';
@@ -12,7 +12,7 @@ import { TimeSpan } from '../timespan';
 export class ScheduleComponent implements OnInit {
 
   title : string = 'Doctors Vacations';
-  doctorId! : string;
+  @Input() doctorId! : string;
   vacations! : IDoctorVacation[];
   vacation : IDoctorVacation=  {
     id: 0,
@@ -23,7 +23,7 @@ export class ScheduleComponent implements OnInit {
     },
     description: '',
     doctorId: "0",
-  };;
+  };
   formAction! : string;
   formOpened : boolean = false;
 
@@ -31,7 +31,9 @@ export class ScheduleComponent implements OnInit {
               private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.doctorId = this._route.snapshot.paramMap.get('doctorId')!;
+    
+    this.doctorId = this._route.snapshot.paramMap.get('id')!;      
+
     this._doctorVacationService.getDoctorVacations(this.doctorId).subscribe(vacations =>{
       this.vacations = vacations;
     })
@@ -66,7 +68,7 @@ export class ScheduleComponent implements OnInit {
     var dd = String(newDate.getDate()).padStart(2, '0');
     var mm = String(newDate.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = newDate.getFullYear();
-    return mm + '/' + dd + '/' + yyyy;
+    return dd + '/' + mm + '/'  + yyyy;
   }
 
 }

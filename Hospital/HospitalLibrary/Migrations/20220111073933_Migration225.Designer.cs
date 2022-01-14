@@ -10,8 +10,8 @@ using ehealthcare.Model;
 namespace HospitalLibrary.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    [Migration("20211223202046_MigrationName")]
-    partial class MigrationName
+    [Migration("20220111073933_Migration225")]
+    partial class Migration225
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,108 @@ namespace HospitalLibrary.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.20")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.DoctorVacation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DoctorVacations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Zimovanje",
+                            DoctorId = "mkisic"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Letovanje",
+                            DoctorId = "nelex"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Bolovanje",
+                            DoctorId = "mkisic"
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.OnCallShift", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OnCallShifts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2022, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "mkisic"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "nelex"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "mkisic"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Date = new DateTime(2022, 1, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DoctorId = "nelex"
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.Shift", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ShiftOrder")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Shifts");
+                });
 
             modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.PatientFeedback", b =>
                 {
@@ -140,9 +242,6 @@ namespace HospitalLibrary.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<double>("Height")
-                        .HasColumnType("double precision");
-
                     b.Property<int>("IdElement")
                         .HasColumnType("integer");
 
@@ -152,15 +251,6 @@ namespace HospitalLibrary.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("text");
 
-                    b.Property<double>("Width")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("X")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("Y")
-                        .HasColumnType("double precision");
-
                     b.HasKey("Id");
 
                     b.ToTable("ExteriorGraphic");
@@ -169,79 +259,51 @@ namespace HospitalLibrary.Migrations
                         new
                         {
                             Id = 1,
-                            Height = 200.0,
                             IdElement = 0,
                             Name = "ZGR1",
-                            Type = "building",
-                            Width = 100.0,
-                            X = 180.0,
-                            Y = 30.0
+                            Type = "building"
                         },
                         new
                         {
                             Id = 2,
-                            Height = 110.0,
                             IdElement = 1,
                             Name = "ZGR2",
-                            Type = "building",
-                            Width = 180.0,
-                            X = 380.0,
-                            Y = 120.0
+                            Type = "building"
                         },
                         new
                         {
                             Id = 7,
-                            Height = 50.0,
                             IdElement = -1,
                             Name = "",
-                            Type = "road",
-                            Width = 600.0,
-                            X = 0.0,
-                            Y = 250.0
+                            Type = "road"
                         },
                         new
                         {
                             Id = 3,
-                            Height = 110.0,
                             IdElement = -1,
                             Name = "",
-                            Type = "road",
-                            Width = 50.0,
-                            X = 0.0,
-                            Y = 290.0
+                            Type = "road"
                         },
                         new
                         {
                             Id = 4,
-                            Height = 400.0,
                             IdElement = -1,
                             Name = "",
-                            Type = "road",
-                            Width = 50.0,
-                            X = 305.0,
-                            Y = 0.0
+                            Type = "road"
                         },
                         new
                         {
                             Id = 5,
-                            Height = 80.0,
                             IdElement = -1,
                             Name = "P",
-                            Type = "parking",
-                            Width = 50.0,
-                            X = 245.0,
-                            Y = 310.0
+                            Type = "parking"
                         },
                         new
                         {
                             Id = 6,
-                            Height = 80.0,
                             IdElement = -1,
                             Name = "P",
-                            Type = "parking",
-                            Width = 50.0,
-                            X = 380.0,
-                            Y = 20.0
+                            Type = "parking"
                         });
                 });
 
@@ -296,19 +358,7 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("FloorGraphicId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Height")
-                        .HasColumnType("integer");
-
                     b.Property<int>("RoomId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Width")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("X")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Y")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -325,187 +375,119 @@ namespace HospitalLibrary.Migrations
                             Id = 16,
                             DoorPosition = "right",
                             FloorGraphicId = 1,
-                            Height = 100,
-                            RoomId = 16,
-                            Width = 100,
-                            X = 0,
-                            Y = 0
+                            RoomId = 16
                         },
                         new
                         {
                             Id = 1,
                             DoorPosition = "right",
                             FloorGraphicId = 1,
-                            Height = 100,
-                            RoomId = 1,
-                            Width = 100,
-                            X = 0,
-                            Y = 100
+                            RoomId = 1
                         },
                         new
                         {
                             Id = 2,
                             DoorPosition = "right",
                             FloorGraphicId = 1,
-                            Height = 145,
-                            RoomId = 2,
-                            Width = 75,
-                            X = 0,
-                            Y = 340
+                            RoomId = 2
                         },
                         new
                         {
                             Id = 3,
                             DoorPosition = "left",
                             FloorGraphicId = 1,
-                            Height = 145,
-                            RoomId = 3,
-                            Width = 75,
-                            X = 222,
-                            Y = 340
+                            RoomId = 3
                         },
                         new
                         {
                             Id = 4,
                             DoorPosition = "top",
                             FloorGraphicId = 1,
-                            Height = 80,
-                            RoomId = 4,
-                            Width = 150,
-                            X = 0,
-                            Y = 517
+                            RoomId = 4
                         },
                         new
                         {
                             Id = 5,
                             DoorPosition = "top",
                             FloorGraphicId = 1,
-                            Height = 80,
-                            RoomId = 5,
-                            Width = 150,
-                            X = 150,
-                            Y = 517
+                            RoomId = 5
                         },
                         new
                         {
                             Id = 6,
                             DoorPosition = "none",
                             FloorGraphicId = 1,
-                            Height = 160,
-                            RoomId = 6,
-                            Width = 140,
-                            X = 150,
-                            Y = 20
+                            RoomId = 6
                         },
                         new
                         {
                             Id = 7,
                             DoorPosition = "right",
                             FloorGraphicId = 2,
-                            Height = 100,
-                            RoomId = 7,
-                            Width = 100,
-                            X = 0,
-                            Y = 0
+                            RoomId = 7
                         },
                         new
                         {
                             Id = 8,
                             DoorPosition = "left",
                             FloorGraphicId = 2,
-                            Height = 100,
-                            RoomId = 8,
-                            Width = 100,
-                            X = 197,
-                            Y = 0
+                            RoomId = 8
                         },
                         new
                         {
                             Id = 9,
                             DoorPosition = "right",
                             FloorGraphicId = 2,
-                            Height = 100,
-                            RoomId = 9,
-                            Width = 100,
-                            X = 0,
-                            Y = 100
+                            RoomId = 9
                         },
                         new
                         {
                             Id = 10,
                             DoorPosition = "left",
                             FloorGraphicId = 2,
-                            Height = 100,
-                            RoomId = 10,
-                            Width = 100,
-                            X = 197,
-                            Y = 100
+                            RoomId = 10
                         },
                         new
                         {
                             Id = 11,
                             DoorPosition = "right",
                             FloorGraphicId = 2,
-                            Height = 145,
-                            RoomId = 11,
-                            Width = 75,
-                            X = 0,
-                            Y = 340
+                            RoomId = 11
                         },
                         new
                         {
                             Id = 12,
                             DoorPosition = "left",
                             FloorGraphicId = 2,
-                            Height = 145,
-                            RoomId = 12,
-                            Width = 75,
-                            X = 222,
-                            Y = 340
+                            RoomId = 12
                         },
                         new
                         {
                             Id = 13,
                             DoorPosition = "top",
                             FloorGraphicId = 2,
-                            Height = 80,
-                            RoomId = 13,
-                            Width = 150,
-                            X = 0,
-                            Y = 517
+                            RoomId = 13
                         },
                         new
                         {
                             Id = 14,
                             DoorPosition = "top",
                             FloorGraphicId = 2,
-                            Height = 80,
-                            RoomId = 14,
-                            Width = 150,
-                            X = 150,
-                            Y = 517
+                            RoomId = 14
                         },
                         new
                         {
                             Id = 15,
                             DoorPosition = "none",
                             FloorGraphicId = 2,
-                            Height = 100,
-                            RoomId = 15,
-                            Width = 140,
-                            X = 10,
-                            Y = 220
+                            RoomId = 15
                         },
                         new
                         {
                             Id = 17,
                             DoorPosition = "right",
                             FloorGraphicId = 3,
-                            Height = 100,
-                            RoomId = 17,
-                            Width = 100,
-                            X = 0,
-                            Y = 0
+                            RoomId = 17
                         });
                 });
 
@@ -922,9 +904,6 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("DurationInMinutes")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<int>("IdDestinationRoom")
                         .HasColumnType("integer");
 
@@ -940,9 +919,6 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("RelocationState")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("timestamp without time zone");
-
                     b.HasKey("Id");
 
                     b.ToTable("TermOfRelocationEquipments");
@@ -952,73 +928,61 @@ namespace HospitalLibrary.Migrations
                         {
                             Id = 1,
                             DurationInMinutes = 10,
-                            EndTime = new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified),
                             IdDestinationRoom = 8,
                             IdSourceRoom = 7,
                             NameOfEquipment = "bed",
                             QuantityOfEquipment = 2,
-                            RelocationState = 0,
-                            StartTime = new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified)
+                            RelocationState = 0
                         },
                         new
                         {
                             Id = 2,
                             DurationInMinutes = 40,
-                            EndTime = new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified),
                             IdDestinationRoom = 9,
                             IdSourceRoom = 7,
                             NameOfEquipment = "needle",
                             QuantityOfEquipment = 14,
-                            RelocationState = 0,
-                            StartTime = new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified)
+                            RelocationState = 0
                         },
                         new
                         {
                             Id = 3,
                             DurationInMinutes = 15,
-                            EndTime = new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified),
                             IdDestinationRoom = 9,
                             IdSourceRoom = 8,
                             NameOfEquipment = "infusion",
                             QuantityOfEquipment = 8,
-                            RelocationState = 0,
-                            StartTime = new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified)
+                            RelocationState = 0
                         },
                         new
                         {
                             Id = 4,
                             DurationInMinutes = 25,
-                            EndTime = new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified),
                             IdDestinationRoom = 11,
                             IdSourceRoom = 9,
                             NameOfEquipment = "table",
                             QuantityOfEquipment = 1,
-                            RelocationState = 0,
-                            StartTime = new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified)
+                            RelocationState = 0
                         },
                         new
                         {
                             Id = 5,
                             DurationInMinutes = 30,
-                            EndTime = new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified),
                             IdDestinationRoom = 7,
                             IdSourceRoom = 10,
                             NameOfEquipment = "xrayMachine",
                             QuantityOfEquipment = 1,
-                            RelocationState = 0,
-                            StartTime = new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified)
+                            RelocationState = 0
                         },
                         new
                         {
                             Id = 6,
                             DurationInMinutes = 20,
-                            EndTime = new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified),
                             IdDestinationRoom = 11,
                             IdSourceRoom = 10,
                             NameOfEquipment = "chair",
                             QuantityOfEquipment = 5,
-                            RelocationState = 0,
-                            StartTime = new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified)
+                            RelocationState = 0
                         });
                 });
 
@@ -1031,9 +995,6 @@ namespace HospitalLibrary.Migrations
 
                     b.Property<int>("DurationInMinutes")
                         .HasColumnType("integer");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("EquipmentLogic")
                         .HasColumnType("integer");
@@ -1062,9 +1023,6 @@ namespace HospitalLibrary.Migrations
                     b.Property<string>("NewSectorForRoomB")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<int>("StateOfRenovation")
                         .HasColumnType("integer");
 
@@ -1080,7 +1038,6 @@ namespace HospitalLibrary.Migrations
                         {
                             Id = 1,
                             DurationInMinutes = 60,
-                            EndTime = new DateTime(2021, 12, 7, 11, 30, 0, 0, DateTimeKind.Unspecified),
                             EquipmentLogic = 0,
                             IdRoomA = 1,
                             IdRoomB = 16,
@@ -1090,7 +1047,6 @@ namespace HospitalLibrary.Migrations
                             NewRoomTypeForRoomB = 5,
                             NewSectorForRoomA = "OS",
                             NewSectorForRoomB = "",
-                            StartTime = new DateTime(2021, 12, 7, 10, 30, 0, 0, DateTimeKind.Unspecified),
                             StateOfRenovation = 3,
                             TypeOfRenovation = 1
                         },
@@ -1098,7 +1054,6 @@ namespace HospitalLibrary.Migrations
                         {
                             Id = 2,
                             DurationInMinutes = 1440,
-                            EndTime = new DateTime(2021, 12, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             EquipmentLogic = 2,
                             IdRoomA = 4,
                             IdRoomB = -1,
@@ -1108,7 +1063,6 @@ namespace HospitalLibrary.Migrations
                             NewRoomTypeForRoomB = 1,
                             NewSectorForRoomA = "OS",
                             NewSectorForRoomB = "OS",
-                            StartTime = new DateTime(2021, 12, 17, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             StateOfRenovation = 0,
                             TypeOfRenovation = 0
                         });
@@ -1253,11 +1207,63 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HospitalLibrary.Shared.Model.Manager", b =>
+                {
+                    b.HasBaseType("ehealthcare.Model.User");
+
+                    b.HasDiscriminator().HasValue("Manager");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "laki",
+                            Address = "Hajduk Veljka, 5",
+                            City = "Novi Sad",
+                            Country = "Serbia",
+                            DateOfBirth = new DateTime(1990, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "igor.m@gmail.com",
+                            Gender = "male",
+                            IsActivated = true,
+                            IsBlocked = false,
+                            LoginType = 1,
+                            Name = "Igor",
+                            ParentName = "Ivan",
+                            Password = "Laki123!",
+                            Phone = "129572904354",
+                            Surname = "Maric",
+                            Token = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Username = "laki"
+                        },
+                        new
+                        {
+                            Id = "jagodica",
+                            Address = "Rumenacka, 23",
+                            City = "Novi Sad",
+                            Country = "Serbia",
+                            DateOfBirth = new DateTime(1985, 1, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "jagodica@gmail.com",
+                            Gender = "female",
+                            IsActivated = true,
+                            IsBlocked = false,
+                            LoginType = 1,
+                            Name = "Jagoda",
+                            ParentName = "Petar",
+                            Password = "Jagodica123!",
+                            Phone = "6820543267243",
+                            Surname = "Vasic",
+                            Token = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Username = "jagodica"
+                        });
+                });
+
             modelBuilder.Entity("ehealthcare.Model.Doctor", b =>
                 {
                     b.HasBaseType("ehealthcare.Model.User");
 
                     b.Property<int>("RoomId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ShiftOrder")
                         .HasColumnType("integer");
 
                     b.Property<int>("Specialization")
@@ -1291,6 +1297,7 @@ namespace HospitalLibrary.Migrations
                             Token = new Guid("00000000-0000-0000-0000-000000000000"),
                             Username = "nelex",
                             RoomId = 1,
+                            ShiftOrder = 1,
                             Specialization = 3,
                             UsedOffDays = 12
                         },
@@ -1314,6 +1321,7 @@ namespace HospitalLibrary.Migrations
                             Token = new Guid("00000000-0000-0000-0000-000000000000"),
                             Username = "mkisic",
                             RoomId = 7,
+                            ShiftOrder = 1,
                             Specialization = 0,
                             UsedOffDays = 12
                         });
@@ -1375,6 +1383,78 @@ namespace HospitalLibrary.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.DoctorVacation", b =>
+                {
+                    b.OwnsOne("HospitalLibrary.RoomsAndEquipment.Terms.Utils.TimeInterval", "DateSpecification", b1 =>
+                        {
+                            b1.Property<int>("DoctorVacationId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<DateTime>("EndTime")
+                                .HasColumnName("EndTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<DateTime>("StartTime")
+                                .HasColumnName("StartTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("DoctorVacationId");
+
+                            b1.ToTable("DoctorVacations");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorVacationId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    DoctorVacationId = 1,
+                                    EndTime = new DateTime(2022, 1, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2022, 1, 15, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    DoctorVacationId = 2,
+                                    EndTime = new DateTime(2022, 6, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2022, 6, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    DoctorVacationId = 3,
+                                    EndTime = new DateTime(2022, 1, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2022, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                                });
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.DoctorSchedule.Model.Shift", b =>
+                {
+                    b.OwnsOne("HospitalLibrary.RoomsAndEquipment.Terms.Utils.TimeInterval", "TimeInterval", b1 =>
+                        {
+                            b1.Property<int>("ShiftId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<DateTime>("EndTime")
+                                .HasColumnName("EndTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<DateTime>("StartTime")
+                                .HasColumnName("StartTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("ShiftId");
+
+                            b1.ToTable("Shifts");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ShiftId");
+                        });
+                });
+
             modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.Question", b =>
                 {
                     b.HasOne("HospitalLibrary.FeedbackAndSurvey.Model.Survey", "Survey")
@@ -1391,6 +1471,143 @@ namespace HospitalLibrary.Migrations
                         .HasForeignKey("PatientId");
                 });
 
+            modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.ExteriorGraphic", b =>
+                {
+                    b.OwnsOne("HospitalLibrary.GraphicalEditor.Model.Dimension", "Dimension", b1 =>
+                        {
+                            b1.Property<int>("ExteriorGraphicId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<int>("Height")
+                                .HasColumnName("Height")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("Width")
+                                .HasColumnName("Width")
+                                .HasColumnType("integer");
+
+                            b1.HasKey("ExteriorGraphicId");
+
+                            b1.ToTable("ExteriorGraphic");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ExteriorGraphicId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    ExteriorGraphicId = 1,
+                                    Height = 200,
+                                    Width = 100
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 2,
+                                    Height = 110,
+                                    Width = 180
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 7,
+                                    Height = 50,
+                                    Width = 600
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 3,
+                                    Height = 110,
+                                    Width = 50
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 4,
+                                    Height = 400,
+                                    Width = 50
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 5,
+                                    Height = 80,
+                                    Width = 50
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 6,
+                                    Height = 80,
+                                    Width = 50
+                                });
+                        });
+
+                    b.OwnsOne("HospitalLibrary.GraphicalEditor.Model.Position", "Position", b1 =>
+                        {
+                            b1.Property<int>("ExteriorGraphicId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<int>("X")
+                                .HasColumnName("X")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("Y")
+                                .HasColumnName("Y")
+                                .HasColumnType("integer");
+
+                            b1.HasKey("ExteriorGraphicId");
+
+                            b1.ToTable("ExteriorGraphic");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ExteriorGraphicId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    ExteriorGraphicId = 1,
+                                    X = 180,
+                                    Y = 30
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 2,
+                                    X = 380,
+                                    Y = 120
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 7,
+                                    X = 0,
+                                    Y = 250
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 3,
+                                    X = 0,
+                                    Y = 290
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 4,
+                                    X = 305,
+                                    Y = 0
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 5,
+                                    X = 245,
+                                    Y = 310
+                                },
+                                new
+                                {
+                                    ExteriorGraphicId = 6,
+                                    X = 380,
+                                    Y = 20
+                                });
+                        });
+                });
+
             modelBuilder.Entity("HospitalLibrary.GraphicalEditor.Model.RoomGraphic", b =>
                 {
                     b.HasOne("HospitalLibrary.GraphicalEditor.Model.FloorGraphic", "FloorGraphic")
@@ -1404,6 +1621,260 @@ namespace HospitalLibrary.Migrations
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.OwnsOne("HospitalLibrary.GraphicalEditor.Model.Dimension", "Dimension", b1 =>
+                        {
+                            b1.Property<int>("RoomGraphicId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<int>("Height")
+                                .HasColumnName("Height")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("Width")
+                                .HasColumnName("Width")
+                                .HasColumnType("integer");
+
+                            b1.HasKey("RoomGraphicId");
+
+                            b1.ToTable("RoomGraphics");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RoomGraphicId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    RoomGraphicId = 16,
+                                    Height = 100,
+                                    Width = 100
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 1,
+                                    Height = 100,
+                                    Width = 100
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 2,
+                                    Height = 145,
+                                    Width = 75
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 3,
+                                    Height = 145,
+                                    Width = 75
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 4,
+                                    Height = 80,
+                                    Width = 150
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 5,
+                                    Height = 80,
+                                    Width = 150
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 6,
+                                    Height = 160,
+                                    Width = 140
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 7,
+                                    Height = 100,
+                                    Width = 100
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 8,
+                                    Height = 100,
+                                    Width = 100
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 9,
+                                    Height = 100,
+                                    Width = 100
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 10,
+                                    Height = 100,
+                                    Width = 100
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 11,
+                                    Height = 145,
+                                    Width = 75
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 12,
+                                    Height = 145,
+                                    Width = 75
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 13,
+                                    Height = 80,
+                                    Width = 150
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 14,
+                                    Height = 80,
+                                    Width = 150
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 15,
+                                    Height = 100,
+                                    Width = 140
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 17,
+                                    Height = 100,
+                                    Width = 100
+                                });
+                        });
+
+                    b.OwnsOne("HospitalLibrary.GraphicalEditor.Model.Position", "Position", b1 =>
+                        {
+                            b1.Property<int>("RoomGraphicId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<int>("X")
+                                .HasColumnName("X")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("Y")
+                                .HasColumnName("Y")
+                                .HasColumnType("integer");
+
+                            b1.HasKey("RoomGraphicId");
+
+                            b1.ToTable("RoomGraphics");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RoomGraphicId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    RoomGraphicId = 16,
+                                    X = 0,
+                                    Y = 0
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 1,
+                                    X = 0,
+                                    Y = 100
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 2,
+                                    X = 0,
+                                    Y = 340
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 3,
+                                    X = 222,
+                                    Y = 340
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 4,
+                                    X = 0,
+                                    Y = 517
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 5,
+                                    X = 150,
+                                    Y = 517
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 6,
+                                    X = 150,
+                                    Y = 20
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 7,
+                                    X = 0,
+                                    Y = 0
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 8,
+                                    X = 197,
+                                    Y = 0
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 9,
+                                    X = 0,
+                                    Y = 100
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 10,
+                                    X = 197,
+                                    Y = 100
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 11,
+                                    X = 0,
+                                    Y = 340
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 12,
+                                    X = 222,
+                                    Y = 340
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 13,
+                                    X = 0,
+                                    Y = 517
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 14,
+                                    X = 150,
+                                    Y = 517
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 15,
+                                    X = 10,
+                                    Y = 220
+                                },
+                                new
+                                {
+                                    RoomGraphicId = 17,
+                                    X = 0,
+                                    Y = 0
+                                });
+                        });
                 });
 
             modelBuilder.Entity("HospitalLibrary.MedicalRecords.Model.MedicalRecord", b =>
@@ -1432,6 +1903,110 @@ namespace HospitalLibrary.Migrations
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HospitalLibrary.RoomsAndEquipment.Terms.Model.TermOfRelocationEquipment", b =>
+                {
+                    b.OwnsOne("HospitalLibrary.RoomsAndEquipment.Terms.Utils.TimeInterval", "TimeInterval", b1 =>
+                        {
+                            b1.Property<int>("TermOfRelocationEquipmentId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<DateTime>("EndTime")
+                                .HasColumnName("EndTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<DateTime>("StartTime")
+                                .HasColumnName("StartTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("TermOfRelocationEquipmentId");
+
+                            b1.ToTable("TermOfRelocationEquipments");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TermOfRelocationEquipmentId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    TermOfRelocationEquipmentId = 1,
+                                    EndTime = new DateTime(2021, 11, 22, 1, 10, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2021, 11, 22, 1, 0, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    TermOfRelocationEquipmentId = 2,
+                                    EndTime = new DateTime(2021, 11, 22, 4, 10, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2021, 11, 22, 3, 30, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    TermOfRelocationEquipmentId = 3,
+                                    EndTime = new DateTime(2021, 11, 23, 7, 45, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2021, 11, 23, 7, 30, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    TermOfRelocationEquipmentId = 4,
+                                    EndTime = new DateTime(2021, 11, 23, 9, 25, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2021, 11, 23, 9, 0, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    TermOfRelocationEquipmentId = 5,
+                                    EndTime = new DateTime(2021, 11, 23, 11, 15, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2021, 11, 23, 10, 45, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    TermOfRelocationEquipmentId = 6,
+                                    EndTime = new DateTime(2021, 11, 23, 14, 50, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2021, 11, 23, 14, 30, 0, 0, DateTimeKind.Unspecified)
+                                });
+                        });
+                });
+
+            modelBuilder.Entity("HospitalLibrary.RoomsAndEquipment.Terms.Model.TermOfRenovation", b =>
+                {
+                    b.OwnsOne("HospitalLibrary.RoomsAndEquipment.Terms.Utils.TimeInterval", "TimeInterval", b1 =>
+                        {
+                            b1.Property<int>("TermOfRenovationId")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<DateTime>("EndTime")
+                                .HasColumnName("EndTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.Property<DateTime>("StartTime")
+                                .HasColumnName("StartTime")
+                                .HasColumnType("timestamp without time zone");
+
+                            b1.HasKey("TermOfRenovationId");
+
+                            b1.ToTable("TermOfRenovations");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TermOfRenovationId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    TermOfRenovationId = 1,
+                                    EndTime = new DateTime(2021, 12, 7, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2021, 12, 7, 10, 30, 0, 0, DateTimeKind.Unspecified)
+                                },
+                                new
+                                {
+                                    TermOfRenovationId = 2,
+                                    EndTime = new DateTime(2021, 12, 18, 9, 0, 0, 0, DateTimeKind.Unspecified),
+                                    StartTime = new DateTime(2021, 12, 17, 9, 0, 0, 0, DateTimeKind.Unspecified)
+                                });
+                        });
                 });
 
             modelBuilder.Entity("ehealthcare.Model.MedicalPermit", b =>

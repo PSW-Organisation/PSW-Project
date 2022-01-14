@@ -53,8 +53,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
             List<TimeInterval> termForRelocation = GetFreePossibleTermsOfRelocation(paramsOfRelocationEquipment);
             if (termForRelocation.Count == 1)
             {
-                newTermOfRelocationEquipment.StartTime = termForRelocation[0].StartTime;
-                newTermOfRelocationEquipment.EndTime = termForRelocation[0].EndTime;
+                newTermOfRelocationEquipment.TimeInterval = new TimeInterval(termForRelocation[0].StartTime, termForRelocation[0].EndTime);
                 newTermOfRelocationEquipment.Id = _relocationEquipmentRepository.GetNewID();
 
                 _relocationEquipmentRepository.Insert(newTermOfRelocationEquipment);
@@ -71,9 +70,9 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
         {
             List<TimeInterval> allTimeInteval = new List<TimeInterval>();
             if (termOfRenovationRoom != null)
-                foreach (TermOfRenovation term in termOfRenovationRoom) allTimeInteval.Add(new TimeInterval(term.StartTime, term.EndTime));
+                foreach (TermOfRenovation term in termOfRenovationRoom) allTimeInteval.Add(new TimeInterval(term.TimeInterval.StartTime, term.TimeInterval.EndTime));
             if (termOfRelocationRoom != null)
-                foreach (TermOfRelocationEquipment term in termOfRelocationRoom) allTimeInteval.Add(new TimeInterval(term.StartTime, term.EndTime));
+                foreach (TermOfRelocationEquipment term in termOfRelocationRoom) allTimeInteval.Add(new TimeInterval(term.TimeInterval.StartTime, term.TimeInterval.EndTime));
 
             return allTimeInteval;
         }
@@ -81,7 +80,7 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Service
         public bool CancelRelocationTerm(int id)
         {   
             TermOfRelocationEquipment termOfRelocation = _relocationEquipmentRepository.Get(id);
-            if (_termsUtils.IsCancelAllowed(termOfRelocation.StartTime)){
+            if (_termsUtils.IsCancelAllowed(termOfRelocation.TimeInterval.StartTime)){
                 termOfRelocation.RelocationState = StateOfTerm.CANCELED;
                 _relocationEquipmentRepository.Save(termOfRelocation);
                 return true; 

@@ -1,6 +1,6 @@
 <ng-template #content let-modal>
   <div class="modal-header">
-    <button type="btn" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="btn" name="dismiss" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
     </button>
   </div>
   <div class="modal-body">
@@ -8,19 +8,19 @@
       <div class="form-group">
         <label for="feedback">Leave feedback here:</label>
         <div class="input-group">
-          <textarea style="margin-left: 1%;" minlength="3" maxlength="120" rows="6" class="form-control" autofocus
+          <textarea name="textarea" style="margin-left: 1%;" minlength="3" maxlength="120" rows="6" class="form-control" autofocus
             type="text" formControlName="textControl"></textarea>
         </div>
         <br />
-        <label>Anonymus:</label>
+        <label>Anonymous:</label>
         <br />
         <div class="btn-group btn-group-toggle" style="margin-left: 2%; margin-top: 1%;" ngbRadioGroup
           name="radioBasic">
 
-          <input type="radio" formControlName="anonymityControl" [value]="true" />
+          <input id="anonymousRadioYes" type="radio" formControlName="anonymityControl" [value]="true" />
           <label style="margin-left: 2%;">Yes</label>
 
-          <input style="margin-left: 30%;" formControlName="anonymityControl" type="radio" [value]="false" />
+          <input id="anonymousRadioNo" style="margin-left: 30%;" formControlName="anonymityControl" type="radio" [value]="false" />
           <label style="margin-left: 2%;"> No</label>
         </div>
         <br />
@@ -29,16 +29,16 @@
         <br />
         <div class="btn-group btn-group-toggle" style="margin-left: 2%; margin-top: 1%;" ngbRadioGroup
           name="radioBasic">
-          <input type="radio" formControlName="publishControl" [value]="true" />
+          <input id="publishRadioYes" type="radio" formControlName="publishControl" [value]="true" />
           <label style="margin-left: 2%;">Yes</label>
 
-          <input style="margin-left: 30%;" formControlName="publishControl" [value]="false" type="radio" />
+          <input id="publishRadioNo" style="margin-left: 30%;" formControlName="publishControl" [value]="false" type="radio" />
           <label style="margin-left: 2%;">No</label>
 
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-dark" type="submit" [disabled]="!feedbackForm.valid">Save</button>
+        <button class="btn btn-dark" name="submit" type="submit" [disabled]="!feedbackForm.valid">Save</button>
       </div>
     </form>
   </div>
