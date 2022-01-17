@@ -1,6 +1,7 @@
 ﻿using ehealthcare.Model;
 using HospitalLibrary.Model;
 using HospitalLibrary.Schedule.Model;
+using HospitalLibrary.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,5 +31,7 @@ namespace HospitalLibrary.Schedule.Service
         public List<Visit> GetForthcomingVisitsByDateAndDoctor(DateTime beginning, DateTime ending, string doctorId);
         public List<Visit> GetАllGeneratedFreeVisits(VisitRecommendation recommendation);
         public List<Visit> GetVisitsForRoom(int roomId);
+        public AppointmentReport GetReport(int id);
+        public AppointmentPrescription GetPrescription(int id);
     }
 }

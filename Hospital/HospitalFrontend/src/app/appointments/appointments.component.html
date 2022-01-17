@@ -43,6 +43,8 @@
                                     <th scope="col">Specialization</th>
                                     <th scope="col">Survey</th>
                                     <th scope="col">Cancel</th>
+                                    <th scope="col">Report</th>
+                                    <th scope="col">Prescription</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,12 +61,18 @@
                                     <td *ngIf="visit.doctor.specialization  === 3">Regular</td>
                                     <td *ngIf="visit.isReviewed">Filled out</td>
                                     <td *ngIf="!visit.isReviewed">
-                                        <button (click)="openSurvey(visit.id)" style="border-radius: 10px;" [disabled]="!isCompleted(visit) || visit.isCanceled" class="btn btn-warning btn-sm">
+                                        <button (click)="openSurvey(visit.id)" title="Open survey" style="border-radius: 10px;" [disabled]="!isCompleted(visit) || visit.isCanceled" class="btn btn-warning btn-sm">
                                             <i style="color: white" class="fa fa-star fa-2x"></i>
                                         </button>
                                     </td>
                                     <td>
-                                        <button name="cancelButton" [disabled]="visit.isCanceled || isCompleted(visit)" style="border-radius: 10px;" class="btn btn-danger btn-sm" (click)="cancelAppointment(visit)"><i class="fa fa-times-circle fa-2x"></i></button>
+                                        <button name="cancelButton" [disabled]="visit.isCanceled || isCompleted(visit)" style="border-radius: 10px;" class="btn btn-danger btn-sm" title="Cancel appointment" (click)="cancelAppointment(visit)"><i class="fa fa-times-circle fa-2x"></i></button>
+                                    </td>
+                                    <td>
+                                        <app-report *ngIf="isCompleted(visit) && !visit.isCanceled" [reportId]="visit.id" ></app-report>
+                                    </td>
+                                    <td>
+                                        <app-prescription *ngIf="isCompleted(visit) && !visit.isCanceled" [prescriptionId]="visit.id" ></app-prescription>
                                     </td>
                                 </tr>
                             </tbody>

@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProfileService {
+  
   currentUser: any;
 
   constructor(private _http: HttpClient) { }
@@ -36,4 +37,13 @@ export class ProfileService {
   getImage(username: string): Observable<any> {
     return this._http.get<any>(`api/Profile/GetImage/${username}`)
   }
+
+  getReport(id: number): Observable<any> {
+    return this._http.get<any>(`api/appointment/report/${id}`, { observe: 'response' })
+  }
+
+  getPreciption(id: number) {
+    return this._http.get<any>(`api/appointment/prescription/${id}`, { observe: 'response' })
+  }
+  
 }

@@ -26,6 +26,8 @@ namespace ehealthcare.Model
         public DbSet<RoomGraphic> RoomGraphics { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Visit> Visits { get; set; }
+        public DbSet<AppointmentReport> Reports { get; set; }
+        public DbSet<AppointmentPrescription> AppointmentPrescriptions { get; set; }
         public DbSet<FloorGraphic> FloorGraphics { get; set; }
         public DbSet<PatientAllergen> PatientAllergens { get; set; }
         public DbSet<User> Users { get; set; }
@@ -1176,7 +1178,7 @@ namespace ehealthcare.Model
                         Email = "markoilic@gmail.com",
                         Address = "Sime Milosevica, 5",
                         IsBlocked = false,
-                        IsActivated = false,
+                        IsActivated = true,
                         Token = new Guid("601ccaa8-3a07-4a7c-89b9-9953e6eac8a7"),
                         City = "Novi Sad",
                         Country = "Serbia",
@@ -1343,6 +1345,37 @@ namespace ehealthcare.Model
                         VisitType = VisitType.examination,
                         IsReviewed = false,
                         IsCanceled = true
+                    });
+            });
+
+            modelBuilder.Entity<AppointmentReport>(r =>
+            {
+                r.HasData(
+                    new AppointmentReport()
+                    {
+                        AppointmentId = -1,
+                        PatientUsername = "imbiamba",
+                        DoctorUsername = "nelex",
+                        Date = new DateTime(2021, 11, 30, 19, 30, 00),
+                        Anamnesis = "Patient exhibits common cold symptoms such as: nasal congestion, sneezing and runny nose.",
+                        Diagnosis = "J00 - Acute nasopharyngitis (common cold)",
+                        Notes = "Patient is advised to drink plenty of fluids and make use of nasal drops or sprays."
+                    });
+            });
+
+            modelBuilder.Entity<AppointmentPrescription>(r =>
+            {
+                r.HasData(
+                    new AppointmentPrescription()
+                    {
+                        AppointmentId = -1,
+                        PatientUsername = "imbiamba",
+                        DoctorUsername = "nelex",
+                        Date = new DateTime(2021, 11, 30, 19, 30, 00),
+                        Medicine = "Amoxiciline",
+                        Quantity = 120,
+                        RecommendedDose = 50,
+                        Diagnosis = "J00 - Acute nasopharyngitis (common cold)",                    
                     });
             });
 

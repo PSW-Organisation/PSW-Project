@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using HospitalLibrary.Shared.Model;
 
 namespace HospitalLibrary.Schedule.Repository
 {
@@ -57,6 +58,16 @@ namespace HospitalLibrary.Schedule.Repository
         public List<Visit> GetVisitsForRoom(int roomId)
         {
             return _dbContext.Visits.Where(v => v.Doctor.RoomId == roomId).ToList();
+        }
+
+        public AppointmentReport GetReport(int id)
+        {
+            return _dbContext.Reports.Where(r=> r.AppointmentId == id).SingleOrDefault();
+        }
+
+        public AppointmentPrescription GetPrescription(int id)
+        {
+            return _dbContext.AppointmentPrescriptions.Where(p => p.AppointmentId == id).SingleOrDefault();
         }
     }
 }
