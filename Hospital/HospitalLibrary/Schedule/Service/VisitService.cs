@@ -9,6 +9,7 @@ using HospitalLibrary.MedicalRecord.Repository;
 using HospitalLibrary.MedicalRecords.Repository;
 using HospitalLibrary.Schedule.Model;
 using HospitalLibrary.Model;
+using HospitalLibrary.Shared.Model;
 
 namespace HospitalLibrary.Schedule.Service
 {
@@ -691,6 +692,16 @@ namespace HospitalLibrary.Schedule.Service
         public List<Visit> GetVisitsForRoom(int roomId)
         {
             return _visitRepository.GetVisitsForRoom(roomId);
+        }
+
+        public AppointmentReport GetReport(int id)
+        {
+            return _visitRepository.GetReport(id);
+        }
+
+        public AppointmentPrescription GetPrescription(int id)
+        {
+            return _visitRepository.GetPrescription(id);
         }
     }
 }

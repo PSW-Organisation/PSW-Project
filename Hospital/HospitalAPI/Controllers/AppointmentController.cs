@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using HospitalLibrary.Model;
+using HospitalLibrary.Shared.Model;
 
 namespace HospitalAPI.Controllers
 {
@@ -161,6 +162,24 @@ namespace HospitalAPI.Controllers
             DateTime startTime = new DateTime(int.Parse(startSplit[2]), int.Parse(startSplit[0]), int.Parse(startSplit[1]));
             DateTime endTime = new DateTime(int.Parse(endSplit[2]), int.Parse(endSplit[0]), int.Parse(endSplit[1]));
             return _visitService.GetАllGeneratedFreeVisits(new VisitRecommendation(startTime, endTime, doctorId, priority, isVisitScheduleByPriority));
+        }
+
+        [HttpGet]
+        [Route("report/{id}")]
+        public ActionResult<AppointmentReport> GetReport(int id)
+        {
+            AppointmentReport report = _visitService.GetReport(id);
+            if (report == null) return NotFound();
+            return Ok(report);
+        }
+
+        [HttpGet]
+        [Route("prescription/{id}")]
+        public ActionResult<AppointmentReport> GetPreciption(int id)
+        {
+            AppointmentPrescription prescription = _visitService.GetPrescription(id);
+            if (prescription == null) return NotFound();
+            return Ok(prescription);
         }
     }
 }

@@ -31,6 +31,8 @@ import { TokenInterceptor } from './shared/token.interceptor';
 import { PatientGuard } from './shared/jwt-guard';
 import { CarouselComponent } from './carousel/carousel.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { ReportComponent } from './report/report.component';
+import { PrescriptionComponent } from './prescription/prescription.component';
 
 export function playerFactory() {
   return player;
@@ -48,7 +50,9 @@ export function playerFactory() {
     StepperComponent,
     RecommendedAppointmentSchedulingComponent,
     NavbarComponent,
-    CarouselComponent
+    CarouselComponent,
+    ReportComponent,
+    PrescriptionComponent
   ],
   imports: [
     BrowserModule,

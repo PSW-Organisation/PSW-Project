@@ -1,5 +1,6 @@
 ﻿using ehealthcare.Model;
 using HospitalLibrary.Repository;
+using HospitalLibrary.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,5 +17,7 @@ namespace HospitalLibrary.Schedule.Repository
         public List<Visit> GetForthcomingVisitsByDateAndDoctor(DateTime begining, DateTime ending, string doctorId);
         public List<Visit> GetAllVisits();
         public List<Visit> GetVisitsForRoom(int roomId);
+        public AppointmentReport GetReport(int id);
+        public AppointmentPrescription GetPrescription(int id);
     }
 }

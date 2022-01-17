@@ -1,0 +1,47 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h2 class="text-center">Prescription</h2>
+        <button type="btn" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="prescriptionForm">
+            <div class="form-group">
+                <label>Date:</label>
+                <div class="input-group mb-3">
+                    <input style="margin-left: 1%;" rows="6" class="form-control" type="text"
+                        readonly formControlName="dateControl">
+                </div>
+                <label>Medicine:</label>
+                <div class="input-group mb-3">
+                    <input style="margin-left: 1%;" rows="6" class="form-control" type="text"
+                        readonly formControlName="medicineControl">
+                </div>
+
+                <label>Quantity[mg]:</label>
+                <div class="input-group">
+                    <input style="margin-left: 1%;" rows="6" class="form-control" type="number"
+                        readonly formControlName="quantityControl">
+                </div>
+
+                <label>Recommended dose:</label>
+                <div class="input-group">
+                    <input style="margin-left: 1%;" rows="6" class="form-control" type="number"
+                        readonly formControlName="recommendedDoseControl">
+                </div>
+
+                <label>Diagnosis:</label>
+                <div class="input-group mb-3">
+                    <textarea style="margin-left: 1%;" rows="6" class="form-control" type="text"
+                        readonly formControlName="diagnosisControl"></textarea>
+                </div>
+
+                
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<button (click)="open(content)" title="Open report" class="btn btn-primary btn-sm" style="border-radius: 10px; margin-left: -15px;">
+    <i class="fa fa-medkit fa-2x"></i> 
+</button>
