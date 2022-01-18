@@ -10,8 +10,8 @@ using ehealthcare.Model;
 namespace HospitalLibrary.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    [Migration("20220111073933_Migration225")]
-    partial class Migration225
+    [Migration("20220118151858_MigrationName")]
+    partial class MigrationName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -121,6 +121,30 @@ namespace HospitalLibrary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Shifts");
+                });
+
+            modelBuilder.Entity("HospitalLibrary.Events.Model.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("EventAppName")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EventClass")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("IdUser")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.PatientFeedback", b =>

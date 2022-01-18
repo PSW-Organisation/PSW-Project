@@ -9,6 +9,7 @@ using HospitalLibrary.Shared.Model;
 using System;
 using HospitalLibrary.DoctorSchedule.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
+using HospitalLibrary.Events.Model;
 
 namespace ehealthcare.Model
 {
@@ -39,6 +40,8 @@ namespace ehealthcare.Model
         public DbSet<DoctorVacation> DoctorVacations { get; set; }
         public DbSet<OnCallShift> OnCallShifts { get; set; }
         public DbSet<Shift> Shifts { get; set; }
+
+        public DbSet<Event> Events { get; set; }
 
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options)
         {
