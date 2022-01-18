@@ -40,6 +40,8 @@ using HospitalLibrary.Shared.Repository;
 using HospitalAPI.JWT;
 using Microsoft.AspNetCore.Authorization;
 using HospitalLibrary.DoctorSchedule.Repository;
+using HospitalLibrary.Events.Repository;
+using HospitalLibrary.Events.Service;
 
 namespace HospitalAPI
 {
@@ -177,6 +179,9 @@ namespace HospitalAPI
             
             services.AddHostedService<RenovationBackgroundService>();
             services.AddHostedService<ShiftBackgroundService>();
+
+            services.AddScoped<IEventRepository, EventRepository>();
+            services.AddScoped<IEventService, EventService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

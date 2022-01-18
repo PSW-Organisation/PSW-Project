@@ -121,6 +121,30 @@ namespace HospitalLibrary.Migrations
                     b.ToTable("Shifts");
                 });
 
+            modelBuilder.Entity("HospitalLibrary.Events.Model.Event", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("EventAppName")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EventClass")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("IdUser")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
+                });
+
             modelBuilder.Entity("HospitalLibrary.FeedbackAndSurvey.Model.PatientFeedback", b =>
                 {
                     b.Property<int>("Id")
