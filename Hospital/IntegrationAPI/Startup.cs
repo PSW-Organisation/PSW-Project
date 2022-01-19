@@ -40,6 +40,9 @@ using IntegrationLibrary.Tendering.Service.ServiceImpl;
 using IntegrationLibrary.Tendering.Service.ServiceInterfaces;
 using IntegrationLibrary.Tendering.Repository.RepoInterfaces;
 using IntegrationLibrary.Tendering.Repository.RepoImpl;
+using IntegrationLibrary.Emailing.Configuration;
+using IntegrationLibrary.Emailing.Service.Interface;
+using IntegrationLibrary.Emailing.Service.Impl;
 
 namespace IntegrationAPI
 {
@@ -56,6 +59,10 @@ namespace IntegrationAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var emailConfig = Configuration.GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+
             services.Configure<FormOptions>(o =>
             {
                 o.ValueLengthLimit = int.MaxValue;
@@ -139,6 +146,7 @@ namespace IntegrationAPI
             services.AddScoped<ITenderService, TenderService>();
             services.AddScoped<ITenderResponseService, TenderResponseService>();
             services.AddScoped<ITenderPublishingService, TenderRabbitMQService>();
+            services.AddScoped<IEmailSender, EmailSender>();
             services.AddHostedService<TenderResponseRabbitMqService>();
             services.AddHostedService<RabbitMQService>();
 

@@ -32,7 +32,7 @@ namespace IntegrationAPIIntegrationTests
             var stubRepositoryTransaction = new Mock<MedicineTransactionRepository>();
             var pharmacies = new List<Pharmacy>();
 
-            pharmacies.Add(new Pharmacy("http://localhost:29631/api3", "Flos", "Bulevar Oslobodjenja, Novi Sad", "bc56df25-0d34-4801-b76a-931e61b4c752", "108817cf-dc25-40f4-a18f-244c1315840a", "", "", 0));
+            pharmacies.Add(new Pharmacy("http://localhost:29631/api3", "Flos", "Bulevar Oslobodjenja, Novi Sad", "bc56df25-0d34-4801-b76a-931e61b4c752", "108817cf-dc25-40f4-a18f-244c1315840a", "", "", 0, ""));
             stubRepositoryPharmacy.Setup(p => p.GetAll()).Returns(pharmacies);
             IPharmacyService pharmacyService = new PharmacyService(stubRepositoryPharmacy.Object);
             IMedicineTransactionService medicineTransactionService = new MedicineTransactionService(stubRepositoryTransaction.Object); 
@@ -51,7 +51,7 @@ namespace IntegrationAPIIntegrationTests
             var stubRepositoryTransaction = new Mock<MedicineTransactionRepository>();
             var pharmacies = new List<Pharmacy>();
 
-            pharmacies.Add(new Pharmacy("http://localhost:29631/api3", "Flos", "Bulevar Oslobodjenja, Novi Sad", "bc56df25-0d34-4801-b76a-931e61b4c752", "108817cf-dc25-40f4-a18f-244c1315840a", "", "", 0));
+            pharmacies.Add(new Pharmacy("http://localhost:29631/api3", "Flos", "Bulevar Oslobodjenja, Novi Sad", "bc56df25-0d34-4801-b76a-931e61b4c752", "108817cf-dc25-40f4-a18f-244c1315840a", "", "", 0, ""));
             stubRepositoryPharmacy.Setup(p => p.GetAll()).Returns(pharmacies);
             IPharmacyService pharmacyService = new PharmacyService(stubRepositoryPharmacy.Object);
             IMedicineTransactionService medicineTransactionService = new MedicineTransactionService(stubRepositoryTransaction.Object);
