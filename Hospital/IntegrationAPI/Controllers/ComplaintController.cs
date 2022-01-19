@@ -31,7 +31,7 @@ namespace IntegrationAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id?}")]      // GET /api/complaint/1
+        [HttpGet("{id?}")]      // GET /api2/complaint/1
         public IActionResult Get(int id)
         {
             Complaint complaint = complaintService.Get(id);
@@ -45,7 +45,7 @@ namespace IntegrationAPI.Controllers
             }
         }
 
-        [HttpPost]      // POST /api/complaint Request body: {"complaintId":num,  "date":"date", "title":"someTitle", "content": "something", "pharmacyId":num}
+        [HttpPost]      // POST /api2/complaint Request body: {"complaintId":num,  "date":"date", "title":"someTitle", "content": "something", "pharmacyId":num}
         public IActionResult Add(ComplaintDTO dto)
         {
             if ( dto.Title.Length <= 0 || dto.Content.Length <= 0)
@@ -60,7 +60,6 @@ namespace IntegrationAPI.Controllers
         }
 
         [HttpDelete("{id?}")]       // DELETE /api2/complaint/1 
-        //zasto je id bio id=0?
         public IActionResult Delete(int id)
         {
             Complaint complaint = complaintService.Get(id);

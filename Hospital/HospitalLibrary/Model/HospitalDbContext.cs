@@ -10,6 +10,7 @@ using System;
 using HospitalLibrary.DoctorSchedule.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 using HospitalLibrary.Events.Model;
+using HospitalLibrary.Medicines.Model;
 
 namespace ehealthcare.Model
 {
@@ -35,7 +36,7 @@ namespace ehealthcare.Model
         public DbSet<Survey> Surveys { get; set; }
 
         public DbSet<Question> Questions { get; set; }
-        //public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
         public DbSet<MedicinePrescription> Prescriptions { get; set; }
         public DbSet<DoctorVacation> DoctorVacations { get; set; }
         public DbSet<OnCallShift> OnCallShifts { get; set; }

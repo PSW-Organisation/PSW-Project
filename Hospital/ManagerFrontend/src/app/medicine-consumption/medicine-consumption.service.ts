@@ -47,7 +47,6 @@ export class MedicineConsumptionService {
     (error:HttpErrorResponse )=>{
       this.sendNotification("failed_specification", medicineName)
      this.sendNotificationForMedicineReport2("This pharmacy doesn't have that medicine. Chose another one, or try again later!")} 
-  
     );
   }
   

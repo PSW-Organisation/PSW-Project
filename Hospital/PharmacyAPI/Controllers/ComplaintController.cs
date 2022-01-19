@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PharmacyAPI.Adapters;
 using PharmacyAPI.DTO;
 using PharmacyAPI.Model;
+using PharmacyLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,20 +15,30 @@ namespace PharmacyAPI.Controllers
     [ApiController]
     public class ComplaintController : ControllerBase
     {
-        private readonly PharmacyDbContext dbContext;
+        private IComplaintService service;
 
-        public ComplaintController(PharmacyDbContext context)
+        public ComplaintController(IComplaintService service)
         {
-            dbContext = context;
+            this.service = service;
         }
 
         [HttpGet]       // GET /api/complaint
         public IActionResult Get()
         {
             List<ComplaintDTO> result = new List<ComplaintDTO>();
-            
-            dbContext.Complaints.ToList().ForEach(complaint => result.Add(ComplaintAdapter.ComplaintToComplaintDto(complaint)));
-            return Ok(result);
+            foreach(Complaint c in service.GetAll())
+            { 
+                    result.Add(ComplaintAdapter.ComplaintToComplaintDto(c));
+            }
+            if( result != null)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                    return NotFound();
+            }
+   
         }
 
        
@@ -36,7 +47,7 @@ namespace PharmacyAPI.Controllers
         public IActionResult Get(long id)
         {
             
-            Complaint complaint = dbContext.Complaints.FirstOrDefault(complaint => complaint.ComplaintId == id);
+            Complaint complaint = service.Get(id);
             if (complaint == null)
             {
                 return NotFound();
@@ -55,24 +66,17 @@ namespace PharmacyAPI.Controllers
             {
                 return BadRequest();
             }
-            List<Hospital> result = new List<Hospital>();
+        
             dto.Date = DateTime.Now;
-            dbContext.Hospitals.ToList().ForEach(hospital => result.Add(hospital));
-            foreach(Hospital hospital in result)
+            if(service.Save(ComplaintAdapter.ComplaintDtoToComplaint(dto), hospitalApiKey) == true)
             {
-               
-                if(hospital.HospitalApiKey == hospitalApiKey)
-                {
-                    long id = dbContext.Complaints.ToList().Count > 0 ? dbContext.Complaints.Max(Complaint => Complaint.ComplaintId) + 1 : 1;
-                    Complaint complaint = ComplaintAdapter.ComplaintDtoToComplaint(dto);
-                    complaint.ComplaintId = id;
-                    complaint.HospitalId = hospital.HospitalId;
-                    dbContext.Complaints.Add(complaint);
-                    dbContext.SaveChanges();
-                    return Ok();
-                }
+                return Ok();
             }
-            return NotFound(); 
+            else {
+                return NotFound(); 
+            }
+             
+            
             
 
         }
@@ -80,16 +84,14 @@ namespace PharmacyAPI.Controllers
         [HttpDelete("{id?}")]       // DELETE /api/complaint/1
         public IActionResult Delete(long id = 0)
         {
-            Complaint complaint = dbContext.Complaints.SingleOrDefault(complaint => complaint.ComplaintId == id);
-            if (complaint == null)
+            
+            if (service.Delete(id) != true)
             {
                 return NotFound();
             }
             else
             {
-               
-                dbContext.Complaints.Remove(complaint);
-                dbContext.SaveChanges();
+              
                 return Ok();
             }
         }

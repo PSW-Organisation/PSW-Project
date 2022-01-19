@@ -46,3 +46,28 @@
   .card6{
   background-color: #851b1b;
 }
+
+
+a.fa-bell {
+  position: relative;
+  font-size: 1.2em;
+  color: grey;
+  cursor: pointer;
+  width: 2em;
+}
+span.fa-comment {
+  position: absolute;
+  font-size: 0.8em;
+  top: -4px;
+  color: white;
+  right: 4px;
+}
+span.num {
+  position: absolute;
+  font-size: 0.9em;
+  font-weight: bold;
+  top: 3px;
+  right: 1.3em;
+  color: white;
+
+}

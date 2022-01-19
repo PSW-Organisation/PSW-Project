@@ -45,13 +45,10 @@ namespace IntegrationAPI.Controllers
 
             ResponseToComplaint response = responseService.Get(id);
             if (response == null)
-            {
                 return NotFound();
-            }
             else
-            {
-                return Ok(ResponseToComplaintAdapter.ResponseToResponseDto(response));
-            }
+             return Ok(ResponseToComplaintAdapter.ResponseToResponseDto(response));
+            
         }
 
         [HttpPost("{pharmaciesAccessApiKey?}")]      // POST /api/pharmacy Request body: {"pharmacyUrl":"someUrl", "pharmacyName":"someName", "pharmacyAddress":"someAddress", "pharmacyApiKey":"someApiKey"}
@@ -63,7 +60,6 @@ namespace IntegrationAPI.Controllers
             }
             List<Pharmacy> allPharmacies = pharmacyService.GetAll();
             Pharmacy pharmacy = new Pharmacy();
-            //Pharmacy pharmacy = dbContext.Pharmacies.FirstOrDefault(pharmacy => pharmacy.PharmacyApiKey == pharmaciesAccessApiKey);
             foreach(Pharmacy p in allPharmacies)
             {
                 if (p.PharmacyApiKey == pharmaciesAccessApiKey)
@@ -79,24 +75,15 @@ namespace IntegrationAPI.Controllers
                         if (c.PharmacyId == pharmacy.Id)
                             complaint = c;
                     }
-                       // Complaint complaint = dbContext.Complaints.FirstOrDefault(complaint => complaint.PharmacyId == pharmacy.Id);
-
                     if(complaint != null) { 
-                           
-             
                       responseService.Save(ResponseToComplaintAdapter.ResponseDtoToResponse(dto));
-             
                       return Ok();
                     }
-                
              }
-            return NotFound();
-          
-
+            return NotFound();  
         }
 
         [HttpDelete("{id?}")]
-        //bila nula, ne znam zasto NIKOLA???
         public IActionResult Delete(int id = 0)
         {
             ResponseToComplaint response = responseService.Get(id); 
