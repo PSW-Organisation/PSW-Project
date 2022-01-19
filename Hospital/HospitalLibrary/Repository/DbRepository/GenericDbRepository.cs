@@ -62,11 +62,16 @@ namespace HospitalLibrary.Repository.DbRepository
         public T Update(T entity)
         {
             _dbContext.Set<T>().Update(entity);
-            //T oldEntity = Get(entity.Id); //dodato
-            //_dbContext.Entry(oldEntity).CurrentValues.SetValues(entity); //dodato 
-            //Save(oldEntity);
             Save(entity);
             return entity;
+        }
+        //metoda za Integration 
+        public T UpdateMedicine(T entity)
+        {
+            T oldEntity = Get(entity.Id); 
+            _dbContext.Entry(oldEntity).CurrentValues.SetValues(entity); 
+            Save(oldEntity);
+            return oldEntity;
         }
     }
 }

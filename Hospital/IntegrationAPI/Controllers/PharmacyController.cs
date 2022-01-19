@@ -36,7 +36,7 @@ namespace IntegrationAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id?}")]      // GET /api/pharmacy/1
+        [HttpGet("{id?}")]      // GET /api2/pharmacy/1
         public IActionResult Get(int id)
         {
             Pharmacy pharmacy = pharmacyService.Get(id);
@@ -50,7 +50,7 @@ namespace IntegrationAPI.Controllers
             }
         }
 
-        [HttpPost]      // POST /api/pharmacy Request body: {"pharmacyUrl":"someUrl", "pharmacyName":"someName", "pharmacyAddress":"someAddress", "hospitalApiKey":"someApiKey"}
+        [HttpPost]      // POST /api2/pharmacy Request body: {"pharmacyUrl":"someUrl", "pharmacyName":"someName", "pharmacyAddress":"someAddress", "hospitalApiKey":"someApiKey"}
         public IActionResult Add(PharmacyDto dto)
         {
             if (dto.PharmacyName.Length <= 0 || dto.PharmacyUrl.Length <= 0 || dto.PharmacyAddress.Length <= 0)
@@ -88,7 +88,7 @@ namespace IntegrationAPI.Controllers
             return Ok();
         }
 
-        [HttpDelete("{id?}")]       // DELETE /api/pharmacy/1
+        [HttpDelete("{id?}")]       // DELETE /api2/pharmacy/1
         public IActionResult Delete(int id)
         {
             Pharmacy pharmacy = pharmacyService.Get(id);

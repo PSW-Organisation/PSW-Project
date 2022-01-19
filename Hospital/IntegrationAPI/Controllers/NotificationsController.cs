@@ -84,7 +84,7 @@ namespace IntegrationAPI.Controllers
         [Route("count")]
         public IActionResult GetNumberOfUnseen()
         {
-            int number=0;
+            int number = 0;
             number = notificationService.GetNumberOfUnseen();
             return Ok(number);
         }

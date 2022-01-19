@@ -32,6 +32,7 @@ using PharmacyLibrary.Repository.AdsRepository;
 using PharmacyLibrary.Tendering.Service;
 using PharmacyLibrary.Tendering.Repository.RepoInterfaces;
 using PharmacyLibrary.Tendering.Repository.RepoImpl;
+using PharmacyLibrary.Repository.ComplaintRepository;
 
 namespace PharmacyAPI
 {
@@ -77,6 +78,8 @@ namespace PharmacyAPI
             services.AddScoped<IPublishService, RabbitMQPublishService>();
             services.AddScoped<IAdsService, AdsService> ();
             services.AddTransient<IAdsRepository, AdsRepository>();
+            services.AddTransient<IComplaintService, ComplaintService>();
+            services.AddScoped<IComplaintRepository, ComplaintRepository>();
 
 
 

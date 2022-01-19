@@ -69,7 +69,7 @@ namespace HospitalLibrary.Medicines.Service
         public void Update(Medicine medicine)
         {
             medicine.medicineName = medicine.medicineName.First().ToString().ToUpper() + medicine.medicineName.Substring(1);
-            _medicineRepository.Update(medicine);
+            _medicineRepository.UpdateMedicine(medicine);
         }
     }
 }
