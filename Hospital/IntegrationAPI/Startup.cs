@@ -45,6 +45,7 @@ using IntegrationLibrary.Emailing.Service.Interface;
 using IntegrationLibrary.Emailing.Service.Impl;
 using IntegrationLibrary.Statistics.Service.ServiceImpl;
 using IntegrationLibrary.Statistics.Service.ServiceInterfaces;
+using IntegrationAPI.Extensions;
 
 namespace IntegrationAPI
 {
@@ -175,6 +176,7 @@ namespace IntegrationAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseRouting();
 
             //added for Cors error
@@ -188,6 +190,7 @@ namespace IntegrationAPI
             //______________________________________________________________________
             app.UseCors(options => options.AllowAnyOrigin());
             //______________________________________________________________________
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseAuthorization();
 

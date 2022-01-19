@@ -47,6 +47,7 @@ namespace IntegrationAPI.Controllers
         [HttpPut("{order}")]
         public IActionResult Put(MedicineSearchDTO dto)
         {
+            throw new Exception();
             if (medicineService.checkCommunicationType(dto.ApiKey) == PharmacyCommunicationType.HTTP)
             {
                 return Ok(medicineService.orderMedicineHTTP(MedicineSearchAdapter.MedicineSearchDtoToMedicineSearch(dto)));
