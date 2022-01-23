@@ -29,6 +29,8 @@ import { RecommendedAppointmentSchedulingComponent } from './recommended-appoint
 import { NavbarComponent } from './navbar/navbar.component';
 import { TokenInterceptor } from './shared/token.interceptor';
 import { PatientGuard } from './shared/jwt-guard';
+import { CarouselComponent } from './carousel/carousel.component';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 export function playerFactory() {
   return player;
@@ -45,7 +47,8 @@ export function playerFactory() {
     AppointmentsComponent,
     StepperComponent,
     RecommendedAppointmentSchedulingComponent,
-    NavbarComponent
+    NavbarComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ export function playerFactory() {
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    IvyCarouselModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-custom',

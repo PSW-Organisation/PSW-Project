@@ -1,0 +1,14 @@
+<div *ngIf="checkIfEmpty()">
+  <h3 style="color: #02ccba;"><b>Medicines on promotion</b></h3>
+  <carousel class="mb-3" [cellWidth]="'100%'" [arrowsOutside]="true" [autoplay]="true" [dots]="true" [loop]="true" [cellsToShow]="1" style="height: 300px;">
+      <div class="carousel-cell" *ngFor="let ad of filteredAds; let i = index">
+          <div class="container">
+              <img [src]="findImage(i)" alt="Ad img">
+              <div class="content">
+                <h5>{{ad.title}}</h5>
+                <p>{{ad.content}}</p>
+              </div>
+            </div>
+      </div>
+  </carousel>
+</div>

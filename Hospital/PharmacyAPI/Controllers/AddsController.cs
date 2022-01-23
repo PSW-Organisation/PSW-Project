@@ -6,6 +6,7 @@ using PharmacyLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Cors;
 
 namespace PharmacyAPI.Controllers
 
@@ -22,7 +23,7 @@ namespace PharmacyAPI.Controllers
             this.adsService = adsService;
         }
 
-
+        [EnableCors]
         [HttpGet]       // GET /api3/adds
         public List<Ad> GetAllAdds()
         {

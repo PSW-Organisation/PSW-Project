@@ -34,19 +34,6 @@
                                 <div class="col">
                                     <img [src]="imageUrl" class="img-fluid rounded img-thumbnail"  alt="Your image here">
                                 </div>
-                                <div class="col">
-                                    <form [formGroup]="imgForm" (ngSubmit)="saveImage()">
-                                        <div style="width: 100px;">
-                                            <input type="file" id="imgInput" accept=".png,.jpg,.jpeg" required
-                                                class="form-control-file" formControlName="imgControl"
-                                                (change)="handleFileInput($any($event.target).files)">
-                                        </div>
-                                        <div style="padding-top: 2%; width: 100px;">
-                                            <button type="submit" class="btn btn-secondary btn-sm">Save
-                                                image</button>
-                                        </div>
-                                    </form>
-                                </div>
                             </div>
                         </div>
                         <div class="col"></div>
