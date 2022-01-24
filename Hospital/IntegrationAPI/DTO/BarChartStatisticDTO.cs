@@ -7,6 +7,10 @@ namespace IntegrationAPI.DTO
 {
     public class BarChartStatisticDTO
     {
+        public BarChartStatisticDTO()
+        {
+        }
+
         public BarChartStatisticDTO(List<DateTime> x, List<double> y)
         {
             X = x;

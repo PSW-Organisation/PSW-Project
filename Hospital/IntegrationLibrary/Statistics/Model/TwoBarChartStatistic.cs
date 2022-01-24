@@ -6,6 +6,10 @@ namespace IntegrationLibrary.Tendering.Model
 {
     public class TwoBarChartStatistic
     {
+        public TwoBarChartStatistic()
+        {
+        }
+
         public TwoBarChartStatistic(List<string> x, List<int> y, List<int> z)
         {
             X = x;
