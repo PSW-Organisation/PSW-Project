@@ -17,7 +17,7 @@
             <div> 
                 <td><label style="font-size: medium;">Pharmacy</label>  </td>
                       <td >
-                        <select  [(ngModel)]="newComplaint.pharmacyId">
+                        <select  [(ngModel)]="newComplaint.pharmacyId" id="pharmacy">
                             <option  *ngFor="let pharmacy of pharmacies" [value]="pharmacy.pharmacyId" (click)="getMyApiKey(pharmacy.pharmacyId)">{{pharmacy.pharmacyName}}</option>
                         </select>
        
@@ -26,12 +26,12 @@
                   <tr style="height: 10px;"> </tr>
                   <tr> 
                       <td class="tdInForm"> <label style="font-size: medium;">Title</label></td>
-                      <td ><input type="text" class="form-control" placeholder="Enter title" [(ngModel)]="newComplaint.title" > </td>
+                      <td ><input type="text" class="form-control" placeholder="Enter title" [(ngModel)]="newComplaint.title" id="title"> </td>
                   </tr>
                   <tr style="height: 10px;"> </tr>
                   <tr> 
                       <td class="tdInForm"> <label style="font-size: medium;">Content</label> </td>
-                      <td style= "width: 250px"> <textarea type="text" class="form-control" style= "width: 250px; height: 100px"  placeholder="Enter content" [(ngModel)]="newComplaint.content"></textarea></td>
+                      <td style= "width: 250px"> <textarea type="text" class="form-control" style= "width: 250px; height: 100px"  placeholder="Enter content" [(ngModel)]="newComplaint.content" id="content"></textarea></td>
                   </tr>
               </table>
               
@@ -39,7 +39,7 @@
               
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" style="margin-right:30px; " data-dismiss="modal" (click) ="addNewComplaint()">Add</button>
+            <button type="button" class="btn btn-danger" style="margin-right:30px; " data-dismiss="modal" (click) ="addNewComplaint()" id="submit">Add</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -49,10 +49,10 @@
 <div class="backgroundImage" > 
 
 <div style= "margin-right: 10%; margin-left: 5%;">    
-   <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newComplaint">Add new complaint</button>
+   <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newComplaint" id="add">Add new complaint</button>
 </div>
 <div class="table-responsive table-striped">
-    <table class='table'>
+    <table class='table' id="complaints">
         <thead   style="color:rgb(95, 173, 236); opacity: 2.2; background-color: whitesmoke;">
             <tr>
                 <th> </th>

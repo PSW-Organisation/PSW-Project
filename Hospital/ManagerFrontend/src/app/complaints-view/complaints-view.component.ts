@@ -39,6 +39,22 @@ export class ComplaintsViewComponent implements OnInit {
   }
 
   addNewComplaint(){
+    if (this.newComplaint.title == "")
+    {
+      alert("Title should be defined!");
+    }
+
+    
+    if ( this.newComplaint.content == "")
+    {
+      alert("Content should be defined!");
+    }
+
+    
+    if (this.newComplaint.pharmacyId == 0)
+    {
+      alert("Pharmacy should be selected!");
+    }
    var stringToConvert= this.newComplaint.pharmacyId;
    var numberId= Number(stringToConvert);
    this.newComplaint.pharmacyId=numberId;

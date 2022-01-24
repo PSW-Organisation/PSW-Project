@@ -14,9 +14,16 @@ namespace IntegrationAPISeleniumTests.Pages
         private IWebElement PharmaciesButton => driver.FindElement(By.Id("pharmacies"));
         private IWebElement PharmaciesCard => driver.FindElement(By.Name("pharmacies"));
 
+        private IWebElement ComplaintsButton => driver.FindElement(By.Id("complaintsButton"));
+
         public void PharmaciesCardDisplayed()
         {
             PharmaciesButton.Click();
+        }
+
+        public void ComplaintsButtonClick()
+        {
+            ComplaintsButton.Click();
         }
 
         public ManagerHomePage(IWebDriver driver)
