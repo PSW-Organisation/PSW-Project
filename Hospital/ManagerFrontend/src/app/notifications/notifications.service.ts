@@ -35,8 +35,6 @@ export class NotificationsService {
     return this._http.delete('http://localhost:16928/api2/notifications/' + notificationId)
   }
 
-  countNumber(){
-    return this._http.get('http://localhost:16928/api2/notifications/count')
-  }
+
   
 }
