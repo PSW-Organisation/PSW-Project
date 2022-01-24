@@ -44,7 +44,7 @@ import { ManageShiftsComponent } from './manage-shifts/manage-shifts.component';
 import { DoctorStatisticsComponent } from './doctor-statistics/doctor-statistics.component';
 import { TenderDetailComponent } from './tender-detail/tender-detail.component';
 import { StatisticsComponent } from './statistics/statistics.component';
-
+import { AddPharmacyComponent } from './add-pharmacy/add-pharmacy.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +74,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
     DoctorOnCallShiftComponent,
     ManageShiftsComponent,
     DoctorStatisticsComponent,
-    TenderDetailComponent
+    TenderDetailComponent,
+    AddPharmacyComponent
   ],
   imports: [
     BrowserModule,
