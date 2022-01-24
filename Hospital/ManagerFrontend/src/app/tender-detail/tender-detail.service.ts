@@ -24,4 +24,9 @@ export class TenderDetailService {
       tap(data => console.log("Data: ", data))
     )
   }
+
+
+  sendNotificationToPharmacy(message: any){
+    return this._http.get('http://localhost:29631/api3/notifications/'+ message).subscribe()
+  }
 }

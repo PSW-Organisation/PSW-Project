@@ -161,6 +161,7 @@ namespace IntegrationAPI
                     .AllowAnyHeader()
                     .AllowCredentials();
             }));
+
             //______________________________________________________________________
         }
 
