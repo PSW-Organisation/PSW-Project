@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { TenderDetailService } from './tender-detail.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class TenderDetailComponent implements OnInit {
   tenderId: number = 0
 
   constructor(private route: ActivatedRoute,
-              private tenderDetailService: TenderDetailService) { }
+              private tenderDetailService: TenderDetailService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.tenderId = Number(this.route.snapshot.paramMap.get('id'));
@@ -48,7 +49,19 @@ export class TenderDetailComponent implements OnInit {
 
   acceptOffer(id: number): void {
     this.tenderDetailService.acceptOffer(id).subscribe(
-      response => {this.getTender(this.tenderId); }
+      response => {this.getTender(this.tenderId); this.sentNotificationToPharmacy("You have the winning offer for Tender " + this.tender.id + "Congratulations!" ); 
+      }
     )
+  }
+
+  sentNotificationToPharmacy(message: any){
+    this.tenderDetailService.sendNotificationToPharmacy(message),
+   this.showToastrSuccess("You accepted this ofer!", "Success!");
+  }
+  showToastrSuccess(message: string, title: string){
+    this.toastr.success(message, title,
+     { timeOut: 3000, 
+      progressBar: true,
+       progressAnimation: 'increasing'})
   }
 }

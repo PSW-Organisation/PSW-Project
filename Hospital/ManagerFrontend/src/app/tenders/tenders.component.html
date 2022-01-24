@@ -106,7 +106,7 @@
                           <div><p class="card-text" *ngIf="compareDates(tender.tenderCloseDate); else elseBlock"> {{tender.tenderCloseDate | date: 'shortDate'}}  </p>
                           </div>
                             <ng-template #elseBlock><p class="card-text">Indefinite</p></ng-template>
-                          <a [routerLink]="" (click)="closeTender(tender.id)" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Cancel tender</a>
+                          <a [routerLink]="" (click)="closeTender(tender.id)" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Close tender</a>
                           <a [routerLink]="['/tender', tender.id]" class="card-link" style="text-decoration: darkred; color:rgb(133, 27, 27) ; font-size:large ;">Show offers</a>
                         </div>
                       </div>

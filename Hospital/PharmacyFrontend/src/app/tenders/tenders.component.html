@@ -99,7 +99,7 @@
 
                       <div class="card text-center" *ngFor = 'let tender of tenders' >
                         <div class="card-body">
-                          <h5 class="card-title">Flos Pharmacy</h5>
+                          <h5 class="card-title">LeanOn Hospital Tender {{tender.id}}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
                           <p class="card-text" *ngFor = 'let item of tender.tenderItems' >{{item.tenderItemName}} {{item.tenderItemQuantity}}</p>
                           <h6 class="card-subtitle mb-2 text-muted">Date start: </h6>
