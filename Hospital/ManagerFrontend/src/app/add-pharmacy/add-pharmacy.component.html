@@ -1,0 +1,29 @@
+<app-navbar>
+    <div app-navbar-button>
+    </div>
+</app-navbar>
+
+   <div class="backgroundImage" >
+    
+        <div>
+            <label>Name</label>
+            <input type="text" class="form-control" placeholder="Enter pharmacy name" [(ngModel)]="newPharmacy.pharmacyName" id="name">
+            <label>Address</label>
+            <input type="text" class="form-control" placeholder="Enter pharmacy address" [(ngModel)]="newPharmacy.pharmacyAddress" id="address">
+            <table style="margin-top: 10px;margin-bottom: 10px;">
+            <tr>Communication type:</tr>
+            <tr ><select  [(ngModel)]="newPharmacy.pharmacyCommunicationType" style="width: 130px;">
+                    <option value="0">HTTP</option>
+                    <option value="1">GRPC</option>
+                </select></tr>
+            </table>
+            <label>Url</label>
+            <input type="text" class="form-control" placeholder="Enter pharmacy url" [(ngModel)]="newPharmacy.pharmacyUrl" id="url">
+            <label>ApiKey</label>
+            <input type="text" class="form-control" placeholder="Enter pharmacy api key" [(ngModel)]="newPharmacy.hospitalApiKey">
+        </div>
+        <div>
+            <button type="button " class="btn btn-secondary" (click)="addNewPharmacy()" id="yes">Add</button>
+            <button type="button" class="btn btn-secondary"><a  routerLink="/pharmacies">Close</a></button>
+        </div>
+    </div>

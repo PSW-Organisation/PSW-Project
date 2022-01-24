@@ -43,6 +43,7 @@ import { TokenInterceptor } from './shared/jwt/token.interceptor';
 import { DoctorOnCallShiftComponent } from './doctor-on-call-shift/doctor-on-call-shift.component';
 import { ManageShiftsComponent } from './manage-shifts/manage-shifts.component';
 import { DoctorStatisticsComponent } from './doctor-statistics/doctor-statistics.component';
+import { AddPharmacyComponent } from './add-pharmacy/add-pharmacy.component';
 
 
 
@@ -75,7 +76,8 @@ import { DoctorStatisticsComponent } from './doctor-statistics/doctor-statistics
     CuFormComponent,
     DoctorOnCallShiftComponent,
     ManageShiftsComponent,
-    DoctorStatisticsComponent
+    DoctorStatisticsComponent,
+    AddPharmacyComponent
   ],
   imports: [
     BrowserModule,

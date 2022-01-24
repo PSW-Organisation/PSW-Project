@@ -16,7 +16,6 @@ namespace IntegrationAPISeleniumTests.Pages
 
         public void PharmaciesCardDisplayed()
         {
-            //return PharmaciesCard.Displayed;
             PharmaciesButton.Click();
         }
 
