@@ -46,12 +46,4 @@ getCountOfUnseen(){
   });
  
 }
-
-getCountOfUnseen(){
-  this.notificationsService.countNumber().subscribe(
-   numberOfUnseen => {
-     this.numberOfUnseen = numberOfUnseen;
-   }
-  )
- }
 }

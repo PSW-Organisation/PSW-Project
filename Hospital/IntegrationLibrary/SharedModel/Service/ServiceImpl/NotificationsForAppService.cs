@@ -59,16 +59,5 @@ namespace IntegrationLibrary.SharedModel.Service.ServiceImpl
             note.Seen = true;
             return this.notificationsRepository.Update(note);
         }
-
-        public int GetNumberOfUnseen()
-        {
-            int number = 0;
-            List<NotificationsForApp> allNotifications = GetAll();
-            foreach (NotificationsForApp n in allNotifications)
-            {
-                if (!n.Seen) number++;
-            }
-            return number;
-        }
     }
 }
