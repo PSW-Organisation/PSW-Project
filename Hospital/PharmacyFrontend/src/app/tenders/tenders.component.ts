@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ITender } from './tender';
 import { ITenderItem } from './tenderItem';
 import { ITenderResponse } from './tenderResponse';
 import { TendersService } from './tenders.service';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'app-tenders',
@@ -18,7 +27,7 @@ export class TendersComponent implements OnInit {
   tenderOffer: ITenderResponse = {tender: {id: 0, tenderItems: [ ] ,
     tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, isWon: false}, tenderId: 0, tenderItems: []}
   tenderItem : ITenderItem ={tenderItemName: "", tenderItemQuantity: 0, tenderItemPrice:0};
-  constructor(private tenderService: TendersService) { }
+  constructor(private tenderService: TendersService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getTenders()
@@ -34,6 +43,7 @@ export class TendersComponent implements OnInit {
     this.tenderService.closeTender(tender).subscribe(
       res => {
         alert("Tender has been closed");
+        this.sendNotificationForConfirmation("Flos pharmacy confirmed her offer. You can close Tender " + tender.id);
       }
     );
   }
@@ -47,6 +57,7 @@ export class TendersComponent implements OnInit {
         this.tenderOffer = {tender: {id: 0, tenderItems: [ ] ,
           tenderOpenDate: new Date, tenderCloseDate: new Date, open: true, isWon: false}, tenderId: 0, tenderItems: []};
           this.getTenders();
+          this.sendNotificationToHospital();
 
       }, err=> console.log(err)
     );
@@ -59,5 +70,16 @@ export class TendersComponent implements OnInit {
       }
     )
   }
-
+sendNotificationToHospital() {
+  this.tenderService.sendNotificationToHospital("You have new tender offer for Tender " + this.modalTender.id + "from Flos Pharmacy. ")
+}
+sendNotificationForConfirmation(message: string) {
+  this.tenderService.sendNotificationToHospital(message);
+}
+showToastrSuccess(message: string, title: string){
+  this.toastr.success(message, title,
+   { timeOut: 3000, 
+    progressBar: true,
+     progressAnimation: 'increasing'})
+}
 }

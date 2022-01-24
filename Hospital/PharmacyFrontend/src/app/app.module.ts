@@ -13,6 +13,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { FileCompressionViewComponent } from './file-compression-view/file-compression-view.component';
 import { NgChartsModule } from 'ng2-charts';
 import { TendersComponent } from './tenders/tenders.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,13 @@ import { TendersComponent } from './tenders/tenders.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    NgChartsModule
+    NgChartsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-custom',
+      progressBar: true,
+      progressAnimation: 'increasing'
+    })
     ],
   providers: [ RegistrationService],
   bootstrap: [AppComponent]

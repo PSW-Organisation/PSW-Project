@@ -93,7 +93,7 @@ namespace PharmacyAPI
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
                 builder
-                    .WithOrigins(new[] { "http://localhost:4200" })
+                    .WithOrigins(new[] { "http://localhost:5000" })
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials();
