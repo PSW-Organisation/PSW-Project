@@ -2,10 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using PharmacyAPI.DTO;
 using PharmacyAPI.Model;
+using PharmacyLibrary.Emailing.Service.Interface;
+using PharmacyLibrary.Emailing.Utility;
 using PharmacyLibrary.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PharmacyAPI.Controllers
@@ -16,11 +19,13 @@ namespace PharmacyAPI.Controllers
     {
         private readonly IMedicineService medicineService;
         private readonly IHospitalService hospitalService;
+        private readonly IEmailSender emailSender;
 
-        public MedicineController(IMedicineService medicineService, IHospitalService hospitalService)
+        public MedicineController(IMedicineService medicineService, IHospitalService hospitalService, IEmailSender emailSender)
         {
             this.medicineService = medicineService;
             this.hospitalService = hospitalService;
+            this.emailSender = emailSender;
         }
 
         [HttpGet]       // GET /api3/pharmacy
@@ -83,6 +88,16 @@ namespace PharmacyAPI.Controllers
             {
                 if (hospital.HospitalApiKey == hospitalApiKey)
                 {
+                    var sb = new StringBuilder();
+                    sb.Append(@"Your order was accepted.");
+                    sb.AppendLine();
+                    sb.Append(@"Order information:");
+                    sb.AppendLine();
+                    sb.AppendFormat(@"Medicine: {0}", searchMedicine.medicineName);
+                    sb.AppendLine();
+                    sb.AppendFormat(@"Ammount: {0}", searchMedicine.medicineAmount);
+                    var message = new Message(new string[] { hospital.Email }, "Medicine order", sb.ToString());
+                    emailSender.SendEmail(message);
                     return Ok(medicineService.reduceQuantityOfMedicine(searchMedicine.medicineName, searchMedicine.medicineAmount));
                 }
             }

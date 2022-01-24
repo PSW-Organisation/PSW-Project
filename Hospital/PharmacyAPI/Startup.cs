@@ -33,6 +33,9 @@ using PharmacyLibrary.Tendering.Service;
 using PharmacyLibrary.Tendering.Repository.RepoInterfaces;
 using PharmacyLibrary.Tendering.Repository.RepoImpl;
 using PharmacyLibrary.Repository.ComplaintRepository;
+using PharmacyLibrary.Emailing.Configuration;
+using PharmacyLibrary.Emailing.Service.Interface;
+using PharmacyLibrary.Emailing.Service.Impl;
 
 namespace PharmacyAPI
 {
@@ -48,6 +51,10 @@ namespace PharmacyAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var emailConfig = Configuration.GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
             services.Configure<FormOptions>(o =>
@@ -80,7 +87,7 @@ namespace PharmacyAPI
             services.AddTransient<IAdsRepository, AdsRepository>();
             services.AddTransient<IComplaintService, ComplaintService>();
             services.AddScoped<IComplaintRepository, ComplaintRepository>();
-
+            services.AddScoped<IEmailSender, EmailSender>();
 
 
 

@@ -114,7 +114,6 @@ namespace IntegrationAPI
             services.AddScoped<MedicineBenefitRepository, MedicineBenefitDbRepository>();
             services.AddScoped<NotificationsForAppRepository, NotificationsForAppDbRepository>();
             services.AddScoped<TenderRepository, TenderDbRepository>();
-
             services.AddScoped<TenderItemRepository, TenderItemDbRepository>();
             services.AddScoped<TenderResponseRepository, TenderResponseDbRepository>();
             //servisi

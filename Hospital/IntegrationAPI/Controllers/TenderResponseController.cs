@@ -10,6 +10,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -45,7 +46,18 @@ namespace IntegrationAPI.Controllers
             var request = new RestRequest("/tender/accept/" + tender.Id, Method.GET);
             var cancellationTokenSource = new CancellationTokenSource();
             client.ExecuteAsync(request, cancellationTokenSource.Token);
-            var message = new Message(new string[] { pharmacy.Email }, "Tender", "Your tender offer was accepted.");
+            var sb = new StringBuilder();
+            sb.Append(@"Your tender offer was accepted.");
+            sb.AppendLine();
+            sb.Append(@"Offer information:");
+            sb.AppendLine();
+            foreach (var item in tenderResponse.TenderItems)
+            {
+                sb.AppendFormat(@"{0} x {1} for {2}$", item.TenderItemName, item.TenderItemQuantity, item.TenderItemPrice);
+                sb.AppendLine();
+            }
+            sb.AppendFormat(@"Offer total: {0}$", tenderResponse.TotalPrice);
+            var message = new Message(new string[] { pharmacy.Email }, "Tender", sb.ToString());
             emailSender.SendEmail(message);
             foreach (TenderResponse response in tender.TenderResponses) {
                 Pharmacy pharm = response.Pharmacy;
