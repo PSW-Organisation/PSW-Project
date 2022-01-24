@@ -25,7 +25,7 @@ namespace HospitalIntegrationTests.Schedule
             _client = factory.CreateClient();
         }
 
-        private async Task<string> GetToken()
+        public async Task<string> GetToken()
         {
             var loginRequest = new HttpRequestMessage(HttpMethod.Post, "api/login/authenticate");
             loginRequest.Content = new StringContent("{\"username\":\"imbiamba\",\"password\":\"pecurkaa\"}", Encoding.UTF8, "application/json");

@@ -26,6 +26,7 @@ import { ScheduleComponent } from './doctor-vacation/schedule/schedule.component
 import { DoctorOnCallShiftComponent } from './doctor-on-call-shift/doctor-on-call-shift.component';
 import { ManageShiftsComponent } from './manage-shifts/manage-shifts.component';
 import { TenderDetailComponent } from './tender-detail/tender-detail.component';
+import { EventStatisticsComponent } from './event-statistics/event-statistics.component';
 
 const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -50,6 +51,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent, canActivate: [ManagerGuard] },
   { path: 'doctorVacation/:doctorId', component: ScheduleComponent, canActivate: [ManagerGuard] },
   { path: 'doctorOnCallShift', component: DoctorOnCallShiftComponent, canActivate: [ManagerGuard]},
+  { path: 'patientSchedulingStats', component: EventStatisticsComponent, canActivate: [ManagerGuard]},
   { path: 'manageShifts', component: ManageShiftsComponent, canActivate: [ManagerGuard]}
 
 ];

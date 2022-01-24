@@ -150,7 +150,7 @@
                     </mat-card-actions>
                 </mat-card>
             </div>
-                <div class="col-4 mt-5 text-center">
+            <div class="col-4 mt-5 text-center">
                 <mat-card class="example-card card5" routerLink="/manageShifts">
                     <mat-card-title>Manage Shifts</mat-card-title>
                     <mat-card-subtitle class="text-light">Manage Shifts</mat-card-subtitle>
@@ -159,13 +159,22 @@
                     </mat-card-actions>
                 </mat-card>
             </div>
-           
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        
-        <div class="row ml-5 mr-5">
-             <div class="col-4 mt-5 text-center">
+        <div class="row ml-5">
+            <div class="col-4 mt-5 mr-5 text-center">
+                <mat-card class="example-card card2" routerLink="/patientSchedulingStats">
+                    <mat-card-title>Event stats</mat-card-title>
+                    <mat-card-subtitle class="text-light">
+                        Patient scheduling stats
+                    </mat-card-subtitle>
+                    <mat-card-actions>
+                        <button mat-button>Enter</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+            <div class="col-4 mt-5 ml-5 text-center">
                 <mat-card class="example-card card1" (click)="logOut()">
                     <mat-card-title>Log out</mat-card-title>
                     <mat-card-subtitle class="text-light">

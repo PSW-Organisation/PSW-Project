@@ -1,0 +1,47 @@
+<app-navbar>
+    <div app-navbar-button>
+    </div>
+</app-navbar>
+<div>
+    <br>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col justify-content-center d-flex">
+            <h1 style="color: rgb(133 27 27);">Events statistics</h1>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row mt-5">
+        <div class="col justify-content-center d-flex">
+            <canvas id="myChart1" style="max-width: 500px; max-height: 500px; height: 400px;"></canvas>
+        </div>
+        <div class="col justify-content-center d-flex">
+            <canvas id="myChart2" style="max-width: 500px; max-height: 500px; height: 400px;"></canvas>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col justify-content-center d-flex">
+            <canvas id="myChart4" style="max-width: 500px; max-height: 500px; height: 400px;"></canvas>
+        </div>
+        <div class="col justify-content-center d-flex">
+            <canvas id="myChart5" style="max-width: 500px; max-height: 500px; height: 400px;"></canvas>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="row mt-5">
+        <div class="col justify-content-center d-flex ml-5">
+            <canvas id="myChart3" style="max-width: 1000px; max-height: 500px; height: 400px;"></canvas>
+        </div>
+        <div class="col mt-5 ml-5">
+            <p>Average steps per scheduling: {{stats.averageStepsPerScheduling}}</p>
+            <p>Maximum steps: {{stats.maxSteps}}</p>
+            <p>Average duration per scheduling: {{stats.averageDuration}}</p>
+            <p>Maximum of scheduling duration in seconds: {{stats.maxDuration}}</p>
+            <p>Minimum scheduling duration in seconds: {{stats.minDuration}}</p>
+            <p>Average age of users: {{stats.averageAge}}</p>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>

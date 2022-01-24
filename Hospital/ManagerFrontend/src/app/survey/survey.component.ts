@@ -2,12 +2,13 @@ import { AfterViewInit, Component, Inject } from "@angular/core";
 import { OnInit } from "@angular/core";
 import {
   Chart, LinearScale, BarController, BarElement, CategoryScale,
-  Decimation, Filler, Title, Tooltip, SubTitle
+  Decimation, Filler, Title, Tooltip, SubTitle, PieController, ArcElement, Legend, DoughnutController, TimeScale, PolarAreaController, RadialLinearScale, RadarController, PointElement, LineController, LineElement
 } from "chart.js";
 import { DOCUMENT } from '@angular/common';
 import { SurveyService } from "./survey.service";
 import { SurveyStats } from "./surveyStats";
-Chart.register(LinearScale, BarController, BarElement, CategoryScale, Decimation, Filler, Title, Tooltip, SubTitle);
+Chart.register(LinearScale, BarController, BarElement, PieController, CategoryScale, Decimation, Filler, Title, Tooltip, SubTitle,
+  ArcElement, Legend, DoughnutController, TimeScale, PolarAreaController, RadialLinearScale, RadarController, PointElement, LineElement);
 
 @Component({
   selector: 'survey',
@@ -222,6 +223,7 @@ export class SurveyComponent implements OnInit {
         plugins: {
           legend: {
             position: 'top',
+
           },
           title: {
             display: true,

@@ -8,6 +8,11 @@ namespace HospitalLibrary.Events.Model
     {
         EnterForm,
         CancelForm, 
-        Etc
+        AppointmentSchedulingStart,
+        AppointmentSchedulingComplete,
+        AppointmentSchedulingFirstStep,
+        AppointmentSchedulingSecondStep,
+        AppointmentSchedulingThirdStep,
+        AppointmentSchedulingFourthStep
     }
 }

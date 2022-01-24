@@ -13,7 +13,7 @@ namespace HospitalAPI.Controllers
 {
     [Route("api/medicine")]
     [ApiController]
-    [Authorize(Policy = "Manager")]
+    [AllowAnonymous]
     public class MedicineController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -32,6 +32,7 @@ namespace HospitalAPI.Controllers
         }
 
         [HttpPut]
+        
         public IActionResult Put(MedicineDTO dto)
         {
             Medicine medicine = _medicineService.GetMedicine(dto.Id);

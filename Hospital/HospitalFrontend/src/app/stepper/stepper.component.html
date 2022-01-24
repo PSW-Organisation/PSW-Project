@@ -48,7 +48,7 @@
                 <div class="bs-stepper-content">
                     <!-- your steps content here -->
                     <div id="date-part" class="content" role="tabpanel" aria-labelledby="date-part-trigger">
-                        <form [formGroup]="dateForm" (ngSubmit)="nextStep()">
+                        <form [formGroup]="dateForm" (ngSubmit)="nextStep(2)">
                             <div class="row">
                                 <div class="col"></div>
                                 <div class="col align-self-center">
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="col"></div>
                                 <div class="col justify-content-end align-self-center d-flex">
-                                    <button class="btn btn-primary" (click)="nextStep()">Next</button>
+                                    <button class="btn btn-primary" (click)="nextStep(3)">Next</button>
                                 </div>
                             </div>
                         </form>
@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="col"></div>
                                 <div class="col justify-content-end align-self-center d-flex">
-                                    <button class="btn btn-primary" (click)="nextStep()">Next</button>
+                                    <button class="btn btn-primary" (click)="nextStep(4)">Next</button>
                                 </div>
                             </div>
                         </form>

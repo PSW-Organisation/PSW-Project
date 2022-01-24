@@ -1,5 +1,5 @@
 import { DatePipe, DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, Event } from '@angular/router';
 import { NavigationStart, NavigationError, NavigationEnd } from '@angular/router';
@@ -11,19 +11,25 @@ import { Doctor } from './doctor';
 import { Visit } from '../recommended-appointment-scheduling/visits';
 import { SchedulingService } from '../scheduling.service'
 import { Patient } from '../registration/patient';
+import { EventService } from './event.service';
+import AppointmentSchedulingEvent from './appointment-scheduling-event';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-stepper',
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.css']
 })
-export class StepperComponent implements OnInit {
+export class StepperComponent implements OnInit, OnDestroy {
   stepper: any = null;
   date: string = '';
   minDate: moment.Moment = moment();
   startDate: moment.Moment = moment();
   isBlocked: boolean = false;
   selectedDoctorFullname: string = '';
+  guid: string = Guid.create().toString();
+  stepTime = Date.now();
+  isSuccessful: boolean = false;
 
   doctors: Doctor[] = [];
   specializations: number[] = [];
@@ -69,36 +75,48 @@ export class StepperComponent implements OnInit {
 
 
   constructor(@Inject(DOCUMENT) private document: Document, private schedulingService: SchedulingService,
-    private toastr: ToastrService, private router: Router, private datepipe: DatePipe) {
-      this.router.events.subscribe((event: Event) => {
-        if (event instanceof NavigationStart) {
-          
-        }
+    private toastr: ToastrService, private router: Router, private datepipe: DatePipe, private eventService: EventService) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
 
-        if (event instanceof NavigationError) {
-            // Handle error
-            console.error(event.error);
-        }
+      }
 
-        if (event instanceof NavigationEnd) {
-          let bsstepper = this.document.querySelector('.bs-stepper')
-          if (bsstepper != null)
-            this.stepper = new Stepper(bsstepper)
-            this.getDoctors();
-            this.configDatePicker();
-        }
+      if (event instanceof NavigationError) {
+        // Handle error
+        console.error(event.error);
+      }
+
+      if (event instanceof NavigationEnd) {
+        let bsstepper = this.document.querySelector('.bs-stepper')
+        if (bsstepper != null)
+          this.stepper = new Stepper(bsstepper)
+        this.getDoctors();
+        this.configDatePicker();
+      }
     });
-     }
+  }
 
   ngOnInit(): void {
-    // var self = this
-    // this.document.addEventListener('DOMContentLoaded', function () {
-    //   let bsstepper = self.document.querySelector('.bs-stepper')
-    //   if (bsstepper != null)
-    //     self.stepper = new Stepper(bsstepper)
-    // })
-    // this.getDoctors();
-    // this.configDatePicker();
+    const event: AppointmentSchedulingEvent = {
+      id: 0,
+      idUser: this.user?.username,
+      timeStamp: new Date(),
+      eventAppName: 'PatientsPortal',
+      eventClass: 'AppointmentSchedulingStart',
+      eventGuid: this.guid,
+      duration: 0
+    }
+    this.stepTime = Date.now()
+    this.eventService.createEvent(event).subscribe();
+  }
+
+  ngOnDestroy(): void {
+    if (!this.isSuccessful) {
+      this.eventService.updateEventDuration({
+        eventGuid: this.guid,
+        duration: (Date.now() - this.stepTime)/1000
+      }).subscribe();
+    }
   }
 
   getDoctors() {
@@ -141,10 +159,60 @@ export class StepperComponent implements OnInit {
     this.filteredDoctors = this.doctors.filter(d => d.specialization == this.selectedSpec)
     this.doctorForm.get('doctorControl')?.setValue(this.filteredDoctors[0])
   }
-  nextStep() {
+  nextStep(step: number) {
+    let eventClass = 'AppointmentSchedulingSecondStep'
+    if (step == 3) {
+      eventClass = 'AppointmentSchedulingThirdStep'
+    }
+    if (step == 4) {
+      eventClass = 'AppointmentSchedulingFourthStep'
+    }
+    const event: AppointmentSchedulingEvent = {
+      id: 0,
+      idUser: this.user?.username,
+      timeStamp: new Date(),
+      eventAppName: 'PatientsPortal',
+      eventClass: eventClass,
+      eventGuid: this.guid,
+      duration: 0
+    }
+    this.eventService.updateEventDuration({
+      eventGuid: this.guid,
+      duration: (Date.now() - this.stepTime)/1000
+    }).subscribe({
+      next: response => {
+        this.eventService.createEvent(event).subscribe();
+      }
+    });
+    this.stepTime = Date.now();
     this.stepper.next();
   }
   backToPrevious(step: number) {
+    let eventClass = 'AppointmentSchedulingThirdStep'
+    if (step == 2) {
+      eventClass = 'AppointmentSchedulingSecondStep'
+    }
+    if (step == 1) {
+      eventClass = 'AppointmentSchedulingFirstStep'
+    }
+    const event: AppointmentSchedulingEvent = {
+      id: 0,
+      idUser: this.user?.username,
+      timeStamp: new Date(),
+      eventAppName: 'PatientsPortal',
+      eventClass: eventClass,
+      eventGuid: this.guid,
+      duration: 0
+    }
+    this.eventService.updateEventDuration({
+      eventGuid: this.guid,
+      duration: (Date.now() - this.stepTime)/1000
+    }).subscribe({
+      next: response => {
+        this.eventService.createEvent(event).subscribe();
+      }
+    });
+    this.stepTime = Date.now();
     this.stepper.to(step);
   }
   onDateSelect(event: any): void {
@@ -194,6 +262,25 @@ export class StepperComponent implements OnInit {
       this.schedulingService.createVisit(this.selectedVisit).subscribe({
         next: response => {
           this.showSuccess("Appointment successfully scheduled!")
+          const event: AppointmentSchedulingEvent = {
+            id: 0,
+            idUser: this.user?.username,
+            timeStamp: new Date(),
+            eventAppName: 'PatientsPortal',
+            eventClass: 'AppointmentSchedulingComplete',
+            eventGuid: this.guid,
+            duration: 0
+          }
+          this.eventService.updateEventDuration({
+            eventGuid: this.guid,
+            duration: (Date.now() - this.stepTime)/1000
+          }).subscribe({
+            next: response => {
+              this.eventService.createEvent(event).subscribe();
+            }
+          });
+          this.stepTime = Date.now();
+          this.isSuccessful = true;
           this.router.navigate(['/appointments'], { queryParams: { username: this.selectedVisit.patientId } })
         },
         error: e => {

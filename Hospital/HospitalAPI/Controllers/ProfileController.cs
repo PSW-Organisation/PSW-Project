@@ -84,7 +84,7 @@ namespace HospitalAPI.Controllers
             {
                 imageArray = System.IO.File.ReadAllBytes(filePath);
             }
-            catch (FileNotFoundException e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
