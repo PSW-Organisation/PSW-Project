@@ -8,7 +8,7 @@ import { RegistrationService } from './reistration.service';
 })
 export class WelcomeComponent implements OnInit {
 
-  hospital: any={ hospitalId: 0, hospitalUrl: "", hospitalName: "", hospitalAddress:"", hospitalApiKey:"notDefinedYet", pharmacyApiKey:"notDefinedYet"}
+  hospital: any={ hospitalId: 0, hospitalUrl: "", hospitalName: "", hospitalAddress:"", hospitalApiKey:"notDefinedYet", pharmacyApiKey:"notDefinedYet", email: ""}
   apiKeyForHospital : string=""
   numberOfUnseen: any;
 

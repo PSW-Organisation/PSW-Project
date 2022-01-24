@@ -7,4 +7,5 @@ export interface IPharmacy{
     comment: string;
     picture: string;
     pharmacyCommunicationType: number;
+    email: string
 }

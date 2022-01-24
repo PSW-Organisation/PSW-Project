@@ -17,6 +17,7 @@ namespace IntegrationAPI.DTO
         public string HospitalApiKey { get; set; }
         public string Comment { get; set; }
         public string Picture { get; set; }
+        public string Email { get; set; }
         public PharmacyCommunicationType pharmacyCommunicationType { get; set; }
     }
 

@@ -18,6 +18,7 @@ namespace PharmacyAPI.Adapter
             hospital.HospitalUrl = dto.HospitalUrl;
             hospital.HospitalApiKey = dto.HospitalApiKey;
             hospital.PharmacyApiKey = dto.PharmacyApiKey;
+            hospital.Email = dto.Email;
             return hospital;
         }
 
@@ -30,6 +31,7 @@ namespace PharmacyAPI.Adapter
             dto.HospitalUrl = hospital.HospitalUrl;
             dto.HospitalApiKey = hospital.HospitalApiKey;
             dto.PharmacyApiKey = hospital.PharmacyApiKey;
+            dto.Email = hospital.Email;
             return dto;
         }
 
@@ -40,6 +42,7 @@ namespace PharmacyAPI.Adapter
             hospital.HospitalUrl = dto.HospitalUrl;
             hospital.HospitalApiKey = dto.HospitalApiKey;
             hospital.PharmacyApiKey = dto.PharmacyApiKey;
+            hospital.Email = dto.Email;
             return hospital;
         }
     }

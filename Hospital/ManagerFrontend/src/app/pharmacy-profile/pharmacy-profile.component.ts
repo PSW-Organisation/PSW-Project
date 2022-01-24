@@ -14,7 +14,7 @@ import { Chart, registerables } from 'chart.js';
 export class PharmacyProfileComponent implements OnInit {
  
 pharmacyId: number=0 
-pharmacy: any = { pharmacyId:"", pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey:"", comment: ""};
+pharmacy: any = { pharmacyId:"", pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey:"", comment: "", email:""};
 pharmacyApiKey : string = "";
 picture: any;
 

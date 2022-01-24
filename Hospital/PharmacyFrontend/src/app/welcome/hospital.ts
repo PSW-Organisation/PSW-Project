@@ -4,5 +4,6 @@ export interface IHospital{
     hospitalName: string;
     hospitalAddress: string;
     hospitalApiKey: string;
-    pharmacyApiKey: string
+    pharmacyApiKey: string;
+    email: string;
 }

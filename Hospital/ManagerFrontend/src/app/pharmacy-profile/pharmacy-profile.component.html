@@ -24,6 +24,8 @@
             <input type="text" class="form-control" placeholder="Enter pharmacy address" [(ngModel)]="pharmacy.pharmacyAddress">
             <label>Url</label>
             <input type="text" class="form-control" placeholder="Enter pharmacy url" [(ngModel)]="pharmacy.pharmacyUrl">
+            <label>Email</label>
+            <input type="text" class="form-control" placeholder="Enter pharmacy url" [(ngModel)]="pharmacy.email">
             <label>comment</label>
             <textarea type="text" class="form-control" placeholder="Enter comment" [(ngModel)]="pharmacy.comment"> </textarea>
           <!--  <button type="button btn-secondary" class="btn btn-default" data-dismiss="modal" (click)="editPharmacy(pharmacy)">Edit</button>
@@ -54,7 +56,9 @@
         <tr> <td><h1> Url:</h1> </td> 
             <td style="width: 30px" > </td>
         <td> <h1> {{pharmacy.pharmacyUrl}}</h1></td></tr>
-   
+        <tr> <td><h1> Email:</h1> </td> 
+            <td style="width: 30px" > </td>
+        <td> <h1> {{pharmacy.email}}</h1></td></tr>
         <tr> <td><h1> Komentar o ovoj apoteci:</h1> </td> 
             <td style="width: 30px" > </td>
         <td> <h1> {{pharmacy.comment}}</h1></td></tr>

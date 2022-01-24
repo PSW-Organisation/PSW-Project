@@ -22,6 +22,7 @@ namespace IntegrationAPI.Adapters
             pharmacy.Comment = dto.Comment;
             pharmacy.Picture = dto.Picture;
             pharmacy.PharmacyCommunicationType = dto.pharmacyCommunicationType;
+            pharmacy.Email = dto.Email;
             return pharmacy;
         }
 
@@ -35,6 +36,7 @@ namespace IntegrationAPI.Adapters
             pharmacy.Comment = dto.Comment;
             pharmacy.Picture = dto.Picture;
             pharmacy.PharmacyCommunicationType = dto.pharmacyCommunicationType;
+            pharmacy.Email = dto.Email;
             return pharmacy;
         }
         public static PharmacyDto PharmacyToPharmacyDto(Pharmacy pharmacy)
@@ -49,6 +51,7 @@ namespace IntegrationAPI.Adapters
             dto.Comment = pharmacy.Comment;
             dto.Picture = pharmacy.Picture;
             dto.pharmacyCommunicationType = pharmacy.PharmacyCommunicationType;
+            dto.Email = pharmacy.Email;
             return dto;
         }
     }

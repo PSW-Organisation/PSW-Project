@@ -23,7 +23,8 @@
                 <tr>
                     <th> </th>
                     <th>Hospital name</th>
-                    <th> Address</th>
+                    <th>Address</th>
+                    <th>Email</th>
                     <th></th>
                 </tr>
             </thead>
@@ -32,7 +33,8 @@
                  <tr *ngFor = 'let hospital of hospitals'>    
                      <td></td>
                      <td style="width: 250px;">{{hospital.hospitalName}}</td>
-                     <td style="width: 500px;">{{hospital.hospitalAddress}}</td> 
+                     <td style="width: 500px;">{{hospital.hospitalAddress}}</td>
+                     <td style="width: 250px;">{{hospital.email}}</td>
                      <td> </td>
                  </tr>  
 <!--

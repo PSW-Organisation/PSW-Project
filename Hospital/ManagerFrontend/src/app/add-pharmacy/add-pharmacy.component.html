@@ -21,6 +21,8 @@
             <input type="text" class="form-control" placeholder="Enter pharmacy url" [(ngModel)]="newPharmacy.pharmacyUrl" id="url">
             <label>ApiKey</label>
             <input type="text" class="form-control" placeholder="Enter pharmacy api key" [(ngModel)]="newPharmacy.hospitalApiKey">
+            <label>Email</label>
+            <input type="text" class="form-control" placeholder="Enter pharmacy email" [(ngModel)]="newPharmacy.email">
         </div>
         <div>
             <button type="button " class="btn btn-secondary" (click)="addNewPharmacy()" id="yes">Add</button>

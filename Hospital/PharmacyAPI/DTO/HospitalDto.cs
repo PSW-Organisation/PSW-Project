@@ -13,5 +13,6 @@ namespace PharmacyAPI.DTO
         public string HospitalAddress { get; set; }
         public string HospitalApiKey { get; set; }
         public string PharmacyApiKey { get; set; }
+        public string Email { get; set; }
     }
 }

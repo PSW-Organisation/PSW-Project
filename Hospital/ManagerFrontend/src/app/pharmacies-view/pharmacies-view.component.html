@@ -33,6 +33,7 @@
                     <th style="width: 270px;">Address</th>
                     <th style="width: 270px;">Url</th>
                     <th style="width: 270px;">Communication type</th>
+                    <th style="width: 270px;">Email</th>
                     <th></th>
                     <th></th>
                     <th> </th>
@@ -46,6 +47,7 @@
                     <td>{{pharmacy.pharmacyUrl}}</td>
                     <td *ngIf = 'pharmacy.pharmacyCommunicationType === 0'>HTTP</td>
                     <td *ngIf = 'pharmacy.pharmacyCommunicationType === 1'>GRPC</td>
+                    <td>{{pharmacy.email}}</td>
                     <td> <button style="color: gray; text-decoration: none;" id="s" class="btn"><a style="text-decoration-line: none; color: white;"  [routerLink] ="['/pharmacy' , pharmacy.pharmacyId]"> Show profile</a> </button></td>
                     <button class="btn" id="s" (click)="deletePharmacy(pharmacy.pharmacyId)" style="margin-top: 15px !important;"> Delete</button>
             

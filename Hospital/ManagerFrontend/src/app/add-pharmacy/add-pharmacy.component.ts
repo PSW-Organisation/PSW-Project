@@ -9,7 +9,7 @@ import { IPharmacy } from '../pharmacies-view/pharmacy'
   styleUrls: ['./add-pharmacy.component.css']
 })
 export class AddPharmacyComponent implements OnInit {
-  newPharmacy: any = { pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: "", comment: "", picture: "", pharmacyCommunicationType:""};
+  newPharmacy: any = { pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: "", comment: "", picture: "", pharmacyCommunicationType:"", email: ""};
 
   constructor(private _pharmaciesService: PharmaciesService, private router: Router) { }
 
