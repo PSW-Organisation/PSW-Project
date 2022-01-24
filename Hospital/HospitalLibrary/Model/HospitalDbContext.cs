@@ -11,6 +11,7 @@ using HospitalLibrary.DoctorSchedule.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 using HospitalLibrary.Events.Model;
 using HospitalLibrary.Medicines.Model;
+using System.IO;
 
 namespace ehealthcare.Model
 {
@@ -43,7 +44,6 @@ namespace ehealthcare.Model
         public DbSet<DoctorVacation> DoctorVacations { get; set; }
         public DbSet<OnCallShift> OnCallShifts { get; set; }
         public DbSet<Shift> Shifts { get; set; }
-
         public DbSet<Event> Events { get; set; }
 
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options)
@@ -1424,6 +1424,109 @@ namespace ehealthcare.Model
                     }
                 );
             });
+
+            #region Events
+
+            //this.Database.ExecuteSqlCommand(File.ReadAllText)
+            //System.Diagnostics.Debug.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
+            
+            modelBuilder.Entity<Event>(e =>
+            {
+                e.HasData(
+                    new Event()
+                    {
+                        Id = -1,
+                        IdUser = "imbiamba",
+                        TimeStamp = new DateTime(2021, 12, 29, 19, 00, 00),
+                        EventAppName = ApplicationName.PatientsPortal,
+                        EventClass = EventClass.AppointmentSchedulingStart,
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84")
+                    },
+                    new Event()
+                    {
+                        Id = -2,
+                        IdUser = "imbiamba",
+                        TimeStamp = new DateTime(2021, 12, 29, 19, 00, 30),
+                        EventAppName = ApplicationName.PatientsPortal,
+                        EventClass = EventClass.AppointmentSchedulingSecondStep,
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84")
+                    },
+                    new Event()
+                    {
+                        Id = -3,
+                        IdUser = "imbiamba",
+                        TimeStamp = new DateTime(2021, 12, 29, 19, 01, 00),
+                        EventAppName = ApplicationName.PatientsPortal,
+                        EventClass = EventClass.AppointmentSchedulingThirdStep,
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84")
+                    },
+                    new Event()
+                    {
+                        Id = -4,
+                        IdUser = "imbiamba",
+                        TimeStamp = new DateTime(2021, 12, 29, 19, 01, 30),
+                        EventAppName = ApplicationName.PatientsPortal,
+                        EventClass = EventClass.AppointmentSchedulingFourthStep,
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84")
+                    },
+                    new Event()
+                    {
+                        Id = -5,
+                        IdUser = "imbiamba",
+                        TimeStamp = new DateTime(2021, 12, 29, 19, 02, 00),
+                        EventAppName = ApplicationName.PatientsPortal,
+                        EventClass = EventClass.AppointmentSchedulingComplete,
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84")
+                    },
+                    new Event()
+                    {
+                        Id = -6,
+                        IdUser = "imbiamba",
+                        TimeStamp = new DateTime(2021, 12, 29, 20, 00, 00),
+                        EventAppName = ApplicationName.PatientsPortal,
+                        EventClass = EventClass.AppointmentSchedulingStart,
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84")
+                    },
+                    new Event()
+                    {
+                        Id = -7,
+                        IdUser = "imbiamba",
+                        TimeStamp = new DateTime(2021, 12, 29, 20, 01, 10),
+                        EventAppName = ApplicationName.PatientsPortal,
+                        EventClass = EventClass.AppointmentSchedulingSecondStep,
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84")
+                    },
+                    new Event()
+                    {
+                        Id = -8,
+                        IdUser = "imbiamba",
+                        TimeStamp = new DateTime(2021, 12, 29, 20, 02, 00),
+                        EventAppName = ApplicationName.PatientsPortal,
+                        EventClass = EventClass.AppointmentSchedulingThirdStep,
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84")
+                    },
+                    new Event()
+                    {
+                        Id = -9,
+                        IdUser = "imbiamba",
+                        TimeStamp = new DateTime(2021, 12, 29, 20, 02, 04),
+                        EventAppName = ApplicationName.PatientsPortal,
+                        EventClass = EventClass.AppointmentSchedulingFourthStep,
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84")
+                    },
+                    new Event()
+                    {
+                        Id = -10,
+                        IdUser = "imbiamba",
+                        TimeStamp = new DateTime(2021, 12, 29, 20, 10, 00),
+                        EventAppName = ApplicationName.PatientsPortal,
+                        EventClass = EventClass.AppointmentSchedulingThirdStep,
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84")
+                    });
+                e.Property(e => e.EventClass).HasConversion<string>();
+            });
+
+            #endregion
         }
     }
 }

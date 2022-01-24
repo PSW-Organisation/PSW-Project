@@ -10,16 +10,14 @@ namespace HospitalLibrary.Medicines.Model
         public String medicineName { get; set; }
         public MedicineStatus medicineStatus { get; set; }
         public int medicineAmount { get; set; }
-        public List<String> medicineIngredient { get; set; }
         public Medicine() { }
 
-        public Medicine(int id, String medicineName, MedicineStatus medicineStatus, int medicineAmount, List<String> medicineIngredient)
+        public Medicine(int id, String medicineName, MedicineStatus medicineStatus, int medicineAmount)
         {
             this.Id = id;
             this.medicineName = medicineName;
             this.medicineStatus = medicineStatus;
             this.medicineAmount = medicineAmount;
-            this.medicineIngredient = medicineIngredient;
         }
     }
 }
