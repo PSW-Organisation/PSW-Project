@@ -38,15 +38,45 @@ namespace IntegrationAPI.Controllers
         {
             if (prescription.DoctorId.Length <= 0 || prescription.MedicineId.Length <= 0 || prescription.PatientId.Length <= 0)
                 return BadRequest();
+            byte[] file = CreatePrescriptionPDF(prescription);
+            var fileName = prescription.PatientId + " " + prescription.PrescriptionDate.ToString("dd-M-yyyy") + ".pdf";
+            var serverFile = @"\pharmacy\" + fileName;
 
-            QRCodeGenerator qr = new QRCodeGenerator();
-            QRCodeData data = qr.CreateQrCode(JsonConvert.SerializeObject(prescription), QRCodeGenerator.ECCLevel.Q);
-            QRCode code = new QRCode(data);
-            var bitmap = code.GetGraphic(5);
-            MemoryStream ms = new MemoryStream();
-            bitmap.Save(ms, ImageFormat.Jpeg);
-            byte[] byteImage = ms.ToArray();
-            var SigBase64 = Convert.ToBase64String(byteImage);
+            List<Pharmacy> pharmacies = new List<Pharmacy>();
+            medicineService.searchMedicine(prescription.MedicineId, 1).ForEach(pharmacy => pharmacies.Add(pharmacy));
+
+            SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
+            sftpService.UploadFile(file, serverFile);
+
+            SendPrescriptionToEligiblePharmacies(file, fileName, pharmacies);
+            return Ok();
+        }
+
+        private static void SendPrescriptionToEligiblePharmacies(byte[] file, string fileName, List<Pharmacy> pharmacies)
+        {
+            foreach (var pharmacy in pharmacies)
+            {
+                if (pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.SFTP)
+                {
+                    var client = new RestClient(pharmacy.PharmacyUrl);
+                    var request = new RestRequest("/report/" + fileName, Method.GET);
+                    var cancellationTokenSource = new CancellationTokenSource();
+                    client.ExecuteAsync(request, cancellationTokenSource.Token);
+                }
+                else if (pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.HTTP)
+                {
+                    var client = new RestClient(pharmacy.PharmacyUrl);
+                    var request = new RestRequest("/report", Method.POST);
+                    request.AddFile("file", file, fileName);
+                    var cancellationTokenSource = new CancellationTokenSource();
+                    client.ExecuteAsync(request, cancellationTokenSource.Token);
+                }
+            }
+        }
+
+        private byte[] CreatePrescriptionPDF(PrescriptionDTO prescription)
+        {
+            string SigBase64 = GetQRCodeFromPrescription(prescription);
 
             var globalSettings = new GlobalSettings
             {
@@ -74,34 +104,20 @@ namespace IntegrationAPI.Controllers
             };
 
             var file = _converter.Convert(pdf);
-            var fileName = prescription.PatientId + " " + prescription.PrescriptionDate.ToString("dd-M-yyyy") + ".pdf";
-            var serverFile = @"\pharmacy\" + fileName;
-            SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
+            return file;
+        }
 
-            List<Pharmacy> pharmacies = new List<Pharmacy>();
-            medicineService.searchMedicine(prescription.MedicineId, 1).ForEach(pharmacy => pharmacies.Add(pharmacy));
-
-            sftpService.UploadFile(file, serverFile);
-
-            foreach (var pharmacy in pharmacies)
-            {
-                if(pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.SFTP)
-                {
-                    var client = new RestClient(pharmacy.PharmacyUrl);
-                    var request = new RestRequest("/report/" + fileName, Method.GET);
-                    var cancellationTokenSource = new CancellationTokenSource();
-                    client.ExecuteAsync(request, cancellationTokenSource.Token);
-                }
-                else if(pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.HTTP)
-                {
-                    var client = new RestClient(pharmacy.PharmacyUrl);
-                    var request = new RestRequest("/report", Method.POST);
-                    request.AddFile("file", file, fileName);
-                    var cancellationTokenSource = new CancellationTokenSource();
-                    client.ExecuteAsync(request, cancellationTokenSource.Token);
-                }
-            }
-            return Ok();
+        private static string GetQRCodeFromPrescription(PrescriptionDTO prescription)
+        {
+            QRCodeGenerator qr = new QRCodeGenerator();
+            QRCodeData data = qr.CreateQrCode(JsonConvert.SerializeObject(prescription), QRCodeGenerator.ECCLevel.Q);
+            QRCode code = new QRCode(data);
+            var bitmap = code.GetGraphic(5);
+            MemoryStream ms = new MemoryStream();
+            bitmap.Save(ms, ImageFormat.Jpeg);
+            byte[] byteImage = ms.ToArray();
+            var SigBase64 = Convert.ToBase64String(byteImage);
+            return SigBase64;
         }
     }
 }

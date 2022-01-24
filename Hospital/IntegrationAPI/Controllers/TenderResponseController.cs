@@ -42,10 +42,34 @@ namespace IntegrationAPI.Controllers
             Pharmacy pharmacy = tenderResponse.Pharmacy;
             tender.ApiKeyPharmacy = pharmacy.PharmacyApiKey;
             tenderResponseService.Update(tenderResponse);
-            var client = new RestClient(pharmacy.PharmacyUrl);
-            var request = new RestRequest("/tender/accept/" + tender.Id, Method.GET);
-            var cancellationTokenSource = new CancellationTokenSource();
-            client.ExecuteAsync(request, cancellationTokenSource.Token);
+            AlertWinningPharmacy(tender, pharmacy);
+            SendEmailToWinningPharmacy(tenderResponse, pharmacy);
+            SendEmailToDeclinedPharmacies(tender, pharmacy);
+            return Ok();
+        }
+
+        private void SendEmailToWinningPharmacy(TenderResponse tenderResponse, Pharmacy pharmacy)
+        {
+            string body = CreateEmailBody(tenderResponse);
+            var message = new Message(new string[] { pharmacy.Email }, "Tender", body);
+            emailSender.SendEmail(message);
+        }
+
+        private void SendEmailToDeclinedPharmacies(Tender tender, Pharmacy pharmacy)
+        {
+            foreach (TenderResponse response in tender.TenderResponses)
+            {
+                Pharmacy pharm = response.Pharmacy;
+                if (pharm.Id != pharmacy.Id)
+                {
+                    var declinedMessage = new Message(new string[] { pharm.Email }, "Tender", "Your tender offer was declined.");
+                    emailSender.SendEmail(declinedMessage);
+                }
+            }
+        }
+
+        private static string CreateEmailBody(TenderResponse tenderResponse)
+        {
             var sb = new StringBuilder();
             sb.Append(@"Your tender offer was accepted.");
             sb.AppendLine();
@@ -57,16 +81,15 @@ namespace IntegrationAPI.Controllers
                 sb.AppendLine();
             }
             sb.AppendFormat(@"Offer total: {0}$", tenderResponse.TotalPrice);
-            var message = new Message(new string[] { pharmacy.Email }, "Tender", sb.ToString());
-            emailSender.SendEmail(message);
-            foreach (TenderResponse response in tender.TenderResponses) {
-                Pharmacy pharm = response.Pharmacy;
-                if (pharm.Id != pharmacy.Id) {
-                    var declinedMessage = new Message(new string[] { pharm.Email }, "Tender", "Your tender offer was declined.");
-                    emailSender.SendEmail(declinedMessage);
-                }
-            }
-            return Ok();
+            return sb.ToString();
+        }
+
+        private static void AlertWinningPharmacy(Tender tender, Pharmacy pharmacy)
+        {
+            var client = new RestClient(pharmacy.PharmacyUrl);
+            var request = new RestRequest("/tender/accept/" + tender.Id, Method.GET);
+            var cancellationTokenSource = new CancellationTokenSource();
+            client.ExecuteAsync(request, cancellationTokenSource.Token);
         }
     }
 }

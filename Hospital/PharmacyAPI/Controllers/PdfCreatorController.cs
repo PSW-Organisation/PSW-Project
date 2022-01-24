@@ -32,18 +32,30 @@ namespace PharmacyAPI.Controllers
         public IActionResult Upload(string name)
         {
             Medicine medicine = null;
-            foreach(var med in medicineService.Get())
+            foreach (var med in medicineService.Get())
             {
-                if(med.Name.Equals(name))
+                if (med.Name.Equals(name))
                 {
                     medicine = med;
                 }
             }
-            if(medicine == null)
+            if (medicine == null)
             {
                 return BadRequest();
             }
 
+            byte[] file = CreateMedicinePDF(medicine);
+            var fileName = name + ".pdf";
+            var serverFile = @"\hospital\" + fileName;
+            // SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password"));   //kod Nevene
+            SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
+            if (sftpService.UploadFile(file, serverFile))
+                return Ok(fileName);
+            return BadRequest();
+        }
+
+        private byte[] CreateMedicinePDF(Medicine medicine)
+        {
             var globalSettings = new GlobalSettings
             {
                 ColorMode = ColorMode.Color,
@@ -51,7 +63,7 @@ namespace PharmacyAPI.Controllers
                 PaperSize = PaperKind.A4,
                 Margins = new MarginSettings { Top = 10 },
                 DocumentTitle = "PDF Report"
-            //  Out = @"D:\PDFCreator\Medicine_Report.pdf"
+                //  Out = @"D:\PDFCreator\Medicine_Report.pdf"
 
             };
 
@@ -67,18 +79,11 @@ namespace PharmacyAPI.Controllers
             var pdf = new HtmlToPdfDocument
             {
                 GlobalSettings = globalSettings,
-                Objects = { objectSettings}
+                Objects = { objectSettings }
             };
 
             var file = _converter.Convert(pdf);
-            var fileName = name + ".pdf";
-            var serverFile = @"\hospital\" + fileName;
-           // SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password"));   //kod Nevene
-           SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
-            if (sftpService.UploadFile(file, serverFile))
-                return Ok(fileName);
-            return BadRequest();
+            return file;
         }
-
     }
 }

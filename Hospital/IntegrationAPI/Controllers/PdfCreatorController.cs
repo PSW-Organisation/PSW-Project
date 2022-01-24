@@ -4,6 +4,7 @@ using IntegrationAPI.DTO;
 using IntegrationAPI.Service;
 using IntegrationAPI.Utility;
 using IntegrationLibrary.Model;
+using IntegrationLibrary.Pharmacies.Model;
 using IntegrationLibrary.Pharmacies.Service.ServiceInterfaces;
 using IntegrationLibrary.Repository;
 using IntegrationLibrary.Service;
@@ -37,7 +38,22 @@ namespace IntegrationAPI.Controllers
         public IActionResult Upload(TimeRangeDTO dto)
         {
             var consumption = consumptionService.GetMedicineConsumptionForDates(dto.StartTime, dto.EndTime);
+            byte[] file = CreateConsuptionReportPDF(dto, consumption);
+            var fileName = dto.StartTime.ToString("dd-M-yyyy") + "_" + dto.EndTime.ToString("dd-M-yyyy") + ".pdf";
+            var serverFile = @"\pharmacy\" + fileName;
+            // SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password")); //kod Nevene
+            SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
+            if (sftpService.UploadFile(file, serverFile))
+            {
 
+                return Ok(fileName);
+            }
+
+            return BadRequest();
+        }
+
+        private byte[] CreateConsuptionReportPDF(TimeRangeDTO dto, List<MedicineConsumption> consumption)
+        {
             var globalSettings = new GlobalSettings
             {
                 ColorMode = ColorMode.Color,
@@ -45,7 +61,7 @@ namespace IntegrationAPI.Controllers
                 PaperSize = PaperKind.A4,
                 Margins = new MarginSettings { Top = 10 },
                 DocumentTitle = "PDF Report"
-              //  Out = @"D:\PDFCreator\Medicine_Report.pdf"
+                //  Out = @"D:\PDFCreator\Medicine_Report.pdf"
             };
 
             var objectSettings = new ObjectSettings
@@ -64,15 +80,7 @@ namespace IntegrationAPI.Controllers
             };
 
             var file = _converter.Convert(pdf);
-            var fileName = dto.StartTime.ToString("dd-M-yyyy") + "_" + dto.EndTime.ToString("dd-M-yyyy") + ".pdf";
-            var serverFile = @"\pharmacy\" + fileName;
-            // SftpService sftpService = new SftpService(new SftpConfig("192.168.1.5", "tester", "password")); //kod Nevene
-            SftpService sftpService = new SftpService(new SftpConfig("192.168.56.1", "tester", "password"));
-            if (sftpService.UploadFile(file, serverFile)) {
-            
-                return Ok(fileName); }
-         
-            return BadRequest();
+            return file;
         }
     }
 }
