@@ -60,6 +60,5 @@ namespace IntegrationLibrary.SharedModel.Service.ServiceImpl
             return this.notificationsRepository.Update(note);
         }
 
-     
-    }
+
 }

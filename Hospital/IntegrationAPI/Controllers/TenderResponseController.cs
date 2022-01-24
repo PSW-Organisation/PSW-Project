@@ -1,4 +1,5 @@
-﻿using IntegrationAPI.DTO;
+using IntegrationAPI.DTO;
+using IntegrationAPI.GlobalErrorHandling.Model;
 using IntegrationLibrary.Emailing.Service;
 using IntegrationLibrary.Emailing.Service.Interface;
 using IntegrationLibrary.Emailing.Utility;
@@ -12,6 +13,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -40,6 +42,8 @@ namespace IntegrationAPI.Controllers
             {
                 return NotFound();
             }
+
+            
             tenderResponse.IsWinner = true;
             Tender tender = tenderResponse.Tender;
             Pharmacy pharmacy = tenderResponse.Pharmacy;

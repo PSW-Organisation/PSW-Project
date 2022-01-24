@@ -9,6 +9,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -67,6 +68,9 @@ namespace IntegrationAPI.Controllers
         [HttpGet("close/{id?}")]
         public IActionResult CloseTender(int id)
         {
+            Ping p = new Ping();
+            PingReply reply;
+            reply = p.Send("");
             Tender tender = tenderService.Get(id);
             if (tender == null)
             {

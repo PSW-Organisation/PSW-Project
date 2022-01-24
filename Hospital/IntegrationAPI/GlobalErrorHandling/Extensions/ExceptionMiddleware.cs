@@ -1,4 +1,5 @@
 ﻿using IntegrationAPI.Extensions;
+using IntegrationAPI.GlobalErrorHandling.Model;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -21,20 +22,20 @@ namespace IntegrationAPI.GlobalErrorHandling.Extensions
             {
                 await _next(httpContext);
             }
-            catch (Exception ex)
+            catch (CustomMessageException ex)
             {
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
-        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private async Task HandleExceptionAsync(HttpContext context, CustomMessageException exception)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             await context.Response.WriteAsync(new ErrorDetails()
             {
                 StatusCode = context.Response.StatusCode,
-                ErrorMessage = "Znaci on kao radi ali ne zeli da mi nastavi program"
-            }.ToString());
+                ErrorMessage = exception.Message
+            }.ToString()) ;
         }
     }
 }

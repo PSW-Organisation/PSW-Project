@@ -1,6 +1,7 @@
 ﻿using Grpc.Core;
 using IntegrationAPI.Adapters;
 using IntegrationAPI.DTO;
+using IntegrationAPI.GlobalErrorHandling.Model;
 using IntegrationAPI.Protos;
 using IntegrationLibrary.Model;
 using IntegrationLibrary.Parnership.Service.ServiceInterfaces;
@@ -46,8 +47,9 @@ namespace IntegrationAPI.Controllers
 
         [HttpPut("{order}")]
         public IActionResult Put(MedicineSearchDTO dto)
+
         {
-            throw new Exception();
+            //throw new CustomMessageException("Zasto je ovo unhandled");
             if (medicineService.checkCommunicationType(dto.ApiKey) == PharmacyCommunicationType.HTTP)
             {
                 return Ok(medicineService.orderMedicineHTTP(MedicineSearchAdapter.MedicineSearchDtoToMedicineSearch(dto)));
