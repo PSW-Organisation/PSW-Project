@@ -13,18 +13,18 @@ export class StatisticsService {
   constructor(private _http: HttpClient) { }
 
   getStatWinnDefeat(apiKey: string){
-    return this._http.get<IStatWinnDefeat>('http://localhost:16928/api2/tender/statisticsPharmacyWinningsDefeat/' + apiKey)
+    return this._http.get<IStatWinnDefeat>('http://localhost:16928/api2/tenderstatistics/statisticsPharmacyWinningsDefeat/' + apiKey)
   }
 
   getStatParticipate(apiKey: string){
-    return this._http.get<IStatWinnDefeat>('http://localhost:16928/api2/tender/statisticsPharmacyParticipate/' + apiKey)
+    return this._http.get<IStatWinnDefeat>('http://localhost:16928/api2/tenderstatistics/statisticsPharmacyParticipate/' + apiKey)
   }
 
   getStatWinnerOffers(apiKey: string){
-    return this._http.get<IStatBarChart>('http://localhost:16928/api2/tender/statisticPharmacyWinnerOffers/' + apiKey)
+    return this._http.get<IStatBarChart>('http://localhost:16928/api2/tenderstatistics/statisticPharmacyWinnerOffers/' + apiKey)
   }
 
   getStatActiveTenderOffers(apiKey: string){
-    return this._http.get<IStatBarChart>('http://localhost:16928/api2/tender/statisticPharmacyAcitiveTenderOffers/' + apiKey)
+    return this._http.get<IStatBarChart>('http://localhost:16928/api2/tenderstatistics/statisticPharmacyAcitiveTenderOffers/' + apiKey)
   }
 }

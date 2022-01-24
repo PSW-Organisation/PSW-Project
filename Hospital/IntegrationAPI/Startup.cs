@@ -43,6 +43,8 @@ using IntegrationLibrary.Tendering.Repository.RepoImpl;
 using IntegrationLibrary.Emailing.Configuration;
 using IntegrationLibrary.Emailing.Service.Interface;
 using IntegrationLibrary.Emailing.Service.Impl;
+using IntegrationLibrary.Statistics.Service.ServiceImpl;
+using IntegrationLibrary.Statistics.Service.ServiceInterfaces;
 
 namespace IntegrationAPI
 {
@@ -114,9 +116,9 @@ namespace IntegrationAPI
             services.AddScoped<MedicineBenefitRepository, MedicineBenefitDbRepository>();
             services.AddScoped<NotificationsForAppRepository, NotificationsForAppDbRepository>();
             services.AddScoped<TenderRepository, TenderDbRepository>();
-
             services.AddScoped<TenderItemRepository, TenderItemDbRepository>();
             services.AddScoped<TenderResponseRepository, TenderResponseDbRepository>();
+
             //servisi
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IAccountDataService, AccountDataService>();
@@ -150,6 +152,7 @@ namespace IntegrationAPI
             services.AddScoped<IEmailSender, EmailSender>();
             services.AddHostedService<TenderResponseRabbitMqService>();
             services.AddHostedService<RabbitMQService>();
+            services.AddScoped<IStatisticsService, StatisticsService > ();
 
             //added for Cors error
             //______________________________________________________________________

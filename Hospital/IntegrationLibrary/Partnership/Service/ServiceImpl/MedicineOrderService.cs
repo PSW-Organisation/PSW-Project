@@ -37,20 +37,11 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
         public List<Pharmacy> searchMedicine(string medicineName, int medicineAmount)
         {
             List<Pharmacy> pharmacies = new List<Pharmacy>();
-
             foreach(Pharmacy pharmacy in pharmacyService.GetAll())
             {
                 if (pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.HTTP || pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.SFTP)
                 {
-                    var client = new RestClient(pharmacy.PharmacyUrl);
-                    var request = new RestRequest("/medicine/" + pharmacy.HospitalApiKey);
-                    var values = new Dictionary<string, object>
-                    {
-                        {"medicineName", medicineName}, {"medicineAmount", medicineAmount}
-                    };
-                    request.AddJsonBody(values);
-                    IRestResponse response = client.Post(request);
-                    if (response.Content.Equals("true"))
+                    if (checkIfExistsHTTP(medicineName, medicineAmount, pharmacy).Content.Equals("true"))
                     {
                         pharmacies.Add(pharmacy);
                     }
@@ -62,27 +53,31 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
         public PharmacyCommunicationType checkCommunicationType(string apiKey)
         {
             List<Pharmacy> pharmacies = new List<Pharmacy>();
-            PharmacyCommunicationType ret = PharmacyCommunicationType.UNDECLARED;
             foreach (Pharmacy pharmacy in pharmacyService.GetAll())
             {
                 if (pharmacy.HospitalApiKey.Equals(apiKey))
-                   ret = pharmacy.PharmacyCommunicationType;
+                   return pharmacy.PharmacyCommunicationType;
             }
-            return ret;
+            return PharmacyCommunicationType.UNDECLARED;
+        }
+
+        private static IRestResponse checkIfExistsHTTP(string medicineName, int medicineAmount, Pharmacy pharmacy)
+        {
+            var client = new RestClient(pharmacy.PharmacyUrl);
+            var request = new RestRequest("/medicine/" + pharmacy.HospitalApiKey);
+            var values = new Dictionary<string, object>
+                    {
+                        {"medicineName", medicineName}, {"medicineAmount", medicineAmount}
+                    };
+            request.AddJsonBody(values);
+            IRestResponse response = client.Post(request);
+            return response;
         }
 
         public bool checkIfMedicineExistsHTTP(MedicineSearch medicineSearch)
         {
             Pharmacy pharmacy = getPharmacyByApi(medicineSearch.ApiKey);
-            var client = new RestSharp.RestClient(pharmacy.PharmacyUrl);
-            var request = new RestRequest("/medicine/" + pharmacy.HospitalApiKey);
-            var values = new Dictionary<string, object>
-                {
-                    {"medicineName", medicineSearch.MedicineName}, {"medicineAmount", medicineSearch.MedicineAmount}
-                };
-            request.AddJsonBody(values);
-            IRestResponse response = client.Post(request);
-            if (response.Content.Equals("true"))
+            if (checkIfExistsHTTP(medicineSearch.MedicineName, medicineSearch.MedicineAmount, pharmacy).Content.Equals("true"))
                 return true;
             else
                 return false;
@@ -90,8 +85,6 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
 
         private Pharmacy getPharmacyByApi(object apiKey)
         {
-            List<Pharmacy> pharmacies = new List<Pharmacy>();
-
             foreach (Pharmacy pharmacy in pharmacyService.GetAll())
             {
                 if (pharmacy.HospitalApiKey.Equals(apiKey))
@@ -103,6 +96,14 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
         public bool orderMedicineHTTP(MedicineSearch medicineSearch)
         {
             Pharmacy pharmacy = getPharmacyByApi(medicineSearch.ApiKey);
+            if (orderMedicineHTTP(medicineSearch, pharmacy).Content != null)
+                return true;
+            else
+                return false;
+        }
+
+        private static IRestResponse orderMedicineHTTP(MedicineSearch medicineSearch, Pharmacy pharmacy)
+        {
             var client = new RestSharp.RestClient(pharmacy.PharmacyUrl);
             var request = new RestRequest("/medicine/" + pharmacy.HospitalApiKey);
             var values = new Dictionary<string, object>
@@ -111,10 +112,7 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
                 };
             request.AddJsonBody(values);
             IRestResponse response = client.Put(request);
-            if (response.Content != null)
-                return true;
-            else
-                return false;
+            return response;
         }
 
         public Medicine SaveMedicine(Medicine medicine)
@@ -128,8 +126,7 @@ namespace IntegrationLibrary.Parnership.Service.ServiceImpl
                     };
             request.AddJsonBody(values);
             var response = client.Post<Medicine>(request);
-            Medicine content = response.Data;
-            return content;
+            return response.Data;
         }
     }
 }

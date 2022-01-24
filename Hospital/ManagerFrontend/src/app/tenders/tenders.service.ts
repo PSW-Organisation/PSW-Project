@@ -34,18 +34,18 @@ export class TendersService {
     //-----------------------------------------------------STATISTIKA----------------------------------------
 
     statisticTenderWinnerOffers(start: Date, end: Date): Observable<ITenderStatisticBarChart>{
-      return this._http.post<ITenderStatisticBarChart>('http://localhost:16928/api2/tender/statisticTenderWinnerOffers', {"dateStart": start, "dateEnd": end});
+      return this._http.post<ITenderStatisticBarChart>('http://localhost:16928/api2/tenderstatistics/statisticTenderWinnerOffers', {"dateStart": start, "dateEnd": end});
     }
 
     statisticTenderPharmacyProfits(start: Date, end: Date): Observable<ITenderStatisticBarChart>{
-      return this._http.post<ITenderStatisticBarChart>('http://localhost:16928/api2/tender/statisticTenderPharmacyProfits', {"dateStart": start, "dateEnd": end});
+      return this._http.post<ITenderStatisticBarChart>('http://localhost:16928/api2/tenderstatistics/statisticTenderPharmacyProfits', {"dateStart": start, "dateEnd": end});
     }
 
     statisticTenderWinningDefeat(start: Date, end: Date): Observable<ITenderStatisticTwoBarChart>{
-      return this._http.post<ITenderStatisticTwoBarChart>('http://localhost:16928/api2/tender/statisticTenderWinningDefeat', {"dateStart": start, "dateEnd": end});
+      return this._http.post<ITenderStatisticTwoBarChart>('http://localhost:16928/api2/tenderstatistics/statisticTenderWinningDefeat', {"dateStart": start, "dateEnd": end});
     }
 
     statisticTenderParticipate(start: Date, end: Date): Observable<ITenderStatisticTwoBarChart>{
-      return this._http.post<ITenderStatisticTwoBarChart>('http://localhost:16928/api2/tender/statisticTenderParticipate', {"dateStart": start, "dateEnd": end});
+      return this._http.post<ITenderStatisticTwoBarChart>('http://localhost:16928/api2/tenderstatistics/statisticTenderParticipate', {"dateStart": start, "dateEnd": end});
     }
 }

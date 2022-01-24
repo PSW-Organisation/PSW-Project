@@ -57,17 +57,6 @@ namespace IntegrationAPI.Controllers
             }
         }
 
-        private bool orderMedicineGRPC(MedicineSearchDTO dto)
-        {
-            bool response = false;
-            Pharmacy pharmacy = pharmacyService.getPharmacyByApiKey(dto.ApiKey);
-            var input = new MedicineOrderRequest { MedicineName = dto.MedicineName, MedicineAmount = dto.MedicineAmount, ApiKey = dto.ApiKey };
-            var channel = new Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
-            var client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
-            var reply = client.orderMedicine(input);
-            response = reply.Response;
-            return response;
-        }
 
         [HttpGet("{medicineName}/{medicineAmount}")]
         public IActionResult SearchMedicine(string medicineName, int medicineAmount)
@@ -89,16 +78,7 @@ namespace IntegrationAPI.Controllers
             {
                 if (pharmacy.PharmacyCommunicationType == PharmacyCommunicationType.GRPC)
                 {
-                    bool response = false;
-                    var input = new MedicineOrderRequest { MedicineName = medicineName, MedicineAmount = medicineAmount, ApiKey = pharmacy.HospitalApiKey };
-                    var channel = new Grpc.Core.Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
-                    var client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
-                    var reply = client.checkIfMedicineExists(input);
-                    response = reply.Response;
-                    if (response)
-                    {
-                        ret.Add(pharmacy);
-                    }
+                    checkIfPharmacyHasMedicine(medicineName, medicineAmount, ret, pharmacy);
                 }
             }
             return ret;
@@ -107,26 +87,65 @@ namespace IntegrationAPI.Controllers
         [HttpPut]
         public IActionResult checkIfMedicineExists(MedicineSearchDTO dto)
         {
-            if(medicineService.checkCommunicationType(dto.ApiKey) == PharmacyCommunicationType.HTTP)
+            if (medicineService.checkCommunicationType(dto.ApiKey) == PharmacyCommunicationType.HTTP)
             {
-               return Ok(medicineService.checkIfMedicineExistsHTTP(MedicineSearchAdapter.MedicineSearchDtoToMedicineSearch(dto)));
-            } else {
+                return Ok(medicineService.checkIfMedicineExistsHTTP(MedicineSearchAdapter.MedicineSearchDtoToMedicineSearch(dto)));
+            }
+            else
+            {
                 return Ok(checkIfMedicineExistsGRPC(dto));
             }
         }
 
+        private static void checkIfPharmacyHasMedicine(string medicineName, int medicineAmount, List<Pharmacy> ret, Pharmacy pharmacy)
+        {
+            MedicineOrderRequest input;
+            OrderMedicineGRPCService.OrderMedicineGRPCServiceClient client;
+            GRPCSendRequest(medicineName, medicineAmount, pharmacy, out input, out client);
+            if (client.checkIfMedicineExists(input).Response)
+            {
+                ret.Add(pharmacy);
+            }
+        }
+
+        private static void GRPCSendRequest(string medicineName, int medicineAmount, Pharmacy pharmacy, out MedicineOrderRequest input, out OrderMedicineGRPCService.OrderMedicineGRPCServiceClient client)
+        {
+            input = new MedicineOrderRequest { MedicineName = medicineName, MedicineAmount = medicineAmount, ApiKey = pharmacy.HospitalApiKey };
+            var channel = new Grpc.Core.Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
+            client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
+        }
+
         public bool checkIfMedicineExistsGRPC(MedicineSearchDTO dto)
         {
-            bool response = false;
-            Pharmacy pharmacy = pharmacyService.getPharmacyByApiKey(dto.ApiKey);
-            var input = new MedicineOrderRequest { MedicineName = dto.MedicineName, MedicineAmount = dto.MedicineAmount, ApiKey = dto.ApiKey };
-            var channel = new Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
-            var client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
+            MedicineOrderRequest input;
+            OrderMedicineGRPCService.OrderMedicineGRPCServiceClient client;
+            GRPCSendRequestCheckIfExists(dto, out input, out client);
             var reply = client.checkIfMedicineExists(input);
+            return reply.Response;
+        }
 
-            response = reply.Response;
+        private void GRPCSendRequestCheckIfExists(MedicineSearchDTO dto, out MedicineOrderRequest input, out OrderMedicineGRPCService.OrderMedicineGRPCServiceClient client)
+        {
+            Pharmacy pharmacy = pharmacyService.getPharmacyByApiKey(dto.ApiKey);
+            input = new MedicineOrderRequest { MedicineName = dto.MedicineName, MedicineAmount = dto.MedicineAmount, ApiKey = dto.ApiKey };
+            var channel = new Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
+            client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
+        }
 
-            return response;
+        private bool orderMedicineGRPC(MedicineSearchDTO dto)
+        {
+            MedicineOrderRequest input;
+            OrderMedicineGRPCService.OrderMedicineGRPCServiceClient client;
+            GRPCSendRequestOrder(dto, out input, out client);
+            return client.orderMedicine(input).Response;
+        }
+
+        private void GRPCSendRequestOrder(MedicineSearchDTO dto, out MedicineOrderRequest input, out OrderMedicineGRPCService.OrderMedicineGRPCServiceClient client)
+        {
+            Pharmacy pharmacy = pharmacyService.getPharmacyByApiKey(dto.ApiKey);
+            input = new MedicineOrderRequest { MedicineName = dto.MedicineName, MedicineAmount = dto.MedicineAmount, ApiKey = dto.ApiKey };
+            var channel = new Channel(pharmacy.PharmacyUrl, ChannelCredentials.Insecure);
+            client = new OrderMedicineGRPCService.OrderMedicineGRPCServiceClient(channel);
         }
     }
 }
