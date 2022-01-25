@@ -74,13 +74,13 @@ namespace IntegrationAPI.Controllers
             }
             tender.Open = false;
             tenderService.Update(tender);
-            foreach(Pharmacy pharmacy in pharmacyService.GetAll())
+           /* foreach(Pharmacy pharmacy in pharmacyService.GetAll())
             {
                 var client = new RestClient(pharmacy.PharmacyUrl);
                 var request = new RestRequest("/tender/notwon/" + id, Method.GET);
                 var cancellationTokenSource = new CancellationTokenSource();
                 client.ExecuteAsync(request, cancellationTokenSource.Token);
-            }
+            }*/
             return Ok();
         }
 

@@ -35,6 +35,11 @@ export class TendersService {
     this.showToastrSuccess("You sent offer!" , "Success");  
 
   }
+  sendNotificationConfirmationToHospital(message: any){
+    return this._http.get('http://localhost:16928/api2/notifications/'+ message).subscribe(),
+    this.showToastrSuccess("You confirmed your offer!" , "Success");  
+
+  }
 
   showToastrSuccess(message: string, title: string){
     this.toastr.success(message, title,

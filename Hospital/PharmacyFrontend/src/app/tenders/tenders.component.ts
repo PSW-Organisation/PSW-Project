@@ -74,7 +74,7 @@ sendNotificationToHospital() {
   this.tenderService.sendNotificationToHospital("You have new tender offer for Tender " + this.modalTender.id + "from Flos Pharmacy. ")
 }
 sendNotificationForConfirmation(message: string) {
-  this.tenderService.sendNotificationToHospital(message);
+  this.tenderService.sendNotificationConfirmationToHospital(message);
 }
 showToastrSuccess(message: string, title: string){
   this.toastr.success(message, title,
