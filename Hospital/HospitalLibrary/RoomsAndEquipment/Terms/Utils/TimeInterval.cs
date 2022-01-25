@@ -19,6 +19,29 @@ namespace HospitalLibrary.RoomsAndEquipment.Terms.Utils
             Validate();
         }
 
+        public bool IsOverlapping(TimeInterval timeInterval)
+        {
+            if (StartTime >= timeInterval.StartTime &&
+                   StartTime <= timeInterval.EndTime ||
+                   EndTime >= timeInterval.StartTime &&
+                   EndTime <= timeInterval.EndTime ||
+                   timeInterval.StartTime >= StartTime &&
+                   timeInterval.StartTime <= EndTime ||
+                   timeInterval.EndTime >= StartTime &&
+                   timeInterval.EndTime <= EndTime)
+                return true;
+
+            return false;
+        }
+
+        public bool IsOverlapping(DateTime dateTime)
+        {
+            if (dateTime >= StartTime && dateTime<=EndTime)
+                return true;
+
+            return false;
+        }
+
         private bool Validate()
         {
             return StartTime < EndTime;
