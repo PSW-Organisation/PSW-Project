@@ -39,7 +39,7 @@ namespace HospitalAPI.Controllers
         [Route("doctorsoncallshift/{date}")]
         public ActionResult<List<DoctorDTO>> GetDoctorsOnCallShift(string date) 
         {
-            var result = _onCallShiftService.GetDoctorsOnCallShifts(DateTime.Parse(date));
+            var result = _onCallShiftService.GetDoctorsOnCallShifts(DateTime.ParseExact(date, "dd.M.yyyy.", CultureInfo.InvariantCulture));
             return Ok(result.Select(d => _mapper.Map<DoctorDTO>(d)).ToList());
         }
 
@@ -47,7 +47,7 @@ namespace HospitalAPI.Controllers
         [Route("doctorsnotoncallshift/{date}")]
         public ActionResult<List<DoctorDTO>> GetDoctorsNotOnCallShift(string date)  
         {
-            var result = _onCallShiftService.GetDoctorsNotOnCallShift(DateTime.Parse(date));
+            var result = _onCallShiftService.GetDoctorsNotOnCallShift(DateTime.ParseExact(date, "dd.M.yyyy.", CultureInfo.InvariantCulture));
             return Ok(result.Select(d => _mapper.Map<DoctorDTO>(d)).ToList());
         }
 

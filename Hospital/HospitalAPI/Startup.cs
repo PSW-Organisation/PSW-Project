@@ -137,6 +137,9 @@ namespace HospitalAPI
             services.AddScoped<IOnCallShiftService, OnCallShiftService>();
             services.AddScoped<IOnCallShiftRepository, OnCallShiftRepository>();
 
+            services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
+            services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<GenericSTRINGIDRepository<User>, UserDbRepository>();
             services.AddScoped<IUserRepository, UserDbRepository>();

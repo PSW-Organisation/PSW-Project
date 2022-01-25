@@ -14,7 +14,7 @@ namespace HospitalAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Policy = "Manager")]
+    //[Authorize(Policy = "Manager")]
 
     public class DoctorVacationController : ControllerBase
     {

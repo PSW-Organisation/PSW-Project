@@ -27,7 +27,16 @@ namespace HospitalLibrary.DoctorSchedule.Repository
 
         public List<OnCallShift> GetAllOnCallShiftByDoctorId(string doctorId)
         {
-            return _dbContext.OnCallShifts.Where(onCallShift => onCallShift.DoctorId.Equals(doctorId)).ToList();
+            return _dbContext.Schedules.Single(s => s.DoctorId == doctorId).OnCallShifts;
+        }
+
+        public List<OnCallShift> GetAllOnCallShifts()
+        {
+            List<OnCallShift> onCallShifts = new List<OnCallShift>();
+            foreach (DoctorsSchedule doctorSchedule in _dbContext.Schedules)
+                foreach (OnCallShift onCallShift in doctorSchedule.OnCallShifts)
+                    onCallShifts.Add(onCallShift);
+            return onCallShifts;
         }
 
         public List<Doctor> GetDoctorsOnCallShift(DateTime date)
@@ -37,17 +46,22 @@ namespace HospitalLibrary.DoctorSchedule.Repository
 
         public List<OnCallShift> GetCallShiftsByDate(DateTime date)
         {
-            return _dbContext.OnCallShifts.Where(onCallShift => onCallShift.Date.Year == date.Year && onCallShift.Date.Month == date.Month && onCallShift.Date.Day == date.Day).ToList();
+            List<OnCallShift> onCallShifts = new List<OnCallShift>();
+            foreach (DoctorsSchedule doctorSchedule in _dbContext.Schedules)
+                foreach (OnCallShift onCallShift in doctorSchedule.OnCallShifts.Where(onCallShift => onCallShift.Date.Year == date.Year && onCallShift.Date.Month == date.Month && onCallShift.Date.Day == date.Day))
+                    onCallShifts.Add(onCallShift);
+            return onCallShifts;
         }
 
         public OnCallShift GetAllOnCallShiftByDateAndDoctor(DateTime date,string doctorId)
         {
             OnCallShift onCallShift = new OnCallShift();
-            foreach (OnCallShift onCall in _dbContext.OnCallShifts.ToList())
-            {
-                if (onCall.Date.Year == date.Year && onCall.Date.Month == date.Month && onCall.Date.Day == date.Day && onCall.DoctorId == doctorId)
-                    return onCall;
-            }
+            foreach(DoctorsSchedule doctorSchedule in _dbContext.Schedules)
+                foreach (OnCallShift onCall in doctorSchedule.OnCallShifts)
+                {
+                    if (onCall.Date.Year == date.Year && onCall.Date.Month == date.Month && onCall.Date.Day == date.Day && onCall.DoctorId == doctorId)
+                        return onCall;
+                }
             return onCallShift;
         }
 
@@ -69,17 +83,6 @@ namespace HospitalLibrary.DoctorSchedule.Repository
                     doctorsNotOnShift.Add(doctor);
                 notOnShift = true;
             }
-            
-
-            //if (GetCallShiftsByDate(date).Count <= 0)
-            //    return _dbContext.Doctors.ToList();
-
-            //foreach (OnCallShift onCallShift in GetCallShiftsByDate(date))
-            //foreach (var doctor in _dbContext.Doctors)
-            //{
-            //    if (!doctor.Id.Equals(onCallShift.DoctorId)) list.Add(doctor);
-            //}
-
             return doctorsNotOnShift;
         }
     }

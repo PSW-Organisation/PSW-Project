@@ -16,5 +16,7 @@ namespace HospitalLibrary.DoctorSchedule.Repository
         public List<OnCallShift> GetAllOnCallShiftByDoctorId(string doctorId);
 
         public OnCallShift GetAllOnCallShiftByDateAndDoctor(DateTime date, string doctorId);
+
+        public List<OnCallShift> GetAllOnCallShifts();
     }
 }

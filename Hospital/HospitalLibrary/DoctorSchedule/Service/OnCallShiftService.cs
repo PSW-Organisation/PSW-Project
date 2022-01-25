@@ -11,36 +11,30 @@ namespace HospitalLibrary.DoctorSchedule.Service
     public class OnCallShiftService : IOnCallShiftService
     {
         private readonly IOnCallShiftRepository _onCallShiftRepository;
+        private readonly IDoctorScheduleRepository _doctorScheduleRepository;
 
-        public OnCallShiftService(IOnCallShiftRepository onCallShiftRepository)
+        public OnCallShiftService(IOnCallShiftRepository onCallShiftRepository, IDoctorScheduleRepository doctorScheduleRepository)
         {
             _onCallShiftRepository = onCallShiftRepository;
+            _doctorScheduleRepository = doctorScheduleRepository;
         }
 
         public OnCallShift CreateOnCallShift(OnCallShift onCallShift)
         {
-            //if (GetAllOnCallShiftByDoctorId(onCallShift.DoctorId).Count < 1)
-            //{
-            //    _onCallShiftRepository.Insert(onCallShift);
-            //    return onCallShift;
-            //}
-            //foreach (OnCallShift onCall in GetAllOnCallShiftByDoctorId(onCallShift.DoctorId))
-            //{
-            //    if (onCall.Date.Year != onCallShift.Date.Year || onCall.Date.Month != onCallShift.Date.Month ||
-            //        onCall.Date.Day != onCallShift.Date.Day)
-            //    {
-             //       _onCallShiftRepository.GetNewId();
-                    _onCallShiftRepository.Insert(onCallShift);
-            //    }
-            //    else return null;
-            //}
+            DoctorsSchedule doctorSchedule = _doctorScheduleRepository.GetDoctorsSchedule(onCallShift.DoctorId);
+            if (!doctorSchedule.AddOnCallShift(onCallShift))
+                return null;
+            _doctorScheduleRepository.Save(doctorSchedule);
             return onCallShift;
         }
 
         public bool DeleteOnCallShift(OnCallShift onCallShift)
         {
-            OnCallShift onCall = _onCallShiftRepository.GetAllOnCallShiftByDateAndDoctor(onCallShift.Date, onCallShift.DoctorId);
-            _onCallShiftRepository.Delete(onCall);
+            DoctorsSchedule doctorSchedule = _doctorScheduleRepository.GetDoctorsSchedule(onCallShift.DoctorId);
+            onCallShift.DoctorsScheduleId = doctorSchedule.Id;
+            if (!doctorSchedule.DeleteOnCallShift(onCallShift))
+                return false;
+            _doctorScheduleRepository.Save(doctorSchedule);
             return true;
         }
 
@@ -51,7 +45,7 @@ namespace HospitalLibrary.DoctorSchedule.Service
 
         public IList<OnCallShift> GetAllOnCallShifts()
         {
-            return _onCallShiftRepository.GetAll();
+            return _onCallShiftRepository.GetAllOnCallShifts();
         }
 
         public List<Doctor> GetDoctorsOnCallShifts(DateTime date)
@@ -66,7 +60,11 @@ namespace HospitalLibrary.DoctorSchedule.Service
 
         public OnCallShift UpdateOnCallShift(OnCallShift onCallShift)
         {
-            return _onCallShiftRepository.Update(onCallShift);
+            DoctorsSchedule doctorSchedule = _doctorScheduleRepository.GetDoctorsSchedule(onCallShift.DoctorId);
+            if (!doctorSchedule.UpdateOnCallShift(onCallShift))
+                return null;
+            _doctorScheduleRepository.Save(doctorSchedule);
+            return onCallShift;
         }
 
         public AppointmentCount GetOnCallCountYearly(string username)

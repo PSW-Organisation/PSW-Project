@@ -1,11 +1,13 @@
+using HospitalLibrary.DoctorSchedule.Model;
+using HospitalLibrary.Events.Model;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.GraphicalEditor.Model;
 using HospitalLibrary.MedicalRecords.Model;
 using HospitalLibrary.Model;
 using HospitalLibrary.RoomsAndEquipment.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Model;
-using Microsoft.EntityFrameworkCore;
 using HospitalLibrary.Shared.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using HospitalLibrary.DoctorSchedule.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
@@ -45,6 +47,7 @@ namespace ehealthcare.Model
         public DbSet<OnCallShift> OnCallShifts { get; set; }
         public DbSet<Shift> Shifts { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<DoctorsSchedule> Schedules { get; set; }
 
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options)
         {
@@ -309,50 +312,33 @@ namespace ehealthcare.Model
 
             #endregion
 
-            #region OnCallShifts
+            #region DoctorSchedule
 
-            modelBuilder.Entity<OnCallShift>().HasData(
+            modelBuilder.Entity<DoctorsSchedule>().HasData(
                 new
                 {
                     Id = 1,
-                    Date = new DateTime(2022, 1, 20),
-                    DoctorId = "mkisic"
+                    DoctorId = "mkisic",
                 },
-                new
-                {
-                    Id = 2,
-                    Date = new DateTime(2022,1,25),
-                    DoctorId = "nelex"
-                },
-                new
-                {
-                    Id = 3,
-                    Date = new DateTime(2022, 1, 15),
-                    DoctorId = "mkisic"
-                },
-
-                new
-                {
-                    Id = 4,
-                    Date = new DateTime(2022, 1, 13),
-                    DoctorId = "nelex"
-                }
-            );
-
-            modelBuilder.Entity<OnCallShift>().Property(o => o.Id).HasIdentityOptions(startValue: 10);
-
-            #endregion
+                 new
+                 {
+                     Id = 2,
+                     DoctorId = "nelex"
+                 }
+                );
 
             #region DoctorVacations
-
-            modelBuilder.Entity<DoctorVacation>().OwnsOne(v => v.DateSpecification, a =>
+            modelBuilder.Entity<DoctorsSchedule>().OwnsMany(d => d.DoctorVacations).OwnsOne(v => v.DateSpecification, a =>
             {
                 a.Property(d => d.StartTime).HasColumnName("StartTime");
                 a.Property(d => d.EndTime).HasColumnName("EndTime");
                 a.Ignore(d => d.Duration);
             });
 
-            modelBuilder.Entity<DoctorVacation>().OwnsOne(v => v.DateSpecification).HasData(
+            modelBuilder.Entity<DoctorsSchedule>().OwnsMany(d => d.DoctorVacations).Property(v => v.Id).HasIdentityOptions(startValue: 10);
+
+
+            modelBuilder.Entity<DoctorsSchedule>().OwnsMany(d => d.DoctorVacations).OwnsOne(v => v.DateSpecification).HasData(
                 new
                 {
                     StartTime = new DateTime(2022, 1, 15),
@@ -372,28 +358,80 @@ namespace ehealthcare.Model
                     DoctorVacationId = 3,
                 });
 
-            modelBuilder.Entity<DoctorVacation>().HasData(
+            modelBuilder.Entity<DoctorsSchedule>().OwnsMany(d => d.DoctorVacations).HasData(
                     new
                     {
                         Id = 1,
                         Description = "Zimovanje",
-                        DoctorId = "mkisic"
+                        DoctorId = "mkisic",
+                        DoctorsScheduleId = 1
                     },
                     new
                     {
                         Id = 2,
                         Description = "Letovanje",
-                        DoctorId = "nelex"
+                        DoctorId = "nelex",
+                        DoctorsScheduleId = 2
                     },
                     new
                     {
                         Id = 3,
                         Description = "Bolovanje",
-                        DoctorId = "mkisic"
+                        DoctorId = "mkisic",
+                        DoctorsScheduleId = 1
                     }
                 );
-                
-            modelBuilder.Entity<DoctorVacation>().Property(v => v.Id).HasIdentityOptions(startValue: 10);
+            #endregion
+
+            #region OnCallShifts
+
+            modelBuilder.Entity<DoctorsSchedule>().OwnsMany(d => d.OnCallShifts).HasData(
+                new
+                {
+                    Id = 1,
+                    Date = new DateTime(2022, 1, 20),
+                    DoctorId = "mkisic",
+                    DoctorsScheduleId = 1
+                },
+                new
+                {
+                    Id = 2,
+                    Date = new DateTime(2022, 1, 25),
+                    DoctorId = "nelex",
+                    DoctorsScheduleId = 2
+                },
+                new
+                {
+                    Id = 3,
+                    Date = new DateTime(2022, 1, 15),
+                    DoctorId = "mkisic",
+                    DoctorsScheduleId = 1
+                },
+
+                new
+                {
+                    Id = 4,
+                    Date = new DateTime(2022, 1, 13),
+                    DoctorId = "nelex",
+                    DoctorsScheduleId = 2
+                }
+                );
+
+
+            modelBuilder.Entity<DoctorsSchedule>().OwnsMany(d => d.OnCallShifts).Property(o => o.Id).HasIdentityOptions(startValue: 10);
+
+            #endregion
+
+            #endregion
+
+            #region Shifts
+
+            modelBuilder.Entity<Shift>().OwnsOne(s => s.TimeInterval, s =>
+            {
+                s.Property(t => t.StartTime).HasColumnName("StartTime");
+                s.Property(t => t.EndTime).HasColumnName("EndTime");
+                s.Ignore(t => t.Duration);
+            });
 
             #endregion
 
@@ -1108,16 +1146,7 @@ namespace ehealthcare.Model
 
             #endregion
 
-            #region Shifts
             
-            modelBuilder.Entity<Shift>().OwnsOne(s => s.TimeInterval, s =>
-            {
-                s.Property(t => t.StartTime).HasColumnName("StartTime");
-                s.Property(t => t.EndTime).HasColumnName("EndTime");
-                s.Ignore(t => t.Duration);
-            });
-
-            #endregion
 
             modelBuilder.Entity<MedicalRecord>(m =>
             {
@@ -1152,7 +1181,7 @@ namespace ehealthcare.Model
                     PatientId = "imbiamba",
                     AllergenId = 1
                 });
-                a.HasKey(pa => new {pa.PatientId, pa.AllergenId});
+                a.HasKey(pa => new { pa.PatientId, pa.AllergenId });
                 a.HasOne<Patient>(p => p.Patient).WithMany(p => p.PatientAllergens)
                     .HasForeignKey(pa => pa.PatientId);
                 a.HasOne<Allergen>(a => a.Allergen).WithMany(p => p.PatientAllergens)
@@ -1292,7 +1321,7 @@ namespace ehealthcare.Model
                         Category = QuestionCategory.hospital
                     });
 
-                q.HasKey(q => new {q.SurveyId, q.Id});
+                q.HasKey(q => new { q.SurveyId, q.Id });
             });
 
 

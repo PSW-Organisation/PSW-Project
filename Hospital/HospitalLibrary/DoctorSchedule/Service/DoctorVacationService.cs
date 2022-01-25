@@ -11,43 +11,36 @@ namespace HospitalLibrary.DoctorSchedule.Service
     public class DoctorVacationService : IDoctorVacationService
     {
         private readonly IDoctorVacationRepository _doctorVacationRepository;
+        private readonly IDoctorScheduleRepository _doctorScheduleRepository;
 
-        public DoctorVacationService(IDoctorVacationRepository doctorVacationRepository)
+        public DoctorVacationService(IDoctorVacationRepository doctorVacationRepository, IDoctorScheduleRepository doctorScheduleRepository)
         {
             _doctorVacationRepository = doctorVacationRepository;
-        }
-
-        private bool CheckIfDatesConflict(DateTime date1Start, DateTime date1End, DateTime date2Start, DateTime date2End)
-        {
-            return date1Start > date2Start &&
-                   date1Start < date2End ||
-                   date1End > date2Start &&
-                   date1End < date2End ||
-                   date2Start > date1Start &&
-                   date2Start < date1End ||
-                   date2End > date1Start &&
-                   date2End < date1End;
+            _doctorScheduleRepository = doctorScheduleRepository;
         }
 
         public DoctorVacation CreateDoctorVacation(DoctorVacation doctorVacation)
         {
-            if (GetDoctorVacations(doctorVacation.DoctorId).Any(dv =>
-                    CheckIfDatesConflict(doctorVacation.DateSpecification.StartTime,
-                        doctorVacation.DateSpecification.EndTime, dv.DateSpecification.StartTime,
-                        dv.DateSpecification.EndTime))) return null;
-            _doctorVacationRepository.Insert(doctorVacation);
+            DoctorsSchedule doctorSchedule = _doctorScheduleRepository.GetDoctorsSchedule(doctorVacation.DoctorId);
+            if (!doctorSchedule.AddDoctorVacation(doctorVacation))
+                return null;
+            _doctorScheduleRepository.Save(doctorSchedule);
             return doctorVacation;
         }
 
         public bool DeleteDoctorVacation(DoctorVacation doctorVacation)
         {
-            _doctorVacationRepository.Delete(doctorVacation);
+            DoctorsSchedule doctorSchedule = _doctorScheduleRepository.GetDoctorsSchedule(doctorVacation.DoctorId);
+            doctorVacation.DoctorsScheduleId = doctorSchedule.Id;
+            if (!doctorSchedule.DeleteDoctorVacation(doctorVacation))
+                return false;
+            _doctorScheduleRepository.Save(doctorSchedule);
             return true;
         }
 
         public IList<DoctorVacation> GetAllDoctorVacations()
         {
-            return _doctorVacationRepository.GetAll();
+            return _doctorVacationRepository.GetAllDoctorVacations();
         }
 
         public List<DoctorVacation> GetDoctorVacations(string doctorId)
@@ -57,18 +50,10 @@ namespace HospitalLibrary.DoctorSchedule.Service
 
         public DoctorVacation UpdateDoctorVacation(DoctorVacation doctorVacation)
         {
-            List<DoctorVacation> doctorVacations = GetDoctorVacations(doctorVacation.DoctorId);
-            foreach (var dv in doctorVacations.Where(dv => dv.Id.Equals(doctorVacation.Id)))
-            {
-                doctorVacations.Remove(dv);
-                break;
-            }
-
-            if (doctorVacations.Any(dv =>
-                    CheckIfDatesConflict(doctorVacation.DateSpecification.StartTime,
-                        doctorVacation.DateSpecification.EndTime, dv.DateSpecification.StartTime,
-                        dv.DateSpecification.EndTime))) return null;
-            _doctorVacationRepository.Update(doctorVacation);
+            DoctorsSchedule doctorSchedule = _doctorScheduleRepository.GetDoctorsSchedule(doctorVacation.DoctorId);
+            if (!doctorSchedule.UpdateDoctorVacation(doctorVacation))
+                return null;
+            _doctorScheduleRepository.Save(doctorSchedule);
             return doctorVacation;
         }
     }

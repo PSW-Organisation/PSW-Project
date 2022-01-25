@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ehealthcare.Model;
 using HospitalLibrary.DoctorSchedule.Model;
@@ -15,5 +16,6 @@ namespace HospitalLibrary.DoctorSchedule.Repository
         {
             _dbContext = dbContext;
         }
+
     }
 }

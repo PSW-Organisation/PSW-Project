@@ -9,6 +9,7 @@ namespace HospitalLibrary.DoctorSchedule.Model
     {
         public DateTime Date { get; set; }
         public string DoctorId { get; set; }
+        public int DoctorsScheduleId { get; set; }
 
         public OnCallShift()
         {

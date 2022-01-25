@@ -46,7 +46,7 @@ namespace HospitalLibrary.DoctorSchedule.Service
             shift.TimeInterval = updatedShift.TimeInterval;
             return _shiftRepository.Update(shift);
         }
-        
+
         public Shift DeleteShift(Shift shift)
         {
             _shiftRepository.Delete(shift);

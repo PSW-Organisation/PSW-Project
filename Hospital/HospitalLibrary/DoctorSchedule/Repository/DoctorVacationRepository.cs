@@ -21,7 +21,22 @@ namespace HospitalLibrary.DoctorSchedule.Repository
 
         public List<DoctorVacation> GetDoctorVacations(string doctorId)
         {
-            return _dbContext.DoctorVacations.Where(d => d.DoctorId.Equals(doctorId)).ToList();
+            return _dbContext.Schedules.Single(s => s.DoctorId == doctorId).DoctorVacations.Where(d => d.DoctorId.Equals(doctorId)).ToList();
+        }
+
+        public List<DoctorVacation> GetAllDoctorVacations()
+        {
+            List<DoctorVacation> doctorVacations = new List<DoctorVacation>();
+            foreach(DoctorsSchedule doctorSchedule in _dbContext.Schedules)
+                foreach (DoctorVacation doctorVacation in doctorSchedule.DoctorVacations)
+                    doctorVacations.Add(doctorVacation);
+            return doctorVacations;
+        }
+
+        public bool DeleteDoctorVacation(DoctorVacation doctorVacation)
+        {
+            _dbContext.Schedules.Single(s => s.DoctorId == doctorVacation.DoctorId).DoctorVacations.Remove(doctorVacation);
+            return true;
         }
     }
 }

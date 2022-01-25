@@ -11,6 +11,8 @@ namespace HospitalLibrary.DoctorSchedule.Model
 
         public string DoctorId { get; set; }
 
+        public int DoctorsScheduleId { get; set; }
+
         public DoctorVacation()
         {
         }
