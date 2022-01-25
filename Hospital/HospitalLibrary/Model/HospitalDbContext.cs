@@ -7,6 +7,7 @@ using HospitalLibrary.RoomsAndEquipment.Terms.Model;
 using Microsoft.EntityFrameworkCore;
 using HospitalLibrary.Shared.Model;
 using System;
+using System.Collections.Generic;
 using HospitalLibrary.DoctorSchedule.Model;
 using HospitalLibrary.RoomsAndEquipment.Terms.Utils;
 using HospitalLibrary.Events.Model;
@@ -33,6 +34,7 @@ namespace ehealthcare.Model
         public DbSet<TermOfRelocationEquipment> TermOfRelocationEquipments { get; set; }
         public DbSet<TermOfRenovation> TermOfRenovations { get; set; }
         public DbSet<RoomEquipment> RoomEquipments { get; set; }
+        public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Survey> Surveys { get; set; }
 
         public DbSet<Question> Questions { get; set; }
@@ -65,40 +67,65 @@ namespace ehealthcare.Model
 
             #region RoomEquipments
 
-            modelBuilder.Entity<RoomEquipment>().HasData(
-                new
+            modelBuilder.Entity<RoomEquipment>().OwnsMany(v => v.Equipments).HasData(
+                new Equipment
                 {
                     Id = 1,
                     Name = "Bed",
                     Quantity = 2,
                     Type = "Static",
-                    RoomId = 1
+                    RoomEquipmentId = 1
                 },
-                new
+                new Equipment
                 {
                     Id = 2,
                     Name = "Needle",
                     Quantity = 200,
                     Type = "Dynamic",
-                    RoomId = 2
+                    RoomEquipmentId = 2
                 },
-                new
+                new Equipment
                 {
                     Id = 3,
                     Name = "Needle",
                     Quantity = 300,
                     Type = "Dynamic",
-                    RoomId = 3
+                    RoomEquipmentId = 3
                 },
-                new
+                new Equipment
                 {
                     Id = 4,
                     Name = "Picks",
                     Quantity = 300,
                     Type = "Dynamic",
+                    RoomEquipmentId = 4
+                }
+            );
+
+            modelBuilder.Entity<RoomEquipment>().HasData(
+                new RoomEquipment
+                {
+                    Id = 1,
+                    RoomId = 1
+                },
+                new
+                {
+                    Id = 2,
+                    RoomId = 2
+                },
+                new
+                {
+                    Id = 3,
+                    RoomId = 3
+                },
+                new
+                {
+                    Id = 4,
                     RoomId = 16
                 }
             );
+
+            modelBuilder.Entity<RoomEquipment>().Property(v => v.Id).HasIdentityOptions(startValue: 10);
 
             #endregion
 
@@ -304,6 +331,8 @@ namespace ehealthcare.Model
                     Sector = "WS"
                 }
             );
+
+            modelBuilder.Entity<Room>().Property(v => v.Id).HasIdentityOptions(startValue: 20);
 
             #endregion
 
@@ -768,6 +797,10 @@ namespace ehealthcare.Model
                     RoomId = 17
                 });
 
+            modelBuilder.Entity<RoomGraphic>().Property(v => v.Id).HasIdentityOptions(startValue: 20);
+            modelBuilder.Entity<FloorGraphic>().Property(v => v.Id).HasIdentityOptions(startValue: 10);
+
+
             #endregion
 
             #region TermOfRelocationEquipments
@@ -882,6 +915,9 @@ namespace ehealthcare.Model
                 }
             );
 
+            modelBuilder.Entity<TermOfRelocationEquipment>().Property(v => v.Id).HasIdentityOptions(startValue: 10);
+
+
             #endregion
 
             #region TermOfRenovations
@@ -942,6 +978,8 @@ namespace ehealthcare.Model
                     NewRoomTypeForRoomB = RoomType.operation,
                 }
             );
+
+            modelBuilder.Entity<TermOfRenovation>().Property(v => v.Id).HasIdentityOptions(startValue: 10);
 
             #endregion
 

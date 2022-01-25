@@ -57,7 +57,9 @@ namespace HospitalAPI.Mapper
             CreateMap<PatientFeedback, PatientFeedbackDTO>();
             CreateMap<PatientFeedbackDTO, PatientFeedback>();
 
-            CreateMap<RoomEquipment, RoomEquipmentDTO>();
+            CreateMap<Equipment, RoomEquipmentDTO>()
+                .ForMember(dest => dest.RoomId,
+                    act => act.MapFrom(src => src.RoomEquipmentId)).ReverseMap();
 
             CreateMap<PatientDto, Patient>().ConstructUsing(x => new Patient(x.Username)).ReverseMap();
             CreateMap<SurveyQuestionDto, Survey>();
@@ -67,6 +69,9 @@ namespace HospitalAPI.Mapper
 
             //CreateMap<Room, RoomMinimalInfoDTO>().ConstructUsing(r => new RoomMinimalInfoDTO() { Id=r.Id, Name=r.Name });
             CreateMap<Room, RoomMinimalInfoDTO>();
+
+            CreateMap<Room, RoomDTO>().ReverseMap();
+
 
             CreateMap<ParamsOfRenovation, ParamsOfRenovationDTO>();
             CreateMap<ParamsOfRenovationDTO, ParamsOfRenovation>();

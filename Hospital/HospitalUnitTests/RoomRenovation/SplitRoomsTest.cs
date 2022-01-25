@@ -379,10 +379,10 @@ namespace HospitalUnitTests.RoomRenovation
 
         [Theory]
         [MemberData(nameof(RoomEquipmentData))]
-        public void Split_room_equipment(EquipmentLogic equipmentLogic, Room room, List<Room> rooms, List<RoomEquipment> roomEquipment, List<RoomEquipment> expectedRoomEquipment)
+        public void Split_room_equipment(EquipmentLogic equipmentLogic, Room room, List<Room> rooms, RoomEquipment roomEquipment, List<RoomEquipment> expectedRoomEquipment)
         {
             var stubRoomEquipmentRepository = new Mock<IRoomEquipmentRepository>();
-            stubRoomEquipmentRepository.Setup(e => e.GetAllEquipmentInRoom(room.Id)).Returns(roomEquipment);
+            stubRoomEquipmentRepository.Setup(e => e.GetRoomEquipmentInRoom(room.Id)).Returns(roomEquipment);
             RoomEquipmentService roomEquipmentService = new RoomEquipmentService(stubRoomEquipmentRepository.Object);
 
             List<RoomEquipment> splitRoomEquipment = roomEquipmentService.SplitRoomEquipment(equipmentLogic, room, rooms);
@@ -425,57 +425,23 @@ namespace HospitalUnitTests.RoomRenovation
                             Sector = "ERS"
                         }
                     },
+                    new RoomEquipment(1, new List<Equipment>()
+                    {
+                        new Equipment(4, "bed", "Static", 1),
+                        new Equipment(33, "needle", "Dynamic", 1),
+                    }),
                     new List<RoomEquipment>()
                     {
-                        new RoomEquipment()
+                        new RoomEquipment(2, new List<Equipment>()
                         {
-                            Name = "bed",
-                            Quantity = 4,
-                            Type = "Static",
-                            RoomId = 1
-                        },
-                        new RoomEquipment()
+                            new Equipment(2, "bed", "Static", 2),
+                            new Equipment(16, "needle", "Dynamic", 2)
+                        }),
+                        new RoomEquipment(3, new List<Equipment>()
                         {
-                            Name = "needle",
-                            Quantity = 33,
-                            Type = "Dynamic",
-                            RoomId = 1
-                        },
-                    },
-                    new List<RoomEquipment>()
-                    {
-                        new RoomEquipment()
-                        {
-                            Id = 2,
-                            Name = "bed",
-                            Quantity = 2,
-                            Type = "Static",
-                            RoomId = 2
-                        },
-                        new RoomEquipment()
-                        {
-                            Id = 2,
-                            Name = "needle",
-                            Quantity = 16,
-                            Type = "Dynamic",
-                            RoomId = 2
-                        },
-                        new RoomEquipment()
-                        {
-                            Id = 3,
-                            Name = "bed",
-                            Quantity = 2,
-                            Type = "Static",
-                            RoomId = 3
-                        },
-                        new RoomEquipment()
-                        {
-                            Id = 3,
-                            Name = "needle",
-                            Quantity = 17,
-                            Type = "Dynamic",
-                            RoomId = 3
-                        }
+                            new Equipment(2, "bed", "Static", 3),
+                            new Equipment(17, "needle", "Dynamic", 3)
+                        })
                     }
                 },
                 new object[]
@@ -508,42 +474,18 @@ namespace HospitalUnitTests.RoomRenovation
                             Sector = "ERS"
                         }
                     },
+                    new RoomEquipment(1, new List<Equipment>()
+                    {
+                        new Equipment(4, "bed", "Static", 1),
+                        new Equipment(33, "needle", "Dynamic", 1),
+                    }),
                     new List<RoomEquipment>()
                     {
-                        new RoomEquipment()
+                        new RoomEquipment(2, new List<Equipment>()
                         {
-
-                            Name = "bed",
-                            Quantity = 4,
-                            Type = "Static",
-                            RoomId = 1
-                        },
-                        new RoomEquipment()
-                        {
-                            Name = "needle",
-                            Quantity = 33,
-                            Type = "Dynamic",
-                            RoomId = 1
-                        },
-                    },
-                    new List<RoomEquipment>()
-                    {
-                        new RoomEquipment()
-                        {
-                            Id = 2,
-                            Name = "bed",
-                            Quantity = 4,
-                            Type = "Static",
-                            RoomId = 2
-                        },
-                        new RoomEquipment()
-                        {
-                            Id = 2,
-                            Name = "needle",
-                            Quantity = 33,
-                            Type = "Dynamic",
-                            RoomId = 2
-                        }
+                            new Equipment(4, "bed", "Static", 2),
+                            new Equipment(33, "needle", "Dynamic", 2)
+                        })
                     }
                 },
                 new object[]
@@ -576,41 +518,18 @@ namespace HospitalUnitTests.RoomRenovation
                             Sector = "ERS"
                         }
                     },
+                    new RoomEquipment(1, new List<Equipment>()
+                    {
+                        new Equipment(4, "bed", "Static", 1),
+                        new Equipment(33, "needle", "Dynamic", 1),
+                    }),
                     new List<RoomEquipment>()
                     {
-                        new RoomEquipment()
+                        new RoomEquipment(3, new List<Equipment>()
                         {
-                            Name = "bed",
-                            Quantity = 4,
-                            Type = "Static",
-                            RoomId = 1
-                        },
-                        new RoomEquipment()
-                        {
-                            Name = "needle",
-                            Quantity = 33,
-                            Type = "Dynamic",
-                            RoomId = 1
-                        },
-                    },
-                    new List<RoomEquipment>()
-                    {
-                        new RoomEquipment()
-                        {
-                            Id = 3,
-                            Name = "bed",
-                            Quantity = 4,
-                            Type = "Static",
-                            RoomId = 3
-                        },
-                        new RoomEquipment()
-                        {
-                            Id = 3,
-                            Name = "needle",
-                            Quantity = 33,
-                            Type = "Dynamic",
-                            RoomId = 3
-                        }
+                            new Equipment(4, "bed", "Static", 3),
+                            new Equipment(33, "needle", "Dynamic", 3)
+                        })
                     }
                 }
             };

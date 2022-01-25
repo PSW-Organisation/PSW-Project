@@ -164,7 +164,7 @@ namespace HospitalAPI
             services.AddScoped<GenericDbRepository<PatientFeedback>, PatientFeedbackDbRepository>();
             services.AddScoped<IPatientFeedbackRepository, PatientFeedbackDbRepository>();
 
-            services.AddHostedService<ScheduleBackgroundService>();
+            services.AddHostedService<RelocationEquipmentBackgroundService>();
             services.AddScoped<ISurveyService, SurveyService>();
             services.AddScoped<GenericDbRepository<Survey>, SurveyDbRepository>();
             services.AddScoped<ISurveyRepository, SurveyDbRepository>();

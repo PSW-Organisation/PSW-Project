@@ -296,16 +296,16 @@ namespace HospitalUnitTests.RoomRenovation
 
         [Theory]
         [MemberData(nameof(RoomEquipmentData))]
-        public void Merge_room_equipment(Room roomA, List<RoomEquipment> roomEquipmentA,
-                                         Room roomB, List<RoomEquipment> roomEquipmentB,
-                                         Room newRoom, List<RoomEquipment> newRoomEquipment)
+        public void Merge_room_equipment(Room roomA, RoomEquipment roomEquipmentA,
+                                         Room roomB, RoomEquipment roomEquipmentB,
+                                         Room newRoom, RoomEquipment newRoomEquipment)
         {
             var stubRoomEquipmentRepository = new Mock<IRoomEquipmentRepository>();
-            stubRoomEquipmentRepository.Setup(e => e.GetAllEquipmentInRoom(It.Is<int>(id => id == roomA.Id))).Returns(roomEquipmentA);
-            stubRoomEquipmentRepository.Setup(e => e.GetAllEquipmentInRoom(It.Is<int>(id => id == roomB.Id))).Returns(roomEquipmentB);
+            stubRoomEquipmentRepository.Setup(e => e.GetRoomEquipmentInRoom(It.Is<int>(id => id == roomA.Id))).Returns(roomEquipmentA);
+            stubRoomEquipmentRepository.Setup(e => e.GetRoomEquipmentInRoom(It.Is<int>(id => id == roomB.Id))).Returns(roomEquipmentB);
             RoomEquipmentService roomEquipmentService = new RoomEquipmentService(stubRoomEquipmentRepository.Object);
 
-            List<RoomEquipment> mergeRoomEquipment = roomEquipmentService.MergeRoomEquipment(roomA, roomB, newRoom);
+            RoomEquipment mergeRoomEquipment = roomEquipmentService.MergeRoomEquipment(roomA, roomB, newRoom);
 
             mergeRoomEquipment.ShouldBeEquivalentTo(newRoomEquipment);
         }
@@ -335,64 +335,64 @@ namespace HospitalUnitTests.RoomRenovation
                 }
             };
 
-        public static List<RoomEquipment> GetRoomEquipment(int i)
+        public static RoomEquipment GetRoomEquipment(int i)
         {
-            List<RoomEquipment> roomEquipment = new List<RoomEquipment>();
+            RoomEquipment roomEquipment = new RoomEquipment();
             if(i == 1)
             {
-                roomEquipment = new List<RoomEquipment>()
+                roomEquipment = new RoomEquipment(1, new List<Equipment>()
                 {
-                    new RoomEquipment(){ Name = "Makaze", Type = "oprema", Quantity = 7, RoomId = 1 },
-                    new RoomEquipment(){ Name = "Stolica", Type = "oprema", Quantity = 5, RoomId = 1 },
-                    new RoomEquipment(){ Name = "XRay", Type = "aparat", Quantity = 1, RoomId = 1 },
-                    new RoomEquipment(){ Name = "TV", Type = "oprema", Quantity = 2, RoomId = 1 },
-                };
+                    new Equipment(7, "Makaze", "oprema", 1),
+                    new Equipment(5, "Stolica", "oprema", 1),
+                    new Equipment(1, "XRay", "aparat", 1),
+                    new Equipment(2, "TV", "oprema", 1)
+                });
             }
             else if(i == 2)
             {
-                roomEquipment = new List<RoomEquipment>()
+                roomEquipment = new RoomEquipment(2, new List<Equipment>()
                 {
-                    new RoomEquipment(){ Name = "Makaze", Type = "oprema", Quantity = 4, RoomId = 2 },
-                    new RoomEquipment(){ Name = "Stolica", Type = "oprema", Quantity = 1, RoomId = 2 },
-                    new RoomEquipment(){ Name = "UV Lampa", Type = "oprema", Quantity = 25, RoomId = 2 },
-                    new RoomEquipment(){ Name = "Infuzija", Type = "oprema", Quantity = 100, RoomId = 2 },
-                };
+                    new Equipment(4, "Makaze", "oprema", 2),
+                    new Equipment(1, "Stolica", "oprema", 2),
+                    new Equipment(25, "UV Lampa", "oprema", 2),
+                    new Equipment(100, "Infuzija", "oprema", 2)
+                });
             }
             else if(i == 3)
             {
-                roomEquipment = new List<RoomEquipment>()
+                roomEquipment = new RoomEquipment(3, new List<Equipment>()
                 {
-                    new RoomEquipment(){ Id = 3, Name = "Makaze", Type = "oprema", Quantity = 11, RoomId = 3 },
-                    new RoomEquipment(){ Id = 3, Name = "Stolica", Type = "oprema", Quantity = 6, RoomId = 3 },
-                    new RoomEquipment(){ Id = 3, Name = "XRay", Type = "aparat", Quantity = 1, RoomId = 3 },
-                    new RoomEquipment(){ Id = 3, Name = "TV", Type = "oprema", Quantity = 2, RoomId = 3 },
-                    new RoomEquipment(){ Id = 3, Name = "UV Lampa", Type = "oprema", Quantity = 25, RoomId = 3 },
-                    new RoomEquipment(){ Id = 3, Name = "Infuzija", Type = "oprema", Quantity = 100, RoomId = 3 },
-                };
+                    new Equipment(11, "Makaze", "oprema", 3),
+                    new Equipment(6, "Stolica", "oprema", 3),
+                    new Equipment(1, "XRay", "aparat", 3),
+                    new Equipment(2, "TV", "oprema", 3),
+                    new Equipment(25, "UV Lampa", "oprema", 3),
+                    new Equipment(100, "Infuzija", "oprema", 3)
+                });
             }
             else if(i == 4)
             {
-                roomEquipment = new List<RoomEquipment>()
+                roomEquipment = new RoomEquipment(4, new List<Equipment>()
                 {
-                    new RoomEquipment(){ Name = "Nos", Type = "oprema", Quantity = 2, RoomId = 4 },
-                    new RoomEquipment(){ Name = "Igla", Type = "oprema", Quantity = 4, RoomId = 4 },
-                    new RoomEquipment(){ Name = "Zavoj", Type = "oprema", Quantity = 5, RoomId = 4 },
-                };
+                    new Equipment(2, "Nos", "oprema", 4),
+                    new Equipment(4, "Igla", "oprema", 4),
+                    new Equipment(5, "Zavoj", "oprema", 4)
+                });
             }
             else if (i == 5)
             {
-                roomEquipment = new List<RoomEquipment>()
+                roomEquipment = new RoomEquipment(5, new List<Equipment>()
                 {
-                    new RoomEquipment(){ Id = 5, Name = "Makaze", Type = "oprema", Quantity = 11, RoomId = 5 },
-                    new RoomEquipment(){ Id = 5, Name = "Stolica", Type = "oprema", Quantity = 6, RoomId = 5 },
-                    new RoomEquipment(){ Id = 5, Name = "XRay", Type = "aparat", Quantity = 1, RoomId = 5 },
-                    new RoomEquipment(){ Id = 5, Name = "TV", Type = "oprema", Quantity = 2, RoomId = 5 },
-                    new RoomEquipment(){ Id = 5, Name = "UV Lampa", Type = "oprema", Quantity = 25, RoomId = 5 },
-                    new RoomEquipment(){ Id = 5, Name = "Infuzija", Type = "oprema", Quantity = 100, RoomId = 5 },
-                    new RoomEquipment(){ Id = 5, Name = "Nos", Type = "oprema", Quantity = 2, RoomId = 5 },
-                    new RoomEquipment(){ Id = 5, Name = "Igla", Type = "oprema", Quantity = 4, RoomId = 5 },
-                    new RoomEquipment(){ Id = 5, Name = "Zavoj", Type = "oprema", Quantity = 5, RoomId = 5 },
-                };
+                    new Equipment(11, "Makaze", "oprema", 5),
+                    new Equipment(6, "Stolica", "oprema", 5),
+                    new Equipment(1, "XRay", "aparat", 5),
+                    new Equipment(2, "TV", "oprema", 5),
+                    new Equipment(25, "UV Lampa", "oprema", 5),
+                    new Equipment(100, "Infuzija", "oprema", 5),
+                    new Equipment(2, "Nos", "oprema", 5),
+                    new Equipment(4, "Igla", "oprema", 5),
+                    new Equipment(5, "Zavoj", "oprema", 5)
+                });
             }
 
             return roomEquipment;

@@ -23,7 +23,8 @@ namespace HospitalLibrary.GraphicalEditor.Model
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            throw new System.NotImplementedException();
+            yield return X;
+            yield return Y;
         }
 
         public int X { get; set; }

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace HospitalLibrary.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class Migrationnnn : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -78,6 +79,7 @@ namespace HospitalLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BuildingId = table.Column<int>(nullable: false),
                     Floor = table.Column<int>(nullable: false)
@@ -85,6 +87,22 @@ namespace HospitalLibrary.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FloorGraphics", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Medicines",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    medicineName = table.Column<string>(nullable: true),
+                    medicineStatus = table.Column<int>(nullable: false),
+                    medicineAmount = table.Column<int>(nullable: false),
+                    medicineIngredient = table.Column<List<string>>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Medicines", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -142,10 +160,8 @@ namespace HospitalLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Quantity = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Type = table.Column<string>(nullable: true),
                     RoomId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -158,6 +174,7 @@ namespace HospitalLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'20', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true),
                     Sector = table.Column<string>(nullable: true),
@@ -193,6 +210,7 @@ namespace HospitalLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IdSourceRoom = table.Column<int>(nullable: false),
                     IdDestinationRoom = table.Column<int>(nullable: false),
@@ -213,6 +231,7 @@ namespace HospitalLibrary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     StartTime = table.Column<DateTime>(nullable: true),
                     EndTime = table.Column<DateTime>(nullable: true),
@@ -274,10 +293,33 @@ namespace HospitalLibrary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Equipments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Quantity = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Type = table.Column<string>(nullable: true),
+                    RoomEquipmentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Equipments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Equipments_RoomEquipments_RoomEquipmentId",
+                        column: x => x.RoomEquipmentId,
+                        principalTable: "RoomEquipments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RoomGraphics",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:IdentitySequenceOptions", "'20', '1', '', '', 'False', '1'")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     X = table.Column<int>(nullable: true),
                     Y = table.Column<int>(nullable: true),
@@ -517,13 +559,13 @@ namespace HospitalLibrary.Migrations
 
             migrationBuilder.InsertData(
                 table: "RoomEquipments",
-                columns: new[] { "Id", "Name", "Quantity", "RoomId", "Type" },
+                columns: new[] { "Id", "RoomId" },
                 values: new object[,]
                 {
-                    { 4, "Picks", 300, 16, "Dynamic" },
-                    { 3, "Needle", 300, 3, "Dynamic" },
-                    { 2, "Needle", 200, 2, "Dynamic" },
-                    { 1, "Bed", 2, 1, "Static" }
+                    { 4, 16 },
+                    { 3, 3 },
+                    { 2, 2 },
+                    { 1, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -601,6 +643,17 @@ namespace HospitalLibrary.Migrations
                 values: new object[] { "kristina", "Sime Milosevica, 9", "Novi Sad", "Serbia", new DateTime(1999, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Patient", "sdjfsj@gmail.com", "female", true, false, 0, "Kristina", "Zoran", "kristinica", "019919195191", "Tamindzija", new Guid("601ccaa8-3a07-4a7c-89b9-9923e6bac8a7"), "kristina", null });
 
             migrationBuilder.InsertData(
+                table: "Equipments",
+                columns: new[] { "Id", "Name", "Quantity", "RoomEquipmentId", "Type" },
+                values: new object[,]
+                {
+                    { 4, "Picks", 300, 4, "Dynamic" },
+                    { 3, "Needle", 300, 3, "Dynamic" },
+                    { 2, "Needle", 200, 2, "Dynamic" },
+                    { 1, "Bed", 2, 1, "Static" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "MedicalRecords",
                 columns: new[] { "PatientId", "BloodType", "DoctorId", "Height", "PersonalId", "Profession", "Weight" },
                 values: new object[,]
@@ -622,11 +675,11 @@ namespace HospitalLibrary.Migrations
                     { 16, "right", 1, 16, 100, 100, 0, 0 },
                     { 17, "right", 3, 17, 100, 100, 0, 0 },
                     { 15, "none", 2, 15, 100, 140, 10, 220 },
-                    { 14, "top", 2, 14, 80, 150, 150, 517 },
                     { 13, "top", 2, 13, 80, 150, 0, 517 },
-                    { 11, "right", 2, 11, 145, 75, 0, 340 },
-                    { 10, "left", 2, 10, 100, 100, 197, 100 },
                     { 12, "left", 2, 12, 145, 75, 222, 340 },
+                    { 14, "top", 2, 14, 80, 150, 150, 517 },
+                    { 10, "left", 2, 10, 100, 100, 197, 100 },
+                    { 9, "right", 2, 9, 100, 100, 0, 100 },
                     { 8, "left", 2, 8, 100, 100, 197, 0 },
                     { 7, "right", 2, 7, 100, 100, 0, 0 },
                     { 6, "none", 1, 6, 160, 140, 150, 20 },
@@ -635,7 +688,7 @@ namespace HospitalLibrary.Migrations
                     { 3, "left", 1, 3, 145, 75, 222, 340 },
                     { 2, "right", 1, 2, 145, 75, 0, 340 },
                     { 1, "right", 1, 1, 100, 100, 0, 100 },
-                    { 9, "right", 2, 9, 100, 100, 0, 100 }
+                    { 11, "right", 2, 11, 145, 75, 0, 340 }
                 });
 
             migrationBuilder.InsertData(
@@ -658,6 +711,11 @@ namespace HospitalLibrary.Migrations
                 table: "Questions",
                 columns: new[] { "SurveyId", "Id", "Category", "Value" },
                 values: new object[] { -1, -1, 1, 1 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Equipments_RoomEquipmentId",
+                table: "Equipments",
+                column: "RoomEquipmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MedicalPermits_DoctorId",
@@ -716,6 +774,9 @@ namespace HospitalLibrary.Migrations
                 name: "DoctorVacations");
 
             migrationBuilder.DropTable(
+                name: "Equipments");
+
+            migrationBuilder.DropTable(
                 name: "Events");
 
             migrationBuilder.DropTable(
@@ -726,6 +787,9 @@ namespace HospitalLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "MedicalRecords");
+
+            migrationBuilder.DropTable(
+                name: "Medicines");
 
             migrationBuilder.DropTable(
                 name: "OnCallShifts");
@@ -743,9 +807,6 @@ namespace HospitalLibrary.Migrations
                 name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "RoomEquipments");
-
-            migrationBuilder.DropTable(
                 name: "RoomGraphics");
 
             migrationBuilder.DropTable(
@@ -759,6 +820,9 @@ namespace HospitalLibrary.Migrations
 
             migrationBuilder.DropTable(
                 name: "Visits");
+
+            migrationBuilder.DropTable(
+                name: "RoomEquipments");
 
             migrationBuilder.DropTable(
                 name: "Allergens");

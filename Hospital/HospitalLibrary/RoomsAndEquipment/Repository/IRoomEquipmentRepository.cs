@@ -6,10 +6,11 @@ namespace HospitalLibrary.RoomsAndEquipment.Repository
 {
     public interface IRoomEquipmentRepository : IGenericRepository<RoomEquipment>
     {
+        public List<Equipment> GetAllEquipmentInRooms();
         public List<RoomEquipmentQuantityDTO> GetAllRoomEquipmentQuantity();
-        public RoomEquipment GetEquipmentInRoom(int idRoom, string nameOfEquipment);
-        public List<RoomEquipment> GetEquipmentInRooms(string equipmentName);
-        public List<RoomEquipment> GetAllEquipmentInRoom(int roomId);
-        int GetNewID();
+        public Equipment GetEquipmentInRoom(int idRoom, string nameOfEquipment);
+        public List<Equipment> GetEquipmentInRooms(string equipmentName);
+        public List<Equipment> GetAllEquipmentInRoom(int roomId);
+        public RoomEquipment GetRoomEquipmentInRoom(int roomId);
     }
 }

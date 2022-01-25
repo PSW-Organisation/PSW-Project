@@ -6,11 +6,11 @@ namespace HospitalLibrary.RoomsAndEquipment.Service
 {
     public interface IRoomEquipmentService
     {
-        List<RoomEquipment> GetEquipmentInRooms(string equipmentName);
-        IList<RoomEquipment> GetAllEquipmentInRooms();
+        List<Equipment> GetEquipmentInRooms(string equipmentName);
+        IList<Equipment> GetAllEquipmentInRooms();
         List<RoomEquipmentQuantityDTO> GetRoomEquipmentQuantity();
-        List<RoomEquipment> GetAllEquipmentInRoom(int roomId);
+        List<Equipment> GetAllEquipmentInRoom(int roomId);
         List<RoomEquipment> SplitRoomEquipment(EquipmentLogic equipmentLogic, Room room, List<Room> rooms);
-        List<RoomEquipment> MergeRoomEquipment(Room roomA, Room roomB, Room newRoom);
+        RoomEquipment MergeRoomEquipment(Room roomA, Room roomB, Room newRoom);
     }
 }

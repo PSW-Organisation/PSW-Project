@@ -1,37 +1,22 @@
-﻿using HospitalLibrary.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using HospitalLibrary.Model;
 
 namespace HospitalLibrary.RoomsAndEquipment.Model
 {
     public class RoomEquipment : EntityDb
     {
-        public int Quantity { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
         public int RoomId { get; set; }
-
+        public virtual List<Equipment> Equipments { get; private set; }
+        
         public RoomEquipment()
         {
+            Equipments = new List<Equipment>();
         }
 
-        public RoomEquipment(RoomEquipment roomEquipment)
+        public RoomEquipment(int roomId, List<Equipment>  equipments)
         {
-            Quantity = roomEquipment.Quantity;
-            Name = roomEquipment.Name;
-            Type = roomEquipment.Type;
-            RoomId = roomEquipment.RoomId;
-        }
-
-        public RoomEquipment(int id, int quantity, string name, string type, int roomId)
-        {
-            Id = id;
-            Quantity = quantity;
-            Name = name;
-            Type = type;
             RoomId = roomId;
+            Equipments = equipments;
         }
-
     }
 }

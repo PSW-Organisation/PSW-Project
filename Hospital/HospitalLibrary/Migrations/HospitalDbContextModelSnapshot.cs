@@ -335,6 +335,7 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("BuildingId")
@@ -373,6 +374,7 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'20', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("DoorPosition")
@@ -666,6 +668,7 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'20', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("Floor")
@@ -888,19 +891,11 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
 
                     b.Property<int>("RoomId")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -910,34 +905,22 @@ namespace HospitalLibrary.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Bed",
-                            Quantity = 2,
-                            RoomId = 1,
-                            Type = "Static"
+                            RoomId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Needle",
-                            Quantity = 200,
-                            RoomId = 2,
-                            Type = "Dynamic"
+                            RoomId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Needle",
-                            Quantity = 300,
-                            RoomId = 3,
-                            Type = "Dynamic"
+                            RoomId = 3
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Picks",
-                            Quantity = 300,
-                            RoomId = 16,
-                            Type = "Dynamic"
+                            RoomId = 16
                         });
                 });
 
@@ -946,6 +929,7 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("DurationInMinutes")
@@ -1038,6 +1022,7 @@ namespace HospitalLibrary.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:IdentitySequenceOptions", "'10', '1', '', '', 'False', '1'")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("DurationInMinutes")
@@ -1983,6 +1968,72 @@ namespace HospitalLibrary.Migrations
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HospitalLibrary.RoomsAndEquipment.Model.RoomEquipment", b =>
+                {
+                    b.OwnsMany("HospitalLibrary.RoomsAndEquipment.Model.Equipment", "Equipments", b1 =>
+                        {
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("integer")
+                                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                            b1.Property<string>("Name")
+                                .HasColumnType("text");
+
+                            b1.Property<int>("Quantity")
+                                .HasColumnType("integer");
+
+                            b1.Property<int>("RoomEquipmentId")
+                                .HasColumnType("integer");
+
+                            b1.Property<string>("Type")
+                                .HasColumnType("text");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("RoomEquipmentId");
+
+                            b1.ToTable("Equipments");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RoomEquipmentId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    Id = 1,
+                                    Name = "Bed",
+                                    Quantity = 2,
+                                    RoomEquipmentId = 1,
+                                    Type = "Static"
+                                },
+                                new
+                                {
+                                    Id = 2,
+                                    Name = "Needle",
+                                    Quantity = 200,
+                                    RoomEquipmentId = 2,
+                                    Type = "Dynamic"
+                                },
+                                new
+                                {
+                                    Id = 3,
+                                    Name = "Needle",
+                                    Quantity = 300,
+                                    RoomEquipmentId = 3,
+                                    Type = "Dynamic"
+                                },
+                                new
+                                {
+                                    Id = 4,
+                                    Name = "Picks",
+                                    Quantity = 300,
+                                    RoomEquipmentId = 4,
+                                    Type = "Dynamic"
+                                });
+                        });
                 });
 
             modelBuilder.Entity("HospitalLibrary.RoomsAndEquipment.Terms.Model.TermOfRelocationEquipment", b =>
