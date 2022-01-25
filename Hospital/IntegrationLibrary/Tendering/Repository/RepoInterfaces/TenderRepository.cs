@@ -8,5 +8,7 @@ namespace IntegrationLibrary.Tendering.Repository.RepoInterfaces
 {
     public interface TenderRepository : GenericRepository<Tender>
     {
+
+        List<Tender> GetTenders();
     }
 }

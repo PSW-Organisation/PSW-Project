@@ -11,7 +11,7 @@ namespace IntegrationLibrary.Tendering.Service.ServiceInterfaces
 
         public Tender Get(int id);
 
-        public Boolean Add(Tender tender);
+        public Boolean Add(List<TenderItem> items, Tender tender);
 
         public Boolean Delete(int id);
 

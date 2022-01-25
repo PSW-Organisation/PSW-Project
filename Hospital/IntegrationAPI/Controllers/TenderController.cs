@@ -47,7 +47,7 @@ namespace IntegrationAPI.Controllers
         [HttpPost]
         public IActionResult Add(TenderDTO dto)
         {
-            return Ok(tenderService.Add(TenderAdapter.TenderDtoToTender(dto)));
+            return Ok(tenderService.Add(dto.TenderItems, TenderAdapter.TenderDtoToTender(dto)));
         }
 
         [HttpGet("{id?}")]

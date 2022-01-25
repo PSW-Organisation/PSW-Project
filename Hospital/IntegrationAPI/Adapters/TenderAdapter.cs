@@ -18,7 +18,12 @@ namespace IntegrationAPI.Adapters
             dto.TenderCloseDate = tender.TenderCloseDate;
             dto.Open = tender.Open;
             dto.ApiKeyPharmacy = tender.ApiKeyPharmacy;
-            dto.TenderItems = tender.TenderItems;
+            foreach(TenderItem item in tender.TenderItems)
+            {
+                dto.TenderItems.Add(item);
+            }
+
+           // dto.TenderItems = tender.TenderItems;
             List<TenderResponseDTO> tenderResponses = new List<TenderResponseDTO>();
             foreach(TenderResponse tenderResponse in tender.TenderResponses)
             {
@@ -36,7 +41,11 @@ namespace IntegrationAPI.Adapters
             tender.TenderCloseDate = dto.TenderCloseDate.GetValueOrDefault(new DateTime(2200, 12,12));
             tender.Open = dto.Open;
             tender.ApiKeyPharmacy = dto.ApiKeyPharmacy;
-            tender.TenderItems = dto.TenderItems;
+            foreach (TenderItem item in dto.TenderItems)
+            {
+                tender.AddItems(item);
+            }
+            //tender.TenderItems = dto.TenderItems;
             
             return tender;
         }

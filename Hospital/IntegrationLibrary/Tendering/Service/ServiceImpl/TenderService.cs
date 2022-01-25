@@ -24,19 +24,24 @@ namespace IntegrationLibrary.Tendering.Service.ServiceImpl
             this.itemRepository = itemRepository;
             this.pharmacyService = pharmacyService;
         }
-        public bool Add(Tender tender)
+        public bool Add(List<TenderItem> items, Tender tender)
         {
-            foreach (TenderItem tenderItem in tender.TenderItems)
-            {
-                tenderItem.Id = itemRepository.GenerateId();
-                itemRepository.Save(tenderItem);
-            }
+            AddItems(items, tender);
             tender.Id = tenderRepository.GenerateId();
             tenderPublishingService.AnnounceTender(tender, "tenders");
             tenderRepository.Save(tender);
             return true;
         }
 
+        private Tender AddItems(List<TenderItem> items, Tender tender)
+        {
+            foreach(TenderItem item in items)
+            {
+                item.Id = itemRepository.GenerateId();
+                tender.AddItems(item);
+            }
+            return tender;
+        }
         public bool Delete(int id)
         {
             throw new NotImplementedException();
@@ -44,7 +49,8 @@ namespace IntegrationLibrary.Tendering.Service.ServiceImpl
 
         public List<Tender> Get()
         {
-            return tenderRepository.GetAll();
+           // return tenderRepository.GetAll();
+           return tenderRepository.GetTenders();
         }
 
         public Tender Get(int id)

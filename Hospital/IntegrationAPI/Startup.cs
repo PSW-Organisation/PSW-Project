@@ -76,8 +76,8 @@ namespace IntegrationAPI
             services.AddDbContext<IntegrationDbContext>(options =>
             {
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"),
-                    assembly => assembly.MigrationsAssembly(typeof(IntegrationDbContext).Assembly.FullName)).UseLazyLoadingProxies();
-            });
+                   assembly => assembly.MigrationsAssembly(typeof(IntegrationDbContext).Assembly.FullName)).UseLazyLoadingProxies();
+        });
 
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
