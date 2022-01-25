@@ -123,7 +123,7 @@
                     <mat-card-title>Tenders</mat-card-title>
                     <mat-card-subtitle class="text-light">Manage tenders</mat-card-subtitle>
                     <mat-card-actions>
-                        <button mat-button>Enter</button>
+                        <button id="tenderButton" mat-button>Enter</button>
                     </mat-card-actions>
                 </mat-card>
             </div>
@@ -135,7 +135,7 @@
                 <mat-card class="example-card card5" routerLink="/notifications">
                     <mat-card-title>Notifications  <a class="fa fa-bell" routerLink="/notifications"></a>
                     <span class="num">{{numberOfUnseen}}</span>    </mat-card-title>
-                    
+
                     <mat-card-subtitle class="text-light">Manage notifications</mat-card-subtitle>
                     <mat-card-actions>
                         <button mat-button>Enter</button>
@@ -160,11 +160,11 @@
                     </mat-card-actions>
                 </mat-card>
             </div>
-           
+
         </div>
     </div>
     <div class="d-flex justify-content-center">
-        
+
         <div class="row ml-5 mr-5">
              <div class="col-4 mt-5 text-center">
                 <mat-card class="example-card card1" (click)="logOut()">
