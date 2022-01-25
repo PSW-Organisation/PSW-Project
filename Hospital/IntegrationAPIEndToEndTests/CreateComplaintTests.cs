@@ -15,6 +15,7 @@ namespace IntegrationAPIEndToEndTests
         private LoginPage loginPage;
         private ManagerHomePage managerHomePage;
         private ComplaintsPage complaintsPage;
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
 
         public CreateComplaintTests()
         {
@@ -51,9 +52,10 @@ namespace IntegrationAPIEndToEndTests
             driver.Dispose();
         }
 
-        [Fact]
+        [SkippableFact]
         public void CreateComplaint()
         {
+            Skip.If(skippable);
             int complaintsCount = complaintsPage.ComplaintsCount();
             complaintsPage.AddButtonClick();
             complaintsPage.SelectPharmacy("Flos");
@@ -68,9 +70,10 @@ namespace IntegrationAPIEndToEndTests
             Assert.Equal("Dobro ste procitali, pun mi vas je.", complaintsPage.GetLastRowContent());
         }
 
-        [Fact]
+        [SkippableFact]
         public void TestInvalidTitle()
         {
+            Skip.If(skippable);
             complaintsPage.AddButtonClick();
             complaintsPage.SelectPharmacy("Flos");
             complaintsPage.InsertContent("Dobro ste procitali, pun mi vas je.");
@@ -80,9 +83,10 @@ namespace IntegrationAPIEndToEndTests
             complaintsPage.ResolveAlertDialog();
         }
 
-        [Fact]
+        [SkippableFact]
         public void TestInvalidContent()
         {
+            Skip.If(skippable);
             complaintsPage.AddButtonClick();
             complaintsPage.SelectPharmacy("Flos");
             complaintsPage.InsertTitle("Pun mi vas je");
@@ -92,9 +96,10 @@ namespace IntegrationAPIEndToEndTests
             complaintsPage.ResolveAlertDialog();
         }
 
-        [Fact]
+        [SkippableFact]
         public void TestInvalidPharmacy()
         {
+            Skip.If(skippable);
             complaintsPage.AddButtonClick();
             complaintsPage.InsertTitle("Pun mi vas je");
             complaintsPage.InsertContent("Dobro ste procitali, pun mi vas je.");

@@ -14,6 +14,7 @@ namespace IntegrationAPISeleniumTests
         private Pages.LoginPage loginPage;
         private Pages.ManagerHomePage managerHomePage;
         private Pages.CreatePharmacyPage createPharmacy;
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
 
         public CreatePharmacyTests()
         {
@@ -47,9 +48,10 @@ namespace IntegrationAPISeleniumTests
             createPharmacy.WaitUntilModalAppears();
         }
 
-        [Fact]
+        [SkippableFact]
         public void CreatePharmacy()
         {
+            Skip.If(skippable);
             int pharmaciesCount = createPharmacy.PharmaciesCount();
             createPharmacy.AddButtonClick();
             createPharmacy.WaitUntilModalAppears();
@@ -66,9 +68,10 @@ namespace IntegrationAPISeleniumTests
             Assert.Equal("wwww.jankovic.com", createPharmacy.GetLastRowUrl());
         }
 
-        [Fact]
+        [SkippableFact]
         public void TestInvalidName()
         {
+            Skip.If(skippable);
             createPharmacy.AddButtonClick();
             createPharmacy.WaitUntilModalAppears();
             createPharmacy.InsertUrl("wwww.jankovic.com");         
@@ -81,9 +84,10 @@ namespace IntegrationAPISeleniumTests
             Assert.Equal(driver.Url, Pages.CreatePharmacyPage.URI);  
         }
 
-        [Fact]
+        [SkippableFact]
         public void TestInvalidAddress()
         {
+            Skip.If(skippable);
             createPharmacy.AddButtonClick();
             createPharmacy.WaitUntilModalAppears();
             createPharmacy.InsertName("Jankovic");          
@@ -96,9 +100,10 @@ namespace IntegrationAPISeleniumTests
             Assert.Equal(driver.Url, Pages.CreatePharmacyPage.URI);  
         }
 
-        [Fact]
+        [SkippableFact]
         public void TestInvalidUrl()
         {
+            Skip.If(skippable);
             createPharmacy.AddButtonClick();
             createPharmacy.WaitUntilModalAppears();
             createPharmacy.InsertName("Jankovic");        
