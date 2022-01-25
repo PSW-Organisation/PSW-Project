@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using Xunit;
 
 namespace IntegrationAPIEndToEndTests
@@ -58,16 +59,23 @@ namespace IntegrationAPIEndToEndTests
             Skip.If(skippable);
             int complaintsCount = complaintsPage.ComplaintsCount();
             complaintsPage.AddButtonClick();
+            Thread.Sleep(2000);
             complaintsPage.SelectPharmacy("Flos");
-            complaintsPage.InsertTitle("Pun mi vas je");
-            complaintsPage.InsertContent("Dobro ste procitali, pun mi vas je.");
+            Thread.Sleep(2000);
+
+            complaintsPage.InsertTitle("Nikola prvi test ti ne radi");
+            Thread.Sleep(2000);
+
+            complaintsPage.InsertContent("Dobro si procitao, prvi test ti ne radi.");
+            Thread.Sleep(2000);
+
             complaintsPage.SubmitForm();
             complaintsPage.WaitUntilSubmit();
 
             Assert.Equal(complaintsCount + 1, complaintsPage.ComplaintsCount());
 
-            Assert.Equal("Pun mi vas je", complaintsPage.GetLastRowTitle());
-            Assert.Equal("Dobro ste procitali, pun mi vas je.", complaintsPage.GetLastRowContent());
+            Assert.Equal("Nikola prvi test ti ne radi", complaintsPage.GetLastRowTitle());
+            Assert.Equal("Dobro si procitao, prvi test ti ne radi.", complaintsPage.GetLastRowContent());
         }
 
         [SkippableFact]
@@ -76,7 +84,7 @@ namespace IntegrationAPIEndToEndTests
             Skip.If(skippable);
             complaintsPage.AddButtonClick();
             complaintsPage.SelectPharmacy("Flos");
-            complaintsPage.InsertContent("Dobro ste procitali, pun mi vas je.");
+            complaintsPage.InsertContent("Dobro si procitao, prvi test ti ne radi.");
             complaintsPage.SubmitForm();
             complaintsPage.WaitForAlertDialog();
             Assert.Equal(complaintsPage.GetDialogMessage(), ComplaintsPage.InvalidTitleMessage);
@@ -89,7 +97,7 @@ namespace IntegrationAPIEndToEndTests
             Skip.If(skippable);
             complaintsPage.AddButtonClick();
             complaintsPage.SelectPharmacy("Flos");
-            complaintsPage.InsertTitle("Pun mi vas je");
+            complaintsPage.InsertTitle("Nikola prvi test ti ne radi");
             complaintsPage.SubmitForm();
             complaintsPage.WaitForAlertDialog();
             Assert.Equal(complaintsPage.GetDialogMessage(), ComplaintsPage.InvalidContentMessage);
@@ -101,8 +109,8 @@ namespace IntegrationAPIEndToEndTests
         {
             Skip.If(skippable);
             complaintsPage.AddButtonClick();
-            complaintsPage.InsertTitle("Pun mi vas je");
-            complaintsPage.InsertContent("Dobro ste procitali, pun mi vas je.");
+            complaintsPage.InsertTitle("Nikola prvi test ti ne radi");
+            complaintsPage.InsertContent("Dobro si procitao, prvi test ti ne radi.");
             complaintsPage.SubmitForm();
             complaintsPage.WaitForAlertDialog();
             Assert.Equal(complaintsPage.GetDialogMessage(), ComplaintsPage.InvalidPharmacyMessage);

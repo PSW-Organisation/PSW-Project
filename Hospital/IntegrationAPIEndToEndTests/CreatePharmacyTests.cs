@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using Xunit;
 
 namespace IntegrationAPISeleniumTests
@@ -60,7 +61,7 @@ namespace IntegrationAPISeleniumTests
             createPharmacy.InsertUrl("wwww.jankovic.com");
             createPharmacy.SubmitForm();
             createPharmacy.WaitUntilSubmit();
-
+            Thread.Sleep(2000);
             Assert.Equal(pharmaciesCount + 1, createPharmacy.PharmaciesCount());
 
             Assert.Equal("Jankovic", createPharmacy.GetLastRowName());

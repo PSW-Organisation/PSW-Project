@@ -16,7 +16,8 @@ namespace IntegrationAPIEndToEndTests
         private LoginPage loginPage;
         private ManagerHomePage managerHomePage;
         private TenderPage tenderPage;
-        
+        private bool skippable = Environment.GetEnvironmentVariable("SkippableTest") != null;
+
         public void Dispose()
         {
             driver.Quit();
@@ -51,10 +52,12 @@ namespace IntegrationAPIEndToEndTests
             managerHomePage.TenderButtonClick();
             tenderPage = new TenderPage(driver);
         }
-        
-        [Fact]
+
+        [SkippableFact]
         public void CreateTender()
         {
+            Skip.If(skippable);
+
             Thread.Sleep(4000);
 
             tenderPage.ButtonAddClick();
@@ -76,9 +79,11 @@ namespace IntegrationAPIEndToEndTests
             //Assert.True(tenderPage.CheckDateExist("indefinite"));
         }
 
-        [Fact]
+        [SkippableFact]
         public void InvalidTender()
         {
+            Skip.If(skippable);
+
             Thread.Sleep(4000);
 
             tenderPage.ButtonAddClick();
