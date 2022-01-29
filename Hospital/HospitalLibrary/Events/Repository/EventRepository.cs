@@ -12,6 +12,7 @@ namespace HospitalLibrary.Events.Repository
     {
 
         private readonly HospitalDbContext _dbContext;
+
         public EventRepository(HospitalDbContext dbContext) : base(dbContext)
         {
             this._dbContext = dbContext;
@@ -98,7 +99,6 @@ namespace HospitalLibrary.Events.Repository
                                                 Guid = q.Key,
                                                 Date = q.OrderByDescending(e => e.TimeStamp).FirstOrDefault().TimeStamp
                                             }).ToList();
-
             return new
             {
                 Jan = unsuccessfullScheduling.Count(a => a.Date.Month == 1),
@@ -125,7 +125,6 @@ namespace HospitalLibrary.Events.Repository
                                                 Guid = q.Key,
                                                 Date = q.OrderBy(e => e.TimeStamp).FirstOrDefault().TimeStamp
                                             }).ToList();
-
             return new
             {
                 Night = schedulingPerTimeOfDay.Count(s => s.Date.Hour >= 0 && s.Date.Hour < 7),

@@ -185,6 +185,9 @@ namespace HospitalAPI
 
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IEventService, EventService>();
+            services.AddScoped<IEventMoveEquipmentService, EventService>();
+            services.AddScoped<IEventMoveEquipmentRepository, EventMoveEquipmentRepository>();
+     
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

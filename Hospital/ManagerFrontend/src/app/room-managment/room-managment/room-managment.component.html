@@ -1,6 +1,6 @@
 <app-navbar>
     <div app-navbar-button>
-        <button type="button" aria-label="Toogle sidenav" mat-icon-button (click)="sidenav.toogle()">
+        <button type="button" id="sidenavButton" aria-label="Toogle sidenav" mat-icon-button (click)="sidenav.toogle()">
             <mat-icon aria-label="Side nav toogle icon">menu</mat-icon>
         </button>
     </div>
@@ -23,7 +23,7 @@
                 <span matLine>Hospital Map</span>
                 <mat-icon>map</mat-icon>
             </mat-list-item>
-            <mat-list-item [routerLink]="['/roomManagment/moveEquipment']">
+            <mat-list-item name="moveEquipment" [routerLink]="['/roomManagment/moveEquipment']">
                 <span matLine>Move Equipment</span>
                 <mat-icon>compare_arrows</mat-icon>
             </mat-list-item>
