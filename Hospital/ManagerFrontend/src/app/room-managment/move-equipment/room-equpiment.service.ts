@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { IEquipment, IEquipmentQuantity, IFreeTerms } from './room-equipment';
 import { IParamsOfRelocationEquipment } from './room-equipment';
+import { EventMoveEquipment, IMoveEquipmentActions } from './moveEquipmentActions';
 
 @Injectable({
   providedIn: 'root',
@@ -61,5 +62,15 @@ export class RoomEqupimentService {
   return this._http.put<boolean>(this._termsOfRelocationUrl + `/cancel/${termId}`, {}).
       pipe(tap((data) => console.log('All: ', JSON.stringify(data))), catchError(this.handleError));
   }
+
+ getAllEventActions(idUser: string): Observable<IMoveEquipmentActions[]> {
+    return this._http.post<IMoveEquipmentActions[]>(this._equipmentUrl + `/equipmentActions/${idUser}`, {}).
+        pipe(tap((data) => console.log('All: ', JSON.stringify(data))), catchError(this.handleError));
+    }
+
+  addMoveEquipmentAction(eventMoveEquipment:EventMoveEquipment): Observable< EventMoveEquipment> {
+      return this._http.post<EventMoveEquipment>(this._equipmentUrl + `/equipmentActions/logEvent`, eventMoveEquipment).
+          pipe(tap((data) => console.log('All: ', JSON.stringify(data))), catchError(this.handleError));
+      }  
   
 }

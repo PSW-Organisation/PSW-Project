@@ -49,6 +49,8 @@ namespace ehealthcare.Model
         public DbSet<Event> Events { get; set; }
         public DbSet<DoctorsSchedule> Schedules { get; set; }
 
+        public DbSet<EventMoveEquipment> MoveEquipmentEvents { get; set; }
+
         public HospitalDbContext(DbContextOptions<HospitalDbContext> options) : base(options)
         {
         }
@@ -1147,6 +1149,69 @@ namespace ehealthcare.Model
             #endregion
 
             
+
+            #region EventsMoveEquipment
+
+            modelBuilder.Entity<EventMoveEquipment>(e =>
+            {
+                e.HasData(
+                    new EventMoveEquipment()
+                    {
+                        Id = -1,
+                        IdUser = "jagodica",
+                        TimeStamp = new DateTime(2021, 12, 29, 19, 00, 00),
+                        SourceRoomID = 1,
+                        DestinationRoomID = 2,
+                        NameOfEquipment = "needle"
+                    },
+                    new EventMoveEquipment()
+                    {
+                        Id = -2,
+                        IdUser = "jagodica",
+                        TimeStamp = new DateTime(2021, 12, 29, 19, 00, 30),
+                        SourceRoomID = 1,
+                        DestinationRoomID = 2,
+                        NameOfEquipment = "needle"
+                    },
+                    new EventMoveEquipment()
+                    {
+                        Id = -3,
+                        IdUser = "jagodica",
+                        TimeStamp = new DateTime(2021, 12, 29, 19, 01, 00),
+                        SourceRoomID = 4,
+                        DestinationRoomID = 6,
+                        NameOfEquipment = "bed"
+                    },
+                    new EventMoveEquipment()
+                    {
+                        Id = -4,
+                        IdUser = "jagodica",
+                        TimeStamp = new DateTime(2021, 12, 29, 19, 01, 30),
+                        SourceRoomID = 4,
+                        DestinationRoomID = 6,
+                        NameOfEquipment = "bed"
+                    },
+                    new EventMoveEquipment()
+                    {
+                        Id = -5,
+                        IdUser = "jagodica",
+                        TimeStamp = new DateTime(2021, 12, 29, 19, 02, 00),
+                        SourceRoomID = 4,
+                        DestinationRoomID = 6,
+                        NameOfEquipment = "bed"
+
+                    },
+                    new EventMoveEquipment()
+                    {
+                        Id = -6,
+                        IdUser = "jagodica",
+                        TimeStamp = new DateTime(2021, 12, 29, 20, 00, 00),
+                        SourceRoomID = 2,
+                        DestinationRoomID = 3,
+                        NameOfEquipment = "bed"
+                    });
+        });
+                #endregion
 
             modelBuilder.Entity<MedicalRecord>(m =>
             {

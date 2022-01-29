@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { filter } from 'rxjs-compat/operator/filter';
 import { IRoom } from '../rooms-view/room';
 import { RoomService } from '../rooms-view/rooms.service';
+import { EventMoveEquipment, IMoveEquipmentActions } from './moveEquipmentActions';
 import { IEquipment, IEquipmentQuantity, IFreeTerms, IParamsOfRelocationEquipment, ParamsOfRelocationEquipment } from './room-equipment';
 
 import { RoomEqupimentService } from './room-equpiment.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -34,13 +37,13 @@ export class MoveEquipmentComponent implements OnInit {
   minDate!: Date;
   selectedFreeTerm!: IFreeTerms;
   termOfRelocationEquipment!: IParamsOfRelocationEquipment;
-
   startYear!: number;
   startMonth!: number;
   startDay!: number;
   startHours!: number;
   startMinutes!: number;
-
+  eventMoveEquipment!:  EventMoveEquipment; 
+  filteredequipmentActions: IMoveEquipmentActions[] = [];
   endYear!: number;
   endMonth!: number;
   endDay!: number;
@@ -48,6 +51,14 @@ export class MoveEquipmentComponent implements OnInit {
   endMinutes!: number;
   
   duration!: number;
+
+  savedActive: boolean = false;
+
+  showRow : boolean = false;
+
+  equipmentActions!: IMoveEquipmentActions[];
+
+  title: string = "Event sourcing";
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
     if (event.value != null) {
@@ -68,7 +79,8 @@ export class MoveEquipmentComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
     private _roomEquipmentService: RoomEqupimentService,
-    private _roomService: RoomService) {
+    private _roomService: RoomService,
+    private toastr: ToastrService) {
     this.paramsOfRelocationEquipment = new ParamsOfRelocationEquipment(-1, -1, '', -1, new Date(), new Date(), 0);
   }
 
@@ -83,6 +95,54 @@ export class MoveEquipmentComponent implements OnInit {
     });
   }
 
+  activateThirdFromAction(equipmentAction: IMoveEquipmentActions){
+    let selectedEquipmentAction =this.equipmentsDTO.find((equ)=> equ.name === equipmentAction.nameOfEquipment);
+    if(selectedEquipmentAction !=undefined ){
+      this.selectedEquipment ={ 
+      name: equipmentAction.nameOfEquipment,
+      quantity :100
+      };
+    }
+    else{
+      this.toastr.error('No such equipment name anymore!', 'Try with stepper!');
+      this.firstFormGroup = this._formBuilder.group({
+        firstCtrl: ['', Validators.required],
+      });
+      this.secondFormGroup = this._formBuilder.group({
+        secondCtrl: ['', Validators.required],
+      });
+      this.savedActive = false;
+      return;
+    }
+    this._roomEquipmentService.getRoomEquipment(equipmentAction.nameOfEquipment).subscribe(roomEquipment => {this.equipments = roomEquipment
+      if(this.equipments != undefined){
+        let selectedRoomAction = this.equipments.find((equ)=> equ.roomId === equipmentAction.sourceRoomID);  
+        if(selectedRoomAction !=undefined ){
+        this.selectedRoomWithEquipment ={
+          id: 1,
+          quantity: 10, 
+          name: equipmentAction.nameOfEquipment, 
+          type: "",
+          roomId: equipmentAction.sourceRoomID
+        }
+        }
+        else{
+          this.toastr.error('Not enough quantity in the selected source room anymore!', 'Try with stepper!');
+          this.firstFormGroup = this._formBuilder.group({
+            firstCtrl: ['', Validators.required],
+          });
+          this.secondFormGroup = this._formBuilder.group({
+            secondCtrl: ['', Validators.required],
+          });
+          this.savedActive = false;
+          return;
+        }
+      }
+     });
+   
+  }
+
+
   activateForth() {
     this._roomService.getRooms().subscribe(rooms => {
       this.roomsWithoutSource = rooms;
@@ -91,8 +151,7 @@ export class MoveEquipmentComponent implements OnInit {
 
   }
 
-  activateFive() {
-    
+  activateFive() {  
   }
 
   activateSix() {
@@ -113,8 +172,34 @@ export class MoveEquipmentComponent implements OnInit {
   activateLast() {
     this.paramsOfRelocationEquipment.StartTime = this.selectedFreeTerm.startTime;
     this.paramsOfRelocationEquipment.EndTime = this.selectedFreeTerm.endTime;
-    this._roomEquipmentService.createTermOfRelocation(this.paramsOfRelocationEquipment).subscribe(create => { this.termOfRelocationEquipment = create; });
+    this._roomEquipmentService.createTermOfRelocation(this.paramsOfRelocationEquipment).subscribe(create => { this.termOfRelocationEquipment = create; 
+    this.eventMoveEquipment = {
+        idUser: "jagodica",
+        timeStamp: new Date(),
+        sourceRoomID: this.paramsOfRelocationEquipment.IdSourceRoom,
+        destinationRoomID: this.paramsOfRelocationEquipment.IdDestinationRoom,
+        nameOfEquipment:  this.paramsOfRelocationEquipment.NameOfEquipment
+      };
+    this._roomEquipmentService.addMoveEquipmentAction(this.eventMoveEquipment);
+    });
   }
+
+  savedActionsOffers(event:Event){
+     event.preventDefault();
+     this.savedActive = true;
+     this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', !Validators.required],
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', !Validators.required],
+    });
+  }
+
+  filterRows(){
+    this.filteredequipmentActions = this.equipmentActions;
+    this.filteredequipmentActions = this.filteredequipmentActions.filter(a => a.numberOfEvents >= 2);
+  }
+  
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -142,10 +227,12 @@ export class MoveEquipmentComponent implements OnInit {
       sevenCtrl: ['', Validators.required],
     });
     
+   
 
     this.minDate = new Date(Date.now());
 
     this._roomEquipmentService.getRoomEquipmentQuantity().subscribe(roomEquipment => this.equipmentsDTO = roomEquipment);
-
+    this._roomEquipmentService.getAllEventActions("jagodica").subscribe(equipmentActions =>{ this.equipmentActions = equipmentActions;     this.filterRows();
+    });
   }
 }

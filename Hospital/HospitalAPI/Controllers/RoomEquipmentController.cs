@@ -9,22 +9,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using HospitalLibrary.Events.Service;
+using HospitalLibrary.Events.Model;
 
 namespace HospitalAPI.Controllers
 {
     [Route("api/roomEquipments")]
     [ApiController]
-    [Authorize(Policy = "Manager")]
+    //[Authorize(Policy = "Manager")]
     public class RoomEquipmentController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IRoomEquipmentService _roomEquipmentService;
+        private readonly IEventMoveEquipmentService _eventMoveEquipmentService;
 
-        public RoomEquipmentController(IMapper mapper, IRoomEquipmentService roomEquipmentService)
+        public RoomEquipmentController(IMapper mapper, IRoomEquipmentService roomEquipmentService, IEventMoveEquipmentService eventMoveEquipmentService)
         {
             _mapper = mapper;
             _roomEquipmentService = roomEquipmentService;
+            _eventMoveEquipmentService = eventMoveEquipmentService;
         }
 
         [HttpGet]
@@ -55,6 +58,23 @@ namespace HospitalAPI.Controllers
         {
             var result = _roomEquipmentService.GetAllEquipmentInRoom(roomId);
             return Ok(result.Select(r => _mapper.Map<RoomEquipmentDTO>(r)).ToList());
+        }
+
+
+        [HttpPost]
+        [Route("equipmentActions/{idUser}")]
+        public ActionResult<List<RoomEquipmentDTO>> GetManagerActionsForMoveEquipment(string idUser)
+        {
+            var result = _eventMoveEquipmentService.GetMoveEquipmentEventActions(idUser);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("equipmentAction/logEvent")]
+        public ActionResult<List<EventMoveEquipment>> CreateActionForMove(EventMoveEquipment eventMoveEquipment)
+        {
+             _eventMoveEquipmentService.SaveMoveEquipmentEvent(eventMoveEquipment);
+            return Ok();
         }
 
     }

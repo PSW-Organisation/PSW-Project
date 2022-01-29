@@ -1,27 +1,66 @@
 <mat-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
+    <mat-step [stepControl]="firstFormGroup" *ngIf="!savedActive">
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>equipment</ng-template>
             <mat-form-field appearance="fill">
                 <mat-label>Select equipment :</mat-label>
-                <mat-select [(ngModel)]="selectedEquipment" formControlName="firstCtrl">
+                <mat-select name="step1" [(ngModel)]="selectedEquipment" formControlName="firstCtrl">
                     <mat-option *ngFor="let equipmentDTO of equipmentsDTO" [value]="equipmentDTO">
                         Equipment: {{ equipmentDTO.name }} - Quantity {{ equipmentDTO.quantity }}
                         <div></div>
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <div (click)="activateSecond()">
-                <button mat-button matStepperNext>Next</button>
+            <div>
+                <button  id="btn1" (click)="activateSecond()" mat-button matStepperNext>Next</button>
+            </div>
+            <div id ="save" (click)="savedActionsOffers($event)">
+                <button mat-button >Saved selections</button>
             </div>
         </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
+
+    <mat-step [stepControl]="firstFormGroup" *ngIf="savedActive">
+        <ng-template matStepLabel>Shortcut history actions</ng-template>
+        <div class="container">
+            <div class="text-center pt-3">
+                <h1> {{title}} </h1>
+            </div>
+            <div class="table-responsive" *ngIf="filteredequipmentActions">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Source room id</th>
+                            <th>Destination room id</th>
+                            <th>Name of equipment</th>
+                            <th>Number of the last actions</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="filteredequipmentActions.length !== 0">
+                        <tr class="align-middle" *ngFor="let equipmentAction of filteredequipmentActions" >
+                            <td>{{equipmentAction.sourceRoomID}}</td>
+                            <td>{{equipmentAction.destinationRoomID}}</td>
+                            <td>{{equipmentAction.nameOfEquipment}}</td>
+                            <td>{{equipmentAction.numberOfEvents}}</td>
+                            <div>
+                                <button  id="btn1" (click)="activateThirdFromAction(equipmentAction)" mat-button matStepperNext>Next</button>
+                            </div>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center" *ngIf="filteredequipmentActions.length === 0">
+                    <h3>There are no defined shifts.</h3>
+                </div>
+            </div>
+        </div>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" *ngIf="!savedActive">
         <form [formGroup]="secondFormGroup">
             <ng-template matStepLabel>room</ng-template>
             <mat-form-field appearance="fill" *ngIf="equipmentsDTO">
                 <mat-label>Select source room :</mat-label>
-                <mat-select [(ngModel)]="selectedRoomWithEquipment" formControlName="secondCtrl">
+                <mat-select  name="step2" [(ngModel)]="selectedRoomWithEquipment" formControlName="secondCtrl">
                     <mat-option *ngFor="let equipment of equipments" [value]="equipment">
                         Room: {{ equipment.roomId }} - Equipment: {{ equipment.name }} - Quantity {{ equipment.quantity }}
                         <div></div>
@@ -30,7 +69,7 @@
             </mat-form-field>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button (click)="activateThird()" mat-button matStepperNext>Next</button>
+                <button id="btn2" (click)="activateThird()" mat-button matStepperNext>Next</button>
             </div>
         </form>
     </mat-step>
@@ -39,12 +78,12 @@
             <ng-template matStepLabel>Fill out amount</ng-template>
             <mat-form-field appearance="fill">
                 <mat-label>Amount</mat-label>
-                <input matInput [(ngModel)]="equipmentAmount" placeholder="Last name, Third name" formControlName="thirdCtrl" max="100" required />
+                <input id ="step3" matInput [(ngModel)]="equipmentAmount" placeholder="Last name, Third name" formControlName="thirdCtrl" max="100" required />
             </mat-form-field>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button (click)="activateForth()" mat-button matStepperNext>Next</button>
-            </div>
+                <button id="btn3" (click)="activateForth()" mat-button matStepperNext>Next</button>
+        </div>
         </form>
     </mat-step>
     <mat-step [stepControl]="forthFormGroup">
@@ -52,7 +91,7 @@
             <ng-template matStepLabel>room</ng-template>
             <mat-form-field appearance="fill">
                 <mat-label>Select destination room :</mat-label>
-                <mat-select [(ngModel)]="selectedDestinationRoom" formControlName="forthCtrl">
+                <mat-select id ="step4" [(ngModel)]="selectedDestinationRoom" formControlName="forthCtrl">
                     <mat-option *ngFor="let room of roomsWithoutSource" [value]="room">
                         Room: {{ room.id }} - Name: {{ room.name }} - Sector: {{ room.sector }}
                         <div></div>
