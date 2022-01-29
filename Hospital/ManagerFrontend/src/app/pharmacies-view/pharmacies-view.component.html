@@ -3,31 +3,32 @@
   </div>
 </app-navbar>
 <div class="backgroundImage" >
- 
-
+  <h1 style="color: rgb(133 27 27); margin-left: 43%;"> Pharmacies </h1>
+  <div style="height: 20px ;"> </div>
+    <button class="btn  btn-secondary addButton"  data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i>Add new pharmacy</button>
+<div> 
  <!-- Pretraga leka -->
- <p style="margin-left: 80px; margin-top: 30px; font-size: 18px; "> If you want to search specific medicine, insert medicine name and ammount here and choose pharmacy: </p>
+ <h2 style="margin-left: 20% !important; margin-top: 30px; "> If you want to search specific medicine, insert medicine name and amount here and choose pharmacy: </h2>
 
- <table class = "search" style="margin-left: 80px; margin-top: 30px;">
+ <table class = "search" style="margin-left: 35% !important; margin-top: 30px;">
   <tr>
       <td><input type="text" style="width: 300px;margin-bottom: 5px;" class="form-control" placeholder="Enter medicine name" [(ngModel)]="medicineName"> </td>
       <td><input type="number" class="form-control" style="width: 200px;margin-bottom: 5px;" [(ngModel)]="medicineAmount"> </td>
   </tr>
   </table>
-
+</div>
  
   <p style="margin-left: 80px; margin-top: 30px; font-size: medium; font-weight: bold;">{{notFoundMessage}}</p>
 
 
 
 <!-- Tabela -->
-    <div class="table-responsive table-striped">
-        <table class='table '>
+    <div class="table-responsive table-striped center">
+        <table class='table center'>
             <thead style="color:rgb(95, 173, 236); margin-bottom: 15px;">
                 <tr >
-                    <th style="width: 170px;">
-                        <button class="btn  btn-secondary addButton"  data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i>Add new pharmacy</button>
-                    </th>
+                    
+                 
                     <th style="width: 170px;">Name</th>
                     <th style="width: 270px;">Address</th>
                     <th style="width: 270px;">Url</th>
@@ -39,16 +40,16 @@
             </thead>
             <tbody>
                 <tr *ngFor = 'let pharmacy of pharmacies'>
-                    <td></td>
+                 
                     <td>{{pharmacy.pharmacyName}}</td>
                     <td>{{pharmacy.pharmacyAddress}}</td>
                     <td>{{pharmacy.pharmacyUrl}}</td>
                     <td *ngIf = 'pharmacy.pharmacyCommunicationType === 0'>HTTP</td>
                     <td *ngIf = 'pharmacy.pharmacyCommunicationType === 1'>GRPC</td>
-                    <td> <button style="color: gray; text-decoration: none;" class="btn"><a style="text-decoration-line: none; color: white;"  [routerLink] ="['/pharmacy' , pharmacy.pharmacyId]"> Show profile</a> </button></td>
-                    <button class="btn" (click)="deletePharmacy(pharmacy.pharmacyId)" style="margin-top: 15px !important;"> Delete</button>
+                    <td> <button style="color: gray; margin-top:2px; text-decoration: none;width:150px; " class="btn"><a style=" text-decoration-line: none; color: white;"  [routerLink] ="['/pharmacy' , pharmacy.pharmacyId]"><i class="bi bi-person-badge-fill"></i> Show profile</a> </button></td>
+                    <button class="btn" (click)="deletePharmacy(pharmacy.pharmacyId)" style="margin-top: 16px !important;"><i class="bi bi-trash-fill"></i> Delete</button>
             
-                    <button class="btn" (click)="searchMedicine(pharmacy.hospitalApiKey)" style="margin-top: 15px !important;">Search</button>
+                    <button class="btn" (click)="searchMedicine(pharmacy.hospitalApiKey)" style="margin-top: 16px !important;"> <i class="bi bi-search"></i>Search</button>
                   </tr>
             </tbody>
         </table>
@@ -60,27 +61,27 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Registrartion pharmacy</h4>
+          <h1 class="modal-title">Registration pharmacy</h1>
         </div>
         <div class="modal-body">
           <label>Name</label>
           <input type="text" class="form-control" placeholder="Enter pharmacy name" [(ngModel)]="newPharmacy.pharmacyName">
-          <label>Address</label>
+          <label style="margin-bottom: 2px; margin-top: 3px;">Address</label>
           <input type="text" class="form-control" placeholder="Enter pharmacy address" [(ngModel)]="newPharmacy.pharmacyAddress">
           <table style="margin-top: 10px;margin-bottom: 10px;">
             <tr>Communication type:</tr>
-            <tr ><select  [(ngModel)]="newPharmacy.pharmacyCommunicationType" style="width: 130px;">
+            <tr ><select  [(ngModel)]="newPharmacy.pharmacyCommunicationType" style="width: 460px;">
                   <option value="0">HTTP</option>
                   <option value="1">GRPC</option>
                 </select></tr>
           </table>
           <label>Url</label>
           <input type="text" class="form-control" placeholder="Enter pharmacy url" [(ngModel)]="newPharmacy.pharmacyUrl">
-          <label>ApiKey</label>
+          <label  style="margin-bottom: 2px; margin-top: 5px;">ApiKey</label>
           <input type="text" class="form-control" placeholder="Enter pharmacy api key" [(ngModel)]="newPharmacy.hospitalApiKey">
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="addNewPharmacy()">Add</button>
+            <button type="button" class="btn btn-danger" style="background-color: rgb(133 27 27);" data-dismiss="modal" (click)="addNewPharmacy()">Add</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>

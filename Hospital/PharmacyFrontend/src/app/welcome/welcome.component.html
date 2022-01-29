@@ -1,7 +1,7 @@
 <div class="logo" >
     <table>
         <tr>
-            <td><img src="../../favicon.ico" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
+            <td><img src="../../favicon.ico" style="margin-left:80px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
             <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; font-weight: bold;  color:rgb(23, 23, 102); " >Flos</p></td>
 
            <!-- A grey horizontal navbar that becomes vertical on small screens -->
@@ -14,18 +14,16 @@
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#registration">Hospital registration</a>
         </li>
-        <li class="nav-item" style="margin-left: 20px;">
-          <a class="nav-link" routerLink="/complaints">Complaints</a>
-        </li>
+      
         <li class="nav-item">
           <a class="nav-link" routerLink="/hospitals">Registred hospitals</a>
         </li>
-      
         <li class="nav-item">
-          <a class="nav-link" routerLink="/reports">Reports</a>
-        </li>
+          <a class="nav-link" routerLink="/space_occupied">Disk Management</a>
+       </li>
+        
 
-        <li class="nav-item" >
+        <li class="nav-item" style="margin-left: 3em;" >
           <table style="margin-top:6px ;" >
           <tr>
              <td>
@@ -33,18 +31,17 @@
                <td class="td3 ">   <a class="fa fa-bell" style="width: 70px; margin-top: 3px; margin-left: 5px; color: grey; " routerLink="/notifications">
             <span class="num">{{numberOfUnseen}}</span></a> </td>
           </tr> </table>
-           
-           
-          
-
+         
        </li>
+          <li class="nav-item" style="margin-left: 20px;">
+          <a class="nav-link" routerLink="/complaints">Complaints</a>
+        </li>
+      
+        <li class="nav-item" style="margin-left: -20px;">
+          <a class="nav-link" routerLink="/reports">Reports</a>
+        </li>
         
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/space_occupied">Disk Management</a>
-       </li>
-        
-        
-        <li class="nav-item">
+        <li class="nav-item" style="margin-left: -20px;">
           <a class="nav-link" routerLink="/tenders">Tenders</a>
           
         </li>

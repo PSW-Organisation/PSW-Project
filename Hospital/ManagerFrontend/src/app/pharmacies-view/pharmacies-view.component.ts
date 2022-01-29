@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { PharmaciesService } from './pharmacies.service';
 import { IPharmacy } from './pharmacy';
 
@@ -20,7 +21,7 @@ export class PharmaciesViewComponent implements OnInit {
   notFoundMessage: string = "";
   notFound: boolean = false;
 
-  constructor(private _pharmaciesService: PharmaciesService) { }
+  constructor(private _pharmaciesService: PharmaciesService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.refreshPharmacies();
@@ -29,7 +30,7 @@ export class PharmaciesViewComponent implements OnInit {
   addNewPharmacy(){
     this._pharmaciesService.addPharmacy(this.newPharmacy).subscribe( res => {
       this.refreshPharmacies();
-      alert("Pharmacy added successfully!");
+      this.showToastrSuccess("You added new pharmacy!", "Success!")
     } );
     this.newPharmacy = {pharmacyUrl: "", pharmacyName:"", pharmacyAddress:"", hospitalApiKey: "",pharmacyCommunicationType: ""};
   }
@@ -85,4 +86,17 @@ export class PharmaciesViewComponent implements OnInit {
     this.fileToUpload = (<HTMLInputElement>event.target).files?.item(0) as File;
 }
 
+showToastrSuccess(message: string, title: string){
+  this.toastr.success(message, title,
+   { timeOut: 3000, 
+    progressBar: true,
+     progressAnimation: 'increasing'})
+}
+
+showToastrError(message: string, title: string){
+  this.toastr.error(message, title,
+   { timeOut: 3000, 
+    progressBar: true,
+     progressAnimation: 'increasing'})
+}
 }

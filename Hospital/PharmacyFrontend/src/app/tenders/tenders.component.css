@@ -5,16 +5,27 @@
 }
   .titleDiv {
     height: 70px;
-    background-color: whitesmoke;
+    background-color: rgb(61, 40, 40);
   }
 
   li{
       list-style: none;
   }
 /**/
+
+li a{
+  width: 200px;
+  color:rgb(23, 23, 102);
+ font-weight: bold;
+ text-decoration: none; /* da ne bi bila podvucena linija!*/
+ list-style: none;
+ font-size: large;
+ 
+}
   .card{
 
     margin-left: 2rem ;
+   
     background-color: whitesmoke;
     opacity:2;
   }

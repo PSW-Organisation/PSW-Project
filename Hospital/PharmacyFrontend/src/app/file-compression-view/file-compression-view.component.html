@@ -12,44 +12,27 @@
   <div class="container-fluid">
     <!-- Links -->
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-toggle="modal" data-target="#registration">Hospital registration</a>
-      </li>
-      <li class="nav-item" style="margin-left: 20px;">
-        <a class="nav-link" routerLink="/complaints">Complaints</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/hospitals">Registred hospitals</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/reports">Reports</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/space_occupied">Disk Management</a>
+   
+      <li class="nav-item" style="margin-left: 850px; font-size: large;">
+        <a class="nav-link" routerLink="/">Home</a>
       </li>
     </ul>
   </div>
-
 </nav>
 </td>
-
 </tr>
   </table>
-
-
 </div>
 
+<div class="backgroundImage"> 
 <div class="page-content page-container" id="page-content">
     <div class="padding">
         <div class="row">
-            <div class="container-fluid d-flex justify-content-center">
+            <div class="container-fluid d-flex justify-content-center" style="margin-top: -70px;">
                 <div class="col-sm-8 col-md-6">
                     <div class="card">
-                        <div class="card-header">Doughnut chart</div>
-                        <div class="card-body" style="height: 420px">
+                        <div class="card-header">Statistic of memory space </div>
+                        <div class="card-body" style="height: 800px">
                           <div style="display: block">
                             <canvas baseChart
                             [data]="doughnutChartData"
@@ -63,4 +46,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

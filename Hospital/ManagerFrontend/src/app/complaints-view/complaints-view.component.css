@@ -9,11 +9,12 @@
   height: 50px;
   font-size: 18px;
     margin-top: 20px;
+    margin-left: -3%;
 }
 
 .table {
     margin-top: 30px;
-    margin-left: 80px;
+    margin-left: 12%;
     margin-right: 60px ;
     width: auto;
     opacity:2;

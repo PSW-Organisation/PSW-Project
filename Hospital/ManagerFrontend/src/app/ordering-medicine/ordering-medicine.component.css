@@ -17,7 +17,7 @@
   
   .table {
     margin-top: 30px;
-    margin-left: 80px;
+    margin-left: 15%;
     margin-right: 60px ;
     max-width: 70%;
     opacity:2;
@@ -44,7 +44,7 @@
 
   .search{
     margin-top: 20px;
-    margin-left: 80px;
+    margin-left:41em;
   }
 
   @media screen and (max-width: 1024px) { /* Specific to this particular image */
