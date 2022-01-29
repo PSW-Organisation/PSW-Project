@@ -1,46 +1,22 @@
 <div class="container register" style="max-width: 100%;">
-    <button class="menu-toggle rounded">
-        <i class="fa fa-bars"></i>
-    </button>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a class="smooth-scroll" routerLink=""></a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a class="smooth-scroll" href="#">Profile</a>
-            </li>
-            <li class="sidebar-nav-item">
-                <a class="smooth-scroll" [routerLink]="['/appointments']">Appointments</a>
-            </li>
-        </ul>
-    </nav>
     <div class="row">
         <div class="col-md-3 register-left">
-            <img src="assets/logo.png" alt="" />
-            <span style="margin-left: 10px;" class="text-dark">
-                <i> LeanOn Hospital</i>
-            </span>
-        </div>
-        <div class="col-md-9 register-right">
             <div class="row">
-                <div class="col-7"></div>
-                <div class="col" style="padding-top: 2%; padding-right: 3%;">
-                    <div class="row" style="padding-bottom: 2%;">
-                        <div class="col">
-                        </div>
-                        <div class="col-6">
-                            <div class="row">
-                                <div class="col">
-                                    <img [src]="imageUrl" class="img-fluid rounded img-thumbnail"  alt="Your image here">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col"></div>
-                    </div>
+                <div class="col">
+                    <img src="assets/logo.png" alt="" />
+                    <span style="margin-left: 10px;" class="text-dark">
+                        <i> LeanOn Hospital</i>
+                    </span>
                 </div>
             </div>
-            <div class="tab-content" id="myTabContent">
+            <div class="row">
+                <div class="col">
+                    <img [src]="imageUrl" class="img-fluid rounded img-thumbnail" style="animation: none; width: 15vw; margin-left: 20%;"  alt="Your image here">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 register-right">
+            <div class="tab-content mt-5" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <h3 class="register-heading">Profile</h3>
                     <form [formGroup]="profile">

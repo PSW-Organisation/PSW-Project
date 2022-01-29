@@ -1,5 +1,6 @@
-<ng-template #content let-modal>
+<ng-template class="modal-dialog-centered" #content let-modal>
   <div class="modal-header">
+    <h2 class="text-center">Feedback</h2>
     <button type="btn" name="dismiss" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
     </button>
   </div>
@@ -38,7 +39,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-dark" name="submit" type="submit" [disabled]="!feedbackForm.valid">Save</button>
+        <button class="btn btn-primary text-center" name="submit" type="submit" [disabled]="!feedbackForm.valid">Send</button>
       </div>
     </form>
   </div>

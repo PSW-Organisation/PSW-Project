@@ -2,12 +2,12 @@
     <div app-navbar-button>
     </div>
 </app-navbar>
-<div>
+<div >
     <br>
     <div class="row">
         <div class="col"></div>
         <div class="col justify-content-center d-flex">
-            <h1 style="color: rgb(133 27 27);">Events statistics</h1>
+            <h1 style="color: rgb(133 27 27);">Scheduling Events Statistics</h1>
         </div>
         <div class="col"></div>
     </div>
@@ -34,12 +34,12 @@
             <canvas id="myChart3" style="max-width: 1000px; max-height: 500px; height: 400px;"></canvas>
         </div>
         <div class="col mt-5 ml-5">
-            <p>Average steps per scheduling: {{stats.averageStepsPerScheduling}}</p>
+            <p>Average steps per scheduling: {{stats.averageStepsPerScheduling.toFixed(2)}}</p>
             <p>Maximum steps: {{stats.maxSteps}}</p>
-            <p>Average duration per scheduling: {{stats.averageDuration}}</p>
-            <p>Maximum of scheduling duration in seconds: {{stats.maxDuration}}</p>
-            <p>Minimum scheduling duration in seconds: {{stats.minDuration}}</p>
-            <p>Average age of users: {{stats.averageAge}}</p>
+            <p>Average duration per scheduling in seconds: {{stats.averageDuration.toFixed(2)}}</p>
+            <p>Maximum scheduling duration in seconds: {{stats.maxDuration.toFixed(0)}}</p>
+            <p>Minimum scheduling duration in seconds: {{stats.minDuration.toFixed(0)}}</p>
+            <p>Average age of users: {{stats.averageAge.toFixed(0)}}</p>
         </div>
     </div>
     <br>

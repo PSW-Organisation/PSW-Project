@@ -14,11 +14,11 @@ namespace HospitalAPI.Medicines.UnitTests
          public void Add_if_medicine_does_not_exsist()
          {
              var stubMedicineRepository = new Mock<IMedicineRepository>();
-             Medicine medicine = new Medicine(-1, "panklav", 0, 5, new List<string>());
+             Medicine medicine = new Medicine(-1, "panklav", 0, 5);
              stubMedicineRepository.Setup(m => m.GetMedicineByName("panklav")).Returns(medicine);
              MedicineService medicineService = new MedicineService(stubMedicineRepository.Object);
 
-             Medicine ret = medicineService.Save(new Medicine(-1, "analgin", 0, 5, new List<string>()));
+             Medicine ret = medicineService.Save(new Medicine(-1, "analgin", 0, 5));
 
              Assert.False(ret.medicineName.Equals(medicine.medicineName));
          }
@@ -27,11 +27,11 @@ namespace HospitalAPI.Medicines.UnitTests
          public void Do_Not_Add_if_medicine_exsist()
          {
              var stubMedicineRepository = new Mock<IMedicineRepository>();
-             Medicine medicine = new Medicine(1, "panklav", 0, 5, new List<string>());
+             Medicine medicine = new Medicine(1, "panklav", 0, 5);
              stubMedicineRepository.Setup(m => m.GetMedicineByName("panklav")).Returns(medicine);
              MedicineService medicineService = new MedicineService(stubMedicineRepository.Object);
 
-             Medicine ret = medicineService.Save(new Medicine(1, "panklav", 0, 3, new List<string>()));
+             Medicine ret = medicineService.Save(new Medicine(1, "panklav", 0, 3));
 
              Assert.True(ret.medicineName.Equals(medicine.medicineName));
          }

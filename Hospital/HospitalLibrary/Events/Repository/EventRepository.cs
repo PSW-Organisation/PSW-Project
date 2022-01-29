@@ -69,7 +69,7 @@ namespace HospitalLibrary.Events.Repository
                                             .Select(q => new
                                             {
                                                 Guid = q.Key,
-                                                Date = q.OrderByDescending(e => e.TimeStamp).FirstOrDefault().TimeStamp
+                                                Date = q.OrderByDescending(e => e.Id).FirstOrDefault().TimeStamp
                                             }).ToList();
 
             return new
@@ -97,7 +97,7 @@ namespace HospitalLibrary.Events.Repository
                                             .Select(q => new
                                             {
                                                 Guid = q.Key,
-                                                Date = q.OrderByDescending(e => e.TimeStamp).FirstOrDefault().TimeStamp
+                                                Date = q.OrderByDescending(e => e.Id).FirstOrDefault().TimeStamp
                                             }).ToList();
             return new
             {

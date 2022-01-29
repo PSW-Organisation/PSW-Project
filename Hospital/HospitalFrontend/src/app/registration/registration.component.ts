@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbDate, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDate, NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { RegistrationService } from './registration.service';
 import { Patient } from './patient';
@@ -26,7 +26,11 @@ export class RegistrationComponent implements OnInit {
   doctors: Doctor[] = []
   minDate: moment.Moment = moment()
   maxDate: moment.Moment = moment()
-  startDate: moment.Moment = moment()
+  startDate: NgbDateStruct = {
+    year: moment(Date.now()).subtract(21, 'years').year(),
+    month: moment(Date.now()).subtract(21, 'years').month(),
+    day: moment(Date.now()).subtract(21, 'years').day()
+  }
 
   settings = {
     singleSelection: false,
@@ -102,7 +106,7 @@ export class RegistrationComponent implements OnInit {
       Validators.pattern(XRegExp('^\\p{Lu}[\\p{Ll}]+$', 'u')),
       Validators.maxLength(30)
     ]),
-    dateOfBirthControl: new FormControl(this.patient.dateOfBirth, [
+    dateOfBirthControl: new FormControl(moment(Date.now()).subtract(21, 'years'), [
       Validators.required
     ]),
     genderControl: new FormControl(this.patient.gender, [
@@ -193,7 +197,7 @@ export class RegistrationComponent implements OnInit {
     })
     this.registrationService.getAllergens().subscribe({
       next: a => {
-        this.allergens = a
+        this.allergens = a.sort((a: Allergen, b: Allergen) => a.name.localeCompare(b.name))
       }, error: e => (console.log(e))
     })
     this.registrationService.getDoctors().subscribe({
@@ -209,7 +213,7 @@ export class RegistrationComponent implements OnInit {
   configDatePicker(): void {
     this.maxDate = moment(Date.now()).subtract(18, 'years');
     this.minDate = moment({ year: 1900, month: 1, day: 1 })
-    this.startDate = moment(Date.now()).subtract(21, 'years');
+    //this.startDate = moment(Date.now()).subtract(21, 'years');
   }
 
   isDisabled = (date: NgbDate) =>
@@ -293,17 +297,16 @@ export class RegistrationComponent implements OnInit {
       medical: medicalRecord,
       medicalPermits: []
     }
-
-    this.saveImage()
     this.registrationService.register(patient).subscribe({
       next: c => {
         console.log(c)
         if (c.statusText === 'OK') {
+          this.saveImage()
           this.toastr.success('Verification email has been sent! Redirecting to home page');
           this.registrationForm.reset();
           setTimeout(() => { this.router.navigate(['home']); }, 5000);
         }
-      }, error: e => this.showError('An error occured.')
+      }, error: e => this.showError('An error occured. Try another username.')
     })
   }
 
