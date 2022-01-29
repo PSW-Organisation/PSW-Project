@@ -9,7 +9,7 @@ namespace HospitalLibrary.MedicalRecords.Service
     public interface IPatientService
     {
         public void SendEmail(string recipientEmail, Guid token);
-        public void Register(Patient patient, List<Allergen> allergens);
+        public bool Register(Patient patient, List<Allergen> allergens);
         public int Activate(Guid guid);
         public Patient GetProfileData(string username);
         public List<Patient> GetMaliciousPatients();

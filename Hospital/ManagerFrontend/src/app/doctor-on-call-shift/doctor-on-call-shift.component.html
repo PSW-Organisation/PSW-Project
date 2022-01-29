@@ -2,119 +2,121 @@
     <div app-navbar-button>
     </div>
 </app-navbar>
-<div class="container">
-    <br>
-    <div class="row ">
-        <div class="col d-flex align-items-center justify-content-center">
-            <h1>Doctors OnCall shifts</h1>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="align-items-start">
-                <div class="justify-content-start text-start">
-                    <mat-card class="demo-inline-calendar-card" style="width: 272px;">
-                        <mat-calendar [selected]="selectedDate" (selectedChange)="dateChange($event)"></mat-calendar>
-                      </mat-card> <br>
-                      <p>Selected date: {{selectedDate}}</p>
-                </div>
+<div class="backgroundImage">
+    <div class="container">
+        <br>
+        <div class="row ">
+            <div class="col d-flex align-items-center justify-content-center">
+                <h1>Doctors OnCall shifts</h1>
             </div>
         </div>
-        <div class="col-sm-9">
-            
-            <div *ngFor="let doctor of selectedDateDoctorsOnCallShift">
-                
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h2 class="card-title text-start"><mat-icon>perm_identity</mat-icon>{{doctor.name}} {{doctor.surname}}</h2> 
-                                </div>
-                                <div class="col-sm-3">
-                                    <h3 class="card-title text-start">Specialization: {{doctor.specialization}}</h3> 
-                                </div>
-                                <div class="col-sm-3">
-                                    <h4 class="card-title text-start">phone: {{doctor.phone}}</h4>
-                                </div>
-                                <div class="col-sm-3">
-                                    <button *ngIf="pastDate" type="button" (click)="removeDoctor(doctor)" class="btn btn-danger">Remove</button>
-                                </div>
-                            </div>
-                        </div>         
-                    </div>
-                
-            </div>
-            <div class="row">
-                <div class="col">
-                    <br>
-                    <div class="d-flex justify-content-center">
-                        <button *ngIf="pastDate" data-bs-target="#enroll" data-bs-toggle="modal" class="btn btn-secondary btnAdd"><mat-icon>person_add</mat-icon></button>
+    
+    
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="align-items-start">
+                    <div class="justify-content-start text-start">
+                        <mat-card class="demo-inline-calendar-card" style="width: 272px;">
+                            <mat-calendar [selected]="selectedDate" (selectedChange)="dateChange($event)"></mat-calendar>
+                          </mat-card> <br>
+                          <p>Selected date: {{selectedDate}}</p>
                     </div>
                 </div>
             </div>
-
-            <!-- MODAL -->
-    <div
-    class="modal fade"
-    id="enroll"
-    tabindex="-1"
-    aria-labelledby="enrollLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" id="enrollLabel">Add Doctor to onCall shift</h3>
-          <button
-          (click)="cancelAdd()"
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-         
-            <div class="card overflow-auto" style="height: 300px;">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Last name</th>
-                            <th>phone</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr [ngClass]="{'selectedTRr': selectCSS(newDoctor)}" *ngFor="let newDoctor of selectedDateDoctorsNotOnCallShift; index as i" (click)="selectDoctor(newDoctor)">
-                            <td>{{newDoctor.name}}</td>
-                            <td>{{newDoctor.surname}}</td>
-                            <td>{{newDoctor.phone}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-sm-9">
+                
+                <div *ngFor="let doctor of selectedDateDoctorsOnCallShift">
+                    
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h2 class="card-title text-start"><mat-icon>perm_identity</mat-icon>{{doctor.name}} {{doctor.surname}}</h2> 
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h3 class="card-title text-start">Specialization: {{doctor.specialization}}</h3> 
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <h4 class="card-title text-start">phone: {{doctor.phone}}</h4>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button *ngIf="pastDate" type="button" (click)="removeDoctor(doctor)" class="btn btn-danger">Remove</button>
+                                    </div>
+                                </div>
+                            </div>         
+                        </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <br>
+                        <div class="d-flex justify-content-center">
+                            <button *ngIf="pastDate" data-bs-target="#enroll" data-bs-toggle="modal" class="btn btn-secondary btnAdd"><mat-icon>person_add</mat-icon></button>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- MODAL -->
+        <div
+        class="modal fade"
+        id="enroll"
+        tabindex="-1"
+        aria-labelledby="enrollLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="enrollLabel">Add Doctor to onCall shift</h3>
+              <button
+              (click)="cancelAdd()"
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
-
-
-        </div>
-        <div class="modal-footer">
-          <button (click)="cancelAdd()"
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Cancel
-          </button>
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal" [ngClass]="{'disabled': selectedDoctorBool==false}" (click)="addNewDoctor()">Add</button>
+            <div class="modal-body">
+             
+                <div class="card overflow-auto" style="height: 300px;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Last name</th>
+                                <th>phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr [ngClass]="{'selectedTRr': selectCSS(newDoctor)}" *ngFor="let newDoctor of selectedDateDoctorsNotOnCallShift; index as i" (click)="selectDoctor(newDoctor)">
+                                <td>{{newDoctor.name}}</td>
+                                <td>{{newDoctor.surname}}</td>
+                                <td>{{newDoctor.phone}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+    
+    
+            </div>
+            <div class="modal-footer">
+              <button (click)="cancelAdd()"
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal" [ngClass]="{'disabled': selectedDoctorBool==false}" (click)="addNewDoctor()">Add</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-            
-          
-
+                
+              
+    
+            </div>
         </div>
+    
     </div>
-
 </div>

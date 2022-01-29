@@ -2,85 +2,87 @@
     <div app-navbar-button>
     </div>
 </app-navbar>
-<div class="container">
+<div class="backgroundImage">
+    <div class="container">
+        
+        
+        <br>
+        <br>
     
+        <div class="row">
+            <div class="col-sm-3">
+                <img class="img-fluid" style="height: 250px; width: 250px;" src="../../assets/images/doctor-img.jpg">
+            </div>
+            <div class="col-sm-5">
+                <h2 class="card-title text-start"><mat-icon>perm_identity</mat-icon>{{doctor.name}} {{doctor.surname}}</h2> 
+                <h3 class="card-title text-start">Specialization: {{doctor.specialization}}</h3> 
+                <h4 class="card-subtitle mb-2 text-muted text-start">Email: {{doctor.email}}</h4>
+                <h4 class="card-title text-start">phone: {{doctor.phone}}</h4>
+                <h4 class="card-title text-start">Country: {{doctor.country}}</h4>
+                <h4 class="card-title text-start">City: {{doctor.city}}</h4>
+            </div>
+            <div class="col-sm-4">
+                
+                <mat-form-field appearance="fill">
+                    <mat-label>Shift :</mat-label>
+                    <mat-select [(ngModel)]="selectedShiftOrder" (selectionChange)="select()">
+                      <mat-option *ngFor="let shift of shifts" [value]="shift.shiftOrder">
+                        {{ shift.name }}
+                        <div></div>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div style="width: 150px; height: 80px;" *ngIf="selected">
+                        <button class="btn-primary" (click)="changeDoctorShiftOrder()">Izmeni</button>
+                  </div>
+            </div>
+        </div>
     
-    <br>
-    <br>
-
-    <div class="row">
-        <div class="col-sm-3">
-            <img class="img-fluid" style="height: 250px; width: 250px;" src="../../assets/images/doctor-img.jpg">
-        </div>
-        <div class="col-sm-5">
-            <h2 class="card-title text-start"><mat-icon>perm_identity</mat-icon>{{doctor.name}} {{doctor.surname}}</h2> 
-            <h3 class="card-title text-start">Specialization: {{doctor.specialization}}</h3> 
-            <h4 class="card-subtitle mb-2 text-muted text-start">Email: {{doctor.email}}</h4>
-            <h4 class="card-title text-start">phone: {{doctor.phone}}</h4>
-            <h4 class="card-title text-start">Country: {{doctor.country}}</h4>
-            <h4 class="card-title text-start">City: {{doctor.city}}</h4>
-        </div>
-        <div class="col-sm-4">
-            
-            <mat-form-field appearance="fill">
-                <mat-label>Shift :</mat-label>
-                <mat-select [(ngModel)]="selectedShiftOrder" (selectionChange)="select()">
-                  <mat-option *ngFor="let shift of shifts" [value]="shift.shiftOrder">
-                    {{ shift.name }}
-                    <div></div>
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <div style="width: 150px; height: 80px;" *ngIf="selected">
-                    <button class="btn-primary" (click)="changeDoctorShiftOrder()">Izmeni</button>
-              </div>
-        </div>
-    </div>
-
-    <br> <br> <br>
-
-    <div class="row">
-        <div class="col">
-            <!-- 
-            <div style="width: 100%; height: 400px; background-color: rgb(255, 208, 121);">
-                Godisnji odmori
-            </div>
-            -->
-            <div class="card">
-                <app-schedule [doctorId]="doctorId"></app-schedule>
+        <br> <br> <br>
+    
+        <div class="row">
+            <div class="col">
+                <!-- 
+                <div style="width: 100%; height: 400px; background-color: rgb(255, 208, 121);">
+                    Godisnji odmori
+                </div>
+                -->
+                <div class="card">
+                    <app-schedule [doctorId]="doctorId"></app-schedule>
+                </div>
             </div>
         </div>
-    </div>
-    <br> <br> <br>
-    <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6">
-            <div class="card overflow-auto" style="height: 300px;">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let onCallshift of onCallShifts; index as i">
-                            <td>{{i+1}}</td>
-                            <td>{{formatDate(onCallshift.date)}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <br> <br> <br>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <div class="card overflow-auto" style="height: 300px;">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let onCallshift of onCallShifts; index as i">
+                                <td>{{i+1}}</td>
+                                <td>{{formatDate(onCallshift.date)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        <br> <br> <br>
+        <div class="row">
+            <div class="col">
+                <div style="width: 100%; height: 600px;">
+                   <app-doctor-statistics></app-doctor-statistics>
+                </div>
             </div>
         </div>
-        <div class="col-sm-3"></div>
+    
     </div>
-    <br> <br> <br>
-    <div class="row">
-        <div class="col">
-            <div style="width: 100%; height: 600px;">
-               <app-doctor-statistics></app-doctor-statistics>
-            </div>
-        </div>
-    </div>
-
 </div>

@@ -61,7 +61,7 @@ export class SurveyComponent implements OnInit {
             if (response.status === 200) {
                 this.service.reviewVisit(this.visit.id).subscribe({
                     next: response => {
-                        this.showSuccess("SUCCESS")
+                        this.showSuccess("Survey submitted successfully!")
                         this.router.navigate(['/appointments'])
                       }, error: e => (this.showError("FAILED"))
                 })

@@ -1,4 +1,4 @@
-using HospitalLibrary.DoctorSchedule.Model;
+﻿using HospitalLibrary.DoctorSchedule.Model;
 using HospitalLibrary.Events.Model;
 using HospitalLibrary.FeedbackAndSurvey.Model;
 using HospitalLibrary.GraphicalEditor.Model;
@@ -63,11 +63,53 @@ namespace ehealthcare.Model
         {
             modelBuilder.Entity<Allergen>(a =>
             {
-                a.HasData(new Allergen()
-                {
-                    Id = 1,
-                    Name = "macija dlaka",
-                });
+                a.HasData(
+                    new Allergen()
+                    {
+                        Id = 1,
+                        Name = "macija dlaka",
+                    },
+                    new Allergen()
+                    {
+                        Id = 2,
+                        Name = "penicilin",
+                    },
+                    new Allergen()
+                    {
+                        Id = 3,
+                        Name = "jagode",
+                    },
+                    new Allergen()
+                    {
+                        Id = 4,
+                        Name = "kikiriki",
+                    },
+                    new Allergen()
+                    {
+                        Id = 5,
+                        Name = "orasi",
+                    },
+                    new Allergen()
+                    {
+                        Id = 6,
+                        Name = "laktoza",
+                    },
+                    new Allergen()
+                    {
+                        Id = 7,
+                        Name = "ambrozija",
+                    },
+                    new Allergen()
+                    {
+                        Id = 8,
+                        Name = "polen",
+                    },
+                    new Allergen()
+                    {
+                        Id = 9,
+                        Name = "gluten",
+                    }
+                );
             });
 
             #region RoomEquipments
@@ -108,18 +150,6 @@ namespace ehealthcare.Model
             );
 
             #endregion
-
-            modelBuilder.Entity<PatientFeedback>().HasData(
-                new
-                {
-                    Id = -1,
-                    PatientUsername = "imbiamba",
-                    SubmissionDate = new DateTime(2021, 11, 4),
-                    Text = "Sehr gut!",
-                    Anonymous = false,
-                    PublishAllowed = true,
-                    IsPublished = true
-                });
 
             #region Rooms
 
@@ -1148,8 +1178,6 @@ namespace ehealthcare.Model
 
             #endregion
 
-            
-
             #region EventsMoveEquipment
 
             modelBuilder.Entity<EventMoveEquipment>(e =>
@@ -1211,8 +1239,9 @@ namespace ehealthcare.Model
                         NameOfEquipment = "bed"
                     });
         });
-                #endregion
+            #endregion
 
+            #region MedicalRecords
             modelBuilder.Entity<MedicalRecord>(m =>
             {
                 m.HasData(
@@ -1228,16 +1257,16 @@ namespace ehealthcare.Model
                     },
                     new MedicalRecord
                     {
-                        PersonalId = "1209222129123",
+                        PersonalId = "0911999158164",
                         BloodType = BloodType.O_positive,
-                        Height = 186,
-                        Weight = 90,
-                        Profession = "Professor",
+                        Height = 170,
+                        Weight = 63,
+                        Profession = "Student",
                         DoctorId = "nelex",
                         PatientId = "kristina"
                     });
-                // m.HasKey(m => new { m.Id, m.PatientId });
             });
+            #endregion
 
             modelBuilder.Entity<PatientAllergen>(a =>
             {
@@ -1253,7 +1282,7 @@ namespace ehealthcare.Model
                     .HasForeignKey(pa => pa.AllergenId);
             });
 
-
+            #region Patients
             modelBuilder.Entity<Patient>(p =>
             {
                 p.HasData(
@@ -1281,24 +1310,105 @@ namespace ehealthcare.Model
                     {
                         Id = "kristina",
                         Name = "Kristina",
-                        Surname = "Tamindzija",
+                        Surname = "Radić",
                         ParentName = "Zoran",
                         Username = "kristina",
                         Password = "kristinica",
                         LoginType = LoginType.patient,
                         Gender = "female",
                         DateOfBirth = new DateTime(1999, 11, 9),
-                        Phone = "019919195191",
-                        Email = "sdjfsj@gmail.com",
+                        Phone = "064534484",
+                        Email = "kristinica@gmail.com",
                         Address = "Sime Milosevica, 9",
                         IsBlocked = false,
                         IsActivated = true,
                         Token = new Guid("601ccaa8-3a07-4a7c-89b9-9923e6bac8a7"),
                         City = "Novi Sad",
                         Country = "Serbia",
+                    },
+                    new Patient("ziki")
+                    {
+                        Id = "ziki",
+                        Name = "Zoran",
+                        Surname = "Veljko",
+                        ParentName = "Vuk",
+                        Username = "ziki",
+                        Password = "Ziki123!",
+                        LoginType = LoginType.patient,
+                        Gender = "male",
+                        DateOfBirth = new DateTime(2002, 3, 9),
+                        Phone = "062635336",
+                        Email = "ziki@gmail.com",
+                        Address = "Vuka Karadzica, 10",
+                        IsBlocked = false,
+                        IsActivated = true,
+                        Token = new Guid("601cdaa8-3a37-4a7c-89b9-9923e6bac8a7"),
+                        City = "Novi Sad",
+                        Country = "Serbia",
+                    },
+                    new Patient("marija")
+                    {
+                        Id = "marija",
+                        Name = "Marija",
+                        Surname = "Lukic",
+                        ParentName = "Ivan",
+                        Username = "marija",
+                        Password = "Marija123!",
+                        LoginType = LoginType.patient,
+                        Gender = "female",
+                        DateOfBirth = new DateTime(1982, 6, 5),
+                        Phone = "063788424",
+                        Email = "marija.lukic@gmail.com",
+                        Address = "Takovska, 34",
+                        IsBlocked = false,
+                        IsActivated = true,
+                        Token = new Guid("601ccaa1-3a07-4a7c-89b9-4923e6bac8a7"),
+                        City = "Belgrade",
+                        Country = "Serbia",
+                    },
+                    new Patient("igor.king")
+                    {
+                        Id = "igor.king",
+                        Name = "Igor",
+                        Surname = "Jaric",
+                        ParentName = "Milana",
+                        Username = "igor.king",
+                        Password = "King123!",
+                        LoginType = LoginType.patient,
+                        Gender = "male",
+                        DateOfBirth = new DateTime(1979, 1, 17),
+                        Phone = "066051147",
+                        Email = "igor.king@gmail.com",
+                        Address = "Cukaricka, 55",
+                        IsBlocked = false,
+                        IsActivated = true,
+                        Token = new Guid("531ccaa1-3b17-4a7c-89b9-4923e6bac8a7"),
+                        City = "Berane",
+                        Country = "Montenegro",
+                    },
+                    new Patient("stevan65")
+                    {
+                        Id = "stevan65",
+                        Name = "Stevan",
+                        Surname = "Zeljic",
+                        ParentName = "Ilija",
+                        Username = "stevan65",
+                        Password = "Stevan123!",
+                        LoginType = LoginType.patient,
+                        Gender = "male",
+                        DateOfBirth = new DateTime(1965, 2, 11),
+                        Phone = "065556352",
+                        Email = "steva65@gmail.com",
+                        Address = "Jevrejska, 3",
+                        IsBlocked = false,
+                        IsActivated = true,
+                        Token = new Guid("601ccaa1-3b17-4a7c-89b9-4923e6bac8a7"),
+                        City = "Zenica",
+                        Country = "Bosnia and Herzegovina",
                     }
                 );
             });
+            #endregion
 
             modelBuilder.Entity<Doctor>(d =>
             {
@@ -1324,6 +1434,29 @@ namespace ehealthcare.Model
                         UsedOffDays = 12,
                         Specialization = Specialization.none,
                         RoomId = 1,
+                        ShiftOrder = 1
+                    },
+                    new Doctor("jeremija")
+                    {
+                        Id = "jeremija",
+                        Name = "Aleksandar",
+                        Surname = "Jeremic",
+                        ParentName = "Zoran",
+                        Username = "jeremija",
+                        Password = "baze2",
+                        LoginType = LoginType.doctor,
+                        Gender = "male",
+                        DateOfBirth = new DateTime(1999, 7, 14),
+                        Phone = "019919199191",
+                        Email = "jeremija@gmail.com",
+                        Address = "Sime Milutinovica, 4",
+                        City = "Novi Sad",
+                        Country = "Serbia",
+                        IsBlocked = false,
+                        IsActivated = false,
+                        UsedOffDays = 12,
+                        Specialization = Specialization.none,
+                        RoomId = 16,
                         ShiftOrder = 1
                     },
                     new Doctor("mkisic")
@@ -1352,16 +1485,60 @@ namespace ehealthcare.Model
                 );
             });
 
-            modelBuilder.Entity<PatientFeedback>().HasData(new PatientFeedback()
-            {
-                Id = -2,
-                PatientUsername = "kristina",
-                SubmissionDate = new DateTime(2021, 11, 4),
-                Text = "Test on me",
-                Anonymous = false,
-                PublishAllowed = true,
-                IsPublished = false
-            });
+            #region Feedbacks
+            modelBuilder.Entity<PatientFeedback>().HasData(
+                new PatientFeedback()
+                {
+                    Id = -1,
+                    PatientUsername = "imbiamba",
+                    SubmissionDate = new DateTime(2021, 11, 4),
+                    Text = "Veoma brzo i jednostavno zakazivanje u omiljenoj bolnici!",
+                    Anonymous = false,
+                    PublishAllowed = true,
+                    IsPublished = true
+                },
+                new PatientFeedback()
+                {
+                    Id = -2,
+                    PatientUsername = "kristina",
+                    SubmissionDate = new DateTime(2021, 12, 7),
+                    Text = "Lep izgled sajta!",
+                    Anonymous = false,
+                    PublishAllowed = true,
+                    IsPublished = false
+                },
+                new PatientFeedback()
+                {
+                    Id = -3,
+                    PatientUsername = "stevan65",
+                    SubmissionDate = new DateTime(2022, 1, 3),
+                    Text = "Sve informacije na jednom mestu i fino predstavljene.",
+                    Anonymous = false,
+                    PublishAllowed = true,
+                    IsPublished = false
+                },
+                new PatientFeedback()
+                {
+                    Id = -4,
+                    PatientUsername = "marija",
+                    SubmissionDate = new DateTime(2021, 12, 16),
+                    Text = "Dosadnoo!!",
+                    Anonymous = true,
+                    PublishAllowed = true,
+                    IsPublished = false
+                },
+                new PatientFeedback()
+                {
+                    Id = -5,
+                    PatientUsername = "igor.king",
+                    SubmissionDate = new DateTime(2022, 1, 22),
+                    Text = "Prijatno iskustvo!",
+                    Anonymous = true,
+                    PublishAllowed = true,
+                    IsPublished = false
+                }
+            );
+            #endregion
 
             modelBuilder.Entity<Survey>(s =>
             {
@@ -1397,7 +1574,7 @@ namespace ehealthcare.Model
                     {
                         Id = -1,
                         DoctorId = "nelex",
-                        PatientId = "kristina",
+                        PatientId = "marko96",
                         StartTime = new DateTime(2021, 11, 30, 19, 00, 00),
                         EndTime = new DateTime(2021, 11, 30, 19, 30, 00),
                         VisitType = VisitType.examination,
@@ -1409,9 +1586,9 @@ namespace ehealthcare.Model
                     {
                         Id = -2,
                         DoctorId = "nelex",
-                        PatientId = "kristina",
-                        StartTime = new DateTime(2022, 01, 30, 19, 00, 00),
-                        EndTime = new DateTime(2022, 01, 30, 19, 30, 00),
+                        PatientId = "marko96",
+                        StartTime = new DateTime(2022, 2, 2, 19, 00, 00),
+                        EndTime = new DateTime(2022, 2, 2, 19, 30, 00),
                         VisitType = VisitType.examination,
                         IsReviewed = false,
                         IsCanceled = false
@@ -1421,9 +1598,9 @@ namespace ehealthcare.Model
                     {
                         Id = -3,
                         DoctorId = "nelex",
-                        PatientId = "kristina",
-                        StartTime = new DateTime(2021, 12, 29, 19, 00, 00),
-                        EndTime = new DateTime(2021, 12, 29, 19, 30, 00),
+                        PatientId = "imbiamba",
+                        StartTime = new DateTime(2022, 1, 23, 19, 00, 00),
+                        EndTime = new DateTime(2022, 1, 23, 19, 30, 00),
                         VisitType = VisitType.examination,
                         IsReviewed = false,
                         IsCanceled = true
@@ -1433,9 +1610,21 @@ namespace ehealthcare.Model
                     {
                         Id = -4,
                         DoctorId = "nelex",
-                        PatientId = "kristina",
-                        StartTime = new DateTime(2022, 1, 3, 19, 00, 00),
-                        EndTime = new DateTime(2022, 1, 3, 19, 30, 00),
+                        PatientId = "imbiamba",
+                        StartTime = new DateTime(2022, 1, 15, 19, 00, 00),
+                        EndTime = new DateTime(2022, 1, 15, 19, 30, 00),
+                        VisitType = VisitType.examination,
+                        IsReviewed = false,
+                        IsCanceled = true
+                    });
+                v.HasData(
+                    new Visit()
+                    {
+                        Id = -5,
+                        DoctorId = "nelex",
+                        PatientId = "imbiamba",
+                        StartTime = new DateTime(2022, 1, 18, 19, 00, 00),
+                        EndTime = new DateTime(2022, 1, 18, 19, 30, 00),
                         VisitType = VisitType.examination,
                         IsReviewed = false,
                         IsCanceled = true

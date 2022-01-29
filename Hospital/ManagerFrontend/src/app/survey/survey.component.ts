@@ -78,6 +78,7 @@ export class SurveyComponent implements OnInit {
         plugins: {
           legend: {
             position: 'top',
+            display: false
           },
           title: {
             display: true,
@@ -149,8 +150,7 @@ export class SurveyComponent implements OnInit {
         plugins: {
           legend: {
             position: 'top',
-            labels: {
-            }
+            display: false
           },
           title: {
             display: true,
@@ -196,7 +196,7 @@ export class SurveyComponent implements OnInit {
             'rgba(75, 192, 192, 1)',
             'rgba(153, 102, 255, 1)'
           ],
-          borderWidth: 1
+          borderWidth: 1,
         }]
       },
       options: {
@@ -223,7 +223,7 @@ export class SurveyComponent implements OnInit {
         plugins: {
           legend: {
             position: 'top',
-
+            display: false
           },
           title: {
             display: true,

@@ -52,9 +52,9 @@ namespace HospitalAPI.Controllers
                 return BadRequest();
 
             patientDto.Token = Guid.NewGuid();
-            _patientService.Register(_mapper.Map<Patient>(patientDto), patientDto.Allergens.ToList());
+            if (!_patientService.Register(_mapper.Map<Patient>(patientDto), patientDto.Allergens.ToList()))
+                return BadRequest();
             _patientService.SendEmail(patientDto.Email, patientDto.Token);
-
             return Ok();
         }
 

@@ -100,7 +100,7 @@
                                             id="dateOfBirth" ngbDatepicker #d="ngbDatepicker"
                                             [minDate]="{year: minDate.year(), month: minDate.month(), day: minDate.day()}"
                                             [maxDate]="{year: maxDate.year(), month: maxDate.month(), day: maxDate.day()}"
-                                            [startDate]="{year: startDate.year(), month: startDate.month()}"
+                                            [startDate]="startDate"
                                             [markDisabled]="isDisabled">
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" (click)="d.toggle()"

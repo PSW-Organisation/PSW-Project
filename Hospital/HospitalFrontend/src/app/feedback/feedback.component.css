@@ -1,0 +1,23 @@
+.btnRegister {
+    margin-top: 2%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #02ccba;
+    color: #fff;
+    font-weight: 600;
+    width: 20%;
+    cursor: pointer;
+}
+
+.btnRegister:disabled {
+    margin-top: 2%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    background: #61f1e5;
+    color: #fff;
+    font-weight: 600;
+    width: 20%;
+    cursor: auto;
+}

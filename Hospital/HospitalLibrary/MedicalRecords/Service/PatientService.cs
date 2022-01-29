@@ -18,10 +18,12 @@ namespace HospitalLibrary.MedicalRecords.Service
             _patientRepository = patientRepository;
         }
 
-        public void Register(Patient patient, List<Allergen> allergens)
+        public bool Register(Patient patient, List<Allergen> allergens)
         {
+            if (_patientRepository.Get(patient.Username) != null) return false;
             _patientRepository.Insert(patient);
             _patientRepository.MapPatientAllergens(patient, allergens);
+            return true;
         }
 
         public void SendEmail(string recipientEmail, Guid token)
