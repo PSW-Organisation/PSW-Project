@@ -23,6 +23,14 @@ import { IComplaint } from './complaint';
     }
 
     //sad stoji samo primera radi na frontu forma, nije bitno za sad
-    sendResponse(idComplaint: number){
+    sendResponse(response: any){
+      return this._http.post('http://localhost:29631/api3/responses', response )
     }
+
+    deleteComplaint(id:any) {
+      return this._http.delete('http://localhost:29631/api3/complaint/delete/'+ id)
+   
+    }
+
+
 }

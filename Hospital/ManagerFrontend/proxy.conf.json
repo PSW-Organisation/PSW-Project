@@ -17,5 +17,12 @@
         "logLevel": "debug",
         "pathRewrite": {"^/api3" : ""},
         "changeOrigin": true
+    },
+    "api3/complaint*": {
+        "target": "http://localhost:29631/complaint",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {"^/api3" : ""},
+        "changeOrigin": true
     }
 }

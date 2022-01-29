@@ -48,12 +48,13 @@
 
 <div class="backgroundImage" > 
 
-<div style= "margin-right: 10%; margin-left: 5%;">    
-   <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newComplaint">Add new complaint</button>
+<div style= "margin-right: 10%; margin-left: 45%;">    
+    <h1 style="color: rgb(133 27 27);"> Complaints</h1>
+   <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newComplaint"> <i class="bi bi-plus-lg"></i>  Add new complaint</button>
 </div>
 <div class="table-responsive table-striped">
-    <table class='table'>
-        <thead   style="color:rgb(95, 173, 236); opacity: 2.2; background-color: whitesmoke;">
+    <table class='table' >
+        <thead   style="color:rgb(95, 173, 236); opacity: 2.2; background-color: transparent;">
             <tr>
                 <th> </th>
                 <th>Date</th>
@@ -65,11 +66,11 @@
         <tbody>
             <tr *ngFor = 'let complaint of complaints'>    
                 <td></td>
-                <td style="opacity: 2.2; color: black; font-size: 16px;">{{complaint.date | date:'short'}}</td>
-                <td><a [routerLink] ="['/complaint' , complaint.complaintId]">
+                <td style="opacity: 2.2; color: black; font-size: 16px; width: 17%">{{complaint.date | date:'short'}}</td>
+                <td style="opacity: 2.2; color: black; font-size: 16px; width: 19%"><a [routerLink] ="['/complaint' , complaint.complaintId]">
                     {{complaint.title}} </a></td> 
-                <td>{{complaint.content}}</td>
-                <button class="btn btn-secondary" style= "background-color: gray;" (click)="deleteComplaint(complaint.complaintId)"><i class="fa fa-trash"></i> Delete</button>
+                <td style="opacity: 2.2; color: black; font-size: 16px; width: 49%">{{complaint.content}}</td>
+                <button class="btn btn-secondary" style= "width:150px; background-color: gray; margin-right: 2em;" (click)="deleteComplaint(complaint.complaintId)"><i class="fa fa-trash"></i> Delete</button>
             </tr>
         </tbody>
     </table>

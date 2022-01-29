@@ -2,8 +2,12 @@
     <div app-navbar-button>
     </div>
 </app-navbar>
-<div class="backgroundImage" >
+<div class="backgroundImage"  >
     <!-- Pretraga leka -->
+    <div style="margin-bottom: 2em;">
+        <div style="height: 20px;"> </div>
+        <h1 style=" margin-bottom: 20px; margin-left: 42%;color: rgb(133 27 27);"> Ordering medicine </h1>
+        <h2 style="margin-top: 10px; margin-bottom: 10px; margin-left: 32em; font-size: large;"> If you want to order medicine,  search in which pharmacies is medicine available:  </h2>
     <table class = "search">
         <tr>
             <td><input type="text" style="width: 300px;margin-bottom: 5px;" class="form-control" placeholder="Enter medicine name" [(ngModel)]="medicineName"> </td>
@@ -11,14 +15,14 @@
             <td><button class="btn  btn-secondary" style="width: 100px;margin-left: 2px;" (click)="searchMedicine()">Search</button></td>
         </tr>
     </table>
-
+</div>
     <!-- Tabela -->
         <div class="table-responsive table-striped" *ngIf = 'pharmacies.length != 0'>
             <table class = "search">
-                <td><input type="text" style="width: 300px;margin-bottom: 5px;" class="form-control" placeholder="Enter pharmacy city or street" [(ngModel)]="searchParameter"></td>
+                <td><input type="text" style="width: 600px;margin-bottom: 5px;margin-left: 0.5em;" class="form-control" placeholder="Enter pharmacy city or street" [(ngModel)]="searchParameter"></td>
             </table>
-            <table class="table">
-                <thead style="color:rgb(62, 66, 70); opacity: 2.2; background-color: whitesmoke;">
+            <table class="table" style="margin-left:13em;">
+                <thead style="color:rgb(62, 66, 70); opacity: 2.2; background-color: transparent; margin-left: 22em;">
                     <tr>
                         <th>Name</th>
                         <th>Address</th>

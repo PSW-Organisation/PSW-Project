@@ -9,6 +9,7 @@ li a{
     color:rgb(23, 23, 102);
    font-weight: bold;
    list-style-type: none;
+   font-size: large;
    
 }
 
@@ -24,9 +25,6 @@ li {
     width: 100%;
     
     
- 
-
-      
     /* Set up positioning */
     position: relative;
     top: 0;
@@ -44,7 +42,7 @@ li {
 
 .table {
     margin-top: 30px;
-    margin-left: 80px;
+    margin-left: 100px;
     margin-right: 60px ;
     width: auto;
     opacity:2;

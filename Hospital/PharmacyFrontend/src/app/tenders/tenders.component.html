@@ -5,7 +5,7 @@
             <td><img src="../../favicon.ico" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
             <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; font-weight: bold;  color:rgb(23, 23, 102); " >Flos</p></td>
             <td style="margin-left:1200px;">
-            <li class="nav-item" style="margin-left: 1200px; font-size: larger;">
+            <li class="nav-item" style="margin-left: 1350px; font-size: larger;">
            <a class="nav-link" routerLink="" >Home</a>
        </li> </td>
         </tr>
@@ -76,26 +76,16 @@
 
 
 
-   <!-- <div class="card" >
-        <div class="card-body">
-          <h5 class="card-title">Tender 1</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Tender items: </h6>
-          <p class="card-text">Panklav 52</p>
-          <p class="card-text">Verapamil 20</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div> -->
 
 
-      <div class="container-fluid">
+      <div class="container-fluid" style="height: 800px;">
 
-        <div class="mx-auto card " style="background: transparent;">
+        <div class="mx-auto card " style="background: transparent; ">
             <div class="card-body" style="background: transparent;">
-                <h3 style="margin-left: 5rem;"> All active tenders: </h3>
+                <h3 style="margin-left: 5rem;"> All tenders: </h3>
                 <hr />
 
-                  <div class="card-columns mx-auto">
+                  <div class="card-columns mx-auto" style="margin-right: 2em;">
 
                       <div class="card text-center" *ngFor = 'let tender of tenders' >
                         <div class="card-body">

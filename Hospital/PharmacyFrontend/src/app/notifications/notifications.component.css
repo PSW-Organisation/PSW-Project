@@ -15,6 +15,7 @@ li a{
    font-weight: bold;
    text-decoration: none; /* da ne bi bila podvucena linija!*/
    list-style: none;
+   font-size: large;
    
 }
 li a:hover{
@@ -37,11 +38,11 @@ margin-left: 20px;
  color: rgb(48, 48, 202);
 }
 .backgroundImage{
-    background-image: url("../../images/specialist-pharmacy.jpg"), linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5));
+    background-image:  linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),url("../../images/specialist-pharmacy.jpg");
 
     height: 750px;
    margin-left: 70px;
-    background-repeat: no-repeat;
+   /* background-repeat: no-repeat;*/
      background-position: center center;
     /* Set up positioning */
     position: relative;

@@ -4,8 +4,8 @@
         <tr> 
             <td><img src="../../favicon.ico" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
             <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; font-weight: bold;  color:rgb(23, 23, 102); " >Flos</p></td>
-            <td style="margin-left:1200px;">
-            <li class="nav-item" style="margin-left: 1150px; "> 
+            <td style="margin-left:1400px;">
+            <li class="nav-item" style="margin-left: 1360px; "> 
            <a class="nav-link" routerLink="">Home</a>
        </li> </td>
         </tr>
@@ -17,6 +17,8 @@
 
 
      <div class="table-responsive table-striped">
+         <h3 style="margin-left:1em; margin-top: 1em; color:rgb(23, 23, 102);"> All notifications: </h3>
+         <hr/>
          <table class='table'>
              <thead   style="color:rgb(17, 67, 109); opacity: 2.2; background-color: whitesmoke;">
                  <tr>
@@ -36,8 +38,8 @@
                      <td style="opacity: 2.2; color: black; font-size: 16px;">{{notification.date | date:'short'}}</td>
                 
                      <td>{{notification.content}}</td>
-                     <td> <button type="button" class="btn btn-outline-secondary" style="width: 150px;" *ngIf="!notification.seen" (click)="changeToSeen(notification)"> <i class="bi-alarm"></i> procitano </button></td>
-                     <td> <button type="button" class="btn btn-outline-secondary" style="width: 150px;"  (click)="deleteNotification(notification.id)"> <i class="bi bi-trash"></i> obrisi </button></td>
+                     <td> <button type="button" class="btn btn-secondary" style="width: 120px;" *ngIf="!notification.seen" (click)="changeToSeen(notification)"> <i class="bi-alarm"></i> procitano </button></td>
+                     <td> <button type="button" class="btn btn-outline-secondary" style="width: 120px;"  (click)="deleteNotification(notification.id)"> <i class="bi bi-trash"></i> obrisi </button></td>
                  </tr>  
  
              </tbody>

@@ -38,6 +38,7 @@ export class ComplaintsService {
     return this._http.post('http://localhost:16928/api2/complaint', newComplaint);
 }
 
+//ne salje zahtev zbog cors, odradjena i na beku 
 sendComplaintToPharmacy(newComplaint : any, key:string){
   var newComplaintForPharmacy = { complaintId: newComplaint.complaintId, date: newComplaint.date, title:newComplaint.title, content:newComplaint.content};
   return this._http.post('http://localhost:29631/api3/complaint/' + key, newComplaintForPharmacy);

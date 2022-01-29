@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { IPharmacy } from '../pharmacies-view/pharmacy';
 import { OrderingMedicineService } from './ordering-medicine.service';
@@ -16,7 +17,7 @@ export class OrderingMedicineComponent implements OnInit {
   notFoundMessage: string = "";
   notFound: boolean = false;
 
-  constructor(private _orderingMedicineService: OrderingMedicineService) { }
+  constructor(private _orderingMedicineService: OrderingMedicineService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
@@ -27,7 +28,7 @@ export class OrderingMedicineComponent implements OnInit {
     if (window.confirm('Are you sure, you want to order medicine from this pharmacy?')){
       this._orderingMedicineService.orderMedicineHospital(this.medicineName, this.medicineAmount).subscribe();
       this._orderingMedicineService.orderMedicinePharmacy(pharmacy.pharmacyUrl, pharmacy.hospitalApiKey ,this.medicineName.toLocaleLowerCase(), this.medicineAmount).subscribe();
-      alert('Medicine was successfully orderd!');
+      this.showToastrSuccess("You ordered medicine!", "Success");
     }
   }
 
@@ -48,4 +49,18 @@ export class OrderingMedicineComponent implements OnInit {
         }
       })
     };}
+
+    showToastrSuccess(message: string, title: string){
+      this.toastr.success(message, title,
+       { timeOut: 3000, 
+        progressBar: true,
+         progressAnimation: 'increasing'})
+    }
+
+    showToastrError(message: string, title: string){
+      this.toastr.error(message, title,
+       { timeOut: 3000, 
+        progressBar: true,
+         progressAnimation: 'increasing'})
+    }
 }

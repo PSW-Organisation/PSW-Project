@@ -2,7 +2,7 @@
 
 
 nav {
-  margin-left: 3em;
+  margin-left: 10em;
 }
 
 li a{
@@ -10,6 +10,7 @@ li a{
     color:rgb(23, 23, 102);
    font-weight: bold;
  text-decoration: none; /* da ne bi bila podvucena linija!*/
+ font-size: large;
    
 }
 li a:hover{

@@ -1,5 +1,5 @@
 export interface IComplaint{
-    complaintId: number;
+    complaintId: any;
     date: Date;
     title: string;
     content: string;

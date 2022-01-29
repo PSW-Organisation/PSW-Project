@@ -31,13 +31,15 @@ margin-left: 20px;
  color: rgb(48, 48, 202);
 }
 .backgroundImage{
-    background-image: url("../../images/specialist-pharmacy.jpg"), linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5));
+  /* redosled navodjenjaje bitan */
+    background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url("../../images/specialist-pharmacy.jpg") ;
 
     height: 750px;
    margin-left: 70px;
-    background-repeat: no-repeat;
+    /*background-repeat: no-repeat;*/
      background-position: center center;
     /* Set up positioning */
+
     position: relative;
     top: 0;
 

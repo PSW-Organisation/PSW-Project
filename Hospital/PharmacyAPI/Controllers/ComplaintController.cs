@@ -26,27 +26,27 @@ namespace PharmacyAPI.Controllers
         public IActionResult Get()
         {
             List<ComplaintDTO> result = new List<ComplaintDTO>();
-            foreach(Complaint c in service.GetAll())
-            { 
-                    result.Add(ComplaintAdapter.ComplaintToComplaintDto(c));
+            foreach (Complaint c in service.GetAll())
+            {
+                result.Add(ComplaintAdapter.ComplaintToComplaintDto(c));
             }
-            if( result != null)
+            if (result != null)
             {
                 return Ok(result);
             }
             else
             {
-                    return NotFound();
+                return NotFound();
             }
-   
+
         }
 
-       
+
 
         [HttpGet("{id?}")]      // GET /api/complaint/1
         public IActionResult Get(long id)
         {
-            
+
             Complaint complaint = service.Get(id);
             if (complaint == null)
             {
@@ -62,36 +62,37 @@ namespace PharmacyAPI.Controllers
         //http://localhost:29631/api3/complaint/  + apiKey
         public IActionResult Add(ComplaintDTO dto, String hospitalApiKey)
         {
-            if ( dto.Title.Length <= 0 || dto.Content.Length <= 0) //date sklonjen iz provere
+            if (dto.Title.Length <= 0 || dto.Content.Length <= 0) //date sklonjen iz provere
             {
                 return BadRequest();
             }
-        
+
             dto.Date = DateTime.Now;
-            if(service.Save(ComplaintAdapter.ComplaintDtoToComplaint(dto), hospitalApiKey) == true)
+            if (service.Save(ComplaintAdapter.ComplaintDtoToComplaint(dto), hospitalApiKey) == true)
             {
                 return Ok();
             }
             else {
-                return NotFound(); 
+                return NotFound();
             }
-             
-            
-            
+
+
+
 
         }
 
-        [HttpDelete("{id?}")]       // DELETE /api/complaint/1
-        public IActionResult Delete(long id = 0)
+        [HttpDelete("{id?}")]       // DELETE /api/complaint/delete
+        [Route("/delete")]
+        public IActionResult Delete(long id)
         {
-            
-            if (service.Delete(id) != true)
+            Complaint complaint = service.Get(id);
+            if (complaint == null)
             {
                 return NotFound();
             }
             else
             {
-              
+                service.Delete(id);
                 return Ok();
             }
         }

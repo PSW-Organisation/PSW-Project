@@ -7,9 +7,10 @@
 
 
 
-    <div class="row" style="margin-left: 50px;">
+    <div class="row" style="margin-left: 35%;">
         <div class="col-4">
-            <h2 style="text-align: center; margin-top: 20px;">Generate PDF Report for medicine consumption</h2>
+            <h1 style="color: rgb(133 27 27); margin-left: 35%"> Create report </h1>
+            <h2 style="text-align: center; margin-top: 20px; ">Generate PDF Report for medicine consumption</h2>
             <div class="form-group mb-3">
                 <label for="startDate">Start date</label>
                 <input id="startDate" type="date" class="form-control" placeholder="Start date" [(ngModel)]="timeRange.startTime">
@@ -25,9 +26,10 @@
                 </select>
             </div>
             <div class="d-grid gap-2 col-2 mx-auto">
-                <button type="button" class="btn btn-danger" (click)="sendConsumptionReport()">Generate</button>
+                <button type="button" class="btn btn-secondary" style="margin-top: 1em; margin-left:-2em" (click)="sendConsumptionReport()">Generate</button>
             </div>
-            <div> 
+            <hr/> 
+            <div style="margin-top:3em;"> 
                 <h2 style="text-align: center; margin-top: 20px;">Generate PDF Report for medicine specification</h2>
                 <div class="form-group mb-3">
                     <label for="pharmacy">Choose Pharmacy</label>
@@ -40,7 +42,7 @@
                     <input id="medicine" class="form-control" type="text" placeholder="Medicine name" [(ngModel)]="medicineName">
                 </div>
                 <div class="d-grid gap-2 col-2 mx-auto">
-                    <button type="button" class="btn btn-danger" (click)="getMedicineDetails()">Generate</button>
+                    <button type="button" class="btn btn-secondary" style="margin-top: 1em; margin-left:-2em" (click)="getMedicineDetails()">Generate</button>
                    
                 </div>
             </div>

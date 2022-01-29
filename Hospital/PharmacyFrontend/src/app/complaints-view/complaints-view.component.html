@@ -5,7 +5,7 @@
             <td><img src="../../favicon.ico" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
             <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; font-weight: bold;  color:rgb(23, 23, 102); " >Flos</p></td>
             <td style="margin-left:1200px;">
-            <li class="nav-item" style="margin-left: 1150px; "> 
+            <li class="nav-item" style="margin-left: 1380px; "> 
            <a class="nav-link" routerLink="">Home</a>
        </li> </td>
         </tr>
@@ -16,16 +16,18 @@
 <div class="backgroundImage">
 
 
-     <div class="table-responsive table-striped">
+     <div class="table-responsive table-striped center">
+         <h3 style="margin-left: 3.1em; margin-top: 1em"> All registred hospitals</h3>
+         <hr/>
          <table class='table'>
              <thead   style="color:rgb(17, 67, 109); opacity: 2.2; background-color: whitesmoke;">
                  <tr>
                      <th> </th>
-                     <th>Date</th>
-                     <th>Title</th>
-                     <th>Content</th>
-                     <th> </th>
-                     <th></th>
+                     <th style="width: 15em;">Date</th>
+                     <th style="width: 15em;">Title</th>
+                     <th style="width: 35em;">Content</th>
+                     <th style="width: 10em;"> </th>
+                     <th style="width: 10em;"></th>
                      <th></th>
                  </tr>
              </thead>
@@ -36,43 +38,14 @@
                      <td style="opacity: 2.2; color: black; font-size: 16px;">{{complaint.date | date:'short'}}</td>
                      <td>{{complaint.title}}</td> 
                      <td>{{complaint.content}}</td>
-                     <td>  <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newResponse">send response</button></td>
-                     <button class="btn btn-secondary" style= "background-color: gray;" ><i class="fa fa-trash"></i> Delete</button>
+                     <td>  <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newResponse"><i class="bi bi-chat-left-text"></i>   Send response</button></td>
+                     <button style="margin-top:0.9em; width: 8em;" class="btn btn-outline-secondary" (click)="deleteComplaint(complaint.complaintId)"><i class="fa fa-trash"></i> Delete</button>
                  </tr>  
- <!--
-                 <tr>    
-                    <td></td>
-                    <td > <label>11/10/2021</label></td>
-                    <td>
-                        Prigovor o dostavi </td> 
-                    <td>Postovani, molimo Vas da lekove koje nam isporucujete adekvatno pakujete</td>
-                    <td>  <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newResponse">send response</button></td>
-                   <td><button class="btn btn-secondary" style= "background-color: gray;" ><i class="fa fa-trash"></i> Delete complaint</button></td> 
-                </tr>
-
-                <tr>    
-                    <td></td>
-                    <td > <label>11/13/2021</label></td>
-                    <td>
-                        Los kvalitet </td> 
-                    <td>Postovani, zelimo da Vam skrenemo paznju da igle koje ste nam poslali porudzbinom N2346 nisu sterilne, jer je zastitna folija probusena.</td>
-                    <td>  <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newResponse">send response</button></td>
-                   <td><button class="btn btn-secondary" style= "background-color: gray;" ><i class="fa fa-trash"></i> Delete complaint</button></td> 
-                </tr>
-                <tr>    
-                    <td></td>
-                    <td > <label>11/20/2021</label></td>
-                    <td>
-                       Pogresna kolicina isporucena</td> 
-                    <td>Postovani, zamolili bismo vas da na fakture N8976 korigujete kolicinu porucenih rukavica, porudzbenica je obuhvatala 20, a ne 40 pakovanja, samim tim je i cena neadekvatna. Hvala na razumevanju!  </td>
-                    <td>  <button class='btn btn-secondary addButton' data-toggle="modal" data-target="#newResponse" >send response</button></td>
-                   <td><button class="btn btn-secondary" style= "background-color: gray;" ><i class="fa fa-trash"></i> Delete complaint</button></td> 
-                </tr>-->
              </tbody>
          </table>
      </div>
       <!-- div za background da bi se videla slika-->
-    <div style="height: 400px; width:20px ;"> </div>
+    <div style="height: 600px; width:20px ;"> </div>
      </div>
 
 
@@ -95,7 +68,7 @@
                   <tr style="height: 10px;"> </tr>
                   <tr> 
                       <td class="tdInForm"> <label style="font-size: medium;">Content: </label> </td> </tr>
-                      <tr><td > <textarea type="text" class="form-control" style= "width: 380px; height: 100px"  placeholder="Write your response"  ></textarea></td> </tr>
+                      <tr><td > <textarea type="text" class="form-control" style= "width: 380px; height: 100px"  placeholder="Write your response"  [(ngModel)]="response.content" ></textarea></td> </tr>
                   
                     <tr style="height: 10px;"> </tr>
                  <tr> 
@@ -110,7 +83,7 @@
               
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" style="margin-right:30px; " data-dismiss="modal"  >Send</button>
+            <button type="button" class="btn btn-primary" style="margin-right:30px; " data-dismiss="modal" (click)="responseToComplaint(complaint.complaintId)" >Send</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         </div>
       </div>

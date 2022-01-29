@@ -5,7 +5,7 @@
             <td><img src="../../favicon.ico" style="margin-left:60px ; margin-top: 20px; margin-bottom: 20px;"  width="50" height="50"> </td>
             <td >  <p style="margin-left:20px ; margin-top: 20px; font-style: italic; font-size: x-large; font-weight: bold;  color:rgb(23, 23, 102); " >Flos</p></td>
             <td style="margin-left:1200px;">
-            <li class="nav-item" style="margin-left: 1150px; "> 
+            <li class="nav-item" style="margin-left: 1350px; "> 
            <a class="nav-link" routerLink="">Home</a>
        </li> </td>
         </tr>
@@ -13,17 +13,20 @@
        </table>      
 </div>
 
-<div  class= "backgroundImage" >
+<div  class= "backgroundImage" style="height: 800px;">
     <!-- text
      <div class="container"> <h3>Giving patient and prescribers access to the higest quality personalised medications.</h3></div>-->
-     
-     <div class="table-responsive table-striped">
-        <table class='table'>
+     <h3 style="margin-left: 3.1em; margin-top: 1em;color:rgb(17, 67, 109);"> All registred hospitals</h3>
+     <hr/>
+     <div class="table-responsive table-striped ">
+        <table class='table'  style="margin-left: 5em;">
             <thead   style="color:rgb(17, 67, 109); opacity: 2.2; background-color: whitesmoke;">
                 <tr>
                     <th> </th>
                     <th>Hospital name</th>
                     <th> Address</th>
+                    <th></th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -31,9 +34,11 @@
                   
                  <tr *ngFor = 'let hospital of hospitals'>    
                      <td></td>
-                     <td style="width: 250px;">{{hospital.hospitalName}}</td>
-                     <td style="width: 500px;">{{hospital.hospitalAddress}}</td> 
-                     <td> </td>
+                     <td style="width: 300px; ">{{hospital.hospitalName}}</td>
+                     <td style="width: 600px; ">{{hospital.hospitalAddress}}</td> 
+                    
+                     <td> <button type="button" class="btn btn-secondary" style="width: 180px; margin-left: 3em;"  > <i class="bi bi-envelope-plus-fill"></i> kontaktiraj </button></td>
+                     <td> <button type="button" class="btn btn-outline-secondary" style="width: 180px;  margin-left: 3em;"  > <i class="bi bi-person-badge-fill"></i> pogledaj profil </button></td> <td> </td>
                  </tr>  
 <!--
                 <tr>    

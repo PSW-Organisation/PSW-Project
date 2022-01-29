@@ -42,7 +42,7 @@ export class TendersComponent implements OnInit {
   closeTender(tender: ITender){
     this.tenderService.closeTender(tender).subscribe(
       res => {
-        alert("Tender has been closed");
+       
         this.sendNotificationForConfirmation("Flos pharmacy confirmed her offer. You can close Tender " + tender.id);
       }
     );
