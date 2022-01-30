@@ -302,9 +302,9 @@ export class RegistrationComponent implements OnInit {
         console.log(c)
         if (c.statusText === 'OK') {
           this.saveImage()
-          this.toastr.success('Verification email has been sent! Redirecting to home page');
+          this.toastr.success('Verification email has been sent!');
           this.registrationForm.reset();
-          setTimeout(() => { this.router.navigate(['home']); }, 5000);
+          this.router.navigate(['home']);
         }
       }, error: e => this.showError('An error occured. Try another username.')
     })

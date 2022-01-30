@@ -1297,7 +1297,7 @@ namespace ehealthcare.Model
                         LoginType = LoginType.patient,
                         Gender = "male",
                         DateOfBirth = new DateTime(2001, 11, 9),
-                        Phone = "019919199191",
+                        Phone = "066489992",
                         Email = "markoilic@gmail.com",
                         Address = "Sime Milosevica, 5",
                         IsBlocked = false,
@@ -1574,7 +1574,7 @@ namespace ehealthcare.Model
                     {
                         Id = -1,
                         DoctorId = "nelex",
-                        PatientId = "marko96",
+                        PatientId = "kristina",
                         StartTime = new DateTime(2021, 11, 30, 19, 00, 00),
                         EndTime = new DateTime(2021, 11, 30, 19, 30, 00),
                         VisitType = VisitType.examination,
@@ -1586,7 +1586,7 @@ namespace ehealthcare.Model
                     {
                         Id = -2,
                         DoctorId = "nelex",
-                        PatientId = "marko96",
+                        PatientId = "kristina",
                         StartTime = new DateTime(2022, 2, 2, 19, 00, 00),
                         EndTime = new DateTime(2022, 2, 2, 19, 30, 00),
                         VisitType = VisitType.examination,
@@ -1637,7 +1637,7 @@ namespace ehealthcare.Model
                     new AppointmentReport()
                     {
                         AppointmentId = -1,
-                        PatientUsername = "imbiamba",
+                        PatientUsername = "marko96",
                         DoctorUsername = "nelex",
                         Date = new DateTime(2021, 11, 30, 19, 30, 00),
                         Anamnesis = "Patient exhibits common cold symptoms such as: nasal congestion, sneezing and runny nose.",
@@ -1652,7 +1652,7 @@ namespace ehealthcare.Model
                     new AppointmentPrescription()
                     {
                         AppointmentId = -1,
-                        PatientUsername = "imbiamba",
+                        PatientUsername = "kristina",
                         DoctorUsername = "nelex",
                         Date = new DateTime(2021, 11, 30, 19, 30, 00),
                         Medicine = "Amoxiciline",
@@ -1723,7 +1723,8 @@ namespace ehealthcare.Model
                         TimeStamp = new DateTime(2021, 12, 29, 19, 00, 00),
                         EventAppName = ApplicationName.PatientsPortal,
                         EventClass = EventClass.AppointmentSchedulingStart,
-                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84")
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84"),
+                        Duration = 10
                     },
                     new Event()
                     {
@@ -1732,7 +1733,8 @@ namespace ehealthcare.Model
                         TimeStamp = new DateTime(2021, 12, 29, 19, 00, 30),
                         EventAppName = ApplicationName.PatientsPortal,
                         EventClass = EventClass.AppointmentSchedulingSecondStep,
-                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84")
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84"),
+                        Duration = 7
                     },
                     new Event()
                     {
@@ -1741,7 +1743,8 @@ namespace ehealthcare.Model
                         TimeStamp = new DateTime(2021, 12, 29, 19, 01, 00),
                         EventAppName = ApplicationName.PatientsPortal,
                         EventClass = EventClass.AppointmentSchedulingThirdStep,
-                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84")
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84"),
+                        Duration = 45
                     },
                     new Event()
                     {
@@ -1750,7 +1753,8 @@ namespace ehealthcare.Model
                         TimeStamp = new DateTime(2021, 12, 29, 19, 01, 30),
                         EventAppName = ApplicationName.PatientsPortal,
                         EventClass = EventClass.AppointmentSchedulingFourthStep,
-                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84")
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84"),
+                        Duration = 55
                     },
                     new Event()
                     {
@@ -1759,7 +1763,8 @@ namespace ehealthcare.Model
                         TimeStamp = new DateTime(2021, 12, 29, 19, 02, 00),
                         EventAppName = ApplicationName.PatientsPortal,
                         EventClass = EventClass.AppointmentSchedulingComplete,
-                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84")
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1329f1af84"),
+                        Duration = 32
                     },
                     new Event()
                     {
@@ -1768,7 +1773,8 @@ namespace ehealthcare.Model
                         TimeStamp = new DateTime(2021, 12, 29, 20, 00, 00),
                         EventAppName = ApplicationName.PatientsPortal,
                         EventClass = EventClass.AppointmentSchedulingStart,
-                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84")
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84"),
+                        Duration = 22
                     },
                     new Event()
                     {
@@ -1777,7 +1783,8 @@ namespace ehealthcare.Model
                         TimeStamp = new DateTime(2021, 12, 29, 20, 01, 10),
                         EventAppName = ApplicationName.PatientsPortal,
                         EventClass = EventClass.AppointmentSchedulingSecondStep,
-                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84")
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84"),
+                        Duration = 11
                     },
                     new Event()
                     {
@@ -1786,7 +1793,8 @@ namespace ehealthcare.Model
                         TimeStamp = new DateTime(2021, 12, 29, 20, 02, 00),
                         EventAppName = ApplicationName.PatientsPortal,
                         EventClass = EventClass.AppointmentSchedulingThirdStep,
-                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84")
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84"),
+                        Duration = 11
                     },
                     new Event()
                     {
@@ -1795,7 +1803,8 @@ namespace ehealthcare.Model
                         TimeStamp = new DateTime(2021, 12, 29, 20, 02, 04),
                         EventAppName = ApplicationName.PatientsPortal,
                         EventClass = EventClass.AppointmentSchedulingFourthStep,
-                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84")
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84"),
+                        Duration = 21
                     },
                     new Event()
                     {
@@ -1804,7 +1813,8 @@ namespace ehealthcare.Model
                         TimeStamp = new DateTime(2021, 12, 29, 20, 10, 00),
                         EventAppName = ApplicationName.PatientsPortal,
                         EventClass = EventClass.AppointmentSchedulingThirdStep,
-                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84")
+                        EventGuid = new Guid("c8021183-2a36-2e33-9cab-ab1333f1af84"),
+                        Duration = 5
                     });
                 e.Property(e => e.EventClass).HasConversion<string>();
             });

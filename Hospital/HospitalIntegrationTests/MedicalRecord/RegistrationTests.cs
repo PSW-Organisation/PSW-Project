@@ -103,7 +103,7 @@ namespace HospitalIntegrationTests.MedicalRecord
                 Gender = "male",
                 DateOfBirth = new DateTime(1999, 10, 21),
                 Phone = "066059455",
-                Email = "micko99@gmail.com",
+                Email = "kisicm21@gmail.com",
                 Address = "Drvarska, 8",
                 City = "Backa Palanka",
                 Country = "Serbia",
