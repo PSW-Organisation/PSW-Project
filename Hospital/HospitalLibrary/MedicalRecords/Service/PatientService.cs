@@ -61,7 +61,7 @@ namespace HospitalLibrary.MedicalRecords.Service
             SmtpClient smcl = new SmtpClient();
             smcl.Host = "smtp.gmail.com";
             smcl.Port = 587;
-            smcl.Credentials = new NetworkCredential("leanonhospital@gmail.com", "pswfirma5");
+            smcl.Credentials = new NetworkCredential("leanonhospital@gmail.com", "zyykovaxyjdwjzss");
             smcl.EnableSsl = true;
             smcl.DeliveryMethod = SmtpDeliveryMethod.Network;
             try

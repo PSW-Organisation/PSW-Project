@@ -281,7 +281,7 @@ export class StepperComponent implements OnInit, OnDestroy {
           });
           this.stepTime = Date.now();
           this.isSuccessful = true;
-          this.router.navigate(['/appointments'], { queryParams: { username: this.selectedVisit.patientId } })
+          this.router.navigate(['/appointments'])
         },
         error: e => {
           if (e.status === 400) this.showError("The selected appointment has been taken in the meantime. Please try selecting another one.")
